@@ -217,7 +217,6 @@
             "Radiation",
             "Slowfreeze",
             "Button",
-            "Collectible",
             "SplatPad",
             "AntiSplatPad",
             "ForceField",

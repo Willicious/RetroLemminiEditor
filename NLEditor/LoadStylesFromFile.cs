@@ -438,9 +438,6 @@ namespace NLEditor
                                 case "PAINT":
                                     objType = C.OBJ.PAINT;
                                     break;
-                                case "COLLECTIBLE":
-                                    objType = C.OBJ.COLLECTIBLE;
-                                    break;
                                 case "UNLOCKBUTTON":
                                     objType = C.OBJ.BUTTON;
                                     break;

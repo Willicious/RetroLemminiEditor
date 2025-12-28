@@ -103,7 +103,7 @@ namespace NLEditor
                     continue;
                 }
 
-                int frameIndex = (ImageLibrary.GetObjType(pieceKey).In(C.OBJ.PICKUP, C.OBJ.EXIT_LOCKED, C.OBJ.BUTTON, C.OBJ.COLLECTIBLE, C.OBJ.TRAPONCE)) ? 1 : 0;
+                int frameIndex = (ImageLibrary.GetObjType(pieceKey).In(C.OBJ.PICKUP, C.OBJ.EXIT_LOCKED, C.OBJ.BUTTON, C.OBJ.TRAPONCE)) ? 1 : 0;
                 Bitmap pieceImage;
 
                 bool preferObjectName = curSettings.PreferObjectName;
@@ -382,14 +382,6 @@ namespace NLEditor
             else
             {
                 but_PairTeleporter.Visible = false;
-            }
-            if (selectionList.Exists(p => p.ObjType == C.OBJ.COLLECTIBLE))
-            {
-                check_Lvl_Invincibility.Visible = true;
-            }
-            else
-            {
-                check_Lvl_Invincibility.Visible = false;
             }
         }
 

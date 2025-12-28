@@ -445,7 +445,6 @@ Ladderer=10";
             CurLevel.TimeLimit = decimal.ToInt32(num_Lvl_TimeMin.Value) * 60
                                     + decimal.ToInt32(num_Lvl_TimeSec.Value);
             CurLevel.IsNoTimeLimit = check_Lvl_InfTime.Checked;
-            CurLevel.IsInvincibility = check_Lvl_Invincibility.Checked;
            
 
             string idText = txt_LevelID.Text;

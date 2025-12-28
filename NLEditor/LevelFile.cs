@@ -114,7 +114,6 @@ namespace NLEditor
             newLevel.ReleaseRate = 103 - file["MAX_SPAWN_INTERVAL"].ValueInt;
             newLevel.IsSpawnRateFix = file.HasChildWithKey("SPAWN_INTERVAL_LOCKED");
             newLevel.IsSuperlemming = file.HasChildWithKey("SUPERLEMMING");
-            newLevel.IsInvincibility = file.HasChildWithKey("INVINCIBILITY");
 
             LoadSkillset(newLevel, file["SKILLSET"]);
 
@@ -425,12 +424,6 @@ namespace NLEditor
                 level.TerrainList.Insert(index, newSketch);
         }
 
-        // Counts the number of collectibles in the level
-        static int CountCollectibles(Level curLevel)
-        {
-            return curLevel.GadgetList.Count(gad => gad.ObjType == C.OBJ.COLLECTIBLE);
-        }
-
         /// <summary>
         /// Ensures that all level parameters are within sensible limits.
         /// </summary>
@@ -579,18 +572,9 @@ namespace NLEditor
             {
                 textFile.WriteLine(" SPAWN_INTERVAL_LOCKED");
             }
-            int collectiblesCount = CountCollectibles(curLevel);
-            if (collectiblesCount > 0)
-            {
-                textFile.WriteLine(" COLLECTIBLES " + collectiblesCount);
-            }
             if (curLevel.IsSuperlemming)
             {
                 textFile.WriteLine(" SUPERLEMMING");
-            }
-            if (curLevel.IsInvincibility && (collectiblesCount > 0))
-            {
-                textFile.WriteLine(" INVINCIBILITY");
             }
             textFile.WriteLine(" ");
 
