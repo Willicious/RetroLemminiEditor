@@ -120,13 +120,8 @@ namespace NLEditor
             foreach (var node in file.Children.FindAll(child => child.Key == "GADGET"))
                 LoadGadget(newLevel, node);
 
-            List<GroupPiece> groupPieceSamples = new List<GroupPiece>();
-
-            foreach (var node in file.Children.FindAll(child => child.Key == "TERRAINGROUP"))
-                LoadTerrainGroup(groupPieceSamples, node);
-
             foreach (var node in file.Children.FindAll(child => child.Key == "TERRAIN"))
-                LoadTerrain(newLevel, groupPieceSamples, node);
+                LoadTerrain(newLevel, node);
 
             foreach (var node in file.Children.FindAll(child => child.Key == "LEMMING"))
                 LoadLemming(newLevel, node);
@@ -256,22 +251,12 @@ namespace NLEditor
             level.GadgetList.Add(newLemming);
         }
 
-        private static void LoadTerrainGroup(List<GroupPiece> samples, NLTextDataNode node)
+        private static void LoadTerrain(Level level, NLTextDataNode node)
         {
-            List<TerrainPiece> pieceList = new List<TerrainPiece>();
-
-            foreach (var subnode in node.Children.FindAll(sn => sn.Key == "TERRAIN"))
-                pieceList.Add(LoadTerrainData(samples, subnode));
-
-            samples.Add(new GroupPiece(pieceList, node["NAME"].Value));
+            level.TerrainList.Add(LoadTerrainData(node));
         }
 
-        private static void LoadTerrain(Level level, List<GroupPiece> groupPieceSamples, NLTextDataNode node)
-        {
-            level.TerrainList.Add(LoadTerrainData(groupPieceSamples, node));
-        }
-
-        private static TerrainPiece LoadTerrainData(List<GroupPiece> groupPieceSamples, NLTextDataNode node)
+        private static TerrainPiece LoadTerrainData(NLTextDataNode node)
         {
             // First read in all infos
             string styleName = node["STYLE"].Value;
@@ -279,13 +264,10 @@ namespace NLEditor
 
             Alias? pieceAlias = null;
 
-            if (styleName.ToUpperInvariant() != "*GROUP")
-            {
-                pieceAlias = Aliases.Dealias(styleName + ":" + pieceName, AliasKind.Terrain);
-                string[] dealiasName = pieceAlias.Value.To.Split(':');
-                styleName = dealiasName[0];
-                pieceName = dealiasName[1];
-            };
+            pieceAlias = Aliases.Dealias(styleName + ":" + pieceName, AliasKind.Terrain);
+            string[] dealiasName = pieceAlias.Value.To.Split(':');
+            styleName = dealiasName[0];
+            pieceName = dealiasName[1];
 
             int posX = node["X"].ValueInt;
             int posY = node["Y"].ValueInt;
@@ -317,16 +299,8 @@ namespace NLEditor
 
             TerrainPiece newTerrain;
 
-            if (styleName.ToUpperInvariant() == "*GROUP")
-            {
-                newTerrain = new GroupPiece(groupPieceSamples.FirstOrDefault(gs => gs.Name.ToUpperInvariant() == pieceName.ToUpperInvariant()), pos, 0, false, isErase, isNoOverwrite, isOneWay);
-            }
-            else
-            {
-                // ... then create the correct Terrain piece
-                string key = ImageLibrary.CreatePieceKey(styleName, pieceName, false);
-                newTerrain = new TerrainPiece(key, pos, 0, false, isErase, isNoOverwrite, isOneWay, specWidth, specHeight);
-            }
+            string key = ImageLibrary.CreatePieceKey(styleName, pieceName, false);
+            newTerrain = new TerrainPiece(key, pos, 0, false, isErase, isNoOverwrite, isOneWay, specWidth, specHeight);
 
             // For compatibility with player: NoOverwrite + Erase pieces work like NoOverWrite
             if (newTerrain.IsNoOverwrite && newTerrain.IsErase)
@@ -574,33 +548,6 @@ namespace NLEditor
                                .ForEach(gad => WriteObject(textFile, gad));
             textFile.WriteLine(" ");
 
-            if (curLevel.TerrainList.Exists(ter => ter is GroupPiece))
-            {
-                textFile.WriteLine("#        Terrain groups         ");
-                textFile.WriteLine("# ----------------------------- ");
-
-                List<GroupPiece> groupPieces = curLevel.TerrainList.FindAll(ter => ter is GroupPiece).Cast<GroupPiece>().ToList();
-                List<GroupPiece> uniqueGroupPieces = new List<GroupPiece>();
-
-                while (groupPieces.Count > 0)
-                {
-                    GroupPiece group = groupPieces[0];
-                    groupPieces.RemoveAll(grp => grp.Key == group.Key);
-
-                    if (!uniqueGroupPieces.Exists(grp => grp.Key == group.Key))
-                    {
-                        groupPieces.AddRange(group.GetConstituents().FindAll(ter => ter is GroupPiece).Cast<GroupPiece>());
-                        uniqueGroupPieces.Add(group);
-                    }
-                }
-
-                SortGroupPieces(uniqueGroupPieces);
-
-                uniqueGroupPieces.ForEach(grp => WriteGroup(textFile, grp));
-
-                textFile.WriteLine(" ");
-            }
-
             textFile.WriteLine("#        Terrain pieces         ");
             textFile.WriteLine("# ----------------------------- ");
             curLevel.TerrainList.FindAll(ter => !ter.IsSketch).ForEach(ter => WriteTerrain(textFile, ter, curLevel.TerrainList.IndexOf(ter), false));
@@ -639,56 +586,9 @@ namespace NLEditor
             return false;
         }
 
-        private static void SortGroupPieces(List<GroupPiece> pieces)
-        {
-            // The normal Sort function doesn't seem to compare every possible pairing, and thus gives an incorrect result.
-
-            int i = 0;
-
-            while (i + 1 < pieces.Count)
-            {
-                var a = pieces[i];
-
-                for (int i2 = i + 1; i2 < pieces.Count; i2++)
-                {
-                    bool aContainsB = false;
-                    bool bContainsA = false;
-                    var b = pieces[i2];
-
-                    foreach (GroupPiece piece in a.GetConstituents().FindAll(pc => pc is GroupPiece))
-                        if (piece.Key == b.Key)
-                        {
-                            aContainsB = true;
-                            break;
-                        }
-
-                    foreach (GroupPiece piece in b.GetConstituents().FindAll(pc => pc is GroupPiece))
-                        if (piece.Key == a.Key)
-                        {
-                            bContainsA = true;
-                            break;
-                        }
-
-                    if (aContainsB && bContainsA)
-                        throw new Exception("Recursive terrain grouping");
-                    else if (aContainsB)
-                    {
-                        pieces.Remove(b);
-                        pieces.Insert(i, b);
-                        i = -1;
-                        break;
-                    }
-                }
-
-                i++;
-            }
-        }
-
         /// <summary>
-        /// Returns whether the skill is in the skill set or available as a pickup skill. 
+        /// Returns whether the skill is in the skill set
         /// </summary>
-        /// <param name="curLevel"></param>
-        /// <param name="skillNum"></param>
         static public bool IsSkillRequired(Level curLevel, C.Skill skill)
         {
             return (curLevel.SkillSet[skill] > 0);
@@ -767,19 +667,6 @@ namespace NLEditor
             textFile.WriteLine(" ");
         }
 
-        private static void WriteGroup(TextWriter textFile, GroupPiece group)
-        {
-            textFile.WriteLine(" $TERRAINGROUP");
-            textFile.WriteLine("   NAME " + group.Name);
-            textFile.WriteLine("   ");
-
-            foreach (TerrainPiece piece in group.GetConstituents())
-                WriteTerrain(textFile, piece, 1);
-
-            textFile.WriteLine(" $END");
-            textFile.WriteLine(" ");
-        }
-
         private static void WriteTerrain(TextWriter textFile, TerrainPiece terrain, int extraIndent)
         {
             WriteTerrain(textFile, terrain, -1, false, extraIndent);
@@ -788,8 +675,6 @@ namespace NLEditor
         /// <summary>
         /// Writes all terrain piece infos in a text file.
         /// </summary>
-        /// <param name="textFile"></param>
-        /// <param name="terrain"></param>
         static private void WriteTerrain(TextWriter textFile, TerrainPiece terrain, int index, bool writingSketch, int extraIndent = 0)
         {
             string prefix = new string(' ', extraIndent * 2);
@@ -797,11 +682,7 @@ namespace NLEditor
             if (!writingSketch)
             {
                 textFile.WriteLine(prefix + " $TERRAIN");
-
-                if (terrain is GroupPiece)
-                    textFile.WriteLine(prefix + "   STYLE *group");
-                else
-                    textFile.WriteLine(prefix + "   STYLE " + terrain.Style);
+                textFile.WriteLine(prefix + "   STYLE " + terrain.Style);
             }
             else
             {

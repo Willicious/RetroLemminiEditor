@@ -548,28 +548,6 @@ namespace NLEditor
         }
 
         /// <summary>
-        /// Renders all terrain pieces in the TerrPieceList.
-        /// <para> This assumes IsClearPhysics = false.</para>
-        /// </summary>
-        /// <param name="terrPieces"></param>
-        public Bitmap CreateTerrainGroupImage(List<TerrainPiece> terrPieces)
-        {
-            int width = terrPieces.Max(ter => ter.PosX + ter.Width);
-            int height = terrPieces.Max(ter => ter.PosY + ter.Height);
-
-            Bitmap GroupImage = new Bitmap(width, height);
-
-            foreach (TerrainPiece terrain in terrPieces)
-            {
-                C.CustDrawMode drawMode = GetDrawModeForTerrain(terrain);
-                GroupImage.DrawOn(terrain.Image, terrain.Pos, drawMode);
-            }
-
-            return GroupImage;
-        }
-
-
-        /// <summary>
         /// Returns the correct CustDrawMode for the terrain piece.
         /// </summary>
         /// <param name="terrPiece"></param>
@@ -577,8 +555,6 @@ namespace NLEditor
         {
             if (terrPiece.IsSketch)
                 return C.CustDrawMode.Default;
-            else if (terrPiece is GroupPiece && Properties.Settings.Default.GroupsAreHighlighted)
-                return C.CustDrawMode.HighlightGrouped;
             else if (terrPiece.IsErase)
                 return C.CustDrawMode.Erase;
             else if (terrPiece.IsNoOverwrite)

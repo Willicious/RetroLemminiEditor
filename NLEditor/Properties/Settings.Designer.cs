@@ -109,18 +109,6 @@ namespace NLEditor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool GroupsAreHighlighted {
-            get {
-                return ((bool)(this["GroupsAreHighlighted"]));
-            }
-            set {
-                this["GroupsAreHighlighted"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000, 148")]
         public global::System.Drawing.Size PieceBrowserSize {
             get {

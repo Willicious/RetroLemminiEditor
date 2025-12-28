@@ -57,7 +57,6 @@
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // comboStyles
             // 
@@ -67,7 +66,6 @@
             this.comboStyles.Name = "comboStyles";
             this.comboStyles.Size = new System.Drawing.Size(360, 28);
             this.comboStyles.TabIndex = 1;
-            this.comboStyles.SelectedIndexChanged += new System.EventHandler(this.comboStyles_SelectedIndexChanged);
             // 
             // btnAddStyle
             // 
@@ -77,7 +75,6 @@
             this.btnAddStyle.TabIndex = 2;
             this.btnAddStyle.Text = "Add Style";
             this.btnAddStyle.UseVisualStyleBackColor = true;
-            this.btnAddStyle.Click += new System.EventHandler(this.btnAddStyle_Click);
             // 
             // lblChooseStyle
             // 
@@ -120,7 +117,6 @@
             this.listViewPieceLinks.TabIndex = 6;
             this.listViewPieceLinks.UseCompatibleStateImageBehavior = false;
             this.listViewPieceLinks.View = System.Windows.Forms.View.Details;
-            this.listViewPieceLinks.SelectedIndexChanged += new System.EventHandler(this.listViewPieceLinks_SelectedIndexChanged);
             // 
             // NXLVLevelPieces
             // 
@@ -148,7 +144,6 @@
             this.btnBrowseForPieceLink.TabIndex = 8;
             this.btnBrowseForPieceLink.Text = "Browse For Linked Piece";
             this.btnBrowseForPieceLink.UseVisualStyleBackColor = true;
-            this.btnBrowseForPieceLink.Click += new System.EventHandler(this.btnBrowseForPieceLink_Click);
             // 
             // btnAddLinkedPieceID
             // 
@@ -158,7 +153,6 @@
             this.btnAddLinkedPieceID.TabIndex = 9;
             this.btnAddLinkedPieceID.Text = "Add Linked Piece ID:";
             this.btnAddLinkedPieceID.UseVisualStyleBackColor = true;
-            this.btnAddLinkedPieceID.Click += new System.EventHandler(this.btnAddLinkedPieceID_Click);
             // 
             // lblOr
             // 
@@ -225,8 +219,6 @@
             this.Name = "FormINIExporter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Export to INI";
-            this.Load += new System.EventHandler(this.FormINIExporter_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormINIExporter_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picPiecePreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLinkedPieceID)).EndInit();
             this.ResumeLayout(false);

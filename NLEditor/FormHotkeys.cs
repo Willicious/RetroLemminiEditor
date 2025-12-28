@@ -686,9 +686,6 @@ namespace NLEditor
                     case "HotkeyCleanseLevels":
                         HotkeyConfig.HotkeyCleanseLevels = parsedKey;
                         break;
-                    case "HotkeyHighlightGroupedPieces":
-                        HotkeyConfig.HotkeyHighlightGroupedPieces = parsedKey;
-                        break;
                     case "HotkeyHighlightEraserPieces":
                         HotkeyConfig.HotkeyHighlightEraserPieces = parsedKey;
                         break;
@@ -925,12 +922,6 @@ namespace NLEditor
                         break;
                     case "HotkeyInvert":
                         HotkeyConfig.HotkeyInvert = parsedKey;
-                        break;
-                    case "HotkeyGroup":
-                        HotkeyConfig.HotkeyGroup = parsedKey;
-                        break;
-                    case "HotkeyUngroup":
-                        HotkeyConfig.HotkeyUngroup = parsedKey;
                         break;
                     case "HotkeyErase":
                         HotkeyConfig.HotkeyErase = parsedKey;

@@ -26,7 +26,6 @@ namespace NLEditor
             curSettings.ReadSettingsFromFile();
 
             snapToGridToolStripMenuItem.Checked = curSettings.UseGridForPieces;
-            highlightGroupedPiecesToolStripMenuItem.Checked = Properties.Settings.Default.GroupsAreHighlighted;
             highlightEraserPiecesToolStripMenuItem.Checked = Properties.Settings.Default.ErasersAreHighlighted;
         }
 
@@ -1542,8 +1541,6 @@ Digger=20
 
             if (currentPiece.IsSketch)
                 pieceStyle = "(Sketches)";
-            else if (currentPiece is GroupPiece)
-                pieceStyle = "(Group)";
             else if (style == null)
                 pieceStyle = "(Default)";
             else
@@ -1564,7 +1561,7 @@ Digger=20
             lblPieceType.Text = pieceType;
             lblPieceSize.Text = pieceSize;
 
-            string[] nonLoadable = { "(Default)", "(Group)", "(Sketches)" };
+            string[] nonLoadable = { "(Default)", "(Sketches)" };
 
             if (pieceCurStyle.NameInEditor != pieceStyle && !nonLoadable.Contains(pieceStyle))
                 but_LoadStyle.Visible = true;
@@ -1937,21 +1934,10 @@ Digger=20
             }
         }
 
-        private static readonly long InstanceID = DateTime.Now.Ticks;
-
         [Serializable()]
         private class ClipboardData
         {
             public List<LevelPiece> Pieces;
-            public List<ClipboardGroup> GroupData;
-            public long InstanceID;
-        }
-
-        [Serializable()]
-        private class ClipboardGroup
-        {
-            public string Name;
-            public List<TerrainPiece> Pieces;
         }
 
         /// <summary>
@@ -1960,39 +1946,13 @@ Digger=20
         private void WriteToClipboard()
         {
             List<LevelPiece> clipboardPieces = CurLevel.SelectionList().Select(piece => piece.Clone()).ToList();
-            List<ClipboardGroup> groupData = new List<ClipboardGroup>();
-
-            foreach (var piece in clipboardPieces)
-                if (piece is GroupPiece gp)
-                    PrepareClipboardGroup(gp, groupData);
 
             ClipboardData clipboardData = new ClipboardData()
             {
-                Pieces = clipboardPieces,
-                GroupData = groupData,
-                InstanceID = groupData.Count == 0 ? 0 : InstanceID
+                Pieces = clipboardPieces
             };
 
             Utility.SetDataToClipboard(clipboardData);
-        }
-
-        private void PrepareClipboardGroup(GroupPiece group, List<ClipboardGroup> groupData)
-        {
-            if (groupData.FirstOrDefault(gd => gd.Name == group.Name) == null)
-            {
-                ClipboardGroup newGroup = new ClipboardGroup();
-
-                var contents = group.GetConstituents();
-
-                newGroup.Name = group.Name;
-                newGroup.Pieces = group.GetConstituents();
-
-                groupData.Insert(0, newGroup);
-
-                foreach (var piece in newGroup.Pieces)
-                    if (piece is GroupPiece gp)
-                        PrepareClipboardGroup(gp, groupData);
-            }
         }
 
         /// <summary>
@@ -2081,14 +2041,12 @@ Digger=20
 
             ClipboardData clipboardData;
             List<LevelPiece> clipboardPieces = null;
-            List<ClipboardGroup> groupData = null;
 
             try
             {
                 clipboardData = Utility.GetDataFromClipboard<ClipboardData>();
 
                 clipboardPieces = clipboardData.Pieces;
-                groupData = clipboardData.GroupData;
 
                 if (clipboardPieces == null || clipboardPieces.Count == 0)
                     return;
@@ -2097,9 +2055,6 @@ Digger=20
             {
                 return;
             }
-
-            foreach (var group in groupData)
-                new GroupPiece(group.Pieces, group.Name); // Don't need to actually place it at this point.
 
             if (doCenterAtCursor)
             {
@@ -2137,51 +2092,6 @@ Digger=20
             }
 
             return newPieces;
-        }
-
-
-        /// <summary>
-        /// Groups the selected pieces, if possible.
-        /// </summary>
-        private void GroupSelectedPieces()
-        {
-            if (CurLevel.MayGroupSelection())
-            {
-                bool userHasHighlightEraserPiecesEnabled = Properties.Settings.Default.ErasersAreHighlighted;
-
-                // Temporarily disable highlit eraser pieces to ensure these are grouped correctly
-                if (userHasHighlightEraserPiecesEnabled)
-                {
-                    Properties.Settings.Default.ErasersAreHighlighted = false;
-                    pic_Level.Image = curRenderer.CreateLevelImage();
-                }
-
-                CurLevel.GroupSelection();
-                SaveChangesToOldLevelList();
-                UpdateFlagsForPieceActions();
-                UpdatePieceMetaData();
-
-                // Reset option before redrawing level
-                if (userHasHighlightEraserPiecesEnabled)
-                    Properties.Settings.Default.ErasersAreHighlighted = true;
-
-                pic_Level.Image = curRenderer.CreateLevelImage();
-            }
-        }
-
-        /// <summary>
-        /// Ungroups the selected pieces, if possible.
-        /// </summary>
-        private void UngroupSelectedPieces()
-        {
-            if (CurLevel.MayUngroupSelection())
-            {
-                CurLevel.UngroupSelection();
-                SaveChangesToOldLevelList();
-                UpdateFlagsForPieceActions();
-                UpdatePieceMetaData();
-                pic_Level.Image = curRenderer.CreateLevelImage();
-            }
         }
 
         /// <summary>
@@ -2340,14 +2250,6 @@ Digger=20
             MessageBox.Show($"Image saved as {savedFilePath}", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void HighlightGroupedPieces()
-        {
-            Properties.Settings.Default.GroupsAreHighlighted = !Properties.Settings.Default.GroupsAreHighlighted;
-            highlightGroupedPiecesToolStripMenuItem.Checked = Properties.Settings.Default.GroupsAreHighlighted;
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-            Properties.Settings.Default.Save();
-        }
-
         private void HighlightEraserPieces()
         {
             Properties.Settings.Default.ErasersAreHighlighted = !Properties.Settings.Default.ErasersAreHighlighted;
@@ -2455,7 +2357,6 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyPlaytestLevel, () => PlaytestLevel());
             AddHotkey(HotkeyConfig.HotkeyValidateLevel, () => ValidateLevel(false, false));
             AddHotkey(HotkeyConfig.HotkeyCleanseLevels, () => ShowCleanseLevelsDialog());
-            AddHotkey(HotkeyConfig.HotkeyHighlightGroupedPieces, () => HighlightGroupedPieces());
             AddHotkey(HotkeyConfig.HotkeyHighlightEraserPieces, () => HighlightEraserPieces());
             AddHotkey(HotkeyConfig.HotkeyToggleClearPhysics, () => ToggleClearPhysics());
             AddHotkey(HotkeyConfig.HotkeyToggleTerrain, () => ToggleTerrain());
@@ -2535,8 +2436,6 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyRotate, () => RotateLevelPieces());
             AddHotkey(HotkeyConfig.HotkeyFlip, () => FlipLevelPieces());
             AddHotkey(HotkeyConfig.HotkeyInvert, () => InvertLevelPieces());
-            AddHotkey(HotkeyConfig.HotkeyGroup, () => GroupSelectedPieces());
-            AddHotkey(HotkeyConfig.HotkeyUngroup, () => UngroupSelectedPieces());
             AddHotkey(HotkeyConfig.HotkeyErase, () => check_Pieces_Erase.Checked = !check_Pieces_Erase.Checked);
             AddHotkey(HotkeyConfig.HotkeyNoOverwrite, () => check_Pieces_NoOv.Checked = !check_Pieces_NoOv.Checked);
             AddHotkey(HotkeyConfig.HotkeyOnlyOnTerrain, () => check_Pieces_OnlyOnTerrain.Checked = !check_Pieces_OnlyOnTerrain.Checked);
@@ -2604,15 +2503,6 @@ Digger=20
 
             duplicateToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyDuplicate);
-
-            groupToolStripMenuItem.ShortcutKeyDisplayString =
-                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyGroup);
-
-            ungroupToolStripMenuItem.ShortcutKeyDisplayString =
-                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyUngroup);
-
-            highlightGroupedPiecesToolStripMenuItem.ShortcutKeyDisplayString =
-                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyHighlightGroupedPieces);
 
             highlightEraserPiecesToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyHighlightEraserPieces);

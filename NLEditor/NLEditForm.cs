@@ -306,11 +306,6 @@ namespace NLEditor
             Application.Exit();
         }
 
-        private void highlightGroupedPiecesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HighlightGroupedPieces();
-        }
-
         private void highlightEraserPiecesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HighlightEraserPieces();
@@ -389,16 +384,6 @@ namespace NLEditor
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DuplicateSelectedPieces();
-        }
-
-        private void groupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GroupSelectedPieces();
-        }
-
-        private void ungroupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            UngroupSelectedPieces();
         }
 
         private void playLevelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -582,18 +567,6 @@ namespace NLEditor
 
         private void but_MoveBackOne_MouseUp(object sender, MouseEventArgs e)
         {
-            PullFocusFromTextInputs();
-        }
-
-        private void but_GroupSelection_Click(object sender, EventArgs e)
-        {
-            GroupSelectedPieces();
-            PullFocusFromTextInputs();
-        }
-
-        private void but_UngroupSelection_Click(object sender, EventArgs e)
-        {
-            UngroupSelectedPieces();
             PullFocusFromTextInputs();
         }
 

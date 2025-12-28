@@ -20,12 +20,6 @@ namespace NLEditor
                 this.Style = "*sketch";
                 this.IsSketch = true;
             }
-            else if (this.Key.Substring(0, 7).ToUpperInvariant() == "*GROUP:")
-            {
-                this.Name = this.Key.Substring(7);
-                this.Style = "default";
-                this.IsSketch = false;
-            }
             else
             {
                 this.Name = System.IO.Path.GetFileName(key);

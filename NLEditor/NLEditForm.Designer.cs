@@ -54,15 +54,12 @@
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteInPlaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ungroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLevelWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPieceBrowserWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expandAllTabsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.highlightGroupedPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.highlightEraserPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.clearPhysicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,8 +126,6 @@
             this.lblPieceStyle = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
             this.lblPieceName = new System.Windows.Forms.Label();
-            this.but_UngroupSelection = new System.Windows.Forms.Button();
-            this.but_GroupSelection = new System.Windows.Forms.Button();
             this.check_Pieces_OneWay = new System.Windows.Forms.CheckBox();
             this.check_Pieces_OnlyOnTerrain = new System.Windows.Forms.CheckBox();
             this.check_Pieces_NoOv = new System.Windows.Forms.CheckBox();
@@ -397,8 +392,6 @@
             this.pasteToolStripMenuItem,
             this.pasteInPlaceToolStripMenuItem,
             this.duplicateToolStripMenuItem,
-            this.groupToolStripMenuItem,
-            this.ungroupToolStripMenuItem,
             this.toolStripSeparator3});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
@@ -468,22 +461,6 @@
             this.duplicateToolStripMenuItem.Text = "Duplicate-In-Place";
             this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
-            // groupToolStripMenuItem
-            // 
-            this.groupToolStripMenuItem.Name = "groupToolStripMenuItem";
-            this.groupToolStripMenuItem.ShortcutKeyDisplayString = "G";
-            this.groupToolStripMenuItem.Size = new System.Drawing.Size(334, 34);
-            this.groupToolStripMenuItem.Text = "Group Pieces";
-            this.groupToolStripMenuItem.Click += new System.EventHandler(this.groupToolStripMenuItem_Click);
-            // 
-            // ungroupToolStripMenuItem
-            // 
-            this.ungroupToolStripMenuItem.Name = "ungroupToolStripMenuItem";
-            this.ungroupToolStripMenuItem.ShortcutKeyDisplayString = "H";
-            this.ungroupToolStripMenuItem.Size = new System.Drawing.Size(334, 34);
-            this.ungroupToolStripMenuItem.Text = "Ungroup Pieces";
-            this.ungroupToolStripMenuItem.Click += new System.EventHandler(this.ungroupToolStripMenuItem_Click);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -496,7 +473,6 @@
             this.openPieceBrowserWindowToolStripMenuItem,
             this.expandAllTabsToolStripMenuItem,
             this.toolStripSeparator6,
-            this.highlightGroupedPiecesToolStripMenuItem,
             this.highlightEraserPiecesToolStripMenuItem,
             this.toolStripSeparator7,
             this.clearPhysicsToolStripMenuItem,
@@ -539,15 +515,6 @@
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(457, 6);
-            // 
-            // highlightGroupedPiecesToolStripMenuItem
-            // 
-            this.highlightGroupedPiecesToolStripMenuItem.CheckOnClick = true;
-            this.highlightGroupedPiecesToolStripMenuItem.Name = "highlightGroupedPiecesToolStripMenuItem";
-            this.highlightGroupedPiecesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+G";
-            this.highlightGroupedPiecesToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
-            this.highlightGroupedPiecesToolStripMenuItem.Text = "Highlight Grouped Pieces";
-            this.highlightGroupedPiecesToolStripMenuItem.Click += new System.EventHandler(this.highlightGroupedPiecesToolStripMenuItem_Click);
             // 
             // highlightEraserPiecesToolStripMenuItem
             // 
@@ -1254,8 +1221,6 @@
             // tabPieces
             // 
             this.tabPieces.Controls.Add(this.gbPieceMetaData);
-            this.tabPieces.Controls.Add(this.but_UngroupSelection);
-            this.tabPieces.Controls.Add(this.but_GroupSelection);
             this.tabPieces.Controls.Add(this.check_Pieces_OneWay);
             this.tabPieces.Controls.Add(this.check_Pieces_OnlyOnTerrain);
             this.tabPieces.Controls.Add(this.check_Pieces_NoOv);
@@ -1380,28 +1345,6 @@
             this.lblPieceName.Size = new System.Drawing.Size(96, 20);
             this.lblPieceName.TabIndex = 3;
             this.lblPieceName.Text = "piece_name";
-            // 
-            // but_UngroupSelection
-            // 
-            this.but_UngroupSelection.Location = new System.Drawing.Point(183, 136);
-            this.but_UngroupSelection.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.but_UngroupSelection.Name = "but_UngroupSelection";
-            this.but_UngroupSelection.Size = new System.Drawing.Size(189, 47);
-            this.but_UngroupSelection.TabIndex = 8;
-            this.but_UngroupSelection.Text = "Ungroup";
-            this.but_UngroupSelection.UseVisualStyleBackColor = true;
-            this.but_UngroupSelection.Click += new System.EventHandler(this.but_UngroupSelection_Click);
-            // 
-            // but_GroupSelection
-            // 
-            this.but_GroupSelection.Location = new System.Drawing.Point(13, 136);
-            this.but_GroupSelection.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.but_GroupSelection.Name = "but_GroupSelection";
-            this.but_GroupSelection.Size = new System.Drawing.Size(166, 47);
-            this.but_GroupSelection.TabIndex = 7;
-            this.but_GroupSelection.Text = "Group";
-            this.but_GroupSelection.UseVisualStyleBackColor = true;
-            this.but_GroupSelection.Click += new System.EventHandler(this.but_GroupSelection_Click);
             // 
             // check_Pieces_OneWay
             // 
@@ -2537,10 +2480,6 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.HScrollBar scrollPicLevelHoriz;
         private System.Windows.Forms.VScrollBar scrollPicLevelVert;
-        private System.Windows.Forms.Button but_UngroupSelection;
-        private System.Windows.Forms.Button but_GroupSelection;
-        private System.Windows.Forms.ToolStripMenuItem groupToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ungroupToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipButton;
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private System.Windows.Forms.TabPage tabMisc;
@@ -2598,7 +2537,6 @@
         private System.Windows.Forms.Label lblPieceSize;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.ToolStripMenuItem highlightEraserPiecesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem highlightGroupedPiecesToolStripMenuItem;
         private System.Windows.Forms.GroupBox gbCustomSkillset;
         private System.Windows.Forms.Button btnCustomSkillset;
         private System.Windows.Forms.ComboBox combo_CustomSkillset;

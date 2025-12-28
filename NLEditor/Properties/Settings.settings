@@ -23,9 +23,6 @@
     <Setting Name="ErasersAreHighlighted" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="GroupsAreHighlighted" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="PieceBrowserSize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">1000, 148</Value>
     </Setting>

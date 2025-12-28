@@ -18,7 +18,6 @@ namespace NLEditor
         public static Keys HotkeyPlaytestLevel;
         public static Keys HotkeyValidateLevel;
         public static Keys HotkeyCleanseLevels;
-        public static Keys HotkeyHighlightGroupedPieces;
         public static Keys HotkeyHighlightEraserPieces;
         public static Keys HotkeyToggleClearPhysics;
         public static Keys HotkeyToggleTerrain;
@@ -98,8 +97,6 @@ namespace NLEditor
         public static Keys HotkeyRotate;
         public static Keys HotkeyFlip;
         public static Keys HotkeyInvert;
-        public static Keys HotkeyGroup;
-        public static Keys HotkeyUngroup;
         public static Keys HotkeyErase;
         public static Keys HotkeyNoOverwrite;
         public static Keys HotkeyOnlyOnTerrain;
@@ -350,8 +347,6 @@ namespace NLEditor
                     HotkeyValidateLevel = ParseHotkeyString(line.Substring("HotkeyValidateLevel=".Length));
                 if (line.StartsWith("HotkeyCleanseLevels="))
                     HotkeyCleanseLevels = ParseHotkeyString(line.Substring("HotkeyCleanseLevels=".Length));
-                if (line.StartsWith("HotkeyHighlightGroupedPieces="))
-                    HotkeyHighlightGroupedPieces = ParseHotkeyString(line.Substring("HotkeyHighlightGroupedPieces=".Length));
                 if (line.StartsWith("HotkeyHighlightEraserPieces="))
                     HotkeyHighlightEraserPieces = ParseHotkeyString(line.Substring("HotkeyHighlightEraserPieces=".Length));
                 if (line.StartsWith("HotkeyToggleClearPhysics="))
@@ -510,10 +505,6 @@ namespace NLEditor
                     HotkeyFlip = ParseHotkeyString(line.Substring("HotkeyFlip=".Length));
                 if (line.StartsWith("HotkeyInvert="))
                     HotkeyInvert = ParseHotkeyString(line.Substring("HotkeyInvert=".Length));
-                if (line.StartsWith("HotkeyGroup="))
-                    HotkeyGroup = ParseHotkeyString(line.Substring("HotkeyGroup=".Length));
-                if (line.StartsWith("HotkeyUngroup="))
-                    HotkeyUngroup = ParseHotkeyString(line.Substring("HotkeyUngroup=".Length));
                 if (line.StartsWith("HotkeyErase="))
                     HotkeyErase = ParseHotkeyString(line.Substring("HotkeyErase=".Length));
                 if (line.StartsWith("HotkeyNoOverwrite="))
@@ -565,7 +556,6 @@ namespace NLEditor
                 $"HotkeyPlaytestLevel={FormatHotkeyString(HotkeyPlaytestLevel)}",
                 $"HotkeyValidateLevel={FormatHotkeyString(HotkeyValidateLevel)}",
                 $"HotkeyCleanseLevels={FormatHotkeyString(HotkeyCleanseLevels)}",
-                $"HotkeyHighlightGroupedPieces={FormatHotkeyString(HotkeyHighlightGroupedPieces)}",
                 $"HotkeyHighlightEraserPieces={FormatHotkeyString(HotkeyHighlightEraserPieces)}",
                 $"HotkeyToggleClearPhysics={FormatHotkeyString(HotkeyToggleClearPhysics)}",
                 $"HotkeyToggleTerrain={FormatHotkeyString(HotkeyToggleTerrain)}",
@@ -645,8 +635,6 @@ namespace NLEditor
                 $"HotkeyRotate={FormatHotkeyString(HotkeyRotate)}",
                 $"HotkeyFlip={FormatHotkeyString(HotkeyFlip)}",
                 $"HotkeyInvert={FormatHotkeyString(HotkeyInvert)}",
-                $"HotkeyGroup={FormatHotkeyString(HotkeyGroup)}",
-                $"HotkeyUngroup={FormatHotkeyString(HotkeyUngroup)}",
                 $"HotkeyErase={FormatHotkeyString(HotkeyErase)}",
                 $"HotkeyNoOverwrite={FormatHotkeyString(HotkeyNoOverwrite)}",
                 $"HotkeyOnlyOnTerrain={FormatHotkeyString(HotkeyOnlyOnTerrain)}",
@@ -677,7 +665,6 @@ namespace NLEditor
             HotkeyPlaytestLevel = Keys.F12;
             HotkeyValidateLevel = Keys.Control | Keys.F12;
             HotkeyCleanseLevels = Keys.Control | Keys.Shift | Keys.F12;
-            HotkeyHighlightGroupedPieces = Keys.Control | Keys.G;
             HotkeyHighlightEraserPieces = Keys.Control | Keys.E;
             HotkeyToggleClearPhysics = Keys.F1;
             HotkeyToggleTerrain = Keys.F2;
@@ -757,8 +744,6 @@ namespace NLEditor
             HotkeyRotate = Keys.R;
             HotkeyFlip = Keys.F;
             HotkeyInvert = Keys.I;
-            HotkeyGroup = Keys.G;
-            HotkeyUngroup = Keys.U;
             HotkeyErase = Keys.E;
             HotkeyNoOverwrite = Keys.N;
             HotkeyOnlyOnTerrain = Keys.T;
@@ -780,7 +765,6 @@ namespace NLEditor
             HotkeyPlaytestLevel = Keys.F12;
             HotkeyValidateLevel = Keys.Control | Keys.F12;
             HotkeyCleanseLevels = Keys.Control | Keys.Shift | Keys.F12;
-            HotkeyHighlightGroupedPieces = Keys.Control | Keys.G;
             HotkeyHighlightEraserPieces = Keys.Control | Keys.E;
             HotkeyToggleClearPhysics = Keys.F1;
             HotkeyToggleTerrain = Keys.F2;
@@ -860,8 +844,6 @@ namespace NLEditor
             HotkeyRotate = Keys.R;
             HotkeyFlip = Keys.E;
             HotkeyInvert = Keys.W;
-            HotkeyGroup = Keys.G;
-            HotkeyUngroup = Keys.U;
             HotkeyErase = Keys.A;
             HotkeyNoOverwrite = Keys.S;
             HotkeyOnlyOnTerrain = Keys.D;

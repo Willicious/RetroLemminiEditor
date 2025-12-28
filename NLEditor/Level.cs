@@ -34,7 +34,6 @@ namespace NLEditor
 
             this.TerrainList = new List<TerrainPiece>();
             this.GadgetList = new List<GadgetPiece>();
-            this.GroupList = new List<GroupPiece>();
 
             this.NumLems = 40;
             this.SaveReq = 20;
@@ -88,8 +87,6 @@ namespace NLEditor
 
         public List<TerrainPiece> TerrainList { get; set; }
         public List<GadgetPiece> GadgetList { get; set; }
-        public List<GroupPiece> GroupList { get; set; }
-
         public Background Background { get; set; }
 
         public int NumLems { get; set; }
@@ -129,7 +126,6 @@ namespace NLEditor
 
             newLevel.TerrainList = new List<TerrainPiece>(this.TerrainList.Select(ter => (TerrainPiece)ter.Clone()));
             newLevel.GadgetList = new List<GadgetPiece>(this.GadgetList.Select(gad => (GadgetPiece)gad.Clone()));
-            newLevel.GroupList = new List<GroupPiece>(this.GroupList);
 
             newLevel.TerrainList.ForEach(ter => ter.IsSelected = false);
             newLevel.GadgetList.ForEach(gad => gad.IsSelected = false);
@@ -450,19 +446,6 @@ namespace NLEditor
         }
 
         /// <summary>
-        /// Groups all selected terrain (non-steel) pieces into one piece. The new group is not selected.
-        /// </summary>
-        public GroupPiece ReplaceSelectedByGroup()
-        {
-            var selectedTerrains = SelectionList().FindAll(item => item.ObjType == C.OBJ.TERRAIN);
-            GroupPiece newGroup = new GroupPiece(selectedTerrains.ConvertAll(item => (TerrainPiece)item));
-            TerrainList.RemoveAll(item => item.ObjType == C.OBJ.TERRAIN);
-            TerrainList.Add(newGroup);
-
-            return newGroup;
-        }
-
-        /// <summary>
         /// Sets the NoOverwrite flag for all objects and terrain pieces.
         /// </summary>
         /// <param name="doAdd"></param>
@@ -638,85 +621,6 @@ namespace NLEditor
                             .Concat(pieceList.GetRange(0, endIndex + 1).FindAll(item => item.IsSelected))
                             .Concat(pieceList.GetRange(endIndex + 1))
                             .ToList();
-        }
-
-        /// <summary>
-        /// Checks whether we may group the currently selected pieces.
-        /// </summary>
-        public bool MayGroupSelection()
-        {
-            var selection = TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch);
-            var selectionVisible = selection.FindAll(ter => !ter.IsErase);
-
-            return selection.Count > 1 && selectionVisible.Count > 0
-                && (selectionVisible.TrueForAll(ter => ter.IsSteel) || selectionVisible.TrueForAll(ter => !ter.IsSteel));
-        }
-
-        /// <summary>
-        /// Checks whether we may ungroup (some of) the currently selected pieces.
-        /// </summary>
-        public bool MayUngroupSelection()
-        {
-            return TerrainList.Exists(ter => ter.IsSelected && ter is GroupPiece);
-        }
-
-        /// <summary>
-        /// Groups all selected terrain pieces.
-        /// </summary>
-        public void GroupSelection()
-        {
-            int insertIndex = TerrainList.FindIndex(ter => ter.IsSelected && !ter.IsSketch);
-            var selection = TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch);
-            TerrainList.RemoveAll(ter => ter.IsSelected && !ter.IsSketch);
-            GroupPiece group = null;
-            try
-            {
-                group = new GroupPiece(selection);
-            }
-            catch (ArgumentException)
-            {
-                // Selection has no visible pixel, so don't add any kind of group piece.
-                return;
-            }
-
-            // Check whether the same group was already created
-            if (!GroupList.Exists(grp => grp.HasSameKey(group)))
-            {
-                var newGroup = (GroupPiece)group.Clone();
-                newGroup.PosX = 0;
-                newGroup.PosY = 0;
-                GroupList.Add(newGroup);
-            }
-
-            group.IsSelected = true;
-            TerrainList.Insert(insertIndex, group);
-        }
-
-        /// <summary>
-        /// Ungroups all selected group pieces and adds the single pieces to the terrain list. 
-        /// </summary>
-        public void UngroupSelection()
-        {
-            var selectedGroups = TerrainList.FindAll(ter => ter.IsSelected && ter is GroupPiece);
-            selectedGroups.ForEach(grp => UnGroup((GroupPiece)grp));
-        }
-
-        /// <summary>
-        /// Ungroups a given group and inserts the single pieces into the terrain list.
-        /// </summary>
-        /// <param name="group"></param>
-        private void UnGroup(GroupPiece group)
-        {
-            int insertIndex = TerrainList.IndexOf(group);
-            TerrainList.Remove(group);
-            TerrainList.InsertRange(insertIndex, group.GetConstituents());
-
-            // Check whether this was the last occurence of this group
-            if (!TerrainList.Exists(ter => ter.HasSameKey(group))
-                && !GroupList.Exists(grp => grp.ContainsConstituent(group)))
-            {
-                GroupList.Remove(group);
-            }
         }
 
         public void PrepareForSave()

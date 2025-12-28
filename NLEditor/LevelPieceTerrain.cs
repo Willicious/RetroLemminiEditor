@@ -16,16 +16,8 @@ namespace NLEditor
             IsNoOverwrite = false;
             IsOneWay = true;
 
-            if (this is GroupPiece)
-            {
-                SpecWidth = 0;
-                SpecHeight = 0;
-            }
-            else
-            {
-                SpecWidth = Utility.EvaluateResizable(0, DefaultWidth, base.Width, MayResizeHoriz());
-                SpecHeight = Utility.EvaluateResizable(0, DefaultHeight, base.Height, MayResizeVert());
-            }
+            SpecWidth = Utility.EvaluateResizable(0, DefaultWidth, base.Width, MayResizeHoriz());
+            SpecHeight = Utility.EvaluateResizable(0, DefaultHeight, base.Height, MayResizeVert());
         }
 
         public TerrainPiece(string key, Point pos, int rotation, bool isInvert, bool isErase, bool isNoOv, bool isOneWay, int specWidth, int specHeight)
