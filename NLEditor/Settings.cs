@@ -62,7 +62,6 @@ namespace NLEditor
         public TriggerAreaColor CurrentTriggerAreaColor { get; private set; }
         public bool InfiniteScrolling { get; private set; }
         public bool UseGridForPieces { get; private set; }
-        public bool UseSpawnInterval { get; private set; }
         public bool ValidateWhenSaving { get; private set; }
         public bool Autosave { get; private set; }
         public bool RemoveOldAutosaves { get; private set; }
@@ -94,7 +93,6 @@ namespace NLEditor
             PreferObjectName = false;
             InfiniteScrolling = false;
             UseGridForPieces = false;
-            UseSpawnInterval = false;
             gridSize = 8;
             GridColor = Color.MidnightBlue;
             customMove = 64;
@@ -408,40 +406,6 @@ namespace NLEditor
             groupTriggerAreaColor.Controls.Add(lblTriggerAreaColor);
             groupTriggerAreaColor.Controls.Add(comboTriggerAreaColor);
 
-            // ========================== Spawn Interval GroupBox ========================== //
-
-            GroupBox groupSpawnInterval = new GroupBox();
-            groupSpawnInterval.Text = "Spawn Interval / Release Rate";
-            groupSpawnInterval.Top = 260;
-            groupSpawnInterval.Left = columnRight;
-            groupSpawnInterval.Width = 280;
-            groupSpawnInterval.Height = 50;
-
-            RadioButton radUseSpawnInterval = new RadioButton();
-            radUseSpawnInterval.Name = "radUseSpawnInterval";
-            radUseSpawnInterval.AutoSize = true;
-            radUseSpawnInterval.Width = 130;
-            radUseSpawnInterval.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radUseSpawnInterval.Checked = UseSpawnInterval;
-            radUseSpawnInterval.Text = "Spawn Interval";
-            radUseSpawnInterval.Top = groupBoxTop;
-            radUseSpawnInterval.Left = groupBoxColumnLeft;
-            radUseSpawnInterval.CheckedChanged += new EventHandler(UseSpawnInterval_CheckedChanged);
-
-            RadioButton radUseReleaseRate = new RadioButton();
-            radUseReleaseRate.Name = "radUseReleaseRate";
-            radUseReleaseRate.AutoSize = true;
-            radUseReleaseRate.Width = 130;
-            radUseReleaseRate.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radUseReleaseRate.Checked = !UseSpawnInterval;
-            radUseReleaseRate.Text = "Release Rate";
-            radUseReleaseRate.Top = groupBoxTop;
-            radUseReleaseRate.Left = groupBoxColumnLeft + radUseSpawnInterval.Width - 16;
-            radUseReleaseRate.CheckedChanged += new EventHandler(UseSpawnInterval_CheckedChanged);
-
-            groupSpawnInterval.Controls.Add(radUseSpawnInterval);
-            groupSpawnInterval.Controls.Add(radUseReleaseRate);
-
             // ========================== Save And Close Button ========================== //
 
             btnSaveAndClose = new Button();
@@ -471,7 +435,6 @@ namespace NLEditor
             settingsForm.Controls.Add(groupCustomMove);
             settingsForm.Controls.Add(groupSnapToGrid);
             settingsForm.Controls.Add(groupTriggerAreaColor);
-            settingsForm.Controls.Add(groupSpawnInterval);
             settingsForm.Controls.Add(groupSavingOptions);
 
             settingsForm.Controls.Add(btnSaveAndClose);
@@ -531,26 +494,6 @@ namespace NLEditor
                     checkPreferObjectName.Enabled = false;
                 else
                     checkPreferObjectName.Enabled = true;
-            }
-
-            settingChanged = true;
-        }
-
-        private void UseSpawnInterval_CheckedChanged(object sender, EventArgs e)
-        {
-            if (sender is RadioButton rb && rb.Checked)
-            {
-                switch (rb.Name)
-                {
-                    case "radUseSpawnInterval":
-                        UseSpawnInterval = true;
-                        break;
-                    case "radUseReleaseRate":
-                        UseSpawnInterval = false;
-                        break;
-                }
-
-                editorForm.UpdateRRSIControls();
             }
 
             settingChanged = true;

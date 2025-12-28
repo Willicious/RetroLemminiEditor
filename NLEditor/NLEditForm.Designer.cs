@@ -88,6 +88,7 @@
             this.pic_Level = new System.Windows.Forms.PictureBox();
             this.tabLvlProperties = new System.Windows.Forms.TabControl();
             this.tabGlobalInfo = new System.Windows.Forms.TabPage();
+            this.check_Lvl_LockSR = new System.Windows.Forms.CheckBox();
             this.chk_Lvl_AutoStart = new System.Windows.Forms.CheckBox();
             this.lbl_Global_Version = new System.Windows.Forms.Label();
             this.but_RandomID = new System.Windows.Forms.Button();
@@ -117,7 +118,6 @@
             this.lbl_Global_Author = new System.Windows.Forms.Label();
             this.txt_LevelTitle = new System.Windows.Forms.TextBox();
             this.lbl_Global_Title = new System.Windows.Forms.Label();
-            this.num_Lvl_SI = new NLEditor.NumUpDownOverwrite();
             this.tabPieces = new System.Windows.Forms.TabPage();
             this.gbPieceMetaData = new System.Windows.Forms.GroupBox();
             this.lblPieceSize = new System.Windows.Forms.Label();
@@ -212,7 +212,6 @@
             this.txt_FocusPieceBrowser = new NLEditor.FocusTextBox();
             this.pic_DragNewPiece = new System.Windows.Forms.PictureBox();
             this.txt_Focus = new NLEditor.FocusTextBox();
-            this.check_Lvl_LockSR = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.tabLvlProperties.SuspendLayout();
@@ -226,7 +225,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_StartX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SizeY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SizeX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SI)).BeginInit();
             this.tabPieces.SuspendLayout();
             this.gbPieceMetaData.SuspendLayout();
             this.tabSkills.SuspendLayout();
@@ -796,7 +794,6 @@
             this.tabGlobalInfo.Controls.Add(this.lbl_Global_Author);
             this.tabGlobalInfo.Controls.Add(this.txt_LevelTitle);
             this.tabGlobalInfo.Controls.Add(this.lbl_Global_Title);
-            this.tabGlobalInfo.Controls.Add(this.num_Lvl_SI);
             this.tabGlobalInfo.Location = new System.Drawing.Point(4, 29);
             this.tabGlobalInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabGlobalInfo.Name = "tabGlobalInfo";
@@ -805,6 +802,17 @@
             this.tabGlobalInfo.TabIndex = 0;
             this.tabGlobalInfo.Text = "Globals";
             this.tabGlobalInfo.UseVisualStyleBackColor = true;
+            // 
+            // check_Lvl_LockSR
+            // 
+            this.check_Lvl_LockSR.AutoSize = true;
+            this.check_Lvl_LockSR.Location = new System.Drawing.Point(112, 451);
+            this.check_Lvl_LockSR.Name = "check_Lvl_LockSR";
+            this.check_Lvl_LockSR.Size = new System.Drawing.Size(171, 24);
+            this.check_Lvl_LockSR.TabIndex = 33;
+            this.check_Lvl_LockSR.Text = "Lock Release Rate";
+            this.check_Lvl_LockSR.UseVisualStyleBackColor = true;
+            this.check_Lvl_LockSR.CheckedChanged += new System.EventHandler(this.textbox_Leave);
             // 
             // chk_Lvl_AutoStart
             // 
@@ -997,7 +1005,6 @@
             0,
             0,
             0});
-            this.num_Lvl_RR.ValueChanged += new System.EventHandler(this.HandleSpawnIntervalNumerics);
             this.num_Lvl_RR.Leave += new System.EventHandler(this.textbox_Leave);
             // 
             // lbl_Global_SR
@@ -1243,30 +1250,6 @@
             this.lbl_Global_Title.TabIndex = 0;
             this.lbl_Global_Title.Text = "Title";
             this.lbl_Global_Title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // num_Lvl_SI
-            // 
-            this.num_Lvl_SI.Location = new System.Drawing.Point(212, 483);
-            this.num_Lvl_SI.Maximum = new decimal(new int[] {
-            102,
-            0,
-            0,
-            0});
-            this.num_Lvl_SI.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.num_Lvl_SI.Name = "num_Lvl_SI";
-            this.num_Lvl_SI.Size = new System.Drawing.Size(70, 26);
-            this.num_Lvl_SI.TabIndex = 32;
-            this.num_Lvl_SI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.num_Lvl_SI.Value = new decimal(new int[] {
-            53,
-            0,
-            0,
-            0});
-            this.num_Lvl_SI.ValueChanged += new System.EventHandler(this.HandleSpawnIntervalNumerics);
             // 
             // tabPieces
             // 
@@ -2381,17 +2364,6 @@
             this.txt_Focus.TabStop = false;
             this.txt_Focus.Text = "asdf";
             // 
-            // check_Lvl_LockSR
-            // 
-            this.check_Lvl_LockSR.AutoSize = true;
-            this.check_Lvl_LockSR.Location = new System.Drawing.Point(112, 451);
-            this.check_Lvl_LockSR.Name = "check_Lvl_LockSR";
-            this.check_Lvl_LockSR.Size = new System.Drawing.Size(171, 24);
-            this.check_Lvl_LockSR.TabIndex = 33;
-            this.check_Lvl_LockSR.Text = "Lock Release Rate";
-            this.check_Lvl_LockSR.UseVisualStyleBackColor = true;
-            this.check_Lvl_LockSR.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
             // NLEditForm
             // 
             this.AllowDrop = true;
@@ -2445,7 +2417,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_StartX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SizeY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SizeX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SI)).EndInit();
             this.tabPieces.ResumeLayout(false);
             this.gbPieceMetaData.ResumeLayout(false);
             this.gbPieceMetaData.PerformLayout();
@@ -2659,7 +2630,6 @@
         private System.Windows.Forms.ToolStripMenuItem refreshStylesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteMissingPiecesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem styleManagerToolStripMenuItem;
-        private NumUpDownOverwrite num_Lvl_SI;
         private System.Windows.Forms.ToolStripMenuItem exportAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToINIToolStripMenuItem;
