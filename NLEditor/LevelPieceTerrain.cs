@@ -81,11 +81,6 @@ namespace NLEditor
             return true;
         }
 
-        public override bool MayReceiveSkill(C.Skill skill)
-        {
-            return false;
-        }
-
         public override void RotateInRect(Rectangle borderRect)
         {
             base.RotateInRect(borderRect);

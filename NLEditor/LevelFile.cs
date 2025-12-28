@@ -193,12 +193,6 @@ namespace NLEditor
             bool doRotate = node.HasChildWithKey("ROTATE");
             bool doInvert = node.HasChildWithKey("FLIP_VERTICAL");
             bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
-            int val_L = node.HasChildWithKey("PAIRING") ? node["PAIRING"].ValueInt : node["SKILL_COUNT"].ValueInt;
-            int dnSpeed = node["SPEED"].ValueInt;
-            int dnAngle = node["ANGLE"].ValueInt;
-            int lemmingCap = node["LEMMINGS"].ValueInt;
-            int countdownLength = node["COUNTDOWN"].ValueInt;
-            HashSet<C.Skill> skillFlags = new HashSet<C.Skill>();
 
             if (doRotate)
             {
@@ -211,14 +205,7 @@ namespace NLEditor
             Point levelFilePos = new Point(posX, posY);
             Point editorPos = ImageLibrary.LevelFileToEditorCoordinates(key, levelFilePos, doRotate, doFlip, doInvert);
             GadgetPiece newGadget = new GadgetPiece(key, editorPos, 0, false, isNoOverwrite, isOnlyOnTerrain,
-              val_L, skillFlags, specWidth, specHeight, dnSpeed, dnAngle, lemmingCap, countdownLength);
-
-            // Read in skill information
-            foreach (C.Skill skill in C.SkillArray)
-            {
-                if (node.HasChildWithKey(SkillString(skill)))
-                    newGadget.SetSkillFlag(skill, true);
-            }
+              specWidth, specHeight);
 
             // For compatibility with player: NoOverwrite + OnlyOnTerrain gadgets work like OnlyOnTerrain 
             if (newGadget.IsNoOverwrite && newGadget.IsOnlyOnTerrain)
@@ -246,20 +233,12 @@ namespace NLEditor
             int posX = node["X"].ValueInt;
             int posY = node["Y"].ValueInt;
             bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
-            HashSet<C.Skill> skillFlags = new HashSet<C.Skill>();
 
             // ... then create the correct Gadget piece
             string key = ImageLibrary.CreatePieceKey("default", "lemming", true);
             Point levelFilePos = new Point(posX, posY);
             Point editorPos = ImageLibrary.LevelFileToEditorCoordinates(key, levelFilePos, false, doFlip, false);
-            GadgetPiece newLemming = new GadgetPiece(key, editorPos, 0, false, false, false, 0, skillFlags, -1, -1, 0, 0, 0);
-
-            // Read in skill information
-            foreach (C.Skill skill in C.SkillArray)
-            {
-                if (node.HasChildWithKey(SkillString(skill)))
-                    newLemming.SetSkillFlag(skill, true);
-            }
+            GadgetPiece newLemming = new GadgetPiece(key, editorPos, 0, false, false, false, -1, -1);
 
             if (doFlip)
                 newLemming.FlipInRect(newLemming.ImageRectangle);
@@ -782,31 +761,6 @@ namespace NLEditor
             if (gadget.IsInvertedInPlayer)
             {
                 textFile.WriteLine("   FLIP_VERTICAL");
-            }
-            if (gadget.ObjType.In(C.OBJ.HATCH, C.OBJ.LEMMING))
-            {
-                foreach (C.Skill skill in gadget.SkillFlags)
-                {
-                    textFile.WriteLine("   " + SkillString(skill) + " ");
-                }
-            }
-            else if (gadget.ObjType == C.OBJ.EXIT)
-            {
-                if (gadget.SkillFlags.Contains(C.Skill.Rival))
-                {
-                    textFile.WriteLine("   " + SkillString(C.Skill.Rival) + " ");
-                }
-            }
-
-            if (gadget.ObjType.In(C.OBJ.DECORATION))
-            {
-                textFile.WriteLine("   SPEED " + gadget.DecorationSpeed.ToString());
-                textFile.WriteLine("   ANGLE " + gadget.DecorationAngle.ToString());
-            }
-
-            if (gadget.ObjType.In(C.OBJ.EXIT, C.OBJ.HATCH) && gadget.LemmingCap > 0)
-            {
-                textFile.WriteLine("   LEMMINGS " + gadget.LemmingCap);
             }
 
             textFile.WriteLine(" $END");

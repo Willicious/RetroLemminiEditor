@@ -509,16 +509,6 @@ namespace NLEditor
         }
 
         /// <summary>
-        /// Adds or removes a skill flag from all selected objects 
-        /// </summary>
-        /// <param name="skill"></param>
-        public void SetSkillForObjects(C.Skill skill, bool doAdd)
-        {
-            GadgetList.FindAll(gad => gad.IsSelected)
-                      .ForEach(gad => gad.SetSkillFlag(skill, doAdd));
-        }
-
-        /// <summary>
         /// Changes the index of all selected pieces.
         /// </summary>
         /// <param name="toTop"></param>
@@ -654,14 +644,6 @@ namespace NLEditor
                             .ToList();
         }
 
-        public void SetLemmingLimit(int value)
-        {
-            GadgetPiece gadget = (GadgetPiece)SelectionList().First();
-            System.Diagnostics.Debug.Assert(gadget != null && new[] { C.OBJ.EXIT, C.OBJ.HATCH }.Contains(gadget.ObjType), "Set lemming limit, but first selected piece is not able to have this value!");
-
-            gadget.SetLemmingLimit(value);
-        }
-
         /// <summary>
         /// Checks whether we may group the currently selected pieces.
         /// </summary>
@@ -744,63 +726,6 @@ namespace NLEditor
         public void PrepareForSave()
         {
             LevelVersion++;
-        }
-
-        public void GetLemmingTypeCounts(out int normalCount, out int zombieCount, out int rivalCount, out int neutralCount)
-        {
-            var hatches = GadgetList.Where(gad => gad.ObjType == C.OBJ.HATCH).ToList();
-            var hatchRemain = new int[hatches.Count];
-
-            int preplacedLemmingCount = GadgetList.Where(gad => gad.ObjType == C.OBJ.LEMMING).Count();
-            int fixedLemmingCount = preplacedLemmingCount;
-
-            zombieCount = GadgetList.Where(gad => gad.ObjType == C.OBJ.LEMMING && gad.IsZombie).Count();
-            rivalCount = GadgetList.Where(gad => gad.ObjType == C.OBJ.LEMMING && gad.IsRival && !gad.IsZombie).Count();
-            neutralCount = GadgetList.Where(gad => gad.ObjType == C.OBJ.LEMMING && gad.IsNeutral && !gad.IsZombie && !gad.IsRival).Count();
-            normalCount = preplacedLemmingCount - zombieCount - rivalCount - neutralCount;
-
-            for (int i = 0; i < hatches.Count; i++)
-            {
-                hatchRemain[i] = hatches[i].LemmingCap > 0 ? hatches[i].LemmingCap : -1;
-                fixedLemmingCount += hatches[i].LemmingCap;
-            }
-
-            int totalLemmingCount;
-
-            if (GadgetList.FirstOrDefault(gad => gad.ObjType == C.OBJ.HATCH && gad.LemmingCap == 0) == null)
-                totalLemmingCount = fixedLemmingCount;
-            else
-                totalLemmingCount = Math.Max(NumLems, fixedLemmingCount);
-
-            int n = -1;
-            for (int i = 0; i < totalLemmingCount - preplacedLemmingCount; i++)
-            {
-                int startN = n;
-
-                do
-                {
-                    n++;
-                    if (n == hatches.Count)
-                        n = 0;
-
-                    if (n == startN && hatchRemain[n] == 0)
-                        throw new Exception("Infinite loop in GetLemmingTypeCounts.");
-                } while (hatchRemain[n] == 0);
-
-                var hatch = hatches[n];
-
-                if (hatch.IsZombie)
-                    zombieCount++;
-                else if (hatch.IsRival)
-                    rivalCount++;
-                else if (hatch.IsNeutral)
-                    neutralCount++;
-                else
-                    normalCount++;
-
-                if (hatchRemain[n] > 0)
-                    hatchRemain[n]--;
-            }
         }
     }
 }

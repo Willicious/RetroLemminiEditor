@@ -134,44 +134,26 @@ namespace NLEditor
 
         // The integer values here are only used to pick the correct frame of pickupanim.png
         public enum Skill
-        {
-            // Non-pickup-skills need to be <0 as they aren't used
-            Neutral = -3, Zombie = -2, Rival = -1,
-            
+        {           
             // Use frame 0 for Skill.None
             None = 0,
 
             // All pickup skills are 2 frames apart
-            Walker = 1, Jumper = 3, Shimmier = 5, Ballooner = 7,
-            Slider = 9, Climber = 11, Swimmer = 13,
-            Floater = 15, Glider = 17, Disarmer = 19,
-            Timebomber = 21, Bomber = 23, Freezer = 25, Stoner = 27,
-            Blocker = 29,
-            Ladderer = 31, Platformer = 33, Builder = 35, Stacker = 37,
-            Spearer = 39, Grenader = 41, Laserer = 43,
-            Basher = 45, Fencer = 47, Miner = 49, Digger = 51,
-            Cloner = 53
+            Climber = 1,
+            Floater = 3,
+            Bomber = 5,
+            Blocker = 7,
+            Builder = 9,
+            Basher = 11,
+            Miner = 13,
+            Digger = 15
         };
         public static Array SkillArray => Enum.GetValues(typeof(C.Skill));
 
         public static readonly HashSet<Skill> PermaSkills = new HashSet<Skill>
         {
-            Skill.Slider,
             Skill.Climber,
-            Skill.Swimmer,
             Skill.Floater,
-            Skill.Glider,
-            Skill.Disarmer
-        };
-
-        public static readonly HashSet<Skill> RetroLemminiSkills = new HashSet<Skill>
-        {
-            Skill.Ballooner,
-            Skill.Timebomber,
-            Skill.Freezer,
-            Skill.Grenader,
-            Skill.Spearer,
-            Skill.Ladderer
         };
 
         public static readonly int ZOOM_MIN = -2;

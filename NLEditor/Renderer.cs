@@ -205,7 +205,6 @@ namespace NLEditor
             if (ZoomFactor >= 0 && IsObjectLayer)
             {
                 AddHatchOrder(ref screenBmp);
-                AddSkillIcons(ref screenBmp);
             }
                 
             AddMouseSelectionArea(ref screenBmp);
@@ -773,39 +772,6 @@ namespace NLEditor
             }
         }
 
-        /// <summary>
-        /// Draws skill icon above pre-assigned Gadgets
-        /// </summary>
-        /// <param name="levelBmp"></param>
-        public void AddSkillIcons(ref Bitmap levelBmp)
-        {
-            var gadgetsWithAssignedSkills = level.GadgetList.Where(gadget => gadget.SkillFlags.Any());
-            Bitmap skillHelpersImage = Properties.Resources.SkillHelpers;
-
-            int frameSize = 16;
-            int iconSpacing = frameSize - (frameSize / 2);
-
-            foreach (var gadget in gadgetsWithAssignedSkills)
-            {
-                int numIcons = gadget.SkillFlags.Count();
-                int totalWidth = numIcons * frameSize / 2;
-                int startX = gadget.PosX + gadget.Width / 2 - totalWidth / 2;
-
-                foreach (C.Skill skill in gadget.SkillFlags)
-                { 
-                    int frameIndex = GetFrameIndexForSkill(skill);
-                    int yOffset = (gadget.ObjType != C.OBJ.HATCH) ? frameSize : iconSpacing;
-
-                    int iconX = startX;
-                    int iconY = gadget.PosY - yOffset;
-
-                    DrawSkillIconFrame(levelBmp, skillHelpersImage, frameIndex, new Point(iconX, iconY));
-
-                    startX += iconSpacing;
-                }
-            }
-        }
-
         /// </summary>
         /// // Determines the frame index based on the assigned skill flag
         /// </summary>
@@ -813,17 +779,8 @@ namespace NLEditor
         {
             switch (skill)
             {
-                case C.Skill.Rival: return 0;
-                case C.Skill.Neutral: return 1;
-                case C.Skill.Zombie: return 2;
-                case C.Skill.Shimmier: return 3;
-                case C.Skill.Ballooner: return 4;
-                case C.Skill.Slider: return 5;
                 case C.Skill.Climber: return 6;
-                case C.Skill.Swimmer: return 7;
                 case C.Skill.Floater: return 8;
-                case C.Skill.Glider: return 9;
-                case C.Skill.Disarmer: return 10;
                 case C.Skill.Blocker: return 11;
 
                 default: return -1; // Handle unknown skills

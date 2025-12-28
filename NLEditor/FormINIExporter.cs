@@ -94,8 +94,7 @@ namespace NLEditor
             // Skills
             ini.NumClimbers = GetSkill(level, Skill.Climber);
             ini.NumFloaters = GetSkill(level, Skill.Floater);
-            ini.NumBombers = GetSkill(level, Skill.Timebomber)
-                           + GetSkill(level, Skill.Bomber);
+            ini.NumBombers = GetSkill(level, Skill.Bomber);
             ini.NumBlockers = GetSkill(level, Skill.Blocker);
             ini.NumBuilders = GetSkill(level, Skill.Builder);
             ini.NumBashers = GetSkill(level, Skill.Basher);

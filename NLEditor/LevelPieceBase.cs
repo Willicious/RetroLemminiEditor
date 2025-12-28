@@ -182,11 +182,6 @@ namespace NLEditor
         public abstract bool MayInvert();
 
         /// <summary>
-        /// Determines whether this piece can receive a flag for a given skill.
-        /// </summary>
-        public abstract bool MayReceiveSkill(C.Skill skill);
-
-        /// <summary>
         /// Rotates the piece around the center of a specified rectangle, if allowed for this piece.
         /// </summary>
         /// <param name="borderRect"></param>

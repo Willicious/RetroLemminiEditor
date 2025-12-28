@@ -109,13 +109,6 @@ namespace NLEditor
         private void FindIssuesTooFewLemmings()
         {
             int numPreplacedAll = level.GadgetList.Count(gad => gad.ObjType == C.OBJ.LEMMING);
-            int numPreplacedZombie = level.GadgetList.Count(gad => gad.ObjType == C.OBJ.LEMMING && gad.IsZombie);
-
-            // Check whether at least one living lemming exists
-            if (level.NumLems <= NumZombies())
-            {
-                issuesList.Add("Only zombie lemmings available in the level.");
-            }
 
             // Check whether number of lemmings is at least the number of preplaced lemmings.
             if (level.NumLems < numPreplacedAll)
@@ -136,32 +129,7 @@ namespace NLEditor
         /// </summary>
         private int MaxNumSavedLems()
         {
-            return level.NumLems + level.SkillSet[C.Skill.Cloner] - NumZombies();
-        }
-
-        /// <summary>
-        /// Returns the total number of zombie lemmings in the level.
-        /// </summary>
-        private int NumZombies()
-        {
-            int numPreplacedAll = level.GadgetList.Count(gad => gad.ObjType == C.OBJ.LEMMING);
-            int numPreplacedZombie = level.GadgetList.Count(gad => gad.ObjType == C.OBJ.LEMMING && gad.IsZombie);
-            int numToSpawn = level.NumLems - numPreplacedAll;
-            List<bool> isHatchZombieList = level.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.HATCH)
-                                                           .ConvertAll(gad => gad.IsZombie);
-            int numHatches = Math.Max(isHatchZombieList.Count, 1);
-            int numZombieHatch = isHatchZombieList.Count(IsZombie => IsZombie);
-
-            int numZombie = numPreplacedZombie;
-            // add number of lemmings that spawn in zombie hatches
-            numZombie += numToSpawn / numHatches * numZombieHatch;
-            for (int i = 0; i < numToSpawn % numHatches; i++)
-            {
-                if (isHatchZombieList[i])
-                    numZombie++;
-            }
-
-            return numZombie;
+            return level.NumLems;
         }
 
 
@@ -204,7 +172,7 @@ namespace NLEditor
         /// </summary>
         private void FindIssuesMissingObjects()
         {
-            if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH && !obj.IsZombie))
+            if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH))
             {
                 int NumPreplacedLems = level.GadgetList.Count(obj => obj.ObjType == C.OBJ.LEMMING);
                 if (level.NumLems > NumPreplacedLems)
