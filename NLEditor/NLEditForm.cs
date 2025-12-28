@@ -100,9 +100,6 @@ namespace NLEditor
             CreateStyleList();
             if (StyleList.Count > 0)
             {
-                this.combo_MainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
-                this.combo_MainStyle.SelectedIndex = 0;
-
                 this.combo_PieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
                 this.combo_PieceStyle.SelectedIndex = 0;
             }
@@ -494,25 +491,6 @@ namespace NLEditor
         /* -----------------------------------------------------------
          *              Global Level Info Tab
          * ----------------------------------------------------------- */
-
-        private void combo_MainStyle_TextChanged(object sender, EventArgs e)
-        {
-            Style newStyle = ValidateStyleName(combo_MainStyle.Text);
-
-            if (newStyle == null || CurLevel == null)
-                return;
-
-            CurLevel.MainStyle = newStyle;
-            UpdateBackgroundImage();
-            LoadPiecesIntoPictureBox();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-
-            // If the level is empty, switch piece style, too
-            if (CurLevel.GadgetList.Count == 0 && CurLevel.TerrainList.Count == 0)
-            {
-                combo_PieceStyle.Text = newStyle.NameInEditor;
-            }
-        }
 
         private void num_Lvl_SizeX_ValueChanged(object sender, EventArgs e)
         {

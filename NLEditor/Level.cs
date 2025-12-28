@@ -13,13 +13,12 @@ namespace NLEditor
         /// <summary>
         /// Creates a new level with the default values.
         /// </summary>
-        /// <param name="mainStyle"></param>
-        public Level(Style mainStyle = null)
+        public Level(Style pieceStyle = null)
         {
             this.Format = "RetroLemmini";
             this.Title = "";
             this.Author = "";
-            this.MainStyle = mainStyle;
+            this.PieceStyle = pieceStyle;
             this.MusicFile = "";
             this.Background = null;
 
@@ -60,7 +59,7 @@ namespace NLEditor
         public string Format { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
-        public Style MainStyle { get; set; }
+        public Style PieceStyle { get; set; }
         public string MusicFile { get; set; }
 
         public ulong LevelID { get; set; }
@@ -116,7 +115,7 @@ namespace NLEditor
         /// </summary>
         public Level Clone()
         {
-            Level newLevel = new Level(this.MainStyle);
+            Level newLevel = new Level(this.PieceStyle);
             newLevel.Format = string.Copy(this.Format);
             newLevel.Title = string.Copy(this.Title);
             newLevel.Author = string.Copy(this.Author);
@@ -171,8 +170,8 @@ namespace NLEditor
                 || !this.Format.Equals(otherLevel.Format)
                 || !this.Title.Equals(otherLevel.Title)
                 || !this.Author.Equals(otherLevel.Author)
-                || !((this.MainStyle == null && otherLevel.MainStyle == null) ||
-                     (this.MainStyle != null && this.MainStyle.NameInDirectory.Equals(otherLevel.MainStyle?.NameInDirectory)))
+                || !((this.PieceStyle == null && otherLevel.PieceStyle == null) ||
+                     (this.PieceStyle != null && this.PieceStyle.NameInDirectory.Equals(otherLevel.PieceStyle?.NameInDirectory)))
                 || !this.MusicFile.Equals(otherLevel.MusicFile)
                 || !this.LevelID.Equals(otherLevel.LevelID)
                 // specifically do not compare LevelVersion
@@ -230,7 +229,7 @@ namespace NLEditor
         /// <param name="styleColor"></param>
         public Color GetThemeColor(C.StyleColor styleColor)
         {
-            return MainStyle?.GetColor(styleColor) ?? C.NLColors[styleColor.ToNLColor()];
+            return PieceStyle?.GetColor(styleColor) ?? C.NLColors[styleColor.ToNLColor()];
         }
 
         /// <summary>

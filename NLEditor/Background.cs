@@ -63,15 +63,11 @@ namespace NLEditor
             });
         }
 
-        /// <summary>
-        /// Gets a list of background names, starting with the one in the mainStyle.
-        /// </summary>
-        /// <param name="mainStyle"></param>
-        public List<string> GetDisplayNames(Style mainStyle)
+        public List<string> GetDisplayNames(Style pieceStyle)
         {
             List<string> displayNames = new List<string>() { "--none--" };
-            displayNames.AddRange(backgroundList.FindAll(bg => bg.Style.Equals(mainStyle)).ConvertAll(bg => bg.Name));
-            displayNames.AddRange(backgroundList.FindAll(bg => !bg.Style.Equals(mainStyle)).ConvertAll(bg => bg.Name));
+            displayNames.AddRange(backgroundList.FindAll(bg => bg.Style.Equals(pieceStyle)).ConvertAll(bg => bg.Name));
+            displayNames.AddRange(backgroundList.FindAll(bg => !bg.Style.Equals(pieceStyle)).ConvertAll(bg => bg.Name));
             return displayNames;
         }
 

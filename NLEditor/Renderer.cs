@@ -151,7 +151,7 @@ namespace NLEditor
             {
                 // Still use background color
                 baseLevelImage = new Bitmap(level.Width, level.Height);
-                baseLevelImage.Clear(level.MainStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.NLColors[C.NLColor.BackDefault]);
+                baseLevelImage.Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.NLColors[C.NLColor.BackDefault]);
             }
 
             // Draw all the layers
@@ -453,7 +453,7 @@ namespace NLEditor
         public void CreateBackgroundLayer()
         {
             // Set background color
-            layerImages[C.Layer.Background].Clear(level.MainStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.NLColors[C.NLColor.BackDefault]);
+            layerImages[C.Layer.Background].Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.NLColors[C.NLColor.BackDefault]);
 
             // Display background images, if selected
             if (level.Background != null)

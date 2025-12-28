@@ -431,7 +431,6 @@ Ladderer=10";
             CurLevel.Author = txt_LevelAuthor.Text;
             CurLevel.Title = txt_LevelTitle.Text;
             CurLevel.MusicFile = System.IO.Path.ChangeExtension(combo_Music.Text, null);
-            CurLevel.MainStyle = ValidateStyleName(combo_MainStyle.Text);
             CurLevel.Width = decimal.ToInt32(num_Lvl_SizeX.Value);
             CurLevel.Height = decimal.ToInt32(num_Lvl_SizeY.Value);
             CurLevel.AutoStartPos = chk_Lvl_AutoStart.Checked;
@@ -483,7 +482,6 @@ Ladderer=10";
                 txt_LevelAuthor.Text = CurLevel.Author;
                 txt_LevelTitle.Text = CurLevel.Title;
                 combo_Music.Text = CurLevel.MusicFile;
-                combo_MainStyle.Text = (CurLevel.MainStyle != null) ? CurLevel.MainStyle.NameInEditor : "";
 
                 // Set size and start position, but without calling the Value_Changed methods,
                 // because they automatically call validation of the start position resp. render the level again.
@@ -540,8 +538,8 @@ Ladderer=10";
             if (AskUserWhetherSaveLevel())
                 return;
 
-            Style mainStyle = StyleList?.Find(sty => sty.NameInEditor == combo_MainStyle.Text);
-            CurLevel = new Level(mainStyle);
+            Style pieceStyle = StyleList?.Find(sty => sty.NameInEditor == combo_PieceStyle.Text);
+            CurLevel = new Level(pieceStyle);
             // Get new renderer with the standard display options
             if (curRenderer != null)
                 curRenderer.Dispose();
@@ -596,7 +594,7 @@ Ladderer=10";
             RepositionPicLevel();
             pic_Level.Image = curRenderer.CreateLevelImage();
 
-            combo_PieceStyle.Text = CurLevel.MainStyle?.NameInEditor;
+            combo_PieceStyle.Text = CurLevel.PieceStyle?.NameInEditor;
 
             UpdateSpecialLemmingCounter();
         }
@@ -651,11 +649,10 @@ Ladderer=10";
                 return;
             }
 
-            Style themeStyle = CurLevel.MainStyle;
+            Style themeStyle = CurLevel.PieceStyle;
             Style pieceStyle = pieceCurStyle;
 
             StyleList.Clear();
-            combo_MainStyle.Items.Clear();
             combo_PieceStyle.Items.Clear();
 
             ImageLibrary.Clear();
@@ -666,15 +663,11 @@ Ladderer=10";
 
             if (StyleList.Count > 0)
             {
-                this.combo_MainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
-                this.combo_MainStyle.Text = ValidateStyleList(themeStyle);
-
                 this.combo_PieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
                 this.combo_PieceStyle.Text = ValidateStyleList(pieceStyle);
 
                 if (refreshedFromStyleManager)
                 {
-                    combo_MainStyle.SelectedIndex = 0;
                     combo_PieceStyle.SelectedIndex = 0;
                 }
             }
