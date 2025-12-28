@@ -55,7 +55,6 @@ namespace NLEditor
 
             this.PreviewText = new List<string>();
             this.PostviewText = new List<string>();
-            this.Talismans = new List<Talisman>();
         }
 
         public string Format { get; set; }
@@ -107,8 +106,6 @@ namespace NLEditor
         public bool IsInvincibility { get; set; }
 
         public Dictionary<C.Skill, int> SkillSet { get; set; }
-
-        public List<Talisman> Talismans { get; set; }  // not changable in the editor
         public List<string> PreviewText { get; set; }  // not changable in the editor
         public List<string> PostviewText { get; set; } // not changable in the editor
 
@@ -158,7 +155,6 @@ namespace NLEditor
                 newLevel.SkillSet.Add(skill, this.SkillSet[skill]);
             }
 
-            newLevel.Talismans = new List<Talisman>(this.Talismans);
             newLevel.PreviewText = new List<string>(this.PreviewText);
             newLevel.PostviewText = new List<string>(this.PostviewText);
 
@@ -198,7 +194,6 @@ namespace NLEditor
                 || this.IsInvincibility != otherLevel.IsInvincibility
                 || this.IsNoTimeLimit != otherLevel.IsNoTimeLimit
                 || (this.TimeLimit != otherLevel.TimeLimit && !this.IsNoTimeLimit)
-                || this.Talismans.Count != otherLevel.Talismans.Count
                 || !this.PreviewText.ToString().Equals(otherLevel.PreviewText.ToString())
                 || !this.PostviewText.ToString().Equals(otherLevel.PostviewText.ToString()))
             {
@@ -223,12 +218,6 @@ namespace NLEditor
             for (int i = 0; i < this.GadgetList.Count; i++)
             {
                 if (!this.GadgetList[i].Equals(otherLevel.GadgetList[i]))
-                    return false;
-            }
-
-            foreach (Talisman talisman in this.Talismans)
-            {
-                if (!otherLevel.Talismans.Contains(talisman))
                     return false;
             }
 
@@ -850,19 +839,7 @@ namespace NLEditor
 
         public void PrepareForSave()
         {
-            ValidateTalismanIDs();
             LevelVersion++;
-        }
-
-        public void ValidateTalismanIDs()
-        {
-            foreach (var talisman in this.Talismans.Where(tal => tal.ID < 0))
-            {
-                int i = 0;
-                while (Talismans.Count(tal => tal.ID == i) > 0)
-                    i++;
-                talisman.ID = i;
-            }
         }
 
         public void GetLemmingTypeCounts(out int normalCount, out int zombieCount, out int rivalCount, out int neutralCount)

@@ -1341,65 +1341,6 @@ namespace NLEditor
                 pieceBrowserWindow.KeyPreview = true; // Re-enable hotkey interaction
         }
 
-        private void btnTalismanMoveUp_Click(object sender, EventArgs e)
-        {
-            int talIndex = lbTalismans.SelectedIndex;
-
-            if (talIndex > 0)
-            {
-                Talisman tal = CurLevel.Talismans[talIndex];
-                CurLevel.Talismans.Remove(tal);
-                CurLevel.Talismans.Insert(talIndex - 1, tal);
-                RegenerateTalismanList();
-            }
-        }
-
-        private void btnTalismanMoveDown_Click(object sender, EventArgs e)
-        {
-            int talIndex = lbTalismans.SelectedIndex;
-
-            if ((talIndex >= 0) && (talIndex < CurLevel.Talismans.Count - 1))
-            {
-                Talisman tal = CurLevel.Talismans[talIndex];
-                CurLevel.Talismans.Remove(tal);
-                CurLevel.Talismans.Insert(talIndex + 1, tal);
-                RegenerateTalismanList();
-            }
-        }
-
-        private void btnTalismanDelete_Click(object sender, EventArgs e)
-        {
-            var tal = (Talisman)lbTalismans.SelectedItem;
-
-            if (tal != null)
-                CurLevel.Talismans.Remove(tal);
-
-            RegenerateTalismanList();
-        }
-
-        private void btnTalismanAdd_Click(object sender, EventArgs e)
-        {
-            using (var talForm = new FormTalisman(CurLevel))
-            {
-                talForm.ShowDialog(this);
-            }
-            RegenerateTalismanList();
-        }
-
-        private void btnTalismanEdit_Click(object sender, EventArgs e)
-        {
-            var tal = (Talisman)lbTalismans.SelectedItem;
-
-            if (tal != null)
-            {
-                using (var talForm = new FormTalisman(CurLevel, tal))
-                {
-                    talForm.ShowDialog(this);
-                }
-                RegenerateTalismanList();
-            }
-        }
-
         private void btnEditPreview_Click(object sender, EventArgs e)
         {
             using (var textForm = new FormPrePostText(CurLevel, true))

@@ -135,9 +135,6 @@ namespace NLEditor
             foreach (var node in file.Children.FindAll(child => child.Key == "SKETCH"))
                 LoadSketch(newLevel, node);
 
-            foreach (var node in file.Children.FindAll(child => child.Key == "TALISMAN"))
-                LoadTalisman(newLevel, node);
-
             foreach (var line in file["PRETEXT"].Children.FindAll(child => child.Key == "LINE"))
                 newLevel.PreviewText.Add(line.Value);
 
@@ -434,36 +431,6 @@ namespace NLEditor
             return curLevel.GadgetList.Count(gad => gad.ObjType == C.OBJ.COLLECTIBLE);
         }
 
-        private static void LoadTalisman(Level level, NLTextDataNode node)
-        {
-            Talisman talisman = new Talisman();
-
-            talisman.Title = node["TITLE"].Value;
-            talisman.AwardType = Utility.ParseEnum<C.TalismanType>(node["COLOR"].Value);
-            talisman.ID = node["ID"].ValueInt;
-
-            foreach (KeyValuePair<C.TalismanReq, string> pair in C.TalismanKeys)
-            {
-                if (pair.Key == C.TalismanReq.UseOnlySkill)
-                    continue;
-                else if (node.HasChildWithKey(pair.Value))
-                    talisman.Requirements[pair.Key] = node[pair.Value].ValueInt;
-            }
-
-            if (node.HasChildWithKey(C.TalismanKeys[C.TalismanReq.UseOnlySkill]))
-            {
-                string allowedSkill = node[C.TalismanKeys[C.TalismanReq.UseOnlySkill]].Value;
-                for (int i = 0; i < C.TalismanSkills.Count; i++)
-                    if (allowedSkill.ToUpperInvariant() == C.TalismanSkills[i].ToUpperInvariant())
-                    {
-                        talisman.Requirements[C.TalismanReq.UseOnlySkill] = i;
-                        break;
-                    }
-            }
-
-            level.Talismans.Add(talisman);
-        }
-
         /// <summary>
         /// Ensures that all level parameters are within sensible limits.
         /// </summary>
@@ -654,8 +621,6 @@ namespace NLEditor
                 textFile.WriteLine(" $END ");
                 textFile.WriteLine(" ");
             }
-
-            curLevel.Talismans.ForEach(tal => WriteTalisman(textFile, tal));
 
             textFile.WriteLine("#     Interactive objects       ");
             textFile.WriteLine("# ----------------------------- ");
@@ -991,32 +956,6 @@ namespace NLEditor
             }
             textFile.WriteLine(prefix + " $END");
             textFile.WriteLine(prefix + " ");
-        }
-
-        /// <summary>
-        /// Writes aa talisman in a text file.
-        /// </summary>
-        /// <param name="textFile"></param>
-        /// <param name="talisman"></param>
-        static private void WriteTalisman(TextWriter textFile, Talisman talisman)
-        {
-            textFile.WriteLine(" $TALISMAN ");
-            textFile.WriteLine("   TITLE " + talisman.Title);
-            textFile.WriteLine("   ID " + talisman.ID);
-            textFile.WriteLine("   COLOR " + talisman.AwardType.ToString());
-            foreach (C.TalismanReq requirement in talisman.Requirements.Keys)
-            {
-                if (requirement == C.TalismanReq.UseOnlySkill)
-                {
-                    textFile.WriteLine("   " + C.TalismanKeys[requirement] + " " + C.TalismanSkills[talisman.Requirements[requirement]]);
-                }
-                else
-                {
-                    textFile.WriteLine("   " + C.TalismanKeys[requirement] + " " + talisman.Requirements[requirement].ToString());
-                }
-            }
-            textFile.WriteLine(" $END ");
-            textFile.WriteLine(" ");
         }
 
         /// <summary>

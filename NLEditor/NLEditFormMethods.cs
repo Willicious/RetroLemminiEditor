@@ -525,23 +525,11 @@ Ladderer=10";
                 }
 
                 lbl_Global_Version.Text = "Version: " + CurLevel.LevelVersion.ToString("X16");
-
-                RegenerateTalismanList();
             }
             finally
             {
                 _IsWritingToForm = false;
             }
-        }
-
-        private void RegenerateTalismanList()
-        {
-            lbTalismans.Items.Clear();
-            foreach (var talisman in CurLevel.Talismans)
-            {
-                lbTalismans.Items.Add(talisman);
-            }
-
         }
 
         /// <summary>
