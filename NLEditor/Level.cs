@@ -44,7 +44,6 @@ namespace NLEditor
             this.TimeLimit = 0;
             this.IsNoTimeLimit = true;
             this.IsSuperlemming = false;
-            this.IsInvincibility = true;
 
             this.SkillSet = new Dictionary<C.Skill, int>();
             foreach (C.Skill skill in C.SkillArray)
@@ -102,7 +101,6 @@ namespace NLEditor
         public int TimeLimit { get; set; }
         public bool IsNoTimeLimit { get; set; }
         public bool IsSuperlemming { get; set; }
-        public bool IsInvincibility { get; set; }
 
         public Dictionary<C.Skill, int> SkillSet { get; set; }
         public List<string> PreviewText { get; set; }  // not changable in the editor
@@ -146,7 +144,6 @@ namespace NLEditor
             newLevel.TimeLimit = this.TimeLimit;
             newLevel.IsNoTimeLimit = this.IsNoTimeLimit;
             newLevel.IsSuperlemming = this.IsSuperlemming;
-            newLevel.IsInvincibility = this.IsInvincibility;
 
             newLevel.SkillSet = new Dictionary<C.Skill, int>();
             foreach (C.Skill skill in C.SkillArray)
@@ -190,7 +187,6 @@ namespace NLEditor
                 || this.ReleaseRate != otherLevel.ReleaseRate
                 || this.IsSpawnRateFix != otherLevel.IsSpawnRateFix
                 || this.IsSuperlemming != otherLevel.IsSuperlemming
-                || this.IsInvincibility != otherLevel.IsInvincibility
                 || this.IsNoTimeLimit != otherLevel.IsNoTimeLimit
                 || (this.TimeLimit != otherLevel.TimeLimit && !this.IsNoTimeLimit)
                 || !this.PreviewText.ToString().Equals(otherLevel.PreviewText.ToString())
@@ -252,9 +248,6 @@ namespace NLEditor
                 }
                 else if (newPiece is GadgetPiece)
                 {
-                    if (newPiece.ObjType.In(C.OBJ.TELEPORTER, C.OBJ.RECEIVER, C.OBJ.PORTAL))
-                        ((GadgetPiece)newPiece).SetTeleporterValue(0);
-
                     GadgetList.Add((GadgetPiece)newPiece);
                 }
             }
@@ -458,17 +451,6 @@ namespace NLEditor
         {
             Rectangle borderRect = SelectionRectangle();
             SelectionList().ForEach(item => item.FlipInRect(borderRect, item.ObjType == C.OBJ.HATCH));
-
-            // check that paired teleporters/receivers got flipped correctly
-            var Teleporters = SelectionList().FindAll(item => item.ObjType.In(C.OBJ.TELEPORTER, C.OBJ.RECEIVER, C.OBJ.PORTAL) && (item as GadgetPiece).Val_L != 0);
-            foreach (GadgetPiece item in Teleporters)
-            {
-                var pairedObject = GadgetList.Find(gadget => gadget != item && gadget.Val_L == item.Val_L);
-                if (pairedObject != null && !Teleporters.Contains(pairedObject))
-                {
-                    pairedObject.FlipInRect(pairedObject.ImageRectangle);
-                }
-            }
         }
 
         /// <summary>
@@ -672,89 +654,12 @@ namespace NLEditor
                             .ToList();
         }
 
-        /// <summary>
-        /// Pairs a selected teleporter and receiver.
-        /// </summary>
-        public void PairTeleporters()
-        {
-            GadgetPiece teleporter = (GadgetPiece)SelectionList().Find(gad => gad.ObjType == C.OBJ.TELEPORTER);
-            GadgetPiece receiver = (GadgetPiece)SelectionList().Find(gad => gad.ObjType == C.OBJ.RECEIVER);
-
-            if ((teleporter == null) || (receiver == null))
-            {
-                teleporter = (GadgetPiece)SelectionList().Find(gad => gad.ObjType == C.OBJ.PORTAL);
-                receiver = (GadgetPiece)SelectionList().Find(gad => (gad != teleporter) && (gad.ObjType == C.OBJ.PORTAL));
-            }
-
-            System.Diagnostics.Debug.Assert(teleporter != null, "Tried to pair teleporters without a selected teleporter!");
-            System.Diagnostics.Debug.Assert(receiver != null, "Tried to pair teleporters without a selected teleporter!");
-
-            if (teleporter.Val_L != 0)
-                RemovePairingValue(teleporter.Val_L);
-            if (receiver.Val_L != 0)
-                RemovePairingValue(receiver.Val_L);
-
-            int newPairingValue = FindNewPairingValue();
-
-            teleporter.SetTeleporterValue(newPairingValue);
-            receiver.SetTeleporterValue(newPairingValue);
-
-            // Set flipping of receiver according to teleporter
-            if (receiver.IsFlippedInPlayer != teleporter.IsFlippedInPlayer)
-            {
-                receiver.FlipInRect(receiver.ImageRectangle);
-            }
-        }
-
-        /// <summary>
-        /// Sets the pickup skill count to the first piece in the selection list.
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetPickupSkillCount(int value)
-        {
-            GadgetPiece pickup = (GadgetPiece)SelectionList().First();
-            System.Diagnostics.Debug.Assert(pickup != null && pickup.ObjType == C.OBJ.PICKUP, "Set pickup skill count, but first selected piece is not a pickup object!");
-
-            pickup.SetPickupSkillCount(value);
-        }
-
-        public void SetCountdownLength(int value)
-        {
-            GadgetPiece gadget = (GadgetPiece)SelectionList().First();
-            System.Diagnostics.Debug.Assert(gadget != null && new[] { C.OBJ.RADIATION, C.OBJ.SLOWFREEZE }.Contains(gadget.ObjType), "Set countdown length, but first selected piece is not able to have this value!");
-
-            gadget.SetCountdownLength(value);
-        }
-
         public void SetLemmingLimit(int value)
         {
             GadgetPiece gadget = (GadgetPiece)SelectionList().First();
-            System.Diagnostics.Debug.Assert(gadget != null && new[] { C.OBJ.EXIT, C.OBJ.EXIT_LOCKED, C.OBJ.HATCH }.Contains(gadget.ObjType), "Set lemming limit, but first selected piece is not able to have this value!");
+            System.Diagnostics.Debug.Assert(gadget != null && new[] { C.OBJ.EXIT, C.OBJ.HATCH }.Contains(gadget.ObjType), "Set lemming limit, but first selected piece is not able to have this value!");
 
             gadget.SetLemmingLimit(value);
-        }
-
-        /// <summary>
-        /// Removes the key-value RemoveValue from all teleporter and receiver objects.
-        /// </summary>
-        /// <param name="removeValue"></param>
-        private void RemovePairingValue(int removeValue)
-        {
-            GadgetList.FindAll(gad => gad.ObjType.In(C.OBJ.TELEPORTER, C.OBJ.RECEIVER, C.OBJ.PORTAL) && gad.Val_L == removeValue)
-                      .ForEach(gad => gad.SetTeleporterValue(0));
-        }
-
-        /// <summary>
-        /// Find the lowest unused teleporter/receiver key value.
-        /// </summary>
-        private int FindNewPairingValue()
-        {
-            var existingPairingValues = GadgetList.FindAll(gad => gad.ObjType.In(C.OBJ.TELEPORTER, C.OBJ.RECEIVER, C.OBJ.PORTAL))
-                                                  .ConvertAll(gad => gad.Val_L);
-
-            return Enumerable.Range(1, int.MaxValue - 1)
-                             .Except(existingPairingValues)
-                             .FirstOrDefault();
         }
 
         /// <summary>

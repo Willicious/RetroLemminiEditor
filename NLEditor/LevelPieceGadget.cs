@@ -96,7 +96,7 @@ namespace NLEditor
 
                 // Adjust to resizing
                 if (IsRotatedInPlayer)
-                {   
+                {
                     // When both resized and rotated:
                     // To get the new height value, we add the new "width" increment, and subtract the original object height (which is now the width!)
                     if (ResizeMode == C.Resize.Both || ResizeMode == C.Resize.Vert)
@@ -151,10 +151,6 @@ namespace NLEditor
             get
             {
                 Bitmap image;
-                if (ObjType == C.OBJ.PICKUP && Val_L > 1)
-                {
-                    image = AddPickupSkillNumber(base.Image);
-                }
 
                 if (ObjType == C.OBJ.HATCH)
                 {
@@ -196,38 +192,23 @@ namespace NLEditor
         /// </summary>
         protected override int GetFrameIndex()
         {
-            if (ObjType.In(C.OBJ.PICKUP, C.OBJ.PERMASKILL_ADD, C.OBJ.SKILL_ASSIGNER))
-            {
-                // Return the index of the skill + 1 or return 0 if no skill is selected
-                foreach (C.Skill skill in C.SkillArray)
-                {
-                    if (SkillFlags.Contains(skill))
-                        return (int)skill;
-                }
-                return 0;
-            }
-            else if (ObjType.In(C.OBJ.EXIT_LOCKED, C.OBJ.BUTTON, C.OBJ.TRAPONCE))
-            {
-                return 1;
-            }
-            else
-                return base.GetFrameIndex();
+            return base.GetFrameIndex();
         }
 
 
         public override bool MayRotate()
         {
-            return !(ObjType.In(C.OBJ.HATCH, C.OBJ.SPLITTER, C.OBJ.LEMMING, C.OBJ.PICKUP, C.OBJ.PORTAL));
+            return !(ObjType.In(C.OBJ.HATCH, C.OBJ.LEMMING));
         }
 
         public override bool MayFlip()
         {
-            return !(ObjType.In(C.OBJ.PICKUP, C.OBJ.PORTAL));
+            return true;
         }
 
         public override bool MayInvert()
         {
-            return !(ObjType.In(C.OBJ.HATCH, C.OBJ.SPLITTER, C.OBJ.LEMMING, C.OBJ.PICKUP, C.OBJ.PORTAL));
+            return !(ObjType.In(C.OBJ.HATCH, C.OBJ.LEMMING));
         }
 
         public override bool MayReceiveSkill(C.Skill skill)
@@ -250,28 +231,9 @@ namespace NLEditor
 
                             || skill.In(C.Skill.Ballooner, C.Skill.Rival) && !NLEditForm.isNeoLemmixOnly;
                     }
-                case C.OBJ.PICKUP:
-                case C.OBJ.SKILL_ASSIGNER:
-                    {
-                        return !skill.In(C.Skill.Zombie, C.Skill.Rival, C.Skill.Neutral)
-
-                           && (!C.RetroLemminiSkills.Contains(skill) || !NLEditForm.isNeoLemmixOnly)
-
-                           && (!skill.In(C.Skill.Stoner) || NLEditForm.isNeoLemmixOnly)
-
-                           && (!(ObjType == C.OBJ.SKILL_ASSIGNER) || C.PermaSkills.Contains(skill) ||
-                               skill.In(C.Skill.Walker, C.Skill.Jumper, C.Skill.Shimmier, C.Skill.Ballooner,
-                                        C.Skill.Blocker, C.Skill.Spearer, C.Skill.Laserer, C.Skill.Grenader,
-                                        C.Skill.Cloner));
-                    }
                 case C.OBJ.EXIT:
-                case C.OBJ.EXIT_LOCKED:
                     {
                         return skill == C.Skill.Rival && !NLEditForm.isNeoLemmixOnly;
-                    }
-                case C.OBJ.PERMASKILL_ADD:
-                    {
-                        return C.PermaSkills.Contains(skill);
                     }
                 default:
                     return false;
@@ -335,11 +297,7 @@ namespace NLEditor
                             SkillFlags.Remove(skill);
                         break;
                     }
-                case C.OBJ.PICKUP:
                 case C.OBJ.EXIT:
-                case C.OBJ.EXIT_LOCKED:
-                case C.OBJ.PERMASKILL_ADD:
-                case C.OBJ.SKILL_ASSIGNER:
                     {
                         SkillFlags.Clear();
                         if (doAdd)
@@ -369,50 +327,10 @@ namespace NLEditor
                 SpecHeight = Math.Max(newHeight, 1);
         }
 
-        /// <summary>
-        /// Sets the key-value for pairing teleporters to receivers.
-        /// </summary>
-        /// <param name="newValue"></param>
-        public void SetTeleporterValue(int newValue)
-        {
-            System.Diagnostics.Debug.Assert(ObjType.In(C.OBJ.TELEPORTER, C.OBJ.RECEIVER, C.OBJ.PORTAL), "Teleporter pairing key set for object, that is neither teleporter nor receiver.");
-            Val_L = newValue;
-        }
-
-        /// <summary>
-        /// Sets the number of skills a pick-up skill gives the player.
-        /// </summary>
-        /// <param name="newValue"></param>
-        public void SetPickupSkillCount(int newValue)
-        {
-            System.Diagnostics.Debug.Assert(ObjType == C.OBJ.PICKUP, "Pickup skill count set for object of another type.");
-            Val_L = newValue;
-        }
-
         public void SetLemmingLimit(int newValue)
         {
-            System.Diagnostics.Debug.Assert(new[] { C.OBJ.EXIT, C.OBJ.EXIT_LOCKED, C.OBJ.HATCH }.Contains(ObjType), "Lemming limit set for incompatible object.");
+            System.Diagnostics.Debug.Assert(new[] { C.OBJ.EXIT, C.OBJ.HATCH }.Contains(ObjType), "Lemming limit set for incompatible object.");
             LemmingCap = newValue;
         }
-
-        public void SetCountdownLength(int newValue)
-        {
-            System.Diagnostics.Debug.Assert(new[] { C.OBJ.RADIATION, C.OBJ.SLOWFREEZE }.Contains(ObjType), "Countdown length set for incompatible object.");
-            CountdownLength = newValue;
-        }
-
-        /// <summary>
-        /// Adds the Pickup skill number to the base image
-        /// </summary>
-        /// <param name="baseImage"></param>
-        private Bitmap AddPickupSkillNumber(Bitmap baseImage)
-        {
-            Bitmap image = (Bitmap)baseImage.Clone();
-            image.WriteTextEdged(Val_L.ToString(), new Point(image.Width + 4, image.Height + 1), Color.FromArgb(16, 16, 16), 5, ContentAlignment.BottomRight);
-            image.WriteTextEdged(Val_L.ToString(), new Point(image.Width + 5, image.Height + 1), Color.FromArgb(240, 240, 240), 5, ContentAlignment.BottomRight);
-            return image;
-        }
-
     }
-
 }

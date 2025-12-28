@@ -76,24 +76,16 @@ namespace NLEditor
         public enum OBJ
         {
             TERRAIN = -1, STEEL = -2,
-            LEMMING = 0, HATCH = 1, EXIT = 2, EXIT_LOCKED = 3,
-            TRAP = 4, TRAPONCE = 5, FIRE = 6,
-            WATER = 7, BLASTICINE = 8, VINEWATER = 9, POISON = 10, LAVA = 11,
-            ONE_WAY_WALL = 12, FORCE_FIELD = 13,
-            PICKUP = 14, BUTTON = 15,
-            TELEPORTER = 17, RECEIVER = 18,
-            UPDRAFT = 19, SPLAT = 20, SPLITTER = 21,
-            RADIATION = 22, SLOWFREEZE = 23,
-            DECORATION = 24, PAINT = 25,
-            PORTAL = 26,
-            NEUTRALIZER = 27, DENEUTRALIZER = 28,
-            PERMASKILL_ADD = 29, PERMASKILL_REMOVE = 30,
-            SKILL_ASSIGNER = 31,
+            LEMMING = 0, 
+            HATCH = 1, EXIT = 2,
+            TRAP = 3, FIRE = 4, WATER = 5,
+            ONE_WAY_WALL = 6,
+            DECORATION = 7, PAINT = 8,
             NONE = 100, NULL
         }
 
         public static OBJ[] HideTriggerObjects = new OBJ[] { OBJ.TERRAIN, OBJ.STEEL, OBJ.NONE, OBJ.DECORATION, OBJ.NULL, OBJ.PAINT };
-        public static OBJ[] TriggerPointObjects = new OBJ[] { OBJ.HATCH, OBJ.RECEIVER };
+        public static OBJ[] TriggerPointObjects = new OBJ[] { OBJ.HATCH };
 
         public enum StyleColor
         {
@@ -115,17 +107,11 @@ namespace NLEditor
         public static readonly Dictionary<OBJ, string> ObjectDescriptions = new Dictionary<OBJ, string>
         {
           {OBJ.TERRAIN, "Terrain"}, {OBJ.STEEL, "Steel"}, {OBJ.NONE, "No Effect"},
-          {OBJ.EXIT, "Exit"}, {OBJ.FORCE_FIELD, "Force-Field"}, {OBJ.ONE_WAY_WALL, "One-Way"}, {OBJ.PAINT, "Paint"},
+          {OBJ.EXIT, "Exit"}, {OBJ.ONE_WAY_WALL, "One-Way"}, {OBJ.PAINT, "Paint"},
           {OBJ.TRAP, "Trap"}, {OBJ.WATER, "Water"}, {OBJ.FIRE, "Fire"},
-          {OBJ.BLASTICINE, "Blasticine"}, {OBJ.VINEWATER, "Vinewater"}, {OBJ.POISON, "Poison"}, {OBJ.LAVA, "Lava"},
-          {OBJ.RADIATION, "Radiation"}, {OBJ.SLOWFREEZE, "Slowfreeze"},
-          {OBJ.TELEPORTER, "Teleporter"}, {OBJ.RECEIVER, "Receiver"}, {OBJ.LEMMING, "Lemming"},
-          {OBJ.PICKUP, "Pickup Skill"}, {OBJ.EXIT_LOCKED, "Locked Exit"}, {OBJ.BUTTON, "Button"},
-          {OBJ.UPDRAFT, "Updraft"},
-          {OBJ.SPLITTER, "Splitter"}, {OBJ.HATCH, "Hatch"},
-          {OBJ.SPLAT, "Splat Pad"}, {OBJ.DECORATION, "Decoration"}, {OBJ.TRAPONCE, "Single Trap"},
-          {OBJ.PORTAL, "Portal" }, {OBJ.NEUTRALIZER, "Neutralizer" }, {OBJ.PERMASKILL_ADD, "PermaSkill Assigner" },
-          {OBJ.DENEUTRALIZER, "Deneutralizer" }, {OBJ.PERMASKILL_REMOVE, "PermaSkill Remover" }, {OBJ.SKILL_ASSIGNER, "Skill Assigner"}
+          {OBJ.LEMMING, "Lemming"},
+          {OBJ.HATCH, "Hatch"},
+          {OBJ.DECORATION, "Decoration"},
         };
 
         public enum DragActions

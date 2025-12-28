@@ -103,7 +103,7 @@ namespace NLEditor
                     continue;
                 }
 
-                int frameIndex = (ImageLibrary.GetObjType(pieceKey).In(C.OBJ.PICKUP, C.OBJ.EXIT_LOCKED, C.OBJ.BUTTON, C.OBJ.TRAPONCE)) ? 1 : 0;
+                int frameIndex = 0;
                 Bitmap pieceImage;
 
                 bool preferObjectName = curSettings.PreferObjectName;
@@ -239,150 +239,6 @@ namespace NLEditor
 
             but_GroupSelection.Enabled = CurLevel.MayGroupSelection();
             but_UngroupSelection.Enabled = CurLevel.MayUngroupSelection();
-
-            foreach (C.Skill skill in checkboxesSkillFlags.Keys)
-            {
-                checkboxesSkillFlags[skill].Enabled = selectionList.Exists(p => p.MayReceiveSkill(skill));
-
-                // Set check-mark correctly, without firing the CheckedChanged event
-                checkboxesSkillFlags[skill].CheckedChanged -= check_Piece_Skill_CheckedChanged;
-                checkboxesSkillFlags[skill].Checked = selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).SkillFlags.Contains(skill));
-                checkboxesSkillFlags[skill].CheckedChanged += check_Piece_Skill_CheckedChanged;
-            }
-
-            if (selectionList.Count > 0)
-            {
-                int specWidth = selectionList[0].Width;
-                int specHeight = selectionList[0].Height;
-                bool mayResizeHoriz = selectionList.All(item => item.MayResizeHoriz() && item.Width == specWidth);
-                bool mayResizeVert = selectionList.All(item => item.MayResizeVert() && item.Height == specHeight);
-
-                lbl_Resize_Width.Visible = mayResizeHoriz;
-                num_Resize_Width.Visible = mayResizeHoriz;
-                if (mayResizeHoriz)
-                {
-                    num_Resize_Width.Maximum = CurLevel.Width + 320;
-                    num_Resize_Width.Value = Math.Min(Math.Max(specWidth, num_Resize_Width.Minimum), num_Resize_Width.Maximum);
-                }
-                lbl_Resize_Height.Visible = mayResizeVert;
-                num_Resize_Height.Visible = mayResizeVert;
-                if (mayResizeVert)
-                {
-                    num_Resize_Height.Maximum = CurLevel.Height + 160;
-                    num_Resize_Height.Value = Math.Min(Math.Max(specHeight, num_Resize_Height.Minimum), num_Resize_Height.Maximum);
-                }
-            }
-            else
-            {
-                lbl_Resize_Width.Visible = false;
-                num_Resize_Width.Visible = false;
-                lbl_Resize_Height.Visible = false;
-                num_Resize_Height.Visible = false;
-            }
-
-            if (selectionList.Count > 0 && selectionList.All(item => item.ObjType == C.OBJ.DECORATION))
-            {
-                var gadget = selectionList[0] as GadgetPiece;
-                int dirIndex = gadget.DecorationAngle * 2 / 45;
-                int speed = gadget.DecorationSpeed;
-
-                lbl_Decoration_Direction.Visible = true;
-                lbl_Decoration_Speed.Visible = true;
-                cb_Decoration_Direction.Visible = true;
-                num_Decoration_Speed.Visible = true;
-
-                cb_Decoration_Direction.SelectedIndex = dirIndex;
-                num_Decoration_Speed.Value = speed;
-            }
-            else
-            {
-                lbl_Decoration_Direction.Visible = false;
-                lbl_Decoration_Speed.Visible = false;
-                cb_Decoration_Direction.Visible = false;
-                num_Decoration_Speed.Visible = false;
-            }
-
-            if (selectionList.Count == 1 && selectionList[0] is GadgetPiece)
-            {
-                GadgetPiece gadget = (GadgetPiece)selectionList[0];
-                if (gadget.ObjType == C.OBJ.PICKUP)
-                {
-                    lbl_PickupSkillCount.Visible = true;
-                    num_PickupSkillCount.Value = Math.Min(Math.Max(gadget.Val_L, num_PickupSkillCount.Minimum), num_PickupSkillCount.Maximum);
-                    num_PickupSkillCount.Visible = true;
-                }
-                else
-                {
-                    lbl_PickupSkillCount.Visible = false;
-                    num_PickupSkillCount.Visible = false;
-                }
-
-                if (new[] { C.OBJ.RADIATION, C.OBJ.SLOWFREEZE }.Contains(gadget.ObjType))
-                {
-                    lbl_SR_Countdown.Visible = true;
-                    num_SR_Countdown.Value = Math.Min(Math.Max(gadget.CountdownLength, num_SR_Countdown.Minimum), num_SR_Countdown.Maximum);
-                    num_SR_Countdown.Visible = true;
-                }
-                else
-                {
-                    lbl_SR_Countdown.Visible = false;
-                    num_SR_Countdown.Visible = false;
-                }
-
-                if (new[] { C.OBJ.EXIT, C.OBJ.EXIT_LOCKED, C.OBJ.HATCH }.Contains(gadget.ObjType))
-                {
-                    lbl_LemmingLimit.Visible = true;
-                    num_LemmingLimit.Value = Math.Min(Math.Max(gadget.LemmingCap, 0), 999);
-                    num_LemmingLimit.Visible = true;
-                }
-                else
-                {
-                    lbl_LemmingLimit.Visible = false;
-                    num_LemmingLimit.Visible = false;
-                }
-            }
-            else
-            {
-                lbl_PickupSkillCount.Visible = false;
-                num_PickupSkillCount.Visible = false;
-                lbl_LemmingLimit.Visible = false;
-                num_LemmingLimit.Visible = false;
-                lbl_SR_Countdown.Visible = false;
-                num_SR_Countdown.Visible = false;
-            }
-
-            if (selectionList.Count == 2 &&
-                   (
-                       (selectionList.Exists(item => item.ObjType == C.OBJ.TELEPORTER) && selectionList.Exists(item => item.ObjType == C.OBJ.RECEIVER)) ||
-                       (selectionList.Count(item => item.ObjType == C.OBJ.PORTAL) == 2)
-                    )
-               )
-            {
-                GadgetPiece MyTeleporter = (GadgetPiece)selectionList.Find(item => item.ObjType == C.OBJ.TELEPORTER);
-                GadgetPiece MyReceiver = (GadgetPiece)selectionList.Find(item => item.ObjType == C.OBJ.RECEIVER);
-
-                if (MyTeleporter == null || MyReceiver == null)
-                {
-                    MyTeleporter = (GadgetPiece)selectionList.Find(item => item.ObjType == C.OBJ.PORTAL);
-                    MyReceiver = (GadgetPiece)selectionList.Find(item => (item != MyTeleporter) && (item.ObjType == C.OBJ.PORTAL));
-                }
-
-                if (MyTeleporter.Val_L > 0 && MyTeleporter.Val_L == MyReceiver.Val_L)
-                {
-                    but_PairTeleporter.Text = "Already Paired";
-                    but_PairTeleporter.Enabled = false;
-                }
-                else
-                {
-                    but_PairTeleporter.Text = "Pair Teleporters";
-                    but_PairTeleporter.Enabled = true;
-                }
-                but_PairTeleporter.Visible = true;
-            }
-            else
-            {
-                but_PairTeleporter.Visible = false;
-            }
         }
 
         /// <summary>
@@ -392,31 +248,6 @@ namespace NLEditor
         {
             if (CurLevel != null)
                 CurLevel.Format = isNeoLemmixOnly ? "NeoLemmix" : "RetroLemmini";
-
-            lbl_Skill_Stoner.Enabled = isNeoLemmixOnly;
-            lbl_Skill_Stoner.Visible = isNeoLemmixOnly;
-            lbl_Skill_Freezer.Enabled = !isNeoLemmixOnly;
-            lbl_Skill_Freezer.Visible = !isNeoLemmixOnly;
-
-            num_Ski_Stoner.Visible = isNeoLemmixOnly;
-            num_Ski_Stoner.Enabled = isNeoLemmixOnly;
-            num_Ski_Freezer.Enabled = !isNeoLemmixOnly;
-            num_Ski_Freezer.Visible = !isNeoLemmixOnly;
-
-            check_Piece_Stoner.Visible = isNeoLemmixOnly;
-            check_Piece_Freezer.Visible = !isNeoLemmixOnly;
-
-            lbl_Skill_Ballooner.Enabled = !isNeoLemmixOnly;
-            lbl_Skill_Timebomber.Enabled = !isNeoLemmixOnly;
-            lbl_Skill_Ladderer.Enabled = !isNeoLemmixOnly;
-            lbl_Skill_Spearer.Enabled = !isNeoLemmixOnly;
-            lbl_Skill_Grenader.Enabled = !isNeoLemmixOnly;
-
-            num_Ski_Ballooner.Enabled = !isNeoLemmixOnly;
-            num_Ski_Timebomber.Enabled = !isNeoLemmixOnly;
-            num_Ski_Ladderer.Enabled = !isNeoLemmixOnly;
-            num_Ski_Spearer.Enabled = !isNeoLemmixOnly;
-            num_Ski_Grenader.Enabled = !isNeoLemmixOnly;
 
             check_Lvl_Superlemming.Enabled = !isNeoLemmixOnly;
         }

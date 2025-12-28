@@ -402,32 +402,11 @@ namespace NLEditor
                                 case "TRAP":
                                     objType = C.OBJ.TRAP;
                                     break;
-                                case "TRAPONCE":
-                                    objType = C.OBJ.TRAPONCE;
-                                    break;
                                 case "WATER":
                                     objType = C.OBJ.WATER;
                                     break;
                                 case "FIRE":
                                     objType = C.OBJ.FIRE;
-                                    break;
-                                case "BLASTICINE":
-                                    objType = C.OBJ.BLASTICINE;
-                                    break;
-                                case "VINEWATER":
-                                    objType = C.OBJ.VINEWATER;
-                                    break;
-                                case "POISON":
-                                    objType = C.OBJ.POISON;
-                                    break;
-                                case "LAVA":
-                                    objType = C.OBJ.LAVA;
-                                    break;
-                                case "RADIATION":
-                                    objType = C.OBJ.RADIATION;
-                                    break;
-                                case "SLOWFREEZE":
-                                    objType = C.OBJ.SLOWFREEZE;
                                     break;
                                 case "ONEWAYRIGHT":
                                 case "ONEWAYLEFT":
@@ -438,58 +417,8 @@ namespace NLEditor
                                 case "PAINT":
                                     objType = C.OBJ.PAINT;
                                     break;
-                                case "UNLOCKBUTTON":
-                                    objType = C.OBJ.BUTTON;
-                                    break;
-                                case "LOCKEDEXIT":
-                                    objType = C.OBJ.EXIT_LOCKED;
-                                    break;
-                                case "PICKUPSKILL":
-                                    objType = C.OBJ.PICKUP;
-                                    break;
-                                case "TELEPORTER":
-                                    objType = C.OBJ.TELEPORTER;
-                                    break;
-                                case "RECEIVER":
-                                    objType = C.OBJ.RECEIVER;
-                                    break;
-                                case "SPLITTER":
-                                    objType = C.OBJ.SPLITTER;
-                                    break;
-                                case "UPDRAFT":
-                                    objType = C.OBJ.UPDRAFT;
-                                    break;
-                                case "ANTISPLATPAD":
-                                case "SPLATPAD":
-                                    objType = C.OBJ.SPLAT;
-                                    break;
-                                case "FORCERIGHT":
-                                case "FORCELEFT":
-                                    objType = C.OBJ.FORCE_FIELD;
-                                    break;
                                 case "DECORATION":
                                     objType = C.OBJ.DECORATION;
-                                    break;
-                                case "PORTAL":
-                                    objType = C.OBJ.PORTAL;
-                                    break;
-                                case "NEUTRALIZER":
-                                    objType = C.OBJ.NEUTRALIZER;
-                                    break;
-                                case "DENEUTRALIZER":
-                                    objType = C.OBJ.DENEUTRALIZER;
-                                    break;
-                                case "NORMALIZER":
-                                    objType = C.OBJ.DENEUTRALIZER;
-                                    break;
-                                case "ADDSKILL":
-                                    objType = C.OBJ.PERMASKILL_ADD;
-                                    break;
-                                case "REMOVESKILLS":
-                                    objType = C.OBJ.PERMASKILL_REMOVE;
-                                    break;
-                                case "SKILLASSIGNER":
-                                    objType = C.OBJ.SKILL_ASSIGNER;
                                     break;
                             }
                             break;

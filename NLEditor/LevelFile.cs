@@ -216,25 +216,8 @@ namespace NLEditor
             // Read in skill information
             foreach (C.Skill skill in C.SkillArray)
             {
-                if (newGadget.ObjType.In(C.OBJ.PICKUP, C.OBJ.PERMASKILL_ADD, C.OBJ.SKILL_ASSIGNER))
-                {
-                    if (node["SKILL"].ValueTrimUpper == SkillString(skill))
-                        newGadget.SetSkillFlag(skill, true);
-                }
-                else if (node.HasChildWithKey(SkillString(skill)))
+                if (node.HasChildWithKey(SkillString(skill)))
                     newGadget.SetSkillFlag(skill, true);
-            }
-
-            // Ensure that pickup skills add at least one skill
-            if (newGadget.ObjType == C.OBJ.PICKUP && newGadget.Val_L < 1)
-            {
-                newGadget.SetPickupSkillCount(1);
-            }
-
-            // Ensure radiation and slowfreeze countdown is set to 10 if no value is available
-            if (newGadget.ObjType.In(C.OBJ.RADIATION, C.OBJ.SLOWFREEZE) && newGadget.CountdownLength < 1)
-            {
-                newGadget.SetCountdownLength(10);
             }
 
             // For compatibility with player: NoOverwrite + OnlyOnTerrain gadgets work like OnlyOnTerrain 
@@ -729,8 +712,7 @@ namespace NLEditor
         /// <param name="skillNum"></param>
         static public bool IsSkillRequired(Level curLevel, C.Skill skill)
         {
-            return (curLevel.SkillSet[skill] > 0)
-                || (curLevel.GadgetList.Exists(gad => gad.ObjType == C.OBJ.PICKUP && gad.SkillFlags.Contains(skill)));
+            return (curLevel.SkillSet[skill] > 0);
         }
 
         static public bool NeedFlipOffset(GadgetPiece gadget)
@@ -749,8 +731,6 @@ namespace NLEditor
         static private void WriteObject(TextWriter textFile, GadgetPiece gadget)
         {
             if (gadget == null)
-                return;
-            if (gadget.ObjType == C.OBJ.PICKUP && gadget.SkillFlags.Count == 0)
                 return;
 
             if (gadget.ObjType == C.OBJ.LEMMING)
@@ -810,41 +790,12 @@ namespace NLEditor
                     textFile.WriteLine("   " + SkillString(skill) + " ");
                 }
             }
-            else if (gadget.ObjType.In(C.OBJ.EXIT, C.OBJ.EXIT_LOCKED))
+            else if (gadget.ObjType == C.OBJ.EXIT)
             {
                 if (gadget.SkillFlags.Contains(C.Skill.Rival))
                 {
                     textFile.WriteLine("   " + SkillString(C.Skill.Rival) + " ");
                 }
-            }
-            else if (gadget.ObjType.In(C.OBJ.PICKUP))
-            {
-                foreach (C.Skill skill in gadget.SkillFlags)
-                {
-                    textFile.WriteLine("   SKILL " + SkillString(skill));
-                }
-
-                if (gadget.Val_L > 1)
-                {
-                    textFile.WriteLine("   SKILL_COUNT " + gadget.Val_L.ToString());
-                }
-            }
-            else if (gadget.ObjType.In(C.OBJ.PERMASKILL_ADD, C.OBJ.SKILL_ASSIGNER))
-            {
-                foreach (C.Skill skill in gadget.SkillFlags)
-                {
-                    textFile.WriteLine("   SKILL " + SkillString(skill));
-                }
-            }
-
-            if (gadget.ObjType.In(C.OBJ.TELEPORTER, C.OBJ.RECEIVER, C.OBJ.PORTAL))
-            {
-                textFile.WriteLine("   PAIRING " + gadget.Val_L.ToString());
-            }
-
-            if (gadget.ObjType.In(C.OBJ.RADIATION, C.OBJ.SLOWFREEZE) && gadget.CountdownLength > 0)
-            {
-                textFile.WriteLine("   COUNTDOWN " + gadget.CountdownLength.ToString());
             }
 
             if (gadget.ObjType.In(C.OBJ.DECORATION))
@@ -853,7 +804,7 @@ namespace NLEditor
                 textFile.WriteLine("   ANGLE " + gadget.DecorationAngle.ToString());
             }
 
-            if (gadget.ObjType.In(C.OBJ.EXIT, C.OBJ.EXIT_LOCKED, C.OBJ.HATCH) && gadget.LemmingCap > 0)
+            if (gadget.ObjType.In(C.OBJ.EXIT, C.OBJ.HATCH) && gadget.LemmingCap > 0)
             {
                 textFile.WriteLine("   LEMMINGS " + gadget.LemmingCap);
             }

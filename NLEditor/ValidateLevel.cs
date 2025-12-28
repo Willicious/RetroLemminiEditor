@@ -185,8 +185,7 @@ namespace NLEditor
 
             foreach (C.Skill skill in C.SkillArray)
             {
-                if (level.SkillSet[skill] > 0 ||
-                    level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.PICKUP && obj.SkillFlags.Contains(skill)))
+                if (level.SkillSet[skill] > 0)
                 {
                     numSkillsUsed++;
                 }
@@ -217,18 +216,10 @@ namespace NLEditor
                 }
             }
 
-            if (!level.GadgetList.Exists(obj => obj.ObjType.In(C.OBJ.EXIT, C.OBJ.EXIT_LOCKED)))
+            if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT))
             {
                 issuesList.Add("Missing object: Exit.");
             }
-
-            foreach (GadgetPiece pickup in level.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.PICKUP && gad.SkillFlags.Count == 0))
-            {
-                issuesList.Add("Pickup skill without selected skill " +
-                               "(Position " + pickup.PosX.ToString() +
-                               ", " + pickup.PosY.ToString() + ").");
-            }
-
         }
 
         private void FindIssuesDeprecation()

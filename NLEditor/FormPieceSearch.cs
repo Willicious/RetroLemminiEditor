@@ -241,16 +241,10 @@ namespace NLEditor
                         triggerEffect = trimmed.Substring(7).Trim();
                         switch (triggerEffect)
                         {
-                            case "LOCKEDEXIT": triggerEffect = "EXIT"; break;
-                            case "UNLOCKBUTTON": triggerEffect = "BUTTON"; break;
                             case "ONEWAYDOWN":
                             case "ONEWAYUP":
                             case "ONEWAYLEFT":
                             case "ONEWAYRIGHT": triggerEffect = "ONEWAY"; break;
-                            case "FORCELEFT":
-                            case "FORCERIGHT": triggerEffect = "FORCEFIELD"; break;
-                            case "ADDSKILL": triggerEffect = "PERMASKILLASSIGNER"; break;
-                            case "REMOVESKILLS": triggerEffect = "PERMASKILLREMOVER"; break;
                         }
                     }
 
@@ -383,7 +377,7 @@ namespace NLEditor
                 return;
             }
 
-            int frameIndex = (ImageLibrary.GetObjType(pieceKey).In(C.OBJ.PICKUP, C.OBJ.EXIT_LOCKED, C.OBJ.BUTTON, C.OBJ.TRAPONCE)) ? 1 : 0;
+            int frameIndex = 0;
             Bitmap pieceImage = ImageLibrary.GetImage(pieceKey, RotateFlipType.RotateNoneFlipNone, frameIndex);
 
             if (pieceKey.StartsWith("default") && ImageLibrary.GetObjType(pieceKey) == C.OBJ.ONE_WAY_WALL)

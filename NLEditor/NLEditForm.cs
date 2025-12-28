@@ -42,42 +42,12 @@ namespace NLEditor
                     picPiece4, picPiece5, picPiece6, picPiece7
                 };
 
-            checkboxesSkillFlags = new Dictionary<C.Skill, CheckBox>()
-                {
-                    { C.Skill.Climber, check_Piece_Climber }, { C.Skill.Floater, check_Piece_Floater },
-                    { C.Skill.Bomber, check_Piece_Bomber }, { C.Skill.Blocker, check_Piece_Blocker },
-                    { C.Skill.Builder, check_Piece_Builder }, { C.Skill.Basher, check_Piece_Basher },
-                    { C.Skill.Miner, check_Piece_Miner }, { C.Skill.Digger, check_Piece_Digger },
-                    { C.Skill.Walker, check_Piece_Walker }, { C.Skill.Swimmer, check_Piece_Swimmer },
-                    { C.Skill.Glider, check_Piece_Glider }, { C.Skill.Ballooner, check_Piece_Ballooner },
-                    { C.Skill.Disarmer, check_Piece_Disarmer },{ C.Skill.Freezer, check_Piece_Freezer },
-                    { C.Skill.Stoner, check_Piece_Stoner },
-                    { C.Skill.Ladderer, check_Piece_Ladderer }, { C.Skill.Platformer, check_Piece_Platformer },
-                    { C.Skill.Stacker, check_Piece_Stacker }, { C.Skill.Cloner, check_Piece_Cloner },
-                    { C.Skill.Fencer, check_Piece_Fencer },  { C.Skill.Shimmier, check_Piece_Shimmier },
-                    { C.Skill.Jumper, check_Piece_Jumper }, { C.Skill.Slider, check_Piece_Slider },
-                    { C.Skill.Laserer, check_Piece_Laserer }, { C.Skill.Spearer, check_Piece_Spearer },
-                    { C.Skill.Grenader, check_Piece_Grenader }, { C.Skill.Timebomber, check_Piece_Timebomber },
-                    { C.Skill.Zombie, check_Piece_Zombie }, { C.Skill.Rival, check_Piece_Rival },
-                    { C.Skill.Neutral, check_Piece_Neutral }
-                };
-
             numericsSkillSet = new Dictionary<C.Skill, NumericUpDown>()
                 {
                     { C.Skill.Climber, num_Ski_Climber }, { C.Skill.Floater, num_Ski_Floater },
                     { C.Skill.Bomber, num_Ski_Bomber }, { C.Skill.Blocker, num_Ski_Blocker },
                     { C.Skill.Builder, num_Ski_Builder }, { C.Skill.Basher, num_Ski_Basher },
-                    { C.Skill.Miner, num_Ski_Miner }, { C.Skill.Digger, num_Ski_Digger },
-                    { C.Skill.Walker, num_Ski_Walker }, { C.Skill.Swimmer, num_Ski_Swimmer },
-                    { C.Skill.Glider, num_Ski_Glider }, { C.Skill.Ballooner, num_Ski_Ballooner },
-                    { C.Skill.Disarmer, num_Ski_Disarmer }, { C.Skill.Freezer, num_Ski_Freezer },
-                    { C.Skill.Stoner, num_Ski_Stoner },
-                    { C.Skill.Ladderer, num_Ski_Ladderer }, { C.Skill.Platformer, num_Ski_Platformer },
-                    { C.Skill.Stacker, num_Ski_Stacker }, { C.Skill.Cloner, num_Ski_Cloner },
-                    { C.Skill.Fencer, num_Ski_Fencer }, { C.Skill.Shimmier, num_Ski_Shimmier },
-                    { C.Skill.Jumper, num_Ski_Jumper }, { C.Skill.Slider, num_Ski_Slider },
-                    { C.Skill.Laserer, num_Ski_Laserer }, { C.Skill.Spearer, num_Ski_Spearer },
-                    { C.Skill.Grenader, num_Ski_Grenader }, { C.Skill.Timebomber, num_Ski_Timebomber },
+                    { C.Skill.Miner, num_Ski_Miner }, { C.Skill.Digger, num_Ski_Digger }
                 };
 
             var displayTabItems = new Dictionary<C.DisplayType, ToolStripMenuItem>()
@@ -154,7 +124,6 @@ namespace NLEditor
                 LoadNewLevel(args[1]);
         }
 
-        Dictionary<C.Skill, CheckBox> checkboxesSkillFlags;
         Dictionary<C.Skill, NumericUpDown> numericsSkillSet;
 
         public List<PictureBox> picPieceList { get; private set; }
@@ -659,77 +628,6 @@ namespace NLEditor
             bool isChecked = (check_Pieces_OneWay.CheckState == CheckState.Checked);
             SetOneWay(isChecked);
             PullFocusFromTextInputs();
-        }
-
-        private void check_Piece_Skill_CheckedChanged(object sender, EventArgs e)
-        {
-            C.Skill skill = checkboxesSkillFlags.First(check => check.Value.Equals((CheckBox)sender)).Key;
-            bool isChecked = ((CheckBox)sender).CheckState == CheckState.Checked;
-            SetSkillForObjects(skill, isChecked);
-            PullFocusFromTextInputs();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-        }
-
-        private void num_Resize_Width_ValueChanged(object sender, EventArgs e)
-        {
-            int newWidth = (int)num_Resize_Width.Value;
-            CurLevel.SelectionList()
-                    .ForEach(obj => obj.SpecWidth = newWidth);
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-        }
-
-        private void num_Resize_Height_ValueChanged(object sender, EventArgs e)
-        {
-            int newHeight = (int)num_Resize_Height.Value;
-            CurLevel.SelectionList()
-                    .ForEach(obj => obj.SpecHeight = newHeight);
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-        }
-
-        private void cb_Decoration_Direction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int newDir = cb_Decoration_Direction.SelectedIndex * 45 / 2;
-            CurLevel.SelectionList()
-                .FindAll(item => item.ObjType == C.OBJ.DECORATION)
-                .ForEach(obj => (obj as GadgetPiece).DecorationAngle = newDir);
-            SaveChangesToOldLevelList();
-        }
-
-        private void num_Decoration_Speed_ValueChanged(object sender, EventArgs e)
-        {
-            int newSpeed = (int)num_Decoration_Speed.Value;
-            CurLevel.SelectionList()
-                .FindAll(item => item.ObjType == C.OBJ.DECORATION)
-                .ForEach(obj => (obj as GadgetPiece).DecorationSpeed = newSpeed);
-            SaveChangesToOldLevelList();
-        }
-
-        private void num_SR_Countdown_ValueChanged(object sender, EventArgs e)
-        {
-            int countdownLength = (int)num_SR_Countdown.Value;
-            CurLevel.SetCountdownLength(countdownLength);
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-        }
-
-        private void but_PairTeleporter_Click(object sender, EventArgs e)
-        {
-            PairTeleporters();
-            PullFocusFromTextInputs();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-        }
-
-        private void num_PickupSkillCount_ValueChanged(object sender, EventArgs e)
-        {
-            int newSkillCount = (int)num_PickupSkillCount.Value;
-            CurLevel.SetPickupSkillCount(newSkillCount);
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
-        }
-
-        private void num_LemmingLimit_ValueChanged(object sender, EventArgs e)
-        {
-            int newLimit = (int)num_LemmingLimit.Value;
-            CurLevel.SetLemmingLimit(newLimit);
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
         }
 
         /* -----------------------------------------------------------
@@ -1349,16 +1247,6 @@ namespace NLEditor
             txt_LevelID.Text = CurLevel.LevelID.ToString("X16");
         }
 
-        private void num_LemmingLimit_KeyPress(object sender, KeyEventArgs e)
-        {
-            num_LemmingLimit_ValueChanged(sender, null);
-        }
-
-        private void num_PickupSkillCount_KeyUp(object sender, KeyEventArgs e)
-        {
-            num_PickupSkillCount_ValueChanged(sender, null);
-        }
-
         private void pasteInPlaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddFromClipboard(false);
@@ -1397,11 +1285,6 @@ namespace NLEditor
             if (_IsWritingToForm) return;
             textbox_Leave(sender, e);
             pic_Level.SetImage(curRenderer.GetScreenImage());
-        }
-
-        private void num_SR_Countdown_KeyUp(object sender, KeyEventArgs e)
-        {
-            num_SR_Countdown_ValueChanged(sender, null);
         }
 
         private void showMissingPiecesStatusBarMenuItem_Click(object sender, EventArgs e)

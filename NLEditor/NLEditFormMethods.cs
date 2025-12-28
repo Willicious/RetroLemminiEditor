@@ -512,7 +512,6 @@ Ladderer=10";
                 num_Lvl_TimeSec.Value = CurLevel.TimeLimit % 60;
                 check_Lvl_InfTime.Checked = CurLevel.IsNoTimeLimit;
                 check_Lvl_Superlemming.Checked = CurLevel.IsSuperlemming;
-                check_Lvl_Invincibility.Checked = CurLevel.IsInvincibility;
 
                 txt_LevelID.Text = CurLevel.LevelID.ToString("X16");
 
@@ -554,8 +553,6 @@ Ladderer=10";
             UpdateFlagsForPieceActions();
             RepositionPicLevel();
             pic_Level.Image = curRenderer.CreateLevelImage();
-
-            UpdateSpecialLemmingCounter();
         }
 
         /// <summary>
@@ -594,8 +591,6 @@ Ladderer=10";
             pic_Level.Image = curRenderer.CreateLevelImage();
 
             combo_PieceStyle.Text = CurLevel.PieceStyle?.NameInEditor;
-
-            UpdateSpecialLemmingCounter();
         }
 
         /// <summary>
@@ -742,7 +737,7 @@ Ladderer=10";
             if (!CurLevel.GadgetList.Exists(obj => obj.ObjType.In(C.OBJ.HATCH, C.OBJ.LEMMING)))
                 levelsWithNoLemmings.Add(CurLevel.FilePathToSave);
 
-            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType.In(C.OBJ.EXIT, C.OBJ.EXIT_LOCKED)))
+            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT))
                 levelsWithNoExits.Add(CurLevel.FilePathToSave);
         }
 
@@ -1964,23 +1959,6 @@ Ladderer=10";
             oldLevelList = oldLevelList.GetRange(0, curOldLevelIndex + 1);
             oldLevelList.Add(CurLevel.Clone());
             curOldLevelIndex = oldLevelList.Count - 1;
-
-            UpdateSpecialLemmingCounter(); // KLUDGE: Could put this somewhere better.
-        }
-
-        private void UpdateSpecialLemmingCounter()
-        {
-            CurLevel.GetLemmingTypeCounts(out int normalCount, out int zombieCount, out int rivalCount, out int neutralCount);
-            string newText =
-                normalCount.ToString() + " Normal";
-            if (zombieCount > 0)
-                newText += ", " + zombieCount.ToString() + " Zombie";
-            if (rivalCount > 0)
-                newText += ", " + rivalCount.ToString() + " Rival";
-            if (neutralCount > 0)
-                newText += ", " + neutralCount.ToString() + " Neutral";
-
-            btnLemCount.Text = newText;
         }
 
         /// <summary>
@@ -2222,15 +2200,6 @@ Ladderer=10";
             return newPieces;
         }
 
-
-        /// <summary>
-        /// Pairs a selected teleporter and receiver.
-        /// </summary>
-        private void PairTeleporters()
-        {
-            CurLevel.PairTeleporters();
-            UpdateFlagsForPieceActions();
-        }
 
         /// <summary>
         /// Groups the selected pieces, if possible.
