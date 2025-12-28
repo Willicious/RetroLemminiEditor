@@ -291,7 +291,7 @@ Builder=20
 Basher=20
 Miner=20
 Digger=20
-;
+";
 
                     // Ensure the directory exists
                     string directory = Path.GetDirectoryName(C.AppPathCustomSkillsets);
@@ -988,25 +988,6 @@ Digger=20
             allTabsExpanded = false;
         }
 
-
-        /// <summary>
-        /// Checks for presence of Neo/RetroLemmini.exe in Editor's base folder and set isNeoLemmixOnly
-        /// </summary>
-        public void DetectLemmixVersions()
-        {
-            string baseFolder = AppDomain.CurrentDomain.BaseDirectory;
-
-            bool isNeoLemmixDetected = File.Exists(C.AppPathNeoLemmix) || File.Exists(C.AppPathNeoLemmixCE);
-            bool isRetroLemminiDetected = File.Exists(C.AppPathRetroLemmini);
-
-            var curMode = curSettings.CurrentEditorMode;
-
-            isNeoLemmixOnly =
-               ((curMode == Settings.EditorMode.Auto && isNeoLemmixDetected && !isRetroLemminiDetected)
-              || curMode == Settings.EditorMode.NeoLemmix)
-              && curMode != Settings.EditorMode.RetroLemmini;
-        }
-
         /// <summary>
         /// If the level changed, displays a message box and asks whether to save the current level.  
         /// </summary>
@@ -1220,31 +1201,11 @@ Digger=20
             if (!LevelValidator.validationPassed)
                 return;
 
-            string enginePath;
-            string engineName;
+            string enginePath = C.AppPathRetroLemmini;
 
-            if (isNeoLemmixOnly)
-            { 
-                if (File.Exists(C.AppPathNeoLemmixCE))
-                {
-                    enginePath = C.AppPathNeoLemmixCE;
-                    engineName = "NeoLemmixCE.exe";
-                }
-                else
-                {
-                    enginePath = C.AppPathNeoLemmix;
-                    engineName = "NeoLemmix.exe";
-                }
-            }
-            else
+            if (!System.IO.File.Exists(C.AppPathRetroLemmini))
             {
-                enginePath = C.AppPathRetroLemmini;
-                engineName = "RetroLemmini.exe";
-            }
-
-            if (!System.IO.File.Exists(enginePath))
-            {
-                MessageBox.Show($"Error: Player {engineName} not found in editor directory.", "File not found");
+                MessageBox.Show($"Error: RetroLemmini.jar not found in editor directory.", "File not found");
             }
             else
             {
@@ -1260,7 +1221,7 @@ Digger=20
                 catch (Exception Ex)
                 {
                     Utility.LogException(Ex);
-                    MessageBox.Show($"Error: Starting {engineName} failed or was aborted.", "Application start failed");
+                    MessageBox.Show($"Error: Starting RetroLemmini.jar failed or was aborted.", "Application start failed");
                 }
             }
         }
@@ -2351,14 +2312,9 @@ Digger=20
                 .ToList();
             numericUpDowns = numericUpDowns.OrderBy(x => random.Next()).ToList();
 
-            int maxSkills;
+            int maxSkills = 8;
 
-            if (isNeoLemmixOnly)
-                maxSkills = 10;
-            else
-                maxSkills = 14;
-
-            // Select up to 14 skills and populate them with a number between minValue and maxValue
+            // Populate skills with a number between minValue and maxValue
             List<NumericUpDown> selectedControls = numericUpDowns.Take(maxSkills).ToList();
             foreach (var numBox in selectedControls)
             {

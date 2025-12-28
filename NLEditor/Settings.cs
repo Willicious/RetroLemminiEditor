@@ -49,13 +49,6 @@ namespace NLEditor
             Purple
         }
 
-        public enum EditorMode
-        {
-            RetroLemmini,
-            NeoLemmix,
-            Auto
-        }
-
         public enum PieceBrowserMode
         {
             ShowPiecesOnly,
@@ -65,7 +58,6 @@ namespace NLEditor
 
         public bool AutoPinSLXStyles { get; set; }
         public bool PreferObjectName { get; private set; }
-        public EditorMode CurrentEditorMode { get; private set; }
         public PieceBrowserMode CurrentPieceBrowserMode { get; private set; }
         public TriggerAreaColor CurrentTriggerAreaColor { get; private set; }
         public bool InfiniteScrolling { get; private set; }
@@ -96,7 +88,6 @@ namespace NLEditor
         /// </summary>
         public void SetDefault()
         {
-            CurrentEditorMode = EditorMode.Auto;
             CurrentPieceBrowserMode = PieceBrowserMode.ShowData;
             CurrentTriggerAreaColor = TriggerAreaColor.Pink;
             AutoPinSLXStyles = true;
@@ -149,49 +140,6 @@ namespace NLEditor
             settingsForm.Text = "RLEditor - Settings";
             settingsForm.MouseDown += new MouseEventHandler(settingsForm_MouseDown);
             settingsForm.FormClosing += new FormClosingEventHandler(settingsForm_FormClosing);
-
-            // ========================== Editor Mode GroupBox =========================== //
-
-            GroupBox groupEditorMode = new GroupBox();
-            groupEditorMode.Text = "Editor Mode";
-            groupEditorMode.Top = 20;
-            groupEditorMode.Left = columnLeft;
-            groupEditorMode.Width = 280;
-            groupEditorMode.Height = 50;
-
-            RadioButton radRetroLemminiMode = new RadioButton();
-            radRetroLemminiMode.Name = "radRetroLemminiMode";
-            radRetroLemminiMode.AutoSize = true;
-            radRetroLemminiMode.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radRetroLemminiMode.Checked = CurrentEditorMode == EditorMode.RetroLemmini;
-            radRetroLemminiMode.Text = "RetroLemmini";
-            radRetroLemminiMode.Top = groupBoxTop;
-            radRetroLemminiMode.Left = groupBoxColumnLeft;
-            radRetroLemminiMode.CheckedChanged += new EventHandler(EditorMode_CheckedChanged);
-
-            RadioButton radNeoLemmixMode = new RadioButton();
-            radNeoLemmixMode.Name = "radNeoLemmixMode";
-            radNeoLemmixMode.AutoSize = true;
-            radNeoLemmixMode.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radNeoLemmixMode.Checked = CurrentEditorMode == EditorMode.NeoLemmix;
-            radNeoLemmixMode.Text = "NeoLemmix";
-            radNeoLemmixMode.Top = groupBoxTop;
-            radNeoLemmixMode.Left = groupBoxColumnLeft + radRetroLemminiMode.Width;
-            radNeoLemmixMode.CheckedChanged += new EventHandler(EditorMode_CheckedChanged);
-
-            RadioButton radAutoMode = new RadioButton();
-            radAutoMode.Name = "radAutoMode";
-            radAutoMode.AutoSize = true;
-            radAutoMode.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radAutoMode.Checked = CurrentEditorMode == EditorMode.Auto;
-            radAutoMode.Text = "Auto";
-            radAutoMode.Top = groupBoxTop;
-            radAutoMode.Left = groupBoxColumnLeft + radRetroLemminiMode.Width + radNeoLemmixMode.Width - 10;
-            radAutoMode.CheckedChanged += new EventHandler(EditorMode_CheckedChanged);
-
-            groupEditorMode.Controls.Add(radRetroLemminiMode);
-            groupEditorMode.Controls.Add(radNeoLemmixMode);
-            groupEditorMode.Controls.Add(radAutoMode);
 
             // ======================= Piece Browser Mode GroupBox ======================== //
 
@@ -519,7 +467,6 @@ namespace NLEditor
 
             // ========================== Add Controls to Form =========================== //
 
-            settingsForm.Controls.Add(groupEditorMode);
             settingsForm.Controls.Add(groupPieceBrowserMode);
             settingsForm.Controls.Add(groupCustomMove);
             settingsForm.Controls.Add(groupSnapToGrid);
@@ -556,30 +503,6 @@ namespace NLEditor
             doSaveSettings = false;
             settingChanged = false;
             settingsForm.Close();
-        }
-
-        private void EditorMode_CheckedChanged(object sender, EventArgs e)
-        {           
-            if (sender is RadioButton rb && rb.Checked)
-            {
-                switch (rb.Name)
-                {
-                    case "radNeoLemmixMode":
-                        CurrentEditorMode = EditorMode.NeoLemmix;
-                        break;
-                    case "radRetroLemminiMode":
-                        CurrentEditorMode = EditorMode.RetroLemmini;
-                        break;
-                    case "radAutoMode":
-                        CurrentEditorMode = EditorMode.Auto;
-                        break;
-                }
-
-                editorForm.DetectLemmixVersions();
-                editorForm.UpdateLemmixVersionFeatures();
-            }
-
-            settingChanged = true;
         }
 
         private void PieceBrowserMode_CheckedChanged(object sender, EventArgs e)
@@ -888,17 +811,6 @@ namespace NLEditor
                     FileLine line = fileLines?[0];
                     switch (line?.Key)
                     {
-                        case "EDITORMODE":
-                            {
-                                var modeText = line.Text.Trim().ToUpper();
-                                if (modeText == "RetroLemmini")
-                                    CurrentEditorMode = EditorMode.RetroLemmini;
-                                else if (modeText == "NEOLEMMIX")
-                                    CurrentEditorMode = EditorMode.NeoLemmix;
-                                else // Default to Auto Mode
-                                    CurrentEditorMode = EditorMode.Auto;
-                                break;
-                            }
                         case "PIECEBROWSERMODE":
                             {
                                 var modeText = line.Text.Trim().ToUpper();
@@ -1016,7 +928,6 @@ namespace NLEditor
                 Utility.LogException(Ex);
             }
 
-            editorForm.previousEditorMode = CurrentEditorMode;
             settingChanged = false;
         }
 
@@ -1041,7 +952,6 @@ namespace NLEditor
                 settingsFile.WriteLine(" ValidateWhenSaving  " + (ValidateWhenSaving ? "True" : "False"));
                 settingsFile.WriteLine(" Autosave            " + AutosaveFrequency.ToString());
                 settingsFile.WriteLine(" AutosaveLimit       " + KeepAutosaveCount.ToString());
-                settingsFile.WriteLine(" EditorMode          " + CurrentEditorMode.ToString());
                 settingsFile.WriteLine(" PieceBrowserMode    " + CurrentPieceBrowserMode.ToString());
                 settingsFile.WriteLine(" AutoPinSLXStyles    " + (AutoPinSLXStyles ? "True" : "False"));
                 settingsFile.WriteLine(" PreferObjectName    " + (PreferObjectName ? "True" : "False"));

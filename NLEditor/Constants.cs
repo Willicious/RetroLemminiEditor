@@ -36,10 +36,7 @@ namespace NLEditor
         public static string AppPathCustomSkillsets => AppPath + "settings" + DirSep + "RLEditorCustomSkillsets.ini";
         public static string AppPathTranslationTables => AppPath + "settings" + DirSep + "RLEditorINITranslationTables.ini";
         public static string AppPathPlayerSettings => AppPath + "settings" + DirSep + "settings.ini";
-        public static string AppPathPlayerSettingsOld => AppPath + "RetroLemmini147Settings.ini";
-        public static string AppPathRetroLemmini => AppPath + "RetroLemmini.exe";
-        public static string AppPathNeoLemmix => AppPath + "NeoLemmix.exe";
-        public static string AppPathNeoLemmixCE => AppPath + "NeoLemmixCE.exe";
+        public static string AppPathRetroLemmini => AppPath + "RetroLemmini.jar";
 
         public static char DirSep => System.IO.Path.DirectorySeparatorChar;
         public static string NewLine => Environment.NewLine;

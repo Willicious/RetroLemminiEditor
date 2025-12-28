@@ -71,7 +71,6 @@ namespace NLEditor
             FindIssuesPieceOutsideBoundary();
             FindIssuesTooFewLemmings();
             FindIssuesTimeLimit();
-            FindIssuesTooManySkills();
             FindIssuesMissingObjects();
             FindIssuesDeprecation();
         }
@@ -108,14 +107,6 @@ namespace NLEditor
         /// </summary>
         private void FindIssuesTooFewLemmings()
         {
-            int numPreplacedAll = level.GadgetList.Count(gad => gad.ObjType == C.OBJ.LEMMING);
-
-            // Check whether number of lemmings is at least the number of preplaced lemmings.
-            if (level.NumLems < numPreplacedAll)
-            {
-                issuesList.Add("More preplaced lemmings set than the total number of lemmings.");
-            }
-
             // Check whether there are enough lemmings for the save requirement.
             int maxNumSaved = MaxNumSavedLems();
             if (level.SaveReq > maxNumSaved)
@@ -141,29 +132,6 @@ namespace NLEditor
             if (!level.IsNoTimeLimit && level.TimeLimit < 1)
             {
                 issuesList.Add("Time limit must be at least 1 second or set to infinite. " + level.TimeLimit.ToString() + " seconds available.");
-            }
-        }
-
-        /// <summary>
-        /// Returns an issue description if too many different skills are used.
-        /// </summary>
-        private void FindIssuesTooManySkills()
-        {
-            int numSkillsUsed = 0;
-
-            foreach (C.Skill skill in C.SkillArray)
-            {
-                if (level.SkillSet[skill] > 0)
-                {
-                    numSkillsUsed++;
-                }
-            }
-
-            int editorModeLimit = NLEditForm.isNeoLemmixOnly ? 10 : 14;
-
-            if (numSkillsUsed > editorModeLimit)
-            {
-                issuesList.Add(numSkillsUsed.ToString() + $" skill types used. Only {editorModeLimit} allowed.");
             }
         }
 

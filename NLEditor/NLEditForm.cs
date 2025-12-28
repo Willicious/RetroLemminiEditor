@@ -15,8 +15,6 @@ namespace NLEditor
     /// </summary>
     partial class NLEditForm : Form
     {
-        public static bool isNeoLemmixOnly { get; private set; }
-
         /// <summary>
         /// Initializes all important components and load an empty level.
         /// </summary>
@@ -64,8 +62,6 @@ namespace NLEditor
 
             curSettings = new Settings(this);
             InitializeSettings();
-            DetectLemmixVersions();
-            UpdateLemmixVersionFeatures();
 
             CreateStyleList();
             if (StyleList.Count > 0)

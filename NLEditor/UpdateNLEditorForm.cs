@@ -12,7 +12,6 @@ namespace NLEditor
     /// </summary>
     partial class NLEditForm
     {
-        public EditorMode previousEditorMode;
         private int pieceBrowserTop = 26;
 
         /// <summary>
@@ -239,17 +238,6 @@ namespace NLEditor
 
             but_GroupSelection.Enabled = CurLevel.MayGroupSelection();
             but_UngroupSelection.Enabled = CurLevel.MayUngroupSelection();
-        }
-
-        /// <summary>
-        /// Sets non-updating controls according to Lemmix version/user preferences
-        /// </summary>
-        public void UpdateLemmixVersionFeatures()
-        {
-            if (CurLevel != null)
-                CurLevel.Format = isNeoLemmixOnly ? "NeoLemmix" : "RetroLemmini";
-
-            check_Lvl_Superlemming.Enabled = !isNeoLemmixOnly;
         }
 
         /// <summary>
