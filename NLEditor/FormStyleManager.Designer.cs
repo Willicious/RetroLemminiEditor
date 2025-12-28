@@ -272,7 +272,7 @@
             this.checkAutoPinSLXStyles.Name = "checkAutoPinSLXStyles";
             this.checkAutoPinSLXStyles.Size = new System.Drawing.Size(239, 24);
             this.checkAutoPinSLXStyles.TabIndex = 20;
-            this.checkAutoPinSLXStyles.Text = "AutoPin SuperLemmix Styles";
+            this.checkAutoPinSLXStyles.Text = "AutoPin RetroLemmini Styles";
             this.checkAutoPinSLXStyles.UseVisualStyleBackColor = true;
             this.checkAutoPinSLXStyles.CheckedChanged += new System.EventHandler(this.checkAutoPinSLXStyles_CheckedChanged);
             // 

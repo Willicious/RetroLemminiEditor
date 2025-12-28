@@ -8,7 +8,7 @@ namespace NLEditor
 {
     public static class INITranslationTables
     {
-        // This string is used to recreate SLXEditorINITranslationTables.ini
+        // This string is used to recreate RLEditorINITranslationTables.ini
         // if the file is missing.
         public static readonly string DefaultContent =
 @"[Styles]

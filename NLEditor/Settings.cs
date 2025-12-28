@@ -51,7 +51,7 @@ namespace NLEditor
 
         public enum EditorMode
         {
-            SuperLemmix,
+            RetroLemmini,
             NeoLemmix,
             Auto
         }
@@ -146,7 +146,7 @@ namespace NLEditor
             settingsForm.MinimizeBox = false;
             settingsForm.MaximizeBox = false;
             settingsForm.ShowInTaskbar = false;
-            settingsForm.Text = "SLXEditor - Settings";
+            settingsForm.Text = "RLEditor - Settings";
             settingsForm.MouseDown += new MouseEventHandler(settingsForm_MouseDown);
             settingsForm.FormClosing += new FormClosingEventHandler(settingsForm_FormClosing);
 
@@ -159,15 +159,15 @@ namespace NLEditor
             groupEditorMode.Width = 280;
             groupEditorMode.Height = 50;
 
-            RadioButton radSuperLemmixMode = new RadioButton();
-            radSuperLemmixMode.Name = "radSuperLemmixMode";
-            radSuperLemmixMode.AutoSize = true;
-            radSuperLemmixMode.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            radSuperLemmixMode.Checked = CurrentEditorMode == EditorMode.SuperLemmix;
-            radSuperLemmixMode.Text = "SuperLemmix";
-            radSuperLemmixMode.Top = groupBoxTop;
-            radSuperLemmixMode.Left = groupBoxColumnLeft;
-            radSuperLemmixMode.CheckedChanged += new EventHandler(EditorMode_CheckedChanged);
+            RadioButton radRetroLemminiMode = new RadioButton();
+            radRetroLemminiMode.Name = "radRetroLemminiMode";
+            radRetroLemminiMode.AutoSize = true;
+            radRetroLemminiMode.CheckAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            radRetroLemminiMode.Checked = CurrentEditorMode == EditorMode.RetroLemmini;
+            radRetroLemminiMode.Text = "RetroLemmini";
+            radRetroLemminiMode.Top = groupBoxTop;
+            radRetroLemminiMode.Left = groupBoxColumnLeft;
+            radRetroLemminiMode.CheckedChanged += new EventHandler(EditorMode_CheckedChanged);
 
             RadioButton radNeoLemmixMode = new RadioButton();
             radNeoLemmixMode.Name = "radNeoLemmixMode";
@@ -176,7 +176,7 @@ namespace NLEditor
             radNeoLemmixMode.Checked = CurrentEditorMode == EditorMode.NeoLemmix;
             radNeoLemmixMode.Text = "NeoLemmix";
             radNeoLemmixMode.Top = groupBoxTop;
-            radNeoLemmixMode.Left = groupBoxColumnLeft + radSuperLemmixMode.Width;
+            radNeoLemmixMode.Left = groupBoxColumnLeft + radRetroLemminiMode.Width;
             radNeoLemmixMode.CheckedChanged += new EventHandler(EditorMode_CheckedChanged);
 
             RadioButton radAutoMode = new RadioButton();
@@ -186,10 +186,10 @@ namespace NLEditor
             radAutoMode.Checked = CurrentEditorMode == EditorMode.Auto;
             radAutoMode.Text = "Auto";
             radAutoMode.Top = groupBoxTop;
-            radAutoMode.Left = groupBoxColumnLeft + radSuperLemmixMode.Width + radNeoLemmixMode.Width - 10;
+            radAutoMode.Left = groupBoxColumnLeft + radRetroLemminiMode.Width + radNeoLemmixMode.Width - 10;
             radAutoMode.CheckedChanged += new EventHandler(EditorMode_CheckedChanged);
 
-            groupEditorMode.Controls.Add(radSuperLemmixMode);
+            groupEditorMode.Controls.Add(radRetroLemminiMode);
             groupEditorMode.Controls.Add(radNeoLemmixMode);
             groupEditorMode.Controls.Add(radAutoMode);
 
@@ -567,8 +567,8 @@ namespace NLEditor
                     case "radNeoLemmixMode":
                         CurrentEditorMode = EditorMode.NeoLemmix;
                         break;
-                    case "radSuperLemmixMode":
-                        CurrentEditorMode = EditorMode.SuperLemmix;
+                    case "radRetroLemminiMode":
+                        CurrentEditorMode = EditorMode.RetroLemmini;
                         break;
                     case "radAutoMode":
                         CurrentEditorMode = EditorMode.Auto;
@@ -866,7 +866,7 @@ namespace NLEditor
         }
 
         /// <summary>
-        /// Reads the users editor settings from SLXEditorSettings.ini.
+        /// Reads the users editor settings from RLEditorSettings.ini.
         /// </summary>
         public void ReadSettingsFromFile()
         {
@@ -891,8 +891,8 @@ namespace NLEditor
                         case "EDITORMODE":
                             {
                                 var modeText = line.Text.Trim().ToUpper();
-                                if (modeText == "SUPERLEMMIX")
-                                    CurrentEditorMode = EditorMode.SuperLemmix;
+                                if (modeText == "RetroLemmini")
+                                    CurrentEditorMode = EditorMode.RetroLemmini;
                                 else if (modeText == "NEOLEMMIX")
                                     CurrentEditorMode = EditorMode.NeoLemmix;
                                 else // Default to Auto Mode
@@ -1021,7 +1021,7 @@ namespace NLEditor
         }
 
         /// <summary>
-        /// Saves the user's current editor settings to SLXEditorSettings.ini. 
+        /// Saves the user's current editor settings to RLEditorSettings.ini. 
         /// </summary>
         public void WriteSettingsToFile()
         {
@@ -1037,7 +1037,7 @@ namespace NLEditor
 
                 TextWriter settingsFile = new StreamWriter(C.AppPathSettings, true);
 
-                settingsFile.WriteLine("# SLXEditor settings ");
+                settingsFile.WriteLine("# RLEditor settings ");
                 settingsFile.WriteLine(" ValidateWhenSaving  " + (ValidateWhenSaving ? "True" : "False"));
                 settingsFile.WriteLine(" Autosave            " + AutosaveFrequency.ToString());
                 settingsFile.WriteLine(" AutosaveLimit       " + KeepAutosaveCount.ToString());

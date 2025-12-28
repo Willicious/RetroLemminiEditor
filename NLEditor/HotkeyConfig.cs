@@ -306,7 +306,7 @@ namespace NLEditor
             // Final check: If "HotkeySelectPieces" was missing entirely, flag it
             if (!foundHotkeySelectPieces)
             {
-                invalidKey = "HotkeySelectPieces is missing from SLXEditorHotkeys.ini";
+                invalidKey = "HotkeySelectPieces is missing from RLEditorHotkeys.ini";
                 return true;
             }
 
@@ -320,7 +320,7 @@ namespace NLEditor
 
             if (ValidateHotkeyIniFile(lines, out string invalidKey))
             {
-                MessageBox.Show($"Invalid or duplicate key detected in SLXEditorHotkeys.ini\n\n" +
+                MessageBox.Show($"Invalid or duplicate key detected in RLEditorHotkeys.ini\n\n" +
                                 $"{invalidKey}\n\n" +
                                 $"The default hotkeys will be loaded instead",
                                 "Hotkey Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

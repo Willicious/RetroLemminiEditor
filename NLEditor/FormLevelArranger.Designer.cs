@@ -40,7 +40,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "FormLevelArranger";
-            this.Text = "SuperLemmix Editor - Level Arranger";
+            this.Text = "RetroLemmini Editor - Level Arranger";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLevelArranger_FormClosing);
             this.Load += new System.EventHandler(this.FormLevelArranger_Load);
             this.Shown += new System.EventHandler(this.FormLevelArranger_Shown);

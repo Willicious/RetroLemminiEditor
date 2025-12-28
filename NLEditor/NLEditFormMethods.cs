@@ -19,7 +19,7 @@ namespace NLEditor
          * -------------------------------------------------------- */
 
         /// <summary>
-        /// Reads the user's settings from the file SLXEditorSettings.ini and applies these options.
+        /// Reads the user's settings from the file RLEditorSettings.ini and applies these options.
         /// </summary>
         private void InitializeSettings()
         {
@@ -270,7 +270,7 @@ namespace NLEditor
                 if (!File.Exists(C.AppPathCustomSkillsets))
                 {
                     // Create the .ini file with default skillsets
-                    string defaultContent = @"# SLXEditor Custom Skillsets
+                    string defaultContent = @"# RLEditor Custom Skillsets
 
 [Classic 8 - 10 of each]
 Climber=10
@@ -1021,21 +1021,21 @@ Ladderer=10";
 
 
         /// <summary>
-        /// Checks for presence of Neo/SuperLemmix.exe in Editor's base folder and set isNeoLemmixOnly
+        /// Checks for presence of Neo/RetroLemmini.exe in Editor's base folder and set isNeoLemmixOnly
         /// </summary>
         public void DetectLemmixVersions()
         {
             string baseFolder = AppDomain.CurrentDomain.BaseDirectory;
 
             bool isNeoLemmixDetected = File.Exists(C.AppPathNeoLemmix) || File.Exists(C.AppPathNeoLemmixCE);
-            bool isSuperLemmixDetected = File.Exists(C.AppPathSuperLemmix);
+            bool isRetroLemminiDetected = File.Exists(C.AppPathRetroLemmini);
 
             var curMode = curSettings.CurrentEditorMode;
 
             isNeoLemmixOnly =
-               ((curMode == Settings.EditorMode.Auto && isNeoLemmixDetected && !isSuperLemmixDetected)
+               ((curMode == Settings.EditorMode.Auto && isNeoLemmixDetected && !isRetroLemminiDetected)
               || curMode == Settings.EditorMode.NeoLemmix)
-              && curMode != Settings.EditorMode.SuperLemmix;
+              && curMode != Settings.EditorMode.RetroLemmini;
         }
 
         /// <summary>
@@ -1214,7 +1214,7 @@ Ladderer=10";
                     cleanseMsg += "\n\nLevels with no exits:\n\n";
                     cleanseMsg += string.Join("\n", levelsWithNoExits.Select(Path.GetFileName));
                 }
-                string reportPath = Path.Combine(targetFolder, "SLXEditorCleanseReport.txt");
+                string reportPath = Path.Combine(targetFolder, "RLEditorCleanseReport.txt");
 
                 // Save report and show message
                 string fullReport =
@@ -1234,7 +1234,7 @@ Ladderer=10";
         }
 
         /// <summary>
-        /// Saves the level as TempTestLevel.nxlv and loads this level in the Neo/SuperLemmix player.
+        /// Saves the level as TempTestLevel.nxlv and loads this level in the Neo/RetroLemmini player.
         /// </summary>
         private void PlaytestLevel()
         {
@@ -1269,8 +1269,8 @@ Ladderer=10";
             }
             else
             {
-                enginePath = C.AppPathSuperLemmix;
-                engineName = "SuperLemmix.exe";
+                enginePath = C.AppPathRetroLemmini;
+                engineName = "RetroLemmini.exe";
             }
 
             if (!System.IO.File.Exists(enginePath))
@@ -1281,7 +1281,7 @@ Ladderer=10";
             {
                 try
                 {
-                    // Start the SuperLemmix player.
+                    // Start the RetroLemmini player.
                     var playerStartInfo = new System.Diagnostics.ProcessStartInfo();
                     playerStartInfo.FileName = enginePath;
                     playerStartInfo.Arguments = "test " + "\"" + C.AppPathTempLevel + "\"";
@@ -2364,11 +2364,11 @@ Ladderer=10";
                 timerAutosave.Stop();
         }
 
-        private void ShowAboutSLXEditor()
+        private void ShowAboutRLEditor()
         {
-            using (var aboutSLXEditor = new FormAboutSLXEditor())
+            using (var aboutRLEditor = new FormAboutRLEditor())
             {
-                aboutSLXEditor.ShowDialog(this);
+                aboutRLEditor.ShowDialog(this);
             }
         }
 
@@ -2590,7 +2590,7 @@ Ladderer=10";
             AddHotkey(HotkeyConfig.HotkeyToggleAllTabs, () => ToggleExpandedTabs());
             AddHotkey(HotkeyConfig.HotkeyOpenSettings, () => settingsToolStripMenuItem_Click(null, null));
             AddHotkey(HotkeyConfig.HotkeyOpenConfigHotkeys, () => hotkeysToolStripMenuItem_Click(null, null));
-            AddHotkey(HotkeyConfig.HotkeyOpenAboutSLX, () => ShowAboutSLXEditor());
+            AddHotkey(HotkeyConfig.HotkeyOpenAboutSLX, () => ShowAboutRLEditor());
             AddHotkey(HotkeyConfig.HotkeySelectPieces, () => {/* deliberately does nothing */});
             AddHotkey(HotkeyConfig.HotkeyDragToScroll, () => dragToScrollPressed = true);
             AddHotkey(HotkeyConfig.HotkeyDragHorizontally, () => dragHorizontallyPressed = true);

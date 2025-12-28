@@ -145,7 +145,7 @@ namespace NLEditor
 
             // Add level stats
             sb.AppendLine($"# LVL {Path.GetFileName(filePath)}");
-            sb.AppendLine($"# Exported from SuperLemmix Editor Version {C.Version}");
+            sb.AppendLine($"# Exported from RetroLemmini Editor Version {C.Version}");
             sb.AppendLine($"# Original .nxlv ID {ini.ID} Version {ini.Version}");
             sb.AppendLine("# RetroLemmini Level");
             sb.AppendLine();
@@ -575,7 +575,7 @@ namespace NLEditor
                     MessageBox.Show(
                         $"Warning: Some pieces are not linked to a corresponding piece in '{selectedStyle}':\n\n" +
                         string.Join(Environment.NewLine, unlinkedPieces) + "\n\n" +
-                        "Please ensure these pieces are linked in SLXEditorINITranslationTables.ini",
+                        "Please ensure these pieces are linked in RLEditorINITranslationTables.ini",
                         "Unlinked Pieces",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);

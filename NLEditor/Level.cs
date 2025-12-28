@@ -16,7 +16,7 @@ namespace NLEditor
         /// <param name="mainStyle"></param>
         public Level(Style mainStyle = null)
         {
-            this.Format = "SuperLemmix";
+            this.Format = "RetroLemmini";
             this.Title = "";
             this.Author = "";
             this.MainStyle = mainStyle;

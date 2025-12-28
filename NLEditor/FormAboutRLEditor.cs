@@ -11,9 +11,9 @@ using System.Windows.Forms.VisualStyles;
 
 namespace NLEditor
 {
-    public partial class FormAboutSLXEditor : Form
+    public partial class FormAboutRLEditor : Form
     {
-        public FormAboutSLXEditor()
+        public FormAboutRLEditor()
         {
             int GetCenter(Control component)
             {
@@ -33,7 +33,7 @@ namespace NLEditor
             picturePadding.Left = richTextBox_WhatsNew.Right;
             pictureClimber.Left = richTextBox_WhatsNew.Right;
 
-            lblWhatsNew.Text = "What's New in SuperLemmix Editor"; //+ C.Version;
+            lblWhatsNew.Text = "What's New in RetroLemmini Editor"; //+ C.Version;
             lblWhatsNew.Top = topMargin;
             lblWhatsNew.Left = GetCenter(lblWhatsNew);
             WriteWhatsNewText();
@@ -41,11 +41,11 @@ namespace NLEditor
             lblPreviousUpdates.Left = GetCenter(lblPreviousUpdates);
             WritePreviousUpdatesText();
 
-            lblSuperLemmixEditor.Text = "SuperLemmix Editor (Version " + C.Version + ")";
-            lblSuperLemmixEditor.Top = richTextBox_PreviousUpdates.Bottom + padding;
-            lblSuperLemmixEditor.Left = GetCenter(lblSuperLemmixEditor);
+            lblRetroLemminiEditor.Text = "RetroLemmini Editor (Version " + C.Version + ")";
+            lblRetroLemminiEditor.Top = richTextBox_PreviousUpdates.Bottom + padding;
+            lblRetroLemminiEditor.Left = GetCenter(lblRetroLemminiEditor);
 
-            lblAuthor.Top = lblSuperLemmixEditor.Bottom + padding;
+            lblAuthor.Top = lblRetroLemminiEditor.Bottom + padding;
             lblAuthor.Left = GetCenter(lblAuthor);
             lblBasedOn.Top = lblAuthor.Bottom;
             lblBasedOn.Left = GetCenter(lblBasedOn);
@@ -70,7 +70,7 @@ namespace NLEditor
             Properties.Settings.Default.Save();
         }
 
-        private void FormAboutSLXEditor_KeyDown(object sender, KeyEventArgs e)
+        private void FormAboutRLEditor_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -214,7 +214,7 @@ namespace NLEditor
             richTextBox.AppendText(" - Working directory is now always set to that of the .exe, so pieces will always be correctly found even if opening the Editor via a .nxlv level file\n");
 
             WriteBoldText(richTextBox, "• Bugfix - Level Validation");
-            richTextBox.AppendText(" -  Validate Level now shows correct skill limit amount depending on Editor mode (10 for NeoLemmix, 14 for SuperLemmix)\n");
+            richTextBox.AppendText(" -  Validate Level now shows correct skill limit amount depending on Editor mode (10 for NeoLemmix, 14 for RetroLemmini)\n");
 
             WriteBoldText(richTextBox, "• Level Validation");
             richTextBox.AppendText(" - Level Validation is now run automatically when attempting to save a level. The dialog is shown if there are any issues, and the level can then be edited to fix the issues or saved anyway\n");

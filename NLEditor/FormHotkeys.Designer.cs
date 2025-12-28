@@ -107,7 +107,7 @@
             "Open Hotkey Configuration",
             "HotkeyOpenConfigHotkeys"}, -1);
             System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Open \"About SuperLemmix Editor\"",
+            "Open \"About RetroLemmini Editor\"",
             "HotkeyOpenAboutSLX"}, -1);
             System.Windows.Forms.ListViewItem listViewItem28 = new System.Windows.Forms.ListViewItem(new string[] {
             "Select/Drag Pieces",
@@ -823,7 +823,7 @@
             this.Name = "FormHotkeys";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SLX Editor - Hotkey Configuration";
+            this.Text = "RL Editor - Hotkey Configuration";
             this.Load += new System.EventHandler(this.FormHotkeys_Load);
             this.Shown += new System.EventHandler(this.FormHotkeys_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormHotkeys_KeyDown);

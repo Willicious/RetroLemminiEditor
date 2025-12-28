@@ -31,13 +31,13 @@ namespace NLEditor
         public static string AppPathLevels => AppPath + "levels" + DirSep;
         public static string AppPathTempLevel => AppPath + "TempTestLevel.nxlv";
         public static string AppPathThemeInfo(string styleName) => AppPathPieces + styleName + C.DirSep + "theme.nxtm";
-        public static string AppPathSettings => AppPath + "settings" + DirSep + "SLXEditorSettings.ini";
-        public static string AppPathHotkeys => AppPath + "settings" + DirSep + "SLXEditorHotkeys.ini";
-        public static string AppPathCustomSkillsets => AppPath + "settings" + DirSep + "SLXEditorCustomSkillsets.ini";
-        public static string AppPathTranslationTables => AppPath + "settings" + DirSep + "SLXEditorINITranslationTables.ini";
+        public static string AppPathSettings => AppPath + "settings" + DirSep + "RLEditorSettings.ini";
+        public static string AppPathHotkeys => AppPath + "settings" + DirSep + "RLEditorHotkeys.ini";
+        public static string AppPathCustomSkillsets => AppPath + "settings" + DirSep + "RLEditorCustomSkillsets.ini";
+        public static string AppPathTranslationTables => AppPath + "settings" + DirSep + "RLEditorINITranslationTables.ini";
         public static string AppPathPlayerSettings => AppPath + "settings" + DirSep + "settings.ini";
-        public static string AppPathPlayerSettingsOld => AppPath + "SuperLemmix147Settings.ini";
-        public static string AppPathSuperLemmix => AppPath + "SuperLemmix.exe";
+        public static string AppPathPlayerSettingsOld => AppPath + "RetroLemmini147Settings.ini";
+        public static string AppPathRetroLemmini => AppPath + "RetroLemmini.exe";
         public static string AppPathNeoLemmix => AppPath + "NeoLemmix.exe";
         public static string AppPathNeoLemmixCE => AppPath + "NeoLemmixCE.exe";
 
@@ -71,7 +71,7 @@ namespace NLEditor
         public enum DIR { N, E, S, W }
 
         /// <summary>
-        /// Warning: The values of the object types here do NOT correspond to the numbers used in SuperLemmix! 
+        /// Warning: The values of the object types here do NOT correspond to the numbers used in RetroLemmini! 
         /// </summary>
         public enum OBJ
         {
@@ -178,7 +178,7 @@ namespace NLEditor
             Skill.Disarmer
         };
 
-        public static readonly HashSet<Skill> SuperLemmixSkills = new HashSet<Skill>
+        public static readonly HashSet<Skill> RetroLemminiSkills = new HashSet<Skill>
         {
             Skill.Ballooner,
             Skill.Timebomber,

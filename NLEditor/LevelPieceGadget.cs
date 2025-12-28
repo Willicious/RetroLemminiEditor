@@ -255,7 +255,7 @@ namespace NLEditor
                     {
                         return !skill.In(C.Skill.Zombie, C.Skill.Rival, C.Skill.Neutral)
 
-                           && (!C.SuperLemmixSkills.Contains(skill) || !NLEditForm.isNeoLemmixOnly)
+                           && (!C.RetroLemminiSkills.Contains(skill) || !NLEditForm.isNeoLemmixOnly)
 
                            && (!skill.In(C.Skill.Stoner) || NLEditForm.isNeoLemmixOnly)
 

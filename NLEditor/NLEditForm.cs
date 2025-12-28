@@ -472,7 +472,7 @@ namespace NLEditor
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowAboutSLXEditor();
+            ShowAboutRLEditor();
         }
 
         /* -----------------------------------------------------------
@@ -1538,7 +1538,7 @@ namespace NLEditor
             SetHotkeys();
 
             if (Properties.Settings.Default.ShowAboutSLXWindowAtStartup)
-                ShowAboutSLXEditor();
+                ShowAboutRLEditor();
 
             if (Properties.Settings.Default.LevelArrangerIsOpen)
                 OpenLevelArrangerWindow();
@@ -1548,7 +1548,7 @@ namespace NLEditor
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowAboutSLXEditor();
+            ShowAboutRLEditor();
         }
 
         private void but_SearchPieces_Click(object sender, EventArgs e)

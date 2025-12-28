@@ -261,7 +261,7 @@ namespace NLEditor
             validatorForm.MaximizeBox = false;
             validatorForm.ShowInTaskbar = false;
             validatorForm.FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            validatorForm.Text = "SLXEditor - Level validation";
+            validatorForm.Text = "RLEditor - Level validation";
             validatorForm.FormClosing += new FormClosingEventHandler(ValidatorForm_FormClosing);
 
             txtIssuesList = new TextBox();

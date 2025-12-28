@@ -41,7 +41,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "FormPieceBrowser";
-            this.Text = "SuperLemmix Editor - Piece Browser";
+            this.Text = "RetroLemmini Editor - Piece Browser";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPieceBrowser_FormClosing);
             this.Load += new System.EventHandler(this.FormPieceBrowser_Load);
             this.Shown += new System.EventHandler(this.FormPieceBrowser_Shown);
