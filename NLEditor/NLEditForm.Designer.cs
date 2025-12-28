@@ -212,6 +212,7 @@
             this.txt_FocusPieceBrowser = new NLEditor.FocusTextBox();
             this.pic_DragNewPiece = new System.Windows.Forms.PictureBox();
             this.txt_Focus = new NLEditor.FocusTextBox();
+            this.check_Lvl_LockSR = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.tabLvlProperties.SuspendLayout();
@@ -765,6 +766,7 @@
             // 
             // tabGlobalInfo
             // 
+            this.tabGlobalInfo.Controls.Add(this.check_Lvl_LockSR);
             this.tabGlobalInfo.Controls.Add(this.chk_Lvl_AutoStart);
             this.tabGlobalInfo.Controls.Add(this.lbl_Global_Version);
             this.tabGlobalInfo.Controls.Add(this.but_RandomID);
@@ -2379,6 +2381,17 @@
             this.txt_Focus.TabStop = false;
             this.txt_Focus.Text = "asdf";
             // 
+            // check_Lvl_LockSR
+            // 
+            this.check_Lvl_LockSR.AutoSize = true;
+            this.check_Lvl_LockSR.Location = new System.Drawing.Point(112, 451);
+            this.check_Lvl_LockSR.Name = "check_Lvl_LockSR";
+            this.check_Lvl_LockSR.Size = new System.Drawing.Size(171, 24);
+            this.check_Lvl_LockSR.TabIndex = 33;
+            this.check_Lvl_LockSR.Text = "Lock Release Rate";
+            this.check_Lvl_LockSR.UseVisualStyleBackColor = true;
+            this.check_Lvl_LockSR.CheckedChanged += new System.EventHandler(this.textbox_Leave);
+            // 
             // NLEditForm
             // 
             this.AllowDrop = true;
@@ -2654,6 +2667,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.CheckBox check_Lvl_LockSR;
     }
 }
 
