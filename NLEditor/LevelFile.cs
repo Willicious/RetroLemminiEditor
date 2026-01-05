@@ -85,8 +85,8 @@ namespace NLEditor
             newLevel.LevelID = file["ID"].ValueUInt64;
             newLevel.LevelVersion = file["VERSION"].ValueUInt64;
 
-            newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == Aliases.Dealias(file["THEME"].Value, AliasKind.Style).To);
-            newLevel.Background = ParseBackground(Aliases.Dealias(file["BACKGROUND"].Value, AliasKind.Background).To, styleList, backgrounds);
+            newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == file["THEME"].Value);
+            newLevel.Background = ParseBackground(file["BACKGROUND"].Value, styleList, backgrounds);
 
             newLevel.MusicFile = file["MUSIC"].Value;
 
@@ -170,20 +170,12 @@ namespace NLEditor
             string styleName = node["STYLE"].Value;
             string gadgetName = node["PIECE"].Value;
 
-            Alias gadgetAlias = Aliases.Dealias(styleName + ":" + gadgetName, AliasKind.Gadget);
-            string[] dealiasName = gadgetAlias.To.Split(':');
-            styleName = dealiasName[0];
-            gadgetName = dealiasName[1];
-
             int posX = node["X"].ValueInt;
             int posY = node["Y"].ValueInt;
             bool isNoOverwrite = node.HasChildWithKey("NO_OVERWRITE");
             bool isOnlyOnTerrain = node.HasChildWithKey("ONLY_ON_TERRAIN");
             int specWidth = node.HasChildWithKey("WIDTH") ? node["WIDTH"].ValueInt : -1;
             int specHeight = node.HasChildWithKey("HEIGHT") ? node["HEIGHT"].ValueInt : -1;
-
-            if (specWidth <= 0 && gadgetAlias.Width > 0) specWidth = gadgetAlias.Width;
-            if (specHeight <= 0 && gadgetAlias.Height > 0) specHeight = gadgetAlias.Height;
 
             bool doRotate = node.HasChildWithKey("ROTATE");
             bool doInvert = node.HasChildWithKey("FLIP_VERTICAL");
@@ -262,13 +254,6 @@ namespace NLEditor
             string styleName = node["STYLE"].Value;
             string pieceName = node["PIECE"].Value;
 
-            Alias? pieceAlias = null;
-
-            pieceAlias = Aliases.Dealias(styleName + ":" + pieceName, AliasKind.Terrain);
-            string[] dealiasName = pieceAlias.Value.To.Split(':');
-            styleName = dealiasName[0];
-            pieceName = dealiasName[1];
-
             int posX = node["X"].ValueInt;
             int posY = node["Y"].ValueInt;
             Point pos = new Point(posX, posY);
@@ -283,13 +268,6 @@ namespace NLEditor
 
             int specWidth = node["WIDTH"].ValueInt;
             int specHeight = node["HEIGHT"].ValueInt;
-
-            if (pieceAlias.HasValue)
-            {
-                Alias alias = pieceAlias.Value;
-                if (specWidth <= 0 && alias.Width > 0) specWidth = alias.Width;
-                if (specHeight <= 0 && alias.Height > 0) specHeight = alias.Height;
-            }
 
             if (doRotate)
             {
