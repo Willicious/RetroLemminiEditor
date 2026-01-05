@@ -126,6 +126,7 @@ namespace NLEditor
         /// </summary>
         private void SearchDirectoryForBackgrounds()
         {
+            // TODO - Find out where lemmini keeps background images
             string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep + "backgrounds";
 
             if (Directory.Exists(directoryPath))
@@ -145,7 +146,8 @@ namespace NLEditor
         /// </summary>
         private void SearchDirectoryForTerrain()
         {
-            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep + "terrain";
+            // TODO - Find a sensible way to establish terrain pieces
+            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
@@ -165,8 +167,8 @@ namespace NLEditor
         /// </summary>
         private void SearchDirectoryForSteel()
         {
-            // Load first the style-specific objects
-            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep + "terrain";
+            // TODO - Find a sensible way to establish steel pieces
+            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
@@ -186,41 +188,18 @@ namespace NLEditor
         /// </summary>
         private void SearchDirectoryForObjects()
         {
-            // Load first the style-specific objects
-            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep + "objects";
+            // TODO - Find a sensible way to establish object pieces
+            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
-                objectKeys = Directory.GetFiles(directoryPath, "*.nxmo", SearchOption.TopDirectoryOnly)
+                objectKeys = Directory.GetFiles(directoryPath, "*.png", SearchOption.TopDirectoryOnly)
                                        .Select(file => ImageLibrary.CreatePieceKey(Path.GetFullPath(file)))
                                        .ToList();
             }
             else
             {
                 objectKeys = new List<string>();
-            }
-
-            // Load now the default objects into the list
-            string directoryPathDefault = C.AppPathPieces + "default" + C.DirSep + "objects";
-
-            if (Directory.Exists(directoryPathDefault))
-            {
-                try
-                {
-                    ObjectKeys.AddRange(Directory.GetFiles(directoryPathDefault, "*.nxmo", SearchOption.TopDirectoryOnly)
-                                                  .Where(file => file.ToLowerInvariant().Substring(file.Length - 13) != "fallback.nxmo")
-                                                  .Select(file => ImageLibrary.CreatePieceKey(Path.GetFullPath(file)))
-                                                  .ToList());
-
-                    ObjectKeys.Add("default" + C.DirSep + "objects" + C.DirSep + "lemming");
-                }
-                catch (Exception Ex)
-                {
-                    Utility.LogException(Ex);
-
-                    System.Windows.Forms.MessageBox.Show("Warning:" + Ex.Message, "Files not found");
-                    // ...but then start the editor as usual
-                }
             }
         }
 
@@ -229,7 +208,8 @@ namespace NLEditor
         /// </summary>
         private static void SearchDirectoryForSketches()
         {
-            string directoryPath = C.AppPath + "sketches";
+            // TODO - Add support for sketches
+            string directoryPath = C.AppPathResources + "sketches";
 
             if (Directory.Exists(directoryPath))
             {

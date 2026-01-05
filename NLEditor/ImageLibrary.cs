@@ -866,8 +866,7 @@ namespace NLEditor
         /// <param name="isObject"></param>
         public static string CreatePieceKey(string styleName, string pieceName, bool isObject)
         {
-            return styleName + C.DirSep + (isObject ? "objects" : "terrain")
-                             + C.DirSep + pieceName;
+            return styleName + C.DirSep + pieceName;
         }
 
         /// <summary>

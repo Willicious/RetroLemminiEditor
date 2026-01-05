@@ -23,7 +23,7 @@ namespace NLEditor
             else
             {
                 this.Name = System.IO.Path.GetFileName(key);
-                this.Style = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(key));
+                this.Style = System.IO.Path.GetDirectoryName(key);
                 this.IsSketch = false;
 
                 System.Diagnostics.Debug.Assert(ImageLibrary.CreatePieceKey(Style, Name, isObj) == Key, "Style and name of level piece incompatible with key.");
