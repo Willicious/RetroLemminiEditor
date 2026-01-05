@@ -36,9 +36,6 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToINIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.playLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -205,6 +202,7 @@
             this.but_PieceRight = new NLEditor.RepeatButton();
             this.but_PieceLeft = new NLEditor.RepeatButton();
             this.txt_FocusPieceBrowser = new NLEditor.FocusTextBox();
+            this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.tabLvlProperties.SuspendLayout();
@@ -257,7 +255,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1478, 36);
+            this.menuStrip.Size = new System.Drawing.Size(1478, 33);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -268,7 +266,7 @@
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.exportAsToolStripMenuItem,
+            this.saveAsImageToolStripMenuItem,
             this.exitToolStripMenuItem,
             this.toolStripSeparator1,
             this.playLevelToolStripMenuItem,
@@ -276,7 +274,7 @@
             this.toolStripSeparator9,
             this.cleanseLevelsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 32);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
@@ -310,30 +308,6 @@
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-            // 
-            // exportAsToolStripMenuItem
-            // 
-            this.exportAsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveAsImageToolStripMenuItem,
-            this.exportToINIToolStripMenuItem});
-            this.exportAsToolStripMenuItem.Name = "exportAsToolStripMenuItem";
-            this.exportAsToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
-            this.exportAsToolStripMenuItem.Text = "Export As...";
-            // 
-            // saveAsImageToolStripMenuItem
-            // 
-            this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
-            this.saveAsImageToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Alt+S";
-            this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(310, 34);
-            this.saveAsImageToolStripMenuItem.Text = "Image (.png)";
-            this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
-            // 
-            // exportToINIToolStripMenuItem
-            // 
-            this.exportToINIToolStripMenuItem.Name = "exportToINIToolStripMenuItem";
-            this.exportToINIToolStripMenuItem.Size = new System.Drawing.Size(310, 34);
-            this.exportToINIToolStripMenuItem.Text = "RetroLemmini Level (.ini)";
-            this.exportToINIToolStripMenuItem.Click += new System.EventHandler(this.exportToINIToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -390,7 +364,7 @@
             this.duplicateToolStripMenuItem,
             this.toolStripSeparator3});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(58, 32);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // undoToolStripMenuItem
@@ -480,7 +454,7 @@
             this.backgroundToolStripMenuItem,
             this.deprecatedPiecesToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 32);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // openLevelWindowToolStripMenuItem
@@ -614,7 +588,7 @@
             this.aboutToolStripMenuItem,
             this.toolStripSeparator4});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(69, 32);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
             this.optionsToolStripMenuItem.Text = "Tools";
             // 
             // searchPiecesToolStripMenuItem
@@ -2281,6 +2255,14 @@
             this.txt_FocusPieceBrowser.TabIndex = 86;
             this.txt_FocusPieceBrowser.Text = "asdf";
             // 
+            // saveAsImageToolStripMenuItem
+            // 
+            this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
+            this.saveAsImageToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Alt+S";
+            this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
+            this.saveAsImageToolStripMenuItem.Text = "Save As Image";
+            this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
+            // 
             // NLEditForm
             // 
             this.AllowDrop = true;
@@ -2537,15 +2519,13 @@
         private System.Windows.Forms.ToolStripMenuItem refreshStylesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteMissingPiecesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem styleManagerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportToINIToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.CheckBox check_Lvl_LockSR;
         private System.Windows.Forms.Button but_LoadStyle;
+        private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem;
     }
 }
 
