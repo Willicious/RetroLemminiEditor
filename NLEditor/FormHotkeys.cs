@@ -710,9 +710,6 @@ namespace NLEditor
                     case "HotkeyToggleDeprecatedPieces":
                         HotkeyConfig.HotkeyToggleDeprecatedPieces = parsedKey;
                         break;
-                    case "HotkeyPieceSearch":
-                        HotkeyConfig.HotkeyPieceSearch = parsedKey;
-                        break;
                     case "HotkeyShowMissingPieces":
                         HotkeyConfig.HotkeyShowMissingPieces = parsedKey;
                         break;

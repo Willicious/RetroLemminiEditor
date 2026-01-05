@@ -26,7 +26,6 @@ namespace NLEditor
         public static Keys HotkeyToggleScreenStart;
         public static Keys HotkeyToggleBackground;
         public static Keys HotkeyToggleDeprecatedPieces;
-        public static Keys HotkeyPieceSearch;
         public static Keys HotkeyShowMissingPieces;
         public static Keys HotkeyRefreshStyles;
         public static Keys HotkeyToggleSnapToGrid;
@@ -363,8 +362,6 @@ namespace NLEditor
                     HotkeyToggleBackground = ParseHotkeyString(line.Substring("HotkeyToggleBackground=".Length));
                 if (line.StartsWith("HotkeyToggleDeprecatedPieces="))
                     HotkeyToggleDeprecatedPieces = ParseHotkeyString(line.Substring("HotkeyToggleDeprecatedPieces=".Length));
-                if (line.StartsWith("HotkeyPieceSearch="))
-                    HotkeyPieceSearch = ParseHotkeyString(line.Substring("HotkeyPieceSearch=".Length));
                 if (line.StartsWith("HotkeyShowMissingPieces="))
                     HotkeyShowMissingPieces = ParseHotkeyString(line.Substring("HotkeyShowMissingPieces=".Length));
                 if (line.StartsWith("HotkeyRefreshStyles="))
@@ -564,7 +561,6 @@ namespace NLEditor
                 $"HotkeyToggleScreenStart={FormatHotkeyString(HotkeyToggleScreenStart)}",
                 $"HotkeyToggleBackground={FormatHotkeyString(HotkeyToggleBackground)}",
                 $"HotkeyToggleDeprecatedPieces={FormatHotkeyString(HotkeyToggleDeprecatedPieces)}",
-                $"HotkeyPieceSearch={FormatHotkeyString(HotkeyPieceSearch)}",
                 $"HotkeyShowMissingPieces={FormatHotkeyString(HotkeyShowMissingPieces)}",
                 $"HotkeyRefreshStyles={FormatHotkeyString(HotkeyRefreshStyles)}",
                 $"HotkeyToggleSnapToGrid={FormatHotkeyString(HotkeyToggleSnapToGrid)}",
@@ -673,7 +669,6 @@ namespace NLEditor
             HotkeyToggleScreenStart = Keys.F5;
             HotkeyToggleBackground = Keys.F6;
             HotkeyToggleDeprecatedPieces = Keys.F7;
-            HotkeyPieceSearch = Keys.F8;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;
             HotkeyToggleSnapToGrid = Keys.F9;
@@ -773,7 +768,6 @@ namespace NLEditor
             HotkeyToggleScreenStart = Keys.F5;
             HotkeyToggleBackground = Keys.F6;
             HotkeyToggleDeprecatedPieces = Keys.F7;
-            HotkeyPieceSearch = Keys.F8;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;
             HotkeyToggleSnapToGrid = Keys.F9;

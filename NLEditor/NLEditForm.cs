@@ -1322,16 +1322,6 @@ namespace NLEditor
             ShowAboutRLEditor();
         }
 
-        private void but_SearchPieces_Click(object sender, EventArgs e)
-        {
-            OpenPieceSearch();
-        }
-
-        private void searchPiecesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenPieceSearch();
-        }
-
         private void but_LoadStyle_Click(object sender, EventArgs e)
         {
             LoadStyleFromMetaData();

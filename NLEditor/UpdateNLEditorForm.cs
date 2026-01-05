@@ -301,10 +301,8 @@ namespace NLEditor
             but_PieceRight.Top = pieceBrowserTop;
             but_PieceRight.Left = panelPieceBrowser.Width - rightButtonOffset;
 
-            but_SearchPieces.Top = 0;
-            but_SearchPieces.Left = but_PieceRight.Right - 4 - but_SearchPieces.Width;
             but_ClearBackground.Top = 0;
-            but_ClearBackground.Left = but_SearchPieces.Left - 6 - but_ClearBackground.Width;
+            but_ClearBackground.Left = but_PieceRight.Right - 4 - but_ClearBackground.Width;
         }
 
         /// <summary>

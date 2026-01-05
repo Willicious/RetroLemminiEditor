@@ -68,7 +68,6 @@
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deprecatedPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,7 +155,6 @@
             this.panelPieceBrowser = new System.Windows.Forms.Panel();
             this.picPiece7 = new System.Windows.Forms.PictureBox();
             this.but_PieceSteel = new System.Windows.Forms.Button();
-            this.but_SearchPieces = new System.Windows.Forms.Button();
             this.but_PieceTerr = new System.Windows.Forms.Button();
             this.but_PieceObj = new System.Windows.Forms.Button();
             this.but_PieceSketches = new System.Windows.Forms.Button();
@@ -576,7 +574,6 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.searchPiecesToolStripMenuItem,
             this.snapToGridToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.hotkeysToolStripMenuItem,
@@ -590,14 +587,6 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
             this.optionsToolStripMenuItem.Text = "Tools";
-            // 
-            // searchPiecesToolStripMenuItem
-            // 
-            this.searchPiecesToolStripMenuItem.Name = "searchPiecesToolStripMenuItem";
-            this.searchPiecesToolStripMenuItem.ShortcutKeyDisplayString = "F8";
-            this.searchPiecesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
-            this.searchPiecesToolStripMenuItem.Text = "Search Pieces";
-            this.searchPiecesToolStripMenuItem.Click += new System.EventHandler(this.searchPiecesToolStripMenuItem_Click);
             // 
             // snapToGridToolStripMenuItem
             // 
@@ -1504,7 +1493,6 @@
             this.panelPieceBrowser.BackColor = System.Drawing.Color.Transparent;
             this.panelPieceBrowser.Controls.Add(this.picPiece7);
             this.panelPieceBrowser.Controls.Add(this.but_PieceSteel);
-            this.panelPieceBrowser.Controls.Add(this.but_SearchPieces);
             this.panelPieceBrowser.Controls.Add(this.but_PieceTerr);
             this.panelPieceBrowser.Controls.Add(this.but_PieceObj);
             this.panelPieceBrowser.Controls.Add(this.but_PieceSketches);
@@ -1551,17 +1539,6 @@
             this.but_PieceSteel.Text = "Steel";
             this.but_PieceSteel.UseVisualStyleBackColor = true;
             this.but_PieceSteel.Click += new System.EventHandler(this.but_PieceSteel_Click);
-            // 
-            // but_SearchPieces
-            // 
-            this.but_SearchPieces.Location = new System.Drawing.Point(1307, 1);
-            this.but_SearchPieces.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.but_SearchPieces.Name = "but_SearchPieces";
-            this.but_SearchPieces.Size = new System.Drawing.Size(145, 32);
-            this.but_SearchPieces.TabIndex = 83;
-            this.but_SearchPieces.Text = "Search Pieces";
-            this.but_SearchPieces.UseVisualStyleBackColor = true;
-            this.but_SearchPieces.Click += new System.EventHandler(this.but_SearchPieces_Click);
             // 
             // but_PieceTerr
             // 
@@ -2473,7 +2450,6 @@
         private NumUpDownOverwrite num_RandomMinLimit;
         private System.Windows.Forms.Label lblRandomMaxLimit;
         private System.Windows.Forms.Label lblRandomMinLimit;
-        private System.Windows.Forms.ToolStripMenuItem searchPiecesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblStyle;
@@ -2496,7 +2472,6 @@
         private System.Windows.Forms.Panel panelPieceBrowser;
         private System.Windows.Forms.PictureBox picPiece7;
         private System.Windows.Forms.Button but_PieceSteel;
-        private System.Windows.Forms.Button but_SearchPieces;
         private System.Windows.Forms.Button but_PieceTerr;
         private System.Windows.Forms.Button but_PieceObj;
         private System.Windows.Forms.Button but_PieceSketches;

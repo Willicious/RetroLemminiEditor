@@ -785,57 +785,6 @@ Digger=20
             UpdateStatusBar();
         }
 
-        /// <summary>
-        /// Performs a search for pieces throughout the full styles folder
-        /// </summary>
-        private void OpenPieceSearch()
-        {
-            string rootPath = Application.StartupPath;
-            Style curStyle = pieceCurStyle;
-
-            if (curStyle is null)
-            {
-                MessageBox.Show("Current style is not defined.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            FormPieceSearch searchForm = new FormPieceSearch(rootPath, curStyle);
-
-            searchForm.StyleSelected += (newStylePath) =>
-            {
-                // Find the style based on its directory (NameInDirectory)
-                Style style = StyleList?.Find(sty => sty.NameInDirectory == newStylePath);
-
-                if (style != null)
-                {   // Set style based on its user-friendly name
-                    combo_PieceStyle.Text = style.NameInEditor;
-                }
-                else
-                {
-                    MessageBox.Show("The selected style could not be found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                // Pass the current selected style back to the search form
-                searchForm.curStyle = style;
-            };
-
-            searchForm.PieceSelected += (newPiece) =>
-            {
-                try
-                {
-                    AddNewPieceToLevel(newPiece, curRenderer.GetCenterPoint());
-                    MaybeOpenPiecesTab();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error adding piece:\nPiece Key: {newPiece}\nException: {ex.Message}",
-                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            };
-
-            searchForm.ShowDialog();
-        }
-
         private void ShowMissingPiecesDialog()
         {
             if (missingPieces.Count > 0)
@@ -2373,7 +2322,6 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyToggleDeprecatedPieces, () => ToggleDeprecatedPieces());
             AddHotkey(HotkeyConfig.HotkeyShowMissingPieces, () => ShowMissingPiecesDialog());
             AddHotkey(HotkeyConfig.HotkeyRefreshStyles, () => RefreshStyles());
-            AddHotkey(HotkeyConfig.HotkeyPieceSearch, () => OpenPieceSearch());
             AddHotkey(HotkeyConfig.HotkeyToggleSnapToGrid, () => ToggleSnapToGrid(true));
             AddHotkey(HotkeyConfig.HotkeyOpenLevelArrangerWindow, () => OpenLevelArrangerWindow());
             AddHotkey(HotkeyConfig.HotkeyOpenPieceBrowserWindow, () => OpenPieceBrowserWindow());
@@ -2539,9 +2487,6 @@ Digger=20
 
             refreshStylesToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyRefreshStyles);
-
-            searchPiecesToolStripMenuItem.ShortcutKeyDisplayString =
-                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyPieceSearch);
 
             snapToGridToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleSnapToGrid);
