@@ -102,7 +102,7 @@
             "HotkeyOpenConfigHotkeys"}, -1);
             System.Windows.Forms.ListViewItem listViewItem25 = new System.Windows.Forms.ListViewItem(new string[] {
             "Open \"About RetroLemmini Editor\"",
-            "HotkeyOpenAboutSLX"}, -1);
+            "HotkeyOpenAboutRL"}, -1);
             System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem(new string[] {
             "Select/Drag Pieces",
             "HotkeySelectPieces"}, -1);

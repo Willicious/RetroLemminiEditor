@@ -1308,7 +1308,7 @@ namespace NLEditor
         {
             SetHotkeys();
 
-            if (Properties.Settings.Default.ShowAboutSLXWindowAtStartup)
+            if (Properties.Settings.Default.ShowAboutRLWindowAtStartup)
                 ShowAboutRLEditor();
 
             if (Properties.Settings.Default.LevelArrangerIsOpen)

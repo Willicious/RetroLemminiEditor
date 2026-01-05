@@ -734,8 +734,8 @@ namespace NLEditor
                     case "HotkeyOpenConfigHotkeys":
                         HotkeyConfig.HotkeyOpenConfigHotkeys = parsedKey;
                         break;
-                    case "HotkeyOpenAboutSLX":
-                        HotkeyConfig.HotkeyOpenAboutSLX = parsedKey;
+                    case "HotkeyOpenAboutRL":
+                        HotkeyConfig.HotkeyOpenAboutRL = parsedKey;
                         break;
                     case "HotkeySelectPieces":
                         HotkeyConfig.HotkeySelectPieces = Keys.LButton; // Just in case

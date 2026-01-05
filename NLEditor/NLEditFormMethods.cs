@@ -335,7 +335,7 @@ Digger=20
         }
 
         /// <summary>
-        /// Returns all skillset names (INI section headers) from the given SLXCustomSkillsets.ini file.
+        /// Returns all skillset names (INI section headers) from the given RLCustomSkillsets.ini file.
         /// </summary>
         private static string[] GetSkillsetNames(string filePath)
         {
@@ -2301,7 +2301,7 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyToggleAllTabs, () => ToggleExpandedTabs());
             AddHotkey(HotkeyConfig.HotkeyOpenSettings, () => settingsToolStripMenuItem_Click(null, null));
             AddHotkey(HotkeyConfig.HotkeyOpenConfigHotkeys, () => hotkeysToolStripMenuItem_Click(null, null));
-            AddHotkey(HotkeyConfig.HotkeyOpenAboutSLX, () => ShowAboutRLEditor());
+            AddHotkey(HotkeyConfig.HotkeyOpenAboutRL, () => ShowAboutRLEditor());
             AddHotkey(HotkeyConfig.HotkeySelectPieces, () => {/* deliberately does nothing */});
             AddHotkey(HotkeyConfig.HotkeyDragToScroll, () => dragToScrollPressed = true);
             AddHotkey(HotkeyConfig.HotkeyDragHorizontally, () => dragHorizontallyPressed = true);
@@ -2480,7 +2480,7 @@ Digger=20
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyOpenConfigHotkeys);
 
             aboutToolStripMenuItem.ShortcutKeyDisplayString =
-                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyOpenAboutSLX);
+                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyOpenAboutRL);
         }
     }
 }

@@ -105,32 +105,32 @@ namespace NLEditor
         {
             string filePath = C.AppPath + "styles" + C.DirSep + "styles.ini";
 
-            // Hard-coded "slx_" style names and order
-            List<string> slxOrder = new List<string>
+            // Hard-coded OG style names and order
+            List<string> originalStylesOrder = new List<string>
             {
-                "slx_crystal",
-                "slx_dirt",
-                "slx_fire",
-                "slx_marble",
-                "slx_pillar",
-                "slx_brick",
-                "slx_bubble",
-                "slx_rock",
-                "slx_snow",
+                "crystal",
+                "dirt",
+                "fire",
+                "marble",
+                "pillar",
+                "brick",
+                "bubble",
+                "rock",
+                "snow",
                 "xmas"
             };
 
-            Dictionary<string, string> slxNameOverrides = new Dictionary<string, string>
+            Dictionary<string, string> originalStyleNameOverrides = new Dictionary<string, string>
             {
-                { "slx_crystal", "Crystal" },
-                { "slx_dirt", "Dirt" },
-                { "slx_fire", "Fire" },
-                { "slx_marble", "Marble" },
-                { "slx_pillar", "Pillar" },
-                { "slx_brick", "Brick" },
-                { "slx_bubble", "Bubble" },
-                { "slx_rock", "Rock" },
-                { "slx_snow", "Snow" },
+                { "crystal", "Crystal" },
+                { "dirt", "Dirt" },
+                { "fire", "Fire" },
+                { "marble", "Marble" },
+                { "pillar", "Pillar" },
+                { "brick", "Brick" },
+                { "bubble", "Bubble" },
+                { "rock", "Rock" },
+                { "snow", "Snow" },
                 { "xmas", "Christmas" }
             };
 
@@ -155,10 +155,10 @@ namespace NLEditor
                 }
             }
 
-            // Override slx_ style display names if applicable
+            // Override OG style display names if applicable
             if (settings.AutoPinSLXStyles)
             {
-                foreach (var kvp in slxNameOverrides)
+                foreach (var kvp in originalStyleNameOverrides)
                 {
                     Style curStyle = styleList.Find(sty => sty.NameInDirectory.Equals(kvp.Key));
                     if (curStyle != null)
@@ -166,19 +166,19 @@ namespace NLEditor
                 }
             }
 
-            // Sort styles: slx_ first in defined order, then styles.ini, then original order
+            // Sort styles: OG styles first in defined order, then styles.ini, then original order
             styleList.Sort((sty1, sty2) =>
             {
                 if (settings.AutoPinSLXStyles)
                 {
-                    int sty1SlxIndex = slxOrder.IndexOf(sty1.NameInDirectory);
-                    int sty2SlxIndex = slxOrder.IndexOf(sty2.NameInDirectory);
+                    int sty1OGIndex = originalStylesOrder.IndexOf(sty1.NameInDirectory);
+                    int sty2OGIndex = originalStylesOrder.IndexOf(sty2.NameInDirectory);
 
-                    if (sty1SlxIndex != -1 && sty2SlxIndex != -1)
-                        return sty1SlxIndex.CompareTo(sty2SlxIndex);
-                    if (sty1SlxIndex != -1)
+                    if (sty1OGIndex != -1 && sty2OGIndex != -1)
+                        return sty1OGIndex.CompareTo(sty2OGIndex);
+                    if (sty1OGIndex != -1)
                         return -1;
-                    if (sty2SlxIndex != -1)
+                    if (sty2OGIndex != -1)
                         return 1;
                 }
 

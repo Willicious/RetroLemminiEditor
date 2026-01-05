@@ -61,12 +61,12 @@ namespace NLEditor
 
             check_ShowThisWindow.Top = linkLF.Bottom + padding;
             check_ShowThisWindow.Left = GetCenter(check_ShowThisWindow);
-            check_ShowThisWindow.Checked = Properties.Settings.Default.ShowAboutSLXWindowAtStartup;
+            check_ShowThisWindow.Checked = Properties.Settings.Default.ShowAboutRLWindowAtStartup;
         }
 
         private void Check_ShowThisWindow_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.ShowAboutSLXWindowAtStartup = check_ShowThisWindow.Checked;
+            Properties.Settings.Default.ShowAboutRLWindowAtStartup = check_ShowThisWindow.Checked;
             Properties.Settings.Default.Save();
         }
 

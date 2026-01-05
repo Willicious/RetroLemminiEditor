@@ -34,7 +34,7 @@ namespace NLEditor
         public static Keys HotkeyToggleAllTabs;
         public static Keys HotkeyOpenSettings;
         public static Keys HotkeyOpenConfigHotkeys;
-        public static Keys HotkeyOpenAboutSLX;
+        public static Keys HotkeyOpenAboutRL;
         public static Keys HotkeySelectPieces;
         public static Keys HotkeyDragToScroll;
         public static Keys HotkeyDragHorizontally;
@@ -378,8 +378,8 @@ namespace NLEditor
                     HotkeyOpenSettings = ParseHotkeyString(line.Substring("HotkeyOpenSettings=".Length));
                 if (line.StartsWith("HotkeyOpenConfigHotkeys="))
                     HotkeyOpenConfigHotkeys = ParseHotkeyString(line.Substring("HotkeyOpenConfigHotkeys=".Length));
-                if (line.StartsWith("HotkeyOpenAboutSLX="))
-                    HotkeyOpenAboutSLX = ParseHotkeyString(line.Substring("HotkeyOpenAboutSLX=".Length));
+                if (line.StartsWith("HotkeyOpenAboutRL="))
+                    HotkeyOpenAboutRL = ParseHotkeyString(line.Substring("HotkeyOpenAboutRL=".Length));
                 if (line.StartsWith("HotkeySelectPieces="))
                     HotkeySelectPieces = Keys.LButton; // Just in case)
                 if (line.StartsWith("HotkeyDragToScroll="))
@@ -569,7 +569,7 @@ namespace NLEditor
                 $"HotkeyToggleAllTabs={FormatHotkeyString(HotkeyToggleAllTabs)}",
                 $"HotkeyOpenSettings={FormatHotkeyString(HotkeyOpenSettings)}",
                 $"HotkeyOpenConfigHotkeys={FormatHotkeyString(HotkeyOpenConfigHotkeys)}",
-                $"HotkeyOpenAboutSLX={FormatHotkeyString(HotkeyOpenAboutSLX)}",
+                $"HotkeyOpenAboutRL={FormatHotkeyString(HotkeyOpenAboutRL)}",
                 $"HotkeySelectPieces={FormatHotkeyString(HotkeySelectPieces)}",
                 $"HotkeyDragToScroll={FormatHotkeyString(HotkeyDragToScroll)}",
                 $"HotkeyDragHorizontally={FormatHotkeyString(HotkeyDragHorizontally)}",
@@ -677,7 +677,7 @@ namespace NLEditor
             HotkeyToggleAllTabs = Keys.Control | Keys.F10;
             HotkeyOpenSettings = Keys.F10;
             HotkeyOpenConfigHotkeys = Keys.F11;
-            HotkeyOpenAboutSLX = Keys.Control | Keys.F11;
+            HotkeyOpenAboutRL = Keys.Control | Keys.F11;
             HotkeySelectPieces = Keys.LButton;
             HotkeyDragToScroll = Keys.RButton;
             HotkeyDragHorizontally = Keys.Control | Keys.Alt | Keys.LButton;
@@ -776,7 +776,7 @@ namespace NLEditor
             HotkeyToggleAllTabs = Keys.Control | Keys.F10;
             HotkeyOpenSettings = Keys.F10;
             HotkeyOpenConfigHotkeys = Keys.F11;
-            HotkeyOpenAboutSLX = Keys.Control | Keys.F11;
+            HotkeyOpenAboutRL = Keys.Control | Keys.F11;
             HotkeySelectPieces = Keys.LButton;
             HotkeyDragToScroll = Keys.RButton;
             HotkeyDragHorizontally = Keys.Control | Keys.Alt | Keys.LButton;
