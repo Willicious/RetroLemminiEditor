@@ -204,6 +204,9 @@ namespace NLEditor
         /// </summary>
         public void ApplyCustomSkillset()
         {
+            if (combo_CustomSkillset.SelectedIndex == 0)
+                return;
+
             try
             {
                 string selectedSkillset = combo_CustomSkillset.Text;
@@ -218,7 +221,7 @@ namespace NLEditor
                 byte[] buffer = new byte[bufferSize];
 
                 int length = GetPrivateProfileSection(selectedSkillset, buffer, bufferSize, C.AppPathCustomSkillsets);
-                if (length == 0)
+                if (length == 0 && combo_CustomSkillset.SelectedIndex > 0)
                 {
                     MessageBox.Show($"No skills found for skillset '{selectedSkillset}'.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -300,11 +303,11 @@ Digger=20
                     File.WriteAllText(C.AppPathCustomSkillsets, defaultContent, Encoding.Unicode);
                 }
 
-                // At this point the file exists, so enable components and populate combo
+                // At this point the file exists, so enable and populate combo
                 combo_CustomSkillset.Enabled = true;
-                btnCustomSkillset.Enabled = true;
 
                 combo_CustomSkillset.Items.Clear();
+                combo_CustomSkillset.Items.Add("Select Custom Skillset");
 
                 // Read all section names (skillset names)
                 string[] skillsetNames = GetSkillsetNames(C.AppPathCustomSkillsets);
@@ -328,7 +331,6 @@ Digger=20
                 );
 
                 combo_CustomSkillset.Enabled = false;
-                btnCustomSkillset.Enabled = false;
             }
         }
 
@@ -1525,6 +1527,7 @@ Digger=20
                 lblPieceName.Text = string.Empty;
                 lblPieceStyle.Text = string.Empty;
                 lblPieceType.Text = string.Empty;
+                lblPieceSize.Text = string.Empty;
                 but_LoadStyle.Visible = false;
 
                 return;
