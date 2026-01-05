@@ -77,8 +77,8 @@ namespace NLEditor
             LEMMING = 0, 
             HATCH = 1, EXIT = 2,
             TRAP = 3, FIRE = 4, WATER = 5,
-            ONE_WAY_WALL = 6,
-            DECORATION = 7, PAINT = 8,
+            FORCE_FIELD = 6, ONE_WAY_WALL = 7,
+            DECORATION = 8, PAINT = 9,
             NONE = 100, NULL
         }
 
@@ -104,12 +104,13 @@ namespace NLEditor
 
         public static readonly Dictionary<OBJ, string> ObjectDescriptions = new Dictionary<OBJ, string>
         {
-          {OBJ.TERRAIN, "Terrain"}, {OBJ.STEEL, "Steel"}, {OBJ.NONE, "No Effect"},
-          {OBJ.EXIT, "Exit"}, {OBJ.ONE_WAY_WALL, "One-Way"}, {OBJ.PAINT, "Paint"},
-          {OBJ.TRAP, "Trap"}, {OBJ.WATER, "Water"}, {OBJ.FIRE, "Fire"},
+          {OBJ.TERRAIN, "Terrain"}, {OBJ.STEEL, "Steel"},
           {OBJ.LEMMING, "Lemming"},
-          {OBJ.HATCH, "Hatch"},
-          {OBJ.DECORATION, "Decoration"},
+          {OBJ.HATCH, "Hatch"}, {OBJ.EXIT, "Exit"},
+          {OBJ.TRAP, "Trap"}, {OBJ.FIRE, "Fire"}, {OBJ.WATER, "Water"},
+          {OBJ.FORCE_FIELD, "Force-Field"}, {OBJ.ONE_WAY_WALL, "One-Way"},
+          {OBJ.DECORATION, "Decoration"}, {OBJ.PAINT, "Paint"},
+          {OBJ.NONE, "No Effect"}
         };
 
         public enum DragActions
