@@ -1322,11 +1322,6 @@ namespace NLEditor
             ShowAboutRLEditor();
         }
 
-        private void but_LoadStyle_Click(object sender, EventArgs e)
-        {
-            LoadStyleFromMetaData();
-        }
-
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectAllPieces();

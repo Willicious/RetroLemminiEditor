@@ -1435,27 +1435,6 @@ Digger=20
             }
         }
 
-        /// <summary>
-        /// Checks that the selected style is valid and loads it into the piece style combo
-        /// </summary>
-        private void LoadStyleFromMetaData()
-        {
-            if (string.IsNullOrWhiteSpace(lblPieceStyle.Text))
-            {
-                MessageBox.Show("No valid style detected in metadata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (combo_PieceStyle.Items.Cast<string>().Contains(lblPieceStyle.Text))
-            {
-                combo_PieceStyle.Text = lblPieceStyle.Text;
-            }
-            else
-            {
-                MessageBox.Show($"Style '{lblPieceStyle.Text}' not found in style list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void UpdatePieceMetaData()
         {
             if (CurLevel == null)
@@ -1477,7 +1456,6 @@ Digger=20
                 lblPieceStyle.Text = string.Empty;
                 lblPieceType.Text = string.Empty;
                 lblPieceSize.Text = string.Empty;
-                but_LoadStyle.Visible = false;
 
                 return;
             }
@@ -1514,11 +1492,6 @@ Digger=20
             lblPieceSize.Text = pieceSize;
 
             string[] nonLoadable = { "(Default)", "(Sketches)" };
-
-            if (pieceCurStyle.NameInEditor != pieceStyle && !nonLoadable.Contains(pieceStyle))
-                but_LoadStyle.Visible = true;
-            else
-                but_LoadStyle.Visible = false;
         }
 
 
