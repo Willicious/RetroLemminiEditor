@@ -14,6 +14,14 @@ namespace NLEditor
     {
         private int pieceBrowserTop = 26;
 
+        private void UpdatePieceStyleComboAvailability()
+        {
+            if (CurLevel.GadgetList.Count > 0 || CurLevel.TerrainList.Count > 0)
+                combo_PieceStyle.Enabled = false;
+            else
+                combo_PieceStyle.Enabled = true;
+        }
+
         /// <summary>
         /// Initializes the intervals for all repeat buttons.
         /// </summary>

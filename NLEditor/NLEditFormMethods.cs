@@ -1545,6 +1545,7 @@ Digger=20
             {
                 AddNewPieceToLevel(hotkeyIndex -1);
                 UpdateFlagsForPieceActions();
+                UpdatePieceStyleComboAvailability();
             }
         }
 
@@ -1578,6 +1579,7 @@ Digger=20
 
             MaybeOpenPiecesTab();
             UpdatePieceMetaData();
+            UpdatePieceStyleComboAvailability();
         }
 
         /// <summary>
@@ -1594,6 +1596,7 @@ Digger=20
             pic_Level.Image = curRenderer.CreateLevelImage();
             UpdateFlagsForPieceActions();
             PullFocusFromTextInputs();
+            UpdatePieceStyleComboAvailability();
         }
 
         /// <summary>
@@ -1941,6 +1944,7 @@ Digger=20
             SaveChangesToOldLevelList();
             pic_Level.Image = curRenderer.CreateLevelImage();
             UpdateFlagsForPieceActions();
+            UpdatePieceStyleComboAvailability();
         }
 
         /// <summary>
