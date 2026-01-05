@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NLEditor</RootNamespace>
-    <AssemblyName>SLXEditor</AssemblyName>
+    <AssemblyName>RLEditor</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -51,7 +51,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Editor_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>EditorIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>37CE8CFD2B7D309E411C858161956CE3841A59AC</ManifestCertificateThumbprint>
@@ -240,6 +240,8 @@
     <None Include="Resources\Lemming.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EditorIcon.ico" />
+    <Content Include="EditorIconGreen.ico" />
     <Content Include="Editor_Icon.ico" />
     <None Include="Resources\ArrowVert.png" />
     <None Include="Resources\ArrowHoriz.png" />
