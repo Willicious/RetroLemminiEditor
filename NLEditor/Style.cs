@@ -146,15 +146,23 @@ namespace NLEditor
         /// </summary>
         private void SearchDirectoryForTerrain()
         {
-            // TODO - Find a sensible way to establish terrain pieces
             string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
                 terrainKeys = Directory.GetFiles(directoryPath, "*.png", SearchOption.TopDirectoryOnly)
-                                       .Select(file => ImageLibrary.CreatePieceKey(file))
-                                       .Where(key => ImageLibrary.GetObjType(key) != C.OBJ.STEEL) // Filter out steel pieces
-                                       .ToList();
+                    .Where(ter =>
+                    {
+                        string name = Path.GetFileNameWithoutExtension(ter);
+                        int underscoreIndex = name.LastIndexOf('_');
+                        if (underscoreIndex <= 0) return false;
+                        char letterBeforeNumber = name[underscoreIndex - 1];
+                        return letterBeforeNumber != 'm' && letterBeforeNumber != 'o';
+                    })
+                    .Select(ter => ImageLibrary.CreatePieceKey(ter))
+                    .Where(key => ImageLibrary.GetObjType(key) == C.OBJ.TERRAIN)
+                    .ToList();
+
             }
             else
             {
@@ -167,15 +175,22 @@ namespace NLEditor
         /// </summary>
         private void SearchDirectoryForSteel()
         {
-            // TODO - Find a sensible way to establish steel pieces
             string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
                 steelKeys = Directory.GetFiles(directoryPath, "*.png", SearchOption.TopDirectoryOnly)
-                                     .Select(file => ImageLibrary.CreatePieceKey(file))
-                                     .Where(key => ImageLibrary.GetObjType(key) == C.OBJ.STEEL) // Only include steel pieces
-                                     .ToList();
+                    .Where(steel =>
+                    {
+                        string name = Path.GetFileNameWithoutExtension(steel);
+                        int underscoreIndex = name.LastIndexOf('_');
+                        if (underscoreIndex <= 0) return false;
+                        char letterBeforeNumber = name[underscoreIndex - 1];
+                        return letterBeforeNumber != 'm' && letterBeforeNumber != 'o';
+                    })
+                    .Select(steel => ImageLibrary.CreatePieceKey(steel))
+                    .Where(key => ImageLibrary.GetObjType(key) == C.OBJ.STEEL)
+                    .ToList();
             }
             else
             {
@@ -188,14 +203,22 @@ namespace NLEditor
         /// </summary>
         private void SearchDirectoryForObjects()
         {
-            // TODO - Find a sensible way to establish object pieces
             string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
                 objectKeys = Directory.GetFiles(directoryPath, "*.png", SearchOption.TopDirectoryOnly)
-                                       .Select(file => ImageLibrary.CreatePieceKey(Path.GetFullPath(file)))
-                                       .ToList();
+                    .Where(obj =>
+                    {
+                        string name = Path.GetFileNameWithoutExtension(obj);
+                        int underscoreIndex = name.LastIndexOf('_');
+                        if (underscoreIndex <= 0) return false;
+                        char letterBeforeNumber = name[underscoreIndex - 1];
+                        return letterBeforeNumber != 'm' && letterBeforeNumber == 'o';
+                    })
+                    .Select(obj => ImageLibrary.CreatePieceKey(obj))
+                    .Where(key => ImageLibrary.GetObjType(key) != C.OBJ.TERRAIN && ImageLibrary.GetObjType(key) != C.OBJ.STEEL)
+                    .ToList();
             }
             else
             {

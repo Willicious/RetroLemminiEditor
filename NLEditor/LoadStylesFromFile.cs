@@ -19,7 +19,7 @@ namespace NLEditor
             string imageKey = ImageLibrary.CreatePieceKey("default", "lemming", true);
             Bitmap image = Properties.Resources.Lemming;
             Rectangle triggerArea = new Rectangle(C.LEM_OFFSET_X, C.LEM_OFFSET_Y, 1, 1);
-            ImageLibrary.AddNewImage(imageKey, image, C.OBJ.LEMMING, triggerArea, C.Resize.None);
+            ImageLibrary.AddNewImage(imageKey, image, C.OBJ.LEMMING, triggerArea);
         }
 
         static readonly Dictionary<string, C.StyleColor> KeyToStyleColorDict = new Dictionary<string, C.StyleColor>
@@ -103,7 +103,7 @@ namespace NLEditor
         /// <param name="styleList"></param>
         public static List<Style> OrderAndRenameStyles(List<Style> styleList, Settings settings)
         {
-            string filePath = C.AppPath + "styles" + C.DirSep + "styles.ini";
+            string filePath = C.AppPathPieces + "styles.ini";
 
             // Hard-coded OG style names and order
             List<string> originalStylesOrder = new List<string>
@@ -290,8 +290,10 @@ namespace NLEditor
             else
             {
                 string imagePath = C.AppPathPieces + imageName;
+                int underscoreIndex = imageName.LastIndexOf('_');
+                char letterBeforeNumber = imageName[underscoreIndex - 1];
 
-                if (File.Exists(imagePath + ".nxmo"))
+                if (letterBeforeNumber == 'o')
                 {
                     // create a new object piece
                     return CreateNewObjectInfo(imagePath);
@@ -299,457 +301,134 @@ namespace NLEditor
                 else
                 {
                     // create a new terrain piece
-                    return CreateNewTerrainInfo(imagePath); // This can handle the NXMT file not existing.
+                    return CreateNewTerrainInfo(imagePath);
                 }
             }
         }
 
         /// <summary>
         /// Reads further object infos from a .nxob file. Default values:
-        /// <para> NumFrames = 1 </para>
-        /// <para> ObjType = C.OBJ.NONE </para>
-        /// <para> TriggerRect = Rectangle(0, 0, 0, 0) </para>
         /// </summary>
-        /// <param name="newBitmap"></param>
-        /// <param name="FilePathInfo"></param>
         private static BaseImageInfo CreateNewObjectInfo(string filePath)
         {
             C.OBJ objType = C.OBJ.NONE;
+            // TODO - match trigger "m" image to piece for displaying the trigger area
             Rectangle triggerRect = new Rectangle(0, 0, 1, 1);
-            C.Resize resizeMode = C.Resize.None;
-            bool isDeprecated = false;
-            bool? cropOverride = null;
-            int defaultWidth = 0;
-            int defaultHeight = 0;
-            int markerX = 0, markerY = 0;
+            int frameCount = 0;
 
-            int[] nineSliceSizes = new int[4]; // Not appropriate to use a Rectangle yet. File contains the width/height of the slice,
-                                               // not a rectangle of the center; and we don't know the width of the object yet. Order
-                                               // in the array is Left, Top, Right, Bottom.
+            string styleName = Path.GetFileName(Path.GetDirectoryName(filePath));
+            string styleTheme = C.AppPathThemeInfo(styleName);
 
-            List<LoadStyleAnimData> animData = new List<LoadStyleAnimData>();
-            LoadStyleAnimData primaryAnim = new LoadStyleAnimData()
-            {
-                Frame = -1,
-                ZIndex = 1
-            };
+            int tileIndex = -1;
+            string fileName = Path.GetFileNameWithoutExtension(filePath);
+            int underscoreIndex = fileName.LastIndexOf('_');
+            if (underscoreIndex >= 0)
+                int.TryParse(fileName.Substring(underscoreIndex + 1), out tileIndex);
 
-            animData.Add(primaryAnim);
-
-            FileParser parser = null;
-            try
-            {
-                parser = new FileParser(filePath + ".nxmo");
-
-                List<FileLine> fileLineList;
-                while ((fileLineList = parser.GetNextLines()) != null)
-                {
-                    System.Diagnostics.Debug.Assert(fileLineList.Count > 0, "FileParser returned empty list.");
-
-                    FileLine line = fileLineList[0];
-                    switch (line.Key)
-                    {
-                        case "TRIGGER_X":
-                            triggerRect.X = line.Value;
-                            break;
-                        case "TRIGGER_Y":
-                            triggerRect.Y = line.Value;
-                            break;
-                        case "TRIGGER_WIDTH":
-                            triggerRect.Width = line.Value;
-                            break;
-                        case "TRIGGER_HEIGHT":
-                            triggerRect.Height = line.Value;
-                            break;
-                        case "RESIZE_VERTICAL":
-                            resizeMode = resizeMode.In(C.Resize.Horiz, C.Resize.Both) ? C.Resize.Both : C.Resize.Vert;
-                            break;
-                        case "RESIZE_HORIZONTAL":
-                            resizeMode = resizeMode.In(C.Resize.Vert, C.Resize.Both) ? C.Resize.Both : C.Resize.Horiz;
-                            break;
-                        case "RESIZE_BOTH":
-                            resizeMode = C.Resize.Both;
-                            break;
-                        case "DEFAULT_WIDTH":
-                            defaultWidth = line.Value;
-                            break;
-                        case "DEFAULT_HEIGHT":
-                            defaultHeight = line.Value;
-                            break;
-                        case "MARKER_X":
-                            markerX = line.Value;
-                            break;
-                        case "MARKER_Y":
-                            markerY = line.Value;
-                            break;
-                        case "DEPRECATED":
-                            isDeprecated = true;
-                            break;
-                        case "EDITOR_CROP":
-                            if (bool.TryParse(line.Text, out bool localCrop))
-                                cropOverride = localCrop;
-                            break;
-
-                        case "EFFECT":
-                            switch (line.Text.Trim().ToUpperInvariant())
-                            {
-                                case "ENTRANCE":
-                                    objType = C.OBJ.HATCH;
-                                    break;
-                                case "EXIT":
-                                    objType = C.OBJ.EXIT;
-                                    break;
-                                case "TRAP":
-                                    objType = C.OBJ.TRAP;
-                                    break;
-                                case "WATER":
-                                    objType = C.OBJ.WATER;
-                                    break;
-                                case "FIRE":
-                                    objType = C.OBJ.FIRE;
-                                    break;
-                                case "ONEWAYRIGHT":
-                                case "ONEWAYLEFT":
-                                case "ONEWAYDOWN":
-                                case "ONEWAYUP":
-                                    objType = C.OBJ.ONE_WAY_WALL;
-                                    break;
-                                case "PAINT":
-                                    objType = C.OBJ.PAINT;
-                                    break;
-                                case "DECORATION":
-                                    objType = C.OBJ.DECORATION;
-                                    break;
-                            }
-                            break;
-
-                        case "PRIMARY_ANIMATION":
-                            foreach (var fileLine in fileLineList)
-                            {
-                                switch (fileLine.Key)
-                                {
-                                    case "NAME":
-                                        primaryAnim.Name = fileLine.Text;
-                                        break;
-                                    case "FRAMES":
-                                        primaryAnim.Frames = fileLine.Value;
-                                        break;
-                                    case "HORIZONTAL_STRIP":
-                                        primaryAnim.HorizontalStrip = true;
-                                        break;
-                                    case "Z_INDEX":
-                                        primaryAnim.ZIndex = fileLine.Value;
-                                        break;
-                                    case "INITIAL_FRAME":
-                                        primaryAnim.Frame = Math.Max(0, fileLine.Value);
-                                        break;
-                                    case "OFFSET_X":
-                                        primaryAnim.OffsetX = fileLine.Value;
-                                        break;
-                                    case "OFFSET_Y":
-                                        primaryAnim.OffsetY = fileLine.Value;
-                                        break;
-                                    case "HIDDEN":
-                                        primaryAnim.Hidden = true;
-                                        break;
-                                    case "NINE_SLICE_LEFT":
-                                        nineSliceSizes[0] = fileLine.Value;
-                                        break;
-                                    case "NINE_SLICE_TOP":
-                                        nineSliceSizes[1] = fileLine.Value;
-                                        break;
-                                    case "NINE_SLICE_RIGHT":
-                                        nineSliceSizes[2] = fileLine.Value;
-                                        break;
-                                    case "NINE_SLICE_BOTTOM":
-                                        nineSliceSizes[3] = fileLine.Value;
-                                        break;
-                                    case "WIDTH":
-                                        primaryAnim.Width = fileLine.Value;
-                                        break;
-                                    case "HEIGHT":
-                                        primaryAnim.Height = fileLine.Value;
-                                        break;
-                                }
-                            }
-                            break;
-
-                        case "ANIMATION":
-                            LoadStyleAnimData newAnim = new LoadStyleAnimData();
-
-                            bool editorHide = false;
-
-                            foreach (var fileLine in fileLineList)
-                            {
-                                switch (fileLine.Key)
-                                {
-                                    case "NAME":
-                                        newAnim.Name = fileLine.Text;
-                                        break;
-                                    case "FRAMES":
-                                        newAnim.Frames = fileLine.Value;
-                                        break;
-                                    case "HORIZONTAL_STRIP":
-                                        newAnim.HorizontalStrip = true;
-                                        break;
-                                    case "Z_INDEX":
-                                        newAnim.ZIndex = fileLine.Value;
-                                        break;
-                                    case "INITIAL_FRAME":
-                                        newAnim.Frame = Math.Max(0, fileLine.Value);
-                                        break;
-                                    case "OFFSET_X":
-                                        newAnim.OffsetX = fileLine.Value;
-                                        break;
-                                    case "OFFSET_Y":
-                                        newAnim.OffsetY = fileLine.Value;
-                                        break;
-                                    case "HIDE":
-                                        newAnim.Hidden = true;
-                                        break;
-                                    case "WIDTH":
-                                        newAnim.Width = fileLine.Value;
-                                        break;
-                                    case "HEIGHT":
-                                        newAnim.Height = fileLine.Value;
-                                        break;
-                                    case "EDITOR_HIDE":
-                                        editorHide = true;
-                                        break;
-                                }
-                            }
-
-                            if (!editorHide)
-                                animData.Add(newAnim);
-                            break;
-                    }
-                }
-            }
-            catch (Exception Ex)
-            {
-                Utility.LogException(Ex);
-                MessageBox.Show(Ex.Message, "File corrupt");
-            }
-            finally
-            {
-                parser?.DisposeStreamReader();
-            }
-
-            bool disableCrop;
-            if (cropOverride.HasValue)
-                disableCrop = !cropOverride.Value;
-            else
-                disableCrop = (resizeMode != C.Resize.None) || ((triggerRect.Width == primaryAnim.Width) && (triggerRect.Height == primaryAnim.Height));
-
-            Bitmap newBitmap = CreateCompositeImage(filePath, animData, primaryAnim,
-              out int marginLeft, out int marginTop, out int marginRight, out int marginBottom,
-              disableCrop);
-
-            // Convert the nine-slice sizes to a nine-slice center rectangle
-            Rectangle? nineSliceRect;
-            if (nineSliceSizes.Any(size => size != 0))
-            {
-                int oneFrameWidth = primaryAnim.Width;
-                int oneFrameHeight = primaryAnim.Height;
-
-                nineSliceRect = new Rectangle(nineSliceSizes[0] + marginLeft, nineSliceSizes[1] + marginTop,
-                                              oneFrameWidth - nineSliceSizes[0] - nineSliceSizes[2] - marginRight,
-                                              oneFrameHeight - nineSliceSizes[1] - nineSliceSizes[3] - marginBottom);
-            }
-            else
-                nineSliceRect = null;
-
-            triggerRect.Offset(marginLeft, marginTop);
-
-            return new BaseImageInfo(newBitmap, objType, primaryAnim.Frames, triggerRect, resizeMode,
-              marginLeft, marginTop, marginRight, marginBottom, isDeprecated, nineSliceRect,
-              defaultWidth, defaultHeight, markerX, markerY);
-        }
-
-        public static Bitmap CreateCompositeImage(string filePath, List<LoadStyleAnimData> anims, LoadStyleAnimData primaryAnim,
-          out int marginLeft, out int marginTop, out int marginRight, out int marginBottom, bool forceOriginalSize = false)
-        {
-            int minX = 0;
-            int minY = 0;
-            int maxX = 0;
-            int maxY = 0;
-
-            var localAnims = anims.OrderBy(anim => anim.ZIndex);
-
-            foreach (var anim in localAnims)
-            {
-                if (anim.Name?.ToUpperInvariant() == "*PICKUP")
-                {
-                    anim.Image = Properties.Resources.PickupAnim;
-                    anim.Frames = 54;
-
-                    Bitmap eraseImage;
-                    var eraseAnim = localAnims.FirstOrDefault(item => item.Name == "skill_mask");
-                    if (eraseAnim != null)
-                    {
-                        eraseAnim.Image = Image(filePath + "_skill_mask");
-                        eraseImage = eraseAnim.Image;
-                    }
-                    else
-                    {
-                        eraseImage = new Bitmap(24, 48);
-                        eraseImage.DrawOnFilledRectangles(new List<Rectangle>() { new Rectangle(0, 0, 24, 24) }, Color.FromArgb(255, 0, 0, 0));
-                    }
-
-                    for (int n = 0; n < anim.Frames; n++)
-                        anim.Image.DrawOn(eraseAnim.Image.Crop(new Rectangle(0, (n % 2) * 24, 24, 24)), new Point(0, n * 24), C.CustDrawMode.Erase);
-                }
-                else if (anim.Name?.ToUpperInvariant() == "*BLANK")
-                {
-                    anim.Frames = Math.Max(anim.Frames, 1);
-                    anim.Width = Math.Max(anim.Width, 1);
-                    anim.Height = Math.Max(anim.Height, 1);
-                    anim.Image = new Bitmap(anim.Width, anim.Height * anim.Frames);
-                    anim.HorizontalStrip = false;
-                }
-                else if (anim.Image == null)
-                {
-                    anim.Image = Image(filePath + (string.IsNullOrEmpty(anim.Name) ? "" : "_" + anim.Name));
-                }
-
-                if (anim.HorizontalStrip)
-                {
-                    anim.Width = anim.Image.Width / anim.Frames;
-                    anim.Height = anim.Image.Height;
-                }
-                else
-                {
-                    anim.Width = anim.Image.Width;
-                    anim.Height = anim.Image.Height / anim.Frames;
-                }
-
-                minX = Math.Min(minX, anim.OffsetX);
-                minY = Math.Min(minY, anim.OffsetY);
-                maxX = Math.Max(maxX, anim.OffsetX + anim.Width);
-                maxY = Math.Max(maxY, anim.OffsetY + anim.Height);
-            }
-
-            marginLeft = -minX;
-            marginTop = -minY;
-            marginRight = maxX - primaryAnim.Width;
-            marginBottom = maxY - primaryAnim.Height;
-
-            Bitmap result = new Bitmap(maxX - minX, (maxY - minY) * primaryAnim.Frames);
-
-            for (int n = 0; n < primaryAnim.Frames; n++)
-            {
-                foreach (var anim in localAnims)
-                {
-                    if (anim.Hidden)
-                        continue;
-
-                    Rectangle srcRect = new Rectangle(0, 0, anim.Width, anim.Height);
-                    int doFrame = anim.Frame >= 0 ? anim.Frame : n;
-
-                    if (anim.HorizontalStrip)
-                        srcRect.X = anim.Width * doFrame;
-                    else
-                        srcRect.Y = anim.Height * doFrame;
-
-                    result.DrawOn(anim.Image.Crop(srcRect), new Point(anim.OffsetX + marginLeft, anim.OffsetY + marginTop + ((maxY - minY) * n)));
-                }
-            }
-
-            int minSolidX;
-            int minSolidY;
-            int maxSolidX;
-            int maxSolidY;
-
-            if (forceOriginalSize)
-            {
-                minSolidX = -minX + primaryAnim.OffsetX;
-                minSolidY = -minY + primaryAnim.OffsetY;
-                maxSolidX = minSolidX + primaryAnim.Width - 1;
-                maxSolidY = minSolidY + primaryAnim.Height - 1;
-            }
-            else
-            {
-                minSolidX = result.Width - 1;
-                minSolidY = result.Height - 1;
-                maxSolidX = 0;
-                maxSolidY = 0;
-
-                for (int y = 0; y < result.Height / primaryAnim.Frames; y++)
-                    for (int x = 0; x < result.Width; x++)
-                        for (int f = 0; f < primaryAnim.Frames; f++)
-                            if (result.GetPixel(x, y + (f * result.Height / primaryAnim.Frames)).A > 0)
-                            {
-                                minSolidX = Math.Min(minSolidX, x);
-                                minSolidY = Math.Min(minSolidY, y);
-                                maxSolidX = Math.Max(maxSolidX, x);
-                                maxSolidY = Math.Max(maxSolidY, y);
-                            }
-
-
-                while (maxSolidX - minSolidX < 7)
-                {
-                    maxSolidX++;
-                    minSolidX--;
-                }
-
-                while (maxSolidY - minSolidY < 7)
-                {
-                    maxSolidY++;
-                    minSolidY--;
-                }
-
-                minSolidX = Math.Max(minSolidX, 0);
-                minSolidY = Math.Max(minSolidY, 0);
-                maxSolidX = Math.Min(maxSolidX, result.Width - 1);
-                maxSolidY = Math.Min(maxSolidY, (result.Height / primaryAnim.Frames) - 1);
-            }
-
-            marginLeft -= minSolidX;
-            marginTop -= minSolidY;
-            marginRight -= result.Width - maxSolidX - 1;
-            marginBottom -= (result.Height / primaryAnim.Frames) - maxSolidY - 1;
-
-            Bitmap oldResult = result;
-            result = new Bitmap(maxSolidX - minSolidX + 1, (maxSolidY - minSolidY + 1) * primaryAnim.Frames);
-
-            for (int i = 0; i < primaryAnim.Frames; i++)
-            {
-                result.DrawOn(oldResult.Crop(new Rectangle(
-                    minSolidX,
-                    minSolidY + (i * oldResult.Height / primaryAnim.Frames),
-                    maxSolidX - minSolidX + 1,
-                    maxSolidY - minSolidY + 1
-                    )),
-                    new Point(0, i * (result.Height / primaryAnim.Frames)));
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Reads further terrain infos from a .nxtp file. Default values:
-        /// <para> IsSteel = false </para>
-        /// </summary>
-        /// <param name="newBitmap"></param>
-        /// <param name="FilePathInfo"></param>
-        private static BaseImageInfo CreateNewTerrainInfo(string filePath)
-        {
-            bool IsSteel = false;
-            bool isDeprecated = false;
-            C.Resize Resize = C.Resize.None;
-            int defaultWidth = 0;
-            int defaultHeight = 0;
-            int nineSliceLeft = 0;
-            int nineSliceTop = 0;
-            int nineSliceRight = 0;
-            int nineSliceBottom = 0;
-
-            if (File.Exists(filePath + ".nxmt"))
+            if (tileIndex >= 0 && File.Exists(styleTheme))
             {
                 FileParser parser = null;
                 try
                 {
-                    parser = new FileParser(filePath + ".nxmt");
+                    parser = new FileParser(styleTheme);
+                    List<FileLine> fileLineList;
+                    while ((fileLineList = parser.GetNextLines()) != null)
+                    {
+                        System.Diagnostics.Debug.Assert(fileLineList.Count > 0, "FileParser returned empty list.");
+
+                        FileLine line = fileLineList[0];
+                        string key = line.Key.Trim();
+
+                        // Parse frames_N
+                        if (key.Equals($"FRAMES_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                        {
+                            string valueStr = line.Text.TrimStart('=', ' ').Trim();
+                            if (int.TryParse(valueStr, out int parsedFrames))
+                            {
+                                frameCount = parsedFrames;
+                            }
+                            continue; // continue parsing in case TYPE_N appears later
+                        }
+
+                        // Parse TYPE_N
+                        if (key.Equals($"TYPE_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                        {
+                            string valueStr = line.Text.TrimStart('=', ' ').Trim();
+                            if (int.TryParse(valueStr, out int parsedType))
+                            {
+                                switch (parsedType)
+                                {
+                                    case 0:
+                                        objType = C.OBJ.DECORATION;
+                                        break;
+                                    case 1:
+                                    case 2:
+                                        objType = C.OBJ.FORCE_FIELD;
+                                        break;
+                                    case 3:
+                                    case 4:
+                                        objType = C.OBJ.ONE_WAY_WALL;
+                                        break;
+                                    case 5:
+                                        objType = C.OBJ.WATER;
+                                        break;
+                                    case 6:
+                                        objType = C.OBJ.TRAP;
+                                        break;
+                                    case 7:
+                                        objType = C.OBJ.FIRE;
+                                        break;
+                                    case 8:
+                                        objType = C.OBJ.EXIT;
+                                        break;
+                                    case 9:
+                                        objType = C.OBJ.STEEL;
+                                        break;
+                                    case 10:
+                                        objType = C.OBJ.HATCH;
+                                        break;
+                                }
+                            }
+                            continue;
+                        }
+                        // Break early if we have all values
+                        if (frameCount >= 1 && objType != C.OBJ.NONE)
+                            break;
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Utility.LogException(Ex);
+                    MessageBox.Show(Ex.Message, "File corrupt");
+                }
+                finally
+                {
+                    parser?.DisposeStreamReader();
+                }
+            }
+            Bitmap newBitmap = Image(filePath);
+            return new BaseImageInfo(newBitmap, objType, frameCount, triggerRect);
+        }
+
+        private static BaseImageInfo CreateNewTerrainInfo(string filePath)
+        {
+            bool IsSteel = false;
+
+            string styleName = Path.GetFileName(Path.GetDirectoryName(filePath));
+            string styleTheme = C.AppPathThemeInfo(styleName);
+
+            int tileIndex = -1;
+            string fileName = Path.GetFileNameWithoutExtension(filePath);
+            int underscoreIndex = fileName.LastIndexOf('_');
+            if (underscoreIndex >= 0)
+                int.TryParse(fileName.Substring(underscoreIndex + 1), out tileIndex);
+
+            if (tileIndex >= 0 && File.Exists(styleTheme))
+            {
+                FileParser parser = null;
+                try
+                {
+                    parser = new FileParser(styleTheme);
 
                     List<FileLine> fileLineList;
                     while ((fileLineList = parser.GetNextLines()) != null)
@@ -757,42 +436,21 @@ namespace NLEditor
                         System.Diagnostics.Debug.Assert(fileLineList.Count > 0, "FileParser returned empty list.");
 
                         FileLine line = fileLineList[0];
-                        switch (line.Key)
+                        if (line.Key.Trim().Equals("steelTiles", StringComparison.OrdinalIgnoreCase))
                         {
-                            case "STEEL":
-                                IsSteel = true;
-                                break;
-                            case "RESIZE_HORIZONTAL":
-                                Resize = (Resize == C.Resize.None || Resize == C.Resize.Horiz) ? C.Resize.Horiz : C.Resize.Both;
-                                break;
-                            case "RESIZE_VERTICAL":
-                                Resize = (Resize == C.Resize.None || Resize == C.Resize.Vert) ? C.Resize.Vert : C.Resize.Both;
-                                break;
-                            case "RESIZE_BOTH":
-                                Resize = C.Resize.Both;
-                                break;
-                            case "DEFAULT_WIDTH":
-                                defaultWidth = line.Value;
-                                break;
-                            case "DEFAULT_HEIGHT":
-                                defaultHeight = line.Value;
-                                break;
-                            case "NINE_SLICE_LEFT":
-                                nineSliceLeft = line.Value;
-                                break;
-                            case "NINE_SLICE_TOP":
-                                nineSliceTop = line.Value;
-                                break;
-                            case "NINE_SLICE_RIGHT":
-                                nineSliceRight = line.Value;
-                                break;
-                            case "NINE_SLICE_BOTTOM":
-                                nineSliceBottom = line.Value;
-                                break;
-                            case "DEPRECATED":
-                                isDeprecated = true;
-                                break;
+                            string values = line.Text.TrimStart('=', ' ').Trim();
+                            string[] parts = values.Split(',');
+                            foreach (string part in parts)
+                            {
+                                if (int.TryParse(part.Trim(), out int steelIndex) && steelIndex == tileIndex)
+                                {
+                                    IsSteel = true;
+                                    break;
+                                }
+                            }
                         }
+                        if (IsSteel)
+                            break;
                     }
                 }
                 catch (Exception Ex)
@@ -807,10 +465,7 @@ namespace NLEditor
             }
 
             Bitmap newBitmap = Image(filePath);
-
-            Rectangle nineSliceRect = new Rectangle(nineSliceLeft, nineSliceTop, newBitmap.Width - nineSliceLeft - nineSliceRight, newBitmap.Height - nineSliceTop - nineSliceBottom);
-
-            return new BaseImageInfo(newBitmap, IsSteel, Resize, isDeprecated, nineSliceRect, defaultWidth, defaultHeight);
+            return new BaseImageInfo(newBitmap, IsSteel);
         }
     }
 }

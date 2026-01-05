@@ -14,10 +14,9 @@ namespace NLEditor
         /// </summary>
         /// <param name="newImage"></param>
         /// <param name="isSteel"></param>
-        public BaseImageInfo(Bitmap newImage, bool isSteel = false, C.Resize resizeMode = C.Resize.None,
-            bool isDeprecated = false, Rectangle? nineSlicingArea = null, int defaultWidth = 0, int defaultHeight = 0)
-            : this(newImage, isSteel ? C.OBJ.STEEL : C.OBJ.TERRAIN, 1, new Rectangle(0, 0, 0, 0), resizeMode,
-               0, 0, 0, 0, isDeprecated, nineSlicingArea, defaultWidth, defaultHeight)
+        public BaseImageInfo(Bitmap newImage, bool isSteel = false, bool isDeprecated = false)
+            : this(newImage, isSteel ? C.OBJ.STEEL : C.OBJ.TERRAIN, 1, new Rectangle(0, 0, 0, 0),
+               0, 0, 0, 0)
         {
             // nothing more
         }
@@ -31,24 +30,15 @@ namespace NLEditor
         /// <param name="isVert"></param>
         /// <param name="triggerRect"></param>
         public BaseImageInfo(Bitmap newImage, C.OBJ objType, int numFrames, Rectangle triggerRect,
-          C.Resize resizeMode, int leftMargin = 0, int topMargin = 0, int rightMargin = 0, int bottomMargin = 0,
-          bool isDeprecated = false, Rectangle? nineSlicingArea = null, int defaultWidth = 0, int defaultHeight = 0,
-            int markerX = 0, int markerY = 0)
+            int leftMargin = 0, int topMargin = 0, int rightMargin = 0, int bottomMargin = 0)
         {
             this.images = new Dictionary<RotateFlipType, List<Bitmap>>();
             this.images[RotateFlipType.RotateNoneFlipNone] = SeparateFrames(newImage, numFrames, true);
             this.Width = this.baseImages[0].Width;
             this.Height = this.baseImages[0].Height;
-            this.DefaultWidth = defaultWidth;
-            this.DefaultHeight = defaultHeight;
-            this.MarkerX = markerX;
-            this.MarkerY = markerY;
             this.ObjectType = objType;
             this.TriggerRect = triggerRect;
-            this.ResizeMode = resizeMode;
             this.PrimaryImageLocation = new Rectangle(leftMargin, topMargin, this.Width - leftMargin - rightMargin, this.Height - topMargin - bottomMargin);
-            this.NineSlicingArea = nineSlicingArea;
-            this.Deprecated = isDeprecated;
         }
 
         Dictionary<RotateFlipType, List<Bitmap>> images;
@@ -112,7 +102,6 @@ namespace NLEditor
         public int MarkerY { get; private set; }
         public C.OBJ ObjectType { get; private set; }
         public Rectangle TriggerRect { get; private set; }
-        public C.Resize ResizeMode { get; private set; }
         public Rectangle PrimaryImageLocation { get; private set; }
         public Rectangle? NineSlicingArea { get; private set; }
         public bool Deprecated { get; private set; }
@@ -243,43 +232,8 @@ namespace NLEditor
                 // Size
                 string pieceSize = Width.ToString() + " x " + Height.ToString();
 
-                // Resize type
-                Image resizeIcon = null;
-
-                if (ResizeMode == C.Resize.Both)
-                    resizeIcon = Properties.Resources.ArrowFourWay;
-                if (ResizeMode == C.Resize.Horiz)
-                    resizeIcon = Properties.Resources.ArrowHoriz;
-                if (ResizeMode == C.Resize.Vert)
-                    resizeIcon = Properties.Resources.ArrowVert;
-
-                if (resizeIcon != null)
-                {
-                    using (Graphics g = Graphics.FromImage(newImage))
-                    {
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-                        int iconX = 4;
-                        int iconY = 4;
-
-                        g.DrawImage(resizeIcon, iconX, iconY, 17, 17);
-                    }
-                }
-
-                // Nine-Sliced?
-                string nineSlice = string.Empty;
-
-                var nineS = NineSlicingArea;
-                if (nineS.HasValue)
-                {
-                    if (nineS.Value.Width > 0 && nineS.Value.Width < Width ||
-                        nineS.Value.Height > 0 && nineS.Value.Height < Height)
-                        nineSlice = "9S";
-                }
-
                 DrawDataString(newImage, pieceDesc, 0, 0, C.NLColors[C.NLColor.Text], 8);
                 DrawDataString(newImage, pieceSize, 0, 64, Color.SkyBlue, 8);
-                DrawDataString(newImage, nineSlice, 44, 64, Color.MediumSpringGreen, 8);
 
                 imagesWithDescriptionAndData.Add(newImage);
             }
@@ -305,43 +259,8 @@ namespace NLEditor
                 // Size
                 string pieceSize = Width.ToString() + " x " + Height.ToString();
 
-                // Resize type
-                Image resizeIcon = null;
-
-                if (ResizeMode == C.Resize.Both)
-                    resizeIcon = Properties.Resources.ArrowFourWay;
-                if (ResizeMode == C.Resize.Horiz)
-                    resizeIcon = Properties.Resources.ArrowHoriz;
-                if (ResizeMode == C.Resize.Vert)
-                    resizeIcon = Properties.Resources.ArrowVert;
-
-                if (resizeIcon != null)
-                {
-                    using (Graphics g = Graphics.FromImage(newImage))
-                    {
-                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-                        int iconX = 4;
-                        int iconY = 4;
-
-                        g.DrawImage(resizeIcon, iconX, iconY, 17, 17);
-                    }
-                }
-
-                // Nine-Sliced?
-                string nineSlice = string.Empty;
-
-                var nineS = NineSlicingArea;
-                if (nineS.HasValue)
-                {
-                    if (nineS.Value.Width > 0 && nineS.Value.Width < Width ||
-                        nineS.Value.Height > 0 && nineS.Value.Height < Height)
-                        nineSlice = "9S";
-                }
-
                 DrawDataString(newImage, pieceDesc, 0, 0, C.NLColors[C.NLColor.Text], 8);
                 DrawDataString(newImage, pieceSize, 0, 64, Color.SkyBlue, 8);
-                DrawDataString(newImage, nineSlice, 44, 64, Color.MediumSpringGreen, 8);
 
                 imagesWithNameAndData.Add(newImage);
             }
@@ -705,22 +624,6 @@ namespace NLEditor
             return imageDict[imageKey].TriggerRect;
         }
 
-        /// <summary>
-        /// Returns the resize mode of the piece corresponding to the key, or C.Resize.None if image cannot be found. 
-        /// </summary>
-        /// <param name="imageKey"></param>
-        public static C.Resize GetResizeMode(string imageKey)
-        {
-            if (!imageDict.ContainsKey(imageKey))
-            {
-                bool success = AddNewImage(imageKey);
-                if (!success)
-                    return C.Resize.None;
-            }
-
-            return imageDict[imageKey].ResizeMode;
-        }
-
         public static bool GetDeprecated(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -731,64 +634,6 @@ namespace NLEditor
             }
 
             return imageDict[imageKey].Deprecated;
-        }
-
-        public static bool IsNineSliced(string imageKey)
-        {
-            var nineSliceArea = imageDict[imageKey].NineSlicingArea;
-
-            if (!nineSliceArea.HasValue)
-                return false;
-
-            var nineSliceWidth = nineSliceArea.Value.Width;
-            var nineSliceHeight = nineSliceArea.Value.Height;
-
-            var pieceWidth = imageDict[imageKey].Width;
-            var pieceHeight = imageDict[imageKey].Height;
-
-            return nineSliceWidth > 0 && nineSliceWidth < pieceWidth ||
-                   nineSliceHeight > 0 && nineSliceHeight < pieceHeight;
-        }
-
-        public static Rectangle? GetNineSliceArea(string imageKey, RotateFlipType rotFlipType = RotateFlipType.RotateNoneFlipNone)
-        {
-            if (!imageDict.ContainsKey(imageKey))
-            {
-                bool success = AddNewImage(imageKey);
-                if (!success)
-                    return null;
-            }
-
-            Rectangle? baseArea = imageDict[imageKey].NineSlicingArea;
-            if (baseArea == null)
-                return null;
-
-            int height = imageDict[imageKey].Height;
-            int width = imageDict[imageKey].Width;
-            Rectangle area = baseArea.Value;
-
-            // Apply rotation
-            switch (rotFlipType)
-            {
-                case RotateFlipType.RotateNoneFlipNone:
-                    return baseArea;
-                case RotateFlipType.RotateNoneFlipX:
-                    return new Rectangle(width - area.Right, area.Top, area.Width, area.Height);
-                case RotateFlipType.RotateNoneFlipY:
-                    return new Rectangle(area.Left, height - area.Bottom, area.Width, area.Height);
-                case RotateFlipType.RotateNoneFlipXY:
-                    return new Rectangle(area.Left, height - area.Bottom, area.Width, area.Height);
-                case RotateFlipType.Rotate90FlipNone:
-                    return new Rectangle(height - area.Bottom, area.Left, area.Height, area.Width);
-                case RotateFlipType.Rotate90FlipX:
-                    return new Rectangle(area.Top, area.Left, area.Height, area.Width);
-                case RotateFlipType.Rotate90FlipY:
-                    return new Rectangle(height - area.Bottom, width - area.Right, area.Height, area.Width);
-                case RotateFlipType.Rotate90FlipXY:
-                    return new Rectangle(area.Top, width - area.Right, area.Height, area.Width);
-                default:
-                    return null;
-            }
         }
 
         /// <summary>
@@ -817,14 +662,14 @@ namespace NLEditor
         /// <param name="image"></param>
         /// <param name="objType"></param>
         /// <param name="triggerRect"></param>
-        public static void AddNewImage(string imageKey, Bitmap image, C.OBJ objType, Rectangle triggerRect, C.Resize resizeMode)
+        public static void AddNewImage(string imageKey, Bitmap image, C.OBJ objType, Rectangle triggerRect)
         {
             if (imageDict.ContainsKey(imageKey))
                 return;
 
             try
             {
-                imageDict[imageKey] = new BaseImageInfo(image, objType, 1, triggerRect, resizeMode);
+                imageDict[imageKey] = new BaseImageInfo(image, objType, 1, triggerRect);
             }
             catch (Exception Ex)
             {

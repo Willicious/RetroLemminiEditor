@@ -608,14 +608,6 @@ namespace NLEditor
             textFile.WriteLine("   X " + posX.ToString());
             textFile.WriteLine("   Y " + posY.ToString());
 
-            if (gadget.MayResizeHoriz())
-            {
-                textFile.WriteLine("   WIDTH " + gadget.Width.ToString());
-            }
-            if (gadget.MayResizeVert())
-            {
-                textFile.WriteLine("   HEIGHT " + gadget.Height.ToString());
-            }
             if (gadget.IsNoOverwrite)
             {
                 textFile.WriteLine("   NO_OVERWRITE");
@@ -693,14 +685,6 @@ namespace NLEditor
             if (terrain.IsOneWay && !writingSketch)
             {
                 textFile.WriteLine(prefix + "   ONE_WAY");
-            }
-            if (terrain.MayResizeHoriz() && !writingSketch)
-            {
-                textFile.WriteLine(prefix + "   WIDTH " + terrain.Width.ToString());
-            }
-            if (terrain.MayResizeVert() && !writingSketch)
-            {
-                textFile.WriteLine(prefix + "   HEIGHT " + terrain.Height.ToString());
             }
             textFile.WriteLine(prefix + " $END");
             textFile.WriteLine(prefix + " ");

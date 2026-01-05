@@ -76,22 +76,6 @@ namespace NLEditor
         public virtual Bitmap Image => ImageLibrary.GetImage(Key, GetRotateFlipType(), GetFrameIndex());
         public Rectangle ImageRectangle => new Rectangle(PosX, PosY, Width, Height);
         public C.OBJ ObjType => ImageLibrary.GetObjType(Key);
-        protected C.Resize ResizeMode => ImageLibrary.GetResizeMode(Key);
-        public bool MayResizeHoriz()
-        {
-            C.Resize resizeMode = ResizeMode;
-            return resizeMode == C.Resize.Both
-               || (resizeMode == C.Resize.Horiz && Rotation % 2 == 0)
-               || (resizeMode == C.Resize.Vert && Rotation % 2 == 1);
-        }
-        public bool MayResizeVert()
-        {
-            C.Resize resizeMode = ResizeMode;
-            return resizeMode == C.Resize.Both
-               || (resizeMode == C.Resize.Vert && Rotation % 2 == 0)
-               || (resizeMode == C.Resize.Horiz && Rotation % 2 == 1);
-        }
-
         public bool IsSelected { get; set; }
 
         /// <summary>

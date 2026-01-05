@@ -153,19 +153,7 @@ namespace NLEditor
             }
             if (pieceKey != null && ImageLibrary.GetWidth(pieceKey) > 0 && ImageLibrary.GetHeight(pieceKey) > 0)
             {
-                toolTipText += $" ({ImageLibrary.GetWidth(pieceKey)} x {ImageLibrary.GetHeight(pieceKey)}";
-
-                if (ImageLibrary.GetResizeMode(pieceKey) != C.Resize.None)
-                {
-                    toolTipText += $", Resize: {ImageLibrary.GetResizeMode(pieceKey)}";
-                }
-
-                if (ImageLibrary.IsNineSliced(pieceKey))
-                {
-                    toolTipText += ", 9S";
-                }
-
-                toolTipText += ")";
+                toolTipText += $" ({ImageLibrary.GetWidth(pieceKey)} x {ImageLibrary.GetHeight(pieceKey)})";
             }
 
             toolTipPieces.SetToolTip(picPiece, toolTipText);

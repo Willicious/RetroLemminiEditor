@@ -15,9 +15,6 @@ namespace NLEditor
             IsErase = false;
             IsNoOverwrite = false;
             IsOneWay = true;
-
-            SpecWidth = Utility.EvaluateResizable(0, DefaultWidth, base.Width, MayResizeHoriz());
-            SpecHeight = Utility.EvaluateResizable(0, DefaultHeight, base.Height, MayResizeVert());
         }
 
         public TerrainPiece(string key, Point pos, int rotation, bool isInvert, bool isErase, bool isNoOv, bool isOneWay, int specWidth, int specHeight)
@@ -26,17 +23,12 @@ namespace NLEditor
             IsErase = isErase;
             IsNoOverwrite = isNoOv;
             IsOneWay = isOneWay;
-            SpecWidth = Utility.EvaluateResizable(specWidth, DefaultWidth, base.Width, MayResizeHoriz());
-            SpecHeight = Utility.EvaluateResizable(specHeight, DefaultHeight, base.Height, MayResizeVert());
         }
 
         public bool IsErase { get; set; }
         public bool IsNoOverwrite { get; set; }
         public bool IsOneWay { get; set; }
         public bool IsSteel => ObjType == C.OBJ.STEEL;
-
-        public override int Width => Utility.EvaluateResizable(SpecWidth, DefaultWidth, base.Width, MayResizeHoriz());
-        public override int Height => Utility.EvaluateResizable(SpecHeight, DefaultHeight, base.Height, MayResizeVert());
 
         public override LevelPiece Clone()
         {
@@ -92,25 +84,13 @@ namespace NLEditor
             {
                 Bitmap image = base.Image;
 
-                if (ResizeMode == C.Resize.None)
-                {
-                    return image;
-                }
-                else if (Width < 1 || Height < 1)
+                if (Width < 1 || Height < 1)
                 {
                     return new Bitmap(1, 1); // should never happen
                 }
                 else
                 {
-                    Rectangle? nineSliceArea = ImageLibrary.GetNineSliceArea(Key, GetRotateFlipType());
-                    if (nineSliceArea == null)
-                    {
-                        return image.PaveArea(new Rectangle(0, 0, Width, Height));
-                    }
-                    else
-                    {
-                        return image.NineSliceArea(new Rectangle(0, 0, Width, Height), nineSliceArea.Value);
-                    }
+                    return image.PaveArea(new Rectangle(0, 0, Width, Height));
                 }
             }
         }

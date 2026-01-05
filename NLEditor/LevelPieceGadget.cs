@@ -16,8 +16,6 @@ namespace NLEditor
         {
             IsNoOverwrite = !ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT, C.OBJ.LEMMING);
             IsOnlyOnTerrain = (ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
-            SpecWidth = Utility.EvaluateResizable(0, DefaultWidth, base.Width, MayResizeHoriz());
-            SpecHeight = Utility.EvaluateResizable(0, DefaultHeight, base.Height, MayResizeVert());
         }
 
         public GadgetPiece(string key, Point pos,
@@ -28,8 +26,6 @@ namespace NLEditor
         {
             IsNoOverwrite = isNoOverwrite;
             IsOnlyOnTerrain = isOnlyOnTerrain;
-            SpecWidth = Utility.EvaluateResizable(specWidth, DefaultWidth, base.Width, MayResizeHoriz());
-            SpecHeight = Utility.EvaluateResizable(specHeight, DefaultHeight, base.Height, MayResizeVert());
         }
 
         public bool IsNoOverwrite { get; set; }
@@ -63,29 +59,6 @@ namespace NLEditor
             get
             {
                 Rectangle trigRect = ImageLibrary.GetTrigger(Key);
-
-                // Adjust to resizing
-                if (IsRotatedInPlayer)
-                {
-                    // When both resized and rotated:
-                    // To get the new height value, we add the new "width" increment, and subtract the original object height (which is now the width!)
-                    if (ResizeMode == C.Resize.Both || ResizeMode == C.Resize.Vert)
-                        trigRect.Height += Width - ImageLibrary.GetHeight(Key);
-
-                    // Vice versa to get the new width value
-                    if (ResizeMode == C.Resize.Both || ResizeMode == C.Resize.Horiz)
-                        trigRect.Width += Height - ImageLibrary.GetWidth(Key);
-                }
-                else
-                {   // When resized but not rotated:
-                    // To get the new width value, we add the new "width" increment, and subtract the original object width
-                    if (ResizeMode.In(C.Resize.Both, C.Resize.Horiz))
-                        trigRect.Width += Width - ImageLibrary.GetWidth(Key);
-
-                    // Vice versa to get the new height value
-                    if (ResizeMode.In(C.Resize.Both, C.Resize.Vert))
-                        trigRect.Height += Height - ImageLibrary.GetHeight(Key);
-                }
 
                 if (ObjType != C.OBJ.ONE_WAY_WALL) // For all objects except one-way-walls
                 {
@@ -131,31 +104,16 @@ namespace NLEditor
                     image = base.Image;
                 }
 
-                if (ResizeMode == C.Resize.None)
-                {
-                    return image;
-                }
-                else if (Width < 1 || Height < 1)
+                if (Width < 1 || Height < 1)
                 {
                     return new Bitmap(1, 1); // should never happen
                 }
                 else
                 {
-                    Rectangle? nineSliceArea = ImageLibrary.GetNineSliceArea(Key, GetRotateFlipType());
-                    if (nineSliceArea == null)
-                    {
-                        return image.PaveArea(new Rectangle(0, 0, Width, Height));
-                    }
-                    else
-                    {
-                        return image.NineSliceArea(new Rectangle(0, 0, Width, Height), nineSliceArea.Value);
-                    }
+                    return image.PaveArea(new Rectangle(0, 0, Width, Height));
                 }
             }
         }
-
-        public override int Width => Utility.EvaluateResizable(SpecWidth, DefaultWidth, base.Width, MayResizeHoriz());
-        public override int Height => Utility.EvaluateResizable(SpecHeight, DefaultHeight, base.Height, MayResizeVert());
 
         /// <summary>
         /// Returns the correct frame to load the image.
@@ -196,26 +154,6 @@ namespace NLEditor
                 SpecWidth = SpecHeight;
                 SpecHeight = oldSpecWidth;
             }
-        }
-
-        /// <summary>
-        /// Sets the width of resizable objects taking rotation into account.
-        /// </summary>
-        /// <param name="newWidth"></param>
-        public void SetSpecWidth(int newWidth)
-        {
-            if (MayResizeHoriz())
-                SpecWidth = Math.Max(newWidth, 1);
-        }
-
-        /// <summary>
-        /// Sets the height of resizable objects taking rotation into account.
-        /// </summary>
-        /// <param name="newHeight"></param>
-        public void SetSpecHeight(int newHeight)
-        {
-            if (MayResizeVert())
-                SpecHeight = Math.Max(newHeight, 1);
         }
     }
 }
