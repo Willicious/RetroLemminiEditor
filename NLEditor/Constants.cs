@@ -25,17 +25,19 @@ namespace NLEditor
         }
 
         public static string AppPath => System.Windows.Forms.Application.StartupPath + DirSep;
-        public static string AppPathAutosave => AppPath + "autosave" + DirSep;
-        public static string AppPathPieces => AppPath + "styles" + DirSep;
-        public static string AppPathMusic => AppPath + "music" + DirSep;
-        public static string AppPathLevels => AppPath + "levels" + DirSep;
-        public static string AppPathTempLevel => AppPath + "TempTestLevel.nxlv";
-        public static string AppPathThemeInfo(string styleName) => AppPathPieces + styleName + C.DirSep + "theme.nxtm";
-        public static string AppPathSettings => AppPath + "settings" + DirSep + "RLEditorSettings.ini";
-        public static string AppPathHotkeys => AppPath + "settings" + DirSep + "RLEditorHotkeys.ini";
-        public static string AppPathCustomSkillsets => AppPath + "settings" + DirSep + "RLEditorCustomSkillsets.ini";
-        public static string AppPathTranslationTables => AppPath + "settings" + DirSep + "RLEditorINITranslationTables.ini";
-        public static string AppPathPlayerSettings => AppPath + "settings" + DirSep + "settings.ini";
+        public static string AppPathResources => AppPath + "resources" + DirSep;
+        public static string AppPathAutosave => AppPathResources + "autosave" + DirSep;
+        public static string AppPathPieces => AppPathResources + "styles" + DirSep;
+        public static string AppPathMusic => AppPathResources + "music" + DirSep;
+        public static string AppPathLevels => AppPathResources + "levels" + DirSep;
+        public static string AppPathTempLevel => AppPathResources + "TempTestLevel.nxlv";
+        public static string AppPathThemeInfo(string styleName) => AppPathPieces + styleName + C.DirSep + styleName + ".ini";
+        public static string AppPathSettingsFolder => AppPath + "settings" + DirSep;
+        public static string AppPathSettings => AppPathSettingsFolder + "RLEditorSettings.ini";
+        public static string AppPathHotkeys => AppPathSettingsFolder + "RLEditorHotkeys.ini";
+        public static string AppPathCustomSkillsets => AppPathSettingsFolder + "RLEditorCustomSkillsets.ini";
+        public static string AppPathTranslationTables => AppPathSettingsFolder + "RLEditorINITranslationTables.ini";
+        public static string AppPathPlayerSettings => AppPathSettingsFolder + "retrolemmini_settings.ini";
         public static string AppPathRetroLemmini => AppPath + "RetroLemmini.jar";
 
         public static char DirSep => System.IO.Path.DirectorySeparatorChar;
