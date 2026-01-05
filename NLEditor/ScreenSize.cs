@@ -4,6 +4,8 @@ using System.IO;
 
 namespace NLEditor
 {
+    // TODO - these values are still set to NeoLemmix, they need setting to RetroLemmini
+
     /// <summary>
     /// This class reads the RetroLemmini player's settings
     /// and determines how much of the level gets displayed

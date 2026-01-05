@@ -27,10 +27,10 @@ namespace NLEditor
                            ((ulong)Utility.Random().Next() << 32);
             this.LevelVersion = 0;
 
-            this.Width = 320;
-            this.Height = 160;
-            this.StartPosX = 160;
-            this.StartPosY = 80;
+            this.Width = 640;
+            this.Height = 320;
+            this.StartPosX = 320;
+            this.StartPosY = 160;
 
             this.TerrainList = new List<TerrainPiece>();
             this.GadgetList = new List<GadgetPiece>();

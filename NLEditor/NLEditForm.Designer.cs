@@ -1033,7 +1033,7 @@
             this.num_Lvl_StartY.Location = new System.Drawing.Point(233, 194);
             this.num_Lvl_StartY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_StartY.Maximum = new decimal(new int[] {
-            159,
+            319,
             0,
             0,
             0});
@@ -1042,7 +1042,7 @@
             this.num_Lvl_StartY.TabIndex = 15;
             this.num_Lvl_StartY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_StartY.Value = new decimal(new int[] {
-            80,
+            160,
             0,
             0,
             0});
@@ -1059,7 +1059,7 @@
             this.num_Lvl_StartX.Location = new System.Drawing.Point(126, 194);
             this.num_Lvl_StartX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_StartX.Maximum = new decimal(new int[] {
-            319,
+            639,
             0,
             0,
             0});
@@ -1068,7 +1068,7 @@
             this.num_Lvl_StartX.TabIndex = 14;
             this.num_Lvl_StartX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_StartX.Value = new decimal(new int[] {
-            160,
+            320,
             0,
             0,
             0});
@@ -1085,7 +1085,7 @@
             this.num_Lvl_SizeY.Location = new System.Drawing.Point(273, 144);
             this.num_Lvl_SizeY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_SizeY.Maximum = new decimal(new int[] {
-            1600,
+            3200,
             0,
             0,
             0});
@@ -1099,7 +1099,7 @@
             this.num_Lvl_SizeY.TabIndex = 10;
             this.num_Lvl_SizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_SizeY.Value = new decimal(new int[] {
-            160,
+            320,
             0,
             0,
             0});
@@ -1116,7 +1116,7 @@
             this.num_Lvl_SizeX.Location = new System.Drawing.Point(98, 144);
             this.num_Lvl_SizeX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_SizeX.Maximum = new decimal(new int[] {
-            3200,
+            6400,
             0,
             0,
             0});
@@ -1130,7 +1130,7 @@
             this.num_Lvl_SizeX.TabIndex = 9;
             this.num_Lvl_SizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_SizeX.Value = new decimal(new int[] {
-            320,
+            640,
             0,
             0,
             0});

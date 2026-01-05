@@ -43,7 +43,7 @@ namespace NLEditor
 
             SetLevel(level);
             ClearLayers();
-            ChangeZoom(1);
+            ChangeZoom(0);
         }
 
         public const int AllowedGrayBorder = 10;
