@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.IO;
 
-namespace NLEditor
+namespace RLEditor
 {
     // TODO - these values are still set to NeoLemmix, they need setting to RetroLemmini
 

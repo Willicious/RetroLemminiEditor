@@ -1,6 +1,6 @@
-﻿namespace NLEditor
+﻿namespace RLEditor
 {
-    partial class NLEditForm
+    partial class RLEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NLEditForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RLEditForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,19 +94,19 @@
             this.lbSizeW = new System.Windows.Forms.Label();
             this.check_Lvl_InfTime = new System.Windows.Forms.CheckBox();
             this.combo_Music = new System.Windows.Forms.ComboBox();
-            this.num_Lvl_TimeSec = new NLEditor.NumUpDownOverwrite();
-            this.num_Lvl_TimeMin = new NLEditor.NumUpDownOverwrite();
+            this.num_Lvl_TimeSec = new RLEditor.NumUpDownOverwrite();
+            this.num_Lvl_TimeMin = new RLEditor.NumUpDownOverwrite();
             this.lbl_Global_TimeLimit = new System.Windows.Forms.Label();
-            this.num_Lvl_RR = new NLEditor.NumUpDownOverwrite();
+            this.num_Lvl_RR = new RLEditor.NumUpDownOverwrite();
             this.lbl_Global_SR = new System.Windows.Forms.Label();
-            this.num_Lvl_Rescue = new NLEditor.NumUpDownOverwrite();
+            this.num_Lvl_Rescue = new RLEditor.NumUpDownOverwrite();
             this.lbl_Global_Rescue = new System.Windows.Forms.Label();
-            this.num_Lvl_Lems = new NLEditor.NumUpDownOverwrite();
+            this.num_Lvl_Lems = new RLEditor.NumUpDownOverwrite();
             this.lbl_Global_Lemmings = new System.Windows.Forms.Label();
-            this.num_Lvl_StartY = new NLEditor.NumUpDownOverwrite();
-            this.num_Lvl_StartX = new NLEditor.NumUpDownOverwrite();
-            this.num_Lvl_SizeY = new NLEditor.NumUpDownOverwrite();
-            this.num_Lvl_SizeX = new NLEditor.NumUpDownOverwrite();
+            this.num_Lvl_StartY = new RLEditor.NumUpDownOverwrite();
+            this.num_Lvl_StartX = new RLEditor.NumUpDownOverwrite();
+            this.num_Lvl_SizeY = new RLEditor.NumUpDownOverwrite();
+            this.num_Lvl_SizeX = new RLEditor.NumUpDownOverwrite();
             this.lbl_Global_Music = new System.Windows.Forms.Label();
             this.txt_LevelAuthor = new System.Windows.Forms.TextBox();
             this.lbl_Global_Author = new System.Windows.Forms.Label();
@@ -126,13 +126,13 @@
             this.check_Pieces_OnlyOnTerrain = new System.Windows.Forms.CheckBox();
             this.check_Pieces_NoOv = new System.Windows.Forms.CheckBox();
             this.check_Pieces_Erase = new System.Windows.Forms.CheckBox();
-            this.but_MoveBackOne = new NLEditor.RepeatButton();
-            this.but_MoveFrontOne = new NLEditor.RepeatButton();
-            this.but_MoveBack = new NLEditor.NoPaddingButton();
-            this.but_MoveFront = new NLEditor.NoPaddingButton();
-            this.but_FlipPieces = new NLEditor.RepeatButton();
-            this.but_InvertPieces = new NLEditor.RepeatButton();
-            this.but_RotatePieces = new NLEditor.RepeatButton();
+            this.but_MoveBackOne = new RLEditor.RepeatButton();
+            this.but_MoveFrontOne = new RLEditor.RepeatButton();
+            this.but_MoveBack = new RLEditor.NoPaddingButton();
+            this.but_MoveFront = new RLEditor.NoPaddingButton();
+            this.but_FlipPieces = new RLEditor.RepeatButton();
+            this.but_InvertPieces = new RLEditor.RepeatButton();
+            this.but_RotatePieces = new RLEditor.RepeatButton();
             this.tabSkills = new System.Windows.Forms.TabPage();
             this.btnClearAllSkills = new System.Windows.Forms.Button();
             this.btnRandomSkillset = new System.Windows.Forms.Button();
@@ -149,17 +149,17 @@
             this.lbl_Skill_Blocker = new System.Windows.Forms.Label();
             this.lbl_Skill_Floater = new System.Windows.Forms.Label();
             this.lbl_Skill_Climber = new System.Windows.Forms.Label();
-            this.num_RandomMaxLimit = new NLEditor.NumUpDownOverwrite();
-            this.num_RandomMinLimit = new NLEditor.NumUpDownOverwrite();
-            this.num_AllNonZeroSkillsToN = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Digger = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Miner = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Basher = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Builder = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Bomber = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Blocker = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Floater = new NLEditor.NumUpDownOverwrite();
-            this.num_Ski_Climber = new NLEditor.NumUpDownOverwrite();
+            this.num_RandomMaxLimit = new RLEditor.NumUpDownOverwrite();
+            this.num_RandomMinLimit = new RLEditor.NumUpDownOverwrite();
+            this.num_AllNonZeroSkillsToN = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Digger = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Miner = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Basher = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Builder = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Bomber = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Blocker = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Floater = new RLEditor.NumUpDownOverwrite();
+            this.num_Ski_Climber = new RLEditor.NumUpDownOverwrite();
             this.tabMisc = new System.Windows.Forms.TabPage();
             this.check_Lvl_Superlemming = new System.Windows.Forms.CheckBox();
             this.btnEditPostview = new System.Windows.Forms.Button();
@@ -168,8 +168,8 @@
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
             this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
-            this.but_PieceRight = new NLEditor.RepeatButton();
-            this.but_PieceLeft = new NLEditor.RepeatButton();
+            this.but_PieceRight = new RLEditor.RepeatButton();
+            this.but_PieceLeft = new RLEditor.RepeatButton();
             this.timerAutosave = new System.Windows.Forms.Timer(this.components);
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -197,9 +197,9 @@
             this.picPiece1 = new System.Windows.Forms.PictureBox();
             this.picPiece0 = new System.Windows.Forms.PictureBox();
             this.combo_PieceStyle = new System.Windows.Forms.ComboBox();
-            this.txt_FocusPieceBrowser = new NLEditor.FocusTextBox();
+            this.txt_FocusPieceBrowser = new RLEditor.FocusTextBox();
             this.pic_DragNewPiece = new System.Windows.Forms.PictureBox();
-            this.txt_Focus = new NLEditor.FocusTextBox();
+            this.txt_Focus = new RLEditor.FocusTextBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.tabLvlProperties.SuspendLayout();
@@ -1911,7 +1911,7 @@
             this.showMissingPiecesStatusBarMenuItem,
             this.oKStatusBarMenuItem,
             this.deleteMissingPiecesToolStripMenuItem});
-            this.statusBarButton1.Image = global::NLEditor.Properties.Resources.LemButton;
+            this.statusBarButton1.Image = global::RLEditor.Properties.Resources.LemButton;
             this.statusBarButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.statusBarButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.statusBarButton1.Name = "statusBarButton1";
@@ -2350,48 +2350,48 @@
         private System.Windows.Forms.Label lbl_Skill_Blocker;
         private System.Windows.Forms.Label lbl_Skill_Floater;
         private System.Windows.Forms.Label lbl_Skill_Climber;
-        private NLEditor.NumUpDownOverwrite num_Ski_Digger;
-        private NLEditor.NumUpDownOverwrite num_Ski_Miner;
-        private NLEditor.NumUpDownOverwrite num_Ski_Basher;
-        private NLEditor.NumUpDownOverwrite num_Ski_Builder;
-        private NLEditor.NumUpDownOverwrite num_Ski_Bomber;
-        private NLEditor.NumUpDownOverwrite num_Ski_Blocker;
-        private NLEditor.NumUpDownOverwrite num_Ski_Floater;
-        private NLEditor.NumUpDownOverwrite num_Ski_Climber;
-        private NLEditor.NumUpDownOverwrite num_Lvl_Rescue;
+        private RLEditor.NumUpDownOverwrite num_Ski_Digger;
+        private RLEditor.NumUpDownOverwrite num_Ski_Miner;
+        private RLEditor.NumUpDownOverwrite num_Ski_Basher;
+        private RLEditor.NumUpDownOverwrite num_Ski_Builder;
+        private RLEditor.NumUpDownOverwrite num_Ski_Bomber;
+        private RLEditor.NumUpDownOverwrite num_Ski_Blocker;
+        private RLEditor.NumUpDownOverwrite num_Ski_Floater;
+        private RLEditor.NumUpDownOverwrite num_Ski_Climber;
+        private RLEditor.NumUpDownOverwrite num_Lvl_Rescue;
         private System.Windows.Forms.Label lbl_Global_Rescue;
-        private NLEditor.NumUpDownOverwrite num_Lvl_Lems;
+        private RLEditor.NumUpDownOverwrite num_Lvl_Lems;
         private System.Windows.Forms.Label lbl_Global_Lemmings;
-        private NLEditor.NumUpDownOverwrite num_Lvl_StartY;
-        private NLEditor.NumUpDownOverwrite num_Lvl_StartX;
-        private NLEditor.NumUpDownOverwrite num_Lvl_SizeY;
-        private NLEditor.NumUpDownOverwrite num_Lvl_SizeX;
+        private RLEditor.NumUpDownOverwrite num_Lvl_StartY;
+        private RLEditor.NumUpDownOverwrite num_Lvl_StartX;
+        private RLEditor.NumUpDownOverwrite num_Lvl_SizeY;
+        private RLEditor.NumUpDownOverwrite num_Lvl_SizeX;
         private System.Windows.Forms.Label lbl_Global_Music;
         private System.Windows.Forms.TextBox txt_LevelAuthor;
         private System.Windows.Forms.Label lbl_Global_Author;
         private System.Windows.Forms.TextBox txt_LevelTitle;
         private System.Windows.Forms.Label lbl_Global_Title;
-        private NLEditor.NumUpDownOverwrite num_Lvl_TimeSec;
-        private NLEditor.NumUpDownOverwrite num_Lvl_TimeMin;
+        private RLEditor.NumUpDownOverwrite num_Lvl_TimeSec;
+        private RLEditor.NumUpDownOverwrite num_Lvl_TimeMin;
         private System.Windows.Forms.Label lbl_Global_TimeLimit;
-        private NLEditor.NumUpDownOverwrite num_Lvl_RR;
+        private RLEditor.NumUpDownOverwrite num_Lvl_RR;
         private System.Windows.Forms.Label lbl_Global_SR;
         private System.Windows.Forms.ComboBox combo_Music;
         private System.Windows.Forms.CheckBox check_Lvl_InfTime;
         private System.Windows.Forms.PictureBox pic_Level;
         private System.Windows.Forms.TabControl tabLvlProperties;
-        private NLEditor.FocusTextBox txt_Focus;
-        private NLEditor.RepeatButton but_FlipPieces;
-        private NLEditor.RepeatButton but_InvertPieces;
-        private NLEditor.RepeatButton but_RotatePieces;
+        private RLEditor.FocusTextBox txt_Focus;
+        private RLEditor.RepeatButton but_FlipPieces;
+        private RLEditor.RepeatButton but_InvertPieces;
+        private RLEditor.RepeatButton but_RotatePieces;
         private System.Windows.Forms.CheckBox check_Pieces_OneWay;
         private System.Windows.Forms.CheckBox check_Pieces_OnlyOnTerrain;
         private System.Windows.Forms.CheckBox check_Pieces_NoOv;
         private System.Windows.Forms.CheckBox check_Pieces_Erase;
-        private NLEditor.RepeatButton but_MoveBackOne;
-        private NLEditor.RepeatButton but_MoveFrontOne;
-        private NLEditor.NoPaddingButton but_MoveBack;
-        private NLEditor.NoPaddingButton but_MoveFront;
+        private RLEditor.RepeatButton but_MoveBackOne;
+        private RLEditor.RepeatButton but_MoveFrontOne;
+        private RLEditor.NoPaddingButton but_MoveBack;
+        private RLEditor.NoPaddingButton but_MoveFront;
         private System.Windows.Forms.ToolStripMenuItem hotkeysToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipPieces;

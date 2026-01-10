@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace NLEditor
+namespace RLEditor
 {
     public partial class FormProgress : Form
     {

@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NLEditor
+namespace RLEditor
 {
-    partial class NLEditForm
+    partial class RLEditForm
     {
         /*---------------------------------------------------------
          *   Main Form: This part defines the methods

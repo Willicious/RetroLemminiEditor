@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace NLEditor
+namespace RLEditor
 {
     static class DisplaySettings
     {

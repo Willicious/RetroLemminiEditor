@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// This stored all data of a gadget. Inherits from LevelPiece.

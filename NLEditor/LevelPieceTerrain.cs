@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// This stored all data of a terrain piece. Inherits from LevelPiece.

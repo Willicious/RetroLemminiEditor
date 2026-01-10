@@ -1,4 +1,4 @@
-﻿namespace NLEditor
+﻿namespace RLEditor
 {
     partial class FormLevelArranger
     {

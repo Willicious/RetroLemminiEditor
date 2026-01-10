@@ -131,7 +131,6 @@
     <Compile Include="LevelPieceBase.cs" />
     <Compile Include="LevelPieceGadget.cs" />
     <Compile Include="LevelPieceTerrain.cs" />
-    <Compile Include="NLTextDataNode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DisplaySettings.cs" />
     <Compile Include="EscExitForm.cs">
@@ -151,13 +150,13 @@
     <Compile Include="Level.cs" />
     <Compile Include="LevelFile.cs" />
     <Compile Include="LoadStylesFromFile.cs" />
-    <Compile Include="NLEditForm.cs">
+    <Compile Include="RLEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NLEditForm.Designer.cs">
-      <DependentUpon>NLEditForm.cs</DependentUpon>
+    <Compile Include="RLEditForm.Designer.cs">
+      <DependentUpon>RLEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NLEditFormMethods.cs">
+    <Compile Include="RLEditFormMethods.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NumUpDownOverwrite.cs">
@@ -205,8 +204,8 @@
     <EmbeddedResource Include="FormAboutRLEditor.resx">
       <DependentUpon>FormAboutRLEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NLEditForm.resx">
-      <DependentUpon>NLEditForm.cs</DependentUpon>
+    <EmbeddedResource Include="RLEditForm.resx">
+      <DependentUpon>RLEditForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProgress.resx">

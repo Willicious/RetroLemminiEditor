@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// Stores the common unchangable data of pieces.
@@ -317,10 +317,10 @@ namespace NLEditor
             imageDict.Clear();
         }
 
-        private static NLEditForm mainForm;
+        private static RLEditForm mainForm;
 
         // Method to set the editor form, this must be called early in your app
-        public static void SetEditorForm(NLEditForm editorForm)
+        public static void SetEditorForm(RLEditForm editorForm)
         {
             mainForm = editorForm;
         }

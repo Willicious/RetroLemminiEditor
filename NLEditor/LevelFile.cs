@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// Contains static methods to load and save levels.

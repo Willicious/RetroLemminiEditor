@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// Stores and modifies the data of a lemming level.

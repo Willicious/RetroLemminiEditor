@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NLEditor
+namespace RLEditor
 {
     public class Background
     {

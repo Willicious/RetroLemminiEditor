@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// This class can check whether a level has playability issues and display these on a separate form.

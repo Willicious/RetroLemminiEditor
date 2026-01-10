@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace NLEditor
+namespace RLEditor
 {
     partial class FormAboutRLEditor
     {
@@ -63,7 +63,7 @@ namespace NLEditor
             // 
             // pictureFloater
             // 
-            this.pictureFloater.Image = global::NLEditor.Properties.Resources.IntroFloater;
+            this.pictureFloater.Image = global::RLEditor.Properties.Resources.IntroFloater;
             this.pictureFloater.Location = new System.Drawing.Point(31, 16);
             this.pictureFloater.Name = "pictureFloater";
             this.pictureFloater.Size = new System.Drawing.Size(156, 220);
@@ -75,7 +75,7 @@ namespace NLEditor
             // 
             this.pictureClimber.BackColor = System.Drawing.SystemColors.ControlDark;
             this.pictureClimber.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureClimber.Image = global::NLEditor.Properties.Resources.IntroClimber;
+            this.pictureClimber.Image = global::RLEditor.Properties.Resources.IntroClimber;
             this.pictureClimber.InitialImage = null;
             this.pictureClimber.Location = new System.Drawing.Point(1170, 82);
             this.pictureClimber.Name = "pictureClimber";

@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// Contains static methods to load styles and meta-infos of objects.

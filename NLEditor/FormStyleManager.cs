@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using static NLEditor.FormStyleManager;
+using static RLEditor.FormStyleManager;
 
-namespace NLEditor
+namespace RLEditor
 {
     public partial class FormStyleManager : Form
     {
@@ -24,10 +24,10 @@ namespace NLEditor
         
         private string styleFilePath = C.AppPath + "styles" + C.DirSep + "styles.ini";
         
-        private NLEditForm mainForm;
+        private RLEditForm mainForm;
         private Settings curSettings;
 
-        internal FormStyleManager(NLEditForm parentForm, Settings settings)
+        internal FormStyleManager(RLEditForm parentForm, Settings settings)
         {
             InitializeComponent();
             mainForm = parentForm;

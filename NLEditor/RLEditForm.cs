@@ -8,17 +8,17 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
-namespace NLEditor
+namespace RLEditor
 {
     /// <summary>
     /// Main editor form: Receives user input.
     /// </summary>
-    partial class NLEditForm : Form
+    partial class RLEditForm : Form
     {
         /// <summary>
         /// Initializes all important components and load an empty level.
         /// </summary>
-        public NLEditForm()
+        public RLEditForm()
         {
             InitializeComponent();
             UpdateExpandedTabs();
