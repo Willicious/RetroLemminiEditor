@@ -30,8 +30,6 @@ namespace RLEditor
             C.ScreenSize = new ScreenSize();
             C.ScreenSize.InizializeSettings();
 
-            LoadStylesFromFile.AddInitialImagesToLibrary();
-
             ImageLibrary.SetEditorForm(this);
 
             picPieceList = new List<PictureBox>

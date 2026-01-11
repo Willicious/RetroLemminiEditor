@@ -141,21 +141,10 @@ namespace RLEditor
         private void FindIssuesMissingObjects()
         {
             if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH))
-            {
-                int NumPreplacedLems = level.GadgetList.Count(obj => obj.ObjType == C.OBJ.LEMMING);
-                if (level.NumLems > NumPreplacedLems)
-                {
-                    String preplacedLemWarning = (NumPreplacedLems > 0)
-                        ? " (Lemming count is higher than the number of pre-placed lemmings)."
-                        : "";
-                    issuesList.Add("Missing object: Hatch." + preplacedLemWarning);
-                }
-            }
+                issuesList.Add("Missing object: Hatch.");
 
             if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT))
-            {
                 issuesList.Add("Missing object: Exit.");
-            }
         }
 
         private void FindIssuesDeprecation()

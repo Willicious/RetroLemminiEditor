@@ -14,7 +14,7 @@ namespace RLEditor
         public GadgetPiece(string key, Point pos)
             : base(key, true, pos)
         {
-            IsNoOverwrite = !ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT, C.OBJ.LEMMING);
+            IsNoOverwrite = !ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT);
             IsOnlyOnTerrain = (ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
         }
 
@@ -126,7 +126,7 @@ namespace RLEditor
 
         public override bool MayRotate()
         {
-            return !(ObjType.In(C.OBJ.HATCH, C.OBJ.LEMMING));
+            return !(ObjType == C.OBJ.HATCH);
         }
 
         public override bool MayFlip()
@@ -136,7 +136,7 @@ namespace RLEditor
 
         public override bool MayInvert()
         {
-            return !(ObjType.In(C.OBJ.HATCH, C.OBJ.LEMMING));
+            return !(ObjType == C.OBJ.HATCH);
         }
 
         /// <summary>

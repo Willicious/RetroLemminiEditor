@@ -641,7 +641,6 @@ Digger=20
             combo_PieceStyle.Items.Clear();
 
             ImageLibrary.Clear();
-            LoadStylesFromFile.AddInitialImagesToLibrary();
             Style.ReloadSketches();
 
             CreateStyleList();
@@ -725,7 +724,7 @@ Digger=20
             if (deprecatedPieces > 0)
                 levelsWithDeprecatedPieces.Add(CurLevel.FilePathToSave);
 
-            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType.In(C.OBJ.HATCH, C.OBJ.LEMMING)))
+            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH))
                 levelsWithNoLemmings.Add(CurLevel.FilePathToSave);
 
             if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT))

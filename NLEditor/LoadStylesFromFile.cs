@@ -13,15 +13,6 @@ namespace RLEditor
     /// </summary>
     static class LoadStylesFromFile
     {
-        public static void AddInitialImagesToLibrary()
-        {
-            // preplaced lemming
-            string imageKey = ImageLibrary.CreatePieceKey("default", "lemming", true);
-            Bitmap image = Properties.Resources.Lemming;
-            Rectangle triggerArea = new Rectangle(C.LEM_OFFSET_X, C.LEM_OFFSET_Y, 1, 1);
-            ImageLibrary.AddNewImage(imageKey, image, C.OBJ.LEMMING, triggerArea);
-        }
-
         // TODO - Implement style colors from .ini
         static readonly Dictionary<string, C.StyleColor> KeyToStyleColorDict = new Dictionary<string, C.StyleColor>
       {
