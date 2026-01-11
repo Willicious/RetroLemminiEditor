@@ -97,7 +97,6 @@
             this.num_Lvl_TimeSec = new RLEditor.NumUpDownOverwrite();
             this.num_Lvl_TimeMin = new RLEditor.NumUpDownOverwrite();
             this.num_Lvl_RR = new RLEditor.NumUpDownOverwrite();
-            this.lbl_Global_SR = new System.Windows.Forms.Label();
             this.num_Lvl_Rescue = new RLEditor.NumUpDownOverwrite();
             this.lbl_Global_Rescue = new System.Windows.Forms.Label();
             this.num_Lvl_Lems = new RLEditor.NumUpDownOverwrite();
@@ -711,7 +710,6 @@
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_TimeSec);
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_TimeMin);
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_RR);
-            this.tabGlobalInfo.Controls.Add(this.lbl_Global_SR);
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_Rescue);
             this.tabGlobalInfo.Controls.Add(this.lbl_Global_Rescue);
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_Lems);
@@ -737,7 +735,7 @@
             // check_Lvl_TimeLimit
             // 
             this.check_Lvl_TimeLimit.AutoSize = true;
-            this.check_Lvl_TimeLimit.Location = new System.Drawing.Point(13, 471);
+            this.check_Lvl_TimeLimit.Location = new System.Drawing.Point(28, 485);
             this.check_Lvl_TimeLimit.Name = "check_Lvl_TimeLimit";
             this.check_Lvl_TimeLimit.Size = new System.Drawing.Size(106, 24);
             this.check_Lvl_TimeLimit.TabIndex = 32;
@@ -748,19 +746,19 @@
             // check_Lvl_LockSR
             // 
             this.check_Lvl_LockSR.AutoSize = true;
-            this.check_Lvl_LockSR.Location = new System.Drawing.Point(213, 386);
+            this.check_Lvl_LockSR.Location = new System.Drawing.Point(28, 403);
             this.check_Lvl_LockSR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Lvl_LockSR.Name = "check_Lvl_LockSR";
-            this.check_Lvl_LockSR.Size = new System.Drawing.Size(87, 24);
+            this.check_Lvl_LockSR.Size = new System.Drawing.Size(171, 24);
             this.check_Lvl_LockSR.TabIndex = 22;
-            this.check_Lvl_LockSR.Text = "Locked";
+            this.check_Lvl_LockSR.Text = "Lock Release Rate";
             this.check_Lvl_LockSR.UseVisualStyleBackColor = true;
             this.check_Lvl_LockSR.CheckedChanged += new System.EventHandler(this.textbox_Leave);
             // 
             // chk_Lvl_AutoStart
             // 
             this.chk_Lvl_AutoStart.AutoSize = true;
-            this.chk_Lvl_AutoStart.Location = new System.Drawing.Point(13, 245);
+            this.chk_Lvl_AutoStart.Location = new System.Drawing.Point(28, 251);
             this.chk_Lvl_AutoStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chk_Lvl_AutoStart.Name = "chk_Lvl_AutoStart";
             this.chk_Lvl_AutoStart.Size = new System.Drawing.Size(163, 24);
@@ -773,7 +771,7 @@
             // lbl_Global_Version
             // 
             this.lbl_Global_Version.AutoSize = true;
-            this.lbl_Global_Version.Location = new System.Drawing.Point(85, 681);
+            this.lbl_Global_Version.Location = new System.Drawing.Point(88, 675);
             this.lbl_Global_Version.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Global_Version.Name = "lbl_Global_Version";
             this.lbl_Global_Version.Size = new System.Drawing.Size(215, 20);
@@ -783,10 +781,10 @@
             // 
             // but_RandomID
             // 
-            this.but_RandomID.Location = new System.Drawing.Point(13, 633);
+            this.but_RandomID.Location = new System.Drawing.Point(28, 623);
             this.but_RandomID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.but_RandomID.Name = "but_RandomID";
-            this.but_RandomID.Size = new System.Drawing.Size(357, 35);
+            this.but_RandomID.Size = new System.Drawing.Size(321, 35);
             this.but_RandomID.TabIndex = 30;
             this.but_RandomID.Text = "Random ID";
             this.but_RandomID.UseVisualStyleBackColor = true;
@@ -794,18 +792,18 @@
             // 
             // txt_LevelID
             // 
-            this.txt_LevelID.Location = new System.Drawing.Point(99, 597);
+            this.txt_LevelID.Location = new System.Drawing.Point(110, 578);
             this.txt_LevelID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_LevelID.MaxLength = 40;
             this.txt_LevelID.Name = "txt_LevelID";
-            this.txt_LevelID.Size = new System.Drawing.Size(270, 26);
+            this.txt_LevelID.Size = new System.Drawing.Size(239, 26);
             this.txt_LevelID.TabIndex = 29;
             this.txt_LevelID.Leave += new System.EventHandler(this.textbox_Leave);
             // 
             // lbl_Global_ID
             // 
             this.lbl_Global_ID.AutoSize = true;
-            this.lbl_Global_ID.Location = new System.Drawing.Point(9, 600);
+            this.lbl_Global_ID.Location = new System.Drawing.Point(24, 581);
             this.lbl_Global_ID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Global_ID.Name = "lbl_Global_ID";
             this.lbl_Global_ID.Size = new System.Drawing.Size(67, 20);
@@ -816,7 +814,7 @@
             // lbStartY
             // 
             this.lbStartY.AutoSize = true;
-            this.lbStartY.Location = new System.Drawing.Point(209, 211);
+            this.lbStartY.Location = new System.Drawing.Point(209, 217);
             this.lbStartY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbStartY.Name = "lbStartY";
             this.lbStartY.Size = new System.Drawing.Size(59, 20);
@@ -827,7 +825,7 @@
             // lbStartX
             // 
             this.lbStartX.AutoSize = true;
-            this.lbStartX.Location = new System.Drawing.Point(9, 211);
+            this.lbStartX.Location = new System.Drawing.Point(24, 217);
             this.lbStartX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbStartX.Name = "lbStartX";
             this.lbStartX.Size = new System.Drawing.Size(59, 20);
@@ -849,7 +847,7 @@
             // lbSizeW
             // 
             this.lbSizeW.AutoSize = true;
-            this.lbSizeW.Location = new System.Drawing.Point(9, 144);
+            this.lbSizeW.Location = new System.Drawing.Point(24, 144);
             this.lbSizeW.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSizeW.Name = "lbSizeW";
             this.lbSizeW.Size = new System.Drawing.Size(50, 20);
@@ -873,7 +871,7 @@
             // 
             // num_Lvl_TimeSec
             // 
-            this.num_Lvl_TimeSec.Location = new System.Drawing.Point(213, 470);
+            this.num_Lvl_TimeSec.Location = new System.Drawing.Point(279, 484);
             this.num_Lvl_TimeSec.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_TimeSec.Maximum = new decimal(new int[] {
             59,
@@ -888,7 +886,7 @@
             // 
             // num_Lvl_TimeMin
             // 
-            this.num_Lvl_TimeMin.Location = new System.Drawing.Point(126, 470);
+            this.num_Lvl_TimeMin.Location = new System.Drawing.Point(192, 484);
             this.num_Lvl_TimeMin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_TimeMin.Maximum = new decimal(new int[] {
             99,
@@ -903,7 +901,7 @@
             // 
             // num_Lvl_RR
             // 
-            this.num_Lvl_RR.Location = new System.Drawing.Point(126, 385);
+            this.num_Lvl_RR.Location = new System.Drawing.Point(279, 402);
             this.num_Lvl_RR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_RR.Maximum = new decimal(new int[] {
             99,
@@ -926,20 +924,9 @@
             0});
             this.num_Lvl_RR.Leave += new System.EventHandler(this.textbox_Leave);
             // 
-            // lbl_Global_SR
-            // 
-            this.lbl_Global_SR.AutoSize = true;
-            this.lbl_Global_SR.Location = new System.Drawing.Point(9, 387);
-            this.lbl_Global_SR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_Global_SR.Name = "lbl_Global_SR";
-            this.lbl_Global_SR.Size = new System.Drawing.Size(107, 20);
-            this.lbl_Global_SR.TabIndex = 23;
-            this.lbl_Global_SR.Text = "Release Rate";
-            this.lbl_Global_SR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // num_Lvl_Rescue
             // 
-            this.num_Lvl_Rescue.Location = new System.Drawing.Point(283, 308);
+            this.num_Lvl_Rescue.Location = new System.Drawing.Point(279, 320);
             this.num_Lvl_Rescue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_Rescue.Maximum = new decimal(new int[] {
             999,
@@ -965,7 +952,7 @@
             // lbl_Global_Rescue
             // 
             this.lbl_Global_Rescue.AutoSize = true;
-            this.lbl_Global_Rescue.Location = new System.Drawing.Point(209, 310);
+            this.lbl_Global_Rescue.Location = new System.Drawing.Point(209, 322);
             this.lbl_Global_Rescue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Global_Rescue.Name = "lbl_Global_Rescue";
             this.lbl_Global_Rescue.Size = new System.Drawing.Size(45, 20);
@@ -975,7 +962,7 @@
             // 
             // num_Lvl_Lems
             // 
-            this.num_Lvl_Lems.Location = new System.Drawing.Point(99, 308);
+            this.num_Lvl_Lems.Location = new System.Drawing.Point(114, 320);
             this.num_Lvl_Lems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_Lems.Maximum = new decimal(new int[] {
             999,
@@ -1001,7 +988,7 @@
             // lbl_Global_Lemmings
             // 
             this.lbl_Global_Lemmings.AutoSize = true;
-            this.lbl_Global_Lemmings.Location = new System.Drawing.Point(9, 310);
+            this.lbl_Global_Lemmings.Location = new System.Drawing.Point(24, 322);
             this.lbl_Global_Lemmings.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Global_Lemmings.Name = "lbl_Global_Lemmings";
             this.lbl_Global_Lemmings.Size = new System.Drawing.Size(82, 20);
@@ -1016,7 +1003,7 @@
             0,
             0,
             0});
-            this.num_Lvl_StartY.Location = new System.Drawing.Point(283, 209);
+            this.num_Lvl_StartY.Location = new System.Drawing.Point(279, 215);
             this.num_Lvl_StartY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_StartY.Maximum = new decimal(new int[] {
             319,
@@ -1042,7 +1029,7 @@
             0,
             0,
             0});
-            this.num_Lvl_StartX.Location = new System.Drawing.Point(99, 209);
+            this.num_Lvl_StartX.Location = new System.Drawing.Point(114, 215);
             this.num_Lvl_StartX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_StartX.Maximum = new decimal(new int[] {
             639,
@@ -1068,7 +1055,7 @@
             0,
             0,
             0});
-            this.num_Lvl_SizeY.Location = new System.Drawing.Point(283, 142);
+            this.num_Lvl_SizeY.Location = new System.Drawing.Point(279, 142);
             this.num_Lvl_SizeY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_SizeY.Maximum = new decimal(new int[] {
             3200,
@@ -1099,7 +1086,7 @@
             0,
             0,
             0});
-            this.num_Lvl_SizeX.Location = new System.Drawing.Point(99, 142);
+            this.num_Lvl_SizeX.Location = new System.Drawing.Point(114, 142);
             this.num_Lvl_SizeX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Lvl_SizeX.Maximum = new decimal(new int[] {
             6400,
@@ -1208,7 +1195,7 @@
             // check_Pieces_Fake
             // 
             this.check_Pieces_Fake.AutoSize = true;
-            this.check_Pieces_Fake.Location = new System.Drawing.Point(21, 354);
+            this.check_Pieces_Fake.Location = new System.Drawing.Point(21, 334);
             this.check_Pieces_Fake.Name = "check_Pieces_Fake";
             this.check_Pieces_Fake.Size = new System.Drawing.Size(71, 24);
             this.check_Pieces_Fake.TabIndex = 68;
@@ -1219,7 +1206,7 @@
             // check_Pieces_Invisible
             // 
             this.check_Pieces_Invisible.AutoSize = true;
-            this.check_Pieces_Invisible.Location = new System.Drawing.Point(21, 328);
+            this.check_Pieces_Invisible.Location = new System.Drawing.Point(21, 308);
             this.check_Pieces_Invisible.Name = "check_Pieces_Invisible";
             this.check_Pieces_Invisible.Size = new System.Drawing.Size(91, 24);
             this.check_Pieces_Invisible.TabIndex = 67;
@@ -1230,7 +1217,7 @@
             // lblPieceSize
             // 
             this.lblPieceSize.AutoSize = true;
-            this.lblPieceSize.Location = new System.Drawing.Point(80, 477);
+            this.lblPieceSize.Location = new System.Drawing.Point(80, 457);
             this.lblPieceSize.Name = "lblPieceSize";
             this.lblPieceSize.Size = new System.Drawing.Size(84, 20);
             this.lblPieceSize.TabIndex = 66;
@@ -1240,7 +1227,7 @@
             // 
             this.lblSize.AutoSize = true;
             this.lblSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(17, 477);
+            this.lblSize.Location = new System.Drawing.Point(17, 457);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(44, 20);
             this.lblSize.TabIndex = 65;
@@ -1250,7 +1237,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(17, 417);
+            this.lblName.Location = new System.Drawing.Point(17, 397);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(55, 20);
             this.lblName.TabIndex = 59;
@@ -1259,7 +1246,7 @@
             // lblPieceType
             // 
             this.lblPieceType.AutoSize = true;
-            this.lblPieceType.Location = new System.Drawing.Point(80, 457);
+            this.lblPieceType.Location = new System.Drawing.Point(80, 437);
             this.lblPieceType.Name = "lblPieceType";
             this.lblPieceType.Size = new System.Drawing.Size(86, 20);
             this.lblPieceType.TabIndex = 64;
@@ -1269,7 +1256,7 @@
             // 
             this.lblStyle.AutoSize = true;
             this.lblStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStyle.Location = new System.Drawing.Point(17, 437);
+            this.lblStyle.Location = new System.Drawing.Point(17, 417);
             this.lblStyle.Name = "lblStyle";
             this.lblStyle.Size = new System.Drawing.Size(48, 20);
             this.lblStyle.TabIndex = 60;
@@ -1278,7 +1265,7 @@
             // lblPieceStyle
             // 
             this.lblPieceStyle.AutoSize = true;
-            this.lblPieceStyle.Location = new System.Drawing.Point(80, 437);
+            this.lblPieceStyle.Location = new System.Drawing.Point(80, 417);
             this.lblPieceStyle.Name = "lblPieceStyle";
             this.lblPieceStyle.Size = new System.Drawing.Size(88, 20);
             this.lblPieceStyle.TabIndex = 63;
@@ -1288,7 +1275,7 @@
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.Location = new System.Drawing.Point(17, 457);
+            this.lblType.Location = new System.Drawing.Point(17, 437);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(47, 20);
             this.lblType.TabIndex = 61;
@@ -1297,7 +1284,7 @@
             // lblPieceName
             // 
             this.lblPieceName.AutoSize = true;
-            this.lblPieceName.Location = new System.Drawing.Point(80, 417);
+            this.lblPieceName.Location = new System.Drawing.Point(80, 397);
             this.lblPieceName.Name = "lblPieceName";
             this.lblPieceName.Size = new System.Drawing.Size(96, 20);
             this.lblPieceName.TabIndex = 62;
@@ -1305,7 +1292,7 @@
             // 
             // check_Pieces_OneWay
             // 
-            this.check_Pieces_OneWay.Location = new System.Drawing.Point(21, 272);
+            this.check_Pieces_OneWay.Location = new System.Drawing.Point(21, 252);
             this.check_Pieces_OneWay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_OneWay.Name = "check_Pieces_OneWay";
             this.check_Pieces_OneWay.Size = new System.Drawing.Size(154, 26);
@@ -1316,7 +1303,7 @@
             // 
             // check_Pieces_OnlyOnTerrain
             // 
-            this.check_Pieces_OnlyOnTerrain.Location = new System.Drawing.Point(21, 246);
+            this.check_Pieces_OnlyOnTerrain.Location = new System.Drawing.Point(21, 226);
             this.check_Pieces_OnlyOnTerrain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_OnlyOnTerrain.Name = "check_Pieces_OnlyOnTerrain";
             this.check_Pieces_OnlyOnTerrain.Size = new System.Drawing.Size(154, 26);
@@ -1327,7 +1314,7 @@
             // 
             // check_Pieces_NoOv
             // 
-            this.check_Pieces_NoOv.Location = new System.Drawing.Point(21, 220);
+            this.check_Pieces_NoOv.Location = new System.Drawing.Point(21, 200);
             this.check_Pieces_NoOv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_NoOv.Name = "check_Pieces_NoOv";
             this.check_Pieces_NoOv.Size = new System.Drawing.Size(154, 26);
@@ -1338,7 +1325,7 @@
             // 
             // check_Pieces_Erase
             // 
-            this.check_Pieces_Erase.Location = new System.Drawing.Point(21, 193);
+            this.check_Pieces_Erase.Location = new System.Drawing.Point(21, 173);
             this.check_Pieces_Erase.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_Erase.Name = "check_Pieces_Erase";
             this.check_Pieces_Erase.Size = new System.Drawing.Size(154, 26);
@@ -1472,7 +1459,7 @@
             // 
             // btnClearAllSkills
             // 
-            this.btnClearAllSkills.Location = new System.Drawing.Point(81, 712);
+            this.btnClearAllSkills.Location = new System.Drawing.Point(62, 734);
             this.btnClearAllSkills.Name = "btnClearAllSkills";
             this.btnClearAllSkills.Size = new System.Drawing.Size(261, 40);
             this.btnClearAllSkills.TabIndex = 64;
@@ -1482,7 +1469,7 @@
             // 
             // btnRandomSkillset
             // 
-            this.btnRandomSkillset.Location = new System.Drawing.Point(81, 459);
+            this.btnRandomSkillset.Location = new System.Drawing.Point(62, 527);
             this.btnRandomSkillset.Name = "btnRandomSkillset";
             this.btnRandomSkillset.Size = new System.Drawing.Size(261, 34);
             this.btnRandomSkillset.TabIndex = 47;
@@ -1492,7 +1479,7 @@
             // 
             // lblRandomMinLimit
             // 
-            this.lblRandomMinLimit.Location = new System.Drawing.Point(95, 503);
+            this.lblRandomMinLimit.Location = new System.Drawing.Point(76, 571);
             this.lblRandomMinLimit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRandomMinLimit.Name = "lblRandomMinLimit";
             this.lblRandomMinLimit.Size = new System.Drawing.Size(50, 26);
@@ -1501,7 +1488,7 @@
             // 
             // lblRandomMaxLimit
             // 
-            this.lblRandomMaxLimit.Location = new System.Drawing.Point(226, 505);
+            this.lblRandomMaxLimit.Location = new System.Drawing.Point(207, 573);
             this.lblRandomMaxLimit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRandomMaxLimit.Name = "lblRandomMaxLimit";
             this.lblRandomMaxLimit.Size = new System.Drawing.Size(32, 26);
@@ -1510,7 +1497,7 @@
             // 
             // btnSaveAsCustomSkillset
             // 
-            this.btnSaveAsCustomSkillset.Location = new System.Drawing.Point(81, 342);
+            this.btnSaveAsCustomSkillset.Location = new System.Drawing.Point(62, 408);
             this.btnSaveAsCustomSkillset.Name = "btnSaveAsCustomSkillset";
             this.btnSaveAsCustomSkillset.Size = new System.Drawing.Size(261, 34);
             this.btnSaveAsCustomSkillset.TabIndex = 55;
@@ -1522,7 +1509,7 @@
             // 
             this.combo_CustomSkillset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_CustomSkillset.FormattingEnabled = true;
-            this.combo_CustomSkillset.Location = new System.Drawing.Point(81, 382);
+            this.combo_CustomSkillset.Location = new System.Drawing.Point(62, 448);
             this.combo_CustomSkillset.Name = "combo_CustomSkillset";
             this.combo_CustomSkillset.Size = new System.Drawing.Size(261, 28);
             this.combo_CustomSkillset.TabIndex = 0;
@@ -1530,7 +1517,7 @@
             // 
             // btnAllNonZeroSkillsToN
             // 
-            this.btnAllNonZeroSkillsToN.Location = new System.Drawing.Point(81, 609);
+            this.btnAllNonZeroSkillsToN.Location = new System.Drawing.Point(62, 652);
             this.btnAllNonZeroSkillsToN.Name = "btnAllNonZeroSkillsToN";
             this.btnAllNonZeroSkillsToN.Size = new System.Drawing.Size(191, 40);
             this.btnAllNonZeroSkillsToN.TabIndex = 42;
@@ -1541,80 +1528,88 @@
             // 
             // lbl_Skill_Digger
             // 
-            this.lbl_Skill_Digger.Location = new System.Drawing.Point(24, 295);
+            this.lbl_Skill_Digger.AutoSize = true;
+            this.lbl_Skill_Digger.Location = new System.Drawing.Point(110, 306);
             this.lbl_Skill_Digger.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Digger.Name = "lbl_Skill_Digger";
-            this.lbl_Skill_Digger.Size = new System.Drawing.Size(88, 26);
+            this.lbl_Skill_Digger.Size = new System.Drawing.Size(56, 20);
             this.lbl_Skill_Digger.TabIndex = 7;
             this.lbl_Skill_Digger.Text = "Digger";
             // 
             // lbl_Skill_Miner
             // 
-            this.lbl_Skill_Miner.Location = new System.Drawing.Point(24, 259);
+            this.lbl_Skill_Miner.AutoSize = true;
+            this.lbl_Skill_Miner.Location = new System.Drawing.Point(110, 266);
             this.lbl_Skill_Miner.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Miner.Name = "lbl_Skill_Miner";
-            this.lbl_Skill_Miner.Size = new System.Drawing.Size(88, 26);
+            this.lbl_Skill_Miner.Size = new System.Drawing.Size(48, 20);
             this.lbl_Skill_Miner.TabIndex = 6;
             this.lbl_Skill_Miner.Text = "Miner";
             // 
             // lbl_Skill_Basher
             // 
-            this.lbl_Skill_Basher.Location = new System.Drawing.Point(24, 212);
+            this.lbl_Skill_Basher.AutoSize = true;
+            this.lbl_Skill_Basher.Location = new System.Drawing.Point(110, 226);
             this.lbl_Skill_Basher.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Basher.Name = "lbl_Skill_Basher";
-            this.lbl_Skill_Basher.Size = new System.Drawing.Size(88, 26);
+            this.lbl_Skill_Basher.Size = new System.Drawing.Size(60, 20);
             this.lbl_Skill_Basher.TabIndex = 5;
             this.lbl_Skill_Basher.Text = "Basher";
             // 
             // lbl_Skill_Builder
             // 
-            this.lbl_Skill_Builder.Location = new System.Drawing.Point(24, 167);
+            this.lbl_Skill_Builder.AutoSize = true;
+            this.lbl_Skill_Builder.Location = new System.Drawing.Point(110, 186);
             this.lbl_Skill_Builder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Builder.Name = "lbl_Skill_Builder";
-            this.lbl_Skill_Builder.Size = new System.Drawing.Size(88, 26);
+            this.lbl_Skill_Builder.Size = new System.Drawing.Size(58, 20);
             this.lbl_Skill_Builder.TabIndex = 4;
             this.lbl_Skill_Builder.Text = "Builder";
             // 
             // lbl_Skill_Bomber
             // 
-            this.lbl_Skill_Bomber.Location = new System.Drawing.Point(16, 95);
+            this.lbl_Skill_Bomber.AutoSize = true;
+            this.lbl_Skill_Bomber.Location = new System.Drawing.Point(110, 106);
             this.lbl_Skill_Bomber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Bomber.Name = "lbl_Skill_Bomber";
-            this.lbl_Skill_Bomber.Size = new System.Drawing.Size(98, 26);
+            this.lbl_Skill_Bomber.Size = new System.Drawing.Size(65, 20);
             this.lbl_Skill_Bomber.TabIndex = 3;
             this.lbl_Skill_Bomber.Text = "Bomber";
             // 
             // lbl_Skill_Blocker
             // 
-            this.lbl_Skill_Blocker.Location = new System.Drawing.Point(16, 128);
+            this.lbl_Skill_Blocker.AutoSize = true;
+            this.lbl_Skill_Blocker.Location = new System.Drawing.Point(110, 146);
             this.lbl_Skill_Blocker.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Blocker.Name = "lbl_Skill_Blocker";
-            this.lbl_Skill_Blocker.Size = new System.Drawing.Size(88, 26);
+            this.lbl_Skill_Blocker.Size = new System.Drawing.Size(62, 20);
             this.lbl_Skill_Blocker.TabIndex = 2;
             this.lbl_Skill_Blocker.Text = "Blocker";
             // 
             // lbl_Skill_Floater
             // 
-            this.lbl_Skill_Floater.Location = new System.Drawing.Point(16, 59);
+            this.lbl_Skill_Floater.AutoSize = true;
+            this.lbl_Skill_Floater.Location = new System.Drawing.Point(110, 66);
             this.lbl_Skill_Floater.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Floater.Name = "lbl_Skill_Floater";
-            this.lbl_Skill_Floater.Size = new System.Drawing.Size(98, 26);
+            this.lbl_Skill_Floater.Size = new System.Drawing.Size(59, 20);
             this.lbl_Skill_Floater.TabIndex = 1;
             this.lbl_Skill_Floater.Text = "Floater";
             // 
             // lbl_Skill_Climber
             // 
-            this.lbl_Skill_Climber.Location = new System.Drawing.Point(16, 22);
+            this.lbl_Skill_Climber.AutoSize = true;
+            this.lbl_Skill_Climber.Location = new System.Drawing.Point(110, 26);
             this.lbl_Skill_Climber.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Skill_Climber.Name = "lbl_Skill_Climber";
-            this.lbl_Skill_Climber.Size = new System.Drawing.Size(98, 26);
+            this.lbl_Skill_Climber.Size = new System.Drawing.Size(62, 20);
             this.lbl_Skill_Climber.TabIndex = 0;
             this.lbl_Skill_Climber.Text = "Climber";
             // 
             // num_RandomMaxLimit
             // 
             this.num_RandomMaxLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_RandomMaxLimit.Location = new System.Drawing.Point(256, 501);
+            this.num_RandomMaxLimit.Location = new System.Drawing.Point(237, 569);
             this.num_RandomMaxLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_RandomMaxLimit.Minimum = new decimal(new int[] {
             2,
@@ -1635,7 +1630,7 @@
             // num_RandomMinLimit
             // 
             this.num_RandomMinLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_RandomMinLimit.Location = new System.Drawing.Point(150, 501);
+            this.num_RandomMinLimit.Location = new System.Drawing.Point(131, 569);
             this.num_RandomMinLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_RandomMinLimit.Maximum = new decimal(new int[] {
             99,
@@ -1650,7 +1645,7 @@
             // 
             // num_AllNonZeroSkillsToN
             // 
-            this.num_AllNonZeroSkillsToN.Location = new System.Drawing.Point(278, 617);
+            this.num_AllNonZeroSkillsToN.Location = new System.Drawing.Point(259, 660);
             this.num_AllNonZeroSkillsToN.Name = "num_AllNonZeroSkillsToN";
             this.num_AllNonZeroSkillsToN.Size = new System.Drawing.Size(64, 26);
             this.num_AllNonZeroSkillsToN.TabIndex = 53;
@@ -1659,7 +1654,7 @@
             // num_Ski_Digger
             // 
             this.num_Ski_Digger.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Digger.Location = new System.Drawing.Point(114, 293);
+            this.num_Ski_Digger.Location = new System.Drawing.Point(204, 304);
             this.num_Ski_Digger.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Digger.Name = "num_Ski_Digger";
             this.num_Ski_Digger.Size = new System.Drawing.Size(64, 26);
@@ -1672,7 +1667,7 @@
             // num_Ski_Miner
             // 
             this.num_Ski_Miner.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Miner.Location = new System.Drawing.Point(114, 258);
+            this.num_Ski_Miner.Location = new System.Drawing.Point(204, 264);
             this.num_Ski_Miner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Miner.Name = "num_Ski_Miner";
             this.num_Ski_Miner.Size = new System.Drawing.Size(64, 26);
@@ -1685,7 +1680,7 @@
             // num_Ski_Basher
             // 
             this.num_Ski_Basher.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Basher.Location = new System.Drawing.Point(114, 210);
+            this.num_Ski_Basher.Location = new System.Drawing.Point(204, 224);
             this.num_Ski_Basher.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Basher.Name = "num_Ski_Basher";
             this.num_Ski_Basher.Size = new System.Drawing.Size(64, 26);
@@ -1698,7 +1693,7 @@
             // num_Ski_Builder
             // 
             this.num_Ski_Builder.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Builder.Location = new System.Drawing.Point(114, 162);
+            this.num_Ski_Builder.Location = new System.Drawing.Point(204, 184);
             this.num_Ski_Builder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Builder.Name = "num_Ski_Builder";
             this.num_Ski_Builder.Size = new System.Drawing.Size(64, 26);
@@ -1711,7 +1706,8 @@
             // num_Ski_Bomber
             // 
             this.num_Ski_Bomber.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Bomber.Location = new System.Drawing.Point(114, 93);
+            this.num_Ski_Bomber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_Ski_Bomber.Location = new System.Drawing.Point(204, 104);
             this.num_Ski_Bomber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Bomber.Name = "num_Ski_Bomber";
             this.num_Ski_Bomber.Size = new System.Drawing.Size(64, 26);
@@ -1724,7 +1720,7 @@
             // num_Ski_Blocker
             // 
             this.num_Ski_Blocker.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Blocker.Location = new System.Drawing.Point(114, 126);
+            this.num_Ski_Blocker.Location = new System.Drawing.Point(204, 144);
             this.num_Ski_Blocker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Blocker.Name = "num_Ski_Blocker";
             this.num_Ski_Blocker.Size = new System.Drawing.Size(64, 26);
@@ -1737,7 +1733,8 @@
             // num_Ski_Floater
             // 
             this.num_Ski_Floater.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Floater.Location = new System.Drawing.Point(114, 57);
+            this.num_Ski_Floater.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_Ski_Floater.Location = new System.Drawing.Point(204, 64);
             this.num_Ski_Floater.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Floater.Name = "num_Ski_Floater";
             this.num_Ski_Floater.Size = new System.Drawing.Size(64, 26);
@@ -1750,7 +1747,8 @@
             // num_Ski_Climber
             // 
             this.num_Ski_Climber.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.num_Ski_Climber.Location = new System.Drawing.Point(114, 20);
+            this.num_Ski_Climber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_Ski_Climber.Location = new System.Drawing.Point(204, 24);
             this.num_Ski_Climber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.num_Ski_Climber.Name = "num_Ski_Climber";
             this.num_Ski_Climber.Size = new System.Drawing.Size(64, 26);
@@ -1776,7 +1774,7 @@
             // check_Lvl_Superlemming
             // 
             this.check_Lvl_Superlemming.AutoSize = true;
-            this.check_Lvl_Superlemming.Location = new System.Drawing.Point(75, 186);
+            this.check_Lvl_Superlemming.Location = new System.Drawing.Point(75, 213);
             this.check_Lvl_Superlemming.Name = "check_Lvl_Superlemming";
             this.check_Lvl_Superlemming.Size = new System.Drawing.Size(242, 24);
             this.check_Lvl_Superlemming.TabIndex = 9;
@@ -1786,10 +1784,10 @@
             // 
             // btnEditPostview
             // 
-            this.btnEditPostview.Location = new System.Drawing.Point(101, 106);
+            this.btnEditPostview.Location = new System.Drawing.Point(75, 106);
             this.btnEditPostview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEditPostview.Name = "btnEditPostview";
-            this.btnEditPostview.Size = new System.Drawing.Size(188, 45);
+            this.btnEditPostview.Size = new System.Drawing.Size(242, 45);
             this.btnEditPostview.TabIndex = 8;
             this.btnEditPostview.Text = "Edit Postview Text";
             this.btnEditPostview.UseVisualStyleBackColor = true;
@@ -1797,10 +1795,10 @@
             // 
             // btnEditPreview
             // 
-            this.btnEditPreview.Location = new System.Drawing.Point(101, 53);
+            this.btnEditPreview.Location = new System.Drawing.Point(75, 53);
             this.btnEditPreview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEditPreview.Name = "btnEditPreview";
-            this.btnEditPreview.Size = new System.Drawing.Size(188, 45);
+            this.btnEditPreview.Size = new System.Drawing.Size(242, 45);
             this.btnEditPreview.TabIndex = 7;
             this.btnEditPreview.Text = "Edit Preview Text";
             this.btnEditPreview.UseVisualStyleBackColor = true;
@@ -2283,6 +2281,7 @@
             this.tabPieces.ResumeLayout(false);
             this.tabPieces.PerformLayout();
             this.tabSkills.ResumeLayout(false);
+            this.tabSkills.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_RandomMaxLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_RandomMinLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_AllNonZeroSkillsToN)).EndInit();
@@ -2373,7 +2372,6 @@
         private RLEditor.NumUpDownOverwrite num_Lvl_TimeSec;
         private RLEditor.NumUpDownOverwrite num_Lvl_TimeMin;
         private RLEditor.NumUpDownOverwrite num_Lvl_RR;
-        private System.Windows.Forms.Label lbl_Global_SR;
         private System.Windows.Forms.ComboBox combo_Music;
         private System.Windows.Forms.PictureBox pic_Level;
         private System.Windows.Forms.TabControl tabLvlProperties;
