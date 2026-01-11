@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
 using System.Windows.Forms;
 
 namespace RLEditor
@@ -85,7 +88,7 @@ namespace RLEditor
 
             // --- Style / background / music ---
             string styleName = ini.GetString("style");
-            newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
+            newLevel.PieceStyle = styleList.Find(sty => sty.NameInEditor == styleName);
             
             newLevel.Background = null; // TODO - Find out how background images are handled in RetroLemmini
             
@@ -114,13 +117,16 @@ namespace RLEditor
             // --- Time limit ---
             if (ini.HasKey("timeLimitSeconds"))
             {
-                newLevel.TimeLimit = ini.GetInt("timeLimitSeconds");
-                newLevel.IsNoTimeLimit = false;
+                int timeLimit = ini.GetInt("timeLimitSeconds");
+                newLevel.TimeLimit = timeLimit;
+
+                if (timeLimit <= 0)
+                    newLevel.IsNoTimeLimit = true;
+                else
+                    newLevel.IsNoTimeLimit = false;
             }
             else
-            {
                 newLevel.IsNoTimeLimit = true;
-            }
 
             // --- Release rate ---
             newLevel.ReleaseRate = ini.GetInt("releaseRate");
@@ -175,6 +181,17 @@ namespace RLEditor
 
         private static void LoadGadget(Level level, string data)
         {
+            int underscore = data.IndexOf('_');
+            int equals = data.IndexOf('=');
+            if (underscore >= 0 && equals > underscore)
+            {
+                string numberPart = data.Substring(underscore + 1, equals - underscore - 1).Trim();
+                if (int.TryParse(numberPart, out int objectIndex))
+                {
+                    data = data.Substring(equals + 1).Trim(); // remove "object_N = " prefix
+                }
+            }
+
             int[] value = INIFileParser.ParseIntArray(data);
 
             int objectID = value[0];
@@ -193,9 +210,9 @@ namespace RLEditor
             int specWidth = -1;
             int specHeight = -1;
 
-            bool doRotate = false; // TODO - Check if RetroLemmini uses rotation
             bool doInvert = (flags & 1) != 0;
             bool doFlip = (flags & 8) != 0;
+            bool doRotate = (flags & 16) != 0;
 
             if (doRotate)
                 Utility.Swap(ref specWidth, ref specHeight);
@@ -241,6 +258,17 @@ namespace RLEditor
 
         private static void LoadTerrain(Level level, string data)
         {
+            int underscore = data.IndexOf('_');
+            int equals = data.IndexOf('=');
+            if (underscore >= 0 && equals > underscore)
+            {
+                string numberPart = data.Substring(underscore + 1, equals - underscore - 1).Trim();
+                if (int.TryParse(numberPart, out int terrainIndex))
+                {
+                    data = data.Substring(equals + 1).Trim(); // remove "terrain_N = " prefix
+                }
+            }
+
             int[] value = INIFileParser.ParseIntArray(data);
 
             int terrainID = value[0];
@@ -258,9 +286,9 @@ namespace RLEditor
 
             bool isOneWay = (modifier & 64) == 0;
 
-            bool doRotate = false; // TODO - Check if RetroLemmini uses rotation
             bool doInvert = (modifier & 4) != 0;
             bool doFlip = (modifier & 32) != 0;
+            bool doRotate = (modifier & 128) != 0;
 
             int specWidth = -1;
             int specHeight = -1;
@@ -417,136 +445,156 @@ namespace RLEditor
         /// <param name="curLevel"></param>
         static public void SaveLevelToFile(string filePath, Level curLevel)
         {
-            // Create new empty file
-            try
-            {
-                File.Create(filePath).Close();
-            }
-            catch (Exception Ex)
-            {
-                Utility.LogException(Ex);
-                MessageBox.Show("Error: Cannot create text file at " + filePath + "." + C.NewLine + Ex.Message, "Could not save");
-                return;
-            }
-
             curLevel.PrepareForSave();
 
-            TextWriter textFile = new StreamWriter(filePath, true);
+            var sb = new StringBuilder();
 
-            textFile.WriteLine("# ----------------------------- ");
-            textFile.WriteLine($"#        {curLevel.Format} Level      ");
-            textFile.WriteLine("#   Created with RLEditor " + C.Version);
-            textFile.WriteLine("# ----------------------------- ");
-            textFile.WriteLine(" ");
-            textFile.WriteLine("#        Level info             ");
-            textFile.WriteLine("# ----------------------------- ");
-            textFile.WriteLine(" TITLE " + curLevel.Title);
-            textFile.WriteLine(" AUTHOR " + curLevel.Author);
-            if (!string.IsNullOrEmpty(curLevel.MusicFile))
+            // Add level stats
+            sb.AppendLine($"# LVL {Path.GetFileName(filePath)}");
+            sb.AppendLine($"# Created with RetroLemmini Editor Version {C.Version}");
+            sb.AppendLine($"# Level ID {curLevel.LevelID} Version {curLevel.LevelVersion}");
+            sb.AppendLine("# RetroLemmini Level");
+            sb.AppendLine();
+            sb.AppendLine("# Level stats");
+            sb.AppendLine($"name = {GetSafeString(curLevel.Title)}");
+            sb.AppendLine($"author = {GetSafeString(curLevel.Author)}");
+            sb.AppendLine($"releaseRate = {curLevel.ReleaseRate}");
+            sb.AppendLine($"numLemmings = {curLevel.NumLems}");
+            sb.AppendLine($"numToRescue = {curLevel.SaveReq}");
+            sb.AppendLine($"timeLimitSeconds = {curLevel.TimeLimit}");
+            sb.AppendLine($"numClimbers = {curLevel.NumClimbers}");
+            sb.AppendLine($"numFloaters = {curLevel.NumFloaters}");
+            sb.AppendLine($"numBombers = {curLevel.NumBombers}");
+            sb.AppendLine($"numBlockers = {curLevel.NumBlockers}");
+            sb.AppendLine($"numBuilders = {curLevel.NumBuilders}");
+            sb.AppendLine($"numBashers = {curLevel.NumBashers}");
+            sb.AppendLine($"numMiners = {curLevel.NumMiners}");
+            sb.AppendLine($"numDiggers = {curLevel.NumDiggers}");
+            sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
+            sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
+            sb.AppendLine($"style = {curLevel.PieceStyle.NameInEditor}");
+            sb.AppendLine($"maxFallDistance = {curLevel.MaxFallDistance}");
+            sb.AppendLine($"autosteelMode = {curLevel.AutosteelMode}");
+            sb.AppendLine($"width = {curLevel.Width}");
+            sb.AppendLine($"height = {curLevel.Height}");
+            sb.AppendLine($"topBoundary = {curLevel.TopBoundary}");
+            sb.AppendLine($"bottomBoundary = {curLevel.BottomBoundary}");
+            sb.AppendLine($"leftBoundary = {curLevel.LeftBoundary}");
+            sb.AppendLine($"rightBoundary = {curLevel.RightBoundary}");
+            sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
+            sb.AppendLine($"forceNormalTimerSpeed = {curLevel.ForceNormalTimerSpeed}");
+            sb.AppendLine();
+
+            // Add objects
+            sb.AppendLine("# Objects");
+            sb.AppendLine("# ID, X pos, Y pos, paint mode, flags, (optional) object-specific modifier");
+            sb.AppendLine("# Paint modes (one value only): 0 = full, 2 = invisible, 4 = no overwrite, 8 = only on terrain");
+            sb.AppendLine("# Flags (combining allowed): 1 = inverted, 2 = fake, 4 = inverted trigger, 8 = flipped, 16 = rotated");
+
+            var objectLinesData = BuildObjectLines(curLevel);
+            foreach (var line in objectLinesData)
+                sb.AppendLine(line);
+
+            sb.AppendLine();
+
+            // Add terrain
+            sb.AppendLine("# Terrain");
+            sb.AppendLine("# ID, X pos, Y pos, flags");
+            sb.AppendLine("# Flags (combining allowed): 1 = invisible, 2 = eraser, 4 = inverted, 8 = no overwrite, 16 = fake, 32 = flipped, 64 = no one-way, 128 = rotated");
+
+            var terrainLinesData = BuildTerrainLines(curLevel);
+            foreach (var line in terrainLinesData)
+                sb.AppendLine(line);
+
+            sb.AppendLine();
+
+            // Write all to .ini
+            File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
+        }
+
+        private static string GetSafeString(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return "";
+
+            // INI safe: wrap strings containing special chars in quotes
+            if (text.Contains('=') || text.Contains(';'))
+                return "\"" + text.Replace("\"", "\\\"") + "\"";
+
+            return text;
+        }
+
+        private static List<string> BuildObjectLines(Level level)
+        {
+            var objectLines = new List<string>();
+            int counter = 0;
+
+            foreach (var gad in level.GadgetList)
             {
-                textFile.WriteLine(" MUSIC " + Path.ChangeExtension(curLevel.MusicFile, null));
-            }
-            textFile.WriteLine(" ID x" + curLevel.LevelID.ToString("X16"));
-            textFile.WriteLine(" VERSION x" + curLevel.LevelVersion.ToString("X16"));
-            textFile.WriteLine(" ");
+                // Determine ID from last underscore in Key
+                int underscore = gad.Key.LastIndexOf('_');
+                int gadgetID = 0;
+                if (underscore >= 0 && int.TryParse(gad.Key.Substring(underscore + 1), out int parsedID))
+                    gadgetID = parsedID;
+                else
+                    gadgetID = 0; // Should never happen
 
-            textFile.WriteLine("#       Level dimensions        ");
-            textFile.WriteLine("# ----------------------------- ");
-            textFile.WriteLine(" WIDTH " + curLevel.Width.ToString());
-            textFile.WriteLine(" HEIGHT " + curLevel.Height.ToString());
-            if (!curLevel.AutoStartPos)
-            {
-                textFile.WriteLine(" START_X " + curLevel.StartPosX.ToString());
-                textFile.WriteLine(" START_Y " + curLevel.StartPosY.ToString());
-            }
-            textFile.WriteLine(" THEME " + curLevel.PieceStyle?.NameInDirectory);
+                int paintMode = 0;
+                if //(gad.IsInvisible) paintMode = 2; // TODO - Add support for invisible objects
+                //else if 
+                        (gad.IsNoOverwrite) paintMode = 4;
+                else if (gad.IsOnlyOnTerrain) paintMode = 8;
 
-            if (curLevel.Background != null)
-            {
-                string bgText = curLevel.Background.Style.NameInDirectory + ":" + curLevel.Background.Name;
-                if (bgText.Trim() != ":")
-                    textFile.WriteLine(" BACKGROUND " + bgText);
-            }
-            textFile.WriteLine(" ");
+                int flags = 0;
+                //if (gad.IsFake) flags |= 2; // TODO - Add support for fake objects
+                if (gad.IsInvertedInPlayer) flags |= 1;
+                if (gad.IsInvertedInPlayer) flags |= 4; // Also invert mask
+                if (gad.IsFlippedInPlayer) flags |= 8;
+                if (gad.IsRotatedInPlayer) flags |= 16;
 
-            textFile.WriteLine("#         Level stats           ");
-            textFile.WriteLine("# ----------------------------- ");
-            textFile.WriteLine(" LEMMINGS " + curLevel.NumLems.ToString());
-            textFile.WriteLine(" SAVE_REQUIREMENT " + curLevel.SaveReq.ToString());
-            if (!curLevel.IsNoTimeLimit)
-            {
-                textFile.WriteLine(" TIME_LIMIT " + curLevel.TimeLimit.ToString());
-            }
-            // TODO: This may need to be recalculated - depends on which value the .ini uses
-            textFile.WriteLine(" MAX_SPAWN_INTERVAL " + curLevel.ReleaseRate.ToString());
-            if (curLevel.IsReleaseRateLocked)
-            {
-                textFile.WriteLine(" SPAWN_INTERVAL_LOCKED");
-            }
-            if (curLevel.IsSuperlemming)
-            {
-                textFile.WriteLine(" SUPERLEMMING");
-            }
-            textFile.WriteLine(" ");
+                int modifier = 0; // gad.Modifier; // TODO - Add support for whatever this is!
 
-            textFile.WriteLine(" $SKILLSET ");
-            foreach (C.Skill skill in C.SkillArray)
-            {
-                if (IsSkillRequired(curLevel, skill))
-                {
-                    var count = curLevel.SkillSet[skill] > 99 ? "INFINITE" : curLevel.SkillSet[skill].ToString();
-                    textFile.WriteLine(PaddedSkillString(skill) + count);
-                }
-            }
-            textFile.WriteLine(" $END ");
-            textFile.WriteLine(" ");
+                string line = $"object_{counter} = {gadgetID}, {gad.PosX}, {gad.PosY}, {paintMode}, {flags}, {modifier}";
+                objectLines.Add(line);
 
-            if (GetTextNeedsSaving(curLevel.PreviewText))
-            {
-                textFile.WriteLine(" $PRETEXT ");
-                curLevel.PreviewText.ForEach(lin => textFile.WriteLine("   LINE " + lin));
-                textFile.WriteLine(" $END ");
-                textFile.WriteLine(" ");
-            }
-
-            if (GetTextNeedsSaving(curLevel.PostviewText))
-            {
-                textFile.WriteLine(" $POSTTEXT ");
-                curLevel.PostviewText.ForEach(lin => textFile.WriteLine("   LINE " + lin));
-                textFile.WriteLine(" $END ");
-                textFile.WriteLine(" ");
-            }
-
-            textFile.WriteLine("#     Interactive objects       ");
-            textFile.WriteLine("# ----------------------------- ");
-            curLevel.GadgetList.FindAll(gad => gad.ObjType != C.OBJ.LEMMING)
-                               .ForEach(gad => WriteObject(textFile, gad));
-            textFile.WriteLine(" ");
-
-            textFile.WriteLine("#        Terrain pieces         ");
-            textFile.WriteLine("# ----------------------------- ");
-            curLevel.TerrainList.FindAll(ter => !ter.IsSketch).ForEach(ter => WriteTerrain(textFile, ter, curLevel.TerrainList.IndexOf(ter), false));
-            textFile.WriteLine(" ");
-
-            if (curLevel.GadgetList.Exists(gad => gad.ObjType == C.OBJ.LEMMING))
-            {
-                textFile.WriteLine("#      Preplaced lemmings       ");
-                textFile.WriteLine("# ----------------------------- ");
-                curLevel.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.LEMMING)
-                                   .ForEach(lem => WriteObject(textFile, lem));
-
-                textFile.WriteLine(" ");
-            }
-
-            if (curLevel.TerrainList.Exists(ter => ter.IsSketch))
-            {
-                textFile.WriteLine("#           Sketches            ");
-                textFile.WriteLine("# ----------------------------- ");
-                curLevel.TerrainList.FindAll(ter => ter.IsSketch).ForEach(ske => WriteTerrain(textFile, ske, curLevel.TerrainList.IndexOf(ske), true));
-                textFile.WriteLine(" ");
+                counter++;
             }
 
-            textFile.Close();
+            return objectLines;
+        }
+
+        private static List<string> BuildTerrainLines(Level level)
+        {
+            var terrainLines = new List<string>();
+            int counter = 0;
+
+            foreach (var ter in level.TerrainList)
+            {
+                // Determine ID from last underscore in Key
+                int underscore = ter.Key.LastIndexOf('_');
+                int terrainID = 0;
+                if (underscore >= 0 && int.TryParse(ter.Key.Substring(underscore + 1), out int parsedID))
+                    terrainID = parsedID;
+                else
+                    terrainID = 0; // Should never happen
+
+                int flags = 0;
+                // if (ter.IsInvisible) flags |= 1; // TODO - Add support for invisible terrain
+                if (ter.IsErase) flags |= 2;
+                if (ter.IsInvertedInPlayer) flags |= 4;
+                if (ter.IsNoOverwrite) flags |= 8;
+                // if (ter.IsFake) flags |= 16; // TODO - Add support for fake terrain
+                if (ter.IsFlippedInPlayer) flags |= 32;
+                if (!ter.IsOneWay) flags |= 64;
+                if (ter.IsRotatedInPlayer) flags |= 128;
+
+                string line = $"terrain_{counter} = {terrainID}, {ter.PosX}, {ter.PosY}, {flags}";
+                terrainLines.Add(line);
+
+                counter++;
+            }
+
+            return terrainLines;
         }
 
         private static bool GetTextNeedsSaving(List<string> text)

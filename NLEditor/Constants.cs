@@ -30,7 +30,7 @@ namespace RLEditor
         public static string AppPathPieces => AppPathResources + "styles" + DirSep;
         public static string AppPathMusic => AppPathResources + "music" + DirSep;
         public static string AppPathLevels => AppPathResources + "levels" + DirSep;
-        public static string AppPathTempLevel => AppPathResources + "TempTestLevel.nxlv";
+        public static string AppPathTempLevel => AppPathResources + "TempTestLevel.ini";
         public static string AppPathThemeInfo(string styleName) => AppPathPieces + styleName + C.DirSep + styleName + ".ini";
         public static string AppPathSettingsFolder => AppPath + "settings" + DirSep;
         public static string AppPathSettings => AppPathSettingsFolder + "RLEditorSettings.ini";

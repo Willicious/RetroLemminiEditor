@@ -384,7 +384,7 @@ namespace RLEditor
                                     case 9:
                                         objType = C.OBJ.STEEL;
                                         break;
-                                    case 10:
+                                    case 32:
                                         objType = C.OBJ.HATCH;
                                         break;
                                 }

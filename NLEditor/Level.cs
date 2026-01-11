@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using static RLEditor.C;
 
 namespace RLEditor
 {
@@ -96,8 +97,27 @@ namespace RLEditor
         public int TimeLimit { get; set; }
         public bool IsNoTimeLimit { get; set; }
         public bool IsSuperlemming { get; set; }
+        public bool ForceNormalTimerSpeed = true;
+
+        public int MaxFallDistance = 126;
+        public int AutosteelMode = 2;
+
+        public int TopBoundary = 8;
+        public int BottomBoundary = 20;
+        public int LeftBoundary = 0;
+        public int RightBoundary = -16;
 
         public Dictionary<C.Skill, int> SkillSet { get; set; }
+
+        public int NumClimbers => GetSkill(Skill.Climber);
+        public int NumFloaters => GetSkill(Skill.Floater);
+        public int NumBombers => GetSkill(Skill.Bomber);
+        public int NumBlockers => GetSkill(Skill.Blocker);
+        public int NumBuilders => GetSkill(Skill.Builder);
+        public int NumBashers => GetSkill(Skill.Basher);
+        public int NumMiners => GetSkill(Skill.Miner);
+        public int NumDiggers => GetSkill(Skill.Digger);
+
         public List<string> PreviewText { get; set; }  // not changable in the editor
         public List<string> PostviewText { get; set; } // not changable in the editor
 
@@ -211,6 +231,14 @@ namespace RLEditor
             return true;
         }
 
+        private int GetSkill(Skill skill)
+        {
+            if (SkillSet != null && SkillSet.ContainsKey(skill))
+                return SkillSet[skill];
+
+            return 0;
+        }
+
         /// <summary>
         /// Returns the theme color as specified by the main style.
         /// </summary>
@@ -256,7 +284,7 @@ namespace RLEditor
             int piecePosY = (centerPos.Y - ImageLibrary.GetHeight(pieceKey) / 2).RoundToMultiple(gridSize);
             Point piecePos = new Point(piecePosX, piecePosY);
 
-            if (pieceKey.Contains("object"))
+            if (pieceKey.Contains(PieceStyle.NameInDirectory + "o_"))
             {
                 GadgetList.Add(new GadgetPiece(pieceKey, piecePos));
             }
