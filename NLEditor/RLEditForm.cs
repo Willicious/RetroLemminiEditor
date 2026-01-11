@@ -1401,13 +1401,5 @@ namespace RLEditor
                 styleManagerForm.ShowDialog(this);
             }
         }
-
-        private void exportToINIToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var iniExporterForm = new FormINIExporter(CurLevel))
-            {
-                iniExporterForm.ShowDialog(this);
-            }
-        }
     }
 }

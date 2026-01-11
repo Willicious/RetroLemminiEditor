@@ -90,12 +90,6 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="BmpModify.cs" />
-    <Compile Include="FormINIExporter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormINIExporter.Designer.cs">
-      <DependentUpon>FormINIExporter.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormLevelArranger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,9 +177,6 @@
     </Compile>
     <Compile Include="Utility.cs" />
     <Compile Include="ValidateLevel.cs" />
-    <EmbeddedResource Include="FormINIExporter.resx">
-      <DependentUpon>FormINIExporter.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormLevelArranger.resx">
       <DependentUpon>FormLevelArranger.cs</DependentUpon>
     </EmbeddedResource>
