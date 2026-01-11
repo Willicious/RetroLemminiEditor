@@ -41,7 +41,7 @@ namespace RLEditor
             this.ReleaseRate = 50;
             this.IsReleaseRateLocked = false;
             this.TimeLimit = 0;
-            this.IsNoTimeLimit = true;
+            this.HasTimeLimit = false;
             this.IsSuperlemming = false;
 
             this.SkillSet = new Dictionary<C.Skill, int>();
@@ -95,7 +95,7 @@ namespace RLEditor
         public int ReleaseRate { get; set; }
         public bool IsReleaseRateLocked { get; set; }
         public int TimeLimit { get; set; }
-        public bool IsNoTimeLimit { get; set; }
+        public bool HasTimeLimit { get; set; }
         public bool IsSuperlemming { get; set; }
         public bool ForceNormalTimerSpeed = true;
 
@@ -155,7 +155,7 @@ namespace RLEditor
             newLevel.ReleaseRate = this.ReleaseRate;
             newLevel.IsReleaseRateLocked = this.IsReleaseRateLocked;
             newLevel.TimeLimit = this.TimeLimit;
-            newLevel.IsNoTimeLimit = this.IsNoTimeLimit;
+            newLevel.HasTimeLimit = this.HasTimeLimit;
             newLevel.IsSuperlemming = this.IsSuperlemming;
 
             newLevel.SkillSet = new Dictionary<C.Skill, int>();
@@ -199,8 +199,8 @@ namespace RLEditor
                 || this.ReleaseRate != otherLevel.ReleaseRate
                 || this.IsReleaseRateLocked != otherLevel.IsReleaseRateLocked
                 || this.IsSuperlemming != otherLevel.IsSuperlemming
-                || this.IsNoTimeLimit != otherLevel.IsNoTimeLimit
-                || (this.TimeLimit != otherLevel.TimeLimit && !this.IsNoTimeLimit)
+                || this.HasTimeLimit != otherLevel.HasTimeLimit
+                || (this.TimeLimit != otherLevel.TimeLimit && this.HasTimeLimit)
                 || !this.PreviewText.ToString().Equals(otherLevel.PreviewText.ToString())
                 || !this.PostviewText.ToString().Equals(otherLevel.PostviewText.ToString()))
             {

@@ -438,7 +438,7 @@ Digger=20
             CurLevel.IsSuperlemming = check_Lvl_Superlemming.Checked;
             CurLevel.TimeLimit = decimal.ToInt32(num_Lvl_TimeMin.Value) * 60
                                     + decimal.ToInt32(num_Lvl_TimeSec.Value);
-            CurLevel.IsNoTimeLimit = !check_Lvl_TimeLimit.Checked;
+            CurLevel.HasTimeLimit = check_Lvl_TimeLimit.Checked;
 
             string idText = txt_LevelID.Text;
             if (idText.Length < 16)
@@ -502,7 +502,7 @@ Digger=20
                 check_Lvl_LockSR.Checked = CurLevel.IsReleaseRateLocked;
                 num_Lvl_TimeMin.Value = CurLevel.TimeLimit / 60;
                 num_Lvl_TimeSec.Value = CurLevel.TimeLimit % 60;
-                check_Lvl_TimeLimit.Checked = !CurLevel.IsNoTimeLimit;
+                check_Lvl_TimeLimit.Checked = CurLevel.HasTimeLimit;
                 check_Lvl_Superlemming.Checked = CurLevel.IsSuperlemming;
 
                 txt_LevelID.Text = CurLevel.LevelID.ToString("X16");

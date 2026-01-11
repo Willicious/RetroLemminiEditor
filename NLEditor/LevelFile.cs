@@ -129,12 +129,12 @@ namespace RLEditor
                 newLevel.TimeLimit = timeLimit;
 
                 if (timeLimit <= 0)
-                    newLevel.IsNoTimeLimit = true;
+                    newLevel.HasTimeLimit = false;
                 else
-                    newLevel.IsNoTimeLimit = false;
+                    newLevel.HasTimeLimit = true;
             }
             else
-                newLevel.IsNoTimeLimit = true;
+                newLevel.HasTimeLimit = false;
 
             // --- Release rate ---
             newLevel.ReleaseRate = ini.GetInt("releaseRate");
