@@ -7,7 +7,7 @@
     <ProjectGuid>{55FACBA7-BEAB-4E2C-84AB-D25C5BE75795}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NLEditor</RootNamespace>
+    <RootNamespace>RLEditor</RootNamespace>
     <AssemblyName>RLEditor</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -127,6 +127,7 @@
     <Compile Include="FormAboutRLEditor.Designer.cs">
       <DependentUpon>FormAboutRLEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="INIFileParser.cs" />
     <Compile Include="INITranslationTables.cs" />
     <Compile Include="LevelPieceBase.cs" />
     <Compile Include="LevelPieceGadget.cs" />

@@ -1041,7 +1041,7 @@ Digger=20
         private bool cleansingLevels;
 
         /// <summary>
-        /// Opens and saves all .nxlv files in a directory in order to ensure compatibility and update the file
+        /// Opens and saves all .ini files in a directory in order to ensure compatibility and update the file
         /// </summary>
         private async void CleanseLevels()
         {
@@ -1059,8 +1059,8 @@ Digger=20
             levelsWithNoLemmings.Clear();
             levelsWithNoExits.Clear();
 
-            // Get all .nxlv files in the target folder and its subdirectories
-            string[] files = Directory.GetFiles(targetFolder, "*.nxlv", SearchOption.AllDirectories);
+            // Get all .ini files in the target folder and its subdirectories
+            string[] files = Directory.GetFiles(targetFolder, "*.ini", SearchOption.AllDirectories);
 
             // Show progress bar
             using (FormProgress progressForm = new FormProgress())
@@ -1088,7 +1088,7 @@ Digger=20
                 statusBar.Visible = false;
 
                 // Display completion message
-                string cleanseMsg = "All .nxlv files cleansed successfully.";
+                string cleanseMsg = "All .ini files cleansed successfully.";
                 
                 if (levelsWithMissingPieces.Count > 0)
                 {
@@ -1130,14 +1130,14 @@ Digger=20
         }
 
         /// <summary>
-        /// Saves the level as TempTestLevel.nxlv and loads this level in the Neo/RetroLemmini player.
+        /// Saves the level as TempTestLevel.ini and loads this level in the RetroLemmini player.
         /// </summary>
         private void PlaytestLevel()
         {
             ReadLevelInfoFromForm(true);
             SaveChangesToOldLevelList();
 
-            // Save the level as TempTestLevel.nxlv.
+            // Save the level as TempTestLevel.ini
             string origFilePath = CurLevel.FilePathToSave;
             CurLevel.FilePathToSave = C.AppPathTempLevel;
             SaveLevel(true);
@@ -2053,7 +2053,7 @@ Digger=20
                     filename = filename.Replace(c, '_');
 
                 Level tempLevel = CurLevel.Clone();
-                LevelFile.SaveLevelToFile(C.AppPathAutosave + filename + ".nxlv", tempLevel);
+                LevelFile.SaveLevelToFile(C.AppPathAutosave + filename + ".ini", tempLevel);
 
                 ClearOldAutosaves();
             }
@@ -2067,7 +2067,7 @@ Digger=20
         {
             if (curSettings.KeepAutosaveCount > 0)
             {
-                string[] files = Directory.GetFiles(C.AppPathAutosave, "*.nxlv");
+                string[] files = Directory.GetFiles(C.AppPathAutosave, "*.ini");
                 if (files.Length > curSettings.KeepAutosaveCount)
                 {
                     List<KeyValuePair<string, long>> fileTimes = new List<KeyValuePair<string, long>>();

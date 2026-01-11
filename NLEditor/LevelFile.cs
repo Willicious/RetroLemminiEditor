@@ -12,10 +12,9 @@ namespace RLEditor
     static class LevelFile
     {
         /// <summary>
-        /// Opens file browser and creates level from a .nxlv file.
+        /// Opens file browser and creates level from a .ini file.
         /// <para> Returns null if process is aborted or file is corrupt. </para>
         /// </summary>
-        /// <param name="styleList"></param>
         static public Level LoadLevel(List<Style> styleList, BackgroundList backgrounds, string levelDirectory)
         {
             var openFileDialog = new OpenFileDialog();
@@ -29,7 +28,7 @@ namespace RLEditor
                 openFileDialog.InitialDirectory = Directory.Exists(C.AppPathLevels) ? C.AppPathLevels : C.AppPath;
             }
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "RetroLemmini level files (*.nxlv)|*.nxlv";
+            openFileDialog.Filter = "RetroLemmini level files (*.ini)|*.ini";
             openFileDialog.RestoreDirectory = true;
             openFileDialog.CheckFileExists = true;
 
@@ -76,63 +75,72 @@ namespace RLEditor
         static private Level DoLoadLevelFromFile(string filePath, List<Style> styleList, BackgroundList backgrounds)
         {
             Level newLevel = new Level();
-            NLTextDataNode file = NLTextParser.LoadFile(filePath);
+            INIFileParser ini = INIFileParser.Load(filePath);
 
-            newLevel.Title = file["TITLE"].Value;
-            newLevel.Author = file["AUTHOR"].Value;
-            newLevel.LevelID = file["ID"].ValueUInt64;
-            newLevel.LevelVersion = file["VERSION"].ValueUInt64;
+            // --- Basic metadata ---
+            newLevel.Title = ini.GetString("name");
+            newLevel.Author = ini.GetString("author");
+            newLevel.LevelID = 0; // TODO - Implement level ID in RetroLemmini
+            newLevel.LevelVersion = 0; // TODO - Implement level version in RetroLemmini
 
-            newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == file["THEME"].Value);
-            newLevel.Background = ParseBackground(file["BACKGROUND"].Value, styleList, backgrounds);
+            // --- Style / background / music ---
+            string styleName = ini.GetString("style");
+            newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
+            
+            newLevel.Background = null; // TODO - Find out how background images are handled in RetroLemmini
+            
+            newLevel.MusicFile = ini.GetString("music");
 
-            newLevel.MusicFile = file["MUSIC"].Value;
+            // --- Level dimensions ---
+            newLevel.Width = ini.GetInt("width");
+            newLevel.Height = ini.GetInt("height");
 
-            newLevel.Width = file["WIDTH"].ValueInt;
-            newLevel.Height = file["HEIGHT"].ValueInt;
+            // --- Start position ---
+            int startX = ini.GetInt("xPosCenter", int.MinValue);
+            int startY = ini.GetInt("yPosCenter", int.MinValue);
 
-            if (file.HasChildWithKey("START_X") && file.HasChildWithKey("START_Y"))
+            if (startX != int.MinValue && startY != int.MinValue)
             {
-                newLevel.StartPos = new Point(file["START_X"].ValueInt, file["START_Y"].ValueInt);
+                newLevel.StartPos = new Point(startX, startY);
                 newLevel.AutoStartPos = false;
             }
             else
                 newLevel.AutoStartPos = true;
 
-            newLevel.NumLems = file["LEMMINGS"].ValueInt;
-            newLevel.SaveReq = file["SAVE_REQUIREMENT"].ValueInt;
+            // --- Lemming counts ---
+            newLevel.NumLems = ini.GetInt("numLemmings");
+            newLevel.SaveReq = ini.GetInt("numToRescue");
 
-            if (file.HasChildWithKey("TIME_LIMIT"))
+            // --- Time limit ---
+            if (ini.HasKey("timeLimitSeconds"))
             {
-                newLevel.TimeLimit = file["TIME_LIMIT"].ValueInt;
+                newLevel.TimeLimit = ini.GetInt("timeLimitSeconds");
                 newLevel.IsNoTimeLimit = false;
             }
+            else
+            {
+                newLevel.IsNoTimeLimit = true;
+            }
 
-            // TODO: This may need to be recalculated - depends on which value the .ini uses
-            newLevel.ReleaseRate = 103 - file["MAX_SPAWN_INTERVAL"].ValueInt;
-            newLevel.IsReleaseRateLocked = file.HasChildWithKey("SPAWN_INTERVAL_LOCKED");
-            newLevel.IsSuperlemming = file.HasChildWithKey("SUPERLEMMING");
+            // --- Release rate ---
+            newLevel.ReleaseRate = ini.GetInt("releaseRate");
+            newLevel.IsReleaseRateLocked = false; // look for "lockReleaseRate = true" in .ini file
+            newLevel.IsSuperlemming = false; // look for "superlemming = true" in .ini file
 
-            LoadSkillset(newLevel, file["SKILLSET"]);
+            // --- Skillset ---
+            LoadSkillset(newLevel, ini);
 
-            foreach (var node in file.Children.FindAll(child => child.Key == "GADGET"))
-                LoadGadget(newLevel, node);
+            // --- Objects / gadgets ---
+            foreach (string data in ini.GetIndexed("object"))
+                LoadGadget(newLevel, data);
 
-            foreach (var node in file.Children.FindAll(child => child.Key == "TERRAIN"))
-                LoadTerrain(newLevel, node);
+            // --- Terrain ---
+            foreach (string data in ini.GetIndexed("terrain"))
+                LoadTerrain(newLevel, data);
 
-            foreach (var node in file.Children.FindAll(child => child.Key == "LEMMING"))
-                LoadLemming(newLevel, node);
-
-            foreach (var node in file.Children.FindAll(child => child.Key == "SKETCH"))
-                LoadSketch(newLevel, node);
-
-            foreach (var line in file["PRETEXT"].Children.FindAll(child => child.Key == "LINE"))
-                newLevel.PreviewText.Add(line.Value);
-
-            foreach (var line in file["POSTTEXT"].Children.FindAll(child => child.Key == "LINE"))
-                newLevel.PostviewText.Add(line.Value);
-
+            //// --- Steel --- 
+            // TODO - Always handle steel as autosteel
+            
             SanitizeInput(newLevel);
             return newLevel;
         }
@@ -153,46 +161,67 @@ namespace RLEditor
                 return null;
         }
 
-        private static void LoadSkillset(Level level, NLTextDataNode node)
+        private static void LoadSkillset(Level level, INIFileParser ini)
         {
-            foreach (C.Skill skill in C.SkillArray)
-            {
-                NLTextDataNode subnode = node[SkillString(skill)];
-                level.SkillSet[skill] = subnode.ValueTrimUpper == "INFINITE" ? 100 : subnode.ValueInt;
-            }
+            level.SkillSet[C.Skill.Climber] = ini.GetInt("numClimbers");
+            level.SkillSet[C.Skill.Floater] = ini.GetInt("numFloaters");
+            level.SkillSet[C.Skill.Bomber] = ini.GetInt("numBombers");
+            level.SkillSet[C.Skill.Blocker] = ini.GetInt("numBlockers");
+            level.SkillSet[C.Skill.Builder] = ini.GetInt("numBuilders");
+            level.SkillSet[C.Skill.Basher] = ini.GetInt("numBashers");
+            level.SkillSet[C.Skill.Miner] = ini.GetInt("numMiners");
+            level.SkillSet[C.Skill.Digger] = ini.GetInt("numDiggers");
         }
 
-        private static void LoadGadget(Level level, NLTextDataNode node)
+        private static void LoadGadget(Level level, string data)
         {
-            // First read in all infos
-            string styleName = node["STYLE"].Value;
-            string gadgetName = node["PIECE"].Value;
+            int[] value = INIFileParser.ParseIntArray(data);
 
-            int posX = node["X"].ValueInt;
-            int posY = node["Y"].ValueInt;
-            bool isNoOverwrite = node.HasChildWithKey("NO_OVERWRITE");
-            bool isOnlyOnTerrain = node.HasChildWithKey("ONLY_ON_TERRAIN");
-            int specWidth = node.HasChildWithKey("WIDTH") ? node["WIDTH"].ValueInt : -1;
-            int specHeight = node.HasChildWithKey("HEIGHT") ? node["HEIGHT"].ValueInt : -1;
+            int objectID = value[0];
+            int posX = value[1];
+            int posY = value[2];
+            int paintMode = value[3];
+            int flags = value[4];
+            int modifier = value.Length > 5 ? value[5] : 0;
 
-            bool doRotate = node.HasChildWithKey("ROTATE");
-            bool doInvert = node.HasChildWithKey("FLIP_VERTICAL");
-            bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
+            string styleName = level.PieceStyle.NameInDirectory;
+            string pieceName = styleName + "o_" + objectID;
+
+            bool isNoOverwrite = (paintMode & 4) != 0;
+            bool isOnlyOnTerrain = (paintMode & 8) != 0;
+
+            int specWidth = -1;
+            int specHeight = -1;
+
+            bool doRotate = false; // TODO - Check if RetroLemmini uses rotation
+            bool doInvert = (flags & 1) != 0;
+            bool doFlip = (flags & 8) != 0;
 
             if (doRotate)
-            {
-                // Swap width and height, to swap it again once the gadget is rotated
                 Utility.Swap(ref specWidth, ref specHeight);
-            }
 
-            // ... then create the correct Gadget piece
-            string key = ImageLibrary.CreatePieceKey(styleName, gadgetName, true);
+            // Create gadget                                    
+            string key = ImageLibrary.CreatePieceKey(styleName, pieceName, true);
             Point levelFilePos = new Point(posX, posY);
-            Point editorPos = ImageLibrary.LevelFileToEditorCoordinates(key, levelFilePos, doRotate, doFlip, doInvert);
-            GadgetPiece newGadget = new GadgetPiece(key, editorPos, 0, false, isNoOverwrite, isOnlyOnTerrain,
-              specWidth, specHeight);
 
-            // For compatibility with player: NoOverwrite + OnlyOnTerrain gadgets work like OnlyOnTerrain 
+            Point editorPos = ImageLibrary.LevelFileToEditorCoordinates(
+                key,
+                levelFilePos,
+                doRotate,
+                doFlip,
+                doInvert);
+
+            GadgetPiece newGadget = new GadgetPiece(
+                key,
+                editorPos,
+                0,
+                false,
+                isNoOverwrite,
+                isOnlyOnTerrain,
+                specWidth,
+                specHeight);
+
+            // Compatibility fix
             if (newGadget.IsNoOverwrite && newGadget.IsOnlyOnTerrain)
                 newGadget.IsNoOverwrite = false;
 
@@ -203,82 +232,53 @@ namespace RLEditor
             if (doInvert)
                 newGadget.InvertInRect(newGadget.ImageRectangle);
 
-            //Reposition gadget to be sure...
             newGadget.PosX = editorPos.X;
             newGadget.PosY = editorPos.Y;
-
             newGadget.IsSelected = false;
 
             level.GadgetList.Add(newGadget);
         }
 
-        private static void LoadLemming(Level level, NLTextDataNode node)
+        private static void LoadTerrain(Level level, string data)
         {
-            // First read in all infos 
-            int posX = node["X"].ValueInt;
-            int posY = node["Y"].ValueInt;
-            bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
+            int[] value = INIFileParser.ParseIntArray(data);
 
-            // ... then create the correct Gadget piece
-            string key = ImageLibrary.CreatePieceKey("default", "lemming", true);
-            Point levelFilePos = new Point(posX, posY);
-            Point editorPos = ImageLibrary.LevelFileToEditorCoordinates(key, levelFilePos, false, doFlip, false);
-            GadgetPiece newLemming = new GadgetPiece(key, editorPos, 0, false, false, false, -1, -1);
+            int terrainID = value[0];
+            int posX = value[1];
+            int posY = value[2];
+            int modifier = value[3];
 
-            if (doFlip)
-                newLemming.FlipInRect(newLemming.ImageRectangle);
+            string styleName = level.PieceStyle.NameInDirectory;
+            string pieceName = styleName + "_" + terrainID;
 
-            //Reposition gadget to be sure...
-            newLemming.PosX = editorPos.X;
-            newLemming.PosY = editorPos.Y;
-
-            // and offset preplaced lemmings, because the level file saves the position of the trigger area
-            newLemming.PosX -= C.LEM_OFFSET_X;
-            newLemming.PosY -= C.LEM_OFFSET_Y;
-
-            newLemming.IsSelected = false;
-
-            level.GadgetList.Add(newLemming);
-        }
-
-        private static void LoadTerrain(Level level, NLTextDataNode node)
-        {
-            level.TerrainList.Add(LoadTerrainData(node));
-        }
-
-        private static TerrainPiece LoadTerrainData(NLTextDataNode node)
-        {
-            // First read in all infos
-            string styleName = node["STYLE"].Value;
-            string pieceName = node["PIECE"].Value;
-
-            int posX = node["X"].ValueInt;
-            int posY = node["Y"].ValueInt;
             Point pos = new Point(posX, posY);
 
-            bool isNoOverwrite = node.HasChildWithKey("NO_OVERWRITE");
-            bool isErase = node.HasChildWithKey("ERASE");
-            bool isOneWay = node.HasChildWithKey("ONE_WAY");
+            bool isErase = (modifier & 2) != 0;
+            bool isNoOverwrite = (modifier & 8) != 0;
 
-            bool doRotate = node.HasChildWithKey("ROTATE");
-            bool doInvert = node.HasChildWithKey("FLIP_VERTICAL");
-            bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
+            bool isOneWay = (modifier & 64) == 0;
 
-            int specWidth = node["WIDTH"].ValueInt;
-            int specHeight = node["HEIGHT"].ValueInt;
+            bool doRotate = false; // TODO - Check if RetroLemmini uses rotation
+            bool doInvert = (modifier & 4) != 0;
+            bool doFlip = (modifier & 32) != 0;
 
-            if (doRotate)
-            {
-                // Swap width and height, to swap it again once the gadget is rotated
-                Utility.Swap(ref specWidth, ref specHeight);
-            }
-
-            TerrainPiece newTerrain;
-
+            int specWidth = -1;
+            int specHeight = -1;
+                                                                
             string key = ImageLibrary.CreatePieceKey(styleName, pieceName, false);
-            newTerrain = new TerrainPiece(key, pos, 0, false, isErase, isNoOverwrite, isOneWay, specWidth, specHeight);
 
-            // For compatibility with player: NoOverwrite + Erase pieces work like NoOverWrite
+            TerrainPiece newTerrain = new TerrainPiece(
+                key,
+                pos,
+                0,
+                false,
+                isErase,
+                isNoOverwrite,
+                isOneWay,
+                specWidth,
+                specHeight);
+
+            // Compatibility rules
             if (newTerrain.IsNoOverwrite && newTerrain.IsErase)
                 newTerrain.IsErase = false;
             if (newTerrain.IsSteel)
@@ -291,50 +291,49 @@ namespace RLEditor
             if (doInvert)
                 newTerrain.InvertInRect(newTerrain.ImageRectangle);
 
-            //Reposition terrain piece to be sure...
             newTerrain.PosX = pos.X;
             newTerrain.PosY = pos.Y;
-
             newTerrain.IsSelected = false;
 
-            return newTerrain;
+            level.TerrainList.Add(newTerrain);
         }
 
-        private static void LoadSketch(Level level, NLTextDataNode node)
-        {
-            // First read in all infos
-            string pieceName = node["PIECE"].Value;
-            int posX = node["X"].ValueInt;
-            int posY = node["Y"].ValueInt;
+        // TODO - Add support for sketches (they should be written into and read from the .ini (and can be ignored by RetroLemmini itself)
+        //private static void LoadSketch(Level level, NLTextDataNode node)
+        //{
+        //    // First read in all infos
+        //    string pieceName = node["PIECE"].Value;
+        //    int posX = node["X"].ValueInt;
+        //    int posY = node["Y"].ValueInt;
 
-            bool doRotate = node.HasChildWithKey("ROTATE");
-            bool doInvert = node.HasChildWithKey("FLIP_VERTICAL");
-            bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
+        //    bool doRotate = node.HasChildWithKey("ROTATE");
+        //    bool doInvert = node.HasChildWithKey("FLIP_VERTICAL");
+        //    bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
 
-            int index = node.HasChildWithKey("INDEX") ? node["INDEX"].ValueInt : -1;
+        //    int index = node.HasChildWithKey("INDEX") ? node["INDEX"].ValueInt : -1;
 
-            // ... then create the correct Terrain piece
-            string key = "*sketch:" + pieceName;
-            Point pos = new Point(posX, posY);
-            TerrainPiece newSketch = new TerrainPiece(key, pos, 0, false, false, false, false, 0, 0);
+        //    // ... then create the correct Terrain piece
+        //    string key = "*sketch:" + pieceName;
+        //    Point pos = new Point(posX, posY);
+        //    TerrainPiece newSketch = new TerrainPiece(key, pos, 0, false, false, false, false, 0, 0);
 
-            if (doRotate)
-                newSketch.RotateInRect(newSketch.ImageRectangle);
-            if (doFlip)
-                newSketch.FlipInRect(newSketch.ImageRectangle);
-            if (doInvert)
-                newSketch.InvertInRect(newSketch.ImageRectangle);
-            //Reposition terrain piece to be sure...
-            newSketch.PosX = pos.X;
-            newSketch.PosY = pos.Y;
+        //    if (doRotate)
+        //        newSketch.RotateInRect(newSketch.ImageRectangle);
+        //    if (doFlip)
+        //        newSketch.FlipInRect(newSketch.ImageRectangle);
+        //    if (doInvert)
+        //        newSketch.InvertInRect(newSketch.ImageRectangle);
+        //    //Reposition terrain piece to be sure...
+        //    newSketch.PosX = pos.X;
+        //    newSketch.PosY = pos.Y;
 
-            newSketch.IsSelected = false;
+        //    newSketch.IsSelected = false;
 
-            if (index < 0 || index >= level.TerrainList.Count)
-                level.TerrainList.Add(newSketch);
-            else
-                level.TerrainList.Insert(index, newSketch);
-        }
+        //    if (index < 0 || index >= level.TerrainList.Count)
+        //        level.TerrainList.Add(newSketch);
+        //    else
+        //        level.TerrainList.Insert(index, newSketch);
+        //}
 
         /// <summary>
         /// Ensures that all level parameters are within sensible limits.
@@ -363,7 +362,7 @@ namespace RLEditor
 
 
         /// <summary>
-        /// Opens file browser and saves the current level to a .nxlv file.
+        /// Opens file browser and saves the current level to a .ini file.
         /// </summary>
         /// <param name="curLevel"></param>
         static public void SaveLevel(Level curLevel, string levelDirectory)
@@ -380,7 +379,7 @@ namespace RLEditor
                 saveFileDialog.InitialDirectory = Directory.Exists(C.AppPathLevels) ? C.AppPathLevels : C.AppPath;
             }
             saveFileDialog.OverwritePrompt = true;
-            saveFileDialog.Filter = "RetroLemmini level files (*.nxlv)|*.nxlv";
+            saveFileDialog.Filter = "RetroLemmini level files (*.ini)|*.ini";
             saveFileDialog.RestoreDirectory = true;
 
             try
@@ -708,11 +707,10 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Converts an old .lvl level file to the current .nxlv type.
+        /// Converts an old .lvl level file to the current .ini type.
         /// Not currently used, but the code remains here because it may be useful for an auto-cleanse feature in the future.
         /// <para> This calls RetroLemmini.exe written in Delphi. </para>
         /// </summary>
-        /// <param name="filePath"></param>
         static bool ConvertWithRetroLemmini(string filePath)
         {
             if (!File.Exists(C.AppPathRetroLemmini))
@@ -748,6 +746,5 @@ namespace RLEditor
                 return false;
             }
         }
-
     }
 }
