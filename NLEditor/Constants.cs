@@ -169,7 +169,7 @@ namespace RLEditor
         {
           { NLColor.Text, Utility.HexToColor("FEF5F5F5") }, // Color.WhiteSmoke with slightly reduced alpha
           { NLColor.OWWDefault, Color.Linen },
-          { NLColor.BackDefault, Color.Black },
+          { NLColor.BackDefault, Utility.HexToColor("FF000033") }, // Amiga Blue
           { NLColor.Trigger, Utility.HexToColor("80EE82EE") }, // Color.Violet with reduced alpha
           { NLColor.ScreenStart, Color.AliceBlue },
           { NLColor.SelRectGadget, Color.Chartreuse },

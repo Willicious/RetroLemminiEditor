@@ -22,6 +22,7 @@ namespace RLEditor
             ImageLibrary.AddNewImage(imageKey, image, C.OBJ.LEMMING, triggerArea);
         }
 
+        // TODO - Implement style colors from .ini
         static readonly Dictionary<string, C.StyleColor> KeyToStyleColorDict = new Dictionary<string, C.StyleColor>
       {
         { "BACKGROUND", C.StyleColor.BACKGROUND },
