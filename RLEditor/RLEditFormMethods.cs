@@ -642,6 +642,7 @@ Digger=20
             combo_PieceStyle.Items.Clear();
 
             ImageLibrary.Clear();
+            LoadStylesFromFile.AddSteelAreaImageToLibrary();
             Style.ReloadSketches();
 
             CreateStyleList();
@@ -797,6 +798,17 @@ Digger=20
             {
                 MessageBox.Show("No missing pieces found.", "Missing Pieces", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void AddSteelArea()
+        {
+            if (check_Lvl_Autosteel.Checked)
+                return;
+
+            string pieceKey = "Default\\SteelArea";
+            Point center = curRenderer.GetCenterPoint();
+
+            AddNewPieceToLevel(pieceKey, center);
         }
 
         private void OpenLevelArrangerWindow()

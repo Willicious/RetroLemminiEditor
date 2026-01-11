@@ -121,10 +121,10 @@ namespace RLEditor
         public static readonly byte ALPHA_OWW = 255;
         public static readonly byte ALPHA_NOOWW = 254;
 
-        public enum Layer { Background, ObjBack, Terrain, ObjTop, Trigger }
+        public enum Layer { Background, ObjBack, Terrain, ObjTop, Trigger, SteelArea }
         public static readonly List<Layer> LayerList = new List<Layer>()
     {
-      Layer.Background, Layer.ObjBack, Layer.Terrain, Layer.ObjTop, Layer.Trigger
+      Layer.Background, Layer.ObjBack, Layer.Terrain, Layer.ObjTop, Layer.Trigger, Layer.SteelArea
     };
 
         // The integer values here are only used to pick the correct frame of pickupanim.png
@@ -154,14 +154,11 @@ namespace RLEditor
         public static readonly int ZOOM_MIN = -2;
         public static readonly int ZOOM_MAX = 10;
 
-        public static readonly int LEM_OFFSET_X = 2;
-        public static readonly int LEM_OFFSET_Y = 9;
-
         // Other colors are specified directly in BmpModify to speed up rendering.
         public enum NLColor
         {
-            Text, OWWDefault, BackDefault,
-            Trigger, ScreenStart, SelRectGadget, SelRectTerrain
+            Text, OWWDefault, BackDefault, Trigger,
+            SteelArea, ScreenStart, SelRectGadget, SelRectTerrain
         }
         public static readonly Dictionary<NLColor, Color> NLColors = new Dictionary<NLColor, Color>()
         {
@@ -169,6 +166,7 @@ namespace RLEditor
           { NLColor.OWWDefault, Color.Linen },
           { NLColor.BackDefault, Utility.HexToColor("FF000033") }, // Amiga Blue
           { NLColor.Trigger, Utility.HexToColor("80EE82EE") }, // Color.Violet with reduced alpha
+          { NLColor.SteelArea, Utility.HexToColor("800022FF") }, // Blue with reduced alpha
           { NLColor.ScreenStart, Color.AliceBlue },
           { NLColor.SelRectGadget, Color.Chartreuse },
           { NLColor.SelRectTerrain, Color.Gold }

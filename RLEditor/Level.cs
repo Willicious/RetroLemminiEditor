@@ -284,7 +284,7 @@ namespace RLEditor
             int piecePosY = (centerPos.Y - ImageLibrary.GetHeight(pieceKey) / 2).RoundToMultiple(gridSize);
             Point piecePos = new Point(piecePosX, piecePosY);
 
-            if (pieceKey.Contains(PieceStyle.NameInDirectory + "o_"))
+            if (pieceKey.Contains(PieceStyle.NameInDirectory + "o_") || pieceKey == "Default\\SteelArea")
             {
                 GadgetList.Add(new GadgetPiece(pieceKey, piecePos));
             }

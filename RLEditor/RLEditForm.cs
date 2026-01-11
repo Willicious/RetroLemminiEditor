@@ -30,6 +30,7 @@ namespace RLEditor
             C.ScreenSize = new ScreenSize();
             C.ScreenSize.InizializeSettings();
 
+            LoadStylesFromFile.AddSteelAreaImageToLibrary();
             ImageLibrary.SetEditorForm(this);
 
             picPieceList = new List<PictureBox>
@@ -1411,6 +1412,20 @@ namespace RLEditor
             {
                 styleManagerForm.ShowDialog(this);
             }
+        }
+
+        private void check_Lvl_Autosteel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_IsWritingToForm) return;
+            ReadLevelInfoFromForm(true);
+            SaveChangesToOldLevelList();
+
+            btnAddSteelArea.Enabled = !check_Lvl_Autosteel.Checked;
+        }
+
+        private void btnAddSteelArea_Click(object sender, EventArgs e)
+        {
+            AddSteelArea();
         }
     }
 }

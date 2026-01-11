@@ -111,6 +111,8 @@
             this.txt_LevelTitle = new System.Windows.Forms.TextBox();
             this.lbl_Global_Title = new System.Windows.Forms.Label();
             this.tabPieces = new System.Windows.Forms.TabPage();
+            this.btnAddSteelArea = new System.Windows.Forms.Button();
+            this.check_Lvl_Autosteel = new System.Windows.Forms.CheckBox();
             this.check_Pieces_Fake = new System.Windows.Forms.CheckBox();
             this.check_Pieces_Invisible = new System.Windows.Forms.CheckBox();
             this.lblPieceSize = new System.Windows.Forms.Label();
@@ -1162,6 +1164,8 @@
             // 
             // tabPieces
             // 
+            this.tabPieces.Controls.Add(this.btnAddSteelArea);
+            this.tabPieces.Controls.Add(this.check_Lvl_Autosteel);
             this.tabPieces.Controls.Add(this.check_Pieces_Fake);
             this.tabPieces.Controls.Add(this.check_Pieces_Invisible);
             this.tabPieces.Controls.Add(this.lblPieceSize);
@@ -1192,10 +1196,34 @@
             this.tabPieces.Text = "Pieces";
             this.tabPieces.UseVisualStyleBackColor = true;
             // 
+            // btnAddSteelArea
+            // 
+            this.btnAddSteelArea.Enabled = false;
+            this.btnAddSteelArea.Location = new System.Drawing.Point(21, 437);
+            this.btnAddSteelArea.Name = "btnAddSteelArea";
+            this.btnAddSteelArea.Size = new System.Drawing.Size(351, 45);
+            this.btnAddSteelArea.TabIndex = 70;
+            this.btnAddSteelArea.Text = "Add Steel Area";
+            this.btnAddSteelArea.UseVisualStyleBackColor = true;
+            this.btnAddSteelArea.Click += new System.EventHandler(this.btnAddSteelArea_Click);
+            // 
+            // check_Lvl_Autosteel
+            // 
+            this.check_Lvl_Autosteel.AutoSize = true;
+            this.check_Lvl_Autosteel.Checked = true;
+            this.check_Lvl_Autosteel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.check_Lvl_Autosteel.Location = new System.Drawing.Point(21, 407);
+            this.check_Lvl_Autosteel.Name = "check_Lvl_Autosteel";
+            this.check_Lvl_Autosteel.Size = new System.Drawing.Size(136, 24);
+            this.check_Lvl_Autosteel.TabIndex = 69;
+            this.check_Lvl_Autosteel.Text = "Use Autosteel";
+            this.check_Lvl_Autosteel.UseVisualStyleBackColor = true;
+            this.check_Lvl_Autosteel.CheckedChanged += new System.EventHandler(this.check_Lvl_Autosteel_CheckedChanged);
+            // 
             // check_Pieces_Fake
             // 
             this.check_Pieces_Fake.AutoSize = true;
-            this.check_Pieces_Fake.Location = new System.Drawing.Point(21, 334);
+            this.check_Pieces_Fake.Location = new System.Drawing.Point(21, 339);
             this.check_Pieces_Fake.Name = "check_Pieces_Fake";
             this.check_Pieces_Fake.Size = new System.Drawing.Size(71, 24);
             this.check_Pieces_Fake.TabIndex = 68;
@@ -1206,7 +1234,7 @@
             // check_Pieces_Invisible
             // 
             this.check_Pieces_Invisible.AutoSize = true;
-            this.check_Pieces_Invisible.Location = new System.Drawing.Point(21, 308);
+            this.check_Pieces_Invisible.Location = new System.Drawing.Point(21, 313);
             this.check_Pieces_Invisible.Name = "check_Pieces_Invisible";
             this.check_Pieces_Invisible.Size = new System.Drawing.Size(91, 24);
             this.check_Pieces_Invisible.TabIndex = 67;
@@ -1217,7 +1245,7 @@
             // lblPieceSize
             // 
             this.lblPieceSize.AutoSize = true;
-            this.lblPieceSize.Location = new System.Drawing.Point(80, 457);
+            this.lblPieceSize.Location = new System.Drawing.Point(80, 595);
             this.lblPieceSize.Name = "lblPieceSize";
             this.lblPieceSize.Size = new System.Drawing.Size(84, 20);
             this.lblPieceSize.TabIndex = 66;
@@ -1227,7 +1255,7 @@
             // 
             this.lblSize.AutoSize = true;
             this.lblSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(17, 457);
+            this.lblSize.Location = new System.Drawing.Point(17, 595);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(44, 20);
             this.lblSize.TabIndex = 65;
@@ -1237,7 +1265,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(17, 397);
+            this.lblName.Location = new System.Drawing.Point(17, 535);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(55, 20);
             this.lblName.TabIndex = 59;
@@ -1246,7 +1274,7 @@
             // lblPieceType
             // 
             this.lblPieceType.AutoSize = true;
-            this.lblPieceType.Location = new System.Drawing.Point(80, 437);
+            this.lblPieceType.Location = new System.Drawing.Point(80, 575);
             this.lblPieceType.Name = "lblPieceType";
             this.lblPieceType.Size = new System.Drawing.Size(86, 20);
             this.lblPieceType.TabIndex = 64;
@@ -1256,7 +1284,7 @@
             // 
             this.lblStyle.AutoSize = true;
             this.lblStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStyle.Location = new System.Drawing.Point(17, 417);
+            this.lblStyle.Location = new System.Drawing.Point(17, 555);
             this.lblStyle.Name = "lblStyle";
             this.lblStyle.Size = new System.Drawing.Size(48, 20);
             this.lblStyle.TabIndex = 60;
@@ -1265,7 +1293,7 @@
             // lblPieceStyle
             // 
             this.lblPieceStyle.AutoSize = true;
-            this.lblPieceStyle.Location = new System.Drawing.Point(80, 417);
+            this.lblPieceStyle.Location = new System.Drawing.Point(80, 555);
             this.lblPieceStyle.Name = "lblPieceStyle";
             this.lblPieceStyle.Size = new System.Drawing.Size(88, 20);
             this.lblPieceStyle.TabIndex = 63;
@@ -1275,7 +1303,7 @@
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.Location = new System.Drawing.Point(17, 437);
+            this.lblType.Location = new System.Drawing.Point(17, 575);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(47, 20);
             this.lblType.TabIndex = 61;
@@ -1284,7 +1312,7 @@
             // lblPieceName
             // 
             this.lblPieceName.AutoSize = true;
-            this.lblPieceName.Location = new System.Drawing.Point(80, 397);
+            this.lblPieceName.Location = new System.Drawing.Point(80, 535);
             this.lblPieceName.Name = "lblPieceName";
             this.lblPieceName.Size = new System.Drawing.Size(96, 20);
             this.lblPieceName.TabIndex = 62;
@@ -2484,6 +2512,8 @@
         private System.Windows.Forms.Label lblPieceStyle;
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label lblPieceName;
+        private System.Windows.Forms.Button btnAddSteelArea;
+        private System.Windows.Forms.CheckBox check_Lvl_Autosteel;
     }
 }
 

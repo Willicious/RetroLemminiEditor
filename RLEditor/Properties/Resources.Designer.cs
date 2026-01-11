@@ -173,6 +173,16 @@ namespace RLEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SteelArea {
+            get {
+                object obj = ResourceManager.GetObject("SteelArea", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap WhatsNew {
             get {
                 object obj = ResourceManager.GetObject("WhatsNew", resourceCulture);

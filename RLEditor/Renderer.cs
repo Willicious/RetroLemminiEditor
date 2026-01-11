@@ -96,6 +96,7 @@ namespace RLEditor
             CreateTerrainLayer();
             CreateObjectTopLayer();
             CreateTriggerLayer();
+            CreateSteelAreaLayer();
 
             return CombineLayers();
         }
@@ -180,6 +181,9 @@ namespace RLEditor
             {
                 baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Trigger], curSettings.CurrentTriggerAreaColor);
             }
+
+            // For now, always draw steel areas. TODO - Implement toggle
+            baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea], curSettings.CurrentTriggerAreaColor);
         }
 
         /// <summary>
@@ -651,6 +655,20 @@ namespace RLEditor
                 .Select(obj => C.TriggerPointObjects.Contains(obj.ObjType) ? new Rectangle(obj.TriggerRect.X, obj.TriggerRect.Y, 1, 1) : obj.TriggerRect)
                 .ToList();
             layerImages[C.Layer.Trigger].DrawOnFilledRectangles(triggerRectangles, C.NLColors[C.NLColor.Trigger]);
+        }
+
+        /// <summary>
+        /// Renders all steel areas.
+        /// </summary>
+        private void CreateSteelAreaLayer()
+        {
+            layerImages[C.Layer.SteelArea].Clear();
+
+            var triggerRectangles = level.GadgetList
+                .Where(obj => obj.ObjType == C.OBJ.STEEL)
+                .Select(obj => obj.TriggerRect)
+                .ToList();
+            layerImages[C.Layer.SteelArea].DrawOnFilledRectangles(triggerRectangles, C.NLColors[C.NLColor.SteelArea]);
         }
 
         /// <summary>

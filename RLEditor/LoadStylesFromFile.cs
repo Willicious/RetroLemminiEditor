@@ -13,6 +13,14 @@ namespace RLEditor
     /// </summary>
     static class LoadStylesFromFile
     {
+        public static void AddSteelAreaImageToLibrary()
+        {
+            string imageKey = ImageLibrary.CreatePieceKey("Default", "SteelArea", true);
+            Bitmap image = Properties.Resources.SteelArea;
+            Rectangle triggerArea = new Rectangle(0, 0, 32, 32);
+            ImageLibrary.AddNewImage(imageKey, image, C.OBJ.STEEL, triggerArea);
+        }
+
         // TODO - Implement style colors from .ini
         static readonly Dictionary<string, C.StyleColor> KeyToStyleColorDict = new Dictionary<string, C.StyleColor>
       {

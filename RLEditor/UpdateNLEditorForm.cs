@@ -196,6 +196,17 @@ namespace RLEditor
             but_MoveBackOne.Enabled = (selectionList.Count > 0);
             but_MoveFrontOne.Enabled = (selectionList.Count > 0);
 
+            if (selectionList.Exists(s => s is GadgetPiece && (s as GadgetPiece).ObjType == C.OBJ.STEEL))
+            {
+                check_Pieces_NoOv.Enabled = false; check_Pieces_NoOv.Checked = false;
+                check_Pieces_Erase.Enabled = false; check_Pieces_Erase.Checked = false;
+                check_Pieces_OneWay.Enabled = false; check_Pieces_OneWay.Checked = false;
+                check_Pieces_OnlyOnTerrain.Enabled = false; check_Pieces_OnlyOnTerrain.Checked = false;
+                check_Pieces_Invisible.Enabled = false; check_Pieces_Invisible.Checked = false;
+                check_Pieces_Fake.Enabled = false; check_Pieces_Fake.Checked = false;
+                return;
+            }
+
             check_Pieces_NoOv.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_NoOv.CheckedChanged -= check_Pieces_NoOv_CheckedChanged;

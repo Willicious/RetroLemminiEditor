@@ -676,7 +676,6 @@ namespace RLEditor
                 Utility.LogException(Ex);
                 imageDict[imageKey] = new BaseImageInfo(new Bitmap(1, 1));
             }
-
         }
 
 
