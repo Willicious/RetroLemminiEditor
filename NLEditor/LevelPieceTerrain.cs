@@ -15,24 +15,32 @@ namespace RLEditor
             IsErase = false;
             IsNoOverwrite = false;
             IsOneWay = true;
+            IsInvisible = false;
+            IsFake = false;
         }
 
-        public TerrainPiece(string key, Point pos, int rotation, bool isInvert, bool isErase, bool isNoOv, bool isOneWay, int specWidth, int specHeight)
+        public TerrainPiece(string key, Point pos, int rotation, bool isInvert, bool isErase, bool isNoOv, bool isOneWay,
+            bool isInvisible, bool isFake, int specWidth, int specHeight)
             : base(key, false, pos, rotation, isInvert)
         {
             IsErase = isErase;
             IsNoOverwrite = isNoOv;
             IsOneWay = isOneWay;
+            IsInvisible = isInvisible;
+            IsFake = isFake;
         }
 
         public bool IsErase { get; set; }
         public bool IsNoOverwrite { get; set; }
         public bool IsOneWay { get; set; }
         public bool IsSteel => ObjType == C.OBJ.STEEL;
+        public bool IsInvisible { get; set; }
+        public bool IsFake { get; set; }
 
         public override LevelPiece Clone()
         {
-            return new TerrainPiece(Key, Pos, Rotation, IsInvert, IsErase, IsNoOverwrite, IsOneWay, SpecWidth, SpecHeight);
+            return new TerrainPiece(Key, Pos, Rotation, IsInvert, IsErase, IsNoOverwrite, IsOneWay,
+                                    IsInvisible, IsFake, SpecWidth, SpecHeight);
         }
 
         /// <summary>

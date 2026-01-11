@@ -597,6 +597,20 @@ namespace RLEditor
             PullFocusFromTextInputs();
         }
 
+        private void check_Pieces_Invisible_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = (check_Pieces_Invisible.CheckState == CheckState.Checked);
+            SetInvisible(isChecked);
+            PullFocusFromTextInputs();
+        }
+
+        private void check_Pieces_Fake_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = (check_Pieces_Fake.CheckState == CheckState.Checked);
+            SetFake(isChecked);
+            PullFocusFromTextInputs();
+        }
+
         /* -----------------------------------------------------------
          *              Skill Selection Tab
          * ----------------------------------------------------------- */
@@ -1249,6 +1263,7 @@ namespace RLEditor
 
         private void chk_Lvl_AutoStart_Leave(object sender, EventArgs e)
         {
+            if (curRenderer == null) return;
             if (_IsWritingToForm) return;
             textbox_Leave(sender, e);
             pic_Level.SetImage(curRenderer.GetScreenImage());
@@ -1311,8 +1326,6 @@ namespace RLEditor
 
             if (Properties.Settings.Default.LevelArrangerIsOpen)
                 OpenLevelArrangerWindow();
-
-            SetMetaDataPanel();
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)

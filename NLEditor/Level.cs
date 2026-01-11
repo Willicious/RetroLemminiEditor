@@ -482,7 +482,7 @@ namespace RLEditor
             TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch)
                        .ForEach(ter => { ter.IsNoOverwrite = doAdd; if (doAdd) ter.IsErase = false; });
             GadgetList.FindAll(gad => gad.IsSelected)
-                      .ForEach(gad => { gad.IsNoOverwrite = doAdd; if (doAdd) gad.IsOnlyOnTerrain = false; });
+                      .ForEach(gad => { gad.IsNoOverwrite = doAdd; if (doAdd) { gad.IsOnlyOnTerrain = false; gad.IsInvisible = false; } });
         }
 
         /// <summary>
@@ -502,7 +502,31 @@ namespace RLEditor
         public void SetOnlyOnTerrain(bool doAdd)
         {
             GadgetList.FindAll(gad => gad.IsSelected)
-                      .ForEach(gad => { gad.IsOnlyOnTerrain = doAdd; if (doAdd) gad.IsNoOverwrite = false; });
+                      .ForEach(gad => { gad.IsOnlyOnTerrain = doAdd; if (doAdd) { gad.IsNoOverwrite = false; gad.IsInvisible = false; } });
+        }
+
+        /// <summary>
+        /// Sets the Invisible flag for all objects and terrain pieces.
+        /// </summary>
+        /// <param name="doAdd"></param>
+        public void SetInvisible(bool doAdd)
+        {
+            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch)
+                       .ForEach(ter => { ter.IsInvisible = doAdd; });
+            GadgetList.FindAll(gad => gad.IsSelected)
+                      .ForEach(gad => { gad.IsInvisible = doAdd; if (doAdd) { gad.IsNoOverwrite = false; gad.IsOnlyOnTerrain = false; } });
+        }
+
+        /// <summary>
+        /// Sets the Fake flag for all objects and terrain pieces.
+        /// </summary>
+        /// <param name="doAdd"></param>
+        public void SetFake(bool doAdd)
+        {
+            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch)
+                       .ForEach(ter => { ter.IsFake = doAdd; });
+            GadgetList.FindAll(gad => gad.IsSelected)
+                      .ForEach(gad => { gad.IsFake = doAdd; });
         }
 
         /// <summary>

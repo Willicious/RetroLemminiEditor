@@ -220,6 +220,20 @@ namespace RLEditor
             check_Pieces_OnlyOnTerrain.CheckedChanged -= check_Pieces_OnlyOnTerrain_CheckedChanged;
             check_Pieces_OnlyOnTerrain.Checked = selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).IsOnlyOnTerrain);
             check_Pieces_OnlyOnTerrain.CheckedChanged += check_Pieces_OnlyOnTerrain_CheckedChanged;
+
+            check_Pieces_Invisible.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
+            // Set check-mark correctly, without firing the CheckedChanged event
+            check_Pieces_Invisible.CheckedChanged -= check_Pieces_Invisible_CheckedChanged;
+            check_Pieces_Invisible.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsInvisible)
+                                                               || (p is TerrainPiece && (p as TerrainPiece).IsInvisible));
+            check_Pieces_Invisible.CheckedChanged += check_Pieces_Invisible_CheckedChanged;
+
+            check_Pieces_Fake.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
+            // Set check-mark correctly, without firing the CheckedChanged event
+            check_Pieces_Fake.CheckedChanged -= check_Pieces_Fake_CheckedChanged;
+            check_Pieces_Fake.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsFake)
+                                                               || (p is TerrainPiece && (p as TerrainPiece).IsFake));
+            check_Pieces_Fake.CheckedChanged += check_Pieces_Fake_CheckedChanged;
         }
 
         /// <summary>

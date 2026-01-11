@@ -89,7 +89,10 @@ namespace RLEditor
             // --- Style / background / music ---
             string styleName = ini.GetString("style");
             newLevel.PieceStyle = styleList.Find(sty => sty.NameInEditor == styleName);
-            
+
+            if (newLevel.PieceStyle == null)
+                newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
+
             newLevel.Background = null; // TODO - Find out how background images are handled in RetroLemmini
             
             newLevel.MusicFile = ini.GetString("music");
@@ -97,6 +100,11 @@ namespace RLEditor
             // --- Level dimensions ---
             newLevel.Width = ini.GetInt("width");
             newLevel.Height = ini.GetInt("height");
+
+            if (newLevel.Width == 0)
+                newLevel.Width = 3200;
+            if (newLevel.Height == 0)
+                newLevel.Height = 320;
 
             // --- Start position ---
             int startX = ini.GetInt("xPosCenter", int.MinValue);
@@ -145,7 +153,7 @@ namespace RLEditor
                 LoadTerrain(newLevel, data);
 
             //// --- Steel --- 
-            // TODO - Always handle steel as autosteel
+            // TODO - Add support for steel areas
             
             SanitizeInput(newLevel);
             return newLevel;
@@ -204,13 +212,15 @@ namespace RLEditor
             string styleName = level.PieceStyle.NameInDirectory;
             string pieceName = styleName + "o_" + objectID;
 
+            bool isInvisible = (paintMode & 2) != 0;
             bool isNoOverwrite = (paintMode & 4) != 0;
             bool isOnlyOnTerrain = (paintMode & 8) != 0;
 
-            int specWidth = -1;
+            int specWidth = -1; // TODO - Find out what this is
             int specHeight = -1;
 
-            bool doInvert = (flags & 1) != 0;
+            bool doInvert = ((flags & 1) != 0) || ((flags & 4) != 0);
+            bool isFake = (flags & 2) != 0;
             bool doFlip = (flags & 8) != 0;
             bool doRotate = (flags & 16) != 0;
 
@@ -235,6 +245,8 @@ namespace RLEditor
                 false,
                 isNoOverwrite,
                 isOnlyOnTerrain,
+                isInvisible,
+                isFake,
                 specWidth,
                 specHeight);
 
@@ -281,16 +293,16 @@ namespace RLEditor
 
             Point pos = new Point(posX, posY);
 
+            bool isInvisible = (modifier & 1) != 0;
             bool isErase = (modifier & 2) != 0;
-            bool isNoOverwrite = (modifier & 8) != 0;
-
-            bool isOneWay = (modifier & 64) == 0;
-
             bool doInvert = (modifier & 4) != 0;
+            bool isNoOverwrite = (modifier & 8) != 0;
+            bool isFake = (modifier & 16) != 0;
             bool doFlip = (modifier & 32) != 0;
+            bool isOneWay = (modifier & 64) == 0;
             bool doRotate = (modifier & 128) != 0;
 
-            int specWidth = -1;
+            int specWidth = -1; // TODO - Find out what this is
             int specHeight = -1;
                                                                 
             string key = ImageLibrary.CreatePieceKey(styleName, pieceName, false);
@@ -303,6 +315,8 @@ namespace RLEditor
                 isErase,
                 isNoOverwrite,
                 isOneWay,
+                isInvisible,
+                isFake,
                 specWidth,
                 specHeight);
 
@@ -370,8 +384,8 @@ namespace RLEditor
         static private void SanitizeInput(Level newLevel)
         {
             // Level size
-            newLevel.Width = Math.Max(Math.Min(newLevel.Width, 6400), 1);
-            newLevel.Height = Math.Max(Math.Min(newLevel.Height, 3200), 1);
+            newLevel.Width = Math.Max(Math.Min(newLevel.Width, 6400), 16);
+            newLevel.Height = Math.Max(Math.Min(newLevel.Height, 3200), 16);
             // Start position
             newLevel.StartPosX = Math.Max(Math.Min(newLevel.StartPosX, newLevel.Width - 1), 0);
             newLevel.StartPosY = Math.Max(Math.Min(newLevel.StartPosY, newLevel.Height - 1), 0);
@@ -540,15 +554,13 @@ namespace RLEditor
                     gadgetID = 0; // Should never happen
 
                 int paintMode = 0;
-                if //(gad.IsInvisible) paintMode = 2; // TODO - Add support for invisible objects
-                //else if 
-                        (gad.IsNoOverwrite) paintMode = 4;
+                if (gad.IsInvisible) paintMode = 2;
+                else if (gad.IsNoOverwrite) paintMode = 4;
                 else if (gad.IsOnlyOnTerrain) paintMode = 8;
 
                 int flags = 0;
-                //if (gad.IsFake) flags |= 2; // TODO - Add support for fake objects
-                if (gad.IsInvertedInPlayer) flags |= 1;
-                if (gad.IsInvertedInPlayer) flags |= 4; // Also invert mask
+                if (gad.IsFake) flags |= 2;
+                if (gad.IsInvertedInPlayer) flags |= 1 | 4; // Also invert mask
                 if (gad.IsFlippedInPlayer) flags |= 8;
                 if (gad.IsRotatedInPlayer) flags |= 16;
 

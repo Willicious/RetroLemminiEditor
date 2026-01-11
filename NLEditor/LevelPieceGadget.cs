@@ -16,25 +16,32 @@ namespace RLEditor
         {
             IsNoOverwrite = !ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT);
             IsOnlyOnTerrain = (ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
+            IsInvisible = false;
+            IsFake = false;
         }
 
         public GadgetPiece(string key, Point pos,
                            int rotation,
                            bool isInvert, bool isNoOverwrite, bool isOnlyOnTerrain,
+                           bool isInvisible, bool isFake,
                            int specWidth = -1, int specHeight = -1)
             : base(key, true, pos, rotation, isInvert)
         {
             IsNoOverwrite = isNoOverwrite;
             IsOnlyOnTerrain = isOnlyOnTerrain;
+            IsInvisible = isInvisible;
+            IsFake = isFake;
         }
 
         public bool IsNoOverwrite { get; set; }
         public bool IsOnlyOnTerrain { get; set; }
+        public bool IsInvisible { get; set; }
+        public bool IsFake { get; set; }
 
         public override LevelPiece Clone()
         {
             return new GadgetPiece(Key, Pos, Rotation, IsInvert, IsNoOverwrite, IsOnlyOnTerrain,
-                                   SpecWidth, SpecHeight);
+                                   IsInvisible, IsFake, SpecWidth, SpecHeight);
         }
 
 

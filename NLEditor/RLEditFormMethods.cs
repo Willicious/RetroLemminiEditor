@@ -421,6 +421,8 @@ Digger=20
         /// </summary>
         private void ReadLevelInfoFromForm(bool allowWriteBack)
         {
+            if (CurLevel == null) return;
+
             CurLevel.Author = txt_LevelAuthor.Text;
             CurLevel.Title = txt_LevelTitle.Text;
             CurLevel.MusicFile = System.IO.Path.ChangeExtension(combo_Music.Text, null);
@@ -436,8 +438,7 @@ Digger=20
             CurLevel.IsSuperlemming = check_Lvl_Superlemming.Checked;
             CurLevel.TimeLimit = decimal.ToInt32(num_Lvl_TimeMin.Value) * 60
                                     + decimal.ToInt32(num_Lvl_TimeSec.Value);
-            CurLevel.IsNoTimeLimit = check_Lvl_InfTime.Checked;
-           
+            CurLevel.IsNoTimeLimit = !check_Lvl_TimeLimit.Checked;
 
             string idText = txt_LevelID.Text;
             if (idText.Length < 16)
@@ -501,7 +502,7 @@ Digger=20
                 check_Lvl_LockSR.Checked = CurLevel.IsReleaseRateLocked;
                 num_Lvl_TimeMin.Value = CurLevel.TimeLimit / 60;
                 num_Lvl_TimeSec.Value = CurLevel.TimeLimit % 60;
-                check_Lvl_InfTime.Checked = CurLevel.IsNoTimeLimit;
+                check_Lvl_TimeLimit.Checked = !CurLevel.IsNoTimeLimit;
                 check_Lvl_Superlemming.Checked = CurLevel.IsSuperlemming;
 
                 txt_LevelID.Text = CurLevel.LevelID.ToString("X16");
@@ -1449,8 +1450,6 @@ Digger=20
                 currentPiece = CurLevel.SelectionList().First();
             else
             {
-                gbPieceMetaData.Enabled = false;
-
                 lblPieceName.Text = string.Empty;
                 lblPieceStyle.Text = string.Empty;
                 lblPieceType.Text = string.Empty;
@@ -1483,8 +1482,6 @@ Digger=20
             pieceSize = $"{ImageLibrary.GetWidth(currentPiece.Key).ToString()} x {ImageLibrary.GetHeight(currentPiece.Key).ToString()}";
 
             // Update panel, labels and button
-            gbPieceMetaData.Enabled = true;
-
             lblPieceName.Text = pieceName;
             lblPieceStyle.Text = pieceStyle;
             lblPieceType.Text = pieceType;
@@ -1793,6 +1790,30 @@ Digger=20
             pic_Level.Image = curRenderer.CreateLevelImage();
         }
 
+        /// <summary>
+        /// Sets the Invisible flag for all selected pieces and displays the result.
+        /// </summary>
+        /// <param name="doAdd"></param>
+        private void SetInvisible(bool doAdd)
+        {
+            CurLevel.SetInvisible(doAdd);
+            UpdateFlagsForPieceActions();
+            SaveChangesToOldLevelList();
+            pic_Level.Image = curRenderer.CreateLevelImage();
+        }
+
+        /// <summary>
+        /// Sets the Fake flag for all selected pieces and displays the result.
+        /// </summary>
+        /// <param name="doAdd"></param>
+        private void SetFake(bool doAdd)
+        {
+            CurLevel.SetFake(doAdd);
+            UpdateFlagsForPieceActions();
+            SaveChangesToOldLevelList();
+            pic_Level.Image = curRenderer.CreateLevelImage();
+        }
+
         private Level GetCurLevel()
         {
             return CurLevel;
@@ -1816,6 +1837,9 @@ Digger=20
         /// </summary>
         private void SaveChangesToOldLevelList()
         {
+            if (CurLevel == null || oldLevelList == null)
+                return;
+
             if (CurLevel.Equals(oldLevelList[curOldLevelIndex]))
                 return;
 
@@ -2096,13 +2120,6 @@ Digger=20
             {
                 aboutRLEditor.ShowDialog(this);
             }
-        }
-
-        private void SetMetaDataPanel()
-        {
-            gbPieceMetaData.Top = tabPieces.Height - gbPieceMetaData.Height;
-            gbPieceMetaData.Left = tabPieces.Left;
-            gbPieceMetaData.Width = tabPieces.Width - 5;
         }
 
         private void SetAllSkillsToZero()
