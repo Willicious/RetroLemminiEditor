@@ -825,10 +825,29 @@ Digger=20
             // Also TODO - Double check that RetroLemmini actually does still support
             // autosteel PLUS steel areas
 
-            string pieceKey = "Default\\SteelArea";
-            Point center = curRenderer.GetCenterPoint();
+            var selection = CurLevel.SelectionList();
+            Rectangle? selectionArea = null;
+            if (selection.Count > 0)
+                selectionArea = selection.Select(p => p.ImageRectangle).Aggregate(Rectangle.Union);
 
-            AddNewPieceToLevel(pieceKey, center);
+            string pieceKey = "Default\\SteelArea";
+
+            Point pos = curRenderer.GetCenterPoint();
+            int width = 32;
+            int height = 32;
+
+            if (selectionArea.HasValue)
+            {
+                var r = selectionArea.Value;
+                pos = new Point(r.Left + 16, r.Top + 16);
+                width = r.Width; // TODO - Ideally, this would ignore transparent pixels
+                height = r.Height;
+            }
+
+            AddNewPieceToLevel(pieceKey, pos);
+
+            num_SteelAreaWidth.Value = width;
+            num_SteelAreaHeight.Value = height;
         }
 
         private void OpenLevelArrangerWindow()
