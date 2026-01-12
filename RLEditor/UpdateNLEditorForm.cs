@@ -204,8 +204,9 @@ namespace RLEditor
             but_MoveBackOne.Enabled = (selectionList.Count > 0);
             but_MoveFrontOne.Enabled = (selectionList.Count > 0);
 
-            if (selectionList.Exists(p => p is GadgetPiece gadget &&
-                              new[] { C.OBJ.STEEL, /*C.OBJ.RULER*/ }.Contains(gadget.ObjType)))
+            bool hasSpecialGadget = selectionList.OfType<GadgetPiece>()
+                 .Any(g => g.ObjType == C.OBJ.STEEL /* || g.ObjType == C.OBJ.RULER */);
+            if (hasSpecialGadget)
             {
                 check_Pieces_NoOv.Enabled = false; check_Pieces_NoOv.Checked = false;
                 check_Pieces_Erase.Enabled = false; check_Pieces_Erase.Checked = false;
@@ -213,24 +214,30 @@ namespace RLEditor
                 check_Pieces_OnlyOnTerrain.Enabled = false; check_Pieces_OnlyOnTerrain.Checked = false;
                 check_Pieces_Invisible.Enabled = false; check_Pieces_Invisible.Checked = false;
                 check_Pieces_Fake.Enabled = false; check_Pieces_Fake.Checked = false;
-
-                GadgetPiece gadget = (GadgetPiece)selectionList[0];
-                if ((selectionList.Count == 1) && (gadget.ObjType == C.OBJ.STEEL))
-                {
-                    lblSteelAreaWidth.Visible = true; lblSteelAreaHeight.Visible = true;
-                    num_SteelAreaWidth.Visible = true; num_SteelAreaHeight.Visible = true;
-                    num_SteelAreaWidth.Value = Math.Max(1, gadget.SpecWidth);
-                    num_SteelAreaHeight.Value = Math.Max(1, gadget.SpecHeight);
-                }
-                //else if ((selectionList.Count == 1) && (gadget.ObjType == C.OBJ.RULER)) // TODO - Add support for this
-                //{
-                //    lblRulerWidth.Visible = true; lblRulerHeight.Visible = true;
-                //    num_RulerWidth.Visible = true; num_RulerHeight.Visible = true;
-                //    num_RulerWidth.Value = Math.Max(1, gadget.SpecWidth);
-                //    num_RulerHeight.Value = Math.Max(1, gadget.SpecHeight);
-                //}
-                return;
             }
+
+            bool singleSteelSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece ste && ste.ObjType == C.OBJ.STEEL;
+            if (singleSteelSelected)
+            {
+                var gadget = (GadgetPiece)selectionList[0];
+
+                lblSteelAreaWidth.Visible = true; lblSteelAreaHeight.Visible = true;
+                num_SteelAreaWidth.Visible = true; num_SteelAreaHeight.Visible = true;
+                num_SteelAreaWidth.Value = Math.Max(1, gadget.SpecWidth);
+                num_SteelAreaHeight.Value = Math.Max(1, gadget.SpecHeight);
+            }
+            //bool singleRulerSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece g && g.ObjType == C.OBJ.RULER; // TODO - Add support for this
+            //{
+            //    var gadget = (GadgetPiece)selectionList[0];
+            //
+            //    lblRulerWidth.Visible = true; lblRulerHeight.Visible = true;
+            //    num_RulerWidth.Visible = true; num_RulerHeight.Visible = true;
+            //    num_RulerWidth.Value = Math.Max(1, gadget.SpecWidth);
+            //    num_RulerHeight.Value = Math.Max(1, gadget.SpecHeight);
+            //}
+
+            if (hasSpecialGadget || singleSteelSelected /*|| singleRulerSelected*/)
+                return;
 
             lblSteelAreaHeight.Visible = false; lblSteelAreaWidth.Visible = false;
             num_SteelAreaHeight.Visible = false; num_SteelAreaWidth.Visible = false;
