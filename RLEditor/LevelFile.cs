@@ -245,7 +245,7 @@ namespace RLEditor
             bool isNoOverwrite = (paintMode & 4) != 0;
             bool isOnlyOnTerrain = (paintMode & 8) != 0;
 
-            int specWidth = -1; // TODO - Find out what this is
+            int specWidth = -1;
             int specHeight = -1;
 
             bool doInvert = ((flags & 1) != 0) || ((flags & 4) != 0);
@@ -331,7 +331,7 @@ namespace RLEditor
             bool isOneWay = (modifier & 64) == 0;
             bool doRotate = (modifier & 128) != 0;
 
-            int specWidth = -1; // TODO - Find out what this is
+            int specWidth = -1;
             int specHeight = -1;
                                                                 
             string key = ImageLibrary.CreatePieceKey(styleName, pieceName, false);
@@ -633,11 +633,11 @@ namespace RLEditor
                     terrainID = 0; // Should never happen
 
                 int flags = 0;
-                // if (ter.IsInvisible) flags |= 1; // TODO - Add support for invisible terrain
+                if (ter.IsInvisible) flags |= 1;
                 if (ter.IsErase) flags |= 2;
                 if (ter.IsInvertedInPlayer) flags |= 4;
                 if (ter.IsNoOverwrite) flags |= 8;
-                // if (ter.IsFake) flags |= 16; // TODO - Add support for fake terrain
+                if (ter.IsFake) flags |= 16;
                 if (ter.IsFlippedInPlayer) flags |= 32;
                 if (!ter.IsOneWay) flags |= 64;
                 if (ter.IsRotatedInPlayer) flags |= 128;

@@ -169,6 +169,5 @@ namespace RLEditor
 
             return new Size(screenWidth, screenHeight);
         }
-
     }
 }
