@@ -665,9 +665,6 @@ namespace RLEditor
 
                 string line = $"steel_{counter} = {ste.PosX}, {ste.PosY}, {ste.Width}, {ste.Height}, {flags}";
 
-                //if (level.AutosteelMode == 2) // TODO - Check if RetroLemmini supports auto and manual at the same time
-                //    line = "# " + line;
-
                 steelLines.Add(line);
                 counter++;
             }

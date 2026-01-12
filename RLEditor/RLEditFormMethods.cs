@@ -822,8 +822,6 @@ Digger=20
             // add a message in the status bar informing them that adding steel areas
             // is optional unless the steel mode is set to "Manual"
             // Let the user choose whether or not to show the message again (add a setting in Properties for this)
-            // Also TODO - Double check that RetroLemmini actually does still support
-            // autosteel PLUS steel areas
 
             var selection = CurLevel.SelectionList();
             Rectangle? selectionArea = null;
