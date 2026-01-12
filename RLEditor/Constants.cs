@@ -166,7 +166,7 @@ namespace RLEditor
           { NLColor.OWWDefault, Color.Linen },
           { NLColor.BackDefault, Utility.HexToColor("FF000033") }, // Amiga Blue
           { NLColor.Trigger, Utility.HexToColor("80EE82EE") }, // Color.Violet with reduced alpha
-          { NLColor.SteelArea, Utility.HexToColor("800022FF") }, // Blue with reduced alpha
+          { NLColor.SteelArea, Utility.HexToColor("600022FF") }, // Blue with reduced alpha
           { NLColor.ScreenStart, Color.AliceBlue },
           { NLColor.SelRectGadget, Color.Chartreuse },
           { NLColor.SelRectTerrain, Color.Gold }

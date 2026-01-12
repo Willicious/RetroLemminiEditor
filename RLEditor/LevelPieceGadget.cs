@@ -18,6 +18,12 @@ namespace RLEditor
             IsOnlyOnTerrain = (ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
             IsInvisible = false;
             IsFake = false;
+
+            if (ObjType == C.OBJ.STEEL)
+            {
+                SpecWidth = ImageLibrary.GetWidth(Key);
+                SpecHeight = ImageLibrary.GetHeight(Key);
+            }
         }
 
         public GadgetPiece(string key, Point pos,
@@ -65,6 +71,11 @@ namespace RLEditor
         {
             get
             {
+                if (ObjType == C.OBJ.STEEL)
+                {
+                    return new Rectangle(PosX, PosY, Math.Max(1, SpecWidth), Math.Max(1, SpecHeight));
+                }
+
                 Rectangle trigRect = ImageLibrary.GetTrigger(Key);
 
                 if (ObjType != C.OBJ.ONE_WAY_WALL) // For all objects except one-way-walls
@@ -100,15 +111,19 @@ namespace RLEditor
         {
             get
             {
-                Bitmap image;
-
                 if (ObjType == C.OBJ.HATCH)
                 {
-                    image = ImageLibrary.GetWindowImageWithDirection(Key, GetRotateFlipType(), GetFrameIndex());
+                    return ImageLibrary.GetWindowImageWithDirection(Key, GetRotateFlipType(), GetFrameIndex());
                 }
-                else
+
+                Bitmap image = base.Image;
+
+                if (ObjType == C.OBJ.STEEL)
                 {
-                    image = base.Image;
+                    int finalWidth = Math.Max(1, SpecWidth);
+                    int finalHeight = Math.Max(1, SpecHeight);
+
+                    return image.PaveArea(new Rectangle(0, 0, finalWidth, finalHeight));
                 }
 
                 if (Width < 1 || Height < 1)
@@ -160,6 +175,28 @@ namespace RLEditor
                 int oldSpecWidth = SpecWidth;
                 SpecWidth = SpecHeight;
                 SpecHeight = oldSpecWidth;
+            }
+        }
+
+        public override int Width
+        {
+            get
+            {
+                if (ObjType == C.OBJ.STEEL && SpecWidth > 0)
+                    return SpecWidth;
+
+                return base.Width;
+            }
+        }
+
+        public override int Height
+        {
+            get
+            {
+                if (ObjType == C.OBJ.STEEL && SpecHeight > 0)
+                    return SpecHeight;
+
+                return base.Height;
             }
         }
     }

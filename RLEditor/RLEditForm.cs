@@ -1427,5 +1427,25 @@ namespace RLEditor
         {
             AddSteelArea();
         }
+
+        private void num_SteelAreaWidth_ValueChanged(object sender, EventArgs e)
+        {
+            GadgetPiece gadget = (GadgetPiece)CurLevel.SelectionList()[0];
+            if ((CurLevel.SelectionList().Count == 1) && (gadget.ObjType == C.OBJ.STEEL))
+            {
+                gadget.SpecWidth = (int)num_SteelAreaWidth.Value;
+                pic_Level.Image = curRenderer.CreateLevelImage();
+            }
+        }
+
+        private void num_SteelAreaHeight_ValueChanged(object sender, EventArgs e)
+        {
+            GadgetPiece gadget = (GadgetPiece)CurLevel.SelectionList()[0];
+            if ((CurLevel.SelectionList().Count == 1) && (gadget.ObjType == C.OBJ.STEEL))
+            {
+                gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
+                pic_Level.Image = curRenderer.CreateLevelImage();
+            }
+        }
     }
 }

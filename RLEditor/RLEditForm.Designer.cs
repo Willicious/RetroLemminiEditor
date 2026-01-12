@@ -111,6 +111,10 @@
             this.txt_LevelTitle = new System.Windows.Forms.TextBox();
             this.lbl_Global_Title = new System.Windows.Forms.Label();
             this.tabPieces = new System.Windows.Forms.TabPage();
+            this.num_SteelAreaHeight = new RLEditor.NumUpDownOverwrite();
+            this.num_SteelAreaWidth = new RLEditor.NumUpDownOverwrite();
+            this.lblSteelAreaHeight = new System.Windows.Forms.Label();
+            this.lblSteelAreaWidth = new System.Windows.Forms.Label();
             this.btnAddSteelArea = new System.Windows.Forms.Button();
             this.check_Lvl_Autosteel = new System.Windows.Forms.CheckBox();
             this.check_Pieces_Fake = new System.Windows.Forms.CheckBox();
@@ -215,6 +219,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SizeY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SizeX)).BeginInit();
             this.tabPieces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_SteelAreaHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_SteelAreaWidth)).BeginInit();
             this.tabSkills.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_RandomMaxLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_RandomMinLimit)).BeginInit();
@@ -1164,6 +1170,10 @@
             // 
             // tabPieces
             // 
+            this.tabPieces.Controls.Add(this.num_SteelAreaHeight);
+            this.tabPieces.Controls.Add(this.num_SteelAreaWidth);
+            this.tabPieces.Controls.Add(this.lblSteelAreaHeight);
+            this.tabPieces.Controls.Add(this.lblSteelAreaWidth);
             this.tabPieces.Controls.Add(this.btnAddSteelArea);
             this.tabPieces.Controls.Add(this.check_Lvl_Autosteel);
             this.tabPieces.Controls.Add(this.check_Pieces_Fake);
@@ -1195,6 +1205,78 @@
             this.tabPieces.TabIndex = 1;
             this.tabPieces.Text = "Pieces";
             this.tabPieces.UseVisualStyleBackColor = true;
+            // 
+            // num_SteelAreaHeight
+            // 
+            this.num_SteelAreaHeight.Location = new System.Drawing.Point(254, 496);
+            this.num_SteelAreaHeight.Maximum = new decimal(new int[] {
+            3200,
+            0,
+            0,
+            0});
+            this.num_SteelAreaHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_SteelAreaHeight.Name = "num_SteelAreaHeight";
+            this.num_SteelAreaHeight.Size = new System.Drawing.Size(82, 26);
+            this.num_SteelAreaHeight.TabIndex = 74;
+            this.num_SteelAreaHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.num_SteelAreaHeight.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.num_SteelAreaHeight.Visible = false;
+            this.num_SteelAreaHeight.ValueChanged += new System.EventHandler(this.num_SteelAreaHeight_ValueChanged);
+            // 
+            // num_SteelAreaWidth
+            // 
+            this.num_SteelAreaWidth.Location = new System.Drawing.Point(80, 496);
+            this.num_SteelAreaWidth.Maximum = new decimal(new int[] {
+            3200,
+            0,
+            0,
+            0});
+            this.num_SteelAreaWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_SteelAreaWidth.Name = "num_SteelAreaWidth";
+            this.num_SteelAreaWidth.Size = new System.Drawing.Size(82, 26);
+            this.num_SteelAreaWidth.TabIndex = 73;
+            this.num_SteelAreaWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.num_SteelAreaWidth.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.num_SteelAreaWidth.Visible = false;
+            this.num_SteelAreaWidth.ValueChanged += new System.EventHandler(this.num_SteelAreaWidth_ValueChanged);
+            // 
+            // lblSteelAreaHeight
+            // 
+            this.lblSteelAreaHeight.AutoSize = true;
+            this.lblSteelAreaHeight.Location = new System.Drawing.Point(192, 498);
+            this.lblSteelAreaHeight.Name = "lblSteelAreaHeight";
+            this.lblSteelAreaHeight.Size = new System.Drawing.Size(56, 20);
+            this.lblSteelAreaHeight.TabIndex = 72;
+            this.lblSteelAreaHeight.Text = "Height";
+            this.lblSteelAreaHeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSteelAreaHeight.Visible = false;
+            // 
+            // lblSteelAreaWidth
+            // 
+            this.lblSteelAreaWidth.AutoSize = true;
+            this.lblSteelAreaWidth.Location = new System.Drawing.Point(21, 498);
+            this.lblSteelAreaWidth.Name = "lblSteelAreaWidth";
+            this.lblSteelAreaWidth.Size = new System.Drawing.Size(50, 20);
+            this.lblSteelAreaWidth.TabIndex = 71;
+            this.lblSteelAreaWidth.Text = "Width";
+            this.lblSteelAreaWidth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSteelAreaWidth.Visible = false;
             // 
             // btnAddSteelArea
             // 
@@ -1245,7 +1327,7 @@
             // lblPieceSize
             // 
             this.lblPieceSize.AutoSize = true;
-            this.lblPieceSize.Location = new System.Drawing.Point(80, 595);
+            this.lblPieceSize.Location = new System.Drawing.Point(80, 636);
             this.lblPieceSize.Name = "lblPieceSize";
             this.lblPieceSize.Size = new System.Drawing.Size(84, 20);
             this.lblPieceSize.TabIndex = 66;
@@ -1255,7 +1337,7 @@
             // 
             this.lblSize.AutoSize = true;
             this.lblSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(17, 595);
+            this.lblSize.Location = new System.Drawing.Point(17, 636);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(44, 20);
             this.lblSize.TabIndex = 65;
@@ -1265,7 +1347,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(17, 535);
+            this.lblName.Location = new System.Drawing.Point(17, 576);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(55, 20);
             this.lblName.TabIndex = 59;
@@ -1274,7 +1356,7 @@
             // lblPieceType
             // 
             this.lblPieceType.AutoSize = true;
-            this.lblPieceType.Location = new System.Drawing.Point(80, 575);
+            this.lblPieceType.Location = new System.Drawing.Point(80, 616);
             this.lblPieceType.Name = "lblPieceType";
             this.lblPieceType.Size = new System.Drawing.Size(86, 20);
             this.lblPieceType.TabIndex = 64;
@@ -1284,7 +1366,7 @@
             // 
             this.lblStyle.AutoSize = true;
             this.lblStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStyle.Location = new System.Drawing.Point(17, 555);
+            this.lblStyle.Location = new System.Drawing.Point(17, 596);
             this.lblStyle.Name = "lblStyle";
             this.lblStyle.Size = new System.Drawing.Size(48, 20);
             this.lblStyle.TabIndex = 60;
@@ -1293,7 +1375,7 @@
             // lblPieceStyle
             // 
             this.lblPieceStyle.AutoSize = true;
-            this.lblPieceStyle.Location = new System.Drawing.Point(80, 555);
+            this.lblPieceStyle.Location = new System.Drawing.Point(80, 596);
             this.lblPieceStyle.Name = "lblPieceStyle";
             this.lblPieceStyle.Size = new System.Drawing.Size(88, 20);
             this.lblPieceStyle.TabIndex = 63;
@@ -1303,7 +1385,7 @@
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.Location = new System.Drawing.Point(17, 575);
+            this.lblType.Location = new System.Drawing.Point(17, 616);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(47, 20);
             this.lblType.TabIndex = 61;
@@ -1312,7 +1394,7 @@
             // lblPieceName
             // 
             this.lblPieceName.AutoSize = true;
-            this.lblPieceName.Location = new System.Drawing.Point(80, 535);
+            this.lblPieceName.Location = new System.Drawing.Point(80, 576);
             this.lblPieceName.Name = "lblPieceName";
             this.lblPieceName.Size = new System.Drawing.Size(96, 20);
             this.lblPieceName.TabIndex = 62;
@@ -2308,6 +2390,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_Lvl_SizeX)).EndInit();
             this.tabPieces.ResumeLayout(false);
             this.tabPieces.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_SteelAreaHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_SteelAreaWidth)).EndInit();
             this.tabSkills.ResumeLayout(false);
             this.tabSkills.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_RandomMaxLimit)).EndInit();
@@ -2514,6 +2598,10 @@
         private System.Windows.Forms.Label lblPieceName;
         private System.Windows.Forms.Button btnAddSteelArea;
         private System.Windows.Forms.CheckBox check_Lvl_Autosteel;
+        private System.Windows.Forms.Label lblSteelAreaHeight;
+        private System.Windows.Forms.Label lblSteelAreaWidth;
+        private NumUpDownOverwrite num_SteelAreaHeight;
+        private NumUpDownOverwrite num_SteelAreaWidth;
     }
 }
 

@@ -204,8 +204,20 @@ namespace RLEditor
                 check_Pieces_OnlyOnTerrain.Enabled = false; check_Pieces_OnlyOnTerrain.Checked = false;
                 check_Pieces_Invisible.Enabled = false; check_Pieces_Invisible.Checked = false;
                 check_Pieces_Fake.Enabled = false; check_Pieces_Fake.Checked = false;
+
+                GadgetPiece gadget = (GadgetPiece)selectionList[0];
+                if ((selectionList.Count == 1) && (gadget.ObjType == C.OBJ.STEEL))
+                {
+                    lblSteelAreaWidth.Visible = true; lblSteelAreaHeight.Visible = true;
+                    num_SteelAreaWidth.Visible = true; num_SteelAreaHeight.Visible = true;
+                    num_SteelAreaWidth.Value = Math.Max(1, gadget.SpecWidth);
+                    num_SteelAreaHeight.Value = Math.Max(1, gadget.SpecHeight);
+                }
                 return;
             }
+
+            lblSteelAreaHeight.Visible = false; lblSteelAreaWidth.Visible = false;
+            num_SteelAreaHeight.Visible = false; num_SteelAreaWidth.Visible = false;
 
             check_Pieces_NoOv.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
             // Set check-mark correctly, without firing the CheckedChanged event
