@@ -123,12 +123,22 @@ namespace RLEditor
             newLevel.SaveReq = ini.GetInt("numToRescue");
 
             // --- Time limit ---
-            if (ini.HasKey("timeLimitSeconds"))
+            if (ini.HasKey("timeLimitSeconds") || ini.HasKey("timeLimit"))
             {
-                int timeLimit = ini.GetInt("timeLimitSeconds");
-                newLevel.TimeLimit = timeLimit;
+                int timeLimitSeconds = 0;
 
-                if (timeLimit <= 0)
+                if (ini.HasKey("timeLimitSeconds"))
+                {
+                    timeLimitSeconds = ini.GetInt("timeLimitSeconds");
+                }
+                else if (ini.HasKey("timeLimit"))
+                {
+                    int timeLimit = ini.GetInt("timeLimit");
+                    timeLimitSeconds = timeLimit * 60;
+                }
+                newLevel.TimeLimit = timeLimitSeconds;
+
+                if (timeLimitSeconds <= 0)
                     newLevel.HasTimeLimit = false;
                 else
                     newLevel.HasTimeLimit = true;
@@ -138,13 +148,24 @@ namespace RLEditor
 
             // --- Release rate ---
             newLevel.ReleaseRate = ini.GetInt("releaseRate");
-            newLevel.IsReleaseRateLocked = false; // look for "lockReleaseRate = true" in .ini file
-            newLevel.IsSuperlemming = false; // look for "superlemming = true" in .ini file
+            string lockReleaseRate = ini.GetString("lockReleaseRate", "false"); // default to "false"
+            newLevel.IsReleaseRateLocked = lockReleaseRate.Trim().ToLower() == "true";
 
             // --- Other stuff ---
-            newLevel.AutosteelMode = ini.GetInt("autosteelMode");
-            newLevel.MaxFallDistance = ini.GetInt("maxFallDistance"); // TODO - Add full support for this
-            newLevel.TopBoundary = ini.GetInt("topBoundary"); // TODO - Add the rest of these
+            string superlemming = ini.GetString("superlemming", "false"); // default to "false"
+            newLevel.IsSuperlemming = superlemming.Trim().ToLower() == "true";
+
+            string forceNormalSpeed = ini.GetString("forceNormalTimerSpeed", "true"); // default to "true"
+            newLevel.ForceNormalTimerSpeed = forceNormalSpeed.Trim().ToLower() == "true";
+
+            newLevel.MaxFallDistance = ini.GetInt("maxFallDistance");
+            newLevel.AutosteelMode = ini.GetInt("autosteelMode"); // TODO - Add support for Simple Autosteel (needs Autosteel to be enabled; probably best to do this as a 3-way off/on/both option)
+                                                                  // TODO - Add support for Classic Steel (off by default)
+
+            newLevel.TopBoundary = ini.GetInt("topBoundary");
+            newLevel.BottomBoundary = ini.GetInt("bottomBoundary");
+            newLevel.LeftBoundary = ini.GetInt("leftBoundary");
+            newLevel.RightBoundary = ini.GetInt("rightBoundary");
 
             // --- Skillset ---
             LoadSkillset(newLevel, ini);
@@ -514,6 +535,7 @@ namespace RLEditor
             sb.AppendLine($"name = {GetSafeString(curLevel.Title)}");
             sb.AppendLine($"author = {GetSafeString(curLevel.Author)}");
             sb.AppendLine($"releaseRate = {curLevel.ReleaseRate}");
+            sb.AppendLine($"lockReleaseRate = {curLevel.IsReleaseRateLocked}");
             sb.AppendLine($"numLemmings = {curLevel.NumLems}");
             sb.AppendLine($"numToRescue = {curLevel.SaveReq}");
             sb.AppendLine($"timeLimitSeconds = {curLevel.TimeLimit}");
@@ -528,16 +550,16 @@ namespace RLEditor
             sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
             sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
             sb.AppendLine($"style = {curLevel.PieceStyle.NameInEditor}");
-            sb.AppendLine($"maxFallDistance = {curLevel.MaxFallDistance}");
-            sb.AppendLine($"autosteelMode = {curLevel.AutosteelMode}");
             sb.AppendLine($"width = {curLevel.Width}");
             sb.AppendLine($"height = {curLevel.Height}");
+            sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
+            sb.AppendLine($"forceNormalTimerSpeed = {curLevel.ForceNormalTimerSpeed}");
+            sb.AppendLine($"maxFallDistance = {curLevel.MaxFallDistance}");
+            sb.AppendLine($"autosteelMode = {curLevel.AutosteelMode}");
             sb.AppendLine($"topBoundary = {curLevel.TopBoundary}");
             sb.AppendLine($"bottomBoundary = {curLevel.BottomBoundary}");
             sb.AppendLine($"leftBoundary = {curLevel.LeftBoundary}");
             sb.AppendLine($"rightBoundary = {curLevel.RightBoundary}");
-            sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
-            sb.AppendLine($"forceNormalTimerSpeed = {curLevel.ForceNormalTimerSpeed}");
             sb.AppendLine();
 
             // Add objects

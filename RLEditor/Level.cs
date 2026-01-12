@@ -43,7 +43,14 @@ namespace RLEditor
             this.TimeLimit = 0;
             this.HasTimeLimit = false;
             this.IsSuperlemming = false;
+            this.ForceNormalTimerSpeed = true;
+            this.MaxFallDistance = 126;
             this.AutosteelMode = 2;
+
+            this.TopBoundary = 8;
+            this.BottomBoundary = 20;
+            this.LeftBoundary = 0;
+            this.RightBoundary = -16;
 
             this.SkillSet = new Dictionary<C.Skill, int>();
             foreach (C.Skill skill in C.SkillArray)
@@ -98,15 +105,14 @@ namespace RLEditor
         public int TimeLimit { get; set; }
         public bool HasTimeLimit { get; set; }
         public bool IsSuperlemming { get; set; }
-        public bool ForceNormalTimerSpeed = true;
-
-        public int MaxFallDistance = 126;
+        public bool ForceNormalTimerSpeed { get; set; }
+        public int MaxFallDistance { get; set; }
         public int AutosteelMode { get; set; }
 
-        public int TopBoundary = 8;
-        public int BottomBoundary = 20;
-        public int LeftBoundary = 0;
-        public int RightBoundary = -16;
+        public int TopBoundary { get; set; }
+        public int BottomBoundary { get; set; }
+        public int LeftBoundary { get; set; }
+        public int RightBoundary { get; set; }
 
         public Dictionary<C.Skill, int> SkillSet { get; set; }
 
@@ -158,7 +164,14 @@ namespace RLEditor
             newLevel.TimeLimit = this.TimeLimit;
             newLevel.HasTimeLimit = this.HasTimeLimit;
             newLevel.IsSuperlemming = this.IsSuperlemming;
+            newLevel.ForceNormalTimerSpeed = this.ForceNormalTimerSpeed;
+            newLevel.MaxFallDistance = this.MaxFallDistance;
             newLevel.AutosteelMode = this.AutosteelMode;
+
+            newLevel.TopBoundary = this.TopBoundary;
+            newLevel.BottomBoundary = this.BottomBoundary;
+            newLevel.LeftBoundary = this.LeftBoundary;
+            newLevel.RightBoundary = this.RightBoundary;
 
             newLevel.SkillSet = new Dictionary<C.Skill, int>();
             foreach (C.Skill skill in C.SkillArray)
@@ -201,7 +214,13 @@ namespace RLEditor
                 || this.ReleaseRate != otherLevel.ReleaseRate
                 || this.IsReleaseRateLocked != otherLevel.IsReleaseRateLocked
                 || this.IsSuperlemming != otherLevel.IsSuperlemming
+                || this.ForceNormalTimerSpeed != otherLevel.ForceNormalTimerSpeed
+                || this.MaxFallDistance != otherLevel.MaxFallDistance
                 || this.AutosteelMode != otherLevel.AutosteelMode
+                || this.TopBoundary != otherLevel.TopBoundary
+                || this.BottomBoundary != otherLevel.BottomBoundary
+                || this.LeftBoundary != otherLevel.LeftBoundary
+                || this.RightBoundary != otherLevel.RightBoundary
                 || this.HasTimeLimit != otherLevel.HasTimeLimit
                 || (this.TimeLimit != otherLevel.TimeLimit && this.HasTimeLimit)
                 || !this.PreviewText.ToString().Equals(otherLevel.PreviewText.ToString())
