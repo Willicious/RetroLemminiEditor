@@ -14,17 +14,23 @@ namespace RLEditor
     {
         private int pieceBrowserTop = 26;
 
+        private void UpdateSteelModeCombo()
+        {
+            combo_SteelMode.SelectedIndex = 0;
+
+            if (CurLevel.AutosteelMode == 1)
+                combo_SteelMode.SelectedIndex = 1;
+            
+            if (CurLevel.AutosteelMode == 0)
+                combo_SteelMode.SelectedIndex = 2;
+        }
+
         private void UpdatePieceStyleComboAvailability()
         {
             if (CurLevel.GadgetList.Count > 0 || CurLevel.TerrainList.Count > 0)
                 combo_PieceStyle.Enabled = false;
             else
                 combo_PieceStyle.Enabled = true;
-        }
-
-        private void SetSteelAreaButton()
-        {
-            btnAddSteelArea.Enabled = !check_Lvl_Autosteel.Checked;
         }
 
         /// <summary>
@@ -201,7 +207,8 @@ namespace RLEditor
             but_MoveBackOne.Enabled = (selectionList.Count > 0);
             but_MoveFrontOne.Enabled = (selectionList.Count > 0);
 
-            if (selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).ObjType == C.OBJ.STEEL))
+            if (selectionList.Exists(p => p is GadgetPiece gadget &&
+                              new[] { C.OBJ.STEEL, /*C.OBJ.RULER*/ }.Contains(gadget.ObjType)))
             {
                 check_Pieces_NoOv.Enabled = false; check_Pieces_NoOv.Checked = false;
                 check_Pieces_Erase.Enabled = false; check_Pieces_Erase.Checked = false;
@@ -218,11 +225,20 @@ namespace RLEditor
                     num_SteelAreaWidth.Value = Math.Max(1, gadget.SpecWidth);
                     num_SteelAreaHeight.Value = Math.Max(1, gadget.SpecHeight);
                 }
+                //else if ((selectionList.Count == 1) && (gadget.ObjType == C.OBJ.RULER)) // TODO - Add support for this
+                //{
+                //    lblRulerWidth.Visible = true; lblRulerHeight.Visible = true;
+                //    num_RulerWidth.Visible = true; num_RulerHeight.Visible = true;
+                //    num_RulerWidth.Value = Math.Max(1, gadget.SpecWidth);
+                //    num_RulerHeight.Value = Math.Max(1, gadget.SpecHeight);
+                //}
                 return;
             }
 
             lblSteelAreaHeight.Visible = false; lblSteelAreaWidth.Visible = false;
             num_SteelAreaHeight.Visible = false; num_SteelAreaWidth.Visible = false;
+            lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
+            num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
 
             check_Pieces_NoOv.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
             // Set check-mark correctly, without firing the CheckedChanged event
@@ -332,7 +348,6 @@ namespace RLEditor
             but_PieceTerr.Top = 0;
             but_PieceSteel.Top = 0;
             but_PieceObj.Top = 0;
-            but_PieceSketches.Top = 0;
             but_PieceBackground.Top = 0;
 
             but_PieceLeft.Top = pieceBrowserTop;
@@ -341,6 +356,10 @@ namespace RLEditor
 
             but_ClearBackground.Top = 0;
             but_ClearBackground.Left = but_PieceRight.Right - 4 - but_ClearBackground.Width;
+            but_AddRuler.Top = 0;
+            but_AddRuler.Left = but_ClearBackground.Left - 4 - but_AddRuler.Width;
+            but_AddSteelArea.Top = 0;
+            but_AddSteelArea.Left = but_AddRuler.Left - 4 - but_AddSteelArea.Width;
         }
 
         /// <summary>

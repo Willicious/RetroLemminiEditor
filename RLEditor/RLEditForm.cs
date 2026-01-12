@@ -1431,15 +1431,7 @@ namespace RLEditor
             }
         }
 
-        private void check_Lvl_Autosteel_CheckedChanged(object sender, EventArgs e)
-        {
-            if (_IsWritingToForm) return;
-            ReadLevelInfoFromForm(true);
-            SaveChangesToOldLevelList();
-            SetSteelAreaButton();
-        }
-
-        private void btnAddSteelArea_Click(object sender, EventArgs e)
+        private void but_AddSteelArea_Click(object sender, EventArgs e)
         {
             AddSteelArea();
         }
@@ -1462,6 +1454,42 @@ namespace RLEditor
         private void num_SteelAreaHeight_KeyUp(object sender, KeyEventArgs e)
         {
             ResizeSteelArea(false);
+        }
+
+        private void but_AddRuler_Click(object sender, EventArgs e)
+        {
+            return;
+            //AddRuler() // TODO - Add this
+        }
+
+        private void num_RulerWidth_ValueChanged(object sender, EventArgs e)
+        {
+            return;
+            //ResizeRuler(true); // TODO - Add this
+        }
+
+        private void num_RulerHeight_ValueChanged(object sender, EventArgs e)
+        {
+            return;
+            //ResizeRuler(false); // TODO - Add this
+        }
+
+        private void num_RulerWidth_KeyUp(object sender, KeyEventArgs e)
+        {
+            return;
+            //ResizeRuler(true); // TODO - Add this
+        }
+
+        private void num_RulerHeight_KeyUp(object sender, KeyEventArgs e)
+        {
+            return;
+            //ResizeRuler(false); // TODO - Add this
+        }
+
+        private void but_SteelHelp_Click(object sender, EventArgs e)
+        {
+            return;
+            // Show a message explaining the different types of steel
         }
     }
 }

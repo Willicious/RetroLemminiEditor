@@ -152,6 +152,9 @@ namespace RLEditor
             newLevel.IsReleaseRateLocked = lockReleaseRate.Trim().ToLower() == "true";
 
             // --- Other stuff ---
+            string classicSteel = ini.GetString("classicSteel", "false"); // default to "false"
+            newLevel.ClassicSteel = classicSteel.Trim().ToLower() == "true";
+
             string superlemming = ini.GetString("superlemming", "false"); // default to "false"
             newLevel.IsSuperlemming = superlemming.Trim().ToLower() == "true";
 
@@ -159,8 +162,7 @@ namespace RLEditor
             newLevel.ForceNormalTimerSpeed = forceNormalSpeed.Trim().ToLower() == "true";
 
             newLevel.MaxFallDistance = ini.GetInt("maxFallDistance");
-            newLevel.AutosteelMode = ini.GetInt("autosteelMode"); // TODO - Add support for Simple Autosteel (needs Autosteel to be enabled; probably best to do this as a 3-way off/on/both option)
-                                                                  // TODO - Add support for Classic Steel (off by default)
+            newLevel.AutosteelMode = ini.GetInt("autosteelMode");
 
             newLevel.TopBoundary = ini.GetInt("topBoundary");
             newLevel.BottomBoundary = ini.GetInt("bottomBoundary");
@@ -555,6 +557,7 @@ namespace RLEditor
             sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
             sb.AppendLine($"forceNormalTimerSpeed = {curLevel.ForceNormalTimerSpeed}");
             sb.AppendLine($"maxFallDistance = {curLevel.MaxFallDistance}");
+            sb.AppendLine($"classicSteel = {curLevel.ClassicSteel}");
             sb.AppendLine($"autosteelMode = {curLevel.AutosteelMode}");
             sb.AppendLine($"topBoundary = {curLevel.TopBoundary}");
             sb.AppendLine($"bottomBoundary = {curLevel.BottomBoundary}");
@@ -699,8 +702,8 @@ namespace RLEditor
 
                 string line = $"steel_{counter} = {ste.PosX}, {ste.PosY}, {ste.Width}, {ste.Height}, {flags}";
 
-                if (level.AutosteelMode == 2)
-                    line = "# " + line;
+                //if (level.AutosteelMode == 2) // TODO - Check if RetroLemmini supports auto and manual at the same time
+                //    line = "# " + line;
 
                 steelLines.Add(line);
                 counter++;

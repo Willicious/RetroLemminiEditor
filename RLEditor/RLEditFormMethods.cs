@@ -436,10 +436,16 @@ Digger=20
             CurLevel.ReleaseRate = decimal.ToInt32(num_Lvl_RR.Value);
             CurLevel.IsReleaseRateLocked = check_Lvl_LockSR.Checked;
             CurLevel.IsSuperlemming = check_Lvl_Superlemming.Checked;
-            CurLevel.AutosteelMode = check_Lvl_Autosteel.Checked ? 2 : 0;
             CurLevel.TimeLimit = decimal.ToInt32(num_Lvl_TimeMin.Value) * 60
                                     + decimal.ToInt32(num_Lvl_TimeSec.Value);
             CurLevel.HasTimeLimit = check_Lvl_TimeLimit.Checked;
+
+            if (combo_SteelMode.SelectedIndex == 2)
+                CurLevel.AutosteelMode = 0;
+            else if (combo_SteelMode.SelectedIndex == 1)
+                CurLevel.AutosteelMode = 1;
+            else
+                CurLevel.AutosteelMode = 2;
 
             string idText = txt_LevelID.Text;
             if (idText.Length < 16)
@@ -505,7 +511,13 @@ Digger=20
                 num_Lvl_TimeSec.Value = CurLevel.TimeLimit % 60;
                 check_Lvl_TimeLimit.Checked = CurLevel.HasTimeLimit;
                 check_Lvl_Superlemming.Checked = CurLevel.IsSuperlemming;
-                check_Lvl_Autosteel.Checked = (CurLevel.AutosteelMode == 2) ? true : false;
+
+                if (CurLevel.AutosteelMode == 0)
+                    combo_SteelMode.SelectedIndex = 2;
+                else if (CurLevel.AutosteelMode == 1)
+                    combo_SteelMode.SelectedIndex = 1;
+                else
+                    combo_SteelMode.SelectedIndex = 0;
 
                 txt_LevelID.Text = CurLevel.LevelID.ToString("X16");
 
@@ -548,7 +560,7 @@ Digger=20
             RepositionPicLevel();
             pic_Level.Image = curRenderer.CreateLevelImage();
             
-            SetSteelAreaButton();
+            UpdateSteelModeCombo();
         }
 
         /// <summary>
@@ -587,7 +599,7 @@ Digger=20
             pic_Level.Image = curRenderer.CreateLevelImage();
 
             combo_PieceStyle.Text = CurLevel.PieceStyle?.NameInEditor;
-            SetSteelAreaButton();
+            UpdateSteelModeCombo();
         }
 
         /// <summary>
@@ -807,8 +819,12 @@ Digger=20
 
         private void AddSteelArea()
         {
-            if (check_Lvl_Autosteel.Checked)
-                return;
+            // TODO - If it's the first time the user has clicked this button,
+            // add a message in the status bar informing them that adding steel areas
+            // is optional unless the steel mode is set to "Manual"
+            // Let the user choose whether or not to show the message again (add a setting in Properties for this)
+            // Also TODO - Double check that RetroLemmini actually does still support
+            // autosteel PLUS steel areas
 
             string pieceKey = "Default\\SteelArea";
             Point center = curRenderer.GetCenterPoint();
@@ -1223,7 +1239,6 @@ Digger=20
                 but_PieceSteel.Font = new Font(but_PieceSteel.Font, FontStyle.Regular);
                 but_PieceObj.Font = new Font(but_PieceObj.Font, FontStyle.Regular);
                 but_PieceBackground.Font = new Font(but_PieceBackground.Font, FontStyle.Regular);
-                but_PieceSketches.Font = new Font(but_PieceSketches.Font, FontStyle.Regular);
 
                 switch (newKind)
                 {
@@ -1238,9 +1253,6 @@ Digger=20
                         break;
                     case C.SelectPieceType.Backgrounds:
                         but_PieceBackground.Font = new Font(but_PieceBackground.Font, FontStyle.Bold);
-                        break;
-                    case C.SelectPieceType.Sketches:
-                        but_PieceSketches.Font = new Font(but_PieceSketches.Font, FontStyle.Bold);
                         break;
                 }
 

@@ -45,6 +45,7 @@ namespace RLEditor
             this.IsSuperlemming = false;
             this.ForceNormalTimerSpeed = true;
             this.MaxFallDistance = 126;
+            this.ClassicSteel = false;
             this.AutosteelMode = 2;
 
             this.TopBoundary = 8;
@@ -106,6 +107,7 @@ namespace RLEditor
         public bool HasTimeLimit { get; set; }
         public bool IsSuperlemming { get; set; }
         public bool ForceNormalTimerSpeed { get; set; }
+        public bool ClassicSteel { get; set; }
         public int MaxFallDistance { get; set; }
         public int AutosteelMode { get; set; }
 
@@ -166,6 +168,7 @@ namespace RLEditor
             newLevel.IsSuperlemming = this.IsSuperlemming;
             newLevel.ForceNormalTimerSpeed = this.ForceNormalTimerSpeed;
             newLevel.MaxFallDistance = this.MaxFallDistance;
+            newLevel.ClassicSteel = this.ClassicSteel;
             newLevel.AutosteelMode = this.AutosteelMode;
 
             newLevel.TopBoundary = this.TopBoundary;
@@ -216,6 +219,7 @@ namespace RLEditor
                 || this.IsSuperlemming != otherLevel.IsSuperlemming
                 || this.ForceNormalTimerSpeed != otherLevel.ForceNormalTimerSpeed
                 || this.MaxFallDistance != otherLevel.MaxFallDistance
+                || this.ClassicSteel != otherLevel.ClassicSteel
                 || this.AutosteelMode != otherLevel.AutosteelMode
                 || this.TopBoundary != otherLevel.TopBoundary
                 || this.BottomBoundary != otherLevel.BottomBoundary
