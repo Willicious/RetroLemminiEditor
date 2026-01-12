@@ -691,12 +691,6 @@ namespace RLEditor
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceSketch_Click(object sender, EventArgs e)
-        {
-            CyclePieceBrowserDisplay(C.SelectPieceType.Sketches);
-            PullFocusFromTextInputs();
-        }
-
         private void but_PieceLeft_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();

@@ -505,7 +505,7 @@ namespace RLEditor
         /// <param name="doAdd"></param>
         public void SetNoOverwrite(bool doAdd)
         {
-            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch)
+            TerrainList.FindAll(ter => ter.IsSelected)
                        .ForEach(ter => { ter.IsNoOverwrite = doAdd; if (doAdd) ter.IsErase = false; });
             GadgetList.FindAll(gad => gad.IsSelected)
                       .ForEach(gad => { gad.IsNoOverwrite = doAdd; if (doAdd) { gad.IsOnlyOnTerrain = false; gad.IsInvisible = false; } });
@@ -517,7 +517,7 @@ namespace RLEditor
         /// <param name="doAdd"></param>
         public void SetErase(bool doAdd)
         {
-            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch)
+            TerrainList.FindAll(ter => ter.IsSelected)
                        .ForEach(ter => { ter.IsErase = doAdd; if (doAdd) ter.IsNoOverwrite = false; });
         }
 
@@ -537,7 +537,7 @@ namespace RLEditor
         /// <param name="doAdd"></param>
         public void SetInvisible(bool doAdd)
         {
-            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch)
+            TerrainList.FindAll(ter => ter.IsSelected)
                        .ForEach(ter => { ter.IsInvisible = doAdd; });
             GadgetList.FindAll(gad => gad.IsSelected)
                       .ForEach(gad => { gad.IsInvisible = doAdd; if (doAdd) { gad.IsNoOverwrite = false; gad.IsOnlyOnTerrain = false; } });
@@ -549,7 +549,7 @@ namespace RLEditor
         /// <param name="doAdd"></param>
         public void SetFake(bool doAdd)
         {
-            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSketch)
+            TerrainList.FindAll(ter => ter.IsSelected)
                        .ForEach(ter => { ter.IsFake = doAdd; });
             GadgetList.FindAll(gad => gad.IsSelected)
                       .ForEach(gad => { gad.IsFake = doAdd; });
@@ -561,7 +561,7 @@ namespace RLEditor
         /// <param name="doAdd"></param>
         public void SetOneWay(bool doAdd)
         {
-            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSteel && !ter.IsSketch)
+            TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSteel)
                        .ForEach(ter => ter.IsOneWay = doAdd);
         }
 

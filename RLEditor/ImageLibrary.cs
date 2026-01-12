@@ -691,17 +691,6 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Creates the sketch image key from a file path (relative or absolute). 
-        /// </summary>
-        /// <param name="filePath"></param>
-        public static string CreateSketchKey(string filePath)
-        {
-            string fullPath = System.IO.Path.GetFullPath(filePath);
-            string relativePath = fullPath.Remove(0, (C.AppPath + "sketches\\").Length);
-            return "*sketch:" + System.IO.Path.ChangeExtension(relativePath, null);
-        }
-
-        /// <summary>
         /// Creates the image key from the style and piece name.
         /// <para> Do NOT use this for background images! </para>
         /// </summary>

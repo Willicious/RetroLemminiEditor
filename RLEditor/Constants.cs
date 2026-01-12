@@ -49,7 +49,7 @@ namespace RLEditor
 
         public enum SelectPieceType
         {
-            Terrain, Steel, Objects, Backgrounds, Sketches
+            Terrain, Steel, Objects, Backgrounds
         }
 
         public enum DisplayType

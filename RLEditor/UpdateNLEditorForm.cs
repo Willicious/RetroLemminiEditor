@@ -77,9 +77,6 @@ namespace RLEditor
                 case C.SelectPieceType.Backgrounds:
                     pieceKeys = pieceCurStyle?.BackgroundKeys;
                     break;
-                case C.SelectPieceType.Sketches:
-                    pieceKeys = Style.SketchKeys;
-                    break;
                 default:
                     throw new ArgumentException();
             }
@@ -240,20 +237,20 @@ namespace RLEditor
             lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
             num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
 
-            check_Pieces_NoOv.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
+            check_Pieces_NoOv.Enabled = selectionList.Exists(p => !(p is TerrainPiece));
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_NoOv.CheckedChanged -= check_Pieces_NoOv_CheckedChanged;
             check_Pieces_NoOv.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsNoOverwrite)
                                                                || (p is TerrainPiece && (p as TerrainPiece).IsNoOverwrite));
             check_Pieces_NoOv.CheckedChanged += check_Pieces_NoOv_CheckedChanged;
 
-            check_Pieces_Erase.Enabled = selectionList.Exists(p => (p is TerrainPiece tp) && (!tp.IsSketch));
+            check_Pieces_Erase.Enabled = selectionList.Exists(p => (p is TerrainPiece tp));
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_Erase.CheckedChanged -= check_Pieces_Erase_CheckedChanged;
             check_Pieces_Erase.Checked = selectionList.Exists(p => p is TerrainPiece && (p as TerrainPiece).IsErase);
             check_Pieces_Erase.CheckedChanged += check_Pieces_Erase_CheckedChanged;
 
-            check_Pieces_OneWay.Enabled = selectionList.Exists(p => (p is TerrainPiece tp) && !tp.IsSteel && !tp.IsSketch);
+            check_Pieces_OneWay.Enabled = selectionList.Exists(p => (p is TerrainPiece tp) && !tp.IsSteel);
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_OneWay.CheckedChanged -= check_Pieces_OneWay_CheckedChanged;
             check_Pieces_OneWay.Checked = selectionList.Exists(p => p is TerrainPiece && (p as TerrainPiece).IsOneWay);
@@ -265,14 +262,14 @@ namespace RLEditor
             check_Pieces_OnlyOnTerrain.Checked = selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).IsOnlyOnTerrain);
             check_Pieces_OnlyOnTerrain.CheckedChanged += check_Pieces_OnlyOnTerrain_CheckedChanged;
 
-            check_Pieces_Invisible.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
+            check_Pieces_Invisible.Enabled = selectionList.Exists(p => !(p is TerrainPiece));
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_Invisible.CheckedChanged -= check_Pieces_Invisible_CheckedChanged;
             check_Pieces_Invisible.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsInvisible)
                                                                || (p is TerrainPiece && (p as TerrainPiece).IsInvisible));
             check_Pieces_Invisible.CheckedChanged += check_Pieces_Invisible_CheckedChanged;
 
-            check_Pieces_Fake.Enabled = selectionList.Exists(p => !(p is TerrainPiece) || !(p as TerrainPiece).IsSketch);
+            check_Pieces_Fake.Enabled = selectionList.Exists(p => !(p is TerrainPiece));
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_Fake.CheckedChanged -= check_Pieces_Fake_CheckedChanged;
             check_Pieces_Fake.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsFake)

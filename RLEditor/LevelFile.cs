@@ -369,43 +369,6 @@ namespace RLEditor
             level.TerrainList.Add(newTerrain);
         }
 
-        // TODO - Add support for sketches (they should be written into and read from the .ini (and can be ignored by RetroLemmini itself)
-        //private static void LoadSketch(Level level, NLTextDataNode node)
-        //{
-        //    // First read in all infos
-        //    string pieceName = node["PIECE"].Value;
-        //    int posX = node["X"].ValueInt;
-        //    int posY = node["Y"].ValueInt;
-
-        //    bool doRotate = node.HasChildWithKey("ROTATE");
-        //    bool doInvert = node.HasChildWithKey("FLIP_VERTICAL");
-        //    bool doFlip = node.HasChildWithKey("FLIP_HORIZONTAL");
-
-        //    int index = node.HasChildWithKey("INDEX") ? node["INDEX"].ValueInt : -1;
-
-        //    // ... then create the correct Terrain piece
-        //    string key = "*sketch:" + pieceName;
-        //    Point pos = new Point(posX, posY);
-        //    TerrainPiece newSketch = new TerrainPiece(key, pos, 0, false, false, false, false, 0, 0);
-
-        //    if (doRotate)
-        //        newSketch.RotateInRect(newSketch.ImageRectangle);
-        //    if (doFlip)
-        //        newSketch.FlipInRect(newSketch.ImageRectangle);
-        //    if (doInvert)
-        //        newSketch.InvertInRect(newSketch.ImageRectangle);
-        //    //Reposition terrain piece to be sure...
-        //    newSketch.PosX = pos.X;
-        //    newSketch.PosY = pos.Y;
-
-        //    newSketch.IsSelected = false;
-
-        //    if (index < 0 || index >= level.TerrainList.Count)
-        //        level.TerrainList.Add(newSketch);
-        //    else
-        //        level.TerrainList.Insert(index, newSketch);
-        //}
-
         private static void LoadSteelAreas(Level level, string data)
         {
             int[] value = INIFileParser.ParseIntArray(data);

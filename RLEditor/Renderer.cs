@@ -557,9 +557,7 @@ namespace RLEditor
         /// <param name="terrPiece"></param>
         private C.CustDrawMode GetDrawModeForTerrain(TerrainPiece terrPiece)
         {
-            if (terrPiece.IsSketch)
-                return C.CustDrawMode.Default;
-            else if (terrPiece.IsErase)
+            if (terrPiece.IsErase)
                 return C.CustDrawMode.Erase;
             else if (terrPiece.IsNoOverwrite)
             {

@@ -14,20 +14,10 @@ namespace RLEditor
         {
             this.Key = key;
 
-            if (this.Key.Substring(0, 8).ToUpperInvariant() == "*SKETCH:")
-            {
-                this.Name = this.Key.Substring(8);
-                this.Style = "*sketch";
-                this.IsSketch = true;
-            }
-            else
-            {
-                this.Name = System.IO.Path.GetFileName(key);
-                this.Style = System.IO.Path.GetDirectoryName(key);
-                this.IsSketch = false;
+            this.Name = System.IO.Path.GetFileName(key);
+            this.Style = System.IO.Path.GetDirectoryName(key);
 
-                System.Diagnostics.Debug.Assert(ImageLibrary.CreatePieceKey(Style, Name, isObj) == Key, "Style and name of level piece incompatible with key.");
-            }
+            System.Diagnostics.Debug.Assert(ImageLibrary.CreatePieceKey(Style, Name, isObj) == Key, "Style and name of level piece incompatible with key.");
 
             this.PosX = pos.X;
             this.PosY = pos.Y;
@@ -36,8 +26,6 @@ namespace RLEditor
             this.IsInvert = isInvert;
             this.IsSelected = true;
         }
-
-        public bool IsSketch { get; private set; }
 
         public int PosX { get; set; }
         public int PosY { get; set; }

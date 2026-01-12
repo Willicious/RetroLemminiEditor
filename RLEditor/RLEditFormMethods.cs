@@ -660,7 +660,6 @@ Digger=20
 
             ImageLibrary.Clear();
             LoadStylesFromFile.AddSteelAreaImageToLibrary();
-            Style.ReloadSketches();
 
             CreateStyleList();
 
@@ -1340,9 +1339,6 @@ Digger=20
                 case C.SelectPieceType.Backgrounds:
                     pieceNameList = pieceCurStyle?.BackgroundKeys;
                     break;
-                case C.SelectPieceType.Sketches:
-                    pieceNameList = Style.SketchKeys;
-                    break;
                 default:
                     throw new ArgumentException();
             }
@@ -1440,9 +1436,6 @@ Digger=20
                     newKind = C.SelectPieceType.Objects;
                     break;
                 case C.SelectPieceType.Objects:
-                    newKind = C.SelectPieceType.Sketches;
-                    break;
-                case C.SelectPieceType.Sketches:
                     newKind = C.SelectPieceType.Backgrounds;
                     break;
                 case C.SelectPieceType.Backgrounds:
@@ -1488,17 +1481,12 @@ Digger=20
             }
 
             // Get the name of the currently-selected piece
-            if (currentPiece.IsSketch)
-                pieceName = char.ToUpper(currentPiece.Name[0]) + currentPiece.Name.Substring(1).ToLower() + " Sketch";
-            else
-                pieceName = currentPiece.Name;
+            pieceName = currentPiece.Name;
 
             // Find the style based on its directory (NameInDirectory)
             Style style = StyleList?.Find(sty => sty.NameInDirectory == currentPiece.Style);
 
-            if (currentPiece.IsSketch)
-                pieceStyle = "(Sketches)";
-            else if (style == null)
+            if (style == null)
                 pieceStyle = "(Default)";
             else
                 pieceStyle = style.NameInEditor;
@@ -1515,8 +1503,6 @@ Digger=20
             lblPieceStyle.Text = pieceStyle;
             lblPieceType.Text = pieceType;
             lblPieceSize.Text = pieceSize;
-
-            string[] nonLoadable = { "(Default)", "(Sketches)" };
         }
 
 
@@ -1541,9 +1527,6 @@ Digger=20
                     break;
                 case C.SelectPieceType.Backgrounds:
                     pieceList = pieceCurStyle?.BackgroundKeys;
-                    break;
-                case C.SelectPieceType.Sketches:
-                    pieceList = Style.SketchKeys;
                     break;
                 default:
                     throw new ArgumentException();
@@ -1591,7 +1574,6 @@ Digger=20
                     case C.SelectPieceType.Terrain:
                     case C.SelectPieceType.Steel:
                     case C.SelectPieceType.Objects:
-                    case C.SelectPieceType.Sketches:
                         AddNewPieceToLevel(pieceKey, curRenderer.GetCenterPoint());
                         break;
                     case C.SelectPieceType.Backgrounds:

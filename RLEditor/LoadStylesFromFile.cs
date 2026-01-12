@@ -283,26 +283,19 @@ namespace RLEditor
         /// <param name="imageName"></param>
         public static BaseImageInfo ImageInfo(string imageName)
         {
-            if (imageName.Substring(0, 8) == "*sketch:")
+            string imagePath = C.AppPathPieces + imageName;
+            int underscoreIndex = imageName.LastIndexOf('_');
+            char letterBeforeNumber = imageName[underscoreIndex - 1];
+
+            if (letterBeforeNumber == 'o')
             {
-                return CreateNewTerrainInfo(C.AppPath + "sketches" + C.DirSep + imageName.Substring(8));
+                // create a new object piece
+                return CreateNewObjectInfo(imagePath);
             }
             else
             {
-                string imagePath = C.AppPathPieces + imageName;
-                int underscoreIndex = imageName.LastIndexOf('_');
-                char letterBeforeNumber = imageName[underscoreIndex - 1];
-
-                if (letterBeforeNumber == 'o')
-                {
-                    // create a new object piece
-                    return CreateNewObjectInfo(imagePath);
-                }
-                else
-                {
-                    // create a new terrain piece
-                    return CreateNewTerrainInfo(imagePath);
-                }
+                // create a new terrain piece
+                return CreateNewTerrainInfo(imagePath);
             }
         }
 
