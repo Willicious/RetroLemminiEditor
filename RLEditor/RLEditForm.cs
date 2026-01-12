@@ -1199,6 +1199,21 @@ namespace RLEditor
                 pieceBrowserWindow.KeyPreview = true; // Re-enable hotkey interaction
         }
 
+        /// <summary>
+        /// Resizes the selected steel piece
+        /// </summary>
+        private void ResizeSteelArea()
+        {
+            var selection = CurLevel.SelectionList();
+
+            if (selection.Count == 1 && selection[0] is GadgetPiece gadget && gadget.ObjType == C.OBJ.STEEL)
+            {
+                gadget.SpecWidth = (int)num_SteelAreaWidth.Value;
+                gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
+                pic_Level.Image = curRenderer.CreateLevelImage();
+            }
+        }
+
         private void btnEditPreview_Click(object sender, EventArgs e)
         {
             using (var textForm = new FormPrePostText(CurLevel, true))
@@ -1430,22 +1445,22 @@ namespace RLEditor
 
         private void num_SteelAreaWidth_ValueChanged(object sender, EventArgs e)
         {
-            GadgetPiece gadget = (GadgetPiece)CurLevel.SelectionList()[0];
-            if ((CurLevel.SelectionList().Count == 1) && (gadget.ObjType == C.OBJ.STEEL))
-            {
-                gadget.SpecWidth = (int)num_SteelAreaWidth.Value;
-                pic_Level.Image = curRenderer.CreateLevelImage();
-            }
+            ResizeSteelArea();
         }
 
         private void num_SteelAreaHeight_ValueChanged(object sender, EventArgs e)
         {
-            GadgetPiece gadget = (GadgetPiece)CurLevel.SelectionList()[0];
-            if ((CurLevel.SelectionList().Count == 1) && (gadget.ObjType == C.OBJ.STEEL))
-            {
-                gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
-                pic_Level.Image = curRenderer.CreateLevelImage();
-            }
+            ResizeSteelArea();
+        }
+
+        private void num_SteelAreaHeight_KeyUp(object sender, KeyEventArgs e)
+        {
+            ResizeSteelArea();
+        }
+
+        private void num_SteelAreaWidth_KeyUp(object sender, KeyEventArgs e)
+        {
+            ResizeSteelArea();
         }
     }
 }

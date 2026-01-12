@@ -1230,6 +1230,8 @@
             0});
             this.num_SteelAreaHeight.Visible = false;
             this.num_SteelAreaHeight.ValueChanged += new System.EventHandler(this.num_SteelAreaHeight_ValueChanged);
+            this.num_SteelAreaHeight.Click += new System.EventHandler(this.num_SteelAreaHeight_ValueChanged);
+            this.num_SteelAreaHeight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.num_SteelAreaHeight_KeyUp);
             // 
             // num_SteelAreaWidth
             // 
@@ -1255,6 +1257,8 @@
             0});
             this.num_SteelAreaWidth.Visible = false;
             this.num_SteelAreaWidth.ValueChanged += new System.EventHandler(this.num_SteelAreaWidth_ValueChanged);
+            this.num_SteelAreaWidth.Click += new System.EventHandler(this.num_SteelAreaWidth_ValueChanged);
+            this.num_SteelAreaWidth.KeyUp += new System.Windows.Forms.KeyEventHandler(this.num_SteelAreaHeight_KeyUp);
             // 
             // lblSteelAreaHeight
             // 
