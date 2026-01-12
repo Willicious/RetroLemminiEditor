@@ -1436,8 +1436,7 @@ namespace RLEditor
             if (_IsWritingToForm) return;
             ReadLevelInfoFromForm(true);
             SaveChangesToOldLevelList();
-
-            btnAddSteelArea.Enabled = !check_Lvl_Autosteel.Checked;
+            SetSteelAreaButton();
         }
 
         private void btnAddSteelArea_Click(object sender, EventArgs e)

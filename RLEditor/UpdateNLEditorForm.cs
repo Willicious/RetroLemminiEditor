@@ -22,6 +22,11 @@ namespace RLEditor
                 combo_PieceStyle.Enabled = true;
         }
 
+        private void SetSteelAreaButton()
+        {
+            btnAddSteelArea.Enabled = !check_Lvl_Autosteel.Checked;
+        }
+
         /// <summary>
         /// Initializes the intervals for all repeat buttons.
         /// </summary>
@@ -196,7 +201,7 @@ namespace RLEditor
             but_MoveBackOne.Enabled = (selectionList.Count > 0);
             but_MoveFrontOne.Enabled = (selectionList.Count > 0);
 
-            if (selectionList.Exists(s => s is GadgetPiece && (s as GadgetPiece).ObjType == C.OBJ.STEEL))
+            if (selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).ObjType == C.OBJ.STEEL))
             {
                 check_Pieces_NoOv.Enabled = false; check_Pieces_NoOv.Checked = false;
                 check_Pieces_Erase.Enabled = false; check_Pieces_Erase.Checked = false;
