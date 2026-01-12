@@ -118,7 +118,7 @@ namespace RLEditor
             if (colorDict.ContainsKey(colorType))
                 return colorDict[colorType];
             else
-                return C.NLColors[(colorType == C.StyleColor.BACKGROUND) ? C.NLColor.BackDefault : C.NLColor.OWWDefault];
+                return C.RLColors[(colorType == C.StyleColor.BACKGROUND) ? C.RLColor.BackDefault : C.RLColor.OWWDefault];
         }
 
         /// <summary>

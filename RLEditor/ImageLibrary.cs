@@ -91,7 +91,7 @@ namespace RLEditor
             bool isFlipped = rotFlipType.In(RotateFlipType.RotateNoneFlipX, RotateFlipType.RotateNoneFlipXY, RotateFlipType.Rotate90FlipY, RotateFlipType.Rotate90FlipXY);
             string directionString = isFlipped ? "←" : "→";
             Point bottomRightCorner = new Point(image.Width, image.Height);
-            image.WriteText(directionString, bottomRightCorner, C.NLColors[C.NLColor.Text], 7, ContentAlignment.BottomRight, new Size(12, 9));
+            image.WriteText(directionString, bottomRightCorner, C.RLColors[C.RLColor.Text], 7, ContentAlignment.BottomRight, new Size(12, 9));
             return image;
         }
         public int Width { get; private set; }
@@ -178,7 +178,7 @@ namespace RLEditor
                 if (ObjectType == C.OBJ.TERRAIN || ObjectType == C.OBJ.STEEL)
                     pieceDesc = System.IO.Path.GetFileNameWithoutExtension(pieceKey);
 
-                DrawDataString(newImage, pieceDesc, 0, 0, C.NLColors[C.NLColor.Text], 8);
+                DrawDataString(newImage, pieceDesc, 0, 0, C.RLColors[C.RLColor.Text], 8);
 
                 imagesWithDescriptions.Add(newImage);
             }
@@ -200,7 +200,7 @@ namespace RLEditor
 
                 string pieceDesc = System.IO.Path.GetFileNameWithoutExtension(pieceKey);
 
-                DrawDataString(newImage, pieceDesc, 0, 0, C.NLColors[C.NLColor.Text], 8);
+                DrawDataString(newImage, pieceDesc, 0, 0, C.RLColors[C.RLColor.Text], 8);
 
                 imagesWithNames.Add(newImage);
             }
@@ -232,7 +232,7 @@ namespace RLEditor
                 // Size
                 string pieceSize = Width.ToString() + " x " + Height.ToString();
 
-                DrawDataString(newImage, pieceDesc, 0, 0, C.NLColors[C.NLColor.Text], 8);
+                DrawDataString(newImage, pieceDesc, 0, 0, C.RLColors[C.RLColor.Text], 8);
                 DrawDataString(newImage, pieceSize, 0, 64, Color.SkyBlue, 8);
 
                 imagesWithDescriptionAndData.Add(newImage);
@@ -259,7 +259,7 @@ namespace RLEditor
                 // Size
                 string pieceSize = Width.ToString() + " x " + Height.ToString();
 
-                DrawDataString(newImage, pieceDesc, 0, 0, C.NLColors[C.NLColor.Text], 8);
+                DrawDataString(newImage, pieceDesc, 0, 0, C.RLColors[C.RLColor.Text], 8);
                 DrawDataString(newImage, pieceSize, 0, 64, Color.SkyBlue, 8);
 
                 imagesWithNameAndData.Add(newImage);

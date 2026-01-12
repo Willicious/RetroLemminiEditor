@@ -245,7 +245,7 @@ namespace RLEditor
         /// <param name="styleColor"></param>
         public Color GetThemeColor(C.StyleColor styleColor)
         {
-            return PieceStyle?.GetColor(styleColor) ?? C.NLColors[styleColor.ToNLColor()];
+            return PieceStyle?.GetColor(styleColor) ?? C.RLColors[styleColor.ToRLColor()];
         }
 
         /// <summary>

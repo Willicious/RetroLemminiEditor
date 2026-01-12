@@ -152,7 +152,7 @@ namespace RLEditor
             {
                 // Still use background color
                 baseLevelImage = new Bitmap(level.Width, level.Height);
-                baseLevelImage.Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.NLColors[C.NLColor.BackDefault]);
+                baseLevelImage.Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
             }
 
             // Draw all the layers
@@ -179,11 +179,11 @@ namespace RLEditor
 
             if (IsTriggerLayer)
             {
-                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Trigger], curSettings.CurrentTriggerAreaColor);
+                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Trigger]);
             }
 
             // For now, always draw steel areas. TODO - Implement toggle
-            baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea], curSettings.CurrentTriggerAreaColor);
+            baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea]);
         }
 
         /// <summary>
@@ -456,7 +456,7 @@ namespace RLEditor
         public void CreateBackgroundLayer()
         {
             // Set background color
-            layerImages[C.Layer.Background].Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.NLColors[C.NLColor.BackDefault]);
+            layerImages[C.Layer.Background].Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
 
             // Display background images, if selected
             if (level.Background != null)
@@ -654,7 +654,25 @@ namespace RLEditor
                 .Where(obj => !C.HideTriggerObjects.Contains(obj.ObjType))
                 .Select(obj => C.TriggerPointObjects.Contains(obj.ObjType) ? new Rectangle(obj.TriggerRect.X, obj.TriggerRect.Y, 1, 1) : obj.TriggerRect)
                 .ToList();
-            layerImages[C.Layer.Trigger].DrawOnFilledRectangles(triggerRectangles, C.NLColors[C.NLColor.Trigger]);
+            layerImages[C.Layer.Trigger].DrawOnFilledRectangles(triggerRectangles, GetTriggerColor());
+        }
+
+        /// <summary>
+        /// Gets the trigger color from settings
+        /// </summary>
+        private Color GetTriggerColor()
+        {
+            var color = curSettings.CurrentTriggerAreaColor;
+            if (color == Settings.TriggerAreaColor.Yellow)
+                return C.TriggerColors[C.RLColor.TriggerYellow];
+            else if (color == Settings.TriggerAreaColor.Green)
+                return C.TriggerColors[C.RLColor.TriggerGreen];
+            else if (color == Settings.TriggerAreaColor.Blue)
+                return C.TriggerColors[C.RLColor.TriggerBlue];
+            else if (color == Settings.TriggerAreaColor.Purple)
+                return C.TriggerColors[C.RLColor.TriggerPurple];
+            else
+                return C.TriggerColors[C.RLColor.TriggerPink]; // Default
         }
 
         /// <summary>
@@ -668,7 +686,7 @@ namespace RLEditor
                 .Where(obj => obj.ObjType == C.OBJ.STEEL)
                 .Select(obj => obj.TriggerRect)
                 .ToList();
-            layerImages[C.Layer.SteelArea].DrawOnFilledRectangles(triggerRectangles, C.NLColors[C.NLColor.SteelArea]);
+            layerImages[C.Layer.SteelArea].DrawOnFilledRectangles(triggerRectangles, C.RLColors[C.RLColor.SteelArea]);
         }
 
         /// <summary>
@@ -740,7 +758,7 @@ namespace RLEditor
             Rectangle screenCenterRect2 = new Rectangle(screenCenterPos.X - 3, screenCenterPos.Y - 3, 7, 7);
 
             levelBmp.DrawOnRectangles(new List<Rectangle>() { screenStartRect, screenCenterRect1, screenCenterRect2 },
-                                      C.NLColors[C.NLColor.ScreenStart]);
+                                      C.RLColors[C.RLColor.ScreenStart]);
         }
 
         /// <summary>
@@ -762,7 +780,7 @@ namespace RLEditor
 
                 screenTextCenterPos.Y -= fontSize;
 
-                levelBmp.WriteText(text, screenTextCenterPos, C.NLColors[C.NLColor.Text], fontSize);
+                levelBmp.WriteText(text, screenTextCenterPos, C.RLColors[C.RLColor.Text], fontSize);
             }
         }
 
@@ -828,7 +846,7 @@ namespace RLEditor
             }
 
             // Set color
-            Color color = C.NLColors[C.NLColor.Text];
+            Color color = C.RLColors[C.RLColor.Text];
 
             fullBmp.WriteText(text, textPos, color, 12, ContentAlignment.BottomRight);
         }
@@ -842,11 +860,11 @@ namespace RLEditor
             // First get a list of all Rectangled to draw (in image coordinates)
             var gadgetRectangles = level.GadgetList.FindAll(gad => gad.IsSelected)
                                                    .ConvertAll(gad => GetPicRectFromLevelRect(gad.ImageRectangle));
-            levelBmp.DrawOnRectangles(gadgetRectangles, C.NLColors[C.NLColor.SelRectGadget]);
+            levelBmp.DrawOnRectangles(gadgetRectangles, C.RLColors[C.RLColor.SelRectGadget]);
 
             var terrRectangles = level.TerrainList.FindAll(ter => ter.IsSelected)
                                                   .ConvertAll(ter => GetPicRectFromLevelRect(ter.ImageRectangle));
-            levelBmp.DrawOnRectangles(terrRectangles, C.NLColors[C.NLColor.SelRectTerrain]);
+            levelBmp.DrawOnRectangles(terrRectangles, C.RLColors[C.RLColor.SelRectTerrain]);
         }
 
         /// <summary>

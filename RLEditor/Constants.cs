@@ -88,16 +88,16 @@ namespace RLEditor
         {
             BACKGROUND, ONE_WAY_WALL, MASK, PICKUP_BORDER, PICKUP_INSIDE
         }
-        public static NLColor ToNLColor(this StyleColor styleColor)
+        public static RLColor ToRLColor(this StyleColor styleColor)
         {
             switch (styleColor)
             {
                 case StyleColor.BACKGROUND:
-                    return NLColor.BackDefault;
+                    return RLColor.BackDefault;
                 case StyleColor.ONE_WAY_WALL:
-                    return NLColor.OWWDefault;
+                    return RLColor.OWWDefault;
                 default:
-                    return NLColor.BackDefault;
+                    return RLColor.BackDefault;
             }
         }
 
@@ -155,21 +155,28 @@ namespace RLEditor
         public static readonly int ZOOM_MAX = 10;
 
         // Other colors are specified directly in BmpModify to speed up rendering.
-        public enum NLColor
+        public enum RLColor
         {
-            Text, OWWDefault, BackDefault, Trigger,
-            SteelArea, ScreenStart, SelRectGadget, SelRectTerrain
+            Text, SteelArea, OWWDefault, BackDefault, ScreenStart, SelRectGadget, SelRectTerrain,
+            TriggerPink, TriggerYellow, TriggerGreen, TriggerBlue, TriggerPurple
         }
-        public static readonly Dictionary<NLColor, Color> NLColors = new Dictionary<NLColor, Color>()
+        public static readonly Dictionary<RLColor, Color> TriggerColors = new Dictionary<RLColor, Color>()
         {
-          { NLColor.Text, Utility.HexToColor("FEF5F5F5") }, // Color.WhiteSmoke with slightly reduced alpha
-          { NLColor.OWWDefault, Color.Linen },
-          { NLColor.BackDefault, Utility.HexToColor("FF000033") }, // Amiga Blue
-          { NLColor.Trigger, Utility.HexToColor("80EE82EE") }, // Color.Violet with reduced alpha
-          { NLColor.SteelArea, Utility.HexToColor("600022FF") }, // Blue with reduced alpha
-          { NLColor.ScreenStart, Color.AliceBlue },
-          { NLColor.SelRectGadget, Color.Chartreuse },
-          { NLColor.SelRectTerrain, Color.Gold }
+          { RLColor.TriggerPink, Utility.HexToColor("55EE88EE") }, // Pink with reduced alpha
+          { RLColor.TriggerYellow, Utility.HexToColor("44FFDD00") }, // Banana with reduced alpha
+          { RLColor.TriggerGreen, Utility.HexToColor("4411FFAA") }, // Mint with reduced alpha
+          { RLColor.TriggerBlue, Utility.HexToColor("4400FFFF") }, // Cyan with reduced alpha
+          { RLColor.TriggerPurple, Utility.HexToColor("44AA00FF") }, // Indigo with reduced alpha
+        };
+        public static readonly Dictionary<RLColor, Color> RLColors = new Dictionary<RLColor, Color>()
+        {
+          { RLColor.Text, Utility.HexToColor("FEF5F5F5") }, // Color.WhiteSmoke with slightly reduced alpha
+          { RLColor.SteelArea, Utility.HexToColor("550022FF") }, // Blue with reduced alpha
+          { RLColor.OWWDefault, Color.Linen },
+          { RLColor.BackDefault, Color.Black },
+          { RLColor.ScreenStart, Color.AliceBlue },
+          { RLColor.SelRectGadget, Color.Chartreuse },
+          { RLColor.SelRectTerrain, Color.Gold }
         };
 
         public static readonly string[] MusicExtensions = new List<string>()
