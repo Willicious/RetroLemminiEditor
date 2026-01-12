@@ -37,6 +37,9 @@ namespace RLEditor
             IsOnlyOnTerrain = isOnlyOnTerrain;
             IsInvisible = isInvisible;
             IsFake = isFake;
+
+            SpecWidth = specWidth;
+            SpecHeight = specHeight;
         }
 
         public bool IsNoOverwrite { get; set; }
