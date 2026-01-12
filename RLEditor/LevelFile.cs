@@ -141,6 +141,11 @@ namespace RLEditor
             newLevel.IsReleaseRateLocked = false; // look for "lockReleaseRate = true" in .ini file
             newLevel.IsSuperlemming = false; // look for "superlemming = true" in .ini file
 
+            // --- Other stuff ---
+            newLevel.AutosteelMode = ini.GetInt("autosteelMode");
+            newLevel.MaxFallDistance = ini.GetInt("maxFallDistance"); // TODO - Add full support for this
+            newLevel.TopBoundary = ini.GetInt("topBoundary"); // TODO - Add the rest of these
+
             // --- Skillset ---
             LoadSkillset(newLevel, ini);
 
@@ -152,9 +157,10 @@ namespace RLEditor
             foreach (string data in ini.GetIndexed("terrain"))
                 LoadTerrain(newLevel, data);
 
-            //// --- Steel --- 
-            // TODO - Add support for steel areas
-            
+            // --- Steel ---
+            foreach (string data in ini.GetIndexed("steel"))
+                LoadSteelAreas(newLevel, data);
+
             SanitizeInput(newLevel);
             return newLevel;
         }
@@ -205,8 +211,8 @@ namespace RLEditor
             int objectID = value[0];
             int posX = value[1];
             int posY = value[2];
-            int paintMode = value[3];
-            int flags = value[4];
+            int paintMode = value.Length > 3 ? value[3] : 0;
+            int flags = value.Length > 4 ? value[4] : 0;
             int modifier = value.Length > 5 ? value[5] : 0;
 
             string styleName = level.PieceStyle.NameInDirectory;
@@ -286,7 +292,7 @@ namespace RLEditor
             int terrainID = value[0];
             int posX = value[1];
             int posY = value[2];
-            int modifier = value[3];
+            int modifier = value.Length > 3 ? value[3] : 0;
 
             string styleName = level.PieceStyle.NameInDirectory;
             string pieceName = styleName + "_" + terrainID;
@@ -377,6 +383,43 @@ namespace RLEditor
         //        level.TerrainList.Insert(index, newSketch);
         //}
 
+        private static void LoadSteelAreas(Level level, string data)
+        {
+            int[] value = INIFileParser.ParseIntArray(data);
+
+            int posX = value[0];
+            int posY = value[1];
+            int width = value[2];
+            int height = value[3];
+            int flags = value.Length > 4 ? value[4] : 0;
+
+            string key = "Default\\SteelArea";
+            Point pos = new Point(posX, posY);
+
+            bool overrideExistingSteel = (flags & 1) != 0; // TODO - Add support for this
+
+            int specWidth = width;
+            int specHeight = height;
+
+            GadgetPiece newSteelArea = new GadgetPiece(
+                key,
+                pos,
+                0,
+                false,
+                false,
+                false,
+                false,
+                false,
+                specWidth,
+                specHeight);
+
+            newSteelArea.PosX = pos.X;
+            newSteelArea.PosY = pos.Y;
+            newSteelArea.IsSelected = false;
+
+            level.GadgetList.Add(newSteelArea);
+        }
+
         /// <summary>
         /// Ensures that all level parameters are within sensible limits.
         /// </summary>
@@ -400,8 +443,6 @@ namespace RLEditor
                 newLevel.SkillSet[skill] = Math.Max(Math.Min(newLevel.SkillSet[skill], 100), 0);
             }
         }
-
-
 
         /// <summary>
         /// Opens file browser and saves the current level to a .ini file.
@@ -522,6 +563,17 @@ namespace RLEditor
 
             sb.AppendLine();
 
+            // Add steel
+            sb.AppendLine("# Steel");
+            sb.AppendLine("# X position, Y position, width, height, flags (optional)");
+            sb.AppendLine("# Flags: 1 = remove existing steel");
+
+            var steelLinesData = BuildSteelLines(curLevel);
+            foreach (var line in steelLinesData)
+                sb.AppendLine(line);
+
+            sb.AppendLine();
+
             // Write all to .ini
             File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
         }
@@ -545,6 +597,9 @@ namespace RLEditor
 
             foreach (var gad in level.GadgetList)
             {
+                if (gad.ObjType == C.OBJ.STEEL)
+                    continue; // Steel areas are added separately
+
                 // Determine ID from last underscore in Key
                 int underscore = gad.Key.LastIndexOf('_');
                 int gadgetID = 0;
@@ -568,7 +623,6 @@ namespace RLEditor
 
                 string line = $"object_{counter} = {gadgetID}, {gad.PosX}, {gad.PosY}, {paintMode}, {flags}, {modifier}";
                 objectLines.Add(line);
-
                 counter++;
             }
 
@@ -602,11 +656,35 @@ namespace RLEditor
 
                 string line = $"terrain_{counter} = {terrainID}, {ter.PosX}, {ter.PosY}, {flags}";
                 terrainLines.Add(line);
-
                 counter++;
             }
 
             return terrainLines;
+        }
+
+        private static List<string> BuildSteelLines(Level level)
+        {
+            var steelLines = new List<string>();
+            int counter = 0;
+
+            foreach (var ste in level.GadgetList)
+            {
+                if (ste.ObjType != C.OBJ.STEEL)
+                    continue; // Other objects are added separately
+
+                int flags = 0;
+                // if (ste.RemoveExistingSteelArea) flags |= 1; // TODO - Add support for this
+
+                string line = $"steel_{counter} = {ste.PosX}, {ste.PosY}, {ste.Width}, {ste.Height}, {flags}";
+
+                if (level.AutosteelMode == 2)
+                    line = "# " + line;
+
+                steelLines.Add(line);
+                counter++;
+            }
+
+            return steelLines;
         }
 
         private static bool GetTextNeedsSaving(List<string> text)
