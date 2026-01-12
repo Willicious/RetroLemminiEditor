@@ -1202,14 +1202,16 @@ namespace RLEditor
         /// <summary>
         /// Resizes the selected steel piece
         /// </summary>
-        private void ResizeSteelArea()
+        private void ResizeSteelArea(bool resizeWidth)
         {
             var selection = CurLevel.SelectionList();
 
             if (selection.Count == 1 && selection[0] is GadgetPiece gadget && gadget.ObjType == C.OBJ.STEEL)
             {
-                gadget.SpecWidth = (int)num_SteelAreaWidth.Value;
-                gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
+                if (resizeWidth)
+                    gadget.SpecWidth = (int)num_SteelAreaWidth.Value;
+                else
+                    gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
                 pic_Level.Image = curRenderer.CreateLevelImage();
             }
         }
@@ -1445,22 +1447,22 @@ namespace RLEditor
 
         private void num_SteelAreaWidth_ValueChanged(object sender, EventArgs e)
         {
-            ResizeSteelArea();
+            ResizeSteelArea(true);
         }
 
         private void num_SteelAreaHeight_ValueChanged(object sender, EventArgs e)
         {
-            ResizeSteelArea();
-        }
-
-        private void num_SteelAreaHeight_KeyUp(object sender, KeyEventArgs e)
-        {
-            ResizeSteelArea();
+            ResizeSteelArea(false);
         }
 
         private void num_SteelAreaWidth_KeyUp(object sender, KeyEventArgs e)
         {
-            ResizeSteelArea();
+            ResizeSteelArea(true);
+        }
+
+        private void num_SteelAreaHeight_KeyUp(object sender, KeyEventArgs e)
+        {
+            ResizeSteelArea(false);
         }
     }
 }
