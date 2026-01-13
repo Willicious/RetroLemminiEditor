@@ -179,11 +179,11 @@ namespace RLEditor
 
             if (IsTriggerLayer)
             {
-                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Trigger]);
+                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Trigger], true);
             }
 
             // For now, always draw steel areas. TODO - Implement toggle
-            baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea]);
+            baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea], true);
         }
 
         /// <summary>
@@ -513,7 +513,10 @@ namespace RLEditor
             backGadgets.Reverse();
             foreach (GadgetPiece gadget in backGadgets)
             {
-                layerImages[C.Layer.ObjBack].DrawOn(gadget.Image, gadget.Pos);
+                if (gadget.IsInvisible || gadget.IsFake)
+                    layerImages[C.Layer.ObjBack].DrawOnWithAlpha(gadget.Image, gadget.Pos, false);
+                else
+                    layerImages[C.Layer.ObjBack].DrawOn(gadget.Image, gadget.Pos);
             }
         }
 
@@ -527,7 +530,10 @@ namespace RLEditor
             foreach (TerrainPiece terrPiece in level.TerrainList)
             {
                 C.CustDrawMode drawMode = GetDrawModeForTerrain(terrPiece);
-                layerImages[C.Layer.Terrain].DrawOn(terrPiece.Image, terrPiece.Pos, drawMode);
+                if (terrPiece.IsInvisible || terrPiece.IsFake)
+                    layerImages[C.Layer.Terrain].DrawOnWithAlpha(terrPiece.Image, terrPiece.Pos, false);
+                else
+                    layerImages[C.Layer.Terrain].DrawOn(terrPiece.Image, terrPiece.Pos, drawMode);
             }
         }
 
@@ -635,7 +641,10 @@ namespace RLEditor
                     !gad.IsNoOverwrite && !gad.IsOnlyOnTerrain && !gad.ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.DECORATION, C.OBJ.PAINT));
             foreach (GadgetPiece gadget in normalGadgetList)
             {
-                layerImages[C.Layer.ObjTop].DrawOn(gadget.Image, gadget.Pos);
+                if (gadget.IsInvisible || gadget.IsFake)
+                    layerImages[C.Layer.ObjTop].DrawOnWithAlpha(gadget.Image, gadget.Pos, false);
+                else
+                    layerImages[C.Layer.ObjTop].DrawOn(gadget.Image, gadget.Pos);
             }
         }
 
@@ -648,6 +657,7 @@ namespace RLEditor
 
             var triggerRectangles = level.GadgetList
                 .Where(obj => !C.HideTriggerObjects.Contains(obj.ObjType))
+                .Where(obj => !obj.IsFake)
                 .Select(obj => obj.TriggerRect)
                 .ToList();
 
@@ -1124,6 +1134,5 @@ namespace RLEditor
 
             return new Point(((Point)LevelStartPos).X + DeltaX, ((Point)LevelStartPos).Y + DeltaY);
         }
-
     }
 }

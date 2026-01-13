@@ -177,9 +177,7 @@ namespace RLEditor
         /// <summary>
         /// Copies the bytes of the NewPixel to the pixel pointed to in the first argument using swapped alpha blending.
         /// </summary>
-        /// <param name="ptrToPixel"></param>
-        /// <param name="ptrToNewPixel"></param>
-        private static unsafe void ChangePixelBlend(byte* ptrToPixel, byte* ptrToNewPixel)
+        private static unsafe void ChangeTriggerPixelBlend(byte* ptrToPixel, byte* ptrToNewPixel)
         {
             int NewAlphaFact = ptrToNewPixel[3];
             int OrigAlphaFact = (255 - NewAlphaFact) / 4; // because the orig bitmap has alpha 25%
@@ -188,7 +186,18 @@ namespace RLEditor
             ptrToPixel[2] = (byte)((ptrToPixel[2] * OrigAlphaFact + ptrToNewPixel[2] * NewAlphaFact) / (OrigAlphaFact + NewAlphaFact));
             ptrToPixel[3] = 255;
         }
+        private static unsafe void ChangePixelBlend(byte* dest, byte* src)
+        {
+            int alpha = 153; // 60% opacity
 
+            float srcAlpha = alpha / 255f;
+            float destAlpha = 1f - srcAlpha;
+
+            dest[0] = (byte)(dest[0] * destAlpha + src[0] * srcAlpha); // Blue
+            dest[1] = (byte)(dest[1] * destAlpha + src[1] * srcAlpha); // Green
+            dest[2] = (byte)(dest[2] * destAlpha + src[2] * srcAlpha); // Red
+            dest[3] = 255;
+        }
 
         /// <summary>
         /// Crops the bitmap along a rectangle.
@@ -564,9 +573,9 @@ namespace RLEditor
         /// </summary>
         /// <param name="origBmp"></param>
         /// <param name="newBmp"></param>
-        public static void DrawOnWithAlpha(this Bitmap origBmp, Bitmap newBmp)
+        public static void DrawOnWithAlpha(this Bitmap origBmp, Bitmap newBmp, bool isTriggerArea)
         {
-            origBmp.DrawOnWithAlpha(newBmp, new Point(0, 0));
+            origBmp.DrawOnWithAlpha(newBmp, new Point(0, 0), isTriggerArea);
         }
 
 
@@ -577,7 +586,7 @@ namespace RLEditor
         /// <param name="origBmp"></param>
         /// <param name="newBmp"></param>
         /// <param name="pos"></param>
-        public static void DrawOnWithAlpha(this Bitmap origBmp, Bitmap newBmp, Point pos)
+        public static void DrawOnWithAlpha(this Bitmap origBmp, Bitmap newBmp, Point pos, bool isTriggerArea)
         {
             if (newBmp == null)
                 return;
@@ -610,7 +619,10 @@ namespace RLEditor
                     {
                         if (curNewLine[x + 3] > 0)
                         {
-                            ChangePixelBlend(curOrigLine + x, curNewLine + x);
+                            if (isTriggerArea)
+                                ChangeTriggerPixelBlend(curOrigLine + x, curNewLine + x);
+                            else
+                                ChangePixelBlend(curOrigLine + x, curNewLine + x);
                         }
                     }
                 });
