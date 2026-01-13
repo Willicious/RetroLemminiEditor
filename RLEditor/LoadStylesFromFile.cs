@@ -156,7 +156,7 @@ namespace RLEditor
             }
 
             // Override OG style display names if applicable
-            if (settings.AutoPinSLXStyles)
+            if (settings.AutoPinOGStyles)
             {
                 foreach (var kvp in originalStyleNameOverrides)
                 {
@@ -169,7 +169,7 @@ namespace RLEditor
             // Sort styles: OG styles first in defined order, then styles.ini, then original order
             styleList.Sort((sty1, sty2) =>
             {
-                if (settings.AutoPinSLXStyles)
+                if (settings.AutoPinOGStyles)
                 {
                     int sty1OGIndex = originalStylesOrder.IndexOf(sty1.NameInDirectory);
                     int sty2OGIndex = originalStylesOrder.IndexOf(sty2.NameInDirectory);

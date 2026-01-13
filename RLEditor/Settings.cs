@@ -56,7 +56,7 @@ namespace RLEditor
             ShowData,
         }
 
-        public bool AutoPinSLXStyles { get; set; }
+        public bool AutoPinOGStyles { get; set; }
         public bool PreferObjectName { get; private set; }
         public PieceBrowserMode CurrentPieceBrowserMode { get; private set; }
         public TriggerAreaColor CurrentTriggerAreaColor { get; private set; }
@@ -89,7 +89,7 @@ namespace RLEditor
         {
             CurrentPieceBrowserMode = PieceBrowserMode.ShowData;
             CurrentTriggerAreaColor = TriggerAreaColor.Pink;
-            AutoPinSLXStyles = true;
+            AutoPinOGStyles = true;
             PreferObjectName = false;
             InfiniteScrolling = false;
             UseGridForPieces = false;
@@ -765,9 +765,9 @@ namespace RLEditor
                                     CurrentPieceBrowserMode = PieceBrowserMode.ShowData;
                                 break;
                             }
-                        case "AUTOPINSLXSTYLES":
+                        case "AUTOPINOGSTYLES":
                             {
-                                AutoPinSLXStyles = (line.Text.Trim().ToUpper() == "TRUE");
+                                AutoPinOGStyles = (line.Text.Trim().ToUpper() == "TRUE");
                                 break;
                             }
                         case "PREFEROBJECTNAME":
@@ -896,7 +896,7 @@ namespace RLEditor
                 settingsFile.WriteLine(" Autosave            " + AutosaveFrequency.ToString());
                 settingsFile.WriteLine(" AutosaveLimit       " + KeepAutosaveCount.ToString());
                 settingsFile.WriteLine(" PieceBrowserMode    " + CurrentPieceBrowserMode.ToString());
-                settingsFile.WriteLine(" AutoPinSLXStyles    " + (AutoPinSLXStyles ? "True" : "False"));
+                settingsFile.WriteLine(" AutoPinOGStyles    " + (AutoPinOGStyles ? "True" : "False"));
                 settingsFile.WriteLine(" PreferObjectName    " + (PreferObjectName ? "True" : "False"));
                 settingsFile.WriteLine(" InfiniteScrolling   " + (InfiniteScrolling ? "True" : "False"));
                 settingsFile.WriteLine(" GridSize            " + GridSize.ToString());

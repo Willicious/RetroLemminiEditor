@@ -51,7 +51,7 @@
             this.btnClearSearch = new System.Windows.Forms.Button();
             this.btnUnpin = new System.Windows.Forms.Button();
             this.picPadding = new System.Windows.Forms.PictureBox();
-            this.checkAutoPinSLXStyles = new System.Windows.Forms.CheckBox();
+            this.checkAutoPinOGStyles = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.picPadding)).BeginInit();
             this.SuspendLayout();
             // 
@@ -263,18 +263,18 @@
             this.picPadding.TabIndex = 19;
             this.picPadding.TabStop = false;
             // 
-            // checkAutoPinSLXStyles
+            // checkAutoPinOGStyles
             // 
-            this.checkAutoPinSLXStyles.AutoSize = true;
-            this.checkAutoPinSLXStyles.Checked = true;
-            this.checkAutoPinSLXStyles.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAutoPinSLXStyles.Location = new System.Drawing.Point(596, 353);
-            this.checkAutoPinSLXStyles.Name = "checkAutoPinSLXStyles";
-            this.checkAutoPinSLXStyles.Size = new System.Drawing.Size(241, 24);
-            this.checkAutoPinSLXStyles.TabIndex = 20;
-            this.checkAutoPinSLXStyles.Text = "AutoPin RetroLemmini Styles";
-            this.checkAutoPinSLXStyles.UseVisualStyleBackColor = true;
-            this.checkAutoPinSLXStyles.CheckedChanged += new System.EventHandler(this.checkAutoPinSLXStyles_CheckedChanged);
+            this.checkAutoPinOGStyles.AutoSize = true;
+            this.checkAutoPinOGStyles.Checked = true;
+            this.checkAutoPinOGStyles.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAutoPinOGStyles.Location = new System.Drawing.Point(596, 353);
+            this.checkAutoPinOGStyles.Name = "checkAutoPinOGStyles";
+            this.checkAutoPinOGStyles.Size = new System.Drawing.Size(241, 24);
+            this.checkAutoPinOGStyles.TabIndex = 20;
+            this.checkAutoPinOGStyles.Text = "AutoPin RetroLemmini Styles";
+            this.checkAutoPinOGStyles.UseVisualStyleBackColor = true;
+            this.checkAutoPinOGStyles.CheckedChanged += new System.EventHandler(this.checkAutoPinOGStyles_CheckedChanged);
             // 
             // FormStyleManager
             // 
@@ -282,7 +282,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(869, 800);
-            this.Controls.Add(this.checkAutoPinSLXStyles);
+            this.Controls.Add(this.checkAutoPinOGStyles);
             this.Controls.Add(this.picPadding);
             this.Controls.Add(this.btnUnpin);
             this.Controls.Add(this.btnShowSelectedItemsInList);
@@ -339,6 +339,6 @@
         private System.Windows.Forms.Button btnClearSearch;
         private System.Windows.Forms.Button btnUnpin;
         private System.Windows.Forms.PictureBox picPadding;
-        private System.Windows.Forms.CheckBox checkAutoPinSLXStyles;
+        private System.Windows.Forms.CheckBox checkAutoPinOGStyles;
     }
 }

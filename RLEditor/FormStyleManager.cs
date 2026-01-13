@@ -22,7 +22,7 @@ namespace RLEditor
 
         private List<StyleEntry> styles = new List<StyleEntry>();
         
-        private string styleFilePath = C.AppPath + "styles" + C.DirSep + "styles.ini";
+        private string styleFilePath = C.AppPathPieces + "styles.ini";
         
         private RLEditForm mainForm;
         private Settings curSettings;
@@ -33,7 +33,7 @@ namespace RLEditor
             mainForm = parentForm;
             curSettings = settings;
 
-            checkAutoPinSLXStyles.Checked = curSettings.AutoPinSLXStyles;
+            checkAutoPinOGStyles.Checked = curSettings.AutoPinOGStyles;
         }
 
         private void LoadStylesIntoListView()
@@ -149,7 +149,7 @@ namespace RLEditor
             // Sort entries
             styles = styles.OrderBy(s => s.Order).ToList();
 
-            HandleSLXStylePinning();
+            HandleOGStylePinning();
 
             // Populate list view
             foreach (var s in styles)
@@ -544,31 +544,31 @@ namespace RLEditor
             listStyles.Focus();
         }
 
-        private void HandleSLXStylePinning()
+        private void HandleOGStylePinning()
         {
-            var slxOrder = new List<string>
+            var ogStylesOrder = new List<string>
             {
-                "slx_crystal",
-                "slx_dirt",
-                "slx_fire",
-                "slx_marble",
-                "slx_pillar",
-                "slx_brick",
-                "slx_bubble",
-                "slx_rock",
-                "slx_snow",
+                "crystal",
+                "dirt",
+                "fire",
+                "marble",
+                "pillar",
+                "brick",
+                "bubble",
+                "rock",
+                "snow",
                 "xmas"
             };
 
-            var slxStyles = slxOrder
+            var ogStyles = ogStylesOrder
                 .Select(name => styles.FirstOrDefault(s =>
                     s.FolderName.Equals(name, StringComparison.OrdinalIgnoreCase)))
                 .Where(s => s != null)
                 .ToList();
 
-            foreach (var s in slxStyles)
+            foreach (var s in ogStyles)
             {
-                if (curSettings.AutoPinSLXStyles)
+                if (curSettings.AutoPinOGStyles)
                 {
                     s.PinnedTop = true;
                     s.PinnedBottom = false;
@@ -579,22 +579,22 @@ namespace RLEditor
                 }
             }
 
-            foreach (var s in slxStyles)
+            foreach (var s in ogStyles)
                 styles.Remove(s);
 
-            if (checkAutoPinSLXStyles.Checked)
-                styles.InsertRange(0, slxStyles);
+            if (checkAutoPinOGStyles.Checked)
+                styles.InsertRange(0, ogStyles);
             else
             {
                 int insertIndex = styles.FindIndex(s => !s.PinnedTop);
                 if (insertIndex < 0) insertIndex = styles.Count;
-                styles.InsertRange(insertIndex, slxStyles);
+                styles.InsertRange(insertIndex, ogStyles);
             }
         }
 
-        private void UpdateSLXStylePinning(object sender)
+        private void UpdateOGStylePinning(object sender)
         {
-            if (sender != checkAutoPinSLXStyles)
+            if (sender != checkAutoPinOGStyles)
                 return;
 
             var cb = sender as CheckBox;
@@ -602,11 +602,11 @@ namespace RLEditor
                 return;
 
             // Update setting
-            curSettings.AutoPinSLXStyles = cb.Checked;
+            curSettings.AutoPinOGStyles = cb.Checked;
             curSettings.WriteSettingsToFile();
 
             // Refresh list view
-            HandleSLXStylePinning();
+            HandleOGStylePinning();
             RefreshListView();
             listStyles.Focus();
         }
@@ -852,7 +852,7 @@ namespace RLEditor
 
         private void txtDisplayName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
                 RenameStyle();
         }
 
@@ -906,9 +906,9 @@ namespace RLEditor
             UnpinSelectedStyles();
         }
 
-        private void checkAutoPinSLXStyles_CheckedChanged(object sender, EventArgs e)
+        private void checkAutoPinOGStyles_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateSLXStylePinning(sender);
+            UpdateOGStylePinning(sender);
         }
     }
 }
