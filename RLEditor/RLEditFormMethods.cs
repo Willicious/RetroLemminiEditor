@@ -987,11 +987,6 @@ Digger=20
             tabLvlSkills.Enabled = true;
             tabLvlSkills.Visible = true;
 
-            tabLvlProperties.TabPages.Remove(tabMisc);
-            tabLvlMisc.TabPages.Add(tabMisc);
-            tabLvlMisc.Enabled = true;
-            tabLvlMisc.Visible = true;
-
             expandAllTabsToolStripMenuItem.Text = "Collapse All Tabs";
             allTabsExpanded = true;
         }
@@ -1007,11 +1002,6 @@ Digger=20
             tabLvlProperties.TabPages.Add(tabSkills);
             tabLvlSkills.Enabled = false;
             tabLvlSkills.Visible = false;
-
-            tabLvlMisc.TabPages.Remove(tabMisc);
-            tabLvlProperties.TabPages.Add(tabMisc);
-            tabLvlMisc.Enabled = false;
-            tabLvlMisc.Visible = false;
 
             expandAllTabsToolStripMenuItem.Text = "Expand All Tabs";
             allTabsExpanded = false;
