@@ -122,7 +122,6 @@
       <DependentUpon>FormAboutRLEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="INIFileParser.cs" />
-    <Compile Include="INITranslationTables.cs" />
     <Compile Include="LevelPieceBase.cs" />
     <Compile Include="LevelPieceGadget.cs" />
     <Compile Include="LevelPieceTerrain.cs" />
