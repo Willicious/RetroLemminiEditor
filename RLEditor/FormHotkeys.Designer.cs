@@ -71,8 +71,8 @@
             "Toggle Screen Start",
             "HotkeyToggleScreenStart"}, -1);
             System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Toggle Deprecated Pieces",
-            "HotkeyToggleDeprecatedPieces"}, -1);
+            "Toggle Steel Areas",
+            "HotkeyToggleSteelAreas"}, -1);
             System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
             "Show Missing Pieces",
             "HotkeyShowMissingPieces"}, -1);

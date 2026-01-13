@@ -24,7 +24,7 @@ namespace RLEditor
         public static Keys HotkeyToggleObjects;
         public static Keys HotkeyToggleTriggerAreas;
         public static Keys HotkeyToggleScreenStart;
-        public static Keys HotkeyToggleDeprecatedPieces;
+        public static Keys HotkeyToggleSteelAreas;
         public static Keys HotkeyShowMissingPieces;
         public static Keys HotkeyRefreshStyles;
         public static Keys HotkeyToggleSnapToGrid;
@@ -357,8 +357,8 @@ namespace RLEditor
                     HotkeyToggleTriggerAreas = ParseHotkeyString(line.Substring("HotkeyToggleTriggerAreas=".Length));
                 if (line.StartsWith("HotkeyToggleScreenStart="))
                     HotkeyToggleScreenStart = ParseHotkeyString(line.Substring("HotkeyToggleScreenStart=".Length));
-                if (line.StartsWith("HotkeyToggleDeprecatedPieces="))
-                    HotkeyToggleDeprecatedPieces = ParseHotkeyString(line.Substring("HotkeyToggleDeprecatedPieces=".Length));
+                if (line.StartsWith("HotkeyToggleSteelAreas="))
+                    HotkeyToggleSteelAreas = ParseHotkeyString(line.Substring("HotkeyToggleSteelAreas=".Length));
                 if (line.StartsWith("HotkeyShowMissingPieces="))
                     HotkeyShowMissingPieces = ParseHotkeyString(line.Substring("HotkeyShowMissingPieces=".Length));
                 if (line.StartsWith("HotkeyRefreshStyles="))
@@ -556,7 +556,7 @@ namespace RLEditor
                 $"HotkeyToggleObjects={FormatHotkeyString(HotkeyToggleObjects)}",
                 $"HotkeyToggleTriggerAreas={FormatHotkeyString(HotkeyToggleTriggerAreas)}",
                 $"HotkeyToggleScreenStart={FormatHotkeyString(HotkeyToggleScreenStart)}",
-                $"HotkeyToggleDeprecatedPieces={FormatHotkeyString(HotkeyToggleDeprecatedPieces)}",
+                $"HotkeyToggleSteelAreas={FormatHotkeyString(HotkeyToggleSteelAreas)}",
                 $"HotkeyShowMissingPieces={FormatHotkeyString(HotkeyShowMissingPieces)}",
                 $"HotkeyRefreshStyles={FormatHotkeyString(HotkeyRefreshStyles)}",
                 $"HotkeyToggleSnapToGrid={FormatHotkeyString(HotkeyToggleSnapToGrid)}",
@@ -663,7 +663,7 @@ namespace RLEditor
             HotkeyToggleObjects = Keys.F3;
             HotkeyToggleTriggerAreas = Keys.F4;
             HotkeyToggleScreenStart = Keys.F5;
-            HotkeyToggleDeprecatedPieces = Keys.F7;
+            HotkeyToggleSteelAreas = Keys.F6;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;
             HotkeyToggleSnapToGrid = Keys.F9;
@@ -761,7 +761,7 @@ namespace RLEditor
             HotkeyToggleObjects = Keys.F3;
             HotkeyToggleTriggerAreas = Keys.F4;
             HotkeyToggleScreenStart = Keys.F5;
-            HotkeyToggleDeprecatedPieces = Keys.F7;
+            HotkeyToggleSteelAreas = Keys.F6;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;
             HotkeyToggleSnapToGrid = Keys.F9;

@@ -704,8 +704,8 @@ namespace RLEditor
                     case "HotkeyToggleScreenStart":
                         HotkeyConfig.HotkeyToggleScreenStart = parsedKey;
                         break;
-                    case "HotkeyToggleDeprecatedPieces":
-                        HotkeyConfig.HotkeyToggleDeprecatedPieces = parsedKey;
+                    case "HotkeyToggleSteelAreas":
+                        HotkeyConfig.HotkeyToggleSteelAreas = parsedKey;
                         break;
                     case "HotkeyShowMissingPieces":
                         HotkeyConfig.HotkeyShowMissingPieces = parsedKey;

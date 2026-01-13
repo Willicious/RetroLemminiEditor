@@ -66,7 +66,7 @@
             this.objectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triggerAreasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screenStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deprecatedPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steelAreasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -466,7 +466,7 @@
             this.objectToolStripMenuItem,
             this.triggerAreasToolStripMenuItem,
             this.screenStartToolStripMenuItem,
-            this.deprecatedPiecesToolStripMenuItem});
+            this.steelAreasToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.viewToolStripMenuItem.Text = "View";
@@ -552,7 +552,9 @@
             // 
             // triggerAreasToolStripMenuItem
             // 
+            this.triggerAreasToolStripMenuItem.Checked = true;
             this.triggerAreasToolStripMenuItem.CheckOnClick = true;
+            this.triggerAreasToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.triggerAreasToolStripMenuItem.Name = "triggerAreasToolStripMenuItem";
             this.triggerAreasToolStripMenuItem.ShortcutKeyDisplayString = "F4";
             this.triggerAreasToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
@@ -569,14 +571,16 @@
             this.screenStartToolStripMenuItem.Text = "Show/Hide Screen Start";
             this.screenStartToolStripMenuItem.Click += new System.EventHandler(this.screenStartToolStripMenuItem_Click);
             // 
-            // deprecatedPiecesToolStripMenuItem
+            // steelAreasToolStripMenuItem
             // 
-            this.deprecatedPiecesToolStripMenuItem.CheckOnClick = true;
-            this.deprecatedPiecesToolStripMenuItem.Name = "deprecatedPiecesToolStripMenuItem";
-            this.deprecatedPiecesToolStripMenuItem.ShortcutKeyDisplayString = "F7";
-            this.deprecatedPiecesToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
-            this.deprecatedPiecesToolStripMenuItem.Text = "Show/Hide Deprecated";
-            this.deprecatedPiecesToolStripMenuItem.Click += new System.EventHandler(this.deprecatedPiecesToolStripMenuItem_Click);
+            this.steelAreasToolStripMenuItem.Checked = true;
+            this.steelAreasToolStripMenuItem.CheckOnClick = true;
+            this.steelAreasToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.steelAreasToolStripMenuItem.Name = "steelAreasToolStripMenuItem";
+            this.steelAreasToolStripMenuItem.ShortcutKeyDisplayString = "F6";
+            this.steelAreasToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.steelAreasToolStripMenuItem.Text = "Show/Hide Steel Areas";
+            this.steelAreasToolStripMenuItem.Click += new System.EventHandler(this.steelAreasToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -2533,7 +2537,6 @@
         private System.Windows.Forms.ToolStripMenuItem terrainToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem objectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem triggerAreasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deprecatedPiecesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem screenStartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -2696,6 +2699,7 @@
         private System.Windows.Forms.TabControl tabLvlProperties;
         private System.Windows.Forms.ComboBox combo_MainStyle;
         private System.Windows.Forms.Label lbl_Global_Style;
+        private System.Windows.Forms.ToolStripMenuItem steelAreasToolStripMenuItem;
     }
 }
 

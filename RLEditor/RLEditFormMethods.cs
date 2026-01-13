@@ -767,13 +767,6 @@ Digger=20
             if (missingPieces.Count > 0)
                 levelsWithMissingPieces.Add(CurLevel.FilePathToSave);
 
-            int deprecatedPieces =
-                CurLevel.TerrainList.Count(ter => ImageLibrary.GetDeprecated(ter.Key)) +
-                CurLevel.GadgetList.Count(obj => ImageLibrary.GetDeprecated(obj.Key));
-
-            if (deprecatedPieces > 0)
-                levelsWithDeprecatedPieces.Add(CurLevel.FilePathToSave);
-
             if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH))
                 levelsWithNoLemmings.Add(CurLevel.FilePathToSave);
 
@@ -1109,7 +1102,6 @@ Digger=20
 
         // Store filenames of levels with missing pieces
         List<string> levelsWithMissingPieces = new List<string>();
-        List<string> levelsWithDeprecatedPieces = new List<string>();
         List<string> levelsWithNoLemmings = new List<string>();
         List<string> levelsWithNoExits = new List<string>();
         private bool cleansingLevels;
@@ -1129,7 +1121,6 @@ Digger=20
 
             // Initialise list
             levelsWithMissingPieces.Clear();
-            levelsWithDeprecatedPieces.Clear();
             levelsWithNoLemmings.Clear();
             levelsWithNoExits.Clear();
 
@@ -1168,11 +1159,6 @@ Digger=20
                 {
                     cleanseMsg += "\n\nLevels with missing pieces:\n\n";
                     cleanseMsg += string.Join("\n", levelsWithMissingPieces.Select(Path.GetFileName));
-                }
-                if (levelsWithDeprecatedPieces.Count > 0)
-                {
-                    cleanseMsg += "\n\nLevels with deprecated pieces:\n\n";
-                    cleanseMsg += string.Join("\n", levelsWithDeprecatedPieces.Select(Path.GetFileName));
                 }
                 if (levelsWithNoLemmings.Count > 0)
                 {
@@ -1562,18 +1548,10 @@ Digger=20
             }
 
             if (pieceList == null || pieceList.Count == 0)
-                return String.Empty;
+                return string.Empty;
 
-            int actualPicPieceIndex = -1;
-            for (int i = 0; i <= picPieceIndex; i++)
-            {
-                actualPicPieceIndex++;
-                if (!DisplaySettings.IsDisplayed(C.DisplayType.Deprecated))
-                    while (ImageLibrary.GetDeprecated(pieceList[(pieceStartIndex + actualPicPieceIndex) % pieceList.Count]))
-                        actualPicPieceIndex++;
-            }
-
-            return pieceList[(pieceStartIndex + actualPicPieceIndex) % pieceList.Count];
+            int actualIndex = (pieceStartIndex + picPieceIndex) % pieceList.Count;
+            return pieceList[actualIndex];
         }
 
         private void AddPieceViaHotkey(int hotkeyIndex)
@@ -2263,7 +2241,13 @@ Digger=20
 
         private void ToggleTriggerAreas()
         {
-            DisplaySettings.ChangeDisplayed(C.DisplayType.Trigger);
+            DisplaySettings.ChangeDisplayed(C.DisplayType.Triggers);
+            pic_Level.SetImage(curRenderer.CombineLayers());
+        }
+
+        private void ToggleSteelAreas()
+        {
+            DisplaySettings.ChangeDisplayed(C.DisplayType.SteelAreas);
             pic_Level.SetImage(curRenderer.CombineLayers());
         }
 
@@ -2271,12 +2255,6 @@ Digger=20
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.ScreenStart);
             pic_Level.SetImage(curRenderer.CombineLayers());
-        }
-
-        private void ToggleDeprecatedPieces()
-        {
-            DisplaySettings.ChangeDisplayed(C.DisplayType.Deprecated);
-            LoadPiecesIntoPictureBox();
         }
 
         private void SetScreenStartToCursor()
@@ -2342,7 +2320,7 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyToggleObjects, () => ToggleObjects());
             AddHotkey(HotkeyConfig.HotkeyToggleTriggerAreas, () => ToggleTriggerAreas());
             AddHotkey(HotkeyConfig.HotkeyToggleScreenStart, () => ToggleScreenStart());
-            AddHotkey(HotkeyConfig.HotkeyToggleDeprecatedPieces, () => ToggleDeprecatedPieces());
+            AddHotkey(HotkeyConfig.HotkeyToggleSteelAreas, () => ToggleSteelAreas());
             AddHotkey(HotkeyConfig.HotkeyShowMissingPieces, () => ShowMissingPiecesDialog());
             AddHotkey(HotkeyConfig.HotkeyRefreshStyles, () => RefreshStyles());
             AddHotkey(HotkeyConfig.HotkeyToggleSnapToGrid, () => ToggleSnapToGrid(true));
@@ -2499,8 +2477,8 @@ Digger=20
             screenStartToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleScreenStart);
 
-            deprecatedPiecesToolStripMenuItem.ShortcutKeyDisplayString =
-                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleDeprecatedPieces);
+            steelAreasToolStripMenuItem.ShortcutKeyDisplayString =
+                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleSteelAreas);
 
             showMissingPiecesToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyShowMissingPieces);

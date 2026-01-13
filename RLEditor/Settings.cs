@@ -108,9 +108,9 @@ namespace RLEditor
             DisplaySettings.SetDisplayed(C.DisplayType.Terrain, true);
             DisplaySettings.SetDisplayed(C.DisplayType.Objects, true);
             DisplaySettings.SetDisplayed(C.DisplayType.ScreenStart, false);
-            DisplaySettings.SetDisplayed(C.DisplayType.Trigger, false);
+            DisplaySettings.SetDisplayed(C.DisplayType.Triggers, true);
             DisplaySettings.SetDisplayed(C.DisplayType.ClearPhysics, false);
-            DisplaySettings.SetDisplayed(C.DisplayType.Deprecated, false);
+            DisplaySettings.SetDisplayed(C.DisplayType.SteelAreas, true);
 
             settingChanged = false;
         }
@@ -892,7 +892,7 @@ namespace RLEditor
                 settingsFile.WriteLine(" Autosave            " + AutosaveFrequency.ToString());
                 settingsFile.WriteLine(" AutosaveLimit       " + KeepAutosaveCount.ToString());
                 settingsFile.WriteLine(" PieceBrowserMode    " + CurrentPieceBrowserMode.ToString());
-                settingsFile.WriteLine(" AutoPinOGStyles    " + (AutoPinOGStyles ? "True" : "False"));
+                settingsFile.WriteLine(" AutoPinOGStyles     " + (AutoPinOGStyles ? "True" : "False"));
                 settingsFile.WriteLine(" PreferObjectName    " + (PreferObjectName ? "True" : "False"));
                 settingsFile.WriteLine(" InfiniteScrolling   " + (InfiniteScrolling ? "True" : "False"));
                 settingsFile.WriteLine(" GridSize            " + GridSize.ToString());
@@ -909,7 +909,7 @@ namespace RLEditor
 
                 var displayTypes = new List<C.DisplayType>()
                 {
-                    C.DisplayType.Trigger, C.DisplayType.ScreenStart, C.DisplayType.Deprecated
+                    C.DisplayType.Triggers, C.DisplayType.ScreenStart, C.DisplayType.SteelAreas
                 };
                 foreach (var displayType in displayTypes)
                 {

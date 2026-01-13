@@ -53,8 +53,8 @@ namespace RLEditor
                     { C.DisplayType.Objects, objectToolStripMenuItem },
                     { C.DisplayType.ScreenStart, screenStartToolStripMenuItem },
                     { C.DisplayType.Terrain, terrainToolStripMenuItem },
-                    { C.DisplayType.Trigger, triggerAreasToolStripMenuItem },
-                    { C.DisplayType.Deprecated, deprecatedPiecesToolStripMenuItem }
+                    { C.DisplayType.Triggers, triggerAreasToolStripMenuItem },
+                    { C.DisplayType.SteelAreas, steelAreasToolStripMenuItem }
                 };
             DisplaySettings.SetMenuTabItems(displayTabItems);
 
@@ -332,14 +332,14 @@ namespace RLEditor
             ToggleTriggerAreas();
         }
 
+        private void steelAreasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToggleSteelAreas();
+        }
+
         private void screenStartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToggleScreenStart();
-        }
-
-        private void deprecatedPiecesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToggleDeprecatedPieces();
         }
 
         private void showMissingPiecesToolStripMenuItem_Click(object sender, EventArgs e)

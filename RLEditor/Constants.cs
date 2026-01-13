@@ -54,7 +54,7 @@ namespace RLEditor
 
         public enum DisplayType
         {
-            Terrain, Objects, Trigger, ScreenStart, ClearPhysics, Deprecated
+            Terrain, Objects, Triggers, SteelAreas, ScreenStart, ClearPhysics
         }
 
         public enum CustDrawMode

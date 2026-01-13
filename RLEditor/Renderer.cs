@@ -55,7 +55,8 @@ namespace RLEditor
         bool IsClearPhysics => DisplaySettings.IsDisplayed(C.DisplayType.ClearPhysics);
         bool IsTerrainLayer => DisplaySettings.IsDisplayed(C.DisplayType.Terrain);
         bool IsObjectLayer => DisplaySettings.IsDisplayed(C.DisplayType.Objects);
-        bool IsTriggerLayer => DisplaySettings.IsDisplayed(C.DisplayType.Trigger);
+        bool IsTriggerLayer => DisplaySettings.IsDisplayed(C.DisplayType.Triggers);
+        bool IsSteelLayer => DisplaySettings.IsDisplayed(C.DisplayType.SteelAreas);
         bool IsScreenStart => DisplaySettings.IsDisplayed(C.DisplayType.ScreenStart);
         bool IsGridEnabled => curSettings.UseGridForPieces;
 
@@ -177,8 +178,10 @@ namespace RLEditor
                 baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Trigger], true);
             }
 
-            // For now, always draw steel areas. TODO - Implement toggle
-            baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea], true);
+            if (IsSteelLayer)
+            {
+                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea], true);
+            }
         }
 
         /// <summary>

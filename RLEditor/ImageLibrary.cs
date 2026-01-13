@@ -14,7 +14,7 @@ namespace RLEditor
         /// </summary>
         /// <param name="newImage"></param>
         /// <param name="isSteel"></param>
-        public BaseImageInfo(Bitmap newImage, bool isSteel = false, bool isDeprecated = false)
+        public BaseImageInfo(Bitmap newImage, bool isSteel = false)
             : this(newImage, isSteel ? C.OBJ.STEEL : C.OBJ.TERRAIN, 1, new Rectangle(0, 0, 0, 0),
                0, 0, 0, 0)
         {
@@ -99,7 +99,6 @@ namespace RLEditor
         public Rectangle TriggerRect { get; private set; }
         public Rectangle PrimaryImageLocation { get; private set; }
         public Rectangle? NineSlicingArea { get; private set; }
-        public bool Deprecated { get; private set; }
 
         /// <summary>
         /// Separates the various frames in one bitmap.
@@ -613,18 +612,6 @@ namespace RLEditor
             }
 
             return imageDict[imageKey].TriggerRect;
-        }
-
-        public static bool GetDeprecated(string imageKey)
-        {
-            if (!imageDict.ContainsKey(imageKey))
-            {
-                bool success = AddNewImage(imageKey);
-                if (!success)
-                    return false;
-            }
-
-            return imageDict[imageKey].Deprecated;
         }
 
         /// <summary>

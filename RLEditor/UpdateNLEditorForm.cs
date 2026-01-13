@@ -65,24 +65,15 @@ namespace RLEditor
                 return;
             }
 
-            int skipDeprecatedOffset = 0;
-
             // load correct pictures
             for (int i = 0; i < picPieceList.Count; i++)
             {
-                string pieceKey = pieceKeys[(pieceStartIndex + i + skipDeprecatedOffset) % pieceKeys.Count];
+                string pieceKey = pieceKeys[(pieceStartIndex + i) % pieceKeys.Count];
                 if (!ImageLibrary.IsImageLoadable(pieceKey))
                 {
                     // Make sure to stop the repeat-buttons from firing again.
                     but_PieceRight.StopRepeatAction();
                     but_PieceLeft.StopRepeatAction();
-                }
-
-                if (ImageLibrary.GetDeprecated(pieceKey) && !DisplaySettings.IsDisplayed(C.DisplayType.Deprecated))
-                {
-                    skipDeprecatedOffset++;
-                    i--;
-                    continue;
                 }
 
                 int frameIndex = (ImageLibrary.GetObjType(pieceKey).In(C.OBJ.HATCH)) ? 9 : 0;

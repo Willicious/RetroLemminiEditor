@@ -72,7 +72,6 @@ namespace RLEditor
             FindIssuesTooFewLemmings();
             FindIssuesTimeLimit();
             FindIssuesMissingObjects();
-            FindIssuesDeprecation();
         }
 
         /// <summary>
@@ -144,24 +143,6 @@ namespace RLEditor
             if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT))
                 issuesList.Add("Missing object: Exit.");
         }
-
-        private void FindIssuesDeprecation()
-        {
-            foreach (GadgetPiece deprecated in level.GadgetList.FindAll(gad => ImageLibrary.GetDeprecated(gad.Key)))
-            {
-                issuesList.Add("Deprecated gadget " +
-                               "(Position " + deprecated.PosX.ToString() +
-                               ", " + deprecated.PosY.ToString() + ").");
-            }
-
-            foreach (TerrainPiece deprecated in level.TerrainList.FindAll(gad => ImageLibrary.GetDeprecated(gad.Key)))
-            {
-                issuesList.Add("Deprecated terrain piece " +
-                               "(Position " + deprecated.PosX.ToString() +
-                               ", " + deprecated.PosY.ToString() + ").");
-            }
-        }
-
 
         /// <summary>
         /// Creates a new form to display the validation result.
@@ -244,8 +225,6 @@ namespace RLEditor
 
                 if (issuesList[0].StartsWith("Piece outside"))
                     butFixIssues.Text = "Delete Pieces Outside Level";
-                else if (issuesList[0].StartsWith("Deprecated"))
-                    butFixIssues.Text = "Delete Deprecated Pieces";
 
                 if (isCleansing && butFixIssues.Text == "Edit Level")
                 {
@@ -275,9 +254,6 @@ namespace RLEditor
             if (butFixIssues.Text == "Delete Pieces Outside Level")
                 RemovePiecesOutsideBoundary();
 
-            if (butFixIssues.Text == "Delete Deprecated Pieces")
-                RemoveDeprecatedPieces();
-
             Validate(true, false, isCleansing);
 
             if (issuesList.Count <= 0)
@@ -306,11 +282,11 @@ namespace RLEditor
             level.TerrainList.RemoveAll(ter => !ter.ImageRectangle.IntersectsWith(levelRect));
             level.GadgetList.RemoveAll(obj => !obj.ImageRectangle.IntersectsWith(levelRect));
         }
-
-        private void RemoveDeprecatedPieces()
-        {
-            level.TerrainList.RemoveAll(ter => ImageLibrary.GetDeprecated(ter.Key));
-            level.GadgetList.RemoveAll(obj => ImageLibrary.GetDeprecated(obj.Key));
-        }
     }
 }
+
+//TODO - We can ask the Editor to not show Decoration pieces that are completely blank
+//in the objects list, and remove any such pieces in level where they exist.
+//Then, if a user wishes to deprecate a piece in their style, they can make it
+//completely blank and mark is as a decoration. Existing levels using the piece
+//will load, and the Editor can fix them automatically.
