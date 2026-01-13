@@ -89,7 +89,7 @@ namespace RLEditor
             }
             return -1;
         }
-        private static Point GetTriggerOffset(string objectImageKey)
+        public static Point GetTriggerOffset(string objectImageKey)
         {
             int tileIndex = GetPieceIndex(objectImageKey);
             if (tileIndex < 0)

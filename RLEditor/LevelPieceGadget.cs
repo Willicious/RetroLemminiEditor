@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace RLEditor
 {
@@ -82,9 +83,15 @@ namespace RLEditor
                     return new Rectangle(PosX, PosY, Math.Max(1, SpecWidth), Math.Max(1, SpecHeight));
                 }
 
-                if (ObjType == C.OBJ.HATCH) // TODO - Specify a default for hatches based on whatever it is in RetroLemmini
+                if (ObjType == C.OBJ.HATCH)
                 {
-                    return new Rectangle(PosX + (Width / 2) + 1, PosY + (Height / 2) - 1, 2, 2);
+                    int lemmingHeight = 20;
+                    Point offset = TriggerMask.GetTriggerOffset(Key);
+
+                    int lemminiSpawnPointX = PosX + (Width / 2) + 2 + offset.X;
+                    int lemminiSpawnPointY = PosY + lemmingHeight + offset.Y;
+
+                    return new Rectangle(lemminiSpawnPointX, lemminiSpawnPointY, 1, 1);
                 }
 
                 Rectangle trigRect = ImageLibrary.GetTrigger(Key);
