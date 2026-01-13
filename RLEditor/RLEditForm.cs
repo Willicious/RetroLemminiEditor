@@ -1311,9 +1311,9 @@ namespace RLEditor
             GenerateRandomSkillset();
         }
 
-        private void btnAllNonZeroSkillsToN_Click(object sender, EventArgs e)
+        private void btnAllSkillsToN_Click(object sender, EventArgs e)
         {
-            SetAllNonZeroSkillsToN();
+            SetAllSkillsToN();
         }
 
         private void num_RandomLimit_ValueChanged(object sender, EventArgs e)

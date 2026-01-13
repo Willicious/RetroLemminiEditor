@@ -2188,23 +2188,22 @@ Digger=20
             {
                 if (ctrl is NumericUpDown numBox && numBox != num_RandomMinLimit
                                                  && numBox != num_RandomMaxLimit
-                                                 && numBox != num_AllNonZeroSkillsToN)
+                                                 && numBox != num_AllSkillsToN)
                 {
                     numBox.Value = 0;
                 }
             }
         }
 
-        private void SetAllNonZeroSkillsToN()
+        private void SetAllSkillsToN()
         {
             foreach (Control ctrl in tabSkills.Controls)
             {
                 if (ctrl is NumericUpDown numBox && numBox != num_RandomMinLimit
                                                  && numBox != num_RandomMaxLimit
-                                                 && numBox != num_AllNonZeroSkillsToN)
+                                                 && numBox != num_AllSkillsToN)
                 {
-                    if (numBox.Value != 0)
-                        numBox.Value = num_AllNonZeroSkillsToN.Value;
+                    numBox.Value = num_AllSkillsToN.Value;
                 }
             }
         }
@@ -2221,7 +2220,7 @@ Digger=20
             List<NumericUpDown> numericUpDowns = tabSkills.Controls.OfType<NumericUpDown>()
                 .Where(n => n != num_RandomMinLimit &&
                             n != num_RandomMaxLimit &&
-                            n != num_AllNonZeroSkillsToN &&
+                            n != num_AllSkillsToN &&
                             n.Enabled)
                 .ToList();
             numericUpDowns = numericUpDowns.OrderBy(x => random.Next()).ToList();
