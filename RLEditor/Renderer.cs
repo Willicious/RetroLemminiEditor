@@ -207,9 +207,7 @@ namespace RLEditor
             AddSelectedRectangles(ref screenBmp);
             
             if (ZoomFactor >= 0 && IsObjectLayer)
-            {
                 AddHatchOrder(ref screenBmp);
-            }
                 
             AddMouseSelectionArea(ref screenBmp);
 
@@ -650,8 +648,9 @@ namespace RLEditor
 
             var triggerRectangles = level.GadgetList
                 .Where(obj => !C.HideTriggerObjects.Contains(obj.ObjType))
-                .Select(obj => C.TriggerPointObjects.Contains(obj.ObjType) ? new Rectangle(obj.TriggerRect.X, obj.TriggerRect.Y, 1, 1) : obj.TriggerRect)
+                .Select(obj => obj.TriggerRect)
                 .ToList();
+
             layerImages[C.Layer.Trigger].DrawOnFilledRectangles(triggerRectangles, GetTriggerColor());
         }
 

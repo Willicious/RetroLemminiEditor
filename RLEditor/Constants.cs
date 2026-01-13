@@ -82,7 +82,6 @@ namespace RLEditor
         }
 
         public static OBJ[] HideTriggerObjects = new OBJ[] { OBJ.TERRAIN, OBJ.STEEL, OBJ.NONE, OBJ.DECORATION, OBJ.NULL, OBJ.PAINT };
-        public static OBJ[] TriggerPointObjects = new OBJ[] { OBJ.HATCH };
 
         public enum StyleColor
         {
@@ -172,8 +171,8 @@ namespace RLEditor
         {
           { RLColor.Text, Utility.HexToColor("FEF5F5F5") }, // Color.WhiteSmoke with slightly reduced alpha
           { RLColor.SteelArea, Utility.HexToColor("550022FF") }, // Blue with reduced alpha
+          { RLColor.BackDefault, Utility.HexToColor("FF000033") }, // Amiga Blue
           { RLColor.OWWDefault, Color.Linen },
-          { RLColor.BackDefault, Color.Black },
           { RLColor.ScreenStart, Color.AliceBlue },
           { RLColor.SelRectGadget, Color.Chartreuse },
           { RLColor.SelRectTerrain, Color.Gold }

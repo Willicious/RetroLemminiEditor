@@ -68,44 +68,42 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Returns the position of the trigger area.
+        /// Returns the position and dimensions of the trigger area.
         /// </summary>
         public Rectangle TriggerRect
         {
             get
             {
-                if (ObjType == C.OBJ.STEEL)
+                if (ObjType == C.OBJ.STEEL) // Manual steel triggers are the same size as the area itself
                 {
                     return new Rectangle(PosX, PosY, Math.Max(1, SpecWidth), Math.Max(1, SpecHeight));
                 }
 
+                if (ObjType == C.OBJ.HATCH) // TODO - Specify a default for hatches based on whatever it is in RetroLemmini
+                {
+                    return new Rectangle(PosX + (Width / 2) + 1, PosY + (Height / 2) - 1, 2, 2);
+                }
+
                 Rectangle trigRect = ImageLibrary.GetTrigger(Key);
 
-                if (ObjType != C.OBJ.ONE_WAY_WALL) // For all objects except one-way-walls
+                // Apply rotation / flipping / inverting
+                if (ObjType != C.OBJ.ONE_WAY_WALL)
                 {
-                    // Rotate the trigger area correctly
                     if (IsRotatedInPlayer)
                     {
                         int origImageHeight = ImageRectangle.Width;
                         trigRect = new Rectangle(origImageHeight - trigRect.Bottom, trigRect.X, trigRect.Height, trigRect.Width);
                     }
-
-                    // Adjust to flipping
                     if (IsFlippedInPlayer && ObjType != C.OBJ.HATCH)
-                    {
                         trigRect.X = ImageRectangle.Width - trigRect.Right;
-                    }
-
-                    // Adjust to inverting
                     if (IsInvertedInPlayer)
-                    {
                         trigRect.Y = ImageRectangle.Height - trigRect.Bottom;
-                    }
                 }
 
                 // Shift to position relative to level
                 trigRect.X += PosX;
                 trigRect.Y += PosY;
+
                 return trigRect;
             }
         }

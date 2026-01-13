@@ -275,12 +275,6 @@ namespace RLEditor
             }
         }
 
-        /// <summary>
-        /// Reads further piece infos from a .nxob resp. nxtp file.
-        /// <para> Returns a finished BaseImageInfo containing both the image and the further info. <\para> 
-        /// </summary>
-        /// <param name="image"></param>
-        /// <param name="imageName"></param>
         public static BaseImageInfo ImageInfo(string imageName)
         {
             string imagePath = C.AppPathPieces + imageName;
@@ -288,35 +282,26 @@ namespace RLEditor
             char letterBeforeNumber = imageName[underscoreIndex - 1];
 
             if (letterBeforeNumber == 'o')
-            {
-                // create a new object piece
                 return CreateNewObjectInfo(imagePath);
-            }
             else
-            {
-                // create a new terrain piece
                 return CreateNewTerrainInfo(imagePath);
-            }
         }
 
-        /// <summary>
-        /// Reads further object infos from a .nxob file. Default values:
-        /// </summary>
         private static BaseImageInfo CreateNewObjectInfo(string filePath)
         {
             C.OBJ objType = C.OBJ.NONE;
-            // TODO - match trigger "m" image to piece for displaying the trigger area
-            Rectangle triggerRect = new Rectangle(0, 0, 1, 1);
             int frameCount = 0;
 
-            string styleName = Path.GetFileName(Path.GetDirectoryName(filePath));
-            string styleTheme = C.AppPathThemeInfo(styleName);
-
-            int tileIndex = -1;
+            // Determine tile index from filename
             string fileName = Path.GetFileNameWithoutExtension(filePath);
             int underscoreIndex = fileName.LastIndexOf('_');
+            int tileIndex = -1;
             if (underscoreIndex >= 0)
                 int.TryParse(fileName.Substring(underscoreIndex + 1), out tileIndex);
+
+            // Load object type and frame count from stylename.ini
+            string styleName = Path.GetFileName(Path.GetDirectoryName(filePath));
+            string styleTheme = C.AppPathThemeInfo(styleName);
 
             if (tileIndex >= 0 && File.Exists(styleTheme))
             {
@@ -340,7 +325,7 @@ namespace RLEditor
                             {
                                 frameCount = parsedFrames;
                             }
-                            continue; // continue parsing in case TYPE_N appears later
+                            continue; // Continue parsing in case TYPE_N appears later
                         }
 
                         // Parse TYPE_N
@@ -399,6 +384,18 @@ namespace RLEditor
                     parser?.DisposeStreamReader();
                 }
             }
+
+            // Get the trigger rectangle from the mask image
+            Rectangle triggerRect = new Rectangle(0, 0, 1, 1);
+
+            if (tileIndex >= 0)
+            {
+                TriggerMask mask = TriggerMask.FromObjectImageKey(Path.Combine(styleName, fileName));
+                if (mask != null && !mask.IsEmpty)
+                    triggerRect = mask.LocalRect;
+            }
+
+            // Output the new object
             Bitmap newBitmap = Image(filePath);
             return new BaseImageInfo(newBitmap, objType, frameCount, triggerRect);
         }
