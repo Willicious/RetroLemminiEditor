@@ -31,12 +31,9 @@ namespace RLEditor
         { "PICKUP_INSIDE", C.StyleColor.PICKUP_INSIDE }
       };
 
-
         /// <summary>
         /// Reads style colors from a .nxtm file.
-        /// <para> Color 0: Background (default: black) </para>
         /// </summary>
-        /// <param name="styleName"></param>
         public static Dictionary<C.StyleColor, Color> StyleColors(string styleName)
         {
             var colorDict = new Dictionary<C.StyleColor, Color>();

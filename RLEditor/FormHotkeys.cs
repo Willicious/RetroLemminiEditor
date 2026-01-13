@@ -704,9 +704,6 @@ namespace RLEditor
                     case "HotkeyToggleScreenStart":
                         HotkeyConfig.HotkeyToggleScreenStart = parsedKey;
                         break;
-                    case "HotkeyToggleBackground":
-                        HotkeyConfig.HotkeyToggleBackground = parsedKey;
-                        break;
                     case "HotkeyToggleDeprecatedPieces":
                         HotkeyConfig.HotkeyToggleDeprecatedPieces = parsedKey;
                         break;

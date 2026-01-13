@@ -57,7 +57,6 @@ namespace RLEditor
         bool IsObjectLayer => DisplaySettings.IsDisplayed(C.DisplayType.Objects);
         bool IsTriggerLayer => DisplaySettings.IsDisplayed(C.DisplayType.Trigger);
         bool IsScreenStart => DisplaySettings.IsDisplayed(C.DisplayType.ScreenStart);
-        bool IsBackgroundLayer => DisplaySettings.IsDisplayed(C.DisplayType.Background);
         bool IsGridEnabled => curSettings.UseGridForPieces;
 
         PictureBox levelPicBox;
@@ -143,10 +142,6 @@ namespace RLEditor
             {
                 // Always use a black background here
                 baseLevelImage = new Bitmap(level.Width, level.Height);
-            }
-            else if (IsBackgroundLayer)
-            {
-                baseLevelImage = (Bitmap)layerImages[C.Layer.Background].Clone();
             }
             else
             {
@@ -448,22 +443,13 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Creates the background layer with the correct background color and background image, 
+        /// Creates the background layer with the correct background color
         /// and draws the piece grid if snap-to-grid is active.
         /// </summary>
         public void CreateBackgroundLayer()
         {
             // Set background color
             layerImages[C.Layer.Background].Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
-
-            // Display background images, if selected
-            if (level.Background != null)
-            {
-                Bitmap backgroundImage = ImageLibrary.GetImage(level.Background.Key, RotateFlipType.RotateNoneFlipNone)
-                                                     .PaveArea(new Rectangle(0, 0, level.Width, level.Height));
-
-                layerImages[C.Layer.Background].DrawOn(backgroundImage, new Point(0, 0));
-            }
 
             // Draw the pieces grid if needed
             if (IsGridEnabled)

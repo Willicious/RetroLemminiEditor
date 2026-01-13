@@ -34,8 +34,6 @@ namespace RLEditor
         /// </summary>
         private void CreateStyleList()
         {
-            Backgrounds = new BackgroundList();
-
             // get list of all existing style names
             List<string> styleNameList = new List<string>();
 
@@ -62,10 +60,8 @@ namespace RLEditor
             }
             // Create the StyleList from the StyleNameList
             styleNameList.RemoveAll(sty => sty == "default");
-            StyleList = styleNameList.ConvertAll(sty => new Style(sty, Backgrounds));
+            StyleList = styleNameList.ConvertAll(sty => new Style(sty));
             StyleList = LoadStylesFromFile.OrderAndRenameStyles(StyleList, curSettings);
-
-            Backgrounds.SortBackgrounds();
         }
 
         /// <summary>
@@ -589,7 +585,7 @@ Digger=20
             lastSavedLevel = CurLevel.Clone();
 
             WriteLevelInfoToForm();
-            UpdateBackgroundImage();
+            UpdateBackgroundColor();
             UpdateFlagsForPieceActions();
             RepositionPicLevel();
             pic_Level.Image = curRenderer.CreateLevelImage();
@@ -606,9 +602,9 @@ Digger=20
             Level level;
 
             if (filename == null)
-                level = LevelFile.LoadLevel(StyleList, Backgrounds, levelDirectory);
+                level = LevelFile.LoadLevel(StyleList, levelDirectory);
             else
-                level = LevelFile.LoadLevelFromFile(filename, StyleList, Backgrounds);
+                level = LevelFile.LoadLevelFromFile(filename, StyleList);
 
             if (level == null)
                 return;
@@ -618,7 +614,7 @@ Digger=20
             CurLevel = level;
             curRenderer.SetLevel(CurLevel);
             ValidateLevelPieces();
-            UpdateBackgroundImage();
+            UpdateBackgroundColor();
 
             oldLevelList = new List<Level>();
             oldLevelList.Add(CurLevel.Clone());
@@ -1278,7 +1274,6 @@ Digger=20
                 but_PieceTerr.Font = new Font(but_PieceTerr.Font, FontStyle.Regular);
                 but_PieceSteel.Font = new Font(but_PieceSteel.Font, FontStyle.Regular);
                 but_PieceObj.Font = new Font(but_PieceObj.Font, FontStyle.Regular);
-                but_PieceBackground.Font = new Font(but_PieceBackground.Font, FontStyle.Regular);
 
                 switch (newKind)
                 {
@@ -1290,9 +1285,6 @@ Digger=20
                         break;
                     case C.SelectPieceType.Objects:
                         but_PieceObj.Font = new Font(but_PieceObj.Font, FontStyle.Bold);
-                        break;
-                    case C.SelectPieceType.Backgrounds:
-                        but_PieceBackground.Font = new Font(but_PieceBackground.Font, FontStyle.Bold);
                         break;
                 }
 
@@ -1376,9 +1368,6 @@ Digger=20
                     break;
                 case C.SelectPieceType.Objects:
                     pieceNameList = pieceCurStyle?.ObjectKeys;
-                    break;
-                case C.SelectPieceType.Backgrounds:
-                    pieceNameList = pieceCurStyle?.BackgroundKeys;
                     break;
                 default:
                     throw new ArgumentException();
@@ -1477,9 +1466,6 @@ Digger=20
                     newKind = C.SelectPieceType.Objects;
                     break;
                 case C.SelectPieceType.Objects:
-                    newKind = C.SelectPieceType.Backgrounds;
-                    break;
-                case C.SelectPieceType.Backgrounds:
                     newKind = C.SelectPieceType.Terrain;
                     break;
                 default:
@@ -1566,9 +1552,6 @@ Digger=20
                 case C.SelectPieceType.Steel:
                     pieceList = pieceCurStyle?.SteelKeys;
                     break;
-                case C.SelectPieceType.Backgrounds:
-                    pieceList = pieceCurStyle?.BackgroundKeys;
-                    break;
                 default:
                     throw new ArgumentException();
             }
@@ -1616,12 +1599,6 @@ Digger=20
                     case C.SelectPieceType.Steel:
                     case C.SelectPieceType.Objects:
                         AddNewPieceToLevel(pieceKey, curRenderer.GetCenterPoint());
-                        break;
-                    case C.SelectPieceType.Backgrounds:
-                        string[] splitKey = pieceKey.Split('/', '\\');
-                        CurLevel.Background = new Background(pieceCurStyle, splitKey[2]);
-                        UpdateBackgroundImage();
-                        pic_Level.SetImage(curRenderer.CombineLayers());
                         break;
                 }
 
@@ -2295,12 +2272,6 @@ Digger=20
             pic_Level.SetImage(curRenderer.CombineLayers());
         }
 
-        private void ToggleBackground()
-        {
-            DisplaySettings.ChangeDisplayed(C.DisplayType.Background);
-            pic_Level.SetImage(curRenderer.CombineLayers());
-        }
-
         private void ToggleDeprecatedPieces()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.Deprecated);
@@ -2370,7 +2341,6 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyToggleObjects, () => ToggleObjects());
             AddHotkey(HotkeyConfig.HotkeyToggleTriggerAreas, () => ToggleTriggerAreas());
             AddHotkey(HotkeyConfig.HotkeyToggleScreenStart, () => ToggleScreenStart());
-            AddHotkey(HotkeyConfig.HotkeyToggleBackground, () => ToggleBackground());
             AddHotkey(HotkeyConfig.HotkeyToggleDeprecatedPieces, () => ToggleDeprecatedPieces());
             AddHotkey(HotkeyConfig.HotkeyShowMissingPieces, () => ShowMissingPiecesDialog());
             AddHotkey(HotkeyConfig.HotkeyRefreshStyles, () => RefreshStyles());
@@ -2527,9 +2497,6 @@ Digger=20
 
             screenStartToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleScreenStart);
-
-            backgroundToolStripMenuItem.ShortcutKeyDisplayString =
-                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleBackground);
 
             deprecatedPiecesToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleDeprecatedPieces);

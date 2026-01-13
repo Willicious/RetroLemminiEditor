@@ -692,11 +692,7 @@ namespace RLEditor
 
         /// <summary>
         /// Creates the image key from the style and piece name.
-        /// <para> Do NOT use this for background images! </para>
         /// </summary>
-        /// <param name="styleName"></param>
-        /// <param name="pieceName"></param>
-        /// <param name="isObject"></param>
         public static string CreatePieceKey(string styleName, string pieceName, bool isObject)
         {
             return styleName + C.DirSep + pieceName;

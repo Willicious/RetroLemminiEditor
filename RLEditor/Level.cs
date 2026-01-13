@@ -21,7 +21,6 @@ namespace RLEditor
             this.Author = "";
             this.PieceStyle = pieceStyle;
             this.MusicFile = "";
-            this.Background = null;
 
             // Create a random 64bit hex number
             this.LevelID = (ulong)Utility.Random().Next() +
@@ -93,7 +92,6 @@ namespace RLEditor
 
         public List<TerrainPiece> TerrainList { get; set; }
         public List<GadgetPiece> GadgetList { get; set; }
-        public Background Background { get; set; }
 
         public int NumLems { get; set; }
         public int SaveReq { get; set; }
@@ -138,7 +136,6 @@ namespace RLEditor
             newLevel.LevelID = this.LevelID;
             newLevel.LevelVersion = this.LevelVersion;
             newLevel.FilePathToSave = this.FilePathToSave; // shallow copy is fine here
-            newLevel.Background = this.Background; // shallow copy is fine here
 
             newLevel.Width = this.Width;
             newLevel.Height = this.Height;
@@ -193,8 +190,6 @@ namespace RLEditor
                 || !this.MusicFile.Equals(otherLevel.MusicFile)
                 || !this.LevelID.Equals(otherLevel.LevelID)
                 // specifically do not compare LevelVersion
-                || !((this.Background == null && otherLevel.Background == null) ||
-                     (this.Background != null && this.Background.Equals(otherLevel.Background)))
                 || this.Width != otherLevel.Width
                 || this.Height != otherLevel.Height
                 || this.StartPosX != otherLevel.StartPosX

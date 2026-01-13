@@ -63,9 +63,6 @@ namespace RLEditor
                 case C.SelectPieceType.Objects:
                     pieceKeys = pieceCurStyle?.ObjectKeys;
                     break;
-                case C.SelectPieceType.Backgrounds:
-                    pieceKeys = pieceCurStyle?.BackgroundKeys;
-                    break;
                 default:
                     throw new ArgumentException();
             }
@@ -167,7 +164,7 @@ namespace RLEditor
         /// <summary>
         /// Updates the background color of the main level image and the piece selection according to the current main style.
         /// </summary>
-        private void UpdateBackgroundImage()
+        private void UpdateBackgroundColor()
         {
             if (CurLevel.PieceStyle == null)
                 return;
@@ -312,7 +309,7 @@ namespace RLEditor
             bool updateImages = MovePicPiecesOnResize(windowed, width);
             if (updateImages)
             {
-                UpdateBackgroundImage();
+                UpdateBackgroundColor();
                 LoadPiecesIntoPictureBox();
             }
         }
@@ -350,19 +347,13 @@ namespace RLEditor
             but_PieceTerr.Top = 0;
             but_PieceSteel.Top = 0;
             but_PieceObj.Top = 0;
-            but_PieceBackground.Top = 0;
 
             but_PieceLeft.Top = pieceBrowserTop;
             but_PieceRight.Top = pieceBrowserTop;
             but_PieceRight.Left = panelPieceBrowser.Width - rightButtonOffset;
 
-            but_ClearBackground.Top = 0;
-            but_ClearBackground.Left = but_PieceRight.Right - 4 - but_ClearBackground.Width;
             but_AddRuler.Top = 0;
-            but_AddRuler.Left =
-                //but_ClearBackground.Left - 4
-                but_PieceRight.Left // TODO - When backgrounds are supported, revert this                
-                - but_AddRuler.Width;
+            but_AddRuler.Left = but_PieceRight.Left - but_AddRuler.Width;
             but_AddSteelArea.Top = 0;
             but_AddSteelArea.Left = but_AddRuler.Left - 4 - but_AddSteelArea.Width;
         }

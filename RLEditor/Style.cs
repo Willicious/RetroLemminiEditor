@@ -15,7 +15,7 @@ namespace RLEditor
         /// Initializes a new instance of a Style by searching for pieces in the directory AppPath/StyleName/.
         /// </summary>
         /// <param name="styleName"></param>
-        public Style(string styleName, BackgroundList backgroundList)
+        public Style(string styleName)
         {
             NameInDirectory = styleName;
             NameInEditor = styleName; // may be overwritten later when forming the StyleList
@@ -28,7 +28,6 @@ namespace RLEditor
         List<string> terrainKeys;
         List<string> steelKeys;
         List<string> objectKeys;
-        List<string> backgroundKeys;
         public string NameInDirectory { get; private set; }
         public string NameInEditor { get; set; }
 
@@ -62,16 +61,6 @@ namespace RLEditor
             }
         }
 
-        public List<string> BackgroundKeys
-        {
-            get
-            {
-                if (backgroundKeys == null)
-                    LoadTerrainAndObjects();
-                return backgroundKeys;
-            }
-        }
-
         /// <summary>
         /// Checks for equality of the style's FileName.
         /// </summary>
@@ -89,7 +78,6 @@ namespace RLEditor
             SearchDirectoryForTerrain();
             SearchDirectoryForSteel();
             SearchDirectoryForObjects();
-            SearchDirectoryForBackgrounds();
 
             RemoveDuplicatedObjects();
             SortObjectNamesByObjectType();
@@ -106,26 +94,6 @@ namespace RLEditor
                 return colorDict[colorType];
             else
                 return C.RLColors[(colorType == C.StyleColor.BACKGROUND) ? C.RLColor.BackDefault : C.RLColor.OWWDefault];
-        }
-
-        /// <summary>
-        /// Writes all pieces in AppPath/StyleName/backgrounds to the list of BackgroundNames.
-        /// </summary>
-        private void SearchDirectoryForBackgrounds()
-        {
-            // TODO - Find out where lemmini keeps background images
-            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep + "backgrounds";
-
-            if (Directory.Exists(directoryPath))
-            {
-                backgroundKeys = Directory.GetFiles(directoryPath, "*.png", SearchOption.TopDirectoryOnly)
-                                       .Select(file => ImageLibrary.CreatePieceKey(file))
-                                       .ToList();
-            }
-            else // use empty list
-            {
-                backgroundKeys = new List<string>();
-            }
         }
 
         /// <summary>

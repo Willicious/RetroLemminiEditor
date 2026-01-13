@@ -66,7 +66,6 @@
             this.objectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triggerAreasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screenStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deprecatedPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,8 +103,6 @@
             this.but_PieceSteel = new System.Windows.Forms.Button();
             this.but_PieceTerr = new System.Windows.Forms.Button();
             this.but_PieceObj = new System.Windows.Forms.Button();
-            this.but_PieceBackground = new System.Windows.Forms.Button();
-            this.but_ClearBackground = new System.Windows.Forms.Button();
             this.picPiece6 = new System.Windows.Forms.PictureBox();
             this.picPiece5 = new System.Windows.Forms.PictureBox();
             this.picPiece4 = new System.Windows.Forms.PictureBox();
@@ -467,7 +464,6 @@
             this.objectToolStripMenuItem,
             this.triggerAreasToolStripMenuItem,
             this.screenStartToolStripMenuItem,
-            this.backgroundToolStripMenuItem,
             this.deprecatedPiecesToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
@@ -570,15 +566,6 @@
             this.screenStartToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
             this.screenStartToolStripMenuItem.Text = "Show/Hide Screen Start";
             this.screenStartToolStripMenuItem.Click += new System.EventHandler(this.screenStartToolStripMenuItem_Click);
-            // 
-            // backgroundToolStripMenuItem
-            // 
-            this.backgroundToolStripMenuItem.CheckOnClick = true;
-            this.backgroundToolStripMenuItem.Name = "backgroundToolStripMenuItem";
-            this.backgroundToolStripMenuItem.ShortcutKeyDisplayString = "F6";
-            this.backgroundToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
-            this.backgroundToolStripMenuItem.Text = "Show/Hide Background";
-            this.backgroundToolStripMenuItem.Click += new System.EventHandler(this.backgroundToolStripMenuItem_Click);
             // 
             // deprecatedPiecesToolStripMenuItem
             // 
@@ -861,8 +848,6 @@
             this.panelPieceBrowser.Controls.Add(this.but_PieceSteel);
             this.panelPieceBrowser.Controls.Add(this.but_PieceTerr);
             this.panelPieceBrowser.Controls.Add(this.but_PieceObj);
-            this.panelPieceBrowser.Controls.Add(this.but_PieceBackground);
-            this.panelPieceBrowser.Controls.Add(this.but_ClearBackground);
             this.panelPieceBrowser.Controls.Add(this.picPiece6);
             this.panelPieceBrowser.Controls.Add(this.picPiece5);
             this.panelPieceBrowser.Controls.Add(this.picPiece4);
@@ -947,30 +932,6 @@
             this.but_PieceObj.Text = "Objects";
             this.but_PieceObj.UseVisualStyleBackColor = true;
             this.but_PieceObj.Click += new System.EventHandler(this.but_PieceObj_Click);
-            // 
-            // but_PieceBackground
-            // 
-            this.but_PieceBackground.Location = new System.Drawing.Point(784, 2);
-            this.but_PieceBackground.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.but_PieceBackground.Name = "but_PieceBackground";
-            this.but_PieceBackground.Size = new System.Drawing.Size(116, 32);
-            this.but_PieceBackground.TabIndex = 76;
-            this.but_PieceBackground.Text = "Backgrounds";
-            this.but_PieceBackground.UseVisualStyleBackColor = true;
-            this.but_PieceBackground.Visible = false;
-            this.but_PieceBackground.Click += new System.EventHandler(this.but_PieceBackground_Click);
-            // 
-            // but_ClearBackground
-            // 
-            this.but_ClearBackground.Location = new System.Drawing.Point(1222, 2);
-            this.but_ClearBackground.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.but_ClearBackground.Name = "but_ClearBackground";
-            this.but_ClearBackground.Size = new System.Drawing.Size(166, 32);
-            this.but_ClearBackground.TabIndex = 77;
-            this.but_ClearBackground.Text = "Clear Background";
-            this.but_ClearBackground.UseVisualStyleBackColor = true;
-            this.but_ClearBackground.Visible = false;
-            this.but_ClearBackground.Click += new System.EventHandler(this.but_ClearBackground_Click);
             // 
             // picPiece6
             // 
@@ -2553,7 +2514,6 @@
         private System.Windows.Forms.PictureBox pic_Level;
         private RLEditor.FocusTextBox txt_Focus;
         private System.Windows.Forms.ToolStripMenuItem hotkeysToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem backgroundToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipPieces;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.HScrollBar scrollPicLevelHoriz;
@@ -2590,8 +2550,6 @@
         private System.Windows.Forms.Button but_PieceSteel;
         private System.Windows.Forms.Button but_PieceTerr;
         private System.Windows.Forms.Button but_PieceObj;
-        private System.Windows.Forms.Button but_PieceBackground;
-        private System.Windows.Forms.Button but_ClearBackground;
         private System.Windows.Forms.PictureBox picPiece6;
         private System.Windows.Forms.PictureBox picPiece5;
         private System.Windows.Forms.PictureBox picPiece4;

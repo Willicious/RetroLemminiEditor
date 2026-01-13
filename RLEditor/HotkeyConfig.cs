@@ -24,7 +24,6 @@ namespace RLEditor
         public static Keys HotkeyToggleObjects;
         public static Keys HotkeyToggleTriggerAreas;
         public static Keys HotkeyToggleScreenStart;
-        public static Keys HotkeyToggleBackground;
         public static Keys HotkeyToggleDeprecatedPieces;
         public static Keys HotkeyShowMissingPieces;
         public static Keys HotkeyRefreshStyles;
@@ -358,8 +357,6 @@ namespace RLEditor
                     HotkeyToggleTriggerAreas = ParseHotkeyString(line.Substring("HotkeyToggleTriggerAreas=".Length));
                 if (line.StartsWith("HotkeyToggleScreenStart="))
                     HotkeyToggleScreenStart = ParseHotkeyString(line.Substring("HotkeyToggleScreenStart=".Length));
-                if (line.StartsWith("HotkeyToggleBackground="))
-                    HotkeyToggleBackground = ParseHotkeyString(line.Substring("HotkeyToggleBackground=".Length));
                 if (line.StartsWith("HotkeyToggleDeprecatedPieces="))
                     HotkeyToggleDeprecatedPieces = ParseHotkeyString(line.Substring("HotkeyToggleDeprecatedPieces=".Length));
                 if (line.StartsWith("HotkeyShowMissingPieces="))
@@ -559,7 +556,6 @@ namespace RLEditor
                 $"HotkeyToggleObjects={FormatHotkeyString(HotkeyToggleObjects)}",
                 $"HotkeyToggleTriggerAreas={FormatHotkeyString(HotkeyToggleTriggerAreas)}",
                 $"HotkeyToggleScreenStart={FormatHotkeyString(HotkeyToggleScreenStart)}",
-                $"HotkeyToggleBackground={FormatHotkeyString(HotkeyToggleBackground)}",
                 $"HotkeyToggleDeprecatedPieces={FormatHotkeyString(HotkeyToggleDeprecatedPieces)}",
                 $"HotkeyShowMissingPieces={FormatHotkeyString(HotkeyShowMissingPieces)}",
                 $"HotkeyRefreshStyles={FormatHotkeyString(HotkeyRefreshStyles)}",
@@ -667,7 +663,6 @@ namespace RLEditor
             HotkeyToggleObjects = Keys.F3;
             HotkeyToggleTriggerAreas = Keys.F4;
             HotkeyToggleScreenStart = Keys.F5;
-            HotkeyToggleBackground = Keys.F6;
             HotkeyToggleDeprecatedPieces = Keys.F7;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;
@@ -766,7 +761,6 @@ namespace RLEditor
             HotkeyToggleObjects = Keys.F3;
             HotkeyToggleTriggerAreas = Keys.F4;
             HotkeyToggleScreenStart = Keys.F5;
-            HotkeyToggleBackground = Keys.F6;
             HotkeyToggleDeprecatedPieces = Keys.F7;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;

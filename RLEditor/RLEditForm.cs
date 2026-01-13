@@ -49,7 +49,6 @@ namespace RLEditor
 
             var displayTabItems = new Dictionary<C.DisplayType, ToolStripMenuItem>()
                 {
-                    { C.DisplayType.Background, backgroundToolStripMenuItem },
                     { C.DisplayType.ClearPhysics, clearPhysicsToolStripMenuItem },
                     { C.DisplayType.Objects, objectToolStripMenuItem },
                     { C.DisplayType.ScreenStart, screenStartToolStripMenuItem },
@@ -131,7 +130,7 @@ namespace RLEditor
 
         public Level CurLevel { get; private set; }
         public List<Style> StyleList { get; private set; }
-        public BackgroundList Backgrounds { get; private set; }
+
         Renderer curRenderer;
         Settings curSettings;
 
@@ -333,11 +332,6 @@ namespace RLEditor
         private void screenStartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToggleScreenStart();
-        }
-
-        private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToggleBackground();
         }
 
         private void deprecatedPiecesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -696,12 +690,6 @@ namespace RLEditor
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceBackground_Click(object sender, EventArgs e)
-        {
-            CyclePieceBrowserDisplay(C.SelectPieceType.Backgrounds);
-            PullFocusFromTextInputs();
-        }
-
         private void but_PieceLeft_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
@@ -735,24 +723,21 @@ namespace RLEditor
 
         private void picPieces_MouseDown(object sender, MouseEventArgs e)
         {
-            if (pieceDoDisplayKind != C.SelectPieceType.Backgrounds)
+            int picIndex = picPieceList.FindIndex(pic => pic.Equals(sender));
+            Debug.Assert(picIndex != -1, "PicBox not found in picPieceList.");
+
+            dragNewPieceKey = GetPieceKeyFromIndex(picIndex);
+
+            if (dragNewPieceKey != "")
             {
-                int picIndex = picPieceList.FindIndex(pic => pic.Equals(sender));
-                Debug.Assert(picIndex != -1, "PicBox not found in picPieceList.");
+                pic_DragNewPiece.Width = ImageLibrary.GetWidth(dragNewPieceKey);
+                pic_DragNewPiece.Height = ImageLibrary.GetHeight(dragNewPieceKey);
+                pic_DragNewPiece.Image = ImageLibrary.GetImage(dragNewPieceKey);
 
-                dragNewPieceKey = GetPieceKeyFromIndex(picIndex);
+                dragNewPieceTimer.Interval = 200;
+                dragNewPieceTimer.Enabled = true;
 
-                if (dragNewPieceKey != "")
-                {
-                    pic_DragNewPiece.Width = ImageLibrary.GetWidth(dragNewPieceKey);
-                    pic_DragNewPiece.Height = ImageLibrary.GetHeight(dragNewPieceKey);
-                    pic_DragNewPiece.Image = ImageLibrary.GetImage(dragNewPieceKey);
-
-                    dragNewPieceTimer.Interval = 200;
-                    dragNewPieceTimer.Enabled = true;
-
-                    curRenderer.SetDraggingVars(new Point(0, 0), C.DragActions.DragNewPiece);
-                }
+                curRenderer.SetDraggingVars(new Point(0, 0), C.DragActions.DragNewPiece);
             }
         }
 
@@ -1219,13 +1204,6 @@ namespace RLEditor
                     gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
                 pic_Level.Image = curRenderer.CreateLevelImage();
             }
-        }
-
-        private void but_ClearBackground_Click(object sender, EventArgs e)
-        {
-            CurLevel.Background = null;
-            UpdateBackgroundImage();
-            pic_Level.SetImage(curRenderer.CombineLayers());
         }
 
         private void but_RandomID_Click(object sender, EventArgs e)

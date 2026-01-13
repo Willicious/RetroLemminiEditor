@@ -49,12 +49,12 @@ namespace RLEditor
 
         public enum SelectPieceType
         {
-            Terrain, Steel, Objects, Backgrounds
+            Terrain, Steel, Objects
         }
 
         public enum DisplayType
         {
-            Terrain, Objects, Trigger, ScreenStart, Background, ClearPhysics, Deprecated
+            Terrain, Objects, Trigger, ScreenStart, ClearPhysics, Deprecated
         }
 
         public enum CustDrawMode

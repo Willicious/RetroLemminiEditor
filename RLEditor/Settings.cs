@@ -107,7 +107,6 @@ namespace RLEditor
 
             DisplaySettings.SetDisplayed(C.DisplayType.Terrain, true);
             DisplaySettings.SetDisplayed(C.DisplayType.Objects, true);
-            DisplaySettings.SetDisplayed(C.DisplayType.Background, true);
             DisplaySettings.SetDisplayed(C.DisplayType.ScreenStart, false);
             DisplaySettings.SetDisplayed(C.DisplayType.Trigger, false);
             DisplaySettings.SetDisplayed(C.DisplayType.ClearPhysics, false);
@@ -741,9 +740,6 @@ namespace RLEditor
             if (!File.Exists(C.AppPathSettings))
                 return;
 
-            // Reset background display to false
-            DisplaySettings.SetDisplayed(C.DisplayType.Background, false);
-
             try
             {
                 FileParser parser = new FileParser(C.AppPathSettings);
@@ -913,7 +909,7 @@ namespace RLEditor
 
                 var displayTypes = new List<C.DisplayType>()
                 {
-                    C.DisplayType.Trigger, C.DisplayType.ScreenStart, C.DisplayType.Background, C.DisplayType.Deprecated
+                    C.DisplayType.Trigger, C.DisplayType.ScreenStart, C.DisplayType.Deprecated
                 };
                 foreach (var displayType in displayTypes)
                 {

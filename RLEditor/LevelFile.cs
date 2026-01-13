@@ -18,7 +18,7 @@ namespace RLEditor
         /// Opens file browser and creates level from a .ini file.
         /// <para> Returns null if process is aborted or file is corrupt. </para>
         /// </summary>
-        static public Level LoadLevel(List<Style> styleList, BackgroundList backgrounds, string levelDirectory)
+        static public Level LoadLevel(List<Style> styleList, string levelDirectory)
         {
             var openFileDialog = new OpenFileDialog();
 
@@ -40,7 +40,7 @@ namespace RLEditor
             try
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    newLevel = LoadLevelFromFile(openFileDialog.FileName, styleList, backgrounds);
+                    newLevel = LoadLevelFromFile(openFileDialog.FileName, styleList);
             }
             catch (Exception Ex)
             {
@@ -56,13 +56,13 @@ namespace RLEditor
             return newLevel;
         }
 
-        static public Level LoadLevelFromFile(string filePath, List<Style> styleList, BackgroundList backgrounds)
+        static public Level LoadLevelFromFile(string filePath, List<Style> styleList)
         {
             Level newLevel = null;
 
             try
             {
-                newLevel = DoLoadLevelFromFile(filePath, styleList, backgrounds);
+                newLevel = DoLoadLevelFromFile(filePath, styleList);
                 newLevel.FilePathToSave = filePath;
             }
             catch (Exception Ex)
@@ -75,7 +75,7 @@ namespace RLEditor
             return newLevel;
         }
 
-        static private Level DoLoadLevelFromFile(string filePath, List<Style> styleList, BackgroundList backgrounds)
+        static private Level DoLoadLevelFromFile(string filePath, List<Style> styleList)
         {
             Level newLevel = new Level();
             INIFileParser ini = INIFileParser.Load(filePath);
@@ -86,17 +86,14 @@ namespace RLEditor
             newLevel.LevelID = 0; // TODO - Implement level ID in RetroLemmini
             newLevel.LevelVersion = 0; // TODO - Implement level version in RetroLemmini
 
-            // --- Style / background / music ---
+            // --- Style ---
             string styleName = ini.GetString("style");
             newLevel.PieceStyle = styleList.Find(sty => sty.NameInEditor == styleName);
 
             if (newLevel.PieceStyle == null)
                 newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
 
-            newLevel.Background = null; // TODO - Find out more about background image handling in the Lemmini codebase
-                                        // It seems to build a background on-the-fly using terrain and object pieces, which isn't ideal
-                                        // It's very unclear how to choose *which* pieces to use. Keep looking, but this one's low priority for now.
-            
+            // --- Music ---
             newLevel.MusicFile = ini.GetString("music");
 
             // --- Level dimensions ---
@@ -188,22 +185,6 @@ namespace RLEditor
 
             SanitizeInput(newLevel);
             return newLevel;
-        }
-
-        private static Background ParseBackground(string identifier, List<Style> styleList, BackgroundList backgrounds)
-        {
-            if (string.IsNullOrEmpty(identifier) || identifier.Trim() == ":")
-                return null;
-
-            string[] bgInfo = identifier.Split(':');
-            if (bgInfo.Length == 2) // background's style and name
-            {
-                Style bgStyle = styleList.Find(sty => sty.NameInDirectory.Equals(bgInfo[0]));
-
-                return new Background(bgStyle, bgInfo[1]);
-            }
-            else
-                return null;
         }
 
         private static void LoadSkillset(Level level, INIFileParser ini)
