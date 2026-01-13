@@ -93,7 +93,9 @@ namespace RLEditor
             if (newLevel.PieceStyle == null)
                 newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
 
-            newLevel.Background = null; // TODO - Find out how background images are handled in RetroLemmini
+            newLevel.Background = null; // TODO - Find out more about background image handling in the Lemmini codebase
+                                        // It seems to build a background on-the-fly using terrain and object pieces, which isn't ideal
+                                        // It's very unclear how to choose *which* pieces to use. Keep looking, but this one's low priority for now.
             
             newLevel.MusicFile = ini.GetString("music");
 
