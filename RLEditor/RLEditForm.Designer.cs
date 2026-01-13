@@ -173,8 +173,6 @@
             this.num_Ski_Climber = new RLEditor.NumUpDownOverwrite();
             this.tabMisc = new System.Windows.Forms.TabPage();
             this.check_Lvl_Superlemming = new System.Windows.Forms.CheckBox();
-            this.btnEditPostview = new System.Windows.Forms.Button();
-            this.btnEditPreview = new System.Windows.Forms.Button();
             this.toolTipPieces = new System.Windows.Forms.ToolTip(this.components);
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
@@ -1995,8 +1993,6 @@
             // tabMisc
             // 
             this.tabMisc.Controls.Add(this.check_Lvl_Superlemming);
-            this.tabMisc.Controls.Add(this.btnEditPostview);
-            this.tabMisc.Controls.Add(this.btnEditPreview);
             this.tabMisc.Location = new System.Drawing.Point(4, 29);
             this.tabMisc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabMisc.Name = "tabMisc";
@@ -2015,28 +2011,6 @@
             this.check_Lvl_Superlemming.Text = "Activate Superlemming Mode";
             this.check_Lvl_Superlemming.UseVisualStyleBackColor = true;
             this.check_Lvl_Superlemming.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
-            // btnEditPostview
-            // 
-            this.btnEditPostview.Location = new System.Drawing.Point(75, 106);
-            this.btnEditPostview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnEditPostview.Name = "btnEditPostview";
-            this.btnEditPostview.Size = new System.Drawing.Size(242, 45);
-            this.btnEditPostview.TabIndex = 8;
-            this.btnEditPostview.Text = "Edit Postview Text";
-            this.btnEditPostview.UseVisualStyleBackColor = true;
-            this.btnEditPostview.Click += new System.EventHandler(this.btnEditPostview_Click);
-            // 
-            // btnEditPreview
-            // 
-            this.btnEditPreview.Location = new System.Drawing.Point(75, 53);
-            this.btnEditPreview.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnEditPreview.Name = "btnEditPreview";
-            this.btnEditPreview.Size = new System.Drawing.Size(242, 45);
-            this.btnEditPreview.TabIndex = 7;
-            this.btnEditPreview.Text = "Edit Preview Text";
-            this.btnEditPreview.UseVisualStyleBackColor = true;
-            this.btnEditPreview.Click += new System.EventHandler(this.btnEditPreview_Click);
             // 
             // scrollPicLevelHoriz
             // 
@@ -2644,8 +2618,6 @@
         private System.Windows.Forms.ToolTip toolTipButton;
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private System.Windows.Forms.TabPage tabMisc;
-        private System.Windows.Forms.Button btnEditPostview;
-        private System.Windows.Forms.Button btnEditPreview;
         private System.Windows.Forms.Label lbStartY;
         private System.Windows.Forms.Label lbStartX;
         private System.Windows.Forms.Label lbSizeH;

@@ -58,9 +58,6 @@ namespace RLEditor
             {
                 SkillSet.Add(skill, 0);
             }
-
-            this.PreviewText = new List<string>();
-            this.PostviewText = new List<string>();
         }
 
         public string Format { get; set; }
@@ -90,7 +87,6 @@ namespace RLEditor
                 StartPosY = value.Y;
             }
         }
-
         public int StartPosX { get; set; }
         public int StartPosY { get; set; }
         public bool AutoStartPos { get; set; }
@@ -126,9 +122,6 @@ namespace RLEditor
         public int NumBashers => GetSkill(Skill.Basher);
         public int NumMiners => GetSkill(Skill.Miner);
         public int NumDiggers => GetSkill(Skill.Digger);
-
-        public List<string> PreviewText { get; set; }  // not changable in the editor
-        public List<string> PostviewText { get; set; } // not changable in the editor
 
         public Size ScreenSize => C.ScreenSize.ScreenArea(Width, Height);
 
@@ -182,9 +175,6 @@ namespace RLEditor
                 newLevel.SkillSet.Add(skill, this.SkillSet[skill]);
             }
 
-            newLevel.PreviewText = new List<string>(this.PreviewText);
-            newLevel.PostviewText = new List<string>(this.PostviewText);
-
             return newLevel;
         }
 
@@ -226,9 +216,7 @@ namespace RLEditor
                 || this.LeftBoundary != otherLevel.LeftBoundary
                 || this.RightBoundary != otherLevel.RightBoundary
                 || this.HasTimeLimit != otherLevel.HasTimeLimit
-                || (this.TimeLimit != otherLevel.TimeLimit && this.HasTimeLimit)
-                || !this.PreviewText.ToString().Equals(otherLevel.PreviewText.ToString())
-                || !this.PostviewText.ToString().Equals(otherLevel.PostviewText.ToString()))
+                || (this.TimeLimit != otherLevel.TimeLimit && this.HasTimeLimit))
             {
                 return false;
             }

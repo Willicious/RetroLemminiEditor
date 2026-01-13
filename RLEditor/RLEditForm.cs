@@ -1221,22 +1221,6 @@ namespace RLEditor
             }
         }
 
-        private void btnEditPreview_Click(object sender, EventArgs e)
-        {
-            using (var textForm = new FormPrePostText(CurLevel, true))
-            {
-                textForm.ShowDialog(this);
-            }
-        }
-
-        private void btnEditPostview_Click(object sender, EventArgs e)
-        {
-            using (var textForm = new FormPrePostText(CurLevel, false))
-            {
-                textForm.ShowDialog(this);
-            }
-        }
-
         private void but_ClearBackground_Click(object sender, EventArgs e)
         {
             CurLevel.Background = null;
