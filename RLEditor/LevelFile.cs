@@ -183,6 +183,10 @@ namespace RLEditor
             foreach (string data in ini.GetIndexed("steel"))
                 LoadSteelAreas(newLevel, data);
 
+            // --- Rulers ---
+            foreach (string data in ini.GetIndexed("ruler"))
+                LoadRulers(newLevel, data);
+
             SanitizeInput(newLevel);
             return newLevel;
         }
@@ -391,6 +395,43 @@ namespace RLEditor
             level.GadgetList.Add(newSteelArea);
         }
 
+        private static void LoadRulers(Level level, string data)
+        {
+            string[] parts = INIFileParser.ParseMultiArray(data);
+
+            string name = parts[0].Trim();
+            int posX = int.Parse(parts[1].Trim());
+            int posY = int.Parse(parts[2].Trim());
+            int width = parts.Length > 3 ? int.Parse(parts[3].Trim()) : 0;
+            int height = parts.Length > 4 ? int.Parse(parts[4].Trim()) : 0;
+            int modifier = parts.Length > 5 ? int.Parse(parts[5].Trim()) : 0;
+
+            string key = $"Rulers\\{name}";
+            Point pos = new Point(posX, posY);
+
+            int specWidth = width;
+            int specHeight = height;
+
+            GadgetPiece newRuler = new GadgetPiece(
+                key,
+                pos,
+                0,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                specWidth,
+                specHeight);
+
+            newRuler.PosX = pos.X;
+            newRuler.PosY = pos.Y;
+            newRuler.IsSelected = false;
+
+            level.GadgetList.Add(newRuler);
+        }
+
         /// <summary>
         /// Ensures that all level parameters are within sensible limits.
         /// </summary>
@@ -547,6 +588,17 @@ namespace RLEditor
 
             sb.AppendLine();
 
+            // Add rules
+            sb.AppendLine("# Rulers");
+            sb.AppendLine("# X position, Y position, width, height, modifier (optional)");
+            sb.AppendLine("# Flags: 1 = remove existing steel");
+
+            var rulerLinesData = BuildRulerLines(curLevel);
+            foreach (var line in rulerLinesData)
+                sb.AppendLine(line);
+
+            sb.AppendLine();
+
             // Write all to .ini
             File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
         }
@@ -570,8 +622,8 @@ namespace RLEditor
 
             foreach (var gad in level.GadgetList)
             {
-                if (gad.ObjType == C.OBJ.STEEL)
-                    continue; // Steel areas are added separately
+                if (gad.ObjType == C.OBJ.STEEL || gad.ObjType == C.OBJ.RULER)
+                    continue; // Steel areas and rulers are added separately
 
                 // Determine ID from last underscore in Key
                 int underscore = gad.Key.LastIndexOf('_');
@@ -673,6 +725,28 @@ namespace RLEditor
             }
 
             return steelLines;
+        }
+
+        private static List<string> BuildRulerLines(Level level)
+        {
+            var rulerLines = new List<string>();
+            int counter = 0;
+
+            foreach (var ruler in level.GadgetList)
+            {
+                if (ruler.ObjType != C.OBJ.RULER)
+                    continue; // Other objects are added separately
+
+                string name = ruler.Name;
+                int modifier = 0;
+
+                string line = $"ruler_{counter} = {name}, {ruler.PosX}, {ruler.PosY}, {ruler.Width}, {ruler.Height}, {modifier}";
+
+                rulerLines.Add(line);
+                counter++;
+            }
+
+            return rulerLines;
         }
 
         private static bool GetTextNeedsSaving(List<string> text)

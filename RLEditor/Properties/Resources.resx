@@ -124,9 +124,6 @@
   <data name="Lemming" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lemming.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LemBlocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LemBlocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="NLLevelConverter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NLLevelConverter.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -150,5 +147,29 @@
   </data>
   <data name="SteelArea" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SteelArea.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Basher" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\Basher.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Blocker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\Blocker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bomber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\Bomber.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Builder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\Builder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Custom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\Custom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Digger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\Digger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FallDistance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\FallDistance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Miner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Rulers\Miner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

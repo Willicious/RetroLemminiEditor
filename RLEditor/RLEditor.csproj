@@ -223,6 +223,14 @@
     <Content Include="EditorIcon.ico" />
     <Content Include="EditorIconGreen.ico" />
     <Content Include="Editor_Icon.ico" />
+    <None Include="Resources\Rulers\Miner.png" />
+    <None Include="Resources\Rulers\FallDistance.png" />
+    <None Include="Resources\Rulers\Digger.png" />
+    <None Include="Resources\Rulers\Custom.png" />
+    <None Include="Resources\Rulers\Builder.png" />
+    <None Include="Resources\Rulers\Bomber.png" />
+    <None Include="Resources\Rulers\Blocker.png" />
+    <None Include="Resources\Rulers\Basher.png" />
     <None Include="Resources\SteelArea.png" />
     <None Include="Resources\WhatsNew.png" />
     <None Include="Resources\ArrowVert.png" />

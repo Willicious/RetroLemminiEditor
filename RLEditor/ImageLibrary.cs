@@ -164,8 +164,8 @@ namespace RLEditor
                                    ? displayName
                                    : ObjectType.ToString();
 
-                // Show Name instead of Type when in Terrain/Steel tab
-                if (ObjectType == C.OBJ.TERRAIN || ObjectType == C.OBJ.STEEL)
+                // Show Name instead of Type when in Terrain/Steel/Rulers tab
+                if (ObjectType == C.OBJ.TERRAIN || ObjectType == C.OBJ.STEEL || ObjectType == C.OBJ.RULER)
                     pieceDesc = System.IO.Path.GetFileNameWithoutExtension(pieceKey);
 
                 DrawDataString(newImage, pieceDesc, 0, 0, C.RLColors[C.RLColor.Text], 8);
@@ -215,8 +215,8 @@ namespace RLEditor
                                    ? displayName
                                    : ObjectType.ToString();
 
-                // Show Name instead of Type when in Terrain/Steel tab
-                if (ObjectType == C.OBJ.TERRAIN || ObjectType == C.OBJ.STEEL)
+                // Show Name instead of Type when in Terrain/Steel/Rulers tab
+                if (ObjectType == C.OBJ.TERRAIN || ObjectType == C.OBJ.STEEL || ObjectType == C.OBJ.RULER)
                     pieceDesc = System.IO.Path.GetFileNameWithoutExtension(pieceKey);
 
                 // Size
@@ -307,6 +307,14 @@ namespace RLEditor
             imageDict.Clear();
         }
 
+        private static readonly List<string> rulerKeys = new List<string>();
+        public static IReadOnlyList<string> RulerKeys => rulerKeys;
+        public static void RegisterRuler(string key)
+        {
+            if (!rulerKeys.Contains(key))
+                rulerKeys.Add(key);
+        }
+
         private static RLEditForm mainForm;
 
         // Method to set the editor form, this must be called early in your app
@@ -318,7 +326,6 @@ namespace RLEditor
         /// <summary>
         /// Returns whether an image with this ImageKey exists.
         /// </summary>
-        /// <param name="imageKey"></param>
         public static bool ExistsKey(string imageKey)
         {
             if (imageDict.ContainsKey(imageKey))
@@ -330,7 +337,6 @@ namespace RLEditor
         /// <summary>
         /// This checks whether an image exists or may be loaded. It does not actually load the image itself.
         /// </summary>
-        /// <param name="imagekey"></param>
         public static bool IsImageLoadable(string imageKey)
         {
             string filePath = C.AppPathPieces + imageKey + ".png";
@@ -356,8 +362,6 @@ namespace RLEditor
         /// Returns a correctly oriented image corresponding to the key, or null if image cannot be found. 
         /// <para> Warning: The Bitmap is passed by reference, so NEVER change its value! </para>
         /// </summary>
-        /// <param name="imageKey"></param>
-        /// <param name="rotFlipType"></param>
         public static Bitmap GetImage(string imageKey, RotateFlipType rotFlipType = RotateFlipType.RotateNoneFlipNone)
         {
             return GetImage(imageKey, rotFlipType, 0);
@@ -367,8 +371,6 @@ namespace RLEditor
         /// Returns a correctly oriented image corresponding to the key and index, or null if image cannot be found. 
         /// <para> Warning: The Bitmap is passed by reference, so NEVER change its value! </para>
         /// </summary>
-        /// <param name="imageKey"></param>
-        /// <param name="rotFlipType"></param>
         public static Bitmap GetImage(string imageKey, RotateFlipType rotFlipType, int index)
         {
             if (!imageDict.ContainsKey(imageKey))

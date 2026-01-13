@@ -93,6 +93,76 @@ namespace RLEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Basher {
+            get {
+                object obj = ResourceManager.GetObject("Basher", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Blocker {
+            get {
+                object obj = ResourceManager.GetObject("Blocker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Bomber {
+            get {
+                object obj = ResourceManager.GetObject("Bomber", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Builder {
+            get {
+                object obj = ResourceManager.GetObject("Builder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Custom {
+            get {
+                object obj = ResourceManager.GetObject("Custom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Digger {
+            get {
+                object obj = ResourceManager.GetObject("Digger", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FallDistance {
+            get {
+                object obj = ResourceManager.GetObject("FallDistance", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IntroClimber {
             get {
                 object obj = ResourceManager.GetObject("IntroClimber", resourceCulture);
@@ -113,16 +183,6 @@ namespace RLEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap LemBlocker {
-            get {
-                object obj = ResourceManager.GetObject("LemBlocker", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap LemButton {
             get {
                 object obj = ResourceManager.GetObject("LemButton", resourceCulture);
@@ -136,6 +196,16 @@ namespace RLEditor.Properties {
         internal static System.Drawing.Bitmap Lemming {
             get {
                 object obj = ResourceManager.GetObject("Lemming", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Miner {
+            get {
+                object obj = ResourceManager.GetObject("Miner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

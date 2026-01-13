@@ -31,6 +31,7 @@ namespace RLEditor
             C.ScreenSize.InizializeSettings();
 
             LoadStylesFromFile.AddSteelAreaImageToLibrary();
+            LoadStylesFromFile.AddRulersToLibrary();
             ImageLibrary.SetEditorForm(this);
 
             picPieceList = new List<PictureBox>
@@ -54,7 +55,8 @@ namespace RLEditor
                     { C.DisplayType.ScreenStart, screenStartToolStripMenuItem },
                     { C.DisplayType.Terrain, terrainToolStripMenuItem },
                     { C.DisplayType.Triggers, triggerAreasToolStripMenuItem },
-                    { C.DisplayType.SteelAreas, steelAreasToolStripMenuItem }
+                    { C.DisplayType.SteelAreas, steelAreasToolStripMenuItem },
+                    { C.DisplayType.Rulers, rulersToolStripMenuItem }
                 };
             DisplaySettings.SetMenuTabItems(displayTabItems);
 
@@ -335,6 +337,11 @@ namespace RLEditor
         private void steelAreasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToggleSteelAreas();
+        }
+
+        private void rulersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToggleRulers();
         }
 
         private void screenStartToolStripMenuItem_Click(object sender, EventArgs e)
@@ -704,6 +711,12 @@ namespace RLEditor
         private void but_PieceObj_Click(object sender, EventArgs e)
         {
             CyclePieceBrowserDisplay(C.SelectPieceType.Objects);
+            PullFocusFromTextInputs();
+        }
+
+        private void but_PieceRulers_Click(object sender, EventArgs e)
+        {
+            CyclePieceBrowserDisplay(C.SelectPieceType.Rulers);
             PullFocusFromTextInputs();
         }
 
@@ -1219,7 +1232,45 @@ namespace RLEditor
                     gadget.SpecWidth = (int)num_SteelAreaWidth.Value;
                 else
                     gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
+
                 pic_Level.Image = curRenderer.CreateLevelImage();
+            }
+        }
+
+        /// <summary>
+        /// Resizes the selected ruler
+        /// </summary>
+        private void ResizeRuler(bool resizeWidth)
+        {
+            var selection = CurLevel.SelectionList();
+
+            if (selection.Count == 1 && selection[0] is GadgetPiece gadget && gadget.ObjType == C.OBJ.RULER)
+            {
+                // For now, only allow resizing the custom ruler (essentially a resizable rectangle)
+                if (!gadget.Key.Contains("Custom"))
+                    return;
+
+                if (resizeWidth)
+                    gadget.SpecWidth = (int)num_RulerWidth.Value;
+                else
+                    gadget.SpecHeight = (int)num_RulerHeight.Value;
+
+                pic_Level.Image = curRenderer.CreateLevelImage();
+            }
+        }
+
+        private void AutosizeFallDistanceRuler(bool resizeWidth)
+        {
+            var selection = CurLevel.SelectionList();
+
+            if (selection.Count == 1 && selection[0] is GadgetPiece gadget && gadget.ObjType == C.OBJ.RULER)
+            {
+                // Automatically set size of fall distance ruler according to the level's max fall distance
+                if (gadget.Key.Contains("FallDistance"))
+                {
+                    gadget.SpecWidth = 8;
+                    gadget.SpecHeight = CurLevel.MaxFallDistance;
+                }
             }
         }
 
@@ -1440,34 +1491,24 @@ namespace RLEditor
             ResizeSteelArea(false);
         }
 
-        private void but_AddRuler_Click(object sender, EventArgs e)
-        {
-            return;
-            //AddRuler() // TODO - Add this
-        }
-
         private void num_RulerWidth_ValueChanged(object sender, EventArgs e)
         {
-            return;
-            //ResizeRuler(true); // TODO - Add this
+            ResizeRuler(true);
         }
 
         private void num_RulerHeight_ValueChanged(object sender, EventArgs e)
         {
-            return;
-            //ResizeRuler(false); // TODO - Add this
+            ResizeRuler(false);
         }
 
         private void num_RulerWidth_KeyUp(object sender, KeyEventArgs e)
         {
-            return;
-            //ResizeRuler(true); // TODO - Add this
+            ResizeRuler(true);
         }
 
         private void num_RulerHeight_KeyUp(object sender, KeyEventArgs e)
         {
-            return;
-            //ResizeRuler(false); // TODO - Add this
+            ResizeRuler(false);
         }
     }
 }

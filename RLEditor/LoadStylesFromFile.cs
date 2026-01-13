@@ -20,6 +20,26 @@ namespace RLEditor
             Rectangle triggerArea = new Rectangle(0, 0, 32, 32);
             ImageLibrary.AddNewImage(imageKey, image, C.OBJ.STEEL, triggerArea);
         }
+        public static void AddRulersToLibrary()
+        {
+            Rectangle triggerArea = new Rectangle(0, 0, 0, 0);
+
+            void AddRuler(string name, Bitmap img)
+            {
+                string key = ImageLibrary.CreatePieceKey("Rulers", name, true);
+                ImageLibrary.AddNewImage(key, img, C.OBJ.RULER, triggerArea);
+                ImageLibrary.RegisterRuler(key);
+            }
+
+            AddRuler("Basher", Properties.Resources.Basher);
+            AddRuler("Blocker", Properties.Resources.Blocker);
+            AddRuler("Bomber", Properties.Resources.Bomber);
+            AddRuler("Builder", Properties.Resources.Builder);
+            AddRuler("Custom", Properties.Resources.Custom);
+            AddRuler("Digger", Properties.Resources.Digger);
+            AddRuler("FallDistance", Properties.Resources.FallDistance);
+            AddRuler("Miner", Properties.Resources.Miner);
+        }
 
         // TODO - Implement style colors from .ini
         static readonly Dictionary<string, C.StyleColor> KeyToStyleColorDict = new Dictionary<string, C.StyleColor>

@@ -67,6 +67,7 @@
             this.triggerAreasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screenStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.steelAreasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rulersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,8 +98,8 @@
             this.tabLvlSkills = new System.Windows.Forms.TabControl();
             this.tabLvlMisc = new System.Windows.Forms.TabControl();
             this.panelPieceBrowser = new System.Windows.Forms.Panel();
+            this.but_PieceRulers = new System.Windows.Forms.Button();
             this.but_AddSteelArea = new System.Windows.Forms.Button();
-            this.but_AddRuler = new System.Windows.Forms.Button();
             this.picPiece7 = new System.Windows.Forms.PictureBox();
             this.but_PieceSteel = new System.Windows.Forms.Button();
             this.but_PieceTerr = new System.Windows.Forms.Button();
@@ -466,7 +467,8 @@
             this.objectToolStripMenuItem,
             this.triggerAreasToolStripMenuItem,
             this.screenStartToolStripMenuItem,
-            this.steelAreasToolStripMenuItem});
+            this.steelAreasToolStripMenuItem,
+            this.rulersToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.viewToolStripMenuItem.Text = "View";
@@ -581,6 +583,16 @@
             this.steelAreasToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
             this.steelAreasToolStripMenuItem.Text = "Show/Hide Steel Areas";
             this.steelAreasToolStripMenuItem.Click += new System.EventHandler(this.steelAreasToolStripMenuItem_Click);
+            // 
+            // rulersToolStripMenuItem
+            // 
+            this.rulersToolStripMenuItem.Checked = true;
+            this.rulersToolStripMenuItem.CheckOnClick = true;
+            this.rulersToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rulersToolStripMenuItem.Name = "rulersToolStripMenuItem";
+            this.rulersToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.rulersToolStripMenuItem.Text = "Show/Hide Rulers";
+            this.rulersToolStripMenuItem.Click += new System.EventHandler(this.rulersToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -848,8 +860,8 @@
             // panelPieceBrowser
             // 
             this.panelPieceBrowser.BackColor = System.Drawing.Color.Transparent;
+            this.panelPieceBrowser.Controls.Add(this.but_PieceRulers);
             this.panelPieceBrowser.Controls.Add(this.but_AddSteelArea);
-            this.panelPieceBrowser.Controls.Add(this.but_AddRuler);
             this.panelPieceBrowser.Controls.Add(this.picPiece7);
             this.panelPieceBrowser.Controls.Add(this.but_PieceSteel);
             this.panelPieceBrowser.Controls.Add(this.but_PieceTerr);
@@ -870,25 +882,25 @@
             this.panelPieceBrowser.Size = new System.Drawing.Size(1454, 176);
             this.panelPieceBrowser.TabIndex = 67;
             // 
+            // but_PieceRulers
+            // 
+            this.but_PieceRulers.Location = new System.Drawing.Point(783, 2);
+            this.but_PieceRulers.Name = "but_PieceRulers";
+            this.but_PieceRulers.Size = new System.Drawing.Size(116, 32);
+            this.but_PieceRulers.TabIndex = 89;
+            this.but_PieceRulers.Text = "Rulers";
+            this.but_PieceRulers.UseVisualStyleBackColor = true;
+            this.but_PieceRulers.Click += new System.EventHandler(this.but_PieceRulers_Click);
+            // 
             // but_AddSteelArea
             // 
-            this.but_AddSteelArea.Location = new System.Drawing.Point(942, 2);
+            this.but_AddSteelArea.Location = new System.Drawing.Point(1132, 2);
             this.but_AddSteelArea.Name = "but_AddSteelArea";
-            this.but_AddSteelArea.Size = new System.Drawing.Size(151, 32);
+            this.but_AddSteelArea.Size = new System.Drawing.Size(188, 32);
             this.but_AddSteelArea.TabIndex = 88;
             this.but_AddSteelArea.Text = "Add Steel Area";
             this.but_AddSteelArea.UseVisualStyleBackColor = true;
             this.but_AddSteelArea.Click += new System.EventHandler(this.but_AddSteelArea_Click);
-            // 
-            // but_AddRuler
-            // 
-            this.but_AddRuler.Location = new System.Drawing.Point(1099, 2);
-            this.but_AddRuler.Name = "but_AddRuler";
-            this.but_AddRuler.Size = new System.Drawing.Size(116, 32);
-            this.but_AddRuler.TabIndex = 87;
-            this.but_AddRuler.Text = "Add Ruler";
-            this.but_AddRuler.UseVisualStyleBackColor = true;
-            this.but_AddRuler.Click += new System.EventHandler(this.but_AddRuler_Click);
             // 
             // picPiece7
             // 
@@ -2604,7 +2616,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem saveAsImageToolStripMenuItem;
         private System.Windows.Forms.Button but_AddSteelArea;
-        private System.Windows.Forms.Button but_AddRuler;
         private System.Windows.Forms.TabPage tabSkills;
         private System.Windows.Forms.Button btnClearAllSkills;
         private System.Windows.Forms.Button btnRandomSkillset;
@@ -2700,6 +2711,8 @@
         private System.Windows.Forms.ComboBox combo_MainStyle;
         private System.Windows.Forms.Label lbl_Global_Style;
         private System.Windows.Forms.ToolStripMenuItem steelAreasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rulersToolStripMenuItem;
+        private System.Windows.Forms.Button but_PieceRulers;
     }
 }
 

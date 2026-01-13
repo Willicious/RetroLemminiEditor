@@ -57,6 +57,7 @@ namespace RLEditor
         bool IsObjectLayer => DisplaySettings.IsDisplayed(C.DisplayType.Objects);
         bool IsTriggerLayer => DisplaySettings.IsDisplayed(C.DisplayType.Triggers);
         bool IsSteelLayer => DisplaySettings.IsDisplayed(C.DisplayType.SteelAreas);
+        bool IsRulerLayer => DisplaySettings.IsDisplayed(C.DisplayType.Rulers);
         bool IsScreenStart => DisplaySettings.IsDisplayed(C.DisplayType.ScreenStart);
         bool IsGridEnabled => curSettings.UseGridForPieces;
 
@@ -97,6 +98,7 @@ namespace RLEditor
             CreateObjectTopLayer();
             CreateTriggerLayer();
             CreateSteelAreaLayer();
+            CreateRulerLayer();
 
             return CombineLayers();
         }
@@ -175,12 +177,17 @@ namespace RLEditor
 
             if (IsTriggerLayer)
             {
-                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Trigger], true);
+                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Triggers], true);
             }
 
             if (IsSteelLayer)
             {
-                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelArea], true);
+                baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelAreas], true);
+            }
+
+            if (IsRulerLayer)
+            {
+                baseLevelImage.DrawOn(layerImages[C.Layer.Rulers]);
             }
         }
 
@@ -642,7 +649,7 @@ namespace RLEditor
         /// </summary>
         private void CreateTriggerLayer()
         {
-            layerImages[C.Layer.Trigger].Clear();
+            layerImages[C.Layer.Triggers].Clear();
 
             var triggerRectangles = level.GadgetList
                 .Where(obj => !C.HideTriggerObjects.Contains(obj.ObjType))
@@ -650,7 +657,7 @@ namespace RLEditor
                 .Select(obj => obj.TriggerRect)
                 .ToList();
 
-            layerImages[C.Layer.Trigger].DrawOnFilledRectangles(triggerRectangles, GetTriggerColor());
+            layerImages[C.Layer.Triggers].DrawOnFilledRectangles(triggerRectangles, GetTriggerColor());
         }
 
         /// <summary>
@@ -676,13 +683,20 @@ namespace RLEditor
         /// </summary>
         private void CreateSteelAreaLayer()
         {
-            layerImages[C.Layer.SteelArea].Clear();
+            layerImages[C.Layer.SteelAreas].Clear();
 
             var triggerRectangles = level.GadgetList
                 .Where(obj => obj.ObjType == C.OBJ.STEEL)
                 .Select(obj => obj.TriggerRect)
                 .ToList();
-            layerImages[C.Layer.SteelArea].DrawOnFilledRectangles(triggerRectangles, C.RLColors[C.RLColor.SteelArea]);
+            layerImages[C.Layer.SteelAreas].DrawOnFilledRectangles(triggerRectangles, C.RLColors[C.RLColor.SteelArea]);
+        }
+        private void CreateRulerLayer()
+        {
+            layerImages[C.Layer.Rulers].Clear();
+
+            foreach (GadgetPiece ruler in level.GadgetList)
+                layerImages[C.Layer.Rulers].DrawOn(ruler.Image, ruler.Pos);
         }
 
         /// <summary>

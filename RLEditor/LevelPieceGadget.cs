@@ -19,7 +19,7 @@ namespace RLEditor
             IsFake = false;
             IsNegativeSteel = false;
 
-            if (ObjType == C.OBJ.STEEL)
+            if (ObjType == C.OBJ.STEEL || ObjType == C.OBJ.RULER)
             {
                 SpecWidth = ImageLibrary.GetWidth(Key);
                 SpecHeight = ImageLibrary.GetHeight(Key);
@@ -129,7 +129,7 @@ namespace RLEditor
 
                 Bitmap image = base.Image;
 
-                if (ObjType == C.OBJ.STEEL)
+                if (ObjType == C.OBJ.STEEL || ObjType == C.OBJ.RULER)
                 {
                     int finalWidth = Math.Max(1, SpecWidth);
                     int finalHeight = Math.Max(1, SpecHeight);
@@ -195,7 +195,7 @@ namespace RLEditor
         {
             get
             {
-                if (ObjType == C.OBJ.STEEL && SpecWidth > 0)
+                if ((ObjType == C.OBJ.STEEL || ObjType == C.OBJ.RULER) && SpecWidth > 0)
                     return SpecWidth;
 
                 return base.Width;
@@ -206,7 +206,7 @@ namespace RLEditor
         {
             get
             {
-                if (ObjType == C.OBJ.STEEL && SpecHeight > 0)
+                if ((ObjType == C.OBJ.STEEL || ObjType == C.OBJ.RULER) && SpecHeight > 0)
                     return SpecHeight;
 
                 return base.Height;

@@ -111,6 +111,7 @@ namespace RLEditor
             DisplaySettings.SetDisplayed(C.DisplayType.Triggers, true);
             DisplaySettings.SetDisplayed(C.DisplayType.ClearPhysics, false);
             DisplaySettings.SetDisplayed(C.DisplayType.SteelAreas, true);
+            DisplaySettings.SetDisplayed(C.DisplayType.Rulers, true);
 
             settingChanged = false;
         }
@@ -909,7 +910,8 @@ namespace RLEditor
 
                 var displayTypes = new List<C.DisplayType>()
                 {
-                    C.DisplayType.Triggers, C.DisplayType.ScreenStart, C.DisplayType.SteelAreas
+                    C.DisplayType.Triggers, C.DisplayType.ScreenStart,
+                    C.DisplayType.SteelAreas, C.DisplayType.Rulers
                 };
                 foreach (var displayType in displayTypes)
                 {

@@ -49,12 +49,12 @@ namespace RLEditor
 
         public enum SelectPieceType
         {
-            Terrain, Steel, Objects
+            Terrain, Steel, Objects, Rulers
         }
 
         public enum DisplayType
         {
-            Terrain, Objects, Triggers, SteelAreas, ScreenStart, ClearPhysics
+            Terrain, Objects, Triggers, SteelAreas, Rulers, ScreenStart, ClearPhysics
         }
 
         public enum CustDrawMode
@@ -73,7 +73,7 @@ namespace RLEditor
         /// </summary>
         public enum OBJ
         {
-            TERRAIN = -1, STEEL = -2,
+            TERRAIN = -1, STEEL = -2, RULER = -3,
             HATCH = 0, EXIT = 1,
             TRAP = 2, FIRE = 3, WATER = 4,
             FORCE_FIELD = 5, ONE_WAY_WALL = 6,
@@ -81,7 +81,7 @@ namespace RLEditor
             NONE = 100, NULL
         }
 
-        public static OBJ[] HideTriggerObjects = new OBJ[] { OBJ.TERRAIN, OBJ.STEEL, OBJ.NONE, OBJ.DECORATION, OBJ.NULL, OBJ.PAINT };
+        public static OBJ[] HideTriggerObjects = new OBJ[] { OBJ.TERRAIN, OBJ.STEEL, OBJ.RULER, OBJ.NONE, OBJ.DECORATION, OBJ.NULL, OBJ.PAINT };
 
         public enum StyleColor
         {
@@ -102,7 +102,7 @@ namespace RLEditor
 
         public static readonly Dictionary<OBJ, string> ObjectDescriptions = new Dictionary<OBJ, string>
         {
-          {OBJ.TERRAIN, "Terrain"}, {OBJ.STEEL, "Steel"},
+          {OBJ.TERRAIN, "Terrain"}, {OBJ.STEEL, "Steel"}, {OBJ.RULER, "Ruler"},
           {OBJ.HATCH, "Hatch"}, {OBJ.EXIT, "Exit"},
           {OBJ.TRAP, "Trap"}, {OBJ.FIRE, "Fire"}, {OBJ.WATER, "Water"},
           {OBJ.FORCE_FIELD, "Force-Field"}, {OBJ.ONE_WAY_WALL, "One-Way"},
@@ -120,10 +120,10 @@ namespace RLEditor
         public static readonly byte ALPHA_OWW = 255;
         public static readonly byte ALPHA_NOOWW = 254;
 
-        public enum Layer { Background, ObjBack, Terrain, ObjTop, Trigger, SteelArea }
+        public enum Layer { Background, ObjBack, Terrain, ObjTop, Triggers, SteelAreas, Rulers }
         public static readonly List<Layer> LayerList = new List<Layer>()
     {
-      Layer.Background, Layer.ObjBack, Layer.Terrain, Layer.ObjTop, Layer.Trigger, Layer.SteelArea
+      Layer.Background, Layer.ObjBack, Layer.Terrain, Layer.ObjTop, Layer.Triggers, Layer.SteelAreas, Layer.Rulers
     };
 
         public static List<string> OriginalStyles = new List<string>
@@ -174,7 +174,8 @@ namespace RLEditor
         // Other colors are specified directly in BmpModify to speed up rendering.
         public enum RLColor
         {
-            Text, SteelArea, OWWDefault, BackDefault, ScreenStart, SelRectGadget, SelRectTerrain,
+            Text, SteelArea, OWWDefault, BackDefault, ScreenStart,
+            SelRectGadget, SelRectTerrain, SelRectSteelAreas, SelRectRulers,
             TriggerPink, TriggerYellow, TriggerGreen, TriggerBlue, TriggerPurple
         }
         public static readonly Dictionary<RLColor, Color> TriggerColors = new Dictionary<RLColor, Color>()
@@ -193,7 +194,9 @@ namespace RLEditor
           { RLColor.OWWDefault, Color.Linen },
           { RLColor.ScreenStart, Color.AliceBlue },
           { RLColor.SelRectGadget, Color.Chartreuse },
-          { RLColor.SelRectTerrain, Color.Gold }
+          { RLColor.SelRectTerrain, Color.Gold },
+          { RLColor.SelRectSteelAreas, Color.SteelBlue }, // TODO - Implement these colors
+          { RLColor.SelRectRulers, Color.CornflowerBlue } // TODO - See if rulers can be recolored to match the style theme's mask
         };
 
         public static readonly string[] MusicExtensions = new List<string>()

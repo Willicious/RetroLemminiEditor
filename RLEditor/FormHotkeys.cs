@@ -707,6 +707,9 @@ namespace RLEditor
                     case "HotkeyToggleSteelAreas":
                         HotkeyConfig.HotkeyToggleSteelAreas = parsedKey;
                         break;
+                    case "HotkeyToggleRulers":
+                        HotkeyConfig.HotkeyToggleRulers = parsedKey;
+                        break;
                     case "HotkeyShowMissingPieces":
                         HotkeyConfig.HotkeyShowMissingPieces = parsedKey;
                         break;

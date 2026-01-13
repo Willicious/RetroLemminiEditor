@@ -688,6 +688,7 @@ Digger=20
 
             ImageLibrary.Clear();
             LoadStylesFromFile.AddSteelAreaImageToLibrary();
+            LoadStylesFromFile.AddRulersToLibrary();
 
             CreateStyleList();
 
@@ -873,6 +874,13 @@ Digger=20
             num_SteelAreaWidth.Value = width;
             num_SteelAreaHeight.Value = height;
 
+            MaybeOpenPiecesTab();
+        }
+
+        private void AddRuler(string pieceKey) // TODO - This may be redundant
+        {
+            Point pos = curRenderer.GetCenterPoint();
+            AddNewPieceToLevel(pieceKey, null, pos);
             MaybeOpenPiecesTab();
         }
 
@@ -1265,6 +1273,7 @@ Digger=20
                 but_PieceTerr.Font = new Font(but_PieceTerr.Font, FontStyle.Regular);
                 but_PieceSteel.Font = new Font(but_PieceSteel.Font, FontStyle.Regular);
                 but_PieceObj.Font = new Font(but_PieceObj.Font, FontStyle.Regular);
+                but_PieceRulers.Font = new Font(but_PieceRulers.Font, FontStyle.Regular);
 
                 switch (newKind)
                 {
@@ -1276,6 +1285,9 @@ Digger=20
                         break;
                     case C.SelectPieceType.Objects:
                         but_PieceObj.Font = new Font(but_PieceObj.Font, FontStyle.Bold);
+                        break;
+                    case C.SelectPieceType.Rulers:
+                        but_PieceRulers.Font = new Font(but_PieceRulers.Font, FontStyle.Bold);
                         break;
                 }
 
@@ -1359,6 +1371,9 @@ Digger=20
                     break;
                 case C.SelectPieceType.Objects:
                     pieceNameList = pieceCurStyle?.ObjectKeys;
+                    break;
+                case C.SelectPieceType.Rulers:
+                    pieceNameList = new List<string>(ImageLibrary.RulerKeys);
                     break;
                 default:
                     throw new ArgumentException();
@@ -1457,6 +1472,9 @@ Digger=20
                     newKind = C.SelectPieceType.Objects;
                     break;
                 case C.SelectPieceType.Objects:
+                    newKind = C.SelectPieceType.Rulers;
+                    break;
+                case C.SelectPieceType.Rulers:
                     newKind = C.SelectPieceType.Terrain;
                     break;
                 default:
@@ -1543,6 +1561,9 @@ Digger=20
                 case C.SelectPieceType.Steel:
                     pieceList = pieceCurStyle?.SteelKeys;
                     break;
+                case C.SelectPieceType.Rulers:
+                    pieceList = new List<string>(ImageLibrary.RulerKeys);
+                    break;
                 default:
                     throw new ArgumentException();
             }
@@ -1582,6 +1603,10 @@ Digger=20
                     case C.SelectPieceType.Objects:
                         AddNewPieceToLevel(pieceKey, pieceCurStyle.NameInDirectory, curRenderer.GetCenterPoint());
                         break;
+                    case C.SelectPieceType.Rulers:
+                        AddRuler(pieceKey);
+                        break;
+
                 }
 
             MaybeOpenPiecesTab();
@@ -1597,6 +1622,7 @@ Digger=20
         {
             CurLevel.UnselectAll();
             CurLevel.AddPiece(pieceKey, style, centerPosition, gridSize);
+            AutosizeFallDistanceRuler(false);
 
             SaveChangesToOldLevelList();
             pic_Level.Image = curRenderer.CreateLevelImage();
@@ -2251,6 +2277,12 @@ Digger=20
             pic_Level.SetImage(curRenderer.CombineLayers());
         }
 
+        private void ToggleRulers()
+        {
+            DisplaySettings.ChangeDisplayed(C.DisplayType.Rulers);
+            pic_Level.SetImage(curRenderer.CombineLayers());
+        }
+
         private void ToggleScreenStart()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.ScreenStart);
@@ -2321,6 +2353,7 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyToggleTriggerAreas, () => ToggleTriggerAreas());
             AddHotkey(HotkeyConfig.HotkeyToggleScreenStart, () => ToggleScreenStart());
             AddHotkey(HotkeyConfig.HotkeyToggleSteelAreas, () => ToggleSteelAreas());
+            AddHotkey(HotkeyConfig.HotkeyToggleRulers, () => ToggleRulers());
             AddHotkey(HotkeyConfig.HotkeyShowMissingPieces, () => ShowMissingPiecesDialog());
             AddHotkey(HotkeyConfig.HotkeyRefreshStyles, () => RefreshStyles());
             AddHotkey(HotkeyConfig.HotkeyToggleSnapToGrid, () => ToggleSnapToGrid(true));
@@ -2479,6 +2512,9 @@ Digger=20
 
             steelAreasToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleSteelAreas);
+
+            rulersToolStripMenuItem.ShortcutKeyDisplayString =
+                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleRulers);
 
             showMissingPiecesToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyShowMissingPieces);

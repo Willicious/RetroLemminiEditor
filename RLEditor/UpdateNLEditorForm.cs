@@ -55,6 +55,9 @@ namespace RLEditor
                 case C.SelectPieceType.Objects:
                     pieceKeys = pieceCurStyle?.ObjectKeys;
                     break;
+                case C.SelectPieceType.Rulers:
+                    pieceKeys = new List<string>(ImageLibrary.RulerKeys);
+                    break;
                 default:
                     throw new ArgumentException();
             }
@@ -169,7 +172,7 @@ namespace RLEditor
             but_MoveFrontOne.Enabled = (selectionList.Count > 0);
 
             bool hasSpecialGadget = selectionList.OfType<GadgetPiece>()
-                 .Any(g => g.ObjType == C.OBJ.STEEL /* || g.ObjType == C.OBJ.RULER */);
+                 .Any(g => g.ObjType == C.OBJ.STEEL || g.ObjType == C.OBJ.RULER);
             if (hasSpecialGadget)
             {
                 check_Pieces_NoOv.Enabled = false; check_Pieces_NoOv.Checked = false;
@@ -198,23 +201,26 @@ namespace RLEditor
                 check_Pieces_NegativeSteel.Visible = false;
             }
 
-            //bool singleRulerSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece g && g.ObjType == C.OBJ.RULER; // TODO - Add support for this
-            //{
-            //    var gadget = (GadgetPiece)selectionList[0];
-            //
-            //    lblRulerWidth.Visible = true; lblRulerHeight.Visible = true;
-            //    num_RulerWidth.Visible = true; num_RulerHeight.Visible = true;
-            //    num_RulerWidth.Value = Math.Max(1, gadget.SpecWidth);
-            //    num_RulerHeight.Value = Math.Max(1, gadget.SpecHeight);
-            //    return;
-            //}
-            //else
+            bool singleRulerSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece && ((GadgetPiece)selectionList[0]).ObjType == C.OBJ.RULER;
+            if (singleRulerSelected)
             {
-                lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
-                num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
+                var r = (GadgetPiece)selectionList[0];
+
+                if (r.Key.Contains("Custom"))
+                {
+                    lblRulerWidth.Visible = true; lblRulerHeight.Visible = true;
+                    num_RulerWidth.Visible = true; num_RulerHeight.Visible = true;
+                    num_RulerWidth.Value = Math.Max(1, r.SpecWidth);
+                    num_RulerHeight.Value = Math.Max(1, r.SpecHeight);
+                }
+                else
+                {
+                    lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
+                    num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
+                }
             }
 
-            if (hasSpecialGadget || singleSteelSelected /*|| singleRulerSelected*/)
+            if (hasSpecialGadget || singleSteelSelected || singleRulerSelected)
                 return;
 
             check_Pieces_NoOv.Enabled = selectionList.Count() > 0;
@@ -325,15 +331,14 @@ namespace RLEditor
             but_PieceTerr.Top = 0;
             but_PieceSteel.Top = 0;
             but_PieceObj.Top = 0;
+            but_PieceRulers.Top = 0;
 
             but_PieceLeft.Top = pieceBrowserTop;
             but_PieceRight.Top = pieceBrowserTop;
             but_PieceRight.Left = panelPieceBrowser.Width - rightButtonOffset;
 
-            but_AddRuler.Top = 0;
-            but_AddRuler.Left = but_PieceRight.Left - but_AddRuler.Width;
             but_AddSteelArea.Top = 0;
-            but_AddSteelArea.Left = but_AddRuler.Left - 4 - but_AddSteelArea.Width;
+            but_AddSteelArea.Left = but_PieceRight.Right - 4 - but_AddSteelArea.Width;
         }
 
         /// <summary>
