@@ -359,7 +359,10 @@ namespace RLEditor
             but_ClearBackground.Top = 0;
             but_ClearBackground.Left = but_PieceRight.Right - 4 - but_ClearBackground.Width;
             but_AddRuler.Top = 0;
-            but_AddRuler.Left = but_ClearBackground.Left - 4 - but_AddRuler.Width;
+            but_AddRuler.Left =
+                //but_ClearBackground.Left - 4
+                but_PieceRight.Left // TODO - When backgrounds are supported, revert this                
+                - but_AddRuler.Width;
             but_AddSteelArea.Top = 0;
             but_AddSteelArea.Left = but_AddRuler.Left - 4 - but_AddSteelArea.Width;
         }

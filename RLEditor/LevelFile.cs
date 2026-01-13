@@ -609,7 +609,7 @@ namespace RLEditor
                 if (gad.IsFlippedInPlayer) flags |= 8;
                 if (gad.IsRotatedInPlayer) flags |= 16;
 
-                int modifier = 0; // gad.Modifier; // TODO - Add support for whatever this is!
+                int modifier = (gad.IsFlippedInPlayer && gad.ObjType == C.OBJ.HATCH) ? 1 : 0;
 
                 string line = $"object_{counter} = {gadgetID}, {gad.PosX}, {gad.PosY}, {paintMode}, {flags}, {modifier}";
                 objectLines.Add(line);
