@@ -40,9 +40,16 @@ namespace RLEditor
         {
             if (!File.Exists(styleFilePath))
             {
-                MessageBox.Show("Could not find styles.ini. Style Manager will now close");
-                Close();
-                return;
+                try
+                {
+                    File.Create(styleFilePath).Dispose(); // Create the file if it doesn't exist
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Could not create styles.ini:\n{ex.Message}\nStyle Manager will now close.");
+                    Close();
+                    return;
+                }
             }
 
             string[] lines = File.ReadAllLines(styleFilePath);
