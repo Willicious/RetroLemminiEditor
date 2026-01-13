@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Drawing;
 
 namespace RLEditor
@@ -18,6 +16,7 @@ namespace RLEditor
             IsOnlyOnTerrain = (ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
             IsInvisible = false;
             IsFake = false;
+            IsNegativeSteel = false;
 
             if (ObjType == C.OBJ.STEEL)
             {
@@ -29,7 +28,7 @@ namespace RLEditor
         public GadgetPiece(string key, Point pos,
                            int rotation,
                            bool isInvert, bool isNoOverwrite, bool isOnlyOnTerrain,
-                           bool isInvisible, bool isFake,
+                           bool isInvisible, bool isFake, bool isNegativeSteel,
                            int specWidth = -1, int specHeight = -1)
             : base(key, true, pos, rotation, isInvert)
         {
@@ -37,7 +36,7 @@ namespace RLEditor
             IsOnlyOnTerrain = isOnlyOnTerrain;
             IsInvisible = isInvisible;
             IsFake = isFake;
-
+            IsNegativeSteel = isNegativeSteel;
             SpecWidth = specWidth;
             SpecHeight = specHeight;
         }
@@ -46,11 +45,12 @@ namespace RLEditor
         public bool IsOnlyOnTerrain { get; set; }
         public bool IsInvisible { get; set; }
         public bool IsFake { get; set; }
+        public bool IsNegativeSteel { get; set; }
 
         public override LevelPiece Clone()
         {
             return new GadgetPiece(Key, Pos, Rotation, IsInvert, IsNoOverwrite, IsOnlyOnTerrain,
-                                   IsInvisible, IsFake, SpecWidth, SpecHeight);
+                                   IsInvisible, IsFake, IsNegativeSteel, SpecWidth, SpecHeight);
         }
 
 
@@ -63,6 +63,9 @@ namespace RLEditor
             return base.Equals(piece)
                 && this.IsNoOverwrite == piece.IsNoOverwrite
                 && this.IsOnlyOnTerrain == piece.IsOnlyOnTerrain
+                && this.IsInvisible == piece.IsInvisible
+                && this.IsFake == piece.IsFake
+                && this.IsNegativeSteel == piece.IsNegativeSteel
                 && this.SpecWidth == piece.SpecWidth
                 && this.SpecHeight == piece.SpecHeight;
         }

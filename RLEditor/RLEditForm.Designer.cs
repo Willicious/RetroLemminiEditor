@@ -82,6 +82,7 @@
             this.pic_Level = new System.Windows.Forms.PictureBox();
             this.tabLvlProperties = new System.Windows.Forms.TabControl();
             this.tabGlobalInfo = new System.Windows.Forms.TabPage();
+            this.check_Lvl_Autosteel = new System.Windows.Forms.CheckBox();
             this.combo_SteelMode = new System.Windows.Forms.ComboBox();
             this.lblSteelMode = new System.Windows.Forms.Label();
             this.check_Lvl_TimeLimit = new System.Windows.Forms.CheckBox();
@@ -113,6 +114,7 @@
             this.txt_LevelTitle = new System.Windows.Forms.TextBox();
             this.lbl_Global_Title = new System.Windows.Forms.Label();
             this.tabPieces = new System.Windows.Forms.TabPage();
+            this.check_Pieces_NegativeSteel = new System.Windows.Forms.CheckBox();
             this.num_RulerHeight = new RLEditor.NumUpDownOverwrite();
             this.num_RulerWidth = new RLEditor.NumUpDownOverwrite();
             this.lblRulerHeight = new System.Windows.Forms.Label();
@@ -210,7 +212,6 @@
             this.txt_FocusPieceBrowser = new RLEditor.FocusTextBox();
             this.pic_DragNewPiece = new System.Windows.Forms.PictureBox();
             this.txt_Focus = new RLEditor.FocusTextBox();
-            this.check_Lvl_Autosteel = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.tabLvlProperties.SuspendLayout();
@@ -751,6 +752,17 @@
             this.tabGlobalInfo.Text = "Globals";
             this.tabGlobalInfo.UseVisualStyleBackColor = true;
             // 
+            // check_Lvl_Autosteel
+            // 
+            this.check_Lvl_Autosteel.AutoSize = true;
+            this.check_Lvl_Autosteel.Location = new System.Drawing.Point(28, 573);
+            this.check_Lvl_Autosteel.Name = "check_Lvl_Autosteel";
+            this.check_Lvl_Autosteel.Size = new System.Drawing.Size(148, 24);
+            this.check_Lvl_Autosteel.TabIndex = 91;
+            this.check_Lvl_Autosteel.Text = "Automatic Steel";
+            this.check_Lvl_Autosteel.UseVisualStyleBackColor = true;
+            this.check_Lvl_Autosteel.CheckedChanged += new System.EventHandler(this.textbox_Leave);
+            // 
             // combo_SteelMode
             // 
             this.combo_SteelMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -760,7 +772,7 @@
             "Auto (Fit to Shape)",
             "Auto (Visible Pixels Only)",
             "Manual"});
-            this.combo_SteelMode.Location = new System.Drawing.Point(120, 598);
+            this.combo_SteelMode.Location = new System.Drawing.Point(120, 602);
             this.combo_SteelMode.Name = "combo_SteelMode";
             this.combo_SteelMode.Size = new System.Drawing.Size(229, 28);
             this.combo_SteelMode.TabIndex = 90;
@@ -774,7 +786,7 @@
             // 
             this.lblSteelMode.AutoSize = true;
             this.lblSteelMode.Enabled = false;
-            this.lblSteelMode.Location = new System.Drawing.Point(24, 605);
+            this.lblSteelMode.Location = new System.Drawing.Point(24, 609);
             this.lblSteelMode.Name = "lblSteelMode";
             this.lblSteelMode.Size = new System.Drawing.Size(90, 20);
             this.lblSteelMode.TabIndex = 89;
@@ -1211,6 +1223,7 @@
             // 
             // tabPieces
             // 
+            this.tabPieces.Controls.Add(this.check_Pieces_NegativeSteel);
             this.tabPieces.Controls.Add(this.num_RulerHeight);
             this.tabPieces.Controls.Add(this.num_RulerWidth);
             this.tabPieces.Controls.Add(this.lblRulerHeight);
@@ -1248,6 +1261,18 @@
             this.tabPieces.TabIndex = 1;
             this.tabPieces.Text = "Pieces";
             this.tabPieces.UseVisualStyleBackColor = true;
+            // 
+            // check_Pieces_NegativeSteel
+            // 
+            this.check_Pieces_NegativeSteel.AutoSize = true;
+            this.check_Pieces_NegativeSteel.Location = new System.Drawing.Point(196, 411);
+            this.check_Pieces_NegativeSteel.Name = "check_Pieces_NegativeSteel";
+            this.check_Pieces_NegativeSteel.Size = new System.Drawing.Size(138, 24);
+            this.check_Pieces_NegativeSteel.TabIndex = 79;
+            this.check_Pieces_NegativeSteel.Text = "Negative Steel";
+            this.check_Pieces_NegativeSteel.UseVisualStyleBackColor = true;
+            this.check_Pieces_NegativeSteel.Visible = false;
+            this.check_Pieces_NegativeSteel.CheckedChanged += new System.EventHandler(this.check_Pieces_NegativeSteel_CheckedChanged);
             // 
             // num_RulerHeight
             // 
@@ -2444,17 +2469,6 @@
             this.txt_Focus.TabStop = false;
             this.txt_Focus.Text = "asdf";
             // 
-            // check_Lvl_Autosteel
-            // 
-            this.check_Lvl_Autosteel.AutoSize = true;
-            this.check_Lvl_Autosteel.Location = new System.Drawing.Point(28, 568);
-            this.check_Lvl_Autosteel.Name = "check_Lvl_Autosteel";
-            this.check_Lvl_Autosteel.Size = new System.Drawing.Size(148, 24);
-            this.check_Lvl_Autosteel.TabIndex = 91;
-            this.check_Lvl_Autosteel.Text = "Automatic Steel";
-            this.check_Lvl_Autosteel.UseVisualStyleBackColor = true;
-            this.check_Lvl_Autosteel.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
             // RLEditForm
             // 
             this.AllowDrop = true;
@@ -2730,6 +2744,7 @@
         private NumUpDownOverwrite num_RulerHeight;
         private NumUpDownOverwrite num_RulerWidth;
         private System.Windows.Forms.CheckBox check_Lvl_Autosteel;
+        private System.Windows.Forms.CheckBox check_Pieces_NegativeSteel;
     }
 }
 

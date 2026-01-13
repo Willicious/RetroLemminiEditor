@@ -276,6 +276,7 @@ namespace RLEditor
                 isOnlyOnTerrain,
                 isInvisible,
                 isFake,
+                false,
                 specWidth,
                 specHeight);
 
@@ -382,7 +383,7 @@ namespace RLEditor
             string key = "Default\\SteelArea";
             Point pos = new Point(posX, posY);
 
-            bool overrideExistingSteel = (flags & 1) != 0; // TODO - Add support for this
+            bool isNegativeSteel = (flags & 1) != 0;
 
             int specWidth = width;
             int specHeight = height;
@@ -396,6 +397,7 @@ namespace RLEditor
                 false,
                 false,
                 false,
+                isNegativeSteel,
                 specWidth,
                 specHeight);
 
@@ -661,7 +663,7 @@ namespace RLEditor
                     continue; // Other objects are added separately
 
                 int flags = 0;
-                // if (ste.RemoveExistingSteelArea) flags |= 1; // TODO - Add support for this
+                if (ste.IsNegativeSteel) flags |= 1;
 
                 string line = $"steel_{counter} = {ste.PosX}, {ste.PosY}, {ste.Width}, {ste.Height}, {flags}";
 

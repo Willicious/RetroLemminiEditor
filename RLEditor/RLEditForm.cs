@@ -612,6 +612,13 @@ namespace RLEditor
             PullFocusFromTextInputs();
         }
 
+        private void check_Pieces_NegativeSteel_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = (check_Pieces_NegativeSteel.CheckState == CheckState.Checked);
+            SetNegativeSteel(isChecked);
+            PullFocusFromTextInputs();
+        }
+
         /* -----------------------------------------------------------
          *              Skill Selection Tab
          * ----------------------------------------------------------- */

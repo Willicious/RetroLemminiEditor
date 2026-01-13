@@ -203,6 +203,7 @@ namespace RLEditor
                 check_Pieces_OnlyOnTerrain.Enabled = false; check_Pieces_OnlyOnTerrain.Checked = false;
                 check_Pieces_Invisible.Enabled = false; check_Pieces_Invisible.Checked = false;
                 check_Pieces_Fake.Enabled = false; check_Pieces_Fake.Checked = false;
+                return;
             }
 
             bool singleSteelSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece ste && ste.ObjType == C.OBJ.STEEL;
@@ -214,7 +215,15 @@ namespace RLEditor
                 num_SteelAreaWidth.Visible = true; num_SteelAreaHeight.Visible = true;
                 num_SteelAreaWidth.Value = Math.Max(1, gadget.SpecWidth);
                 num_SteelAreaHeight.Value = Math.Max(1, gadget.SpecHeight);
+                check_Pieces_NegativeSteel.Visible = true;
             }
+            else
+            {
+                lblSteelAreaHeight.Visible = false; lblSteelAreaWidth.Visible = false;
+                num_SteelAreaHeight.Visible = false; num_SteelAreaWidth.Visible = false;
+                check_Pieces_NegativeSteel.Visible = false;
+            }
+
             //bool singleRulerSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece g && g.ObjType == C.OBJ.RULER; // TODO - Add support for this
             //{
             //    var gadget = (GadgetPiece)selectionList[0];
@@ -223,15 +232,13 @@ namespace RLEditor
             //    num_RulerWidth.Visible = true; num_RulerHeight.Visible = true;
             //    num_RulerWidth.Value = Math.Max(1, gadget.SpecWidth);
             //    num_RulerHeight.Value = Math.Max(1, gadget.SpecHeight);
+            //    return;
             //}
-
-            if (hasSpecialGadget || singleSteelSelected /*|| singleRulerSelected*/)
-                return;
-
-            lblSteelAreaHeight.Visible = false; lblSteelAreaWidth.Visible = false;
-            num_SteelAreaHeight.Visible = false; num_SteelAreaWidth.Visible = false;
-            lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
-            num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
+            //else
+            {
+                lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
+                num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
+            }
 
             check_Pieces_NoOv.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event

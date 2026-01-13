@@ -1873,6 +1873,14 @@ Digger=20
             pic_Level.Image = curRenderer.CreateLevelImage();
         }
 
+        private void SetNegativeSteel(bool doAdd)
+        {
+            CurLevel.SetNegativeSteel(doAdd);
+            UpdateFlagsForPieceActions();
+            SaveChangesToOldLevelList();
+            pic_Level.Image = curRenderer.CreateLevelImage();
+        }
+
         private Level GetCurLevel()
         {
             return CurLevel;

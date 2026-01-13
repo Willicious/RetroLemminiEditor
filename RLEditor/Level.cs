@@ -524,7 +524,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the OnlyOnTerrain flag for all objects.
         /// </summary>
-        /// <param name="doAdd"></param>
         public void SetOnlyOnTerrain(bool doAdd)
         {
             GadgetList.FindAll(gad => gad.IsSelected)
@@ -553,6 +552,16 @@ namespace RLEditor
                        .ForEach(ter => { ter.IsFake = doAdd; });
             GadgetList.FindAll(gad => gad.IsSelected)
                       .ForEach(gad => { gad.IsFake = doAdd; });
+        }
+
+        /// <summary>
+        /// Sets the IsNegativeSteel flag for steel areas
+        /// </summary>
+        public void SetNegativeSteel(bool doAdd)
+        {
+            GadgetList
+                .FindAll(gad => gad.IsSelected && gad.ObjType == C.OBJ.STEEL)
+                .ForEach(gad => gad.IsNegativeSteel = doAdd);
         }
 
         /// <summary>
