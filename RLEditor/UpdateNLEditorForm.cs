@@ -203,7 +203,6 @@ namespace RLEditor
                 check_Pieces_OnlyOnTerrain.Enabled = false; check_Pieces_OnlyOnTerrain.Checked = false;
                 check_Pieces_Invisible.Enabled = false; check_Pieces_Invisible.Checked = false;
                 check_Pieces_Fake.Enabled = false; check_Pieces_Fake.Checked = false;
-                return;
             }
 
             bool singleSteelSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece ste && ste.ObjType == C.OBJ.STEEL;
@@ -239,6 +238,9 @@ namespace RLEditor
                 lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
                 num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
             }
+
+            if (hasSpecialGadget || singleSteelSelected /*|| singleRulerSelected*/)
+                return;
 
             check_Pieces_NoOv.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event
