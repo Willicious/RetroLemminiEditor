@@ -233,7 +233,7 @@ namespace RLEditor
             lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
             num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
 
-            check_Pieces_NoOv.Enabled = selectionList.Exists(p => !(p is TerrainPiece));
+            check_Pieces_NoOv.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_NoOv.CheckedChanged -= check_Pieces_NoOv_CheckedChanged;
             check_Pieces_NoOv.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsNoOverwrite)
@@ -258,14 +258,14 @@ namespace RLEditor
             check_Pieces_OnlyOnTerrain.Checked = selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).IsOnlyOnTerrain);
             check_Pieces_OnlyOnTerrain.CheckedChanged += check_Pieces_OnlyOnTerrain_CheckedChanged;
 
-            check_Pieces_Invisible.Enabled = selectionList.Exists(p => !(p is TerrainPiece));
+            check_Pieces_Invisible.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_Invisible.CheckedChanged -= check_Pieces_Invisible_CheckedChanged;
             check_Pieces_Invisible.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsInvisible)
                                                                || (p is TerrainPiece && (p as TerrainPiece).IsInvisible));
             check_Pieces_Invisible.CheckedChanged += check_Pieces_Invisible_CheckedChanged;
 
-            check_Pieces_Fake.Enabled = selectionList.Exists(p => !(p is TerrainPiece));
+            check_Pieces_Fake.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event
             check_Pieces_Fake.CheckedChanged -= check_Pieces_Fake_CheckedChanged;
             check_Pieces_Fake.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsFake)
