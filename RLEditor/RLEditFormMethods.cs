@@ -572,8 +572,8 @@ Digger=20
             if (AskUserWhetherSaveLevel())
                 return;
 
-            Style pieceStyle = StyleList?.Find(sty => sty.NameInEditor == combo_PieceStyle.Text);
-            CurLevel = new Level(pieceStyle);
+            Style mainStyle = StyleList?.Find(sty => sty.NameInEditor == combo_MainStyle.Text);
+            CurLevel = new Level(mainStyle);
             // Get new renderer with the standard display options
             if (curRenderer != null)
                 curRenderer.Dispose();
@@ -626,7 +626,7 @@ Digger=20
             RepositionPicLevel();
             pic_Level.Image = curRenderer.CreateLevelImage();
 
-            combo_PieceStyle.Text = CurLevel.PieceStyle?.NameInEditor;
+            combo_PieceStyle.Text = CurLevel.MainStyle?.NameInEditor;
         }
 
         /// <summary>
@@ -679,10 +679,11 @@ Digger=20
                 return;
             }
 
-            Style themeStyle = CurLevel.PieceStyle;
+            Style themeStyle = CurLevel.MainStyle;
             Style pieceStyle = pieceCurStyle;
 
             StyleList.Clear();
+            combo_MainStyle.Items.Clear();
             combo_PieceStyle.Items.Clear();
 
             ImageLibrary.Clear();
@@ -692,11 +693,15 @@ Digger=20
 
             if (StyleList.Count > 0)
             {
+                this.combo_MainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
+                this.combo_MainStyle.Text = ValidateStyleList(themeStyle);
+
                 this.combo_PieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
                 this.combo_PieceStyle.Text = ValidateStyleList(pieceStyle);
 
                 if (refreshedFromStyleManager)
                 {
+                    combo_MainStyle.SelectedIndex = 0;
                     combo_PieceStyle.SelectedIndex = 0;
                 }
             }
@@ -869,7 +874,7 @@ Digger=20
                 height = r.Height;
             }
 
-            AddNewPieceToLevel(pieceKey, pos);
+            AddNewPieceToLevel(pieceKey, null, pos);
 
             // Set the width and height of the steel area whilst it's auto-selected!
             num_SteelAreaWidth.Value = width;
@@ -1577,7 +1582,6 @@ Digger=20
             {
                 AddNewPieceToLevel(hotkeyIndex -1);
                 UpdateFlagsForPieceActions();
-                UpdatePieceStyleComboAvailability();
             }
         }
 
@@ -1598,13 +1602,12 @@ Digger=20
                     case C.SelectPieceType.Terrain:
                     case C.SelectPieceType.Steel:
                     case C.SelectPieceType.Objects:
-                        AddNewPieceToLevel(pieceKey, curRenderer.GetCenterPoint());
+                        AddNewPieceToLevel(pieceKey, pieceCurStyle.NameInDirectory, curRenderer.GetCenterPoint());
                         break;
                 }
 
             MaybeOpenPiecesTab();
             UpdatePieceMetaData();
-            UpdatePieceStyleComboAvailability();
         }
 
         /// <summary>
@@ -1612,16 +1615,15 @@ Digger=20
         /// </summary>
         /// <param name="pieceKey"></param>
         /// <param name="centerPosition"></param>
-        public void AddNewPieceToLevel(string pieceKey, Point centerPosition)
+        public void AddNewPieceToLevel(string pieceKey, string style, Point centerPosition)
         {
             CurLevel.UnselectAll();
-            CurLevel.AddPiece(pieceKey, centerPosition, gridSize);
+            CurLevel.AddPiece(pieceKey, style, centerPosition, gridSize);
 
             SaveChangesToOldLevelList();
             pic_Level.Image = curRenderer.CreateLevelImage();
             UpdateFlagsForPieceActions();
             PullFocusFromTextInputs();
-            UpdatePieceStyleComboAvailability();
         }
 
         /// <summary>
@@ -2004,7 +2006,6 @@ Digger=20
             SaveChangesToOldLevelList();
             pic_Level.Image = curRenderer.CreateLevelImage();
             UpdateFlagsForPieceActions();
-            UpdatePieceStyleComboAvailability();
         }
 
         /// <summary>

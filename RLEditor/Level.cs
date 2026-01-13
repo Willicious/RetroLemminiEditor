@@ -14,12 +14,12 @@ namespace RLEditor
         /// <summary>
         /// Creates a new level with the default values.
         /// </summary>
-        public Level(Style pieceStyle = null)
+        public Level(Style mainStyle = null)
         {
             this.Format = "RetroLemmini";
             this.Title = "";
             this.Author = "";
-            this.PieceStyle = pieceStyle;
+            this.MainStyle = mainStyle;
             this.MusicFile = "";
 
             // Create a random 64bit hex number
@@ -62,7 +62,7 @@ namespace RLEditor
         public string Format { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
-        public Style PieceStyle { get; set; }
+        public Style MainStyle { get; set; }
         public string MusicFile { get; set; }
 
         public ulong LevelID { get; set; }
@@ -128,7 +128,7 @@ namespace RLEditor
         /// </summary>
         public Level Clone()
         {
-            Level newLevel = new Level(this.PieceStyle);
+            Level newLevel = new Level(this.MainStyle);
             newLevel.Format = string.Copy(this.Format);
             newLevel.Title = string.Copy(this.Title);
             newLevel.Author = string.Copy(this.Author);
@@ -185,8 +185,8 @@ namespace RLEditor
                 || !this.Format.Equals(otherLevel.Format)
                 || !this.Title.Equals(otherLevel.Title)
                 || !this.Author.Equals(otherLevel.Author)
-                || !((this.PieceStyle == null && otherLevel.PieceStyle == null) ||
-                     (this.PieceStyle != null && this.PieceStyle.NameInDirectory.Equals(otherLevel.PieceStyle?.NameInDirectory)))
+                || !((this.MainStyle == null && otherLevel.MainStyle == null) ||
+                     (this.MainStyle != null && this.MainStyle.NameInDirectory.Equals(otherLevel.MainStyle?.NameInDirectory)))
                 || !this.MusicFile.Equals(otherLevel.MusicFile)
                 || !this.LevelID.Equals(otherLevel.LevelID)
                 // specifically do not compare LevelVersion
@@ -254,7 +254,7 @@ namespace RLEditor
         /// <param name="styleColor"></param>
         public Color GetThemeColor(C.StyleColor styleColor)
         {
-            return PieceStyle?.GetColor(styleColor) ?? C.RLColors[styleColor.ToRLColor()];
+            return MainStyle?.GetColor(styleColor) ?? C.RLColors[styleColor.ToRLColor()];
         }
 
         /// <summary>
@@ -287,13 +287,13 @@ namespace RLEditor
         /// </summary>
         /// <param name="pieceKey"></param>
         /// <param name="centerPos"></param>
-        public void AddPiece(string pieceKey, Point centerPos, int gridSize)
+        public void AddPiece(string pieceKey, string style, Point centerPos, int gridSize)
         {
             int piecePosX = (centerPos.X - ImageLibrary.GetWidth(pieceKey) / 2).RoundToMultiple(gridSize);
             int piecePosY = (centerPos.Y - ImageLibrary.GetHeight(pieceKey) / 2).RoundToMultiple(gridSize);
             Point piecePos = new Point(piecePosX, piecePosY);
 
-            if (pieceKey.Contains(PieceStyle.NameInDirectory + "o_") || pieceKey == "Default\\SteelArea")
+            if (pieceKey.Contains(style + "o_") || pieceKey == "Default\\SteelArea")
             {
                 GadgetList.Add(new GadgetPiece(pieceKey, piecePos));
             }

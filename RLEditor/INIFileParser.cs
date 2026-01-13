@@ -89,5 +89,13 @@ namespace RLEditor
 
             return values;
         }
+
+        public static string[] ParseMultiArray(string array)
+        {
+            var parts = array.Split(',');
+            for (int i = 0; i < parts.Length; i++)
+                parts[i] = parts[i].Trim();
+            return parts;
+        }
     }
 }

@@ -147,7 +147,7 @@ namespace RLEditor
             {
                 // Still use background color
                 baseLevelImage = new Bitmap(level.Width, level.Height);
-                baseLevelImage.Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
+                baseLevelImage.Clear(level.MainStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
             }
 
             // Draw all the layers
@@ -449,7 +449,7 @@ namespace RLEditor
         public void CreateBackgroundLayer()
         {
             // Set background color
-            layerImages[C.Layer.Background].Clear(level.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
+            layerImages[C.Layer.Background].Clear(level.MainStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
 
             // Draw the pieces grid if needed
             if (IsGridEnabled)

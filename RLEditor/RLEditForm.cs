@@ -64,6 +64,9 @@ namespace RLEditor
             CreateStyleList();
             if (StyleList.Count > 0)
             {
+                this.combo_MainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
+                this.combo_MainStyle.SelectedIndex = 0;
+
                 this.combo_PieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
                 this.combo_PieceStyle.SelectedIndex = 0;
             }
@@ -640,16 +643,30 @@ namespace RLEditor
          *              Piece Selection
          * ----------------------------------------------------------- */
 
+        private void combo_MainStyle_TextChanged(object sender, EventArgs e)
+        {
+            Style newStyle = ValidateStyleName(combo_MainStyle.Text);
+
+            if (newStyle == null || CurLevel == null)
+                return;
+
+            CurLevel.MainStyle = newStyle;
+            LoadPiecesIntoPictureBox();
+            pic_Level.SetImage(curRenderer.CreateLevelImage());
+
+            // If the level is empty, switch piece style, too
+            if (CurLevel.GadgetList.Count == 0 && CurLevel.TerrainList.Count == 0)
+            {
+                combo_PieceStyle.Text = newStyle.NameInEditor;
+            }
+        }
+
         private void combo_PieceStyle_TextChanged(object sender, EventArgs e)
         {
             Style newStyle = ValidateStyleName(combo_PieceStyle.Text);
 
             if (newStyle == null || newStyle == pieceCurStyle)
                 return;
-
-            // Set as the new level style
-            if (CurLevel != null)
-                CurLevel.PieceStyle = newStyle;
 
             // Load new style into PictureBoxes
             pieceCurStyle = newStyle;
@@ -1035,7 +1052,7 @@ namespace RLEditor
                         if (curRenderer.IsPointInLevelArea(mousePicBoxPos))
                         {
                             Point mouseLevelPos = curRenderer.GetMousePosInLevel(mousePicBoxPos);
-                            AddNewPieceToLevel(dragNewPieceKey, mouseLevelPos);
+                            AddNewPieceToLevel(dragNewPieceKey, pieceCurStyle.NameInDirectory, mouseLevelPos);
                         }
                         dragNewPieceTimer.Enabled = false;
                         pic_DragNewPiece.Visible = false;

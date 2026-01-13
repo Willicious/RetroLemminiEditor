@@ -88,10 +88,10 @@ namespace RLEditor
 
             // --- Style ---
             string styleName = ini.GetString("style");
-            newLevel.PieceStyle = styleList.Find(sty => sty.NameInEditor == styleName);
+            newLevel.MainStyle = styleList.Find(sty => sty.NameInEditor == styleName);
 
-            if (newLevel.PieceStyle == null)
-                newLevel.PieceStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
+            if (newLevel.MainStyle == null)
+                newLevel.MainStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
 
             // --- Music ---
             newLevel.MusicFile = ini.GetString("music");
@@ -212,17 +212,17 @@ namespace RLEditor
                 }
             }
 
-            int[] value = INIFileParser.ParseIntArray(data);
+            string[] parts = INIFileParser.ParseMultiArray(data);
 
-            int objectID = value[0];
-            int posX = value[1];
-            int posY = value[2];
-            int paintMode = value.Length > 3 ? value[3] : 0;
-            int flags = value.Length > 4 ? value[4] : 0;
-            int modifier = value.Length > 5 ? value[5] : 0;
+            int objectID = int.Parse(parts[0].Trim());
+            int posX = int.Parse(parts[1].Trim());
+            int posY = int.Parse(parts[2].Trim());
+            int paintMode = parts.Length > 3 ? int.Parse(parts[3].Trim()) : 0;
+            int flags = parts.Length > 4 ? int.Parse(parts[4].Trim()) : 0;
+            int modifier = parts.Length > 5 ? int.Parse(parts[5].Trim()) : 0;
+            string style = parts.Length > 6 ? parts[6].Trim() : level.MainStyle.NameInDirectory;
 
-            string styleName = level.PieceStyle.NameInDirectory;
-            string pieceName = styleName + "o_" + objectID;
+            string pieceName = style + "o_" + objectID;
 
             bool isInvisible = (paintMode & 2) != 0;
             bool isNoOverwrite = (paintMode & 4) != 0;
@@ -240,7 +240,7 @@ namespace RLEditor
                 Utility.Swap(ref specWidth, ref specHeight);
 
             // Create gadget                                    
-            string key = ImageLibrary.CreatePieceKey(styleName, pieceName, true);
+            string key = ImageLibrary.CreatePieceKey(style, pieceName, true);
             Point levelFilePos = new Point(posX, posY);
 
             Point editorPos = ImageLibrary.LevelFileToEditorCoordinates(
@@ -294,15 +294,15 @@ namespace RLEditor
                 }
             }
 
-            int[] value = INIFileParser.ParseIntArray(data);
+            string[] parts = INIFileParser.ParseMultiArray(data);
 
-            int terrainID = value[0];
-            int posX = value[1];
-            int posY = value[2];
-            int modifier = value.Length > 3 ? value[3] : 0;
+            int terrainID = int.Parse(parts[0].Trim());
+            int posX = int.Parse(parts[1].Trim());
+            int posY = int.Parse(parts[2].Trim());
+            int modifier = parts.Length > 3 ? int.Parse(parts[3].Trim()) : 0;
+            string style = parts.Length > 4 ? parts[4].Trim() : level.MainStyle.NameInDirectory;
 
-            string styleName = level.PieceStyle.NameInDirectory;
-            string pieceName = styleName + "_" + terrainID;
+            string pieceName = style + "_" + terrainID;
 
             Point pos = new Point(posX, posY);
 
@@ -318,7 +318,7 @@ namespace RLEditor
             int specWidth = -1;
             int specHeight = -1;
                                                                 
-            string key = ImageLibrary.CreatePieceKey(styleName, pieceName, false);
+            string key = ImageLibrary.CreatePieceKey(style, pieceName, false);
 
             TerrainPiece newTerrain = new TerrainPiece(
                 key,
@@ -499,7 +499,7 @@ namespace RLEditor
             sb.AppendLine($"numDiggers = {curLevel.NumDiggers}");
             sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
             sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
-            sb.AppendLine($"style = {curLevel.PieceStyle.NameInEditor}");
+            sb.AppendLine($"style = {curLevel.MainStyle.NameInEditor}");
             sb.AppendLine($"width = {curLevel.Width}");
             sb.AppendLine($"height = {curLevel.Height}");
             sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
@@ -595,6 +595,15 @@ namespace RLEditor
                 int modifier = (gad.IsFlippedInPlayer && gad.ObjType == C.OBJ.HATCH) ? 1 : 0;
 
                 string line = $"object_{counter} = {gadgetID}, {gad.PosX}, {gad.PosY}, {paintMode}, {flags}, {modifier}";
+
+                bool isMixedStyle = gad.Style != level.MainStyle.NameInDirectory &&
+                    gad.Style != level.MainStyle.NameInEditor;
+
+                string style = isMixedStyle ? gad.Style : string.Empty;
+                
+                if (style != string.Empty)
+                    line = line + $", {style}";
+                
                 objectLines.Add(line);
                 counter++;
             }
@@ -628,6 +637,15 @@ namespace RLEditor
                 if (ter.IsRotatedInPlayer) flags |= 128;
 
                 string line = $"terrain_{counter} = {terrainID}, {ter.PosX}, {ter.PosY}, {flags}";
+
+                bool isMixedStyle = ter.Style != level.MainStyle.NameInDirectory &&
+                                    ter.Style != level.MainStyle.NameInEditor;
+
+                string style = isMixedStyle ? ter.Style : string.Empty;
+
+                if (style != string.Empty)
+                    line = line + $", {style}";
+
                 terrainLines.Add(line);
                 counter++;
             }

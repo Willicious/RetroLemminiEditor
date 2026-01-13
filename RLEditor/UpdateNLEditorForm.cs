@@ -14,14 +14,6 @@ namespace RLEditor
     {
         private int pieceBrowserTop = 26;
 
-        private void UpdatePieceStyleComboAvailability()
-        {
-            if (CurLevel.GadgetList.Count > 0 || CurLevel.TerrainList.Count > 0)
-                combo_PieceStyle.Enabled = false;
-            else
-                combo_PieceStyle.Enabled = true;
-        }
-
         /// <summary>
         /// Initializes the intervals for all repeat buttons.
         /// </summary>
@@ -166,9 +158,9 @@ namespace RLEditor
         /// </summary>
         private void UpdateBackgroundColor()
         {
-            if (CurLevel.PieceStyle == null)
+            if (CurLevel.MainStyle == null)
                 return;
-            Color backColor = CurLevel.PieceStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault];
+            Color backColor = CurLevel.MainStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault];
 
             picPieceList.ForEach(pic => pic.BackColor = backColor);
             curRenderer?.CreateBackgroundLayer();
