@@ -766,7 +766,7 @@ namespace RLEditor
             {
                 GadgetPiece hatch = hatches[hatchIndex];
                 string text = (hatchIndex + 1).ToString() + "/" + hatches.Count.ToString();
-                int fontSize = 8 + 2 * ZoomFactor;
+                int fontSize = 10 + 2 * ZoomFactor;
 
                 Point levelTextCenterPos = new Point(hatch.PosX + hatch.Width / 2, hatch.PosY);
                 Point screenTextCenterPos = GetPicPointFromLevelPoint(levelTextCenterPos);
@@ -774,39 +774,6 @@ namespace RLEditor
                 screenTextCenterPos.Y -= fontSize;
 
                 levelBmp.WriteText(text, screenTextCenterPos, C.RLColors[C.RLColor.Text], fontSize);
-            }
-        }
-
-        /// </summary>
-        /// // Determines the frame index based on the assigned skill flag
-        /// </summary>
-        private int GetFrameIndexForSkill(C.Skill skill)
-        {
-            switch (skill)
-            {
-                case C.Skill.Climber: return 6;
-                case C.Skill.Floater: return 8;
-                case C.Skill.Blocker: return 11;
-
-                default: return -1; // Handle unknown skills
-            }
-        }
-
-        /// </summary>
-        /// // Draws the correct icon based on the frame index
-        /// </summary>
-        private void DrawSkillIconFrame(Bitmap targetBitmap, Bitmap sourceImage, int frameIndex, Point position)
-        {
-            int frameSize = 16;
-            Rectangle sourceRect = new Rectangle(0, frameIndex * frameSize, frameSize, frameSize);
-            Point screenAlignmentPos = GetPicPointFromLevelPoint(position);
-            int outputFrameSize = frameSize * (ZoomFactor + 1) / 2;
-
-            screenAlignmentPos.Y += outputFrameSize;
-
-            using (Graphics g = Graphics.FromImage(targetBitmap))
-            {
-                g.DrawImage(sourceImage, new Rectangle(screenAlignmentPos, new Size(outputFrameSize, outputFrameSize)), sourceRect, GraphicsUnit.Pixel);
             }
         }
 

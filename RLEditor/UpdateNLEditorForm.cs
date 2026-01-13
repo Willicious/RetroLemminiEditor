@@ -85,7 +85,7 @@ namespace RLEditor
                     continue;
                 }
 
-                int frameIndex = 0;
+                int frameIndex = (ImageLibrary.GetObjType(pieceKey).In(C.OBJ.HATCH)) ? 9 : 0;
                 Bitmap pieceImage;
 
                 bool preferObjectName = curSettings.PreferObjectName;
@@ -106,11 +106,6 @@ namespace RLEditor
                 }
                 else
                     pieceImage = ImageLibrary.GetImage(pieceKey, RotateFlipType.RotateNoneFlipNone, frameIndex);
-
-                if (pieceKey.StartsWith("default") && ImageLibrary.GetObjType(pieceKey) == C.OBJ.ONE_WAY_WALL)
-                {
-                    pieceImage = pieceImage.ApplyThemeColor(CurLevel.GetThemeColor(C.StyleColor.ONE_WAY_WALL), 255);
-                }
 
                 picPieceList[i].Image = pieceImage;
                 SetToolTipsForPicPiece(picPieceList[i], pieceKey);

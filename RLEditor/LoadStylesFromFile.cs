@@ -102,35 +102,6 @@ namespace RLEditor
         {
             string filePath = C.AppPathPieces + "styles.ini";
 
-            // Hard-coded OG style names and order
-            List<string> originalStylesOrder = new List<string>
-            {
-                "crystal",
-                "dirt",
-                "fire",
-                "marble",
-                "pillar",
-                "brick",
-                "bubble",
-                "rock",
-                "snow",
-                "xmas"
-            };
-
-            Dictionary<string, string> originalStyleNameOverrides = new Dictionary<string, string>
-            {
-                { "crystal", "Crystal" },
-                { "dirt", "Dirt" },
-                { "fire", "Fire" },
-                { "marble", "Marble" },
-                { "pillar", "Pillar" },
-                { "brick", "Brick" },
-                { "bubble", "Bubble" },
-                { "rock", "Rock" },
-                { "snow", "Snow" },
-                { "xmas", "Christmas" }
-            };
-
             // Capture original indices for fallback ordering
             Dictionary<Style, int> originalIndices = styleList
                 .Select((sty, idx) => new { sty, idx })
@@ -155,7 +126,7 @@ namespace RLEditor
             // Override OG style display names if applicable
             if (settings.AutoPinOGStyles)
             {
-                foreach (var kvp in originalStyleNameOverrides)
+                foreach (var kvp in C.OriginalStyleNameOverrides)
                 {
                     Style curStyle = styleList.Find(sty => sty.NameInDirectory.Equals(kvp.Key));
                     if (curStyle != null)
@@ -168,8 +139,8 @@ namespace RLEditor
             {
                 if (settings.AutoPinOGStyles)
                 {
-                    int sty1OGIndex = originalStylesOrder.IndexOf(sty1.NameInDirectory);
-                    int sty2OGIndex = originalStylesOrder.IndexOf(sty2.NameInDirectory);
+                    int sty1OGIndex = C.OriginalStyles.IndexOf(sty1.NameInDirectory);
+                    int sty2OGIndex = C.OriginalStyles.IndexOf(sty2.NameInDirectory);
 
                     if (sty1OGIndex != -1 && sty2OGIndex != -1)
                         return sty1OGIndex.CompareTo(sty2OGIndex);

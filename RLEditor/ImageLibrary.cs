@@ -24,11 +24,6 @@ namespace RLEditor
         /// <summary>
         /// Use this to create the base-info of a new object piece.
         /// </summary>
-        /// <param name="newImage"></param>
-        /// <param name="objType"></param>
-        /// <param name="numFrames"></param>
-        /// <param name="isVert"></param>
-        /// <param name="triggerRect"></param>
         public BaseImageInfo(Bitmap newImage, C.OBJ objType, int numFrames, Rectangle triggerRect,
             int leftMargin = 0, int topMargin = 0, int rightMargin = 0, int bottomMargin = 0)
         {
@@ -91,7 +86,7 @@ namespace RLEditor
             bool isFlipped = rotFlipType.In(RotateFlipType.RotateNoneFlipX, RotateFlipType.RotateNoneFlipXY, RotateFlipType.Rotate90FlipY, RotateFlipType.Rotate90FlipXY);
             string directionString = isFlipped ? "←" : "→";
             Point bottomRightCorner = new Point(image.Width, image.Height);
-            image.WriteText(directionString, bottomRightCorner, C.RLColors[C.RLColor.Text], 7, ContentAlignment.BottomRight, new Size(12, 9));
+            image.WriteText(directionString, bottomRightCorner, C.RLColors[C.RLColor.Text], 12, ContentAlignment.BottomRight, new Size(20, 16));
             return image;
         }
         public int Width { get; private set; }
@@ -109,9 +104,6 @@ namespace RLEditor
         /// <summary>
         /// Separates the various frames in one bitmap.
         /// </summary>
-        /// <param name="newBitmap"></param>
-        /// <param name="numFrames"></param>
-        /// <param name="isVert"></param>
         private List<Bitmap> SeparateFrames(Bitmap newBitmap, int numFrames, bool isVert)
         {
             List<Bitmap> imageFrames = new List<Bitmap>();
@@ -143,7 +135,6 @@ namespace RLEditor
         /// <summary>
         /// Creates rotated images of the desired orientation, if these do not yet exist.
         /// </summary>
-        /// <param name="rotFlipType"></param>
         private void CreateRotatedImages(RotateFlipType rotFlipType)
         {
             images[rotFlipType] = new List<Bitmap>();

@@ -126,21 +126,39 @@ namespace RLEditor
       Layer.Background, Layer.ObjBack, Layer.Terrain, Layer.ObjTop, Layer.Trigger, Layer.SteelArea
     };
 
-        // The integer values here are only used to pick the correct frame of pickupanim.png
+        public static List<string> OriginalStyles = new List<string>
+        {
+            "crystal",
+            "dirt",
+            "fire",
+            "marble",
+            "pillar",
+            "brick",
+            "bubble",
+            "rock",
+            "snow",
+            "xmas"
+        };
+
+        public static Dictionary<string, string> OriginalStyleNameOverrides = new Dictionary<string, string>
+        {
+            { "crystal", "Crystal" },
+            { "dirt", "Dirt" },
+            { "fire", "Fire" },
+            { "marble", "Marble" },
+            { "pillar", "Pillar" },
+            { "brick", "Brick" },
+            { "bubble", "Bubble" },
+            { "rock", "Rock" },
+            { "snow", "Snow" },
+            { "xmas", "Christmas" }
+        };
+
         public enum Skill
         {           
-            // Use frame 0 for Skill.None
-            None = 0,
-
-            // All pickup skills are 2 frames apart
-            Climber = 1,
-            Floater = 3,
-            Bomber = 5,
-            Blocker = 7,
-            Builder = 9,
-            Basher = 11,
-            Miner = 13,
-            Digger = 15
+            None,
+            Climber, Floater, Bomber, Blocker,
+            Builder, Basher, Miner, Digger
         };
         public static Array SkillArray => Enum.GetValues(typeof(C.Skill));
 

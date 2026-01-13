@@ -153,9 +153,11 @@ namespace RLEditor
         /// </summary>
         protected override int GetFrameIndex()
         {
-            return base.GetFrameIndex();
+            if (ObjType == C.OBJ.HATCH && C.OriginalStyles.Contains(Style))
+                return 9;
+            else
+                return base.GetFrameIndex();
         }
-
 
         public override bool MayRotate()
         {
