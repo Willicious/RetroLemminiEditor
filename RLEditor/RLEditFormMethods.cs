@@ -440,12 +440,29 @@ Digger=20
                                     + decimal.ToInt32(num_Lvl_TimeSec.Value);
             CurLevel.HasTimeLimit = check_Lvl_TimeLimit.Checked;
 
-            if (combo_SteelMode.SelectedIndex == 2)
-                CurLevel.AutosteelMode = 0;
-            else if (combo_SteelMode.SelectedIndex == 1)
-                CurLevel.AutosteelMode = 1;
-            else
-                CurLevel.AutosteelMode = 2;
+            /*
+             N.B.All Lemmini versions currently don't actually support NeoLemmix-style steel,
+             (which is what AutosteelMode = 2 is supposed to be)
+             The source of the bug is currently unknown, but from the SuperLemmini days it's
+             clear that the intention was as follows:
+             [Mode = 2] should be "steel is only steel where visible"
+             [Mode = 1] should be "steel is always steel wherever it exists"
+             [Mode = 0 or unspecified] is "steel is only steel where an area has been manually added"
+             I have attempted to retrofix this, but due to the convoluted nature of the
+             level painting methods in the Lemmini codebase it's proven too difficult
+             For that reason, this Editor will only support Mode 0 and Mode 1.
+             Mode 2, wherever specified, will be treated the same Editor - side for the time being.
+
+             If mode 2 ever gets implemented correctly, the combo is there to support the 3 intended modes:
+            */
+
+            //if (combo_SteelMode.SelectedIndex == 2)
+            //    CurLevel.AutosteelMode = 0;
+            //else if (combo_SteelMode.SelectedIndex == 1)
+            //    CurLevel.AutosteelMode = 2;
+            //else
+            //    CurLevel.AutosteelMode = 1;
+            CurLevel.AutosteelMode = check_Lvl_Autosteel.Checked ? 1 : 0;
 
             string idText = txt_LevelID.Text;
             if (idText.Length < 16)
@@ -512,12 +529,29 @@ Digger=20
                 check_Lvl_TimeLimit.Checked = CurLevel.HasTimeLimit;
                 check_Lvl_Superlemming.Checked = CurLevel.IsSuperlemming;
 
-                if (CurLevel.AutosteelMode == 0)
-                    combo_SteelMode.SelectedIndex = 2;
-                else if (CurLevel.AutosteelMode == 1)
-                    combo_SteelMode.SelectedIndex = 1;
-                else
-                    combo_SteelMode.SelectedIndex = 0;
+                /*
+                 N.B.All Lemmini versions currently don't actually support NeoLemmix-style steel,
+                 (which is what AutosteelMode = 2 is supposed to be)
+                 The source of the bug is currently unknown, but from the SuperLemmini days it's
+                 clear that the intention was as follows:
+                 [Mode = 2] should be "steel is only steel where visible"
+                 [Mode = 1] should be "steel is always steel wherever it exists"
+                 [Mode = 0 or unspecified] is "steel is only steel where an area has been manually added"
+                 I have attempted to retrofix this, but due to the convoluted nature of the
+                 level painting methods in the Lemmini codebase it's proven too difficult
+                 For that reason, this Editor will only support Mode 0 and Mode 1.
+                 Mode 2, wherever specified, will be treated the same Editor - side for the time being.
+
+                 If mode 2 ever gets implemented correctly, the combo is there to support the 3 intended modes:
+                */
+
+                //if (CurLevel.AutosteelMode == 0)
+                //    combo_SteelMode.SelectedIndex = 2;
+                //else if (CurLevel.AutosteelMode == 2)
+                //    combo_SteelMode.SelectedIndex = 1;
+                //else
+                //    combo_SteelMode.SelectedIndex = 0;
+                check_Lvl_Autosteel.Checked = CurLevel.AutosteelMode == 0 ? false : true;
 
                 txt_LevelID.Text = CurLevel.LevelID.ToString("X16");
 
@@ -559,8 +593,6 @@ Digger=20
             UpdateFlagsForPieceActions();
             RepositionPicLevel();
             pic_Level.Image = curRenderer.CreateLevelImage();
-            
-            UpdateSteelModeCombo();
         }
 
         /// <summary>
@@ -599,7 +631,6 @@ Digger=20
             pic_Level.Image = curRenderer.CreateLevelImage();
 
             combo_PieceStyle.Text = CurLevel.PieceStyle?.NameInEditor;
-            UpdateSteelModeCombo();
         }
 
         /// <summary>

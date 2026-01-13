@@ -14,24 +14,6 @@ namespace RLEditor
     {
         private int pieceBrowserTop = 26;
 
-        private void UpdateSteelModeCombo()
-        {
-            // TODO - RetroLemmini currently doesn't actually support NeoLemmix-style steel,
-            // which is what AutosteelMode = 1 is supposed to be
-            // Whether or not it's a bug or oversight in the RetroLemmini codebase is
-            // currently unknown, but from the SuperLemmini days it's clear that the
-            // intention was for [Mode = 1] to behave as "steel is only steel where visible"
-            // whilst [Mode = 2] is essentially "steel is always steel wherever it exists"
-            // [Mode = 0 or unspecified] is "steel is only steel where an area has been manually added"
-            combo_SteelMode.SelectedIndex = 0;
-
-            if (CurLevel.AutosteelMode == 1)
-                combo_SteelMode.SelectedIndex = 1;
-            
-            if (CurLevel.AutosteelMode == 0)
-                combo_SteelMode.SelectedIndex = 2;
-        }
-
         private void UpdatePieceStyleComboAvailability()
         {
             if (CurLevel.GadgetList.Count > 0 || CurLevel.TerrainList.Count > 0)

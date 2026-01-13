@@ -1479,11 +1479,5 @@ namespace RLEditor
             return;
             //ResizeRuler(false); // TODO - Add this
         }
-
-        private void but_SteelHelp_Click(object sender, EventArgs e)
-        {
-            return;
-            // Show a message explaining the different types of steel
-        }
     }
 }
