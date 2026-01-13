@@ -646,6 +646,10 @@ namespace RLEditor
             if (newStyle == null || newStyle == pieceCurStyle)
                 return;
 
+            // Set as the new level style
+            if (CurLevel != null)
+                CurLevel.PieceStyle = newStyle;
+
             // Load new style into PictureBoxes
             pieceCurStyle = newStyle;
             pieceStartIndex = 0;
