@@ -875,8 +875,11 @@ Digger=20
 
             AddNewPieceToLevel(pieceKey, pos);
 
+            // Set the width and height of the steel area whilst it's auto-selected!
             num_SteelAreaWidth.Value = width;
             num_SteelAreaHeight.Value = height;
+
+            MaybeOpenPiecesTab();
         }
 
         private void OpenLevelArrangerWindow()
