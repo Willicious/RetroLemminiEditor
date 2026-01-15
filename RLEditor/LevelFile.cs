@@ -146,9 +146,14 @@ namespace RLEditor
                 newLevel.HasTimeLimit = false;
 
             // --- Release rate ---
-            newLevel.ReleaseRate = ini.GetInt("releaseRate");
+            int minRR = ini.GetInt("releaseRate");
+            int maxRR = ini.GetInt("maxReleaseRate");
             string lockReleaseRate = ini.GetString("lockReleaseRate", "false"); // default to "false"
-            newLevel.IsReleaseRateLocked = lockReleaseRate.Trim().ToLower() == "true";
+            bool isRRLocked = lockReleaseRate.Trim().ToLower() == "true";
+
+            newLevel.MinReleaseRate = minRR;
+            newLevel.MaxReleaseRate = maxRR;
+            newLevel.IsReleaseRateLocked = (maxRR <= minRR) ? true : isRRLocked;
 
             // --- Other stuff ---
             string classicSteel = ini.GetString("classicSteel", "false"); // default to "false"
@@ -447,8 +452,10 @@ namespace RLEditor
             // Global level properties
             newLevel.NumLems = Math.Max(Math.Min(newLevel.NumLems, 999), 1);
             newLevel.SaveReq = Math.Max(Math.Min(newLevel.SaveReq, 999), 1);
-            newLevel.ReleaseRate = Math.Max(Math.Min(newLevel.ReleaseRate, 99), 1);
+            newLevel.MinReleaseRate = Math.Max(Math.Min(newLevel.MinReleaseRate, 99), 1);
+            newLevel.MaxReleaseRate = Math.Max(Math.Min(newLevel.MaxReleaseRate, 99), 1);
             newLevel.TimeLimit = Math.Max(Math.Min(newLevel.TimeLimit, 5999), 0);
+            newLevel.MaxFallDistance = Math.Max(Math.Min(newLevel.MaxReleaseRate, 3200), 1);
             // Skill numbers
             foreach (C.Skill skill in C.SkillArray)
             {
@@ -525,7 +532,8 @@ namespace RLEditor
             sb.AppendLine("# Level stats");
             sb.AppendLine($"name = {GetSafeString(curLevel.Title)}");
             sb.AppendLine($"author = {GetSafeString(curLevel.Author)}");
-            sb.AppendLine($"releaseRate = {curLevel.ReleaseRate}");
+            sb.AppendLine($"releaseRate = {curLevel.MinReleaseRate}");
+            sb.AppendLine($"maxReleaseRate = {curLevel.MaxReleaseRate}");
             sb.AppendLine($"lockReleaseRate = {curLevel.IsReleaseRateLocked}");
             sb.AppendLine($"numLemmings = {curLevel.NumLems}");
             sb.AppendLine($"numToRescue = {curLevel.SaveReq}");

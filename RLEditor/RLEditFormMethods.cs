@@ -429,12 +429,15 @@ Digger=20
             CurLevel.StartPosY = decimal.ToInt32(num_Lvl_StartY.Value);
             CurLevel.NumLems = decimal.ToInt32(num_Lvl_Lems.Value);
             CurLevel.SaveReq = decimal.ToInt32(num_Lvl_Rescue.Value);
-            CurLevel.ReleaseRate = decimal.ToInt32(num_Lvl_RR.Value);
+            CurLevel.MinReleaseRate = decimal.ToInt32(num_Lvl_RRMin.Value);
+            CurLevel.MaxReleaseRate = decimal.ToInt32(num_Lvl_RRMax.Value);
             CurLevel.IsReleaseRateLocked = check_Lvl_LockSR.Checked;
             CurLevel.IsSuperlemming = check_Lvl_Superlemming.Checked;
+            CurLevel.ForceNormalTimerSpeed = check_Lvl_ForceNormalTimerSpeed.Checked;
             CurLevel.TimeLimit = decimal.ToInt32(num_Lvl_TimeMin.Value) * 60
                                     + decimal.ToInt32(num_Lvl_TimeSec.Value);
             CurLevel.HasTimeLimit = check_Lvl_TimeLimit.Checked;
+            CurLevel.MaxFallDistance = decimal.ToInt32(num_Lvl_MaxFallDistance.Value);
 
             /*
              N.B.All Lemmini versions currently don't actually support NeoLemmix-style steel,
@@ -518,12 +521,15 @@ Digger=20
                 // Add the rest of the values
                 num_Lvl_Lems.Value = CurLevel.NumLems;
                 num_Lvl_Rescue.Value = CurLevel.SaveReq;
-                num_Lvl_RR.Value = CurLevel.ReleaseRate;
+                num_Lvl_RRMin.Value = CurLevel.MinReleaseRate;
+                num_Lvl_RRMax.Value = CurLevel.MaxReleaseRate;
                 check_Lvl_LockSR.Checked = CurLevel.IsReleaseRateLocked;
                 num_Lvl_TimeMin.Value = CurLevel.TimeLimit / 60;
                 num_Lvl_TimeSec.Value = CurLevel.TimeLimit % 60;
                 check_Lvl_TimeLimit.Checked = CurLevel.HasTimeLimit;
                 check_Lvl_Superlemming.Checked = CurLevel.IsSuperlemming;
+                check_Lvl_ForceNormalTimerSpeed.Checked = CurLevel.ForceNormalTimerSpeed;
+                num_Lvl_MaxFallDistance.Value = CurLevel.MaxFallDistance;
 
                 /*
                  N.B.All Lemmini versions currently don't actually support NeoLemmix-style steel,

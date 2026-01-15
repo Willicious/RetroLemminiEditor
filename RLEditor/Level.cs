@@ -37,7 +37,8 @@ namespace RLEditor
 
             this.NumLems = 40;
             this.SaveReq = 20;
-            this.ReleaseRate = 50;
+            this.MinReleaseRate = 50;
+            this.MaxReleaseRate = 99;
             this.IsReleaseRateLocked = false;
             this.TimeLimit = 0;
             this.HasTimeLimit = false;
@@ -95,7 +96,8 @@ namespace RLEditor
 
         public int NumLems { get; set; }
         public int SaveReq { get; set; }
-        public int ReleaseRate { get; set; }
+        public int MinReleaseRate { get; set; }
+        public int MaxReleaseRate { get; set; }
         public bool IsReleaseRateLocked { get; set; }
         public int TimeLimit { get; set; }
         public bool HasTimeLimit { get; set; }
@@ -151,7 +153,8 @@ namespace RLEditor
 
             newLevel.NumLems = this.NumLems;
             newLevel.SaveReq = this.SaveReq;
-            newLevel.ReleaseRate = this.ReleaseRate;
+            newLevel.MinReleaseRate = this.MinReleaseRate;
+            newLevel.MaxReleaseRate = this.MaxReleaseRate;
             newLevel.IsReleaseRateLocked = this.IsReleaseRateLocked;
             newLevel.TimeLimit = this.TimeLimit;
             newLevel.HasTimeLimit = this.HasTimeLimit;
@@ -199,7 +202,8 @@ namespace RLEditor
                 || this.GadgetList.Count != otherLevel.GadgetList.Count
                 || this.NumLems != otherLevel.NumLems
                 || this.SaveReq != otherLevel.SaveReq
-                || this.ReleaseRate != otherLevel.ReleaseRate
+                || this.MinReleaseRate != otherLevel.MinReleaseRate
+                || this.MaxReleaseRate != otherLevel.MaxReleaseRate
                 || this.IsReleaseRateLocked != otherLevel.IsReleaseRateLocked
                 || this.IsSuperlemming != otherLevel.IsSuperlemming
                 || this.ForceNormalTimerSpeed != otherLevel.ForceNormalTimerSpeed

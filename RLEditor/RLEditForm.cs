@@ -255,11 +255,16 @@ namespace RLEditor
             PullFocusFromTextInputs();
         }
 
-        private void textbox_Leave(object sender, EventArgs e)
+        private void CommitLevelChanges()
         {
             if (_IsWritingToForm) return;
             ReadLevelInfoFromForm(true);
             SaveChangesToOldLevelList();
+        }
+
+        private void textbox_Leave(object sender, EventArgs e)
+        {
+            CommitLevelChanges();
         }
 
         private void textbox_Modify(object sender, EventArgs e)
@@ -485,6 +490,36 @@ namespace RLEditor
             pic_Level.SetImage(curRenderer.GetScreenImage());
         }
 
+        private void num_Lvl_RRMin_ValueChanged(object sender, EventArgs e)
+        {
+            if (check_Lvl_LockSR.Checked || num_Lvl_RRMax.Value < num_Lvl_RRMin.Value)
+                num_Lvl_RRMax.Value = num_Lvl_RRMin.Value;
+        }
+        private void num_Lvl_RRMax_ValueChanged(object sender, EventArgs e)
+        {
+            if (num_Lvl_RRMax.Value < num_Lvl_RRMin.Value)
+                num_Lvl_RRMin.Value = num_Lvl_RRMax.Value;
+        }
+
+        private void check_Lvl_LockSR_CheckedChanged(object sender, EventArgs e)
+        {
+            num_Lvl_RRMax.Value = num_Lvl_RRMin.Value;
+            num_Lvl_RRMax.Enabled = !check_Lvl_LockSR.Checked;
+            CommitLevelChanges();
+        }
+
+        private void check_Lvl_Superlemming_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!check_Lvl_Superlemming.Checked)
+            {
+                check_Lvl_ForceNormalTimerSpeed.Checked = true;
+                check_Lvl_ForceNormalTimerSpeed.Enabled = false;
+            }
+            else
+                check_Lvl_ForceNormalTimerSpeed.Enabled = true;
+
+            CommitLevelChanges();
+        }
 
         /* -----------------------------------------------------------
          *              Piece Info Tab
@@ -572,7 +607,6 @@ namespace RLEditor
         {
             PullFocusFromTextInputs();
         }
-
 
         private void check_Pieces_Erase_CheckedChanged(object sender, EventArgs e)
         {
