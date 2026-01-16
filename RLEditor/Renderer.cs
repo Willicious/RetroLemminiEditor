@@ -695,8 +695,11 @@ namespace RLEditor
         {
             layerImages[C.Layer.Rulers].Clear();
 
-            foreach (GadgetPiece ruler in level.GadgetList)
+            var rulerList = level.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.RULER);
+            foreach (GadgetPiece ruler in rulerList)
+            {
                 layerImages[C.Layer.Rulers].DrawOn(ruler.Image, ruler.Pos);
+            }
 
             //var rulerList = level.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.RULER);
             //foreach (GadgetPiece ruler in rulerList)
