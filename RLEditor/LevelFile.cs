@@ -83,8 +83,7 @@ namespace RLEditor
             // --- Basic metadata ---
             newLevel.Title = ini.GetString("name");
             newLevel.Author = ini.GetString("author");
-            newLevel.LevelID = 0; // TODO - Implement level ID in RetroLemmini
-            newLevel.LevelVersion = 0; // TODO - Implement level version in RetroLemmini
+            newLevel.LevelVersion = (ulong)ini.GetInt("version");
 
             // --- Style ---
             string styleName = ini.GetString("style");
@@ -539,12 +538,12 @@ namespace RLEditor
             // Add level stats
             sb.AppendLine($"# LVL {Path.GetFileName(filePath)}");
             sb.AppendLine($"# Created with RetroLemmini Editor Version {C.Version}");
-            sb.AppendLine($"# Level ID {curLevel.LevelID} Version {curLevel.LevelVersion}");
-            sb.AppendLine("# RetroLemmini Level");
+            sb.AppendLine($"# RetroLemmini Level Version {curLevel.LevelVersion.ToString()}");
             sb.AppendLine();
             sb.AppendLine("# Level stats");
             sb.AppendLine($"name = {GetSafeString(curLevel.Title)}");
             sb.AppendLine($"author = {GetSafeString(curLevel.Author)}");
+            sb.AppendLine($"version = {curLevel.LevelVersion}");
             sb.AppendLine($"releaseRate = {curLevel.MinReleaseRate}");
             sb.AppendLine($"maxReleaseRate = {curLevel.MaxReleaseRate}");
             sb.AppendLine($"lockReleaseRate = {curLevel.IsReleaseRateLocked}");

@@ -17,15 +17,11 @@ namespace RLEditor
         public Level(Style mainStyle = null)
         {
             this.Format = "RetroLemmini";
+            this.LevelVersion = 0;
             this.Title = "";
             this.Author = "";
             this.MainStyle = mainStyle;
             this.MusicFile = "";
-
-            // Create a random 64bit hex number
-            this.LevelID = (ulong)Utility.Random().Next() +
-                           ((ulong)Utility.Random().Next() << 32);
-            this.LevelVersion = 0;
 
             this.Width = 640;
             this.Height = 320;
@@ -63,13 +59,12 @@ namespace RLEditor
         }
 
         public string Format { get; set; }
+        public ulong LevelVersion { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public Style MainStyle { get; set; }
         public string MusicFile { get; set; }
 
-        public ulong LevelID { get; set; }
-        public ulong LevelVersion { get; set; }
         public string FilePathToSave { get; set; }
 
         public int Width { get; set; }
@@ -135,11 +130,10 @@ namespace RLEditor
         {
             Level newLevel = new Level(this.MainStyle);
             newLevel.Format = string.Copy(this.Format);
+            newLevel.LevelVersion = this.LevelVersion;
             newLevel.Title = string.Copy(this.Title);
             newLevel.Author = string.Copy(this.Author);
             newLevel.MusicFile = string.Copy(this.MusicFile);
-            newLevel.LevelID = this.LevelID;
-            newLevel.LevelVersion = this.LevelVersion;
             newLevel.FilePathToSave = this.FilePathToSave; // shallow copy is fine here
 
             newLevel.Width = this.Width;
@@ -189,13 +183,12 @@ namespace RLEditor
         {
             if (otherLevel == null
                 || !this.Format.Equals(otherLevel.Format)
+                // specifically do not compare LevelVersion
                 || !this.Title.Equals(otherLevel.Title)
                 || !this.Author.Equals(otherLevel.Author)
                 || !((this.MainStyle == null && otherLevel.MainStyle == null) ||
                      (this.MainStyle != null && this.MainStyle.NameInDirectory.Equals(otherLevel.MainStyle?.NameInDirectory)))
                 || !this.MusicFile.Equals(otherLevel.MusicFile)
-                || !this.LevelID.Equals(otherLevel.LevelID)
-                // specifically do not compare LevelVersion
                 || this.Width != otherLevel.Width
                 || this.Height != otherLevel.Height
                 || this.StartPosX != otherLevel.StartPosX

@@ -463,21 +463,6 @@ Digger=20
             //    CurLevel.AutosteelMode = 1;
             CurLevel.AutosteelMode = check_Lvl_Autosteel.Checked ? 1 : 0;
 
-            string idText = txt_LevelID.Text;
-            if (idText.Length < 16)
-                idText = idText.PadLeft(16);
-            if (idText.Length > 16)
-                idText = idText.Substring(16);
-
-            if (ulong.TryParse(idText, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulong newID))
-            {
-                if (newID != 0)
-                    CurLevel.LevelID = newID;
-            }
-
-            if (allowWriteBack && txt_LevelID.Text != CurLevel.LevelID.ToString("X16"))
-                txt_LevelID.Text = CurLevel.LevelID.ToString("X16");
-
             foreach (C.Skill skill in numericsSkillSet.Keys)
             {
                 CurLevel.SkillSet[skill] = decimal.ToInt32(numericsSkillSet[skill].Value);
@@ -555,14 +540,12 @@ Digger=20
                 //    combo_SteelMode.SelectedIndex = 0;
                 check_Lvl_Autosteel.Checked = CurLevel.AutosteelMode == 0 ? false : true;
 
-                txt_LevelID.Text = CurLevel.LevelID.ToString("X16");
-
                 foreach (C.Skill skill in numericsSkillSet.Keys)
                 {
                     numericsSkillSet[skill].Value = CurLevel.SkillSet[skill];
                 }
 
-                lbl_Global_Version.Text = "Version: " + CurLevel.LevelVersion.ToString("X16");
+                lbl_Global_Version.Text = "Level Version " + CurLevel.LevelVersion.ToString();
             }
             finally
             {
