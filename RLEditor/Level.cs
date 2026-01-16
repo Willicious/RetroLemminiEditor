@@ -251,7 +251,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the theme color as specified by the main style.
         /// </summary>
-        /// <param name="styleColor"></param>
         public Color GetThemeColor(C.StyleColor styleColor)
         {
             return MainStyle?.GetColor(styleColor) ?? C.RLColors[styleColor.ToRLColor()];

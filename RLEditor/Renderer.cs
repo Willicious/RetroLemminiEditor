@@ -697,6 +697,14 @@ namespace RLEditor
 
             foreach (GadgetPiece ruler in level.GadgetList)
                 layerImages[C.Layer.Rulers].DrawOn(ruler.Image, ruler.Pos);
+
+            //var rulerList = level.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.RULER);
+            //foreach (GadgetPiece ruler in rulerList)
+            //{
+            //    Bitmap recoloredImage;
+            //    recoloredImage = ruler.Image.ApplyThemeColorToTarget(level.GetThemeColor(C.StyleColor.BUILDERBRICKS), Color.Silver);
+            //    layerImages[C.Layer.ObjTop].DrawOn(recoloredImage, ruler.Pos);
+            //}
         }
 
         /// <summary>
