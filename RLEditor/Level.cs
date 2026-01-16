@@ -58,6 +58,8 @@ namespace RLEditor
             {
                 SkillSet.Add(skill, 0);
             }
+
+            this.Hints = new List<string>();
         }
 
         public string Format { get; set; }
@@ -113,6 +115,7 @@ namespace RLEditor
         public int RightBoundary { get; set; }
 
         public Dictionary<C.Skill, int> SkillSet { get; set; }
+        public List<string> Hints { get; set; }
 
         public int NumClimbers => GetSkill(Skill.Climber);
         public int NumFloaters => GetSkill(Skill.Floater);

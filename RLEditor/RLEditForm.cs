@@ -1544,5 +1544,13 @@ namespace RLEditor
         {
             ResizeRuler(false);
         }
+
+        private void but_Hints_Click(object sender, EventArgs e)
+        {
+            using (var hintsForm = new FormHints(CurLevel))
+            {
+                hintsForm.ShowDialog(this);
+            }
+        }
     }
 }

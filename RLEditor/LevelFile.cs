@@ -176,6 +176,9 @@ namespace RLEditor
             // --- Skillset ---
             LoadSkillset(newLevel, ini);
 
+            // --- Hints ---
+            LoadHints(newLevel, ini);
+
             // --- Objects / gadgets ---
             foreach (string data in ini.GetIndexed("object"))
                 LoadGadget(newLevel, data);
@@ -206,6 +209,16 @@ namespace RLEditor
             level.SkillSet[C.Skill.Basher] = ini.GetInt("numBashers");
             level.SkillSet[C.Skill.Miner] = ini.GetInt("numMiners");
             level.SkillSet[C.Skill.Digger] = ini.GetInt("numDiggers");
+        }
+
+        private static void LoadHints(Level level, INIFileParser ini)
+        {
+            level.Hints.Clear();
+
+            foreach (string hint in ini.GetIndexed("hint"))
+            {
+                level.Hints.Add(hint);
+            }
         }
 
         private static void LoadGadget(Level level, string data)
@@ -596,7 +609,17 @@ namespace RLEditor
 
             sb.AppendLine();
 
-            // Add rules
+            // Add hints
+            sb.AppendLine("# Hints");
+            sb.AppendLine("# hint_N = Your hint here");
+
+            var hintsData = BuildHintsLines(curLevel);
+            foreach (var line in hintsData)
+                sb.AppendLine(line);
+
+            sb.AppendLine();
+
+            // Add rulers
             sb.AppendLine("# Rulers");
             sb.AppendLine("# X position, Y position, width, height, modifier (optional)");
             sb.AppendLine("# Flags: 1 = remove existing steel");
@@ -733,6 +756,18 @@ namespace RLEditor
             }
 
             return steelLines;
+        }
+
+        private static List<string> BuildHintsLines(Level level)
+        {
+            var hintsLines = new List<string>();
+
+            for (int i = 0; i < level.Hints.Count; i++)
+            {
+                hintsLines.Add($"hint_{i} = {level.Hints[i]}");
+            }
+
+            return hintsLines;
         }
 
         private static List<string> BuildRulerLines(Level level)
