@@ -834,14 +834,46 @@ namespace RLEditor
         /// <param name="levelBmp"></param>
         private void AddSelectedRectangles(ref Bitmap levelBmp)
         {
-            // First get a list of all Rectangled to draw (in image coordinates)
-            var gadgetRectangles = level.GadgetList.FindAll(gad => gad.IsSelected)
-                                                   .ConvertAll(gad => GetPicRectFromLevelRect(gad.ImageRectangle));
-            levelBmp.DrawOnRectangles(gadgetRectangles, C.RLColors[C.RLColor.SelRectGadget]);
+            // ----- Gadgets -----
+            var selectedGadgets = level.GadgetList.FindAll(gad => gad.IsSelected);
 
-            var terrRectangles = level.TerrainList.FindAll(ter => ter.IsSelected)
-                                                  .ConvertAll(ter => GetPicRectFromLevelRect(ter.ImageRectangle));
-            levelBmp.DrawOnRectangles(terrRectangles, C.RLColors[C.RLColor.SelRectTerrain]);
+            // Steel areas
+            var steelAreaRects = selectedGadgets
+                .Where(gad => gad.ObjType == C.OBJ.STEEL)
+                .Select(gad => GetPicRectFromLevelRect(gad.ImageRectangle))
+                .ToList();
+            levelBmp.DrawOnRectangles(steelAreaRects, C.RLColors[C.RLColor.SelRectSteel]);
+
+            // Rulers
+            var rulerRects = selectedGadgets
+                .Where(gad => gad.ObjType == C.OBJ.RULER)
+                .Select(gad => GetPicRectFromLevelRect(gad.ImageRectangle))
+                .ToList();
+            levelBmp.DrawOnRectangles(rulerRects, C.RLColors[C.RLColor.SelRectRulers]);
+
+            // All other gadgets
+            var gadgetRects = selectedGadgets
+                .Where(gad => gad.ObjType != C.OBJ.STEEL && gad.ObjType != C.OBJ.RULER)
+                .Select(gad => GetPicRectFromLevelRect(gad.ImageRectangle))
+                .ToList();
+            levelBmp.DrawOnRectangles(gadgetRects, C.RLColors[C.RLColor.SelRectGadget]);
+
+            // ----- Terrain -----
+            var selectedTerrain = level.TerrainList.FindAll(ter => ter.IsSelected);
+
+            // Steel terrain
+            var steelRects = selectedTerrain
+                .Where(ter => ter.IsSteel)
+                .Select(ter => GetPicRectFromLevelRect(ter.ImageRectangle))
+                .ToList();
+            levelBmp.DrawOnRectangles(steelRects, C.RLColors[C.RLColor.SelRectSteel]);
+
+            // All other terrain
+            var terrRects = selectedTerrain
+                .Where(ter => !ter.IsSteel)
+                .Select(ter => GetPicRectFromLevelRect(ter.ImageRectangle))
+                .ToList();
+            levelBmp.DrawOnRectangles(terrRects, C.RLColors[C.RLColor.SelRectTerrain]);
         }
 
         /// <summary>

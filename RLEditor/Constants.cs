@@ -175,7 +175,7 @@ namespace RLEditor
         public enum RLColor
         {
             Text, SteelArea, OWWDefault, BackDefault, ScreenStart,
-            SelRectGadget, SelRectTerrain, SelRectSteelAreas, SelRectRulers,
+            SelRectGadget, SelRectTerrain, SelRectSteel, SelRectSteelAreas, SelRectRulers,
             TriggerPink, TriggerYellow, TriggerGreen, TriggerBlue, TriggerPurple
         }
         public static readonly Dictionary<RLColor, Color> TriggerColors = new Dictionary<RLColor, Color>()
@@ -195,8 +195,8 @@ namespace RLEditor
           { RLColor.ScreenStart, Color.AliceBlue },
           { RLColor.SelRectGadget, Color.Chartreuse },
           { RLColor.SelRectTerrain, Color.Gold },
-          { RLColor.SelRectSteelAreas, Color.SteelBlue }, // TODO - Implement these colors
-          { RLColor.SelRectRulers, Color.CornflowerBlue } // TODO - See if rulers can be recolored to match the style theme's mask
+          { RLColor.SelRectSteel, Color.LightSteelBlue },
+          { RLColor.SelRectRulers, Color.Violet } // TODO - See if rulers can be recolored to match the style theme's mask
         };
 
         public static readonly string[] MusicExtensions = new List<string>()
