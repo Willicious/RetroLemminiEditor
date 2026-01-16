@@ -866,7 +866,7 @@ Digger=20
             MaybeOpenPiecesTab();
         }
 
-        private void AddRuler(string pieceKey) // TODO - This may be redundant
+        private void AddRuler(string pieceKey)
         {
             Point pos = curRenderer.GetCenterPoint();
             AddNewPieceToLevel(pieceKey, null, pos);

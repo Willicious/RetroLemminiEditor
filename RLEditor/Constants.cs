@@ -85,7 +85,7 @@ namespace RLEditor
 
         public enum StyleColor
         {
-            BACKGROUND, ONE_WAY_WALL, MASK, PICKUP_BORDER, PICKUP_INSIDE
+            BACKGROUND, BUILDERBRICKS
         }
         public static RLColor ToRLColor(this StyleColor styleColor)
         {
@@ -93,8 +93,8 @@ namespace RLEditor
             {
                 case StyleColor.BACKGROUND:
                     return RLColor.BackDefault;
-                case StyleColor.ONE_WAY_WALL:
-                    return RLColor.OWWDefault;
+                case StyleColor.BUILDERBRICKS:
+                    return RLColor.BuilderBricks;
                 default:
                     return RLColor.BackDefault;
             }
@@ -174,7 +174,7 @@ namespace RLEditor
         // Other colors are specified directly in BmpModify to speed up rendering.
         public enum RLColor
         {
-            Text, SteelArea, OWWDefault, BackDefault, ScreenStart,
+            Text, ScreenStart, BackDefault, BuilderBricks, SteelArea,
             SelRectGadget, SelRectTerrain, SelRectSteel, SelRectSteelAreas, SelRectRulers,
             TriggerPink, TriggerYellow, TriggerGreen, TriggerBlue, TriggerPurple
         }
@@ -189,14 +189,14 @@ namespace RLEditor
         public static readonly Dictionary<RLColor, Color> RLColors = new Dictionary<RLColor, Color>()
         {
           { RLColor.Text, Utility.HexToColor("FEF5F5F5") }, // Color.WhiteSmoke with slightly reduced alpha
-          { RLColor.SteelArea, Utility.HexToColor("550022FF") }, // Blue with reduced alpha
-          { RLColor.BackDefault, Utility.HexToColor("FF000033") }, // Amiga Blue
-          { RLColor.OWWDefault, Color.Linen },
           { RLColor.ScreenStart, Color.AliceBlue },
+          { RLColor.BackDefault, Utility.HexToColor("FF000033") }, // Amiga Blue
+          { RLColor.SteelArea, Utility.HexToColor("550022FF") }, // Blue with reduced alpha
+          { RLColor.BuilderBricks, Color.AliceBlue },
           { RLColor.SelRectGadget, Color.Chartreuse },
           { RLColor.SelRectTerrain, Color.Gold },
           { RLColor.SelRectSteel, Color.LightSteelBlue },
-          { RLColor.SelRectRulers, Color.Violet } // TODO - See if rulers can be recolored to match the style theme's mask
+          { RLColor.SelRectRulers, Color.Violet }
         };
 
         public static readonly string[] MusicExtensions = new List<string>()

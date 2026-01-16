@@ -621,16 +621,7 @@ namespace RLEditor
             var owwGadgetList = level.GadgetList.FindAll(gad => gad.ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
             foreach (GadgetPiece gadget in owwGadgetList)
             {
-                Bitmap gadgetImage;
-                if ((gadget.Style != "default") || (gadget.ObjType == C.OBJ.PAINT))
-                {
-                    gadgetImage = gadget.Image;
-                }
-                else
-                {
-                    gadgetImage = gadget.Image.ApplyThemeColor(level.GetThemeColor(C.StyleColor.ONE_WAY_WALL));
-                }
-                layerImages[C.Layer.ObjTop].DrawOn(gadgetImage, layerImages[C.Layer.Terrain], gadget.Pos, C.CustDrawMode.OnlyAtOWW);
+                layerImages[C.Layer.ObjTop].DrawOn(gadget.Image, layerImages[C.Layer.Terrain], gadget.Pos, C.CustDrawMode.OnlyAtOWW);
             }
 
             var normalGadgetList = level.GadgetList.FindAll(gad =>
@@ -698,16 +689,10 @@ namespace RLEditor
             var rulerList = level.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.RULER);
             foreach (GadgetPiece ruler in rulerList)
             {
-                layerImages[C.Layer.Rulers].DrawOn(ruler.Image, ruler.Pos);
+                Bitmap recoloredImage;
+                recoloredImage = ruler.Image.ApplyThemeColor(level.GetThemeColor(C.StyleColor.BUILDERBRICKS), Color.Silver);
+                layerImages[C.Layer.Rulers].DrawOn(recoloredImage, ruler.Pos);
             }
-
-            //var rulerList = level.GadgetList.FindAll(gad => gad.ObjType == C.OBJ.RULER);
-            //foreach (GadgetPiece ruler in rulerList)
-            //{
-            //    Bitmap recoloredImage;
-            //    recoloredImage = ruler.Image.ApplyThemeColorToTarget(level.GetThemeColor(C.StyleColor.BUILDERBRICKS), Color.Silver);
-            //    layerImages[C.Layer.ObjTop].DrawOn(recoloredImage, ruler.Pos);
-            //}
         }
 
         /// <summary>

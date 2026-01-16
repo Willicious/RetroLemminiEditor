@@ -41,14 +41,10 @@ namespace RLEditor
             AddRuler("Miner", Properties.Resources.Miner);
         }
 
-        // TODO - Implement style colors from .ini
         static readonly Dictionary<string, C.StyleColor> KeyToStyleColorDict = new Dictionary<string, C.StyleColor>
       {
-        { "BACKGROUND", C.StyleColor.BACKGROUND },
-        { "MASK", C.StyleColor.MASK },
-        { "ONE_WAYS", C.StyleColor.ONE_WAY_WALL },
-        { "PICKUP_BORDER", C.StyleColor.PICKUP_BORDER },
-        { "PICKUP_INSIDE", C.StyleColor.PICKUP_INSIDE }
+        { "bgColor", C.StyleColor.BACKGROUND },
+        { "debrisColor", C.StyleColor.BUILDERBRICKS }
       };
 
         /// <summary>
@@ -58,6 +54,7 @@ namespace RLEditor
         {
             var colorDict = new Dictionary<C.StyleColor, Color>();
             string filePath = C.AppPathThemeInfo(styleName);
+
             if (!File.Exists(filePath))
                 return colorDict;
 
@@ -73,7 +70,6 @@ namespace RLEditor
                 return colorDict;
             }
 
-
             try
             {
                 List<FileLine> newFileLine;
@@ -81,15 +77,15 @@ namespace RLEditor
                 {
                     foreach (string key in KeyToStyleColorDict.Keys)
                     {
-                        FileLine colorLine = newFileLine.Find(line => line.Key == key);
+                        FileLine colorLine = newFileLine.Find(line => line.Key.Trim().Equals(key, StringComparison.OrdinalIgnoreCase));
                         if (colorLine != null)
                         {
-                            string colorString = colorLine.Text;
-                            if (colorString.StartsWith("x"))
-                                colorString = colorString.Substring(1);
+                            string colorString = colorLine.Text.TrimStart('=', ' ', '\t');
+
                             try
                             {
-                                colorDict[KeyToStyleColorDict[key]] = ColorTranslator.FromHtml("#" + colorString);
+                                Color c = ColorTranslator.FromHtml("#" + colorString);
+                                colorDict[KeyToStyleColorDict[key]] = Color.FromArgb(255, c.R, c.G, c.B); // force 255 alpha
                             }
                             catch
                             {

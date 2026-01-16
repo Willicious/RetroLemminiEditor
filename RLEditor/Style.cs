@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace RLEditor
 {
@@ -93,7 +94,7 @@ namespace RLEditor
             if (colorDict.ContainsKey(colorType))
                 return colorDict[colorType];
             else
-                return C.RLColors[(colorType == C.StyleColor.BACKGROUND) ? C.RLColor.BackDefault : C.RLColor.OWWDefault];
+                return C.RLColors[(colorType == C.StyleColor.BACKGROUND) ? C.RLColor.BackDefault : C.RLColor.BuilderBricks];
         }
 
         /// <summary>
