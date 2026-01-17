@@ -505,7 +505,7 @@ namespace RLEditor
                 layerImages[C.Layer.ObjBack].DrawOn(gadget.Image, gadget.Pos);
             }
 
-            var backGadgets = level.GadgetList.FindAll(obj => obj.IsNoOverwrite && !obj.ObjType.In(C.OBJ.DECORATION, C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
+            var backGadgets = level.GadgetList.FindAll(obj => obj.IsNoOverwrite && !obj.ObjType.In(C.OBJ.DECORATION, C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT, C.OBJ.RULER));
             backGadgets.Reverse();
             foreach (GadgetPiece gadget in backGadgets)
             {
@@ -612,7 +612,7 @@ namespace RLEditor
             layerImages[C.Layer.ObjTop].Clear();
 
             var onlyOnTerrainGadgetList = level.GadgetList.FindAll(gad =>
-                    gad.IsOnlyOnTerrain && !gad.ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT));
+                    gad.IsOnlyOnTerrain && !gad.ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.PAINT, C.OBJ.RULER));
             foreach (GadgetPiece gadget in onlyOnTerrainGadgetList)
             {
                 layerImages[C.Layer.ObjTop].DrawOn(gadget.Image, layerImages[C.Layer.Terrain], gadget.Pos, C.CustDrawMode.OnlyAtMask);
@@ -625,7 +625,7 @@ namespace RLEditor
             }
 
             var normalGadgetList = level.GadgetList.FindAll(gad =>
-                    !gad.IsNoOverwrite && !gad.IsOnlyOnTerrain && !gad.ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.DECORATION, C.OBJ.PAINT));
+                    !gad.IsNoOverwrite && !gad.IsOnlyOnTerrain && !gad.ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.DECORATION, C.OBJ.PAINT, C.OBJ.RULER));
             foreach (GadgetPiece gadget in normalGadgetList)
             {
                 if (gadget.IsInvisible || gadget.IsFake)
