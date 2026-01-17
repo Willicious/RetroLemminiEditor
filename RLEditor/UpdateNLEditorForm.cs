@@ -172,7 +172,7 @@ namespace RLEditor
             but_MoveFrontOne.Enabled = (selectionList.Count > 0);
 
             bool hasSpecialGadget = selectionList.OfType<GadgetPiece>()
-                 .Any(g => g.ObjType == C.OBJ.STEEL || g.ObjType == C.OBJ.RULER);
+                 .Any(g => g.ObjType.In(C.OBJ.STEEL, C.OBJ.RULER));
             if (hasSpecialGadget)
             {
                 check_Pieces_NoOv.Enabled = false; check_Pieces_NoOv.Checked = false;

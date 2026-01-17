@@ -652,7 +652,7 @@ namespace RLEditor
 
             foreach (var gad in level.GadgetList)
             {
-                if (gad.ObjType == C.OBJ.STEEL || gad.ObjType == C.OBJ.RULER)
+                if (gad.ObjType.In (C.OBJ.STEEL, C.OBJ.RULER))
                     continue; // Steel areas and rulers are added separately
 
                 // Determine ID from last underscore in Key

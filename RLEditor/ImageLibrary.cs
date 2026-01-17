@@ -165,7 +165,7 @@ namespace RLEditor
                                    : ObjectType.ToString();
 
                 // Show Name instead of Type when in Terrain/Steel/Rulers tab
-                if (ObjectType == C.OBJ.TERRAIN || ObjectType == C.OBJ.STEEL || ObjectType == C.OBJ.RULER)
+                if (ObjectType.In(C.OBJ.TERRAIN, C.OBJ.STEEL, C.OBJ.RULER))
                     pieceDesc = System.IO.Path.GetFileNameWithoutExtension(pieceKey);
 
                 DrawDataString(newImage, pieceDesc, 0, 0, C.RLColors[C.RLColor.Text], 8);
@@ -216,7 +216,7 @@ namespace RLEditor
                                    : ObjectType.ToString();
 
                 // Show Name instead of Type when in Terrain/Steel/Rulers tab
-                if (ObjectType == C.OBJ.TERRAIN || ObjectType == C.OBJ.STEEL || ObjectType == C.OBJ.RULER)
+                if (ObjectType.In(C.OBJ.TERRAIN, C.OBJ.STEEL, C.OBJ.RULER))
                     pieceDesc = System.IO.Path.GetFileNameWithoutExtension(pieceKey);
 
                 // Size
