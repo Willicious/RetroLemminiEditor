@@ -88,8 +88,9 @@
             this.but_PieceLeft = new RLEditor.RepeatButton();
             this.timerAutosave = new System.Windows.Forms.Timer(this.components);
             this.statusBar = new System.Windows.Forms.StatusStrip();
-            this.statusBarLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusBarLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusBarSteelAreasLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusBarMissingPiecesLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusBarGenericLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBarButtonMissingPieces = new System.Windows.Forms.ToolStripDropDownButton();
             this.showMissingPiecesStatusBarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oKStatusBarMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -774,8 +775,9 @@
             this.statusBar.Dock = System.Windows.Forms.DockStyle.None;
             this.statusBar.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusBarLabel1,
-            this.statusBarLabel2,
+            this.statusBarSteelAreasLabel,
+            this.statusBarMissingPiecesLabel,
+            this.statusBarGenericLabel,
             this.statusBarButtonMissingPieces,
             this.statusBarButtonSteelAreas});
             this.statusBar.Location = new System.Drawing.Point(403, 7);
@@ -786,23 +788,37 @@
             this.statusBar.Text = "statusBar";
             this.statusBar.Visible = false;
             // 
-            // statusBarLabel1
+            // statusBarSteelAreasLabel
             // 
-            this.statusBarLabel1.BackColor = System.Drawing.SystemColors.Info;
-            this.statusBarLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.statusBarLabel1.ForeColor = System.Drawing.Color.Red;
-            this.statusBarLabel1.Name = "statusBarLabel1";
-            this.statusBarLabel1.Size = new System.Drawing.Size(147, 25);
-            this.statusBarLabel1.Text = "statusBarLabel1";
-            this.statusBarLabel1.MouseEnter += new System.EventHandler(this.toolStripLabel1_MouseEnter);
-            this.statusBarLabel1.MouseLeave += new System.EventHandler(this.toolStripLabel1_MouseLeave);
+            this.statusBarSteelAreasLabel.ActiveLinkColor = System.Drawing.Color.SteelBlue;
+            this.statusBarSteelAreasLabel.BackColor = System.Drawing.SystemColors.Info;
+            this.statusBarSteelAreasLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.statusBarSteelAreasLabel.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.statusBarSteelAreasLabel.Name = "statusBarSteelAreasLabel";
+            this.statusBarSteelAreasLabel.Size = new System.Drawing.Size(145, 25);
+            this.statusBarSteelAreasLabel.Text = "steelAreasLabel";
+            this.statusBarSteelAreasLabel.Click += new System.EventHandler(this.statusBarLabel1_Click);
+            this.statusBarSteelAreasLabel.MouseEnter += new System.EventHandler(this.statusBarLabel_MouseEnter);
+            this.statusBarSteelAreasLabel.MouseLeave += new System.EventHandler(this.statusBarLabel_MouseLeave);
             // 
-            // statusBarLabel2
+            // statusBarMissingPiecesLabel
             // 
-            this.statusBarLabel2.BackColor = System.Drawing.SystemColors.Info;
-            this.statusBarLabel2.Name = "statusBarLabel2";
-            this.statusBarLabel2.Size = new System.Drawing.Size(135, 25);
-            this.statusBarLabel2.Text = "statusBarLabel2";
+            this.statusBarMissingPiecesLabel.BackColor = System.Drawing.SystemColors.Info;
+            this.statusBarMissingPiecesLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.statusBarMissingPiecesLabel.ForeColor = System.Drawing.Color.Red;
+            this.statusBarMissingPiecesLabel.Name = "statusBarMissingPiecesLabel";
+            this.statusBarMissingPiecesLabel.Size = new System.Drawing.Size(174, 25);
+            this.statusBarMissingPiecesLabel.Text = "missingPiecesLabel";
+            this.statusBarMissingPiecesLabel.Click += new System.EventHandler(this.statusBarLabel2_Click);
+            this.statusBarMissingPiecesLabel.MouseEnter += new System.EventHandler(this.statusBarLabel_MouseEnter);
+            this.statusBarMissingPiecesLabel.MouseLeave += new System.EventHandler(this.statusBarLabel_MouseLeave);
+            // 
+            // statusBarGenericLabel
+            // 
+            this.statusBarGenericLabel.BackColor = System.Drawing.SystemColors.Info;
+            this.statusBarGenericLabel.Name = "statusBarGenericLabel";
+            this.statusBarGenericLabel.Size = new System.Drawing.Size(110, 25);
+            this.statusBarGenericLabel.Text = "genericLabel";
             // 
             // statusBarButtonMissingPieces
             // 
@@ -2685,8 +2701,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.StatusStrip statusBar;
-        private System.Windows.Forms.ToolStripStatusLabel statusBarLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel statusBarLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel statusBarMissingPiecesLabel;
+        private System.Windows.Forms.ToolStripStatusLabel statusBarGenericLabel;
         private System.Windows.Forms.ToolStripDropDownButton statusBarButtonMissingPieces;
         private System.Windows.Forms.ToolStripMenuItem oKStatusBarMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showMissingPiecesStatusBarMenuItem;
@@ -2832,6 +2848,7 @@
         private System.Windows.Forms.ToolStripDropDownButton statusBarButtonSteelAreas;
         private System.Windows.Forms.ToolStripMenuItem gotItThanksStatusBarMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dontShowAgainStatusBarMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel statusBarSteelAreasLabel;
     }
 }
 

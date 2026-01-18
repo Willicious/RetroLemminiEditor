@@ -25,6 +25,8 @@ namespace RLEditor
             this.Rotation = rotation;
             this.IsInvert = isInvert;
             this.IsSelected = true;
+
+            this.IsMissing = ImageLibrary.GetIsMissing(Key);
         }
 
         public int PosX { get; set; }
@@ -65,6 +67,7 @@ namespace RLEditor
         public Rectangle ImageRectangle => new Rectangle(PosX, PosY, Width, Height);
         public C.OBJ ObjType => ImageLibrary.GetObjType(Key);
         public bool IsSelected { get; set; }
+        public bool IsMissing { get; set; }
 
         /// <summary>
         /// Returns whether the ImageLibrary can find an image corresponding to this piece.

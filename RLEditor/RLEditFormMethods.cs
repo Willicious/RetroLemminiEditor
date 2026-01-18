@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -805,33 +804,39 @@ Digger=20
         /// </summary>
         public void UpdateStatusBar(int message)
         {
-            string textLabel1 = "";
-            string textLabel2 = "";
+            string textLabelMissingPieces = "";
+            string textLabelSteelAreas = "";
+            string textLabelGeneric = "";
             bool showMessage = false;
 
             if (message == 0 && (missingPieces.Count > 0))
             {
-                textLabel1 = "This level contains missing pieces (click to show).";
-                statusBarLabel1.Click += (sender, e) => { ShowMissingPiecesDialog(); Cursor = Cursors.Default; };
-                textLabel2 = "Click the lemming button for more options";
+                textLabelMissingPieces = "This level contains missing pieces (click to show).";
+                textLabelSteelAreas = "";
+                textLabelGeneric = "Click the lemming button for more options";
                 statusBarButtonMissingPieces.Visible = true;
                 statusBarButtonSteelAreas.Visible = false;
+                statusBarMissingPiecesLabel.Visible = true;
+                statusBarSteelAreasLabel.Visible = false;
                 showMessage = true;
             }
             else if ((message == 1) && Properties.Settings.Default.ShowSteelAreasMessage)
             {
-                textLabel1 = "Steel areas are optional.";
-                statusBarLabel1.Click += (sender, e) => { HideStatusBar(); Cursor = Cursors.Default; };
-                textLabel2 = "Use autosteel (in the Globals tab) if you want steel pieces to be automatically designated as steel. Click the lemming button for options";
+                textLabelMissingPieces = "";
+                textLabelSteelAreas = "Steel areas are optional.";
+                textLabelGeneric = "Use autosteel (in the Globals tab) if you want steel pieces to be automatically designated as steel. Click the lemming button for options";
                 statusBarButtonMissingPieces.Visible = false;
                 statusBarButtonSteelAreas.Visible = true;
+                statusBarMissingPiecesLabel.Visible = false;
+                statusBarSteelAreasLabel.Visible = true;
                 showMessage = true;
             }
 
             if (showMessage)
             {
-                statusBarLabel1.Text = textLabel1;
-                statusBarLabel2.Text = textLabel2;
+                statusBarMissingPiecesLabel.Text = textLabelMissingPieces;
+                statusBarSteelAreasLabel.Text = textLabelSteelAreas;
+                statusBarGenericLabel.Text = textLabelGeneric;
                 statusBar.Visible = true;
                 statusBar.Enabled = true;
             }
@@ -852,12 +857,10 @@ Digger=20
         /// </summary>
         private void UpdateMissingPiecesList()
         {
-            // TODO - Missing pieces causes "object reference not set to an instance" error
-            // Re-link the loading methods up to the missing pieces handling logic
-            CurLevel.TerrainList.FindAll(ter => !ter.ExistsImage())
-                  .ForEach(ter => missingPieces.Add($@"{ter.Style}\terrain\{ter.Name}"));
-            CurLevel.GadgetList.FindAll(gad => !gad.ExistsImage())
-                             .ForEach(gad => missingPieces.Add($@"{gad.Style}\terrain\{gad.Name}"));
+            CurLevel.TerrainList.FindAll(ter => ter.IsMissing)
+                  .ForEach(ter => missingPieces.Add($@"{ter.Style}\{ter.Name}"));
+            CurLevel.GadgetList.FindAll(gad => gad.IsMissing)
+                             .ForEach(gad => missingPieces.Add($@"{gad.Style}\{gad.Name}"));
         }
 
         /// <summary>
@@ -877,8 +880,8 @@ Digger=20
                     return;
             }
 
-            CurLevel.TerrainList.RemoveAll(ter => !ter.ExistsImage());
-            CurLevel.GadgetList.RemoveAll(gad => !gad.ExistsImage());
+            CurLevel.TerrainList.RemoveAll(ter => ter.IsMissing);
+            CurLevel.GadgetList.RemoveAll(gad => gad.IsMissing);
             missingPieces.Clear();
             UpdateStatusBar(0);
         }

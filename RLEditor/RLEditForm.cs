@@ -1373,14 +1373,24 @@ namespace RLEditor
             DeleteMissingPieces();
         }
 
-        private void toolStripLabel1_MouseEnter(object sender, EventArgs e)
+        private void statusBarLabel_MouseEnter(object sender, EventArgs e)
         {
             Cursor = Cursors.Hand;
         }
 
-        private void toolStripLabel1_MouseLeave(object sender, EventArgs e)
+        private void statusBarLabel_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
+        }
+
+        private void statusBarLabel2_Click(object sender, EventArgs e)
+        {
+            ShowMissingPiecesDialog();
+        }
+
+        private void statusBarLabel1_Click(object sender, EventArgs e)
+        {
+            HideStatusBar();
         }
 
         private void btnRandomSkillset_Click(object sender, EventArgs e)

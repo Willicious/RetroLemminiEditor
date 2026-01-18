@@ -18,7 +18,11 @@ namespace RLEditor
             : this(newImage, isSteel ? C.OBJ.STEEL : C.OBJ.TERRAIN, 1, new Rectangle(0, 0, 0, 0),
                0, 0, 0, 0)
         {
-            // nothing more
+            if (newImage == null)
+            {
+                ObjectType = C.OBJ.NULL; // null placeholder
+                IsMissingFromPiecesDirectory = true;
+            }
         }
 
         /// <summary>
@@ -27,6 +31,12 @@ namespace RLEditor
         public BaseImageInfo(Bitmap newImage, C.OBJ objType, int numFrames, Rectangle triggerRect,
             int leftMargin = 0, int topMargin = 0, int rightMargin = 0, int bottomMargin = 0)
         {
+            if (newImage == null)
+            {
+                newImage = new Bitmap(1, 1); // null placeholder
+                IsMissingFromPiecesDirectory = true;
+            }
+
             this.images = new Dictionary<RotateFlipType, List<Bitmap>>();
             this.images[RotateFlipType.RotateNoneFlipNone] = SeparateFrames(newImage, numFrames, true);
             this.Width = this.baseImages[0].Width;
@@ -99,6 +109,7 @@ namespace RLEditor
         public Rectangle TriggerRect { get; private set; }
         public Rectangle PrimaryImageLocation { get; private set; }
         public Rectangle? NineSlicingArea { get; private set; }
+        public bool IsMissingFromPiecesDirectory { get; private set; } = false;
 
         /// <summary>
         /// Separates the various frames in one bitmap.
@@ -356,6 +367,14 @@ namespace RLEditor
                 }
                 return true;
             }
+        }
+
+        /// <summary>
+        /// Checks to see if the piece has been marked as missing from directory.
+        /// </summary>
+        public static bool GetIsMissing(string imageKey)
+        {
+            return imageDict.TryGetValue(imageKey, out BaseImageInfo info) && info.IsMissingFromPiecesDirectory;
         }
 
         /// <summary>

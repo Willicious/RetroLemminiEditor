@@ -260,7 +260,7 @@ namespace RLEditor
             if (doRotate)
                 Utility.Swap(ref specWidth, ref specHeight);
 
-            // Create gadget                                    
+            // Create gadget
             string key = ImageLibrary.CreatePieceKey(style, pieceName, true);
             Point levelFilePos = new Point(posX, posY);
 
