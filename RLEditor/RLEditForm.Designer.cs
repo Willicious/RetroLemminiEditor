@@ -2427,7 +2427,7 @@
             this.num_Lvl_StartX.TabIndex = 14;
             this.num_Lvl_StartX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_StartX.Value = new decimal(new int[] {
-            320,
+            400,
             0,
             0,
             0});
@@ -2489,7 +2489,7 @@
             this.num_Lvl_SizeX.TabIndex = 9;
             this.num_Lvl_SizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_SizeX.Value = new decimal(new int[] {
-            640,
+            800,
             0,
             0,
             0});

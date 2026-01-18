@@ -23,9 +23,9 @@ namespace RLEditor
             this.MainStyle = mainStyle;
             this.MusicFile = "";
 
-            this.Width = 640;
+            this.Width = 800;
             this.Height = 320;
-            this.StartPosX = 320;
+            this.StartPosX = 400;
             this.StartPosY = 160;
 
             this.TerrainList = new List<TerrainPiece>();

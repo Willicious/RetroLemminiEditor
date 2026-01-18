@@ -44,7 +44,7 @@ namespace RLEditor
         public static string NewLine => Environment.NewLine;
 
         public static Size PicPieceSize => new Size(84, 84);
-        public static Size ScreenSize => new Size(640, 320); // TODO - Check that this matches the values given in RetroLemmini for screen display size
+        public static Size ScreenSize => new Size(800, 320);
 
         public enum SelectPieceType
         {
