@@ -28,6 +28,7 @@ namespace RLEditor
         public static Keys HotkeyToggleRulers;
         public static Keys HotkeyShowMissingPieces;
         public static Keys HotkeyRefreshStyles;
+        public static Keys HotkeyStyleManager;
         public static Keys HotkeyToggleSnapToGrid;
         public static Keys HotkeyOpenLevelArrangerWindow;
         public static Keys HotkeyOpenPieceBrowserWindow;
@@ -366,6 +367,8 @@ namespace RLEditor
                     HotkeyShowMissingPieces = ParseHotkeyString(line.Substring("HotkeyShowMissingPieces=".Length));
                 if (line.StartsWith("HotkeyRefreshStyles="))
                     HotkeyRefreshStyles = ParseHotkeyString(line.Substring("HotkeyRefreshStyles=".Length));
+                if (line.StartsWith("HotkeyStyleManager="))
+                    HotkeyStyleManager = ParseHotkeyString(line.Substring("HotkeyStyleManager=".Length));
                 if (line.StartsWith("HotkeyToggleSnapToGrid="))
                     HotkeyToggleSnapToGrid = ParseHotkeyString(line.Substring("HotkeyToggleSnapToGrid=".Length));
                 if (line.StartsWith("HotkeyOpenLevelArrangerWindow="))
@@ -563,6 +566,7 @@ namespace RLEditor
                 $"HotkeyToggleRulers={FormatHotkeyString(HotkeyToggleRulers)}",
                 $"HotkeyShowMissingPieces={FormatHotkeyString(HotkeyShowMissingPieces)}",
                 $"HotkeyRefreshStyles={FormatHotkeyString(HotkeyRefreshStyles)}",
+                $"HotkeyRefreshStyles={FormatHotkeyString(HotkeyStyleManager)}",
                 $"HotkeyToggleSnapToGrid={FormatHotkeyString(HotkeyToggleSnapToGrid)}",
                 $"HotkeyOpenLevelArrangerWindow={FormatHotkeyString(HotkeyOpenLevelArrangerWindow)}",
                 $"HotkeyOpenPieceBrowserWindow={FormatHotkeyString(HotkeyOpenPieceBrowserWindow)}",
@@ -671,6 +675,7 @@ namespace RLEditor
             HotkeyToggleRulers = Keys.F7;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;
+            HotkeyStyleManager = Keys.Control | Keys.Alt | Keys.F8;
             HotkeyToggleSnapToGrid = Keys.F9;
             HotkeyOpenLevelArrangerWindow = Keys.Control | Keys.F9;
             HotkeyOpenPieceBrowserWindow = Keys.Control | Keys.Shift | Keys.F9;
@@ -770,6 +775,7 @@ namespace RLEditor
             HotkeyToggleRulers = Keys.F7;
             HotkeyShowMissingPieces = Keys.Control | Keys.F8;
             HotkeyRefreshStyles = Keys.Control | Keys.Shift | Keys.F8;
+            HotkeyStyleManager = Keys.Control | Keys.Alt | Keys.F8;
             HotkeyToggleSnapToGrid = Keys.F9;
             HotkeyOpenLevelArrangerWindow = Keys.Control | Keys.F9;
             HotkeyOpenPieceBrowserWindow = Keys.Control | Keys.Shift | Keys.F9;

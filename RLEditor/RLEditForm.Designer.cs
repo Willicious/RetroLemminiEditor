@@ -599,6 +599,7 @@
             this.rulersToolStripMenuItem.CheckOnClick = true;
             this.rulersToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.rulersToolStripMenuItem.Name = "rulersToolStripMenuItem";
+            this.rulersToolStripMenuItem.ShortcutKeyDisplayString = "F7";
             this.rulersToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
             this.rulersToolStripMenuItem.Text = "Show/Hide Rulers";
             this.rulersToolStripMenuItem.Click += new System.EventHandler(this.rulersToolStripMenuItem_Click);
@@ -668,6 +669,7 @@
             // styleManagerToolStripMenuItem
             // 
             this.styleManagerToolStripMenuItem.Name = "styleManagerToolStripMenuItem";
+            this.styleManagerToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Alt+F8";
             this.styleManagerToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
             this.styleManagerToolStripMenuItem.Text = "Style Manager";
             this.styleManagerToolStripMenuItem.Click += new System.EventHandler(this.styleManagerToolStripMenuItem_Click);

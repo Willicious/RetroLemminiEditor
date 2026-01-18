@@ -716,6 +716,9 @@ namespace RLEditor
                     case "HotkeyRefreshStyles":
                         HotkeyConfig.HotkeyRefreshStyles = parsedKey;
                         break;
+                    case "HotkeyStyleManager":
+                        HotkeyConfig.HotkeyStyleManager = parsedKey;
+                        break;
                     case "HotkeyToggleSnapToGrid":
                         HotkeyConfig.HotkeyToggleSnapToGrid = parsedKey;
                         break;

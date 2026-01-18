@@ -627,6 +627,14 @@ Digger=20
             pic_Level.Image = curRenderer.CreateLevelImage();
         }
 
+        public void OpenStyleManager()
+        {
+            using (var styleManagerForm = new FormStyleManager(this, curSettings))
+            {
+                styleManagerForm.ShowDialog(this);
+            }
+        }
+
         /// <summary>
         /// Returns the requested style or the first available valid style
         /// </summary>
@@ -2380,6 +2388,7 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyToggleRulers, () => ToggleRulers());
             AddHotkey(HotkeyConfig.HotkeyShowMissingPieces, () => ShowMissingPiecesDialog());
             AddHotkey(HotkeyConfig.HotkeyRefreshStyles, () => RefreshStyles());
+            AddHotkey(HotkeyConfig.HotkeyStyleManager, () => OpenStyleManager());
             AddHotkey(HotkeyConfig.HotkeyToggleSnapToGrid, () => ToggleSnapToGrid(true));
             AddHotkey(HotkeyConfig.HotkeyOpenLevelArrangerWindow, () => OpenLevelArrangerWindow());
             AddHotkey(HotkeyConfig.HotkeyOpenPieceBrowserWindow, () => OpenPieceBrowserWindow());
@@ -2545,6 +2554,9 @@ Digger=20
 
             refreshStylesToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyRefreshStyles);
+
+            styleManagerToolStripMenuItem.ShortcutKeyDisplayString =
+                HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyStyleManager);
 
             snapToGridToolStripMenuItem.ShortcutKeyDisplayString =
                 HotkeyConfig.FormatHotkeyString(HotkeyConfig.HotkeyToggleSnapToGrid);

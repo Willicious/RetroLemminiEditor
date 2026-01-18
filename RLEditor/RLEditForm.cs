@@ -1491,10 +1491,7 @@ namespace RLEditor
 
         private void styleManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var styleManagerForm = new FormStyleManager(this, curSettings))
-            {
-                styleManagerForm.ShowDialog(this);
-            }
+            OpenStyleManager();
         }
 
         private void but_AddSteelArea_Click(object sender, EventArgs e)
