@@ -217,6 +217,7 @@
             this.lbl_Global_Title = new System.Windows.Forms.Label();
             this.tabLvlProperties = new System.Windows.Forms.TabControl();
             this.txt_Focus = new RLEditor.FocusTextBox();
+            this.levelPackCompilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -615,6 +616,7 @@
             this.showMissingPiecesToolStripMenuItem,
             this.refreshStylesToolStripMenuItem,
             this.styleManagerToolStripMenuItem,
+            this.levelPackCompilerToolStripMenuItem,
             this.toolStripSeparator2,
             this.aboutToolStripMenuItem,
             this.toolStripSeparator4});
@@ -2568,6 +2570,13 @@
             this.txt_Focus.TabStop = false;
             this.txt_Focus.Text = "asdf";
             // 
+            // levelPackCompilerToolStripMenuItem
+            // 
+            this.levelPackCompilerToolStripMenuItem.Name = "levelPackCompilerToolStripMenuItem";
+            this.levelPackCompilerToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.levelPackCompilerToolStripMenuItem.Text = "Level Pack Compiler";
+            this.levelPackCompilerToolStripMenuItem.Click += new System.EventHandler(this.levelPackCompilerToolStripMenuItem_Click);
+            // 
             // RLEditForm
             // 
             this.AllowDrop = true;
@@ -2849,6 +2858,7 @@
         private System.Windows.Forms.ToolStripMenuItem gotItThanksStatusBarMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dontShowAgainStatusBarMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel statusBarSteelAreasLabel;
+        private System.Windows.Forms.ToolStripMenuItem levelPackCompilerToolStripMenuItem;
     }
 }
 

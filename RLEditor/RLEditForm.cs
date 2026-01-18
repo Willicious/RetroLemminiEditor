@@ -1556,5 +1556,10 @@ namespace RLEditor
                 hintsForm.ShowDialog(this);
             }
         }
+
+        private void levelPackCompilerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenLevelPackCompiler();
+        }
     }
 }
