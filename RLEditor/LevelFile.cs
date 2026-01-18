@@ -560,7 +560,7 @@ namespace RLEditor
             sb.AppendLine($"numDiggers = {curLevel.NumDiggers}");
             sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
             sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
-            sb.AppendLine($"style = {curLevel.MainStyle.NameInEditor}");
+            sb.AppendLine($"style = {HandleStyleName(curLevel)}");
             sb.AppendLine($"width = {curLevel.Width}");
             sb.AppendLine($"height = {curLevel.Height}");
             sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
@@ -631,6 +631,17 @@ namespace RLEditor
 
             // Write all to .ini
             File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
+        }
+
+        // TODO - Remove the need for this RetroLemmini-side
+        private static string HandleStyleName(Level level)
+        {
+            string style = level.MainStyle.NameInEditor;
+
+            if (style == "Christmas")
+                return level.MainStyle.NameInDirectory;
+            else
+                return style;
         }
 
         private static string GetSafeString(string text)
