@@ -739,12 +739,12 @@ namespace RLEditor
         /// </summary>
         public Rectangle ScreenStartRectangle()
         {
-            Size levelScreenSize = level.ScreenSize;
-            int levelScreenPosX = level.StartPosX - levelScreenSize.Width / 2;
-            int levelScreenPosY = level.StartPosY - levelScreenSize.Height / 2;
-            levelScreenPosX = Math.Max(Math.Min(levelScreenPosX, level.Width - levelScreenSize.Width), 0);
-            levelScreenPosY = Math.Max(Math.Min(levelScreenPosY, level.Height - levelScreenSize.Height), 0);
-            return new Rectangle(levelScreenPosX, levelScreenPosY, levelScreenSize.Width, levelScreenSize.Height);
+            Size screenSize = C.ScreenSize;
+            int levelScreenPosX = level.StartPosX - screenSize.Width / 2;
+            int levelScreenPosY = level.StartPosY - screenSize.Height / 2;
+            levelScreenPosX = Math.Max(Math.Min(levelScreenPosX, level.Width - screenSize.Width), 0);
+            levelScreenPosY = Math.Max(Math.Min(levelScreenPosY, level.Height - screenSize.Height), 0);
+            return new Rectangle(levelScreenPosX, levelScreenPosY, screenSize.Width, screenSize.Height);
         }
 
         /// <summary>

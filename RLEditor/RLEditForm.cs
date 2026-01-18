@@ -27,9 +27,6 @@ namespace RLEditor
             SetCustomSkillsetList();
             SetMusicList();
 
-            C.ScreenSize = new ScreenSize();
-            C.ScreenSize.InizializeSettings();
-
             LoadStylesFromFile.AddSteelAreaImageToLibrary();
             LoadStylesFromFile.AddRulersToLibrary();
             ImageLibrary.SetEditorForm(this);

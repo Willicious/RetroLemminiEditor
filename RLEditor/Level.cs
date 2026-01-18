@@ -121,8 +121,6 @@ namespace RLEditor
         public int NumMiners => GetSkill(Skill.Miner);
         public int NumDiggers => GetSkill(Skill.Digger);
 
-        public Size ScreenSize => C.ScreenSize.ScreenArea(Width, Height);
-
         /// <summary>
         /// Creates a deep copy of the level.
         /// </summary>

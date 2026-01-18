@@ -162,7 +162,6 @@
     <Compile Include="FormProgress.Designer.cs">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="ScreenSize.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="RepeatButton.cs">
       <SubType>Component</SubType>
@@ -230,8 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EditorIcon.ico" />
-    <Content Include="EditorIconGreen.ico" />
-    <Content Include="Editor_Icon.ico" />
     <None Include="Resources\Rulers\Miner.png" />
     <None Include="Resources\Rulers\FallDistance.png" />
     <None Include="Resources\Rulers\Digger.png" />
