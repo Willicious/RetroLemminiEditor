@@ -354,12 +354,25 @@ Digger=20
         private void SetMusicList()
         {
             List<string> musicNames = null;
-            if (System.IO.Directory.Exists(C.AppPathMusic))
+
+            if (Directory.Exists(C.AppPathMusic))
             {
-                musicNames = System.IO.Directory.GetFiles(C.AppPathMusic)
-                                                .ToList()
-                                                .FindAll(dir => System.IO.Path.GetExtension(dir).In(C.MusicExtensions))
-                                                .ConvertAll(dir => System.IO.Path.GetFileNameWithoutExtension(dir));
+                string root = Path.GetFullPath(C.AppPathMusic)
+                                  .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                                  + Path.DirectorySeparatorChar;
+
+                musicNames = Directory
+                    .GetFiles(root, "*.*", SearchOption.AllDirectories)
+                    .Where(f => Path.GetExtension(f).In(C.MusicExtensions))
+                    .Select(f =>
+                    {
+                        string fullPath = Path.GetFullPath(f);
+                        string relativePath = fullPath.Substring(root.Length);
+                        string noExt = Path.ChangeExtension(relativePath, null);
+
+                        return noExt.Replace('\\', '/');
+                    })
+                    .ToList();
             }
             else
             {
@@ -367,6 +380,7 @@ Digger=20
             }
 
             combo_Music.Items.Clear();
+            combo_Music.Items.Add("");
             musicNames.ForEach(music => combo_Music.Items.Add(music));
         }
 
@@ -422,7 +436,7 @@ Digger=20
 
             CurLevel.Author = txt_LevelAuthor.Text;
             CurLevel.Title = txt_LevelTitle.Text;
-            CurLevel.MusicFile = System.IO.Path.ChangeExtension(combo_Music.Text, null);
+            CurLevel.MusicFile = Path.ChangeExtension(combo_Music.Text, null);
             CurLevel.Width = decimal.ToInt32(num_Lvl_SizeX.Value);
             CurLevel.Height = decimal.ToInt32(num_Lvl_SizeY.Value);
             CurLevel.AutoStartPos = chk_Lvl_AutoStart.Checked;
@@ -482,7 +496,13 @@ Digger=20
             {
                 txt_LevelAuthor.Text = CurLevel.Author;
                 txt_LevelTitle.Text = CurLevel.Title;
-                combo_Music.Text = CurLevel.MusicFile;
+
+                if (string.IsNullOrEmpty(CurLevel.MusicFile))
+                    combo_Music.SelectedIndex = 0;
+                else if (combo_Music.Items.Contains(CurLevel.MusicFile))
+                    combo_Music.SelectedItem = CurLevel.MusicFile;
+                else
+                    combo_Music.SelectedIndex = 0;
 
                 // Set size and start position, but without calling the Value_Changed methods,
                 // because they automatically call validation of the start position resp. render the level again.

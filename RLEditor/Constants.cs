@@ -206,10 +206,14 @@ namespace RLEditor
 
         public static readonly List<string> MusicNames = new List<string>()
         {
-          "orig_01", "orig_02", "orig_03", "orig_04", "orig_05", "orig_06", "orig_07", "orig_08", "orig_09", "orig_10",
-          "orig_11", "orig_12", "orig_13", "orig_14", "orig_15", "orig_16", "orig_17",
-          "ohno_01", "ohno_02", "ohno_03", "ohno_04", "ohno_05", "ohno_06",
-          "xmas_01", "xmas_02", "xmas_03"
+          "cancan", "doggie", "lemming1", "lemming2", "lemming3", "mountain", "tenlemms",
+          "tim1", "tim2", "tim3", "tim4", "tim5", "tim6", "tim7", "tim8", "tim9", "tim10",
+          "tune1", "tune2", "tune3", "tune4", "tune5", "tune6",
+          "xmas/jb", "xmas/kw", "xmas/rudi",
+          "xmas/WillLem_Xmas_Music/WL_Ding_Dong", "xmas/WillLem_Xmas_Music/WL_Hark_Angels",
+          "xmas/WillLem_Xmas_Music/WL_Jingle_Bells", "xmas/WillLem_Xmas_Music/WL_O_Holy_Night",
+          "xmas/WillLem_Xmas_Music/WL_Rockin_Around", "xmas/WillLem_Xmas_Music/WL_Rudolph",
+          "xmas/WillLem_Xmas_Music/WL_Twelve_Days", "xmas/WillLem_Xmas_Music/WL_Winter_Wonderland",
         };
 
         public static readonly Dictionary<int, string> FileConverterErrorMsg = new Dictionary<int, string>()
