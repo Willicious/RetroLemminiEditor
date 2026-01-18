@@ -30,7 +30,7 @@ namespace RLEditor
         public int PosX { get; set; }
         public int PosY { get; set; }
         public Point Pos => new Point(PosX, PosY);
-
+        public Rectangle SolidPixelOffsetRect => ImageLibrary.SolidPixelRect(Image, Key, Rotation, IsFlippedInPlayer);
         public virtual int Width => (Rotation % 2 == 0) ? ImageLibrary.GetWidth(Key) : ImageLibrary.GetHeight(Key);
         public virtual int Height => (Rotation % 2 == 0) ? ImageLibrary.GetHeight(Key) : ImageLibrary.GetWidth(Key);
         public virtual int DefaultWidth => (Rotation % 2 == 0) ? ImageLibrary.GetDefaultWidth(Key) : ImageLibrary.GetDefaultHeight(Key);
@@ -216,6 +216,19 @@ namespace RLEditor
         protected virtual int GetFrameIndex()
         {
             return 0;
+        }
+
+        /// <summary>
+        /// Returns the rectangle of the solid pixels in world coordinates
+        /// </summary>
+        public Rectangle GetSolidPixelWorldRect()
+        {
+            return new Rectangle(
+                PosX + SolidPixelOffsetRect.Left,
+                PosY + SolidPixelOffsetRect.Top,
+                SolidPixelOffsetRect.Width,
+                SolidPixelOffsetRect.Height
+            );
         }
     }
 }

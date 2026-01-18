@@ -827,7 +827,6 @@ namespace RLEditor
         /// <summary>
         /// Draws rectangles around selected pieces on already zoomed and cropped image.
         /// </summary>
-        /// <param name="levelBmp"></param>
         private void AddSelectedRectangles(ref Bitmap levelBmp)
         {
             // ----- Gadgets -----
@@ -850,7 +849,7 @@ namespace RLEditor
             // All other gadgets
             var gadgetRects = selectedGadgets
                 .Where(gad => gad.ObjType != C.OBJ.STEEL && gad.ObjType != C.OBJ.RULER)
-                .Select(gad => GetPicRectFromLevelRect(gad.ImageRectangle))
+                .Select(gad => GetPicRectFromLevelRect(gad.GetSolidPixelWorldRect()))
                 .ToList();
             levelBmp.DrawOnRectangles(gadgetRects, C.RLColors[C.RLColor.SelRectGadget]);
 
@@ -860,14 +859,14 @@ namespace RLEditor
             // Steel terrain
             var steelRects = selectedTerrain
                 .Where(ter => ter.IsSteel)
-                .Select(ter => GetPicRectFromLevelRect(ter.ImageRectangle))
+                .Select(ter => GetPicRectFromLevelRect(ter.GetSolidPixelWorldRect()))
                 .ToList();
             levelBmp.DrawOnRectangles(steelRects, C.RLColors[C.RLColor.SelRectSteel]);
 
             // All other terrain
             var terrRects = selectedTerrain
                 .Where(ter => !ter.IsSteel)
-                .Select(ter => GetPicRectFromLevelRect(ter.ImageRectangle))
+                .Select(ter => GetPicRectFromLevelRect(ter.GetSolidPixelWorldRect()))
                 .ToList();
             levelBmp.DrawOnRectangles(terrRects, C.RLColors[C.RLColor.SelRectTerrain]);
         }

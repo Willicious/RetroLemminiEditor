@@ -400,10 +400,12 @@ namespace RLEditor
             if (selectedPieces.Count == 0)
                 return new Rectangle(0, 0, 1, 1);
 
-            int left = selectedPieces.Min(item => item.PosX);
-            int right = selectedPieces.Max(item => item.PosX + item.Width);
-            int top = selectedPieces.Min(item => item.PosY);
-            int bottom = selectedPieces.Max(item => item.PosY + item.Height);
+            var solidRects = selectedPieces.Select(p => p.GetSolidPixelWorldRect());
+
+            int left = solidRects.Min(r => r.Left);
+            int right = solidRects.Max(r => r.Right);
+            int top = solidRects.Min(r => r.Top);
+            int bottom = solidRects.Max(r => r.Bottom);
 
             return new Rectangle(left, top, right - left, bottom - top);
         }

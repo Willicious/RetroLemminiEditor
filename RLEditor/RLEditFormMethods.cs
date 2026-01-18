@@ -865,9 +865,12 @@ Digger=20
         {
             var selection = CurLevel.SelectionList();
             Rectangle? selectionArea = null;
+
             if (selection.Count > 0)
-                // TODO - Ideally, this would ignore transparent pixels
-                selectionArea = selection.Select(p => p.ImageRectangle).Aggregate(Rectangle.Union);
+            {
+                var solidRects = selection.Select(p => p.GetSolidPixelWorldRect());
+                selectionArea = solidRects.Aggregate(Rectangle.Union);
+            }
 
             string pieceKey = "Default\\SteelArea";
 

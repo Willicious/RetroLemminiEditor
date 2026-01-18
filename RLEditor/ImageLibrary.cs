@@ -489,6 +489,75 @@ namespace RLEditor
         }
 
         /// <summary>
+        /// Gets the smallest rectangle which bounds all solid pixels in the image.
+        /// </summary>
+        public struct SolidPixelKey
+        {
+            public string ImageKey;
+            public int Rotation;
+            public bool IsFlipped;
+
+            public override bool Equals(object obj)
+            {
+                if (!(obj is SolidPixelKey))
+                    return false;
+
+                var other = (SolidPixelKey)obj;
+                return ImageKey == other.ImageKey
+                    && Rotation == other.Rotation
+                    && IsFlipped == other.IsFlipped;
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    int hash = 17;
+                    hash = hash * 23 + (ImageKey?.GetHashCode() ?? 0);
+                    hash = hash * 23 + Rotation.GetHashCode();
+                    hash = hash * 23 + IsFlipped.GetHashCode();
+                    return hash;
+                }
+            }
+        }
+
+        public static Dictionary<SolidPixelKey, Rectangle> SolidPixelRects = new Dictionary<SolidPixelKey, Rectangle>();
+
+        public static Rectangle SolidPixelRect(Bitmap bmp, string key, int rotation, bool flipped)
+        {
+            var cacheKey = new SolidPixelKey
+            {
+                ImageKey = key,
+                Rotation = rotation,
+                IsFlipped = flipped
+            };
+
+            if (SolidPixelRects.TryGetValue(cacheKey, out var rect))
+                return rect;
+
+            rect = ComputeSolidPixelRect(bmp);
+            SolidPixelRects[cacheKey] = rect;
+            return rect;
+        }
+
+        public static Rectangle ComputeSolidPixelRect(Bitmap bmp)
+        {
+            int left = 0, right = bmp.Width - 1, top = 0, bottom = bmp.Height - 1;
+
+            bool HasSolidPixelInColumn(int x) { for (int y = 0; y < bmp.Height; y++) if (bmp.GetPixel(x, y).A != 0) return true; return false; }
+            bool HasSolidPixelInRow(int y) { for (int x = 0; x < bmp.Width; x++) if (bmp.GetPixel(x, y).A != 0) return true; return false; }
+
+            while (left <= right && !HasSolidPixelInColumn(left)) left++;
+            while (right >= left && !HasSolidPixelInColumn(right)) right--;
+            while (top <= bottom && !HasSolidPixelInRow(top)) top++;
+            while (bottom >= top && !HasSolidPixelInRow(bottom)) bottom--;
+
+            if (left > right || top > bottom) return new Rectangle(0, 0, 0, 0); // fully transparent
+
+            return new Rectangle(left, top, right - left + 1, bottom - top + 1);
+        }
+
+        /// <summary>
         /// Returns the width of the piece corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
         /// <param name="imageKey"></param>
