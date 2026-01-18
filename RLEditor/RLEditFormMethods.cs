@@ -497,10 +497,13 @@ Digger=20
                 txt_LevelAuthor.Text = CurLevel.Author;
                 txt_LevelTitle.Text = CurLevel.Title;
 
-                if (string.IsNullOrEmpty(CurLevel.MusicFile))
-                    combo_Music.SelectedIndex = 0;
-                else if (combo_Music.Items.Contains(CurLevel.MusicFile))
+                if (!string.IsNullOrEmpty(CurLevel.MusicFile) && combo_Music.Items.Contains(CurLevel.MusicFile))
                     combo_Music.SelectedItem = CurLevel.MusicFile;
+                else
+                    combo_Music.SelectedIndex = 0;
+
+                if ((CurLevel.MainStyle != null) && combo_MainStyle.Items.Contains(CurLevel.MainStyle.NameInEditor))
+                    combo_MainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
                 else
                     combo_Music.SelectedIndex = 0;
 
@@ -720,7 +723,11 @@ Digger=20
 
                 if (refreshedFromStyleManager)
                 {
-                    combo_MainStyle.SelectedIndex = 0;
+                    if ((CurLevel.MainStyle != null) && combo_MainStyle.Items.Contains(CurLevel.MainStyle.NameInEditor))
+                        combo_MainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
+                    else
+                        combo_MainStyle.SelectedIndex = 0;
+
                     combo_PieceStyle.SelectedIndex = 0;
                 }
             }
