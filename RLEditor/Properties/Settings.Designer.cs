@@ -154,5 +154,17 @@ namespace RLEditor.Properties {
                 this["PieceBrowserIsOpen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowSteelAreasMessage {
+            get {
+                return ((bool)(this["ShowSteelAreasMessage"]));
+            }
+            set {
+                this["ShowSteelAreasMessage"] = value;
+            }
+        }
     }
 }

@@ -703,7 +703,7 @@ Digger=20
 
             // Reset style pieces and status bar
             ValidateStylePieces();
-            UpdateStatusBar();
+            UpdateStatusBar(0);
 
             // Reset level
             curRenderer.SetLevel(CurLevel);
@@ -719,7 +719,7 @@ Digger=20
         {
             // Initialise missingPieces list and status bar
             missingPieces.Clear();
-            UpdateStatusBar();
+            UpdateStatusBar(0);
         }
 
         /// <summary>
@@ -732,7 +732,7 @@ Digger=20
 
             PrepareForPieceValidation();
             UpdateMissingPiecesList();
-            UpdateStatusBar();
+            UpdateStatusBar(0);
         }
 
         // Store the names of the missing pieces for the current level
@@ -748,7 +748,7 @@ Digger=20
 
             PrepareForPieceValidation();
             UpdateMissingPiecesList();
-            UpdateStatusBar();
+            UpdateStatusBar(0);
 
             // If cleansing, search for more piece information and populate lists
             if (!cleansingLevels)
@@ -767,20 +767,48 @@ Digger=20
         /// <summary>
         ///  Handles status bar visibility and display text
         /// </summary>
-        public void UpdateStatusBar()
+        public void UpdateStatusBar(int message)
         {
-            if (missingPieces.Count > 0)
+            string textLabel1 = "";
+            string textLabel2 = "";
+            bool showMessage = false;
+
+            if (message == 0 && (missingPieces.Count > 0))
             {
-                statusBarLabel1.Text = "This level contains missing pieces (click to show).";
-                statusBarLabel2.Text = "Click the lemming button for more options";
+                textLabel1 = "This level contains missing pieces (click to show).";
+                statusBarLabel1.Click += (sender, e) => { ShowMissingPiecesDialog(); Cursor = Cursors.Default; };
+                textLabel2 = "Click the lemming button for more options";
+                statusBarButtonMissingPieces.Visible = true;
+                statusBarButtonSteelAreas.Visible = false;
+                showMessage = true;
+            }
+            else if ((message == 1) && Properties.Settings.Default.ShowSteelAreasMessage)
+            {
+                textLabel1 = "Steel areas are optional.";
+                statusBarLabel1.Click += (sender, e) => { HideStatusBar(); Cursor = Cursors.Default; };
+                textLabel2 = "Use autosteel (in the Globals tab) if you want steel pieces to be automatically designated as steel. Click the lemming button for options";
+                statusBarButtonMissingPieces.Visible = false;
+                statusBarButtonSteelAreas.Visible = true;
+                showMessage = true;
+            }
+
+            if (showMessage)
+            {
+                statusBarLabel1.Text = textLabel1;
+                statusBarLabel2.Text = textLabel2;
                 statusBar.Visible = true;
                 statusBar.Enabled = true;
             }
             else
             {
-                statusBar.Visible = false;
-                statusBar.Enabled = false;
+                HideStatusBar();
             }
+        }
+
+        public void HideStatusBar()
+        {
+            statusBar.Enabled = false;
+            statusBar.Visible = false;
         }
 
         /// <summary>
@@ -788,6 +816,8 @@ Digger=20
         /// </summary>
         private void UpdateMissingPiecesList()
         {
+            // TODO - Missing pieces causes "object reference not set to an instance" error
+            // Re-link the loading methods up to the missing pieces handling logic
             CurLevel.TerrainList.FindAll(ter => !ter.ExistsImage())
                   .ForEach(ter => missingPieces.Add($@"{ter.Style}\terrain\{ter.Name}"));
             CurLevel.GadgetList.FindAll(gad => !gad.ExistsImage())
@@ -814,7 +844,7 @@ Digger=20
             CurLevel.TerrainList.RemoveAll(ter => !ter.ExistsImage());
             CurLevel.GadgetList.RemoveAll(gad => !gad.ExistsImage());
             missingPieces.Clear();
-            UpdateStatusBar();
+            UpdateStatusBar(0);
         }
 
         private void ShowMissingPiecesDialog()
@@ -833,14 +863,10 @@ Digger=20
 
         private void AddSteelArea()
         {
-            // TODO - If it's the first time the user has clicked this button,
-            // add a message in the status bar informing them that adding steel areas
-            // is optional unless the steel mode is set to "Manual"
-            // Let the user choose whether or not to show the message again (add a setting in Properties for this)
-
             var selection = CurLevel.SelectionList();
             Rectangle? selectionArea = null;
             if (selection.Count > 0)
+                // TODO - Ideally, this would ignore transparent pixels
                 selectionArea = selection.Select(p => p.ImageRectangle).Aggregate(Rectangle.Union);
 
             string pieceKey = "Default\\SteelArea";
@@ -853,7 +879,7 @@ Digger=20
             {
                 var r = selectionArea.Value;
                 pos = new Point(r.Left + 16, r.Top + 16);
-                width = r.Width; // TODO - Ideally, this would ignore transparent pixels
+                width = r.Width;
                 height = r.Height;
             }
 
@@ -864,6 +890,7 @@ Digger=20
             num_SteelAreaHeight.Value = height;
 
             MaybeOpenPiecesTab();
+            UpdateStatusBar(1);
         }
 
         private void AddRuler(string pieceKey)

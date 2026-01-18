@@ -1349,6 +1349,18 @@ namespace RLEditor
             pic_Level.SetImage(curRenderer.GetScreenImage());
         }
 
+        private void gotItThanksStatusBarMenuItem_Click(object sender, EventArgs e)
+        {
+            HideStatusBar();
+        }
+
+        private void dontShowAgainStatusBarMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ShowSteelAreasMessage = false;
+            Properties.Settings.Default.Save();
+            HideStatusBar();
+        }
+
         private void showMissingPiecesStatusBarMenuItem_Click(object sender, EventArgs e)
         {
             ShowMissingPiecesDialog();
@@ -1356,17 +1368,12 @@ namespace RLEditor
 
         private void oKStatusBarMenuItem_Click(object sender, EventArgs e)
         {
-            statusBar.Visible = false;
+            HideStatusBar();
         }
 
         private void deleteMissingPiecesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteMissingPieces();
-        }
-
-        private void statusBarLabel1_Click(object sender, EventArgs e)
-        {
-            ShowMissingPiecesDialog();
         }
 
         private void toolStripLabel1_MouseEnter(object sender, EventArgs e)

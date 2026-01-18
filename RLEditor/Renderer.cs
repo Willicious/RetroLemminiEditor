@@ -43,7 +43,7 @@ namespace RLEditor
 
             SetLevel(level);
             ClearLayers();
-            ChangeZoom(0); // TODO - We ideally need a zoom factor between 0 and 1
+            ChangeZoom(0);
         }
 
         public const int AllowedGrayBorder = 10;
