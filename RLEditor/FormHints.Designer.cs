@@ -51,7 +51,7 @@
             // 
             this.btnAddHint.Location = new System.Drawing.Point(565, 22);
             this.btnAddHint.Name = "btnAddHint";
-            this.btnAddHint.Size = new System.Drawing.Size(214, 42);
+            this.btnAddHint.Size = new System.Drawing.Size(214, 50);
             this.btnAddHint.TabIndex = 1;
             this.btnAddHint.Text = "Add Hint";
             this.btnAddHint.UseVisualStyleBackColor = true;
@@ -61,7 +61,7 @@
             // 
             this.btnDeleteHints.Location = new System.Drawing.Point(565, 80);
             this.btnDeleteHints.Name = "btnDeleteHints";
-            this.btnDeleteHints.Size = new System.Drawing.Size(214, 42);
+            this.btnDeleteHints.Size = new System.Drawing.Size(214, 50);
             this.btnDeleteHints.TabIndex = 2;
             this.btnDeleteHints.Text = "Delete Selected Hints";
             this.btnDeleteHints.UseVisualStyleBackColor = true;
@@ -69,9 +69,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(566, 232);
+            this.btnSave.Location = new System.Drawing.Point(566, 224);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(214, 42);
+            this.btnSave.Size = new System.Drawing.Size(214, 50);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(565, 290);
+            this.btnCancel.Location = new System.Drawing.Point(565, 282);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(214, 42);
+            this.btnCancel.Size = new System.Drawing.Size(214, 50);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
