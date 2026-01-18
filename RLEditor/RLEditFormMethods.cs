@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -1245,11 +1246,15 @@ Digger=20
                 try
                 {
                     // Start the RetroLemmini player.
-                    var playerStartInfo = new System.Diagnostics.ProcessStartInfo();
-                    playerStartInfo.FileName = enginePath;
-                    playerStartInfo.Arguments = "test " + "\"" + C.AppPathTempLevel + "\"";
+                    var playerStartInfo = new ProcessStartInfo
+                    {
+                        FileName = "java",
+                        Arguments = $"-jar \"{C.AppPathRetroLemmini}\" test \"{C.AppPathTempLevel}\"",
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
 
-                    System.Diagnostics.Process.Start(playerStartInfo);
+                    Process.Start(playerStartInfo);
                 }
                 catch (Exception Ex)
                 {
