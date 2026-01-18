@@ -146,7 +146,7 @@ namespace RLEditor
 
             // --- Release rate ---
             int minRR = ini.GetInt("releaseRate");
-            int maxRR = ini.GetInt("maxReleaseRate");
+            int maxRR = ini.GetInt("maxReleaseRate", 99);
             string lockReleaseRate = ini.GetString("lockReleaseRate", "false"); // default to "false"
             bool isRRLocked = lockReleaseRate.Trim().ToLower() == "true";
 
@@ -164,7 +164,7 @@ namespace RLEditor
             string forceNormalSpeed = ini.GetString("forceNormalTimerSpeed", "true"); // default to "true"
             newLevel.ForceNormalTimerSpeed = forceNormalSpeed.Trim().ToLower() == "true";
 
-            newLevel.MaxFallDistance = ini.GetInt("maxFallDistance");
+            newLevel.MaxFallDistance = ini.GetInt("maxFallDistance", 99);
             newLevel.AutosteelMode = ini.GetInt("autosteelMode");
 
             newLevel.TopBoundary = ini.GetInt("topBoundary");
@@ -467,7 +467,7 @@ namespace RLEditor
             newLevel.MinReleaseRate = Math.Max(Math.Min(newLevel.MinReleaseRate, 99), 1);
             newLevel.MaxReleaseRate = Math.Max(Math.Min(newLevel.MaxReleaseRate, 99), 1);
             newLevel.TimeLimit = Math.Max(Math.Min(newLevel.TimeLimit, 5999), 0);
-            newLevel.MaxFallDistance = Math.Max(Math.Min(newLevel.MaxReleaseRate, 3200), 1);
+            newLevel.MaxFallDistance = Math.Max(Math.Min(newLevel.MaxFallDistance, 3200), 1);
             // Skill numbers
             foreach (C.Skill skill in C.SkillArray)
             {
