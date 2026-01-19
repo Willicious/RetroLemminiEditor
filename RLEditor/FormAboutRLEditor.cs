@@ -103,17 +103,23 @@ namespace RLEditor
             var richTextBox = richTextBox_WhatsNew;
             richTextBox.Clear();
 
-            // Test version text
-            WriteBoldText(richTextBox, "This version of the Editor is for test purposes only!\n");
-            richTextBox.AppendText("Please do not distribute it publicly as stability cannot be guaranteed. Thanks\n");
+            //// Test version text
+            //WriteBoldText(richTextBox, "This version of the Editor is for test purposes only!\n");
+            //richTextBox.AppendText("Please do not distribute it publicly as stability cannot be guaranteed. Thanks\n");
 
             // Version 1.1.1 features
-            WriteBoldText(richTextBox, "Version 1.1.1\n");
-            WriteBoldText(richTextBox, "• Example");
-            richTextBox.AppendText(" - Description\n");
+            WriteBoldText(richTextBox, "Version 1.0.0\n");
+            WriteBoldText(richTextBox, "• Full-featured level editor for RetroLemmini");
+            richTextBox.AppendText(" - Create, edit and play levels in a user-friendly and intuitive custom-built app.\n");
 
-            WriteBoldText(richTextBox, "• Example");
-            richTextBox.AppendText(" - Description\n");
+            WriteBoldText(richTextBox, "• Rulers");
+            richTextBox.AppendText(" - Use rulers to measure builder bridges, basher tunnels, fall distance, and more.\n");
+
+            WriteBoldText(richTextBox, "• Level Pack Compiler");
+            richTextBox.AppendText(" - Compile your levels into a level pack for RetroLemmini.\n");
+
+            WriteBoldText(richTextBox, "• Style Manager");
+            richTextBox.AppendText(" - Easily keep your styles list up to date and in whatever order you wish.\n");
         }
 
         /// <summary>
