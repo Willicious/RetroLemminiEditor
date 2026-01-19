@@ -80,7 +80,7 @@ namespace RLEditor
             SearchDirectoryForSteel();
             SearchDirectoryForObjects();
 
-            RemoveTransparentPieces();
+            RemoveDeprecatedPieces();
             SortObjectNamesByObjectType();
         }
 
@@ -183,14 +183,14 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Removes all pieces that are completely transparent.
+        /// Removes all pieces that are deprecated.
         /// </summary>
-        private void RemoveTransparentPieces()
+        private void RemoveDeprecatedPieces()
         {
             ObjectKeys.RemoveAll(key =>
             {
                 Bitmap bmp = ImageLibrary.GetImage(key);
-                return bmp == null || ImageLibrary.IsFullyTransparent(bmp, key);
+                return bmp == null || ImageLibrary.GetIsDeprecated(bmp, key);
             });
         }
 

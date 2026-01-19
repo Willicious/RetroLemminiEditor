@@ -577,12 +577,6 @@ namespace RLEditor
             return new Rectangle(left, top, right - left + 1, bottom - top + 1);
         }
 
-        public static bool GetIsFullyTransparent(Bitmap bmp, string key)
-        {
-            var rect = SolidPixelRect(bmp, key, 0, false);
-            return rect.Width == 0 || rect.Height == 0;
-        }
-
         /// <summary>
         /// Returns the width of the piece corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
@@ -713,7 +707,7 @@ namespace RLEditor
         /// <summary>
         /// Returns the deprecated status of the piece.
         /// </summary>
-        public static bool GetIsDeprecated(string imageKey)
+        public static bool GetIsDeprecated(Bitmap bmp, string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
             {
@@ -722,7 +716,11 @@ namespace RLEditor
                     return false;
             }
 
-            return imageDict[imageKey].IsDeprecated;
+            var rect = SolidPixelRect(bmp, imageKey, 0, false);
+            bool isFullyTransparent = (rect.Width == 0 || rect.Height == 0);
+            bool isMarkedDeprecated = imageDict[imageKey].IsDeprecated;
+
+            return isFullyTransparent || isMarkedDeprecated;
         }
 
         /// <summary>
