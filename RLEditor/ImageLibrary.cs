@@ -12,11 +12,9 @@ namespace RLEditor
         /// <summary>
         /// Use this to create the base-info of a new terrain piece.
         /// </summary>
-        /// <param name="newImage"></param>
-        /// <param name="isSteel"></param>
-        public BaseImageInfo(Bitmap newImage, bool isSteel = false)
+        public BaseImageInfo(Bitmap newImage, bool isSteel = false, bool isDeprecated = false)
             : this(newImage, isSteel ? C.OBJ.STEEL : C.OBJ.TERRAIN, 1, new Rectangle(0, 0, 0, 0),
-               0, 0, 0, 0)
+                  isDeprecated, 0, 0, 0, 0)
         {
             if (newImage == null)
             {
@@ -28,7 +26,8 @@ namespace RLEditor
         /// <summary>
         /// Use this to create the base-info of a new object piece.
         /// </summary>
-        public BaseImageInfo(Bitmap newImage, C.OBJ objType, int numFrames, Rectangle triggerRect,
+        public BaseImageInfo(Bitmap newImage, C.OBJ objType, int numFrames,
+            Rectangle triggerRect, bool isDeprecated,
             int leftMargin = 0, int topMargin = 0, int rightMargin = 0, int bottomMargin = 0)
         {
             if (newImage == null)
@@ -43,6 +42,7 @@ namespace RLEditor
             this.Height = this.baseImages[0].Height;
             this.ObjectType = objType;
             this.TriggerRect = triggerRect;
+            this.IsDeprecated = isDeprecated;
             this.PrimaryImageLocation = new Rectangle(leftMargin, topMargin, this.Width - leftMargin - rightMargin, this.Height - topMargin - bottomMargin);
         }
 
@@ -110,6 +110,7 @@ namespace RLEditor
         public Rectangle PrimaryImageLocation { get; private set; }
         public Rectangle? NineSlicingArea { get; private set; }
         public bool IsMissingFromPiecesDirectory { get; private set; } = false;
+        public bool IsDeprecated { get; private set; } = false;
 
         /// <summary>
         /// Separates the various frames in one bitmap.
@@ -681,7 +682,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the object type of the piece corresponding to the key, or C.OBJ.NULL if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static C.OBJ GetObjType(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -711,6 +711,21 @@ namespace RLEditor
         }
 
         /// <summary>
+        /// Returns the deprecated status of the piece.
+        /// </summary>
+        public static bool GetIsDeprecated(string imageKey)
+        {
+            if (!imageDict.ContainsKey(imageKey))
+            {
+                bool success = AddNewImage(imageKey);
+                if (!success)
+                    return false;
+            }
+
+            return imageDict[imageKey].IsDeprecated;
+        }
+
+        /// <summary>
         /// Loads a new image into the ImageLibrary. Returns false, if image cannot be found.
         /// </summary>
         /// <param name="imageKey"></param>
@@ -732,18 +747,14 @@ namespace RLEditor
         /// <summary>
         /// Adds by hand a new image to the ImagelIbrary, assuming the ImageKey doesn't exist yet. 
         /// </summary>
-        /// <param name="imageKey"></param>
-        /// <param name="image"></param>
-        /// <param name="objType"></param>
-        /// <param name="triggerRect"></param>
-        public static void AddNewImage(string imageKey, Bitmap image, C.OBJ objType, Rectangle triggerRect)
+        public static void AddNewImage(string imageKey, Bitmap image, C.OBJ objType, Rectangle triggerRect, bool isDeprecated)
         {
             if (imageDict.ContainsKey(imageKey))
                 return;
 
             try
             {
-                imageDict[imageKey] = new BaseImageInfo(image, objType, 1, triggerRect);
+                imageDict[imageKey] = new BaseImageInfo(image, objType, 1, triggerRect, isDeprecated);
             }
             catch (Exception Ex)
             {

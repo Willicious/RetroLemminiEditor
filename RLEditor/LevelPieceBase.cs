@@ -27,6 +27,7 @@ namespace RLEditor
             this.IsSelected = true;
 
             this.IsMissing = ImageLibrary.GetIsMissing(Key);
+            this.IsDeprecated = ImageLibrary.GetIsDeprecated(Key);
         }
 
         public int PosX { get; set; }
@@ -68,6 +69,7 @@ namespace RLEditor
         public C.OBJ ObjType => ImageLibrary.GetObjType(Key);
         public bool IsSelected { get; set; }
         public bool IsMissing { get; set; }
+        public bool IsDeprecated { get; set; }
 
         /// <summary>
         /// Returns whether the ImageLibrary can find an image corresponding to this piece.

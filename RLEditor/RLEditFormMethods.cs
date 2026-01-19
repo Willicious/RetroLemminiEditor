@@ -846,8 +846,9 @@ Digger=20
             UpdateStatusBar(0);
         }
 
-        // Store the names of the missing pieces for the current level
+        // Store the names of the missing/deprecated pieces for the current level
         public HashSet<string> missingPieces = new HashSet<string>();
+        public HashSet<string> deprecatedPieces = new HashSet<string>();
 
         /// <summary>
         /// Checks for & removes all pieces for which no image in the corresponding style exists.
@@ -858,12 +859,16 @@ Digger=20
                 return;
 
             PrepareForPieceValidation();
+            UpdateDeprecatedPiecesList();
             UpdateMissingPiecesList();
             UpdateStatusBar(0);
 
             // If cleansing, search for more piece information and populate lists
             if (!cleansingLevels)
                 return;
+
+            if (deprecatedPieces.Count > 0)
+                levelsWithDeprecatedPieces.Add(CurLevel.FilePathToSave);
 
             if (missingPieces.Count > 0)
                 levelsWithMissingPieces.Add(CurLevel.FilePathToSave);
@@ -926,6 +931,17 @@ Digger=20
         {
             statusBar.Enabled = false;
             statusBar.Visible = false;
+        }
+
+        /// <summary>
+        /// Searches for deprecated pieces in the current level, and populates the list if found
+        /// </summary>
+        private void UpdateDeprecatedPiecesList()
+        {
+            CurLevel.TerrainList.FindAll(ter => ter.IsDeprecated)
+                  .ForEach(ter => deprecatedPieces.Add($@"{ter.Style}\{ter.Name}"));
+            CurLevel.GadgetList.FindAll(gad => gad.IsDeprecated)
+                             .ForEach(gad => deprecatedPieces.Add($@"{gad.Style}\{gad.Name}"));
         }
 
         /// <summary>
@@ -1243,6 +1259,7 @@ Digger=20
         }
 
         // Store filenames of levels with missing pieces
+        List<string> levelsWithDeprecatedPieces = new List<string>();
         List<string> levelsWithMissingPieces = new List<string>();
         List<string> levelsWithNoLemmings = new List<string>();
         List<string> levelsWithNoExits = new List<string>();
@@ -1262,6 +1279,7 @@ Digger=20
             cleansingLevels = true;
 
             // Initialise list
+            levelsWithDeprecatedPieces.Clear();
             levelsWithMissingPieces.Clear();
             levelsWithNoLemmings.Clear();
             levelsWithNoExits.Clear();
@@ -1296,7 +1314,12 @@ Digger=20
 
                 // Display completion message
                 string cleanseMsg = "All .ini files cleansed successfully.";
-                
+
+                if (levelsWithDeprecatedPieces.Count > 0)
+                {
+                    cleanseMsg += "\n\nLevels with deprecated pieces:\n\n";
+                    cleanseMsg += string.Join("\n", levelsWithDeprecatedPieces.Select(Path.GetFileName));
+                }
                 if (levelsWithMissingPieces.Count > 0)
                 {
                     cleanseMsg += "\n\nLevels with missing pieces:\n\n";

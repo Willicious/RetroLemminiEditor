@@ -72,11 +72,9 @@ namespace RLEditor
             FindIssuesTooFewLemmings();
             FindIssuesTimeLimit();
             FindIssuesMissingObjects();
+            FindIssuesDeprecatedPieces();
         }
 
-        /// <summary>
-        /// Returns a list of descriptions for pieces outside the level boundaries.
-        /// </summary>
         private void FindIssuesPieceOutsideBoundary()
         {
             foreach (LevelPiece piece in GetPiecesOutsideBoundary())
@@ -88,10 +86,6 @@ namespace RLEditor
             }
         }
 
-
-        /// <summary>
-        /// Gets a list of all pieces completely outside the level area.
-        /// </summary>
         private List<LevelPiece> GetPiecesOutsideBoundary()
         {
             System.Drawing.Rectangle levelRect = new System.Drawing.Rectangle(0, 0, level.Width, level.Height);
@@ -101,9 +95,6 @@ namespace RLEditor
             return outsidePieceList;
         }
 
-        /// <summary>
-        /// Returns a list of descriptions of issues regarding having too few lemmings available.
-        /// </summary>
         private void FindIssuesTooFewLemmings()
         {
             // Check whether there are enough lemmings for the save requirement.
@@ -114,27 +105,17 @@ namespace RLEditor
             }
         }
 
-        /// <summary>
-        /// Returns the maximal number of lemmings that can be saved theoretically.
-        /// </summary>
         private int MaxNumSavedLems()
         {
             return level.NumLems;
         }
 
-
-        /// <summary>
-        /// Returns an issue description if the time limit is less than 10 seconds. 
-        /// </summary>
         private void FindIssuesTimeLimit()
         {
             if (level.HasTimeLimit && level.TimeLimit < 1)
                 issuesList.Add("Time limit must be at least 1 second or set to infinite. " + level.TimeLimit.ToString() + " seconds available.");
         }
 
-        /// <summary>
-        /// Returns a list of descriptions of issues regarding missing object types.
-        /// </summary>
         private void FindIssuesMissingObjects()
         {
             if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH))
@@ -142,6 +123,23 @@ namespace RLEditor
 
             if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT))
                 issuesList.Add("Missing object: Exit.");
+        }
+
+        private void FindIssuesDeprecatedPieces()
+        {
+            foreach (GadgetPiece deprecated in level.GadgetList.FindAll(gad => gad.IsDeprecated))
+            {
+                issuesList.Add("Deprecated gadget " +
+                               "(Position " + deprecated.PosX.ToString() +
+                               ", " + deprecated.PosY.ToString() + ").");
+            }
+
+            foreach (TerrainPiece deprecated in level.TerrainList.FindAll(gad => gad.IsDeprecated))
+            {
+                issuesList.Add("Deprecated terrain piece " +
+                               "(Position " + deprecated.PosX.ToString() +
+                               ", " + deprecated.PosY.ToString() + ").");
+            }
         }
 
         /// <summary>
@@ -225,6 +223,8 @@ namespace RLEditor
 
                 if (issuesList[0].StartsWith("Piece outside"))
                     butFixIssues.Text = "Delete Pieces Outside Level";
+                else if (issuesList[0].StartsWith("Deprecated"))
+                    butFixIssues.Text = "Delete Deprecated Pieces";
 
                 if (isCleansing && butFixIssues.Text == "Edit Level")
                 {
@@ -252,7 +252,10 @@ namespace RLEditor
             }
 
             if (butFixIssues.Text == "Delete Pieces Outside Level")
-                RemovePiecesOutsideBoundary();
+                DeletePiecesOutsideBoundary();
+
+            if (butFixIssues.Text == "Delete Deprecated Pieces")
+                DeleteDeprecatedPieces();
 
             Validate(true, false, isCleansing);
 
@@ -273,20 +276,17 @@ namespace RLEditor
             validatorForm.Close();
         }
 
-        /// <summary>
-        /// Removes all pieces that do not intersect the level boundaries.
-        /// </summary>
-        private void RemovePiecesOutsideBoundary()
+        private void DeletePiecesOutsideBoundary()
         {
             System.Drawing.Rectangle levelRect = new System.Drawing.Rectangle(0, 0, level.Width, level.Height);
             level.TerrainList.RemoveAll(ter => !ter.ImageRectangle.IntersectsWith(levelRect));
             level.GadgetList.RemoveAll(obj => !obj.ImageRectangle.IntersectsWith(levelRect));
         }
+
+        private void DeleteDeprecatedPieces()
+        {
+            level.TerrainList.RemoveAll(ter => ter.IsDeprecated);
+            level.GadgetList.RemoveAll(obj => obj.IsDeprecated);
+        }
     }
 }
-
-//TODO - We can ask the Editor to not show Decoration pieces that are completely blank
-//in the objects list, and remove any such pieces in level where they exist.
-//Then, if a user wishes to deprecate a piece in their style, they can make it
-//completely blank and mark is as a decoration. Existing levels using the piece
-//will load, and the Editor can fix them automatically.

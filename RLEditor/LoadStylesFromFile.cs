@@ -18,7 +18,7 @@ namespace RLEditor
             string imageKey = ImageLibrary.CreatePieceKey("Default", "SteelArea", true);
             Bitmap image = Properties.Resources.SteelArea;
             Rectangle triggerArea = new Rectangle(0, 0, 32, 32);
-            ImageLibrary.AddNewImage(imageKey, image, C.OBJ.STEEL, triggerArea);
+            ImageLibrary.AddNewImage(imageKey, image, C.OBJ.STEEL, triggerArea, false);
         }
         public static void AddRulersToLibrary()
         {
@@ -27,7 +27,7 @@ namespace RLEditor
             void AddRuler(string name, Bitmap img)
             {
                 string key = ImageLibrary.CreatePieceKey("Rulers", name, true);
-                ImageLibrary.AddNewImage(key, img, C.OBJ.RULER, triggerArea);
+                ImageLibrary.AddNewImage(key, img, C.OBJ.RULER, triggerArea, false);
                 ImageLibrary.RegisterRuler(key);
             }
 
@@ -275,6 +275,7 @@ namespace RLEditor
         {
             C.OBJ objType = C.OBJ.NONE;
             int frameCount = 0;
+            bool isDeprecated = false;
 
             // Determine tile index from filename
             string fileName = Path.GetFileNameWithoutExtension(filePath);
@@ -301,19 +302,26 @@ namespace RLEditor
                         FileLine line = fileLineList[0];
                         string key = line.Key.Trim();
 
-                        // Parse frames_N
-                        if (key.Equals($"FRAMES_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                        // Check to see if the piece is deprecated
+                        if (key.Equals($"deprecated_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                        {
+                            isDeprecated = true;
+                            continue;
+                        }
+
+                        // Number of frames
+                        if (key.Equals($"frames_{tileIndex}", StringComparison.OrdinalIgnoreCase))
                         {
                             string valueStr = line.Text.TrimStart('=', ' ').Trim();
                             if (int.TryParse(valueStr, out int parsedFrames))
                             {
                                 frameCount = parsedFrames;
                             }
-                            continue; // Continue parsing in case TYPE_N appears later
+                            continue;
                         }
 
-                        // Parse TYPE_N
-                        if (key.Equals($"TYPE_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                        // Object type
+                        if (key.Equals($"type_{tileIndex}", StringComparison.OrdinalIgnoreCase))
                         {
                             string valueStr = line.Text.TrimStart('=', ' ').Trim();
                             if (int.TryParse(valueStr, out int parsedType))
@@ -353,6 +361,7 @@ namespace RLEditor
                             }
                             continue;
                         }
+
                         // Break early if we have all values
                         if (frameCount >= 1 && objType != C.OBJ.NONE)
                             break;
@@ -381,12 +390,13 @@ namespace RLEditor
 
             // Output the new object
             Bitmap newBitmap = Image(filePath);
-            return new BaseImageInfo(newBitmap, objType, frameCount, triggerRect);
+            return new BaseImageInfo(newBitmap, objType, frameCount, triggerRect, isDeprecated);
         }
 
         private static BaseImageInfo CreateNewTerrainInfo(string filePath)
         {
             bool IsSteel = false;
+            bool IsDeprecated = false;
 
             string styleName = Path.GetFileName(Path.GetDirectoryName(filePath));
             string styleTheme = C.AppPathThemeInfo(styleName);
@@ -410,20 +420,43 @@ namespace RLEditor
                         System.Diagnostics.Debug.Assert(fileLineList.Count > 0, "FileParser returned empty list.");
 
                         FileLine line = fileLineList[0];
-                        if (line.Key.Trim().Equals("steelTiles", StringComparison.OrdinalIgnoreCase))
+                        string key = line.Key.Trim();
+
+                        // ---- Steel tiles ----
+                        if (key.Equals("steelTiles", StringComparison.OrdinalIgnoreCase))
                         {
                             string values = line.Text.TrimStart('=', ' ').Trim();
                             string[] parts = values.Split(',');
+
                             foreach (string part in parts)
                             {
-                                if (int.TryParse(part.Trim(), out int steelIndex) && steelIndex == tileIndex)
+                                if (int.TryParse(part.Trim(), out int steelIndex) &&
+                                    steelIndex == tileIndex)
                                 {
                                     IsSteel = true;
                                     break;
                                 }
                             }
+                            continue;
                         }
-                        if (IsSteel)
+
+                        // ---- Deprecated tiles ----
+                        if (key.Equals("deprecatedTiles", StringComparison.OrdinalIgnoreCase))
+                        {
+                            string values = line.Text.TrimStart('=', ' ').Trim();
+                            string[] parts = values.Split(',');
+
+                            foreach (string part in parts)
+                            {
+                                if (int.TryParse(part.Trim(), out int deprecatedIndex) &&
+                                    deprecatedIndex == tileIndex)
+                                {
+                                    IsDeprecated = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (IsSteel || IsDeprecated)
                             break;
                     }
                 }
@@ -439,7 +472,7 @@ namespace RLEditor
             }
 
             Bitmap newBitmap = Image(filePath);
-            return new BaseImageInfo(newBitmap, IsSteel);
+            return new BaseImageInfo(newBitmap, IsSteel, IsDeprecated);
         }
     }
 }
