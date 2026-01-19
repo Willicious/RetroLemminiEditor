@@ -1409,6 +1409,7 @@ Digger=20
             ReadLevelInfoFromForm(true);
             var validator = new LevelValidator(CurLevel);
             validator.Validate(false, openedViaSave, cleansingLevels);
+            pic_Level.SetImage(curRenderer.CreateLevelImage());
         }
 
 
