@@ -80,7 +80,7 @@ namespace RLEditor
             SearchDirectoryForSteel();
             SearchDirectoryForObjects();
 
-            RemoveDuplicatedObjects();
+            RemoveTransparentPieces();
             SortObjectNamesByObjectType();
         }
 
@@ -98,7 +98,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Writes all pieces in AppPath/StyleName/terrain to the list of TerrainNames.
+        /// Writes all relevant pieces in AppPath/StyleName/ to the list of TerrainNames.
         /// </summary>
         private void SearchDirectoryForTerrain()
         {
@@ -127,7 +127,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Writes all steel pieces in AppPath/StyleName/terrain to the list of SteelNames.
+        /// Writes all steel pieces in AppPath/StyleName/ to the list of SteelNames.
         /// </summary>
         private void SearchDirectoryForSteel()
         {
@@ -155,7 +155,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Writes all pieces in AppPath/StyleName/objects and /default to the list of ObjectNames.
+        /// Writes all relevant pieces in AppPath/StyleName/ to the list of ObjectNames.
         /// </summary>
         private void SearchDirectoryForObjects()
         {
@@ -183,14 +183,15 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Removes all default objects, that are already present in the actual style.
+        /// Removes all pieces that are completely transparent.
         /// </summary>
-        private void RemoveDuplicatedObjects()
+        private void RemoveTransparentPieces()
         {
-            ObjectKeys.RemoveAll(obj => obj.StartsWith("default")
-                                      && !ImageLibrary.GetObjType(obj).In(C.OBJ.NONE, C.OBJ.DECORATION)
-                                      && ObjectKeys.Exists(obj2 => !obj2.StartsWith("default")
-                                                              && ImageLibrary.GetObjType(obj) == ImageLibrary.GetObjType(obj2)));
+            ObjectKeys.RemoveAll(key =>
+            {
+                Bitmap bmp = ImageLibrary.GetImage(key);
+                return bmp == null || ImageLibrary.IsFullyTransparent(bmp, key);
+            });
         }
 
         /// <summary>
