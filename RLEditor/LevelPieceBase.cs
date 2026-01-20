@@ -179,7 +179,10 @@ namespace RLEditor
         /// <param name="borderRect"></param>
         public virtual void FlipInRect(Rectangle borderRect)
         {
-            PosX = borderRect.Left + borderRect.Right - PosX - Width;
+            if (ObjType != C.OBJ.HATCH)
+            {
+                PosX = borderRect.Left + borderRect.Right - PosX - Width;
+            }
 
             if (MayFlip())
             {
