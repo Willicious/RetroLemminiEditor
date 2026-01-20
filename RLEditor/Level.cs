@@ -478,7 +478,7 @@ namespace RLEditor
         public void FlipPieces()
         {
             Rectangle borderRect = SelectionRectangle();
-            SelectionList().ForEach(item => item.FlipInRect(borderRect, item.ObjType == C.OBJ.HATCH));
+            SelectionList().ForEach(item => item.FlipInRect(borderRect));
         }
 
         /// <summary>

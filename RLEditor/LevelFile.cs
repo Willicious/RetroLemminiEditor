@@ -291,7 +291,7 @@ namespace RLEditor
             if (doRotate)
                 newGadget.RotateInRect(newGadget.ImageRectangle);
             if (doFlip)
-                newGadget.FlipInRect(newGadget.ImageRectangle, newGadget.ObjType == C.OBJ.HATCH);
+                newGadget.FlipInRect(newGadget.ImageRectangle);
             if (doInvert)
                 newGadget.InvertInRect(newGadget.ImageRectangle);
 
@@ -810,14 +810,6 @@ namespace RLEditor
         static public bool IsSkillRequired(Level curLevel, C.Skill skill)
         {
             return (curLevel.SkillSet[skill] > 0);
-        }
-
-        static public bool NeedFlipOffset(GadgetPiece gadget)
-        {
-            if (gadget.ObjType == C.OBJ.HATCH && gadget.FlipOffset != 0)
-                return true;
-            else
-                return false;
         }
 
         /// <summary>

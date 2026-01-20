@@ -50,12 +50,6 @@ namespace RLEditor
         protected bool IsInvert { get; private set; }
         public int GetRotation() => Rotation;
 
-        // For calculating the flip offset
-        public int MarginLeft => ImageLibrary.GetMargins(Key).Left;
-        public int MarginRight => ImageLibrary.GetMargins(Key).Right;
-
-        public int FlipOffset;
-
         // For writing the save file
         public bool IsRotatedInPlayer => (Rotation % 2 == 1);
         public bool IsInvertedInPlayer => (IsInvert && Rotation % 4 < 2) || (!IsInvert && Rotation % 4 > 1);
@@ -183,7 +177,7 @@ namespace RLEditor
         /// Flips the piece wrt. a specified rectangle, if allowed for this piece.
         /// </summary>
         /// <param name="borderRect"></param>
-        public virtual void FlipInRect(Rectangle borderRect, bool isHatch = false)
+        public virtual void FlipInRect(Rectangle borderRect)
         {
             PosX = borderRect.Left + borderRect.Right - PosX - Width;
 
@@ -191,7 +185,6 @@ namespace RLEditor
             {
                 Rotation = (Rotation + 2) % 4;
                 IsInvert = !IsInvert;
-                FlipOffset = isHatch ? MarginRight - MarginLeft : 0;
             }
         }
 

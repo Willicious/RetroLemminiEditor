@@ -308,7 +308,7 @@ namespace RLEditor
             imageDict = new Dictionary<string, BaseImageInfo>();
         }
 
-        // The key is the file path below the "styles\\pieces" folder!
+        // The key is the file path below the "styles\" folder!
         static Dictionary<string, BaseImageInfo> imageDict;
 
         /// <summary>
