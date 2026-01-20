@@ -153,8 +153,8 @@ namespace RLEditor
         /// </summary>
         protected override int GetFrameIndex()
         {
-            if (ObjType == C.OBJ.HATCH && C.OriginalStyles.Contains(Style))
-                return 9;
+            if (ObjType == C.OBJ.HATCH)
+                return ImageLibrary.GetFrameCount(Key);
             else
                 return base.GetFrameIndex();
         }

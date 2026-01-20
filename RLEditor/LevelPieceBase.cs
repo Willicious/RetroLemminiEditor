@@ -216,7 +216,10 @@ namespace RLEditor
         /// </summary>
         protected virtual int GetFrameIndex()
         {
-            return 0;
+            if (ObjType == C.OBJ.HATCH)
+                return ImageLibrary.GetFrameCount(Key);
+            else
+                return 0;
         }
 
         /// <summary>
@@ -233,11 +236,6 @@ namespace RLEditor
         }
     }
 }
-
-// TODO - Fix hatches:
-// Selection rectangle looks at frame 1, it should look at frame 10
-// However, it's correct when they're flipped!
-// Look at hatch flipping offsets, I think they're causing the hatch to move when flipped
 
 // TODO - Add support for mods
 

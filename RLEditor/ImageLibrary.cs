@@ -89,14 +89,15 @@ namespace RLEditor
                 CreateImagesWithNameAndData(pieceKey);
             return imagesWithNameAndData[index % imagesWithNameAndData.Count];
         }
-        public Bitmap WindowImageWithDirection(RotateFlipType rotFlipType, int index)
+        public Bitmap WindowImageWithDirection(RotateFlipType rotFlipType, int index, string key)
         {
             // Warning: Ignore rotFlipType for actual image and use it only for the directional arrow!
             Bitmap image = (Bitmap)Image(RotateFlipType.RotateNoneFlipNone, index).Clone();
             bool isFlipped = rotFlipType.In(RotateFlipType.RotateNoneFlipX, RotateFlipType.RotateNoneFlipXY, RotateFlipType.Rotate90FlipY, RotateFlipType.Rotate90FlipXY);
             string directionString = isFlipped ? "←" : "→";
-            Point bottomRightCorner = new Point(image.Width, image.Height);
-            image.WriteText(directionString, bottomRightCorner, C.RLColors[C.RLColor.Text], 12, ContentAlignment.BottomRight, new Size(20, 16));
+            Rectangle rect = ImageLibrary.SolidPixelRect(image, key, 0, false);
+            Point bottomRightCorner = new Point(rect.Width, rect.Height);
+            image.WriteText(directionString, bottomRightCorner, C.RLColors[C.RLColor.Text], 12, ContentAlignment.BottomRight, new Size(12, 16));
             return image;
         }
         public int Width { get; private set; }
@@ -106,6 +107,7 @@ namespace RLEditor
         public int MarkerX { get; private set; }
         public int MarkerY { get; private set; }
         public C.OBJ ObjectType { get; private set; }
+        public int FrameCount => baseImages.Count - 1;
         public Rectangle TriggerRect { get; private set; }
         public Rectangle PrimaryImageLocation { get; private set; }
         public Rectangle? NineSlicingArea { get; private set; }
@@ -379,6 +381,17 @@ namespace RLEditor
         }
 
         /// <summary>
+        /// Get the total number of frames for the current image
+        /// </summary>
+        public static int GetFrameCount(string imageKey)
+        {
+            if (!imageDict.ContainsKey(imageKey))
+                return 1;
+
+            return imageDict[imageKey].FrameCount;
+        }
+
+        /// <summary>
         /// Returns a correctly oriented image corresponding to the key, or null if image cannot be found. 
         /// <para> Warning: The Bitmap is passed by reference, so NEVER change its value! </para>
         /// </summary>
@@ -402,6 +415,9 @@ namespace RLEditor
                     return null;
                 }
             }
+
+            if (GetObjType(imageKey) == C.OBJ.HATCH)
+                index = GetFrameCount(imageKey);
 
             return imageDict[imageKey].Image(rotFlipType, index);
         }
@@ -493,7 +509,7 @@ namespace RLEditor
                 }
             }
 
-            return imageDict[imageKey].WindowImageWithDirection(rotFlipType, index);
+            return imageDict[imageKey].WindowImageWithDirection(rotFlipType, index, imageKey);
         }
 
         public static (int Left, int Right) GetMargins(string imageKey)

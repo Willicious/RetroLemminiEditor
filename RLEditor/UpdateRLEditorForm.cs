@@ -79,7 +79,7 @@ namespace RLEditor
                     but_PieceLeft.StopRepeatAction();
                 }
 
-                int frameIndex = (ImageLibrary.GetObjType(pieceKey).In(C.OBJ.HATCH)) ? 9 : 0;
+                int frameIndex = ImageLibrary.GetObjType(pieceKey) == C.OBJ.HATCH ? ImageLibrary.GetFrameCount(pieceKey) : 0;
                 Bitmap pieceImage;
 
                 bool preferObjectName = curSettings.PreferObjectName;
