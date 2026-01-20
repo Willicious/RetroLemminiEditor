@@ -544,7 +544,6 @@ namespace RLEditor
             sb.AppendLine($"name = {GetSafeString(curLevel.Title)}");
             sb.AppendLine($"author = {GetSafeString(curLevel.Author)}");
             sb.AppendLine($"version = {curLevel.LevelVersion}");
-            sb.AppendLine($"music = {curLevel.MusicFile}");
             sb.AppendLine($"releaseRate = {curLevel.MinReleaseRate}");
             sb.AppendLine($"maxReleaseRate = {curLevel.MaxReleaseRate}");
             sb.AppendLine($"lockReleaseRate = {curLevel.IsReleaseRateLocked}");
@@ -573,6 +572,7 @@ namespace RLEditor
             sb.AppendLine($"bottomBoundary = {curLevel.BottomBoundary}");
             sb.AppendLine($"leftBoundary = {curLevel.LeftBoundary}");
             sb.AppendLine($"rightBoundary = {curLevel.RightBoundary}");
+            sb.AppendLine(curLevel.MusicFile == "" ? "" : $"music = {curLevel.MusicFile}");
             sb.AppendLine();
 
             // Add objects

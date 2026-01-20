@@ -237,3 +237,15 @@ namespace RLEditor
         }
     }
 }
+
+// TODO - Fix hatches:
+// Selection rectangle looks at frame 1, it should look at frame 10
+// However, it's correct when they're flipped!
+// Look at hatch flipping offsets, I think they're causing the hatch to move when flipped
+
+// TODO - Add support for mods
+
+// TODO - Maybe put optional stuff in an "Extras" tab
+
+// TODO - Add "?" button next to Mods, Superlemming and Autosteel
+// Clicking opens a simple dialog with explanation
