@@ -281,6 +281,8 @@ namespace RLEditor
             bool pieceBrowserIsWindowed = pieceBrowserWindow != null;
             int width = pieceBrowserWindow != null ? pieceBrowserWindow.Width : this.Width;
 
+            btnLoadStyle.Top = tabPieces.Height - btnLoadStyle.Height;
+
             RepositionPieceBrowser(pieceBrowserIsWindowed, width);
             RepositionPicPieces(pieceBrowserIsWindowed, width);
         }

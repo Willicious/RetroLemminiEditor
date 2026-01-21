@@ -95,6 +95,9 @@ namespace RLEditor
             // --- Music ---
             newLevel.MusicFile = ini.GetString("music");
 
+            // --- Mods ---
+            newLevel.Mods = ini.GetString("mods");
+
             // --- Level dimensions ---
             newLevel.Width = ini.GetInt("width");
             newLevel.Height = ini.GetInt("height");
@@ -573,6 +576,7 @@ namespace RLEditor
             sb.AppendLine($"leftBoundary = {curLevel.LeftBoundary}");
             sb.AppendLine($"rightBoundary = {curLevel.RightBoundary}");
             sb.AppendLine(curLevel.MusicFile == "" ? "" : $"music = {curLevel.MusicFile}");
+            sb.AppendLine(curLevel.Mods == "" ? "" : $"mods = {curLevel.Mods}");
             sb.AppendLine();
 
             // Add objects

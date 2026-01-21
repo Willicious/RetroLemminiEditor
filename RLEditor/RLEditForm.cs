@@ -26,6 +26,7 @@ namespace RLEditor
             SetRepeatButtonIntervals();
             SetCustomSkillsetList();
             SetMusicList();
+            SetModsList();
 
             LoadStylesFromFile.AddSteelAreaImageToLibrary();
             LoadStylesFromFile.AddRulersToLibrary();
@@ -75,7 +76,6 @@ namespace RLEditor
             UpdatePieceMetaData();
 
             ResetLevelImage();
-            MoveControlsOnFormResize();
 
             if (!curSettings.UseTooltipBotton)
                 toolTipButton.Active = false;
@@ -1415,11 +1415,17 @@ namespace RLEditor
         {
             SetHotkeys();
 
+            // Use this to reset settings if needed
+            //Properties.Settings.Default.Reset();
+            //Properties.Settings.Default.Save();
+
             if (Properties.Settings.Default.ShowAboutRLWindowAtStartup)
                 ShowAboutRLEditor();
 
             if (Properties.Settings.Default.LevelArrangerIsOpen)
                 OpenLevelArrangerWindow();
+
+            MoveControlsOnFormResize();
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1560,6 +1566,26 @@ namespace RLEditor
         private void levelPackCompilerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenLevelPackCompiler();
+        }
+
+        private void btnLevelPackCompiler_Click(object sender, EventArgs e)
+        {
+            OpenLevelPackCompiler();
+        }
+
+        private void btnModsHelp_Click(object sender, EventArgs e)
+        {
+            ShowModsHelpDialog(true);
+        }
+
+        private void combo_Mods_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowModsHelpDialog(false);
+        }
+
+        private void btnLoadStyle_Click(object sender, EventArgs e)
+        {
+            LoadStyleFromMetaData();
         }
     }
 }

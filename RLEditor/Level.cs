@@ -22,6 +22,7 @@ namespace RLEditor
             this.Author = "";
             this.MainStyle = mainStyle;
             this.MusicFile = "";
+            this.Mods = "";
 
             this.Width = 800;
             this.Height = 320;
@@ -64,6 +65,7 @@ namespace RLEditor
         public string Author { get; set; }
         public Style MainStyle { get; set; }
         public string MusicFile { get; set; }
+        public string Mods { get; set; }
 
         public string FilePathToSave { get; set; }
 
@@ -132,6 +134,7 @@ namespace RLEditor
             newLevel.Title = string.Copy(this.Title);
             newLevel.Author = string.Copy(this.Author);
             newLevel.MusicFile = string.Copy(this.MusicFile);
+            newLevel.Mods = string.Copy(this.Mods);
             newLevel.FilePathToSave = this.FilePathToSave; // shallow copy is fine here
 
             newLevel.Width = this.Width;
@@ -187,6 +190,7 @@ namespace RLEditor
                 || !((this.MainStyle == null && otherLevel.MainStyle == null) ||
                      (this.MainStyle != null && this.MainStyle.NameInDirectory.Equals(otherLevel.MainStyle?.NameInDirectory)))
                 || !this.MusicFile.Equals(otherLevel.MusicFile)
+                || !this.Mods.Equals(otherLevel.Mods)
                 || this.Width != otherLevel.Width
                 || this.Height != otherLevel.Height
                 || this.StartPosX != otherLevel.StartPosX

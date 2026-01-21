@@ -166,5 +166,17 @@ namespace RLEditor.Properties {
                 this["ShowSteelAreasMessage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowModsHelpDialog {
+            get {
+                return ((bool)(this["ShowModsHelpDialog"]));
+            }
+            set {
+                this["ShowModsHelpDialog"] = value;
+            }
+        }
     }
 }

@@ -385,6 +385,33 @@ Digger=20
         }
 
         /// <summary>
+        /// Sets the mods list according to available files in the mods folder.
+        /// </summary>
+        private void SetModsList()
+        {
+            List<string> availableMods;
+
+            if (Directory.Exists(C.AppPathMods))
+            {
+                string root = Path.GetFullPath(C.AppPathMods)
+                                  .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+                availableMods = Directory
+                    .GetDirectories(root, "*", SearchOption.TopDirectoryOnly)
+                    .Select(dir => Path.GetFileName(dir))
+                    .ToList();
+            }
+            else
+            {
+                availableMods = new List<string>();
+            }
+
+            combo_Mods.Items.Clear();
+            combo_Mods.Items.Add("");
+            availableMods.ForEach(mod => combo_Mods.Items.Add(mod));
+        }
+
+        /// <summary>
         /// Sets the correct size and position of the expanded tabs
         /// </summary>
         private void UpdateExpandedTabs()
@@ -397,9 +424,9 @@ Digger=20
             tabLvlSkills.Left = tabLvlPieces.Right;
             tabLvlSkills.Top = tabLvlProperties.Top;
 
-            tabLvlMisc.Size = tabLvlProperties.Size;
-            tabLvlMisc.Left = tabLvlSkills.Right;
-            tabLvlMisc.Top = tabLvlProperties.Top;
+            tabLvlExtras.Size = tabLvlProperties.Size;
+            tabLvlExtras.Left = tabLvlSkills.Right;
+            tabLvlExtras.Top = tabLvlProperties.Top;
 
             if (Properties.Settings.Default.AllTabsAreExpanded)
                 ExpandAllTabs();
@@ -437,6 +464,7 @@ Digger=20
             CurLevel.Author = txt_LevelAuthor.Text;
             CurLevel.Title = txt_LevelTitle.Text;
             CurLevel.MusicFile = Path.ChangeExtension(combo_Music.Text, null);
+            CurLevel.Mods = combo_Mods.Text;
             CurLevel.Width = decimal.ToInt32(num_Lvl_SizeX.Value);
             CurLevel.Height = decimal.ToInt32(num_Lvl_SizeY.Value);
             CurLevel.AutoStartPos = chk_Lvl_AutoStart.Checked;
@@ -506,6 +534,11 @@ Digger=20
                     combo_MainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
                 else
                     combo_MainStyle.SelectedIndex = 0;
+
+                if (!string.IsNullOrEmpty(CurLevel.Mods) && combo_Mods.Items.Contains(CurLevel.Mods))
+                    combo_Mods.SelectedItem = CurLevel.Mods;
+                else
+                    combo_Mods.SelectedIndex = 0;
 
                 // Set size and start position, but without calling the Value_Changed methods,
                 // because they automatically call validation of the start position resp. render the level again.
@@ -655,6 +688,108 @@ Digger=20
             using (var styleManagerForm = new FormStyleManager(this, curSettings))
             {
                 styleManagerForm.ShowDialog(this);
+            }
+        }
+        private void LoadStyleFromMetaData()
+        {
+            if (string.IsNullOrWhiteSpace(lblPieceStyle.Text))
+            {
+                MessageBox.Show("No valid style detected in metadata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (combo_PieceStyle.Items.Cast<string>().Contains(lblPieceStyle.Text))
+            {
+                combo_PieceStyle.Text = lblPieceStyle.Text;
+            }
+            else
+            {
+                MessageBox.Show($"Style '{lblPieceStyle.Text}' not found in style list.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ShowModsHelpDialog(bool userOpened)
+        {
+            if (!this.Visible) // Ensure the main form has loaded
+                return;
+
+            Properties.Settings settings = Properties.Settings.Default;
+
+            if (!userOpened && !settings.ShowModsHelpDialog)
+                return;
+
+            using (Form dlg = new Form())
+            {
+                dlg.Text = "Mods Info";
+                dlg.FormBorderStyle = FormBorderStyle.FixedDialog;
+                dlg.StartPosition = FormStartPosition.CenterParent;
+                dlg.MaximizeBox = false;
+                dlg.MinimizeBox = false;
+                dlg.ClientSize = new Size(420, 208);
+                dlg.ShowInTaskbar = false;
+
+                Label lbl = new Label()
+                {
+                    AutoSize = false,
+                    Location = new Point(12, 12),
+                    Size = new Size(380, 80),
+                    Text =
+                        "Mods can be used on a per-level or per-pack basis.\n\n" +
+                        "If a level with mods is placed into a pack with mods, level mods take priority.\n\n" +
+                        "To apply a mod to the current level, select one from the dropdown list.\n" +
+                        "To apply mods to a full pack of levels, use the Level Pack Compiler."
+                };
+
+                CheckBox checkDontShowAgain = new CheckBox
+                {
+                    Text = "Don't show this again",
+                    AutoSize = true,
+                    Location = new Point(16, 120),
+                    Visible = !userOpened
+                };
+
+                Button btnLevelPackCompiler = new Button()
+                {
+                    Text = "Open Level Pack Compiler",
+                    Size = new Size(180, 35),
+                    Location = new Point(12, 160)
+                };
+
+                btnLevelPackCompiler.Click += (s, e) =>
+                {
+                    if (checkDontShowAgain.Checked && settings.ShowModsHelpDialog)
+                    {
+                        settings.ShowModsHelpDialog = false;
+                        settings.Save();
+                    }
+
+                    OpenLevelPackCompiler();
+                    dlg.Close();
+                };
+
+                Button btnOK = new Button()
+                {
+                    Text = "OK",
+                    Size = new Size(100, 35),
+                    Location = new Point(310, 160),
+                    DialogResult = DialogResult.Cancel
+                };
+
+                btnOK.Click += (s, e) =>
+                {
+                    if (checkDontShowAgain.Checked && settings.ShowModsHelpDialog)
+                    {
+                        settings.ShowModsHelpDialog = false;
+                        settings.Save();
+                    }
+                };
+
+                dlg.Controls.Add(lbl);
+                dlg.Controls.Add(checkDontShowAgain);
+                dlg.Controls.Add(btnLevelPackCompiler);
+                dlg.Controls.Add(btnOK);
+
+                dlg.ShowDialog(this);
             }
         }
 
@@ -1139,6 +1274,11 @@ Digger=20
             tabLvlSkills.Enabled = true;
             tabLvlSkills.Visible = true;
 
+            tabLvlProperties.TabPages.Remove(tabExtras);
+            tabLvlExtras.TabPages.Add(tabExtras);
+            tabLvlExtras.Enabled = true;
+            tabLvlExtras.Visible = true;
+
             expandAllTabsToolStripMenuItem.Text = "Collapse All Tabs";
             allTabsExpanded = true;
         }
@@ -1154,6 +1294,11 @@ Digger=20
             tabLvlProperties.TabPages.Add(tabSkills);
             tabLvlSkills.Enabled = false;
             tabLvlSkills.Visible = false;
+
+            tabLvlExtras.TabPages.Remove(tabExtras);
+            tabLvlProperties.TabPages.Add(tabExtras);
+            tabLvlExtras.Enabled = false;
+            tabLvlExtras.Visible = false;
 
             expandAllTabsToolStripMenuItem.Text = "Expand All Tabs";
             allTabsExpanded = false;
@@ -1674,6 +1819,7 @@ Digger=20
                 lblPieceStyle.Text = string.Empty;
                 lblPieceType.Text = string.Empty;
                 lblPieceSize.Text = string.Empty;
+                btnLoadStyle.Visible = false;
 
                 return;
             }
@@ -1701,8 +1847,14 @@ Digger=20
             lblPieceStyle.Text = pieceStyle;
             lblPieceType.Text = pieceType;
             lblPieceSize.Text = pieceSize;
-        }
 
+            string[] nonLoadable = { "(Default)", "(Rulers)" };
+
+            if (pieceCurStyle.NameInEditor != pieceStyle && !nonLoadable.Contains(pieceStyle))
+                btnLoadStyle.Visible = true;
+            else
+                btnLoadStyle.Visible = false;
+        }
 
         /// <summary>
         /// Gets the key from the index of the clicked PieceBox.
