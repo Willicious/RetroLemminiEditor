@@ -505,7 +505,7 @@ Digger=20
                 if ((CurLevel.MainStyle != null) && combo_MainStyle.Items.Contains(CurLevel.MainStyle.NameInEditor))
                     combo_MainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
                 else
-                    combo_Music.SelectedIndex = 0;
+                    combo_MainStyle.SelectedIndex = 0;
 
                 // Set size and start position, but without calling the Value_Changed methods,
                 // because they automatically call validation of the start position resp. render the level again.
