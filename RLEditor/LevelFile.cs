@@ -460,17 +460,17 @@ namespace RLEditor
         {
             // Level size
             newLevel.Width = Math.Max(Math.Min(newLevel.Width, 6400), 16);
-            newLevel.Height = Math.Max(Math.Min(newLevel.Height, 3200), 16);
+            newLevel.Height = Math.Max(Math.Min(newLevel.Height, 6400), 16);
             // Start position
             newLevel.StartPosX = Math.Max(Math.Min(newLevel.StartPosX, newLevel.Width - 1), 0);
             newLevel.StartPosY = Math.Max(Math.Min(newLevel.StartPosY, newLevel.Height - 1), 0);
             // Global level properties
-            newLevel.NumLems = Math.Max(Math.Min(newLevel.NumLems, 999), 1);
-            newLevel.SaveReq = Math.Max(Math.Min(newLevel.SaveReq, 999), 1);
+            newLevel.NumLems = Math.Max(Math.Min(newLevel.NumLems, 9999), 1);
+            newLevel.SaveReq = Math.Max(Math.Min(newLevel.SaveReq, 9999), 1);
             newLevel.MinReleaseRate = Math.Max(Math.Min(newLevel.MinReleaseRate, 99), 1);
             newLevel.MaxReleaseRate = Math.Max(Math.Min(newLevel.MaxReleaseRate, 99), 1);
-            newLevel.TimeLimit = Math.Max(Math.Min(newLevel.TimeLimit, 5999), 0);
-            newLevel.MaxFallDistance = Math.Max(Math.Min(newLevel.MaxFallDistance, 3200), 1);
+            newLevel.TimeLimit = Math.Max(Math.Min(newLevel.TimeLimit, 9999), 0);
+            newLevel.MaxFallDistance = Math.Max(Math.Min(newLevel.MaxFallDistance, 9999), 7);
             // Skill numbers
             foreach (C.Skill skill in C.SkillArray)
             {
