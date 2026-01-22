@@ -30,7 +30,9 @@ namespace RLEditor
 
         Form validatorForm;
         TextBox txtIssuesList;
-        Button butFixIssues;
+        Button butEditLevel;
+        Button butDeleteOutsidePieces;
+        Button butDeleteDeprecatedPieces;
         Button butClose;
 
         public static bool validationPassed = true;
@@ -79,10 +81,7 @@ namespace RLEditor
         {
             foreach (LevelPiece piece in GetPiecesOutsideBoundary())
             {
-                issuesList.Add("Piece outside level boundary: " + piece.Name +
-                               " in style " + piece.Style +
-                               "(Position " + piece.PosX.ToString() +
-                               ", " + piece.PosY.ToString() + ").");
+                issuesList.Add($"Piece outside level boundary: {piece.Name} in style {piece.Style} (Position {piece.PosX}, {piece.PosY})");
             }
         }
 
@@ -129,16 +128,12 @@ namespace RLEditor
         {
             foreach (GadgetPiece deprecated in level.GadgetList.FindAll(gad => gad.IsDeprecated))
             {
-                issuesList.Add("Deprecated gadget " +
-                               "(Position " + deprecated.PosX.ToString() +
-                               ", " + deprecated.PosY.ToString() + ").");
+                issuesList.Add($"Deprecated gadget: {deprecated.Name} in style {deprecated.Style} (Position {deprecated.PosX}, {deprecated.PosY})");
             }
 
             foreach (TerrainPiece deprecated in level.TerrainList.FindAll(gad => gad.IsDeprecated))
             {
-                issuesList.Add("Deprecated terrain piece " +
-                               "(Position " + deprecated.PosX.ToString() +
-                               ", " + deprecated.PosY.ToString() + ").");
+                issuesList.Add($"Deprecated terrain piece: {deprecated.Name} in style {deprecated.Style} (Position {deprecated.PosX}, {deprecated.PosY})");
             }
         }
 
@@ -169,19 +164,40 @@ namespace RLEditor
             txtIssuesList.TabStop = false;
             validatorForm.Controls.Add(txtIssuesList);
 
-            butFixIssues = new Button();
-            butFixIssues.Top = 212;
-            butFixIssues.Left = 6;
-            butFixIssues.Width = 220;
-            butFixIssues.Height = 40;
-            butFixIssues.Text = "Edit Level";
-            butFixIssues.Click += new EventHandler(butFixIssues_Click);
-            validatorForm.Controls.Add(butFixIssues);
+            butEditLevel = new Button();
+            butEditLevel.Top = 212;
+            butEditLevel.Left = 6;
+            butEditLevel.Width = 220;
+            butEditLevel.Height = 40;
+            butEditLevel.Text = "Edit Level";
+            butEditLevel.Visible = false;
+            butEditLevel.Click += new EventHandler(butEditLevel_Click);
+            validatorForm.Controls.Add(butEditLevel);
+
+            butDeleteOutsidePieces = new Button();
+            butDeleteOutsidePieces.Top = 212;
+            butDeleteOutsidePieces.Left = 6;
+            butDeleteOutsidePieces.Width = 220;
+            butDeleteOutsidePieces.Height = 40;
+            butDeleteOutsidePieces.Text = "Delete Pieces Outside Level";
+            butDeleteOutsidePieces.Visible = false;
+            butDeleteOutsidePieces.Click += new EventHandler(butDeleteOutsidePieces_Click);
+            validatorForm.Controls.Add(butDeleteOutsidePieces);
+
+            butDeleteDeprecatedPieces = new Button();
+            butDeleteDeprecatedPieces.Top = 212;
+            butDeleteDeprecatedPieces.Left = 6;
+            butDeleteDeprecatedPieces.Width = 220;
+            butDeleteDeprecatedPieces.Height = 40;
+            butDeleteDeprecatedPieces.Text = "Delete Deprecated Pieces";
+            butDeleteDeprecatedPieces.Visible = false;
+            butDeleteDeprecatedPieces.Click += new EventHandler(butDeleteDeprecatedPieces_Click);
+            validatorForm.Controls.Add(butDeleteDeprecatedPieces);
 
             String butCloseCaption = openedViaSave ? "Save Anyway" : "Close";
             butClose = new Button();
             butClose.Top = 212;
-            butClose.Left = butFixIssues.Left + butFixIssues.Width + 20;
+            butClose.Left = butEditLevel.Left + butEditLevel.Width + 20;
             butClose.Width = 220;
             butClose.Height = 40;
             butClose.Text = butCloseCaption;
@@ -200,7 +216,9 @@ namespace RLEditor
         private void ValidatorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             txtIssuesList.Dispose();
-            butFixIssues.Dispose();
+            butEditLevel.Dispose();
+            butDeleteOutsidePieces.Dispose();
+            butDeleteDeprecatedPieces.Dispose();
             butClose.Dispose();
         }
 
@@ -211,69 +229,25 @@ namespace RLEditor
         private void DisplayValidationResult()
         {
             txtIssuesList.Text = "";
+            butEditLevel.Visible = false;
+            butDeleteOutsidePieces.Visible = false;
+            butDeleteDeprecatedPieces.Visible = false;
 
             if (issuesList == null || issuesList.Count == 0)
             {
                 txtIssuesList.Text = "No issues found.";
-                butFixIssues.Enabled = false;
             }
             else
             {
                 txtIssuesList.Text = string.Join(C.NewLine, issuesList);
 
                 if (issuesList[0].StartsWith("Piece outside"))
-                    butFixIssues.Text = "Delete Pieces Outside Level";
+                    butDeleteOutsidePieces.Visible = true;
                 else if (issuesList[0].StartsWith("Deprecated"))
-                    butFixIssues.Text = "Delete Deprecated Pieces";
-
-                if (isCleansing && butFixIssues.Text == "Edit Level")
-                {
-                    butFixIssues.Enabled = false;
-                    butFixIssues.Visible = false;
-                    return;
-                }
-
-                butFixIssues.Enabled = true;
+                    butDeleteDeprecatedPieces.Visible = true;
+                else if (!isCleansing)
+                    butEditLevel.Visible = true;
             }
-        }
-
-        /// <summary>
-        /// Removes all pieces outside of the level and validates the level again afterwards.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void butFixIssues_Click(object sender, EventArgs e)
-        {
-            if (butFixIssues.Text == "Edit Level")
-            {
-                validationPassed = false;
-                validatorForm.Close();
-                return;
-            }
-
-            if (butFixIssues.Text == "Delete Pieces Outside Level")
-                DeletePiecesOutsideBoundary();
-
-            if (butFixIssues.Text == "Delete Deprecated Pieces")
-                DeleteDeprecatedPieces();
-
-            Validate(true, false, isCleansing);
-
-            if (issuesList.Count <= 0)
-            {
-                validationPassed = true;
-                validatorForm.Close();
-                return;
-            }
-
-            butFixIssues.Enabled = true;
-            butFixIssues.Text = "Edit Level";
-        }
-
-        private void butClose_Click(object sender, EventArgs e)
-        {
-            validationPassed = true; // user chose to save anyway, treat as validation passed
-            validatorForm.Close();
         }
 
         private void DeletePiecesOutsideBoundary()
@@ -287,6 +261,53 @@ namespace RLEditor
         {
             level.TerrainList.RemoveAll(ter => ter.IsDeprecated);
             level.GadgetList.RemoveAll(obj => obj.IsDeprecated);
+        }
+
+        /// <summary>
+        /// Ends validation and returns the user to the main form.
+        /// </summary>
+        private void butEditLevel_Click(object sender, EventArgs e)
+        {
+            validationPassed = false;
+            validatorForm.Close();
+        }
+
+        /// <summary>
+        /// Deletes pieces outside level and runs the validator again.
+        /// </summary>
+        private void butDeleteOutsidePieces_Click(object sender, EventArgs e)
+        {
+            DeletePiecesOutsideBoundary();
+
+            Validate(true, false, isCleansing);
+
+            if (issuesList.Count <= 0)
+            {
+                validationPassed = true;
+                validatorForm.Close();
+            }
+        }
+
+        /// <summary>
+        /// Deletes deprecated pieces and runs the validator again.
+        /// </summary>
+        private void butDeleteDeprecatedPieces_Click(object sender, EventArgs e)
+        {
+            DeleteDeprecatedPieces();
+
+            Validate(true, false, isCleansing);
+
+            if (issuesList.Count <= 0)
+            {
+                validationPassed = true;
+                validatorForm.Close();
+            }
+        }
+
+        private void butClose_Click(object sender, EventArgs e)
+        {
+            validationPassed = true; // user chose to save anyway, treat as validation passed
+            validatorForm.Close();
         }
     }
 }
