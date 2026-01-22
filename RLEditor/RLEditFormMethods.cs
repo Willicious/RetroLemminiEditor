@@ -1430,7 +1430,11 @@ Digger=20
             levelsWithNoExits.Clear();
 
             // Get all .ini files in the target folder and its subdirectories
-            string[] files = Directory.GetFiles(targetFolder, "*.ini", SearchOption.AllDirectories);
+            var files = Directory
+                .GetFiles(targetFolder, "*.ini", SearchOption.AllDirectories)
+                // Important - ignore levelpack.ini files!
+                .Where(f => !Path.GetFileName(f).Equals("levelpack.ini", StringComparison.OrdinalIgnoreCase))
+                .ToArray();
 
             // Show progress bar
             using (FormProgress progressForm = new FormProgress())
