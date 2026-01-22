@@ -1386,11 +1386,13 @@ namespace RLEditor
         private void statusBarLabel2_Click(object sender, EventArgs e)
         {
             ShowMissingPiecesDialog();
+            Cursor = Cursors.Default;
         }
 
         private void statusBarLabel1_Click(object sender, EventArgs e)
         {
             HideStatusBar();
+            Cursor = Cursors.Default;
         }
 
         private void btnRandomSkillset_Click(object sender, EventArgs e)
