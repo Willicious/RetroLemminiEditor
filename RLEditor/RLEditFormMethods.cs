@@ -963,7 +963,8 @@ Digger=20
         /// </summary>
         private void PrepareForPieceValidation()
         {
-            // Initialise missingPieces list and status bar
+            // Initialise lists and status bar
+            deprecatedPieces.Clear();
             missingPieces.Clear();
             UpdateStatusBar(0);
         }
@@ -1382,6 +1383,7 @@ Digger=20
             using (var folderBrowserDialog = new FolderBrowserDialog())
             {
                 folderBrowserDialog.Description = "Choose a folder of levels to cleanse";
+                folderBrowserDialog.SelectedPath = C.AppPathLevels;
 
                 DialogResult result = folderBrowserDialog.ShowDialog();
 
