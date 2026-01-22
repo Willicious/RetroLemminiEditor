@@ -190,7 +190,8 @@ namespace RLEditor
             ObjectKeys.RemoveAll(key =>
             {
                 Bitmap bmp = ImageLibrary.GetImage(key);
-                return bmp == null || ImageLibrary.GetIsDeprecated(bmp, key);
+                C.OBJ type = ImageLibrary.GetObjType(key);
+                return bmp == null || ImageLibrary.GetIsDeprecated(bmp, key, type);
             });
         }
 

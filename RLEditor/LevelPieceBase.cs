@@ -27,7 +27,7 @@ namespace RLEditor
             this.IsSelected = true;
 
             this.IsMissing = ImageLibrary.GetIsMissing(Key);
-            this.IsDeprecated = ImageLibrary.GetIsDeprecated(ImageLibrary.GetImage(Key), Key);
+            this.IsDeprecated = ImageLibrary.GetIsDeprecated(ImageLibrary.GetImage(Key), Key, ObjType);
         }
 
         public int PosX { get; set; }

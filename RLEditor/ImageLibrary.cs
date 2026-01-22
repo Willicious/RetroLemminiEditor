@@ -723,7 +723,7 @@ namespace RLEditor
         /// <summary>
         /// Returns the deprecated status of the piece.
         /// </summary>
-        public static bool GetIsDeprecated(Bitmap bmp, string imageKey)
+        public static bool GetIsDeprecated(Bitmap bmp, string imageKey, C.OBJ type)
         {
             if (!imageDict.ContainsKey(imageKey))
             {
@@ -731,6 +731,9 @@ namespace RLEditor
                 if (!success)
                     return false;
             }
+
+            if (imageKey.Contains("Default") && type == C.OBJ.STEEL)
+                return false;
 
             var rect = SolidPixelRect(bmp, imageKey, 0, false);
             bool isFullyTransparent = (rect.Width == 0 || rect.Height == 0);
