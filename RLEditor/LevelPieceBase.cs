@@ -227,19 +227,19 @@ namespace RLEditor
         /// </summary>
         public Rectangle GetSolidPixelWorldRect()
         {
-            return new Rectangle(
+            Rectangle solidPixelRect = new Rectangle(
                 PosX + SolidPixelOffsetRect.Left,
                 PosY + SolidPixelOffsetRect.Top,
                 SolidPixelOffsetRect.Width,
                 SolidPixelOffsetRect.Height
             );
+
+            Rectangle imageRect = new Rectangle(PosX, PosY, Width, Height);
+
+            if (solidPixelRect.Width == 0 || solidPixelRect.Height == 0)
+                return imageRect;
+            else
+                return solidPixelRect;
         }
     }
 }
-
-// TODO - Add support for mods
-
-// TODO - Maybe put optional stuff in an "Extras" tab
-
-// TODO - Add "?" button next to Mods, Superlemming and Autosteel
-// Clicking opens a simple dialog with explanation
