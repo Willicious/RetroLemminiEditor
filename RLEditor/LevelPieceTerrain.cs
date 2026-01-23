@@ -57,33 +57,14 @@ namespace RLEditor
                 && this.SpecHeight == piece.SpecHeight;
         }
 
-
-        public override bool MayRotate()
-        {
-            return true;
-        }
-
-        public override bool MayFlip()
-        {
-            return true;
-        }
-
-        public override bool MayInvert()
-        {
-            return true;
-        }
-
         public override void RotateInRect(Rectangle borderRect)
         {
             base.RotateInRect(borderRect);
 
-            if (MayRotate())
-            {
-                // Swap special height and special width;
-                int oldSpecWidth = SpecWidth;
-                SpecWidth = SpecHeight;
-                SpecHeight = oldSpecWidth;
-            }
+            // Swap special height and special width;
+            int oldSpecWidth = SpecWidth;
+            SpecWidth = SpecHeight;
+            SpecHeight = oldSpecWidth;
         }
 
         public override Bitmap Image

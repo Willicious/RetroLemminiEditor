@@ -26,11 +26,11 @@ namespace RLEditor
             }
         }
 
-        public GadgetPiece(string key, Point pos,
-                           int rotation,
+        public GadgetPiece(string key, Point pos, int rotation,
                            bool isInvert, bool isNoOverwrite, bool isOnlyOnTerrain,
                            bool isInvisible, bool isFake, bool isNegativeSteel,
-                           int specWidth = -1, int specHeight = -1)
+                           int specWidth = -1, int specHeight = -1,
+                           bool isSpawnLeft = false)
             : base(key, true, pos, rotation, isInvert)
         {
             IsNoOverwrite = isNoOverwrite;
@@ -40,6 +40,7 @@ namespace RLEditor
             IsNegativeSteel = isNegativeSteel;
             SpecWidth = specWidth;
             SpecHeight = specHeight;
+            IsSpawnLeft = isSpawnLeft;
         }
 
         public bool IsNoOverwrite { get; set; }
@@ -124,7 +125,7 @@ namespace RLEditor
             {
                 if (ObjType == C.OBJ.HATCH)
                 {
-                    return ImageLibrary.GetWindowImageWithDirection(Key, GetRotateFlipType(), GetFrameIndex());
+                    return ImageLibrary.GetWindowImageWithDirection(Key, IsSpawnLeft, GetRotateFlipType(), GetFrameIndex());
                 }
 
                 Bitmap image = base.Image;
@@ -159,21 +160,6 @@ namespace RLEditor
                 return base.GetFrameIndex();
         }
 
-        public override bool MayRotate()
-        {
-            return !(ObjType == C.OBJ.HATCH);
-        }
-
-        public override bool MayFlip()
-        {
-            return true;
-        }
-
-        public override bool MayInvert()
-        {
-            return !(ObjType == C.OBJ.HATCH);
-        }
-
         /// <summary>
         /// Rotates the piece around the center of a specified rectangle, if allowed for this piece.
         /// </summary>
@@ -182,13 +168,10 @@ namespace RLEditor
         {
             base.RotateInRect(borderRect);
 
-            if (MayRotate())
-            {
-                // Swap special height and special width;
-                int oldSpecWidth = SpecWidth;
-                SpecWidth = SpecHeight;
-                SpecHeight = oldSpecWidth;
-            }
+            // Swap special height and special width;
+            int oldSpecWidth = SpecWidth;
+            SpecWidth = SpecHeight;
+            SpecHeight = oldSpecWidth;
         }
 
         public override int Width

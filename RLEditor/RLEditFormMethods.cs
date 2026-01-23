@@ -2098,6 +2098,18 @@ Digger=20
         }
 
         /// <summary>
+        /// Flips spawn direction of all selected hatches and displays the result.
+        /// </summary>
+        private void FlipSpawnDirection()
+        {
+            foreach (var gad in CurLevel.GadgetList)
+                if (gad.IsSelected)
+                    gad.IsSpawnLeft = !gad.IsSpawnLeft;
+            SaveChangesToOldLevelList();
+            pic_Level.Image = curRenderer.CreateLevelImage();
+        }
+
+        /// <summary>
         /// Sets the NoOverwrite flag for all selected pieces and displays the result.
         /// </summary>
         /// <param name="doAdd"></param>

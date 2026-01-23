@@ -147,6 +147,7 @@
             this.num_Ski_Floater = new RLEditor.NumUpDownOverwrite();
             this.num_Ski_Climber = new RLEditor.NumUpDownOverwrite();
             this.tabPieces = new System.Windows.Forms.TabPage();
+            this.but_FlipSpawnDirection = new System.Windows.Forms.Button();
             this.btnLoadStyle = new System.Windows.Forms.Button();
             this.check_Pieces_NegativeSteel = new System.Windows.Forms.CheckBox();
             this.lblRulerHeight = new System.Windows.Forms.Label();
@@ -1505,6 +1506,7 @@
             // 
             // tabPieces
             // 
+            this.tabPieces.Controls.Add(this.but_FlipSpawnDirection);
             this.tabPieces.Controls.Add(this.btnLoadStyle);
             this.tabPieces.Controls.Add(this.check_Pieces_NegativeSteel);
             this.tabPieces.Controls.Add(this.lblRulerHeight);
@@ -1544,6 +1546,16 @@
             this.tabPieces.TabIndex = 1;
             this.tabPieces.Text = "Pieces";
             this.tabPieces.UseVisualStyleBackColor = true;
+            // 
+            // but_FlipSpawnDirection
+            // 
+            this.but_FlipSpawnDirection.Location = new System.Drawing.Point(11, 139);
+            this.but_FlipSpawnDirection.Name = "but_FlipSpawnDirection";
+            this.but_FlipSpawnDirection.Size = new System.Drawing.Size(361, 50);
+            this.but_FlipSpawnDirection.TabIndex = 81;
+            this.but_FlipSpawnDirection.Text = "←   Flip Spawn Direction   →";
+            this.but_FlipSpawnDirection.UseVisualStyleBackColor = true;
+            this.but_FlipSpawnDirection.Click += new System.EventHandler(this.but_FlipSpawnDirection_Click);
             // 
             // btnLoadStyle
             // 
@@ -1614,7 +1626,7 @@
             // check_Pieces_Fake
             // 
             this.check_Pieces_Fake.AutoSize = true;
-            this.check_Pieces_Fake.Location = new System.Drawing.Point(21, 339);
+            this.check_Pieces_Fake.Location = new System.Drawing.Point(21, 368);
             this.check_Pieces_Fake.Name = "check_Pieces_Fake";
             this.check_Pieces_Fake.Size = new System.Drawing.Size(71, 24);
             this.check_Pieces_Fake.TabIndex = 68;
@@ -1625,7 +1637,7 @@
             // check_Pieces_Invisible
             // 
             this.check_Pieces_Invisible.AutoSize = true;
-            this.check_Pieces_Invisible.Location = new System.Drawing.Point(21, 313);
+            this.check_Pieces_Invisible.Location = new System.Drawing.Point(21, 342);
             this.check_Pieces_Invisible.Name = "check_Pieces_Invisible";
             this.check_Pieces_Invisible.Size = new System.Drawing.Size(91, 24);
             this.check_Pieces_Invisible.TabIndex = 67;
@@ -1636,7 +1648,7 @@
             // lblPieceSize
             // 
             this.lblPieceSize.AutoSize = true;
-            this.lblPieceSize.Location = new System.Drawing.Point(80, 475);
+            this.lblPieceSize.Location = new System.Drawing.Point(80, 494);
             this.lblPieceSize.Name = "lblPieceSize";
             this.lblPieceSize.Size = new System.Drawing.Size(84, 20);
             this.lblPieceSize.TabIndex = 66;
@@ -1646,7 +1658,7 @@
             // 
             this.lblSize.AutoSize = true;
             this.lblSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(17, 475);
+            this.lblSize.Location = new System.Drawing.Point(17, 494);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(44, 20);
             this.lblSize.TabIndex = 65;
@@ -1656,7 +1668,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(17, 403);
+            this.lblName.Location = new System.Drawing.Point(17, 422);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(55, 20);
             this.lblName.TabIndex = 59;
@@ -1665,7 +1677,7 @@
             // lblPieceType
             // 
             this.lblPieceType.AutoSize = true;
-            this.lblPieceType.Location = new System.Drawing.Point(80, 451);
+            this.lblPieceType.Location = new System.Drawing.Point(80, 470);
             this.lblPieceType.Name = "lblPieceType";
             this.lblPieceType.Size = new System.Drawing.Size(86, 20);
             this.lblPieceType.TabIndex = 64;
@@ -1675,7 +1687,7 @@
             // 
             this.lblStyle.AutoSize = true;
             this.lblStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStyle.Location = new System.Drawing.Point(17, 427);
+            this.lblStyle.Location = new System.Drawing.Point(17, 446);
             this.lblStyle.Name = "lblStyle";
             this.lblStyle.Size = new System.Drawing.Size(48, 20);
             this.lblStyle.TabIndex = 60;
@@ -1684,7 +1696,7 @@
             // lblPieceStyle
             // 
             this.lblPieceStyle.AutoSize = true;
-            this.lblPieceStyle.Location = new System.Drawing.Point(80, 427);
+            this.lblPieceStyle.Location = new System.Drawing.Point(80, 446);
             this.lblPieceStyle.Name = "lblPieceStyle";
             this.lblPieceStyle.Size = new System.Drawing.Size(88, 20);
             this.lblPieceStyle.TabIndex = 63;
@@ -1694,7 +1706,7 @@
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblType.Location = new System.Drawing.Point(17, 451);
+            this.lblType.Location = new System.Drawing.Point(17, 470);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(47, 20);
             this.lblType.TabIndex = 61;
@@ -1703,7 +1715,7 @@
             // lblPieceName
             // 
             this.lblPieceName.AutoSize = true;
-            this.lblPieceName.Location = new System.Drawing.Point(80, 403);
+            this.lblPieceName.Location = new System.Drawing.Point(80, 422);
             this.lblPieceName.Name = "lblPieceName";
             this.lblPieceName.Size = new System.Drawing.Size(96, 20);
             this.lblPieceName.TabIndex = 62;
@@ -1711,7 +1723,7 @@
             // 
             // check_Pieces_OneWay
             // 
-            this.check_Pieces_OneWay.Location = new System.Drawing.Point(21, 252);
+            this.check_Pieces_OneWay.Location = new System.Drawing.Point(21, 285);
             this.check_Pieces_OneWay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_OneWay.Name = "check_Pieces_OneWay";
             this.check_Pieces_OneWay.Size = new System.Drawing.Size(154, 26);
@@ -1722,7 +1734,7 @@
             // 
             // check_Pieces_OnlyOnTerrain
             // 
-            this.check_Pieces_OnlyOnTerrain.Location = new System.Drawing.Point(21, 226);
+            this.check_Pieces_OnlyOnTerrain.Location = new System.Drawing.Point(21, 259);
             this.check_Pieces_OnlyOnTerrain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_OnlyOnTerrain.Name = "check_Pieces_OnlyOnTerrain";
             this.check_Pieces_OnlyOnTerrain.Size = new System.Drawing.Size(154, 26);
@@ -1733,7 +1745,7 @@
             // 
             // check_Pieces_NoOv
             // 
-            this.check_Pieces_NoOv.Location = new System.Drawing.Point(21, 200);
+            this.check_Pieces_NoOv.Location = new System.Drawing.Point(21, 233);
             this.check_Pieces_NoOv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_NoOv.Name = "check_Pieces_NoOv";
             this.check_Pieces_NoOv.Size = new System.Drawing.Size(154, 26);
@@ -1744,7 +1756,7 @@
             // 
             // check_Pieces_Erase
             // 
-            this.check_Pieces_Erase.Location = new System.Drawing.Point(21, 173);
+            this.check_Pieces_Erase.Location = new System.Drawing.Point(21, 206);
             this.check_Pieces_Erase.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.check_Pieces_Erase.Name = "check_Pieces_Erase";
             this.check_Pieces_Erase.Size = new System.Drawing.Size(154, 26);
@@ -1887,7 +1899,7 @@
             // 
             // but_MoveBack
             // 
-            this.but_MoveBack.Location = new System.Drawing.Point(293, 73);
+            this.but_MoveBack.Location = new System.Drawing.Point(292, 73);
             this.but_MoveBack.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.but_MoveBack.Name = "but_MoveBack";
             this.but_MoveBack.NoPaddingText = "Draw First";
@@ -1899,7 +1911,7 @@
             // but_MoveFront
             // 
             this.but_MoveFront.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.but_MoveFront.Location = new System.Drawing.Point(13, 73);
+            this.but_MoveFront.Location = new System.Drawing.Point(11, 73);
             this.but_MoveFront.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.but_MoveFront.Name = "but_MoveFront";
             this.but_MoveFront.NoPaddingText = "Draw Last";
@@ -2941,6 +2953,7 @@
         private System.Windows.Forms.Button btnModsHelp;
         private System.Windows.Forms.Button btnLevelPackCompiler;
         private System.Windows.Forms.Button btnLoadStyle;
+        private System.Windows.Forms.Button but_FlipSpawnDirection;
     }
 }
 

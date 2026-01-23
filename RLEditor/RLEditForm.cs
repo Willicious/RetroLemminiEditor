@@ -559,6 +559,11 @@ namespace RLEditor
             }
         }
 
+        private void but_FlipSpawnDirection_Click(object sender, EventArgs e)
+        {
+            FlipSpawnDirection();
+        }
+
         private void but_FlipPieces_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();

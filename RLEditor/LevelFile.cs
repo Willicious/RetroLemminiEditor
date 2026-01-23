@@ -260,6 +260,8 @@ namespace RLEditor
             bool doFlip = (flags & 8) != 0;
             bool doRotate = (flags & 16) != 0;
 
+            bool isSpawnLeft = ((modifier & 1) != 0);
+
             if (doRotate)
                 Utility.Swap(ref specWidth, ref specHeight);
 
@@ -285,7 +287,8 @@ namespace RLEditor
                 isFake,
                 false,
                 specWidth,
-                specHeight);
+                specHeight,
+                isSpawnLeft);
 
             // Compatibility fix
             if (newGadget.IsNoOverwrite && newGadget.IsOnlyOnTerrain)
@@ -406,7 +409,8 @@ namespace RLEditor
                 false,
                 isNegativeSteel,
                 specWidth,
-                specHeight);
+                specHeight,
+                false);
 
             newSteelArea.PosX = pos.X;
             newSteelArea.PosY = pos.Y;
@@ -679,7 +683,7 @@ namespace RLEditor
                 if (gad.IsFlippedInPlayer) flags |= 8;
                 if (gad.IsRotatedInPlayer) flags |= 16;
 
-                int modifier = (gad.IsFlippedInPlayer && gad.ObjType == C.OBJ.HATCH) ? 1 : 0;
+                int modifier = (gad.IsSpawnLeft && gad.ObjType == C.OBJ.HATCH) ? 1 : 0;
 
                 string line = $"object_{counter} = {gadgetID}, {gad.PosX}, {gad.PosY}, {paintMode}, {flags}, {modifier}";
 

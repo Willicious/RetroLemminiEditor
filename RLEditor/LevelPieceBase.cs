@@ -44,6 +44,7 @@ namespace RLEditor
 
         public int SpecWidth { get; set; }
         public int SpecHeight { get; set; }
+        public bool IsSpawnLeft { get; set; }
 
         // RULE: FIRST ROTATE CLOCKWISE - THEN INVERT
         protected int Rotation { get; private set; }
@@ -130,31 +131,11 @@ namespace RLEditor
             return this.Key.Equals(piece.Key);
         }
 
-
-        /// <summary>
-        /// Determines whether this piece can be rotated.
-        /// </summary>
-        public abstract bool MayRotate();
-
-        /// <summary>
-        /// Determines whether this piece can be flipped.
-        /// </summary>
-        public abstract bool MayFlip();
-
-        /// <summary>
-        /// Determines whether this piece can be inverted.
-        /// </summary>
-        public abstract bool MayInvert();
-
         /// <summary>
         /// Rotates the piece around the center of a specified rectangle, if allowed for this piece.
         /// </summary>
-        /// <param name="borderRect"></param>
         public virtual void RotateInRect(Rectangle borderRect)
         {
-            if (!MayRotate())
-                return;
-
             Rectangle newPieceRect = new Rectangle(PosX, PosY, Width, Height).RotateInRectangle(borderRect);
             PosX = newPieceRect.Left;
             PosY = newPieceRect.Top;
@@ -165,30 +146,20 @@ namespace RLEditor
         /// <summary>
         /// Inverts the piece wrt. a specified rectangle, if allowed for this piece.
         /// </summary>
-        /// <param name="borderRect"></param>
         public virtual void InvertInRect(Rectangle borderRect)
         {
             PosY = borderRect.Top + borderRect.Bottom - PosY - Height;
-            if (MayInvert())
-                IsInvert = !IsInvert;
+            IsInvert = !IsInvert;
         }
 
         /// <summary>
         /// Flips the piece wrt. a specified rectangle, if allowed for this piece.
         /// </summary>
-        /// <param name="borderRect"></param>
         public virtual void FlipInRect(Rectangle borderRect)
         {
-            if (ObjType != C.OBJ.HATCH)
-            {
-                PosX = borderRect.Left + borderRect.Right - PosX - Width;
-            }
-
-            if (MayFlip())
-            {
-                Rotation = (Rotation + 2) % 4;
-                IsInvert = !IsInvert;
-            }
+            PosX = borderRect.Left + borderRect.Right - PosX - Width;
+            Rotation = (Rotation + 2) % 4;
+            IsInvert = !IsInvert;
         }
 
         /// <summary>

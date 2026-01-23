@@ -162,14 +162,13 @@ namespace RLEditor
         {
             List<LevelPiece> selectionList = CurLevel.SelectionList();
 
-            but_RotatePieces.Enabled = selectionList.Exists(p => p.MayRotate());
-            but_FlipPieces.Enabled = selectionList.Exists(p => p.MayFlip());
-            but_InvertPieces.Enabled = selectionList.Exists(p => p.MayInvert());
-
             but_MoveBack.Enabled = (selectionList.Count > 0);
             but_MoveFront.Enabled = (selectionList.Count > 0);
             but_MoveBackOne.Enabled = (selectionList.Count > 0);
             but_MoveFrontOne.Enabled = (selectionList.Count > 0);
+
+            but_FlipSpawnDirection.Visible = selectionList.Count > 0 &&
+                selectionList.All(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.HATCH);
 
             bool hasSpecialGadget = selectionList.OfType<GadgetPiece>()
                  .Any(g => g.ObjType.In(C.OBJ.STEEL, C.OBJ.RULER));
