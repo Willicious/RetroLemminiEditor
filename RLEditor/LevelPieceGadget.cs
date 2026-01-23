@@ -123,11 +123,6 @@ namespace RLEditor
         {
             get
             {
-                if (ObjType == C.OBJ.HATCH)
-                {
-                    return ImageLibrary.GetWindowImageWithDirection(Key, IsSpawnLeft, GetRotateFlipType(), GetFrameIndex());
-                }
-
                 Bitmap image = base.Image;
 
                 if (ObjType.In(C.OBJ.STEEL, C.OBJ.RULER))

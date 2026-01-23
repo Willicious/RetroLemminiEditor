@@ -212,7 +212,10 @@ namespace RLEditor
             AddSelectedRectangles(ref screenBmp);
             
             if (ZoomFactor >= 0 && IsObjectLayer)
+            {
                 AddHatchOrder(ref screenBmp);
+                AddHatchArrow(ref screenBmp);
+            }
                 
             AddMouseSelectionArea(ref screenBmp);
 
@@ -768,9 +771,8 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Adds indizes above hatches
+        /// Adds indices above hatches
         /// </summary>
-        /// <param name="levelBmp"></param>
         private void AddHatchOrder(ref Bitmap levelBmp)
         {
             var hatches = level.GadgetList.FindAll(obj => obj.ObjType == C.OBJ.HATCH);
@@ -781,8 +783,9 @@ namespace RLEditor
                 string text = (hatchIndex + 1).ToString() + "/" + hatches.Count.ToString();
                 int fontSize = 10 + 2 * ZoomFactor;
 
-                Point levelTextCenterPos = new Point(hatch.PosX + hatch.Width / 2, hatch.PosY);
-                Point screenTextCenterPos = GetPicPointFromLevelPoint(levelTextCenterPos);
+                Rectangle rect = hatch.GetSolidPixelWorldRect();
+                Point selectionRectPos = new Point(rect.Left + rect.Width / 2, rect.Top);
+                Point screenTextCenterPos = GetPicPointFromLevelPoint(selectionRectPos);
 
                 screenTextCenterPos.Y -= fontSize;
 
@@ -791,9 +794,29 @@ namespace RLEditor
         }
 
         /// <summary>
+        /// Adds spawn direction arrow at bottom right of hatch
+        /// </summary>
+        public void AddHatchArrow(ref Bitmap levelBmp)
+        {
+            var hatches = level.GadgetList.FindAll(obj => obj.ObjType == C.OBJ.HATCH);
+
+            for (int hatchIndex = 0; hatchIndex < hatches.Count; hatchIndex++)
+            {
+                GadgetPiece hatch = hatches[hatchIndex];
+                string directionString = hatch.IsSpawnLeft ? "←" : "→";
+                int fontSize = (ZoomFactor <= 0) ? 16 : 14 * (ZoomFactor + 1);
+                
+                Rectangle rect = hatch.GetSolidPixelWorldRect();
+                Point selectionRectPos = new Point(rect.Right - 12, rect.Bottom - 8);
+                Point screenTextCenterPos = GetPicPointFromLevelPoint(selectionRectPos);
+
+                levelBmp.WriteText(directionString, screenTextCenterPos, C.RLColors[C.RLColor.Text], fontSize);
+            }
+        }
+
+        /// <summary>
         /// Adds the selection coordinates and/or grid status at the bottom right of the level image.
         /// </summary>
-        /// <param name="levelBmp"></param>
         private void AddCornerText(ref Bitmap fullBmp)
         {
             string text = (IsGridEnabled ? "(G)" : "");

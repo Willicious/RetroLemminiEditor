@@ -89,17 +89,7 @@ namespace RLEditor
                 CreateImagesWithNameAndData(pieceKey);
             return imagesWithNameAndData[index % imagesWithNameAndData.Count];
         }
-        public Bitmap WindowImageWithDirection(RotateFlipType rotFlipType, bool isSpawnLeft, int index, string key)
-        {
-            Bitmap image = (Bitmap)Image(rotFlipType, index).Clone();
-            string directionString = isSpawnLeft ? "←" : "→";
 
-            Rectangle rect = ImageLibrary.SolidPixelRect(image, key, 0, false);
-            Point bottomRightCorner = new Point(rect.Width, rect.Height);
-            image.WriteText(directionString, bottomRightCorner, C.RLColors[C.RLColor.Text], 12, ContentAlignment.BottomRight, new Size(12, 16));
-
-            return image;
-        }
         public int Width { get; private set; }
         public int Height { get; private set; }
         public int DefaultWidth { get; private set; }
@@ -492,24 +482,6 @@ namespace RLEditor
             }
 
             return imageDict[imageKey].ImageWithNameAndData(index, imageKey);
-        }
-
-        /// <summary>
-        /// Returns the image with the directional arrow in the Piece Browser
-        /// </summary>
-        public static Bitmap GetWindowImageWithDirection(string imageKey, bool isSpawnLeft, RotateFlipType rotFlipType, int index)
-        {
-            if (!imageDict.ContainsKey(imageKey))
-            {
-                bool success = AddNewImage(imageKey);
-                if (!success)
-                {
-                    mainForm.missingPieces.Add(imageKey);
-                    return null;
-                }
-            }
-
-            return imageDict[imageKey].WindowImageWithDirection(rotFlipType, isSpawnLeft, index, imageKey);
         }
 
         public static (int Left, int Right) GetMargins(string imageKey)
