@@ -2110,6 +2110,26 @@ Digger=20
         }
 
         /// <summary>
+        /// Flip hotkey flips spawn direction for hatches if only hatches are selected
+        /// Otherwise, it flips pieces as normal
+        /// </summary>
+        private void HandleFlipHotkey()
+        {
+            var selection = CurLevel.SelectionList();
+            if (selection.Count == 0)
+                return;
+
+            bool hasOnlyHatches = selection.All(item => item.ObjType == C.OBJ.HATCH);
+            if (hasOnlyHatches)
+            {
+                FlipSpawnDirection();
+                return;
+            }
+                
+            FlipLevelPieces();
+        }
+
+        /// <summary>
         /// Sets the NoOverwrite flag for all selected pieces and displays the result.
         /// </summary>
         /// <param name="doAdd"></param>
@@ -2755,7 +2775,7 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyCustomMoveLeft, () => HandleMovement(C.DIR.W, customMove));
             AddHotkey(HotkeyConfig.HotkeyCustomMoveRight, () => HandleMovement(C.DIR.E, customMove));
             AddHotkey(HotkeyConfig.HotkeyRotate, () => RotateLevelPieces());
-            AddHotkey(HotkeyConfig.HotkeyFlip, () => FlipLevelPieces());
+            AddHotkey(HotkeyConfig.HotkeyFlip, () => HandleFlipHotkey());
             AddHotkey(HotkeyConfig.HotkeyInvert, () => InvertLevelPieces());
             AddHotkey(HotkeyConfig.HotkeyErase, () => check_Pieces_Erase.Checked = !check_Pieces_Erase.Checked);
             AddHotkey(HotkeyConfig.HotkeyNoOverwrite, () => check_Pieces_NoOv.Checked = !check_Pieces_NoOv.Checked);
