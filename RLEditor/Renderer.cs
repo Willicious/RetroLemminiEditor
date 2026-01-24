@@ -93,6 +93,7 @@ namespace RLEditor
         {
             UpdateLayerBmpSize();
 
+            CreateBackgroundLayer();
             CreateObjectBackLayer();
             CreateTerrainLayer();
             CreateObjectTopLayer();
@@ -154,6 +155,10 @@ namespace RLEditor
             }
 
             // Draw all the layers
+            if (IsGridEnabled)
+            {
+                baseLevelImage.DrawOn(layerImages[C.Layer.Background]);
+            }
             if (IsObjectLayer)
             {
                 baseLevelImage.DrawOn(layerImages[C.Layer.ObjBack]);
@@ -493,7 +498,6 @@ namespace RLEditor
                 }
             }
         }
-
 
         /// <summary>
         /// Renders all NoOverwrite objects.
