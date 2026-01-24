@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -257,8 +258,33 @@ namespace RLEditor
             level.GadgetList.RemoveAll(obj => !obj.ImageRectangle.IntersectsWith(levelRect));
         }
 
+        /// <summary>
+        /// Special handling for deprecated bubble pieces
+        /// </summary>
+        private void ResolveBubbleDeprecatedPieces()
+        {
+            // NOTE - This method can be deleted once all official and currently-maintained level packs have been resolved
+            foreach (var obj in level.GadgetList.ToList())
+            {
+                if (obj.Style == "bubble")
+                {
+                    if (obj.Name == "bubbleo_0")
+                    {
+                        Point pos = new Point(obj.PosX + 48, obj.PosY + 24);
+                        level.AddPiece("bubble\\bubbleo_11", "bubble", pos, 1);
+                    }
+                    if (obj.Name == "bubbleo_10")
+                    {
+                        Point pos = new Point(obj.PosX + 86, obj.PosY - 4);
+                        level.AddPiece("bubble\\bubbleo_12", "bubble", pos, 1);
+                    }
+                }
+            }
+        }
+
         private void DeleteDeprecatedPieces()
         {
+            ResolveBubbleDeprecatedPieces();
             level.TerrainList.RemoveAll(ter => ter.IsDeprecated);
             level.GadgetList.RemoveAll(obj => obj.IsDeprecated);
         }
