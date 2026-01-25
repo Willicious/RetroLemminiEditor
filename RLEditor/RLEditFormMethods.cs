@@ -1433,7 +1433,7 @@ Digger=20
 
             // Ask the user to choose an output extension
             string chosenExt = null;
-            using (var dlg = new FormLevelFormat())
+            using (var dlg = new FormLevelFormat(targetFolder))
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
                     chosenExt = dlg.SelectedExtension;
