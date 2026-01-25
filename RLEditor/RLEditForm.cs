@@ -1584,8 +1584,9 @@ namespace RLEditor
             ShowModsHelpDialog(true);
         }
 
-        private void combo_Mods_SelectedIndexChanged(object sender, EventArgs e)
+        private void combo_Mods_DropDownClosed(object sender, EventArgs e)
         {
+            PullFocusFromTextInputs();
             ShowModsHelpDialog(false);
         }
 

@@ -2571,8 +2571,7 @@
             this.combo_Mods.Name = "combo_Mods";
             this.combo_Mods.Size = new System.Drawing.Size(209, 28);
             this.combo_Mods.TabIndex = 106;
-            this.combo_Mods.SelectedIndexChanged += new System.EventHandler(this.combo_Mods_SelectedIndexChanged);
-            this.combo_Mods.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
+            this.combo_Mods.DropDownClosed += new System.EventHandler(this.combo_Mods_DropDownClosed);
             this.combo_Mods.Leave += new System.EventHandler(this.textbox_Leave);
             this.combo_Mods.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
             this.combo_Mods.MouseLeave += new System.EventHandler(this.ComboMouseLeave);

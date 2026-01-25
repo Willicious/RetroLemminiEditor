@@ -710,9 +710,6 @@ Digger=20
 
         private void ShowModsHelpDialog(bool userOpened)
         {
-            if (!this.Visible) // Ensure the main form has loaded
-                return;
-
             Properties.Settings settings = Properties.Settings.Default;
 
             if (!userOpened && !settings.ShowModsHelpDialog)
