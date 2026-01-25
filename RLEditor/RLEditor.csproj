@@ -101,6 +101,12 @@
     <Compile Include="FormLevelArranger.Designer.cs">
       <DependentUpon>FormLevelArranger.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormLevelFormat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLevelFormat.Designer.cs">
+      <DependentUpon>FormLevelFormat.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPieceBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormLevelArranger.resx">
       <DependentUpon>FormLevelArranger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLevelFormat.resx">
+      <DependentUpon>FormLevelFormat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPieceBrowser.resx">
       <DependentUpon>FormPieceBrowser.cs</DependentUpon>

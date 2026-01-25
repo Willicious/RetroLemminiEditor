@@ -15,7 +15,7 @@ namespace RLEditor
     static class LevelFile
     {
         /// <summary>
-        /// Opens file browser and creates level from a .ini file.
+        /// Opens file browser and creates level from a .ini/.rlv file.
         /// <para> Returns null if process is aborted or file is corrupt. </para>
         /// </summary>
         static public Level LoadLevel(List<Style> styleList, string levelDirectory)
@@ -31,7 +31,7 @@ namespace RLEditor
                 openFileDialog.InitialDirectory = Directory.Exists(C.AppPathLevels) ? C.AppPathLevels : C.AppPath;
             }
             openFileDialog.Multiselect = false;
-            openFileDialog.Filter = "RetroLemmini level files (*.ini)|*.ini";
+            openFileDialog.Filter = "RetroLemmini level files (*.ini;*.rlv)|*.ini;*.rlv";
             openFileDialog.RestoreDirectory = true;
             openFileDialog.CheckFileExists = true;
 
@@ -483,9 +483,8 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Opens file browser and saves the current level to a .ini file.
+        /// Opens file browser and saves the current level to a .rlv/.ini file.
         /// </summary>
-        /// <param name="curLevel"></param>
         static public void SaveLevel(Level curLevel, string levelDirectory)
         {
             var saveFileDialog = new SaveFileDialog();
@@ -500,7 +499,7 @@ namespace RLEditor
                 saveFileDialog.InitialDirectory = Directory.Exists(C.AppPathLevels) ? C.AppPathLevels : C.AppPath;
             }
             saveFileDialog.OverwritePrompt = true;
-            saveFileDialog.Filter = "RetroLemmini level files (*.ini)|*.ini";
+            saveFileDialog.Filter = saveFileDialog.Filter = "RetroLemmini level files (*.rlv)|*.rlv|" + "Lemmini level files (*.ini)|*.ini";
             saveFileDialog.RestoreDirectory = true;
 
             try
@@ -534,8 +533,6 @@ namespace RLEditor
         /// <summary>
         /// Saves a level at the specified file path.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="curLevel"></param>
         static public void SaveLevelToFile(string filePath, Level curLevel)
         {
             curLevel.PrepareForSave();
@@ -638,7 +635,7 @@ namespace RLEditor
 
             sb.AppendLine();
 
-            // Write all to .ini
+            // Write all to .ini/.rlv
             File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
         }
 
@@ -829,7 +826,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Converts an old .lvl level file to the current .ini type.
+        /// Converts an old .lvl level file to the current .rlv type.
         /// Not currently used, but the code remains here because it may be useful for an auto-cleanse feature in the future.
         /// <para> This calls RetroLemmini.exe written in Delphi. </para>
         /// </summary>

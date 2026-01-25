@@ -1389,18 +1389,7 @@ Digger=20
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
                 {
-                    targetFolder = folderBrowserDialog.SelectedPath;
-
-                    var confirmResult = MessageBox.Show(
-                        $"Are you sure you want to cleanse all levels in \"{targetFolder}\"?",
-                        "Confirm Cleansing",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning);
-
-                    if (confirmResult == DialogResult.Yes)
-                    {
-                        CleanseLevels();
-                    }
+                    CleanseLevels();
                 }
             }
         }
@@ -1413,7 +1402,7 @@ Digger=20
         private bool cleansingLevels;
 
         /// <summary>
-        /// Opens and saves all .ini files in a directory in order to ensure compatibility and update the file
+        /// Opens and saves all .ini/.rlv files in a directory in order to ensure compatibility and update the file
         /// </summary>
         private async void CleanseLevels()
         {
@@ -1431,12 +1420,26 @@ Digger=20
             levelsWithNoLemmings.Clear();
             levelsWithNoExits.Clear();
 
-            // Get all .ini files in the target folder and its subdirectories
+            // Get all .ini and .rlv files in the target folder and subdirectories,
             var files = Directory
-                .GetFiles(targetFolder, "*.ini", SearchOption.AllDirectories)
-                // Important - ignore levelpack.ini files!
-                .Where(f => !Path.GetFileName(f).Equals("levelpack.ini", StringComparison.OrdinalIgnoreCase))
+                .GetFiles(targetFolder, "*.*", SearchOption.AllDirectories)
+                .Where(f =>
+                {
+                    string ext = Path.GetExtension(f).ToLower();
+                    string name = Path.GetFileName(f).ToLower();
+                    return (ext == ".ini" || ext == ".rlv") && name != "levelpack.ini"; // Important - ignore levelpack.ini!
+                })
                 .ToArray();
+
+            // Ask the user to choose an output extension
+            string chosenExt = null;
+            using (var dlg = new FormLevelFormat())
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                    chosenExt = dlg.SelectedExtension;
+                else
+                    return; // User cancelled
+            }
 
             // Show progress bar
             using (FormProgress progressForm = new FormProgress())
@@ -1447,6 +1450,13 @@ Digger=20
                 foreach (string file in files)
                 {
                     LoadNewLevel(file);
+                    if (chosenExt != null)
+                    {
+                        CurLevel.FilePathToSave = Path.Combine(
+                            Path.GetDirectoryName(file),
+                            Path.GetFileNameWithoutExtension(file) + chosenExt
+                        );
+                    }
                     SaveLevel(false);
 
                     // Update the progress bar
@@ -1464,7 +1474,7 @@ Digger=20
                 statusBar.Visible = false;
 
                 // Display completion message
-                string cleanseMsg = "All .ini files cleansed successfully.";
+                string cleanseMsg = "All levels cleansed successfully.";
 
                 if (levelsWithDeprecatedPieces.Count > 0)
                 {
@@ -1506,7 +1516,7 @@ Digger=20
         }
 
         /// <summary>
-        /// Saves the level as TempTestLevel.ini and loads this level in the RetroLemmini player.
+        /// Saves the level as TempTestLevel.rlv and loads this level in the RetroLemmini player.
         /// </summary>
         private void PlaytestLevel()
         {
@@ -2470,7 +2480,7 @@ Digger=20
                     filename = filename.Replace(c, '_');
 
                 Level tempLevel = CurLevel.Clone();
-                LevelFile.SaveLevelToFile(C.AppPathAutosave + filename + ".ini", tempLevel);
+                LevelFile.SaveLevelToFile(C.AppPathAutosave + filename + ".rlv", tempLevel);
 
                 ClearOldAutosaves();
             }
@@ -2484,7 +2494,7 @@ Digger=20
         {
             if (curSettings.KeepAutosaveCount > 0)
             {
-                string[] files = Directory.GetFiles(C.AppPathAutosave, "*.ini");
+                string[] files = Directory.GetFiles(C.AppPathAutosave, "*.rlv");
                 if (files.Length > curSettings.KeepAutosaveCount)
                 {
                     List<KeyValuePair<string, long>> fileTimes = new List<KeyValuePair<string, long>>();
