@@ -1424,7 +1424,9 @@ Digger=20
                 {
                     string ext = Path.GetExtension(f).ToLower();
                     string name = Path.GetFileName(f).ToLower();
-                    return (ext == ".ini" || ext == ".rlv") && name != "levelpack.ini"; // Important - ignore levelpack.ini!
+                    return (ext == ".ini" || ext == ".rlv") // Search for *.ini and *.rlv
+                        && name != "levelpack.ini" // Important - ignore levelpack.ini!
+                        && name != "$levelcache.ini"; // Important - ignore $levelcache.ini!
                 })
                 .ToArray();
 
