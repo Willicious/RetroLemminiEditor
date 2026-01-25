@@ -473,7 +473,7 @@ namespace RLEditor
             newLevel.SaveReq = Math.Max(Math.Min(newLevel.SaveReq, 9999), 1);
             newLevel.MinReleaseRate = Math.Max(Math.Min(newLevel.MinReleaseRate, 99), 1);
             newLevel.MaxReleaseRate = Math.Max(Math.Min(newLevel.MaxReleaseRate, 99), 1);
-            newLevel.TimeLimit = Math.Max(Math.Min(newLevel.TimeLimit, 9999), 0);
+            newLevel.TimeLimit = Math.Max(Math.Min(newLevel.TimeLimit, 5999), 0);
             newLevel.MaxFallDistance = Math.Max(Math.Min(newLevel.MaxFallDistance, 9999), 7);
             // Skill numbers
             foreach (C.Skill skill in C.SkillArray)
@@ -564,7 +564,7 @@ namespace RLEditor
             sb.AppendLine($"numDiggers = {curLevel.NumDiggers}");
             sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
             sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
-            sb.AppendLine($"style = {curLevel.MainStyle.NameInEditor}");
+            sb.AppendLine($"style = {curLevel.MainStyle?.NameInEditor}");
             sb.AppendLine($"width = {curLevel.Width}");
             sb.AppendLine($"height = {curLevel.Height}");
             sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
