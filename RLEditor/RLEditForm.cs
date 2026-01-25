@@ -143,7 +143,6 @@ namespace RLEditor
         Level lastSavedLevel;
 
         string levelDirectory; // for starting directory for saving/loading
-        string targetFolder;
 
         int gridSize => curSettings.GridSize;
         int gridMoveAmount => curSettings.GridMoveAmount;
