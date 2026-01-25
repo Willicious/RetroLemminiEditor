@@ -35,12 +35,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.labelCleansingLevels = new System.Windows.Forms.Label();
             this.labelTargetFolder = new System.Windows.Forms.Label();
+            this.checkApplyFormatToLevelpackINI = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblChooseOutputFormat
             // 
             this.lblChooseOutputFormat.AutoSize = true;
-            this.lblChooseOutputFormat.Location = new System.Drawing.Point(25, 66);
+            this.lblChooseOutputFormat.Location = new System.Drawing.Point(25, 80);
             this.lblChooseOutputFormat.Name = "lblChooseOutputFormat";
             this.lblChooseOutputFormat.Size = new System.Drawing.Size(351, 20);
             this.lblChooseOutputFormat.TabIndex = 0;
@@ -54,16 +55,16 @@
             "Keep original format",
             "RetroLemmini(.rlv)",
             "Lemmini(.ini)"});
-            this.comboBoxFormats.Location = new System.Drawing.Point(29, 107);
+            this.comboBoxFormats.Location = new System.Drawing.Point(29, 115);
             this.comboBoxFormats.Name = "comboBoxFormats";
-            this.comboBoxFormats.Size = new System.Drawing.Size(347, 28);
+            this.comboBoxFormats.Size = new System.Drawing.Size(567, 28);
             this.comboBoxFormats.TabIndex = 1;
             // 
             // btnCleanseLevels
             // 
-            this.btnCleanseLevels.Location = new System.Drawing.Point(29, 154);
+            this.btnCleanseLevels.Location = new System.Drawing.Point(29, 221);
             this.btnCleanseLevels.Name = "btnCleanseLevels";
-            this.btnCleanseLevels.Size = new System.Drawing.Size(180, 50);
+            this.btnCleanseLevels.Size = new System.Drawing.Size(285, 50);
             this.btnCleanseLevels.TabIndex = 2;
             this.btnCleanseLevels.Text = "Cleanse Levels";
             this.btnCleanseLevels.UseVisualStyleBackColor = true;
@@ -71,9 +72,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(224, 154);
+            this.btnCancel.Location = new System.Drawing.Point(320, 221);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(150, 50);
+            this.btnCancel.Size = new System.Drawing.Size(276, 50);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -82,7 +83,7 @@
             // labelCleansingLevels
             // 
             this.labelCleansingLevels.AutoSize = true;
-            this.labelCleansingLevels.Location = new System.Drawing.Point(25, 29);
+            this.labelCleansingLevels.Location = new System.Drawing.Point(25, 26);
             this.labelCleansingLevels.Name = "labelCleansingLevels";
             this.labelCleansingLevels.Size = new System.Drawing.Size(126, 20);
             this.labelCleansingLevels.TabIndex = 4;
@@ -92,17 +93,28 @@
             // 
             this.labelTargetFolder.AutoSize = true;
             this.labelTargetFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTargetFolder.Location = new System.Drawing.Point(157, 29);
+            this.labelTargetFolder.Location = new System.Drawing.Point(157, 26);
             this.labelTargetFolder.Name = "labelTargetFolder";
             this.labelTargetFolder.Size = new System.Drawing.Size(120, 20);
             this.labelTargetFolder.TabIndex = 5;
             this.labelTargetFolder.Text = "(target folder)";
             // 
+            // checkApplyFormatToLevelpackINI
+            // 
+            this.checkApplyFormatToLevelpackINI.AutoSize = true;
+            this.checkApplyFormatToLevelpackINI.Location = new System.Drawing.Point(29, 159);
+            this.checkApplyFormatToLevelpackINI.Name = "checkApplyFormatToLevelpackINI";
+            this.checkApplyFormatToLevelpackINI.Size = new System.Drawing.Size(286, 24);
+            this.checkApplyFormatToLevelpackINI.TabIndex = 6;
+            this.checkApplyFormatToLevelpackINI.Text = "Apply chosen format to levelpack.ini";
+            this.checkApplyFormatToLevelpackINI.UseVisualStyleBackColor = true;
+            // 
             // FormLevelFormat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 233);
+            this.ClientSize = new System.Drawing.Size(623, 295);
+            this.Controls.Add(this.checkApplyFormatToLevelpackINI);
             this.Controls.Add(this.labelTargetFolder);
             this.Controls.Add(this.labelCleansingLevels);
             this.Controls.Add(this.btnCancel);
@@ -126,5 +138,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label labelCleansingLevels;
         private System.Windows.Forms.Label labelTargetFolder;
+        private System.Windows.Forms.CheckBox checkApplyFormatToLevelpackINI;
     }
 }

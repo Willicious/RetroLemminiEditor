@@ -1433,10 +1433,14 @@ Digger=20
 
             // Ask the user to choose an output extension
             string chosenExt = null;
+            bool applyFormatToLevelpackINI = false;
             using (var dlg = new FormLevelFormat(targetFolder))
             {
                 if (dlg.ShowDialog() == DialogResult.OK)
+                {
                     chosenExt = dlg.SelectedExtension;
+                    applyFormatToLevelpackINI = dlg.ApplyFormatToLevelpackINI;
+                }
                 else
                     return; // User cancelled
             }
@@ -1458,6 +1462,9 @@ Digger=20
                         );
                     }
                     SaveLevel(false);
+
+                    if (applyFormatToLevelpackINI && (chosenExt != null))
+                        ApplyFormatToLevelpackINI(file, targetFolder, chosenExt);
 
                     // Update the progress bar
                     int progressPercentage = (Array.IndexOf(files, file) + 1) * 100 / files.Length;
@@ -1513,6 +1520,23 @@ Digger=20
 
                 cleansingLevels = false;
             }
+        }
+        private void ApplyFormatToLevelpackINI(string file, string folder, string ext)
+        {
+            string iniPath = Path.Combine(folder, "levelpack.ini");
+            if (!File.Exists(iniPath))
+                return;
+
+            string oldName = Path.GetFileName(file);
+            string newName = Path.GetFileNameWithoutExtension(file) + ext;
+
+            string text = File.ReadAllText(iniPath);
+
+            if (!text.Contains(oldName))
+                return;
+
+            text = text.Replace(oldName, newName);
+            File.WriteAllText(iniPath, text);
         }
 
         /// <summary>

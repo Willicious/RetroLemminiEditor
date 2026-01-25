@@ -14,6 +14,7 @@ namespace RLEditor
     public partial class FormLevelFormat : Form
     {
         public string SelectedExtension { get; private set; } = null;
+        public bool ApplyFormatToLevelpackINI { get; private set; } = false;
 
         public FormLevelFormat(String path)
         {
@@ -42,6 +43,8 @@ namespace RLEditor
                     SelectedExtension = null; // keep original
                     break;
             }
+
+            ApplyFormatToLevelpackINI = checkApplyFormatToLevelpackINI.Checked;
 
             DialogResult = DialogResult.OK;
             Close();
