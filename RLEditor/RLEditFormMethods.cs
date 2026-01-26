@@ -1526,7 +1526,9 @@ Digger=20
             if (!File.Exists(iniPath))
                 return;
 
-            string oldName = Path.GetFileName(file);
+            string oldExt = ext == ".rlv" ? ".ini" : ".rlv"; // Just in case levels are already converted
+
+            string oldName = Path.GetFileNameWithoutExtension(file) + oldExt;
             string newName = Path.GetFileNameWithoutExtension(file) + ext;
 
             string text = File.ReadAllText(iniPath);
