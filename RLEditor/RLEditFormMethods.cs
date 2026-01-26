@@ -1523,6 +1523,9 @@ Digger=20
         private void ApplyFormatToLevelpackINI(string file, string folder, string ext)
         {
             string iniPath = Path.Combine(folder, "levelpack.ini");
+            
+            if (!File.Exists(iniPath))
+                iniPath = Path.Combine(Path.GetDirectoryName(file), "levelpack.ini");
             if (!File.Exists(iniPath))
                 return;
 
