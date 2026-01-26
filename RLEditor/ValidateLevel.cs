@@ -72,10 +72,10 @@ namespace RLEditor
             issuesList = new List<string>();
 
             FindIssuesPieceOutsideBoundary();
+            FindIssuesDeprecatedPieces();
             FindIssuesTooFewLemmings();
             FindIssuesTimeLimit();
             FindIssuesMissingObjects();
-            FindIssuesDeprecatedPieces();
         }
 
         private void FindIssuesPieceOutsideBoundary()
@@ -282,8 +282,54 @@ namespace RLEditor
             }
         }
 
+        /// <summary>
+        /// Drop-in replacement for all bottom-half-only exits
+        /// </summary>
+        private void ResolveMissingExits()
+        {
+            var exitData = new[]
+            {   // Style, Deprecated piece, Replacement piece, Horizontal offset, Vertical offset
+                new { Style = "crystal", Dep = "crystalo_0", Rep = "crystalo_8", OffsetX = 48, OffsetY = 7 },
+                new { Style = "dirt",    Dep = "dirto_0",    Rep = "dirto_7",    OffsetX = 48, OffsetY = 9 },
+                new { Style = "fire",    Dep = "fireo_0",    Rep = "fireo_6",    OffsetX = 48, OffsetY = 4 },
+                new { Style = "marble",  Dep = "marbleo_0",  Rep = "marbleo_6",  OffsetX = 48, OffsetY = 8 },
+                new { Style = "pillar",  Dep = "pillaro_0",  Rep = "pillaro_6",  OffsetX = 48, OffsetY = 9 },
+            };
+
+            // Drop in a replacement exit at the same co-ordinates as the missing one
+            foreach (var data in exitData)
+            {
+                var deps = level.GadgetList.Where(o => o.Style == data.Style && o.Name == data.Dep).ToList();
+                if (deps.Count == 0)
+                    continue;
+
+                var reps = level.GadgetList.Count(o => o.Style == data.Style && o.Name == data.Rep);
+                if (reps >= deps.Count)
+                    continue;
+
+                foreach (var obj in deps)
+                {
+                    var pos = new Point(obj.PosX + data.OffsetX, obj.PosY + data.OffsetY);
+                    level.AddPiece($"{data.Style}\\{data.Rep}", data.Style, pos, 1);
+                }
+            }
+
+            // Check for and remove duplicates (in case the level also had a complete exit)
+            var duplicateReps = level.GadgetList
+                .Where(o => exitData.Any(d => o.Style == d.Style && o.Name == d.Rep))
+                .GroupBy(o => new { o.Style, o.Name, o.PosX, o.PosY })
+                .Where(g => g.Count() > 1);
+
+            foreach (var group in duplicateReps)
+            {
+                foreach (var extra in group.Skip(1))
+                    level.GadgetList.Remove(extra);
+            }
+        }
+
         private void DeleteDeprecatedPieces()
         {
+            ResolveMissingExits();
             ResolveBubbleDeprecatedPieces();
             level.TerrainList.RemoveAll(ter => ter.IsDeprecated);
             level.GadgetList.RemoveAll(obj => obj.IsDeprecated);
