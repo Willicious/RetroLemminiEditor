@@ -167,7 +167,7 @@ namespace RLEditor
             string forceNormalSpeed = ini.GetString("forceNormalTimerSpeed", "true"); // default to "true"
             newLevel.ForceNormalTimerSpeed = forceNormalSpeed.Trim().ToLower() == "true";
 
-            newLevel.MaxFallDistance = ini.GetInt("maxFallDistance", 99);
+            newLevel.MaxFallDistance = ini.GetInt("maxFallDistance", 126);
             newLevel.AutosteelMode = ini.GetInt("autosteelMode");
 
             newLevel.TopBoundary = ini.GetInt("topBoundary");
