@@ -158,15 +158,19 @@ namespace RLEditor
 
             HandleOGStylePinning();
 
-            // Populate list view
             foreach (var s in styles)
-            {
-                var item = new ListViewItem(s.FolderName);
-                item.SubItems.Add(s.DisplayName);
-                item.SubItems.Add(s.PinnedTop ? "↑" : s.PinnedBottom ? "↓" : "");
-                item.Tag = s;
-                listStyles.Items.Add(item);
-            }
+                AddStyleToListView(s);
+        }
+
+        private void AddStyleToListView(StyleEntry entry)
+        {
+            var item = new ListViewItem(entry.FolderName);
+            item.SubItems.Add(entry.DisplayName);
+            item.SubItems.Add(entry.PinnedTop ? "↑" : entry.PinnedBottom ? "↓" : "");
+            item.SubItems.Add(entry.Randomize ? "Randomize" : "");
+            item.Tag = entry;
+
+            listStyles.Items.Add(item);
         }
 
         private void PerformStyleSearch()
@@ -185,14 +189,7 @@ namespace RLEditor
                     s.FolderName.ToLowerInvariant().Contains(search) ||
                     s.DisplayName.ToLowerInvariant().Contains(search))
                 {
-                    var item = new ListViewItem(s.FolderName);
-                    item.SubItems.Add(s.DisplayName);
-                    item.SubItems.Add(s.PinnedTop ? "↑" : s.PinnedBottom ? "↓" : "");
-
-                    // Store the reference to the original StyleEntry
-                    item.Tag = s;
-
-                    listStyles.Items.Add(item);
+                    AddStyleToListView(s);
                 }
             }
 
@@ -249,46 +246,30 @@ namespace RLEditor
             if (searchActive)
             {
                 btnClearSearch.Enabled = true;
-                btnShowSelectedItemsInList.Enabled = true;
                 btnShowSelectedItemsInList.Visible = true;
-                btnAddNew.Enabled = false;
                 btnAddNew.Visible = false;
-                btnMoveUp1.Enabled = false;
                 btnMoveUp1.Visible = false;
-                btnMoveUp10.Enabled = false;
                 btnMoveUp10.Visible = false;
-                btnMoveDown1.Enabled = false;
                 btnMoveDown1.Visible = false;
-                btnMoveDown10.Enabled = false;
                 btnMoveDown10.Visible = false;
-                btnPinToTop.Enabled = false;
                 btnPinToTop.Visible = false;
-                btnPinToBottom.Enabled = false;
                 btnPinToBottom.Visible = false;
-                btnUnpin.Enabled = false;
                 btnUnpin.Visible = false;
+                checkAutoPinOGStyles.Visible = false;
             }
             else
             {
                 btnClearSearch.Enabled = false;
-                btnShowSelectedItemsInList.Enabled = false;
                 btnShowSelectedItemsInList.Visible = false;
-                btnAddNew.Enabled = true;
                 btnAddNew.Visible = true;
-                btnMoveUp1.Enabled = true;
                 btnMoveUp1.Visible = true;
-                btnMoveUp10.Enabled = true;
                 btnMoveUp10.Visible = true;
-                btnMoveDown1.Enabled = true;
                 btnMoveDown1.Visible = true;
-                btnMoveDown10.Enabled = true;
                 btnMoveDown10.Visible = true;
-                btnPinToTop.Enabled = true;
                 btnPinToTop.Visible = true;
-                btnPinToBottom.Enabled = true;
                 btnPinToBottom.Visible = true;
-                btnUnpin.Enabled = true;
                 btnUnpin.Visible = true;
+                checkAutoPinOGStyles.Visible = true;
             }
         }
 
@@ -435,13 +416,7 @@ namespace RLEditor
             listStyles.Items.Clear();
 
             foreach (var s in styles)
-            {
-                var item = new ListViewItem(s.FolderName);
-                item.SubItems.Add(s.DisplayName);
-                item.SubItems.Add(s.PinnedTop ? "↑" : s.PinnedBottom ? "↓" : "");
-                item.Tag = s;
-                listStyles.Items.Add(item);
-            }
+                AddStyleToListView(s);
 
             listStyles.EndUpdate();
         }
