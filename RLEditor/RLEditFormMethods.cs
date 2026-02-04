@@ -27,7 +27,7 @@ namespace RLEditor
             curSettings.ReadSettingsFromFile();
 
             snapToGridToolStripMenuItem.Checked = curSettings.UseGridForPieces;
-            highlightEraserPiecesToolStripMenuItem.Checked = Properties.Settings.Default.ErasersAreHighlighted;
+            highlightEraserPiecesToolStripMenuItem.Checked = BmpModify.HighlightErasers;
         }
 
         /// <summary>
@@ -429,9 +429,6 @@ Digger=20
             tabLvlExtras.Size = tabLvlProperties.Size;
             tabLvlExtras.Left = tabLvlSkills.Right;
             tabLvlExtras.Top = tabLvlProperties.Top;
-
-            if (Properties.Settings.Default.AllTabsAreExpanded)
-                ExpandAllTabs();
         }
 
         /// <summary>
@@ -781,9 +778,7 @@ Digger=20
 
         private void ShowModsHelpDialog(bool userOpened)
         {
-            Properties.Settings settings = Properties.Settings.Default;
-
-            if (!userOpened && !settings.ShowModsHelpDialog)
+            if (!userOpened && !curSettings.ShowModsHelpDialog)
                 return;
 
             using (Form dlg = new Form())
@@ -825,10 +820,10 @@ Digger=20
 
                 btnLevelPackCompiler.Click += (s, e) =>
                 {
-                    if (checkDontShowAgain.Checked && settings.ShowModsHelpDialog)
+                    if (checkDontShowAgain.Checked && curSettings.ShowModsHelpDialog)
                     {
-                        settings.ShowModsHelpDialog = false;
-                        settings.Save();
+                        curSettings.ShowModsHelpDialog = false;
+                        curSettings.WriteSettingsToFile();
                     }
 
                     OpenLevelPackCompiler();
@@ -845,10 +840,10 @@ Digger=20
 
                 btnOK.Click += (s, e) =>
                 {
-                    if (checkDontShowAgain.Checked && settings.ShowModsHelpDialog)
+                    if (checkDontShowAgain.Checked && curSettings.ShowModsHelpDialog)
                     {
-                        settings.ShowModsHelpDialog = false;
-                        settings.Save();
+                        curSettings.ShowModsHelpDialog = false;
+                        curSettings.WriteSettingsToFile();
                     }
                 };
 
@@ -1105,7 +1100,7 @@ Digger=20
                 statusBarSteelAreasLabel.Visible = false;
                 showMessage = true;
             }
-            else if ((message == 1) && Properties.Settings.Default.ShowSteelAreasMessage)
+            else if ((message == 1) && curSettings.ShowSteelAreasMessage)
             {
                 textLabelMissingPieces = "";
                 textLabelSteelAreas = "Steel areas are optional.";
@@ -1248,7 +1243,7 @@ Digger=20
             }
 
             // Create the pop-out window and pass pic_Level to it
-            levelArrangerWindow = new FormLevelArranger(pic_Level, this, curRenderer);
+            levelArrangerWindow = new FormLevelArranger(pic_Level, this, curRenderer, curSettings);
 
             // Don't reposition pic_Level when zooming from within the Arrange Window
             repositionAfterZooming = false;
@@ -1291,7 +1286,7 @@ Digger=20
             }
 
             // Create the pop-out window and pass panelPieceBrowser to it
-            pieceBrowserWindow = new FormPieceBrowser(panelPieceBrowser, this);
+            pieceBrowserWindow = new FormPieceBrowser(panelPieceBrowser, this, curSettings);
 
             // Subscribe to the PieceBrowserReturned event to handle re-parenting
             pieceBrowserWindow.PieceBrowserReturned += () =>
@@ -1327,8 +1322,8 @@ Digger=20
                 CollapseAllTabs();
 
             // Update settings
-            Properties.Settings.Default.AllTabsAreExpanded = allTabsExpanded;
-            Properties.Settings.Default.Save();
+            curSettings.AllTabsExpanded = allTabsExpanded;
+            curSettings.WriteSettingsToFile();
         }
 
         private void ExpandAllTabs()
@@ -2634,7 +2629,7 @@ Digger=20
 
         private void ShowAboutRLEditor()
         {
-            using (var aboutRLEditor = new FormAboutRLEditor())
+            using (var aboutRLEditor = new FormAboutRLEditor(curSettings))
             {
                 aboutRLEditor.ShowDialog(this);
             }
@@ -2717,10 +2712,10 @@ Digger=20
 
         private void HighlightEraserPieces()
         {
-            Properties.Settings.Default.ErasersAreHighlighted = !Properties.Settings.Default.ErasersAreHighlighted;
-            highlightEraserPiecesToolStripMenuItem.Checked = Properties.Settings.Default.ErasersAreHighlighted;
+            BmpModify.HighlightErasers = !BmpModify.HighlightErasers;
+            highlightEraserPiecesToolStripMenuItem.Checked = BmpModify.HighlightErasers;
             pic_Level.SetImage(curRenderer.CreateLevelImage());
-            Properties.Settings.Default.Save();
+            curSettings.WriteSettingsToFile();
         }
 
         private void ToggleClearPhysics()

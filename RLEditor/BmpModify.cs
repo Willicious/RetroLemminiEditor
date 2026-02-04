@@ -52,8 +52,7 @@ namespace RLEditor
         private static Dictionary<C.CustDrawMode, Func<byte, byte, bool>> doDrawThisPixelDict;
 
         const int BytesPerPixel = 4;
-
-        private static bool _eraserHighlightCached;
+        public static bool HighlightErasers { get; set; }
 
         private static readonly byte[] COLOR_ERASE = { 0, 0, 0, 0 };
         private static readonly byte[] COLOR_ERASE_SOLID = { 100, 0, 100, 255 };
@@ -74,7 +73,7 @@ namespace RLEditor
         }
         private static byte[] ColorFunc_Erase(int posX, int posY)
         {
-            return _eraserHighlightCached ? COLOR_ERASE_SOLID : COLOR_ERASE;
+            return HighlightErasers ? COLOR_ERASE_SOLID : COLOR_ERASE;
         }
 
         private static byte[] ColorFunc_ClearPhysics(int posX, int posY)
@@ -269,9 +268,6 @@ namespace RLEditor
         /// <summary>
         /// Copies pixels from a new bitmap to the base bitmap. 
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="newBmp"></param>
-        /// <param name="pos"></param>
         public static void DrawOn(this Bitmap origBmp, Bitmap newBmp, Point pos, byte alpha = 255)
         {
             origBmp.DrawOn(newBmp, pos, DoDrawThisPixel_DrawNew, alpha);
@@ -280,16 +276,10 @@ namespace RLEditor
         /// <summary>
         /// Draws NewBmp to the base bitmap using the selected CustDrawMode.
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="newBmp"></param>
-        /// <param name="pos"></param>
-        /// <param name="colorSelect"></param>
         public static void DrawOn(this Bitmap origBmp, Bitmap newBmp, Point pos, C.CustDrawMode colorSelect)
         {
             var colorFunc = colorFuncDict[colorSelect];
             var doDrawThisPixel = doDrawThisPixelDict[colorSelect];
-
-            _eraserHighlightCached = Properties.Settings.Default.ErasersAreHighlighted;
 
             if (colorFunc == null)
             {
@@ -311,17 +301,10 @@ namespace RLEditor
         /// <summary>
         /// Draws NewBmp to the base bitmap using the selected CustDrawMode using a mask.
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="newBmp"></param>
-        /// <param name="maskBmp"></param>
-        /// <param name="pos"></param>
-        /// <param name="colorSelect"></param>
         public static void DrawOn(this Bitmap origBmp, Bitmap newBmp, Bitmap maskBmp, Point pos, C.CustDrawMode colorSelect)
         {
             var colorFunc = colorFuncDict[colorSelect];
             var doDrawThisPixel = doDrawThisPixelDict[colorSelect];
-
-            _eraserHighlightCached = Properties.Settings.Default.ErasersAreHighlighted;
 
             if (colorFunc == null)
             {
@@ -337,11 +320,6 @@ namespace RLEditor
         /// Copies pixels from a new bitmap to the base bitmap under condition specified by DoDrawThisPixel. 
         /// <para> All pixels will be drawn with fixed alpha value. </para>
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="newBmp"></param>
-        /// <param name="pos"></param>
-        /// <param name="doDrawThisPixel"></param>
-        /// <param name="alpha"></param>
         private static void DrawOn(this Bitmap origBmp, Bitmap newBmp, Point pos,
                                    Func<byte, byte, bool> doDrawThisPixel, byte alpha)
         {
@@ -389,10 +367,6 @@ namespace RLEditor
         /// <summary>
         /// Copies pixels from a new bitmap to the base bitmap as specified by ColorFunc and DoDrawThisPixel. 
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="newBmp"></param>
-        /// <param name="pos"></param>
-        /// <param name="ColorSelect"></param>
         private static void DrawOn(this Bitmap origBmp, Bitmap newBmp, Point pos,
                                    Func<int, int, byte[]> colorFunc, Func<byte, byte, bool> doDrawThisPixel)
         {
@@ -691,8 +665,6 @@ namespace RLEditor
         /// <summary>
         /// Zooms a bitmap.
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="zoomFactor"></param>
         public static Bitmap Zoom(this Bitmap origBmp, int zoomFactor)
         {
             int newWidth = (zoomFactor < 0) ? Math.Max(origBmp.Width / (Math.Abs(zoomFactor) + 1), 1) : origBmp.Width * (zoomFactor + 1);
@@ -705,9 +677,6 @@ namespace RLEditor
         /// <summary>
         /// Zooms a bitmap and crops it to a smaller size.
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="zoomFactor"></param>
-        /// <param name="newBmpSize"></param>
         public static Bitmap Zoom(this Bitmap origBmp, int zoomFactor, Size newBmpSize)
         {
             Bitmap newBmp = new Bitmap(newBmpSize.Width, newBmpSize.Height);
@@ -800,9 +769,6 @@ namespace RLEditor
         /// <summary>
         /// Draws a list of rectangles on a bitmap.
         /// </summary>
-        /// <param name="origBmp"></param>
-        /// <param name="rectList"></param>
-        /// <param name="rectColor"></param>
         public static void DrawOnRectangles(this Bitmap origBmp, List<Rectangle> rectList, Color rectColor)
         {
             if (rectList == null)

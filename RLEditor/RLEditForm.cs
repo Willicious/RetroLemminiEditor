@@ -1357,8 +1357,8 @@ namespace RLEditor
 
         private void dontShowAgainStatusBarMenuItem_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.ShowSteelAreasMessage = false;
-            Properties.Settings.Default.Save();
+            curSettings.ShowSteelAreasMessage = false;
+            curSettings.WriteSettingsToFile();
             HideStatusBar();
         }
 
@@ -1421,15 +1421,17 @@ namespace RLEditor
         {
             SetHotkeys();
 
-            // Use this to reset settings if needed
-            //Properties.Settings.Default.Reset();
-            //Properties.Settings.Default.Save();
+            if (curSettings.AllTabsExpanded)
+                ExpandAllTabs();
 
-            if (Properties.Settings.Default.ShowAboutRLWindowAtStartup)
-                ShowAboutRLEditor();
-
-            if (Properties.Settings.Default.LevelArrangerIsOpen)
+            if (curSettings.LevelArranger.IsOpen)
                 OpenLevelArrangerWindow();
+
+            if (curSettings.PieceBrowser.IsOpen)
+                OpenPieceBrowserWindow();
+
+            if (curSettings.ShowAboutAtStartup)
+                ShowAboutRLEditor();
 
             MoveControlsOnFormResize();
         }

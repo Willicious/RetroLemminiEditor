@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace RLEditor
 {
     public partial class FormAboutRLEditor : Form
     {
-        public FormAboutRLEditor()
+        private Settings curSettings;
+        internal FormAboutRLEditor(Settings settings)
         {
+            curSettings = settings;
+
             int GetCenter(Control component)
             {
                 return (this.ClientSize.Width - component.Width) / 2;
@@ -60,13 +56,13 @@ namespace RLEditor
 
             check_ShowThisWindow.Top = linkLF.Bottom + padding;
             check_ShowThisWindow.Left = GetCenter(check_ShowThisWindow);
-            check_ShowThisWindow.Checked = Properties.Settings.Default.ShowAboutRLWindowAtStartup;
+            check_ShowThisWindow.Checked = curSettings.ShowAboutAtStartup;
         }
 
         private void Check_ShowThisWindow_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.ShowAboutRLWindowAtStartup = check_ShowThisWindow.Checked;
-            Properties.Settings.Default.Save();
+            curSettings.ShowAboutAtStartup = check_ShowThisWindow.Checked;
+            curSettings.WriteSettingsToFile();
         }
 
         private void FormAboutRLEditor_KeyDown(object sender, KeyEventArgs e)

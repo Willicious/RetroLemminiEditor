@@ -29,8 +29,6 @@ namespace RLEditor
         /// <summary>
         /// Initializes a new instance of a Renderer. This resets all existing display options. 
         /// </summary>
-        /// <param name="level"></param>
-        /// <param name="pic_Level"></param>
         public Renderer(Level level, PictureBox pic_Level, Settings settings)
         {
             curSettings = settings;
@@ -844,7 +842,7 @@ namespace RLEditor
             Rectangle displayedLevelRect = GetLevelBmpRect();
 
             // Adjust text position if the scrollbars are visible and we're not in Level Arranger window
-            if (!Properties.Settings.Default.LevelArrangerIsOpen)
+            if (!curSettings.LevelArranger.IsOpen)
             {
                 if (displayedLevelRect.Width + 1 < level.Width) textPos.X = textPos.X - 10;
                 if (displayedLevelRect.Height + 1 < level.Height) textPos.Y = textPos.Y - 8;
