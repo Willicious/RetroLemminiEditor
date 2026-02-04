@@ -39,6 +39,7 @@ namespace RLEditor
         public static string AppPathCustomSkillsets => AppPathSettingsFolder + "RLEditorCustomSkillsets.ini";
         public static string AppPathTranslationTables => AppPathSettingsFolder + "RLEditorINITranslationTables.ini";
         public static string AppPathPlayerSettings => AppPathSettingsFolder + "retrolemmini_settings.ini";
+        public static string AppPathPlayerPlayers => AppPathSettingsFolder + "players.ini";
         public static string AppPathRetroLemmini => AppPath + "RetroLemmini.jar";
 
         public static char DirSep => System.IO.Path.DirectorySeparatorChar;

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace RLEditor
@@ -55,7 +54,7 @@ namespace RLEditor
             ShowDescriptions,
             ShowData,
         }
-
+        public string DefaultAuthorName { get; private set; }
         public bool AutoPinOGStyles { get; set; }
         public bool PreferObjectName { get; private set; }
         public PieceBrowserMode CurrentPieceBrowserMode { get; private set; }
@@ -87,6 +86,7 @@ namespace RLEditor
         /// </summary>
         public void SetDefault()
         {
+            DefaultAuthorName = string.Empty;
             CurrentPieceBrowserMode = PieceBrowserMode.ShowData;
             CurrentTriggerAreaColor = TriggerAreaColor.Pink;
             AutoPinOGStyles = true;
@@ -121,16 +121,18 @@ namespace RLEditor
         /// </summary>
         public void OpenSettingsWindow()
         {
+            int formWidth = 650;
+            int formHeight = 380;
             int columnLeft = 30;
             int columnRight = 340;
             int groupBoxTop = 20;
             int groupBoxColumnLeft = 16;
             int groupBoxColumnRight = 208;
-            int buttonsTop = 350;
+            int buttonsTop = 330;
 
             settingsForm = new EscExitForm();
             settingsForm.StartPosition = FormStartPosition.CenterScreen;
-            settingsForm.ClientSize = new System.Drawing.Size(650, 400);
+            settingsForm.ClientSize = new Size(formWidth, formHeight);
             settingsForm.FormBorderStyle = FormBorderStyle.FixedDialog;
             settingsForm.MinimizeBox = false;
             settingsForm.MaximizeBox = false;
@@ -139,11 +141,26 @@ namespace RLEditor
             settingsForm.MouseDown += new MouseEventHandler(settingsForm_MouseDown);
             settingsForm.FormClosing += new FormClosingEventHandler(settingsForm_FormClosing);
 
+            // ======================= Author Name Field ======================== //
+
+            Label labelAuthorName = new Label();
+            labelAuthorName.Text = "Default Author Name";
+            labelAuthorName.Top = 20;
+            labelAuthorName.Left = columnLeft;
+            labelAuthorName.AutoSize = true;
+
+            TextBox textAuthorName = new TextBox();
+            textAuthorName.Name = "textDefaultAuthorName";
+            textAuthorName.Text = DefaultAuthorName;
+            textAuthorName.Top = labelAuthorName.Top - 3;
+            textAuthorName.Left = labelAuthorName.Right + 10;
+            textAuthorName.Width = 170;
+
             // ======================= Piece Browser Mode GroupBox ======================== //
 
             GroupBox groupPieceBrowserMode = new GroupBox();
             groupPieceBrowserMode.Text = "Piece Browser Mode";
-            groupPieceBrowserMode.Top = 90;
+            groupPieceBrowserMode.Top = 60;
             groupPieceBrowserMode.Left = columnLeft;
             groupPieceBrowserMode.Width = 280;
             groupPieceBrowserMode.Height = 110;
@@ -210,7 +227,7 @@ namespace RLEditor
 
             GroupBox groupSavingOptions = new GroupBox();
             groupSavingOptions.Text = "Level Saving Options";
-            groupSavingOptions.Top = 220;
+            groupSavingOptions.Top = 190;
             groupSavingOptions.Left = columnLeft;
             groupSavingOptions.Width = 280;
             groupSavingOptions.Height = 110;
@@ -430,6 +447,9 @@ namespace RLEditor
 
 
             // ========================== Add Controls to Form =========================== //
+
+            settingsForm.Controls.Add(labelAuthorName);
+            settingsForm.Controls.Add(textAuthorName);
 
             settingsForm.Controls.Add(groupPieceBrowserMode);
             settingsForm.Controls.Add(groupCustomMove);
@@ -681,6 +701,15 @@ namespace RLEditor
             CurrentTriggerAreaColor = parsedColor;
         }
 
+        private void UpdateDefaultAuthorName()
+        {
+            if (!doSaveSettings)
+                return;
+
+            if (settingsForm.Controls.Find("textDefaultAuthorName", true).FirstOrDefault() is TextBox textDefaultAuthorName)
+                DefaultAuthorName = textDefaultAuthorName.Text;
+        }
+
         private void PrepareFormForClosing()
         {
             btnCancel.Focus(); // Prevents saving values if caret is still in numUpDown
@@ -751,6 +780,11 @@ namespace RLEditor
                     FileLine line = fileLines?[0];
                     switch (line?.Key)
                     {
+                        case "DEFAULTAUTHORNAME":
+                            {
+                                DefaultAuthorName = line.Text.Trim();
+                                break;
+                            }
                         case "PIECEBROWSERMODE":
                             {
                                 var modeText = line.Text.Trim().ToUpper();
@@ -839,12 +873,12 @@ namespace RLEditor
                             }
                         case "FORM_WIDTH":
                             {
-                                FormSize = new System.Drawing.Size(line.Value, FormSize.Height);
+                                FormSize = new Size(line.Value, FormSize.Height);
                                 break;
                             }
                         case "FORM_HEIGHT":
                             {
-                                FormSize = new System.Drawing.Size(FormSize.Width, line.Value);
+                                FormSize = new Size(FormSize.Width, line.Value);
                                 break;
                             }
                         case "AUTOSTART":
@@ -886,9 +920,12 @@ namespace RLEditor
 
                 File.Create(C.AppPathSettings).Close();
 
+                UpdateDefaultAuthorName();
+
                 TextWriter settingsFile = new StreamWriter(C.AppPathSettings, true);
 
                 settingsFile.WriteLine("# RLEditor settings ");
+                settingsFile.WriteLine(" DefaultAuthorName   " + DefaultAuthorName);
                 settingsFile.WriteLine(" ValidateWhenSaving  " + (ValidateWhenSaving ? "True" : "False"));
                 settingsFile.WriteLine(" Autosave            " + AutosaveFrequency.ToString());
                 settingsFile.WriteLine(" AutosaveLimit       " + KeepAutosaveCount.ToString());
