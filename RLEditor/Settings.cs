@@ -56,6 +56,7 @@ namespace RLEditor
         }
         public string DefaultAuthorName { get; private set; }
         public bool AutoPinOGStyles { get; set; }
+        public bool ShowRandomButton { get; set; }
         public bool PreferObjectName { get; private set; }
         public PieceBrowserMode CurrentPieceBrowserMode { get; private set; }
         public TriggerAreaColor CurrentTriggerAreaColor { get; private set; }
@@ -122,13 +123,13 @@ namespace RLEditor
         public void OpenSettingsWindow()
         {
             int formWidth = 650;
-            int formHeight = 380;
+            int formHeight = 410;
             int columnLeft = 30;
             int columnRight = 340;
             int groupBoxTop = 20;
             int groupBoxColumnLeft = 16;
             int groupBoxColumnRight = 208;
-            int buttonsTop = 330;
+            int buttonsTop = 360;
 
             settingsForm = new EscExitForm();
             settingsForm.StartPosition = FormStartPosition.CenterScreen;
@@ -163,7 +164,7 @@ namespace RLEditor
             groupPieceBrowserMode.Top = 60;
             groupPieceBrowserMode.Left = columnLeft;
             groupPieceBrowserMode.Width = 280;
-            groupPieceBrowserMode.Height = 110;
+            groupPieceBrowserMode.Height = 140;
 
             RadioButton radShowPieceData = new RadioButton();
             radShowPieceData.Name = "radShowPieceData";
@@ -217,17 +218,28 @@ namespace RLEditor
             checkInfiniteScrolling.Left = groupBoxColumnLeft;
             checkInfiniteScrolling.CheckedChanged += new EventHandler(checkInfiniteScrolling_CheckedChanged);
 
+            CheckBox checkShowRandomButton = new CheckBox();
+            checkShowRandomButton.Name = "checkShowRandomButton";
+            checkShowRandomButton.AutoSize = true;
+            checkShowRandomButton.CheckAlign = ContentAlignment.MiddleLeft;
+            checkShowRandomButton.Checked = ShowRandomButton;
+            checkShowRandomButton.Text = "Show Random Style Button";
+            checkShowRandomButton.Top = groupBoxTop + 90;
+            checkShowRandomButton.Left = groupBoxColumnLeft;
+            checkShowRandomButton.CheckedChanged += new EventHandler(showRandomButton_CheckedChanged);
+
             groupPieceBrowserMode.Controls.Add(radShowPiecesOnly);
             groupPieceBrowserMode.Controls.Add(radShowPieceDescriptions);
             groupPieceBrowserMode.Controls.Add(radShowPieceData);
             groupPieceBrowserMode.Controls.Add(checkPreferObjectName);
             groupPieceBrowserMode.Controls.Add(checkInfiniteScrolling);
+            groupPieceBrowserMode.Controls.Add(checkShowRandomButton);
 
             // =========================== Saving Options GroupBox =========================== //
 
             GroupBox groupSavingOptions = new GroupBox();
             groupSavingOptions.Text = "Level Saving Options";
-            groupSavingOptions.Top = 190;
+            groupSavingOptions.Top = 210;
             groupSavingOptions.Left = columnLeft;
             groupSavingOptions.Width = 280;
             groupSavingOptions.Height = 110;
@@ -532,9 +544,16 @@ namespace RLEditor
             settingChanged = true;
         }
 
+        private void showRandomButton_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowRandomButton = ((sender as CheckBox).CheckState == CheckState.Checked);
+            editorForm.MoveControlsOnFormResize();
+            settingChanged = true;
+        }
+
         private void checkUseGrid_CheckedChanged(object sender, EventArgs e)
         {
-            UseGridForPieces = ((sender as CheckBox).CheckState == CheckState.Checked);
+            UseGridForPieces = (sender as CheckBox).CheckState == CheckState.Checked;
 
             if (settingsForm.Controls.Find("numGridSize", true).FirstOrDefault() is NumericUpDown numGridSize)
                 numGridSize.Enabled = UseGridForPieces;
@@ -755,6 +774,7 @@ namespace RLEditor
             ReadSettingsFromFile();
 
             editorForm.ToggleSnapToGrid();
+            editorForm.MoveControlsOnFormResize();
             editorForm.LoadPiecesIntoPictureBox();
 
             WriteSettingsToFile();
@@ -809,6 +829,11 @@ namespace RLEditor
                         case "INFINITESCROLLING":
                             {
                                 InfiniteScrolling = (line.Text.Trim().ToUpper() == "TRUE");
+                                break;
+                            }
+                        case "SHOWRANDOMBUTTON":
+                            {
+                                ShowRandomButton = (line.Text.Trim().ToUpper() == "TRUE");
                                 break;
                             }
                         case "GRIDSIZE":
@@ -933,6 +958,7 @@ namespace RLEditor
                 settingsFile.WriteLine(" AutoPinOGStyles     " + (AutoPinOGStyles ? "True" : "False"));
                 settingsFile.WriteLine(" PreferObjectName    " + (PreferObjectName ? "True" : "False"));
                 settingsFile.WriteLine(" InfiniteScrolling   " + (InfiniteScrolling ? "True" : "False"));
+                settingsFile.WriteLine(" ShowRandomButton    " + (ShowRandomButton ? "True" : "False"));
                 settingsFile.WriteLine(" GridSize            " + GridSize.ToString());
                 settingsFile.WriteLine(" GridColor           " + (GridColor == Color.Empty ? "(Invisible)" : ColorTranslator.ToHtml(GridColor)));
                 settingsFile.WriteLine(" TriggerAreaColor    " + CurrentTriggerAreaColor.ToString());

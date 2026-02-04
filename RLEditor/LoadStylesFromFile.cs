@@ -126,16 +126,29 @@ namespace RLEditor
             // Optional: read styles.ini
             Dictionary<string, float> styleOrderDict = new Dictionary<string, float>();
             Dictionary<string, string> newStyleNameDict = new Dictionary<string, string>();
+            Dictionary<string, bool> styleRandomizerDict = new Dictionary<string, bool>();
             if (File.Exists(filePath))
             {
-                ReadStyleOrderFromFile(filePath, out styleOrderDict, out newStyleNameDict);
+                ReadStyleOrderFromFile(filePath, out styleOrderDict, out newStyleNameDict, out styleRandomizerDict);
 
                 // Rename all styles according to styles.ini
                 foreach (string styleFileName in newStyleNameDict.Keys)
                 {
                     Style curStyle = styleList.Find(sty => sty.NameInDirectory.Equals(styleFileName));
                     if (curStyle != null)
+                    {
                         curStyle.NameInEditor = newStyleNameDict[styleFileName];
+                    }
+                }
+
+                // Add style to Randomizer if relevant
+                foreach (string styleFileName in styleRandomizerDict.Keys)
+                {
+                    Style curStyle = styleList.Find(sty => sty.NameInDirectory.Equals(styleFileName));
+                    if (curStyle != null)
+                    {
+                        curStyle.Randomize = styleRandomizerDict[styleFileName];
+                    }
                 }
             }
 
@@ -183,14 +196,13 @@ namespace RLEditor
         /// <summary>
         /// Reads a style file and returns new positions and custom names for styles.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="styleOrderDict"></param>
-        /// <param name="newStyleNameDict"></param>
         private static void ReadStyleOrderFromFile(string filePath, out Dictionary<string, float> styleOrderDict,
-                                                                    out Dictionary<string, string> newStyleNameDict)
+                                                                    out Dictionary<string, string> newStyleNameDict,
+                                                                    out Dictionary<string, bool> styleRandomizerDict)
         {
             styleOrderDict = new Dictionary<string, float>();
             newStyleNameDict = new Dictionary<string, string>();
+            styleRandomizerDict = new Dictionary<string, bool>();
 
             StreamReader fileStream = null;
             string styleFileName = null;
@@ -225,6 +237,15 @@ namespace RLEditor
                             float.TryParse(line.Substring(6).Trim(), NumberStyles.Number, CultureInfo.InvariantCulture, out styleNewPos))
                         {
                             styleOrderDict[styleFileName] = styleNewPos;
+                        }
+                    }
+                    else if (line.ToUpper().StartsWith("RANDOMIZE") && line.Length > 10)
+                    {
+                        bool styleNewRandomize;
+                        if (styleFileName != null &&
+                            bool.TryParse(line.Substring("RANDOMIZE=".Length).Trim(), out styleNewRandomize))
+                        {
+                            styleRandomizerDict[styleFileName] = styleNewRandomize;
                         }
                     }
                 }

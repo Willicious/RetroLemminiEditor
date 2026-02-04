@@ -16,10 +16,11 @@ namespace RLEditor
         /// Initializes a new instance of a Style by searching for pieces in the directory AppPath/StyleName/.
         /// </summary>
         /// <param name="styleName"></param>
-        public Style(string styleName)
+        public Style(string styleName, bool randomize)
         {
             NameInDirectory = styleName;
             NameInEditor = styleName; // may be overwritten later when forming the StyleList
+            Randomize = randomize;
 
             colorDict = LoadStylesFromFile.StyleColors(NameInDirectory);
         }
@@ -31,6 +32,7 @@ namespace RLEditor
         List<string> objectKeys;
         public string NameInDirectory { get; private set; }
         public string NameInEditor { get; set; }
+        public bool Randomize { get; set; }
 
         public List<string> TerrainKeys
         {

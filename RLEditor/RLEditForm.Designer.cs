@@ -225,6 +225,7 @@
             this.check_Lvl_Superlemming = new System.Windows.Forms.CheckBox();
             this.num_Lvl_MaxFallDistance = new RLEditor.NumUpDownOverwrite();
             this.txt_Focus = new RLEditor.FocusTextBox();
+            this.but_StyleRandom = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -933,6 +934,7 @@
             // panelPieceBrowser
             // 
             this.panelPieceBrowser.BackColor = System.Drawing.Color.Transparent;
+            this.panelPieceBrowser.Controls.Add(this.but_StyleRandom);
             this.panelPieceBrowser.Controls.Add(this.but_PieceRulers);
             this.panelPieceBrowser.Controls.Add(this.but_AddSteelArea);
             this.panelPieceBrowser.Controls.Add(this.picPiece7);
@@ -1133,10 +1135,10 @@
             // 
             this.combo_PieceStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_PieceStyle.FormattingEnabled = true;
-            this.combo_PieceStyle.Location = new System.Drawing.Point(9, 2);
+            this.combo_PieceStyle.Location = new System.Drawing.Point(127, 2);
             this.combo_PieceStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.combo_PieceStyle.Name = "combo_PieceStyle";
-            this.combo_PieceStyle.Size = new System.Drawing.Size(392, 28);
+            this.combo_PieceStyle.Size = new System.Drawing.Size(274, 28);
             this.combo_PieceStyle.TabIndex = 75;
             this.combo_PieceStyle.SelectedIndexChanged += new System.EventHandler(this.combo_PieceStyle_TextChanged);
             this.combo_PieceStyle.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
@@ -2662,6 +2664,16 @@
             this.txt_Focus.TabStop = false;
             this.txt_Focus.Text = "asdf";
             // 
+            // but_StyleRandom
+            // 
+            this.but_StyleRandom.Location = new System.Drawing.Point(13, 2);
+            this.but_StyleRandom.Name = "but_StyleRandom";
+            this.but_StyleRandom.Size = new System.Drawing.Size(100, 32);
+            this.but_StyleRandom.TabIndex = 90;
+            this.but_StyleRandom.Text = "Random";
+            this.but_StyleRandom.UseVisualStyleBackColor = true;
+            this.but_StyleRandom.Click += new System.EventHandler(this.but_StyleRandom_Click);
+            // 
             // RLEditForm
             // 
             this.AllowDrop = true;
@@ -2953,6 +2965,7 @@
         private System.Windows.Forms.Button btnLevelPackCompiler;
         private System.Windows.Forms.Button btnLoadStyle;
         private System.Windows.Forms.Button but_FlipSpawnDirection;
+        private System.Windows.Forms.Button but_StyleRandom;
     }
 }
 

@@ -63,7 +63,7 @@ namespace RLEditor
             }
             // Create the StyleList from the StyleNameList
             styleNameList.RemoveAll(sty => sty == "default");
-            StyleList = styleNameList.ConvertAll(sty => new Style(sty));
+            StyleList = styleNameList.ConvertAll(sty => new Style(sty, false));
             StyleList = LoadStylesFromFile.OrderAndRenameStyles(StyleList, curSettings);
         }
 
@@ -723,6 +723,44 @@ Digger=20
                 styleManagerForm.ShowDialog(this);
             }
         }
+
+        /// <summary>
+        /// Chooses a random style for the piece browser
+        /// </summary>
+        private static readonly Random _rng = new Random();
+        private void RandomizePieceStyle()
+        {
+            if (combo_PieceStyle.Items.Count == 0)
+                return;
+
+            var randomizedNames = StyleList.Where(s => s.Randomize).Select(s => s.NameInEditor).ToList();
+
+            string current = combo_PieceStyle.SelectedItem as string;
+
+            if (randomizedNames.Count == 0)
+            {
+                int index;
+                do
+                {
+                    index = _rng.Next(combo_PieceStyle.Items.Count);
+                }
+                while (combo_PieceStyle.Items[index].Equals(current) &&
+                       combo_PieceStyle.Items.Count > 1);
+
+                combo_PieceStyle.SelectedIndex = index;
+                return;
+            }
+
+            string chosen;
+            do
+            {
+                chosen = randomizedNames[_rng.Next(randomizedNames.Count)];
+            }
+            while (chosen == current && randomizedNames.Count > 1);
+
+            combo_PieceStyle.SelectedItem = chosen;
+        }
+
         private void LoadStyleFromMetaData()
         {
             if (string.IsNullOrWhiteSpace(lblPieceStyle.Text))

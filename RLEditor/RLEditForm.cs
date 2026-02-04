@@ -1516,6 +1516,11 @@ namespace RLEditor
             OpenStyleManager();
         }
 
+        private void but_StyleRandom_Click(object sender, EventArgs e)
+        {
+            RandomizePieceStyle();
+        }
+
         private void but_AddSteelArea_Click(object sender, EventArgs e)
         {
             AddSteelArea();
