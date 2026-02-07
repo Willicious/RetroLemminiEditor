@@ -310,8 +310,22 @@ namespace RLEditor
                     continue;
 
                 var reps = level.GadgetList.Count(o => o.Style == data.Style && o.Name == data.Rep);
-                if (reps >= deps.Count)
-                    continue;
+
+                if (reps > deps.Count)
+                {
+                    DialogResult result = MessageBox.Show("This level contains more working exits than deprecated exits.\n" +
+                                                          "Would you like to replace the deprecated exits anyway?\n\n" +
+                                                          "('Yes' is Recommended)",
+                                                          "Deprecated Exit Replacement",
+                                                          MessageBoxButtons.YesNoCancel,
+                                                          MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                        { /*carry on*/ }
+                    else if (result == DialogResult.No)
+                        continue;
+                    else
+                        return;
+                }
 
                 foreach (var obj in deps)
                 {
