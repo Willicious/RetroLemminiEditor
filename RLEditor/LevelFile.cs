@@ -650,8 +650,14 @@ namespace RLEditor
 
         private static string GetSafeString(string text)
         {
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrWhiteSpace(text))
                 return "";
+
+            // Trim whitespace
+            text = text.Trim();
+
+            // Remove leading/trailing backslashes
+            text = text.Trim('\\');
 
             // INI safe: wrap strings containing special chars in quotes
             if (text.Contains('=') || text.Contains(';'))
