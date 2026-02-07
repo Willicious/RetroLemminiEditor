@@ -1066,16 +1066,21 @@ Digger=20
             if (!cleansingLevels)
                 return;
 
+            bool mainLevelUsed = CurLevel.MainLevel != "";
+
             if (deprecatedPieces.Count > 0)
                 levelsWithDeprecatedPieces.Add(CurLevel.FilePathToSave);
 
             if (missingPieces.Count > 0)
                 levelsWithMissingPieces.Add(CurLevel.FilePathToSave);
 
-            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH))
+            if (mainLevelUsed)
+                levelsUsingAMainLevel.Add(CurLevel.FilePathToSave);
+
+            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH) && !mainLevelUsed)
                 levelsWithNoLemmings.Add(CurLevel.FilePathToSave);
 
-            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT))
+            if (!CurLevel.GadgetList.Exists(obj => obj.ObjType == C.OBJ.EXIT) && !mainLevelUsed)
                 levelsWithNoExits.Add(CurLevel.FilePathToSave);
         }
 
@@ -1460,6 +1465,7 @@ Digger=20
         // Store filenames of levels with missing pieces
         List<string> levelsWithDeprecatedPieces = new List<string>();
         List<string> levelsWithMissingPieces = new List<string>();
+        List<string> levelsUsingAMainLevel = new List<string>();
         List<string> levelsWithNoLemmings = new List<string>();
         List<string> levelsWithNoExits = new List<string>();
         private bool cleansingLevels;
@@ -1480,6 +1486,7 @@ Digger=20
             // Initialise list
             levelsWithDeprecatedPieces.Clear();
             levelsWithMissingPieces.Clear();
+            levelsUsingAMainLevel.Clear();
             levelsWithNoLemmings.Clear();
             levelsWithNoExits.Clear();
 
@@ -1572,6 +1579,11 @@ Digger=20
                 {
                     cleanseMsg += "\n\nLevels with missing pieces:\n\n";
                     cleanseMsg += string.Join("\n", levelsWithMissingPieces.Select(Path.GetFileName));
+                }
+                if (levelsUsingAMainLevel.Count > 0)
+                {
+                    cleanseMsg += "\n\nLevels that use the mainLevel property:\n\n";
+                    cleanseMsg += string.Join("\n", levelsUsingAMainLevel.Select(Path.GetFileName));
                 }
                 if (levelsWithNoLemmings.Count > 0)
                 {

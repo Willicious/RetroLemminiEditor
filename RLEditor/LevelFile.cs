@@ -83,6 +83,7 @@ namespace RLEditor
             // --- Basic metadata ---
             newLevel.Title = ini.GetString("name");
             newLevel.Author = ini.GetString("author");
+            newLevel.MainLevel = ini.GetString("mainLevel");
             newLevel.LevelVersion = (ulong)ini.GetInt("version");
 
             // --- Style ---
@@ -545,6 +546,7 @@ namespace RLEditor
             sb.AppendLine($"# RetroLemmini Level Version {curLevel.LevelVersion.ToString()}");
             sb.AppendLine();
             sb.AppendLine("# Level stats");
+            if (curLevel.MainLevel != "") sb.AppendLine($"mainLevel = {curLevel.MainLevel}");
             sb.AppendLine($"name = {GetSafeString(curLevel.Title)}");
             sb.AppendLine($"author = {GetSafeString(curLevel.Author)}");
             sb.AppendLine($"version = {curLevel.LevelVersion}");
@@ -564,20 +566,27 @@ namespace RLEditor
             sb.AppendLine($"numDiggers = {curLevel.NumDiggers}");
             sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
             sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
-            sb.AppendLine($"style = {curLevel.MainStyle?.NameInEditor}");
-            sb.AppendLine($"width = {curLevel.Width}");
-            sb.AppendLine($"height = {curLevel.Height}");
             sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
             sb.AppendLine($"forceNormalTimerSpeed = {curLevel.ForceNormalTimerSpeed}");
             sb.AppendLine($"maxFallDistance = {curLevel.MaxFallDistance}");
             sb.AppendLine($"classicSteel = {curLevel.ClassicSteel}");
+
+            if (curLevel.MainLevel != "") // Levels with a mainLevel property only use the above - the rest is ignored
+            {
+                File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
+                return;
+            }
+
             sb.AppendLine($"autosteelMode = {curLevel.AutosteelMode}");
+            sb.AppendLine($"style = {curLevel.MainStyle?.NameInEditor}");
+            sb.AppendLine($"width = {curLevel.Width}");
+            sb.AppendLine($"height = {curLevel.Height}");
             sb.AppendLine($"topBoundary = {curLevel.TopBoundary}");
             sb.AppendLine($"bottomBoundary = {curLevel.BottomBoundary}");
             sb.AppendLine($"leftBoundary = {curLevel.LeftBoundary}");
             sb.AppendLine($"rightBoundary = {curLevel.RightBoundary}");
-            sb.AppendLine(curLevel.MusicFile == "" ? "" : $"music = {curLevel.MusicFile}");
-            sb.AppendLine(curLevel.Mods == "" ? "" : $"mods = {curLevel.Mods}");
+            if (curLevel.MusicFile != "") sb.AppendLine($"music = {curLevel.MusicFile}");
+            if (curLevel.Mods != "") sb.AppendLine($"mods = {curLevel.Mods}");
             sb.AppendLine();
 
             // Add objects

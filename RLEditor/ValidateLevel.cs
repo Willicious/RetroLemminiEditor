@@ -118,6 +118,9 @@ namespace RLEditor
 
         private void FindIssuesMissingObjects()
         {
+            if (level.MainLevel != "")
+                return;
+
             if (!level.GadgetList.Exists(obj => obj.ObjType == C.OBJ.HATCH))
                 issuesList.Add("Missing object: Hatch.");
 
@@ -127,6 +130,9 @@ namespace RLEditor
 
         private void FindIssuesDeprecatedPieces()
         {
+            if (level.MainLevel != "")
+                return;
+
             foreach (GadgetPiece deprecated in level.GadgetList.FindAll(gad => gad.IsDeprecated))
             {
                 issuesList.Add($"Deprecated gadget: {deprecated.Name} in style {deprecated.Style} (Position {deprecated.PosX}, {deprecated.PosY})");

@@ -20,6 +20,7 @@ namespace RLEditor
             this.LevelVersion = 0;
             this.Title = "";
             this.Author = "";
+            this.MainLevel = "";
             this.MainStyle = mainStyle;
             this.MusicFile = "";
             this.Mods = "";
@@ -63,6 +64,7 @@ namespace RLEditor
         public ulong LevelVersion { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
+        public string MainLevel { get; set; }
         public Style MainStyle { get; set; }
         public string MusicFile { get; set; }
         public string Mods { get; set; }
@@ -132,6 +134,7 @@ namespace RLEditor
             newLevel.Format = string.Copy(this.Format);
             newLevel.LevelVersion = this.LevelVersion;
             newLevel.Title = string.Copy(this.Title);
+            newLevel.MainLevel = string.Copy(this.MainLevel);
             newLevel.Author = string.Copy(this.Author);
             newLevel.MusicFile = string.Copy(this.MusicFile);
             newLevel.Mods = string.Copy(this.Mods);
@@ -187,6 +190,7 @@ namespace RLEditor
                 // specifically do not compare LevelVersion
                 || !this.Title.Equals(otherLevel.Title)
                 || !this.Author.Equals(otherLevel.Author)
+                || !this.MainLevel.Equals(otherLevel.MainLevel)
                 || !((this.MainStyle == null && otherLevel.MainStyle == null) ||
                      (this.MainStyle != null && this.MainStyle.NameInDirectory.Equals(otherLevel.MainStyle?.NameInDirectory)))
                 || !this.MusicFile.Equals(otherLevel.MusicFile)
