@@ -73,8 +73,7 @@ namespace RLEditor
 
         private static bool IsTriggerPixel(Color c)
         {
-            // Trigger colour: FF00FF @ full alpha
-            return c.A == 255 && c.R == 255 && c.G == 0 && c.B == 255;
+            return c.A == 255; // Fully opaque
         }
 
         private static int GetPieceIndex(string objectImageKey)
