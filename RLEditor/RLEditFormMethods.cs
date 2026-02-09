@@ -1503,8 +1503,6 @@ Digger=20
                 })
                 .ToArray();
 
-            var failedCleanses = new List<Tuple<string, string>>();
-
             // Ask the user to choose an output extension
             string chosenExt = null;
             bool applyFormatToLevelpackINI = false;
@@ -1528,21 +1526,16 @@ Digger=20
                 foreach (string file in files)
                 {
                     LoadNewLevel(file);
-                    if (chosenExt != null)
+                    if (chosenExt != "")
                     {
                         CurLevel.FilePathToSave = Path.Combine(
                             Path.GetDirectoryName(file),
                             Path.GetFileNameWithoutExtension(file) + chosenExt
                         );
-                        SaveLevel(false);
                     }
-                    else
-                    {
-                        failedCleanses.Add(Tuple.Create(file, $" - error: invalid extension ({chosenExt})"));
-                        continue;
-                    }
+                    SaveLevel(false);
 
-                    if (applyFormatToLevelpackINI && (chosenExt != null))
+                    if (applyFormatToLevelpackINI && (chosenExt != ""))
                         ApplyFormatToLevelpackINI(file, targetFolder, chosenExt);
 
                     // Update the progress bar
@@ -1565,11 +1558,6 @@ Digger=20
                 // Display completion message
                 string cleanseMsg = "All levels cleansed successfully.";
 
-                if (failedCleanses.Count > 0)
-                {
-                    cleanseMsg += "\n\nFailed cleanses:\n\n";
-                    cleanseMsg += string.Join("\n", failedCleanses);
-                }
                 if (levelsWithDeprecatedPieces.Count > 0)
                 {
                     cleanseMsg += "\n\nLevels with deprecated pieces:\n\n";

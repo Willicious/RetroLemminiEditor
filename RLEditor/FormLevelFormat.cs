@@ -40,7 +40,7 @@ namespace RLEditor
                     SelectedExtension = ".ini";
                     break;
                 default:
-                    SelectedExtension = null; // keep original
+                    SelectedExtension = ""; // keep original
                     break;
             }
 
