@@ -88,10 +88,10 @@ namespace RLEditor
 
             // --- Style ---
             string styleName = ini.GetString("style");
-            newLevel.MainStyle = styleList.Find(sty => sty.NameInEditor == styleName);
+            newLevel.MainStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
 
             if (newLevel.MainStyle == null)
-                newLevel.MainStyle = styleList.Find(sty => sty.NameInDirectory == styleName);
+                newLevel.MainStyle = styleList.Find(sty => sty.NameInEditor == styleName);
 
             // --- Music ---
             newLevel.MusicFile = ini.GetString("music");
@@ -578,7 +578,7 @@ namespace RLEditor
             }
 
             sb.AppendLine($"autosteelMode = {curLevel.AutosteelMode}");
-            sb.AppendLine($"style = {curLevel.MainStyle?.NameInEditor}");
+            sb.AppendLine($"style = {curLevel.MainStyle?.NameInDirectory}");
             sb.AppendLine($"width = {curLevel.Width}");
             sb.AppendLine($"height = {curLevel.Height}");
             sb.AppendLine($"topBoundary = {curLevel.TopBoundary}");
