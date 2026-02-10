@@ -1446,7 +1446,7 @@ Digger=20
             }
         }
 
-        private void ShowCleanseLevelsDialog()
+        private async void ShowCleanseLevelsDialog()
         {
             using (var folderBrowserDialog = new FolderBrowserDialog())
             {
@@ -1457,7 +1457,7 @@ Digger=20
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
                 {
-                    CleanseLevels(folderBrowserDialog.SelectedPath);
+                    await CleanseLevels(folderBrowserDialog.SelectedPath);
                 }
             }
         }
@@ -1473,7 +1473,7 @@ Digger=20
         /// <summary>
         /// Opens and saves all .ini/.rlv files in a directory in order to ensure compatibility and update the file
         /// </summary>
-        private async void CleanseLevels(String targetFolder)
+        private async Task CleanseLevels(String targetFolder)
         {
             if (string.IsNullOrEmpty(targetFolder))
             {
