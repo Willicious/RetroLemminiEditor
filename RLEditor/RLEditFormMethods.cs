@@ -1601,27 +1601,46 @@ Digger=20
                 cleansingLevels = false;
             }
         }
-        private void ApplyFormatToLevelpackINI(string file, string folder, string ext)
+        private void ApplyFormatToLevelpackINI(string originalFilePath, string rootFolder, string newExt)
         {
-            string iniPath = Path.Combine(folder, "levelpack.ini");
-            
+            string iniPath = Path.Combine(rootFolder, "levelpack.ini");
             if (!File.Exists(iniPath))
-                iniPath = Path.Combine(Path.GetDirectoryName(file), "levelpack.ini");
+                iniPath = Path.Combine(Path.GetDirectoryName(originalFilePath), "levelpack.ini");
+
             if (!File.Exists(iniPath))
                 return;
 
-            string oldExt = ext == ".rlv" ? ".ini" : ".rlv"; // Just in case levels are already converted
+            string oldFileName = Path.GetFileName(originalFilePath);
+            string newFileName = Path.GetFileName(Path.ChangeExtension(originalFilePath, newExt));
 
-            string oldName = Path.GetFileNameWithoutExtension(file) + oldExt;
-            string newName = Path.GetFileNameWithoutExtension(file) + ext;
-
-            string text = File.ReadAllText(iniPath);
-
-            if (!text.Contains(oldName))
+            if (oldFileName.Equals(newFileName, StringComparison.OrdinalIgnoreCase))
                 return;
 
-            text = text.Replace(oldName, newName);
-            File.WriteAllText(iniPath, text);
+            var lines = File.ReadAllLines(iniPath);
+            bool modified = false;
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+
+                int equalsIndex = line.IndexOf('=');
+                if (equalsIndex < 0)
+                    continue;
+
+                string rhs = line.Substring(equalsIndex + 1).TrimStart();
+
+                int fileStart = rhs.LastIndexOf(oldFileName, StringComparison.OrdinalIgnoreCase);
+                if (fileStart < 0)
+                    continue;
+
+                string newRhs = rhs.Substring(0, fileStart) + newFileName + rhs.Substring(fileStart + oldFileName.Length);
+                lines[i] = line.Substring(0, equalsIndex + 1) + " " + newRhs;
+                modified = true;
+                break;
+            }
+
+            if (modified)
+                File.WriteAllLines(iniPath, lines);
         }
 
         /// <summary>
