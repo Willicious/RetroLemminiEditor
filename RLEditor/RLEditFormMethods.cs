@@ -1521,7 +1521,7 @@ Digger=20
             using (FormProgress progressForm = new FormProgress())
             {
                 progressForm.ProgressBar.Maximum = files.Length;
-                progressForm.Show();
+                progressForm.Show(this);
 
                 foreach (string file in files)
                 {
