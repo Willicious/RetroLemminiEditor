@@ -314,7 +314,7 @@ namespace RLEditor
 
                 if (reps > deps.Count)
                 {
-                    DialogResult result = MessageBox.Show("This level contains more working exits than deprecated exits.\n" +
+                    DialogResult result = MessageBox.Show($"'{level.Title}' contains more working exits than deprecated exits.\n" +
                                                           "Would you like to replace the deprecated exits anyway?\n\n" +
                                                           "('Yes' is Recommended)",
                                                           "Deprecated Exit Replacement",
