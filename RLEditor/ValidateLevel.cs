@@ -212,6 +212,7 @@ namespace RLEditor
             validatorForm.Controls.Add(butClose);
 
             DisplayValidationResult();
+            validatorForm.TopMost = true;
             validatorForm.ShowDialog();
         }
 
