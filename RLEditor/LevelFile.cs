@@ -110,7 +110,11 @@ namespace RLEditor
 
             // --- Start position ---
             int startX = ini.GetInt("xPosCenter", int.MinValue);
+            int posX = ini.GetInt("xPos", int.MinValue);
             int startY = ini.GetInt("yPosCenter", int.MinValue);
+
+            startX = (posX > 0 && startX < 0) ? posX + (C.ScreenSize.Width / 2) : startX;
+            startY = (posX > 0 && startY < 0) ? (C.ScreenSize.Height / 2) : startY;
 
             if (startX != int.MinValue && startY != int.MinValue)
             {
