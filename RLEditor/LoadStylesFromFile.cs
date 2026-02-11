@@ -358,6 +358,8 @@ namespace RLEditor
                                         break;
                                     case 3:
                                     case 4:
+                                    case 10:
+                                    case 11:
                                         objType = C.OBJ.ONE_WAY_WALL;
                                         break;
                                     case 5:
