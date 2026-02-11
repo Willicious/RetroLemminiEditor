@@ -162,13 +162,22 @@ namespace RLEditor
         {
             List<LevelPiece> selectionList = CurLevel.SelectionList();
 
-            but_MoveBack.Enabled = (selectionList.Count > 0);
-            but_MoveFront.Enabled = (selectionList.Count > 0);
-            but_MoveBackOne.Enabled = (selectionList.Count > 0);
-            but_MoveFrontOne.Enabled = (selectionList.Count > 0);
+            bool piecesSelected = selectionList.Count > 0;
 
-            but_FlipSpawnDirection.Visible = selectionList.Count > 0 &&
-                selectionList.All(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.HATCH);
+            but_MoveBack.Enabled = piecesSelected;
+            but_MoveFront.Enabled = piecesSelected;
+            but_MoveBackOne.Enabled = piecesSelected;
+            but_MoveFrontOne.Enabled = piecesSelected;
+
+            bool onlyHatchesSelected = selectionList.All(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.HATCH);
+
+            but_FlipSpawnDirection.Visible = piecesSelected && onlyHatchesSelected;
+
+            bool oneWaySelected = selectionList.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL);
+
+            but_RotatePieces.Enabled = !oneWaySelected;
+            but_InvertPieces.Enabled = !oneWaySelected;
+            but_FlipPieces.Enabled = !oneWaySelected;
 
             bool hasSpecialGadget = selectionList.OfType<GadgetPiece>()
                  .Any(g => g.ObjType.In(C.OBJ.STEEL, C.OBJ.RULER));
