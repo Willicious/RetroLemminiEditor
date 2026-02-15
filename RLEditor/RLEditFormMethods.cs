@@ -1483,6 +1483,9 @@ Digger=20
 
             cleansingLevels = true;
 
+            // Disable eraser highlighting
+            BmpModify.HighlightErasers = false;
+
             // Initialise list
             levelsWithDeprecatedPieces.Clear();
             levelsWithMissingPieces.Clear();
