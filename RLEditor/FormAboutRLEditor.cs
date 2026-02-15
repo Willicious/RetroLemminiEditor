@@ -102,10 +102,41 @@ namespace RLEditor
             //// Test version text
             //WriteBoldText(richTextBox, "This version of the Editor is for test purposes only!\n");
             //richTextBox.AppendText("Please do not distribute it publicly as stability cannot be guaranteed. Thanks\n");
+            //richTextBox.AppendText("\n===============================================================================\n");
+
+            WriteBoldText(richTextBox, $"================ Version {C.Version} Updates ================\n");
+
+            WriteBoldText(richTextBox, "\n• New OWW Directions\n");
+            richTextBox.AppendText(" • Added support for OWW Up/Down (available in RetroLemmini 2.8 onwards)\n");
+            richTextBox.AppendText(" • Note that it's no longer possible to flip/rotate/invert OWW in the Editor (transformed OWWs are not supported in RetroLemmini yet)\n");
+
+            WriteBoldText(richTextBox, "\n• Piece Browser\n");
+            richTextBox.AppendText(" • Added a 'Random' button to the Piece Browser which, when clicked, randomized the piece style selection. It's possible to specify which styles are Randomized in the Style Manager; if no styles are specified, the entire list is randomized\n");
+
+            WriteBoldText(richTextBox, "\n• Default Author Name\n");
+            richTextBox.AppendText(" • Added a setting which automatically applies a default author name when a new level is created\n");
+
+            WriteBoldText(richTextBox, "\n• Cleanse Levels\n");
+            richTextBox.AppendText(" • Bugfix - Cleansing to existing ext (.ini/.rlv) no longer throws an exception\n");
+            richTextBox.AppendText(" • Bugfix - Progress form is linked to main form and kept on top. This is to prevent unhandled exceptions when focusing a different app during a cleanse\n");
+            richTextBox.AppendText(" • Highlight erasers is disabled when cleansing (it must be manually re-enabled afterwards if necessary)\n");
+            richTextBox.AppendText(" • mainLevel property is now internally supported to prevent errors during cleansing (ideally, it should no longer be used for new levels)\n");
+            richTextBox.AppendText(" • Bugfix - .ini/.rlv is written in correctly when auto-updating levelpack.ini\n");
+
+            WriteBoldText(richTextBox, "\n• Validate Levels");
+            richTextBox.AppendText(" - Validate levels can now auto-replace deprecated objects for OG styles. Choose 'Delete deprecated pieces' and they will be auto-replaced with the new corresponding piece\n");
+
+            WriteBoldText(richTextBox, "\n• Bugfixes");
+            richTextBox.AppendText(" - Whitespace and trailing backslashes are auto-trimmed from level titles.\n");
+            richTextBox.AppendText(" - Any opaque pixel in a trigger mask is seen as a trigger area (it no longer has to be a specific shade of pink).\n");
+            richTextBox.AppendText(" • 'Save As Image' sanitizes invalid characters when saving\n");
+            richTextBox.AppendText(" • Directory name is prioritized when identifying styles\n");
+            richTextBox.AppendText(" • Added backwards-compatibility for screen start positions in earlier levels (it always saves to the more recent format)\n");
 
             // Version 1.1 features
-            WriteBoldText(richTextBox, "Version 1.1\n");
-            WriteBoldText(richTextBox, "• Full-featured level editor for RetroLemmini");
+            WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");
+
+            WriteBoldText(richTextBox, "\n• Full-featured level editor for RetroLemmini");
             richTextBox.AppendText(" - Create, edit and play levels in a user-friendly and intuitive custom-built app.\n");
 
             WriteBoldText(richTextBox, "• Front-panel control for all level features");
