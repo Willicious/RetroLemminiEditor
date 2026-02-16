@@ -876,9 +876,16 @@ namespace RLEditor
                 .ToList();
             levelBmp.DrawOnRectangles(rulerRects, C.RLColors[C.RLColor.SelRectRulers]);
 
+            // One-way-walls
+            var owwRects = selectedGadgets
+                .Where(gad => gad.ObjType == C.OBJ.ONE_WAY_WALL)
+                .Select(gad => GetPicRectFromLevelRect(gad.ImageRectangle))
+                .ToList();
+            levelBmp.DrawOnRectangles(owwRects, C.RLColors[C.RLColor.SelRectGadget]);
+
             // All other gadgets
             var gadgetRects = selectedGadgets
-                .Where(gad => gad.ObjType != C.OBJ.STEEL && gad.ObjType != C.OBJ.RULER)
+                .Where(gad => gad.ObjType != C.OBJ.STEEL && gad.ObjType != C.OBJ.RULER && gad.ObjType != C.OBJ.ONE_WAY_WALL)
                 .Select(gad => GetPicRectFromLevelRect(gad.GetSolidPixelWorldRect()))
                 .ToList();
             levelBmp.DrawOnRectangles(gadgetRects, C.RLColors[C.RLColor.SelRectGadget]);
