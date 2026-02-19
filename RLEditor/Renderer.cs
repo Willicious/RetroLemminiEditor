@@ -80,8 +80,6 @@ namespace RLEditor
         Point zoomMouseLevelPos;
 
         public CropTool CropTool;
-
-        public bool CropToolActive;
         private Point currentLevelDrawOffset;
 
         public void Dispose()
@@ -281,18 +279,6 @@ namespace RLEditor
                 GetLevelPointFromPicPoint,
                 () => new Rectangle(0, 0, level.Width, level.Height),
                 () => currentLevelDrawOffset);
-        }
-
-        public void StartCropTool()
-        {
-            CropTool.Start();
-            CropToolActive = true;
-        }
-
-        public void StopCropTool()
-        {
-            CropTool.Stop();
-            CropToolActive = false;
         }
 
         public void ConfirmDrag()

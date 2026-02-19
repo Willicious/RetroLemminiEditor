@@ -715,14 +715,14 @@ Digger=20
 
         public void HandleCropLevel()
         {
-            if (curRenderer.CropToolActive)
+            if (curRenderer.CropTool.Active)
             {
-                curRenderer.StopCropTool();
+                curRenderer.CropTool.Stop();
                 but_CropLevel.Text = "Crop";
             }
             else
             {
-                curRenderer.StartCropTool();
+                curRenderer.CropTool.Start();
                 but_CropLevel.Text = "Apply Crop";
             }
             pic_Level.SetImage(curRenderer.GetScreenImage());

@@ -77,8 +77,6 @@ namespace RLEditor
         /// <summary>
         /// Moves the piece in the level some pixels in a given direction.
         /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="step"></param>
         public void Move(C.DIR direction, int step, int gridSize)
         {
             switch (direction)
