@@ -968,6 +968,13 @@ namespace RLEditor
 
         private void HandleMouseInput(object sender, MouseEventArgs e)
         {
+            if (curRenderer.CropToolActive)
+            {
+                curRenderer.CropTool.MouseDown(e.Location);
+                pic_Level.SetImage(curRenderer.GetScreenImage());
+                return;
+            }
+
             mutexMouseDown.WaitOne();
 
             ReadLevelInfoFromForm(true);
@@ -1042,6 +1049,14 @@ namespace RLEditor
 
         private void pic_Level_MouseUp(object sender, MouseEventArgs e)
         {
+
+            if (curRenderer.CropToolActive)
+            {
+                curRenderer.CropTool.MouseUp();
+                pic_Level.SetImage(curRenderer.CreateLevelImage());
+                return;
+            }
+
             mutexMouseUp.WaitOne();
 
             curRenderer.MouseCurPos = e.Location;
@@ -1131,6 +1146,13 @@ namespace RLEditor
 
         private void pic_Level_MouseMove(object sender, MouseEventArgs e)
         {
+            if (curRenderer.CropToolActive)
+            {
+                curRenderer.CropTool.MouseMove(e.Location);
+                pic_Level.SetImage(curRenderer.CreateLevelImage());
+                return;
+            }
+
             if (curRenderer.MouseStartPos == null)
                 return;
 

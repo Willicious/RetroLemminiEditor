@@ -115,11 +115,10 @@ namespace RLEditor
                 return;
 
             Point offset = getLevelDrawOffset();
-            Point adjusted = new Point(
-                picPoint.X - offset.X,
-                picPoint.Y - offset.Y);
 
+            Point adjusted = new Point(picPoint.X - offset.X, picPoint.Y - offset.Y);
             Point levelPoint = picToLevelPoint(adjusted);
+
             Rectangle picRect = levelToPicRect(LevelCropRect);
             picRect.Offset(offset);
 
