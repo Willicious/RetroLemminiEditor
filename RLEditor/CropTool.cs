@@ -12,6 +12,7 @@ namespace RLEditor
         private readonly Func<Rectangle, Rectangle> levelToPicRect;
         private readonly Func<Point, Point> picToLevelPoint;
         private readonly Func<Rectangle> getLevelBounds;
+        private readonly Func<Point> getLevelDrawOffset;
 
         private enum DragMode
         {
@@ -34,13 +35,15 @@ namespace RLEditor
         private const int HANDLE_SIZE = 6;
 
         public CropTool(
-            Func<Rectangle, Rectangle> levelToPicRect,
-            Func<Point, Point> picToLevelPoint,
-            Func<Rectangle> getLevelBounds)
+            Func<Rectangle, Rectangle> levelRect,
+            Func<Point, Point> levelPoint,
+            Func<Rectangle> levelBounds,
+            Func<Point> drawOffset)
         {
-            this.levelToPicRect = levelToPicRect;
-            this.picToLevelPoint = picToLevelPoint;
-            this.getLevelBounds = getLevelBounds;
+            this.levelToPicRect = levelRect;
+            this.picToLevelPoint = levelPoint;
+            this.getLevelBounds = levelBounds;
+            this.getLevelDrawOffset = drawOffset;
         }
 
         public void Start()
@@ -60,11 +63,15 @@ namespace RLEditor
             if (!Active)
                 return;
 
+            Point offset = getLevelDrawOffset();
+
             Rectangle picRect = levelToPicRect(LevelCropRect);
+            picRect.Offset(offset);
 
             using (Brush darken = new SolidBrush(Color.FromArgb(120, 0, 0, 0)))
             {
                 Rectangle full = levelToPicRect(getLevelBounds());
+                full.Offset(offset);
 
                 Region outside = new Region(full);
                 outside.Exclude(picRect);
@@ -107,10 +114,17 @@ namespace RLEditor
             if (!Active)
                 return;
 
-            Point levelPoint = picToLevelPoint(picPoint);
+            Point offset = getLevelDrawOffset();
+            Point adjusted = new Point(
+                picPoint.X - offset.X,
+                picPoint.Y - offset.Y);
+
+            Point levelPoint = picToLevelPoint(adjusted);
             Rectangle picRect = levelToPicRect(LevelCropRect);
+            picRect.Offset(offset);
 
             dragMode = HitTest(picPoint, picRect);
+
             if (dragMode == DragMode.None)
                 return;
 
@@ -123,7 +137,12 @@ namespace RLEditor
             if (!Active || dragMode == DragMode.None)
                 return;
 
-            Point levelPoint = picToLevelPoint(picPoint);
+            Point offset = getLevelDrawOffset();
+            Point adjusted = new Point(
+                picPoint.X - offset.X,
+                picPoint.Y - offset.Y);
+
+            Point levelPoint = picToLevelPoint(adjusted);
             int dx = levelPoint.X - dragStartLevel.X;
             int dy = levelPoint.Y - dragStartLevel.Y;
 

@@ -82,6 +82,7 @@ namespace RLEditor
         private CropTool cropTool;
 
         public bool CropToolActive;
+        private Point currentLevelDrawOffset;
 
         public void Dispose()
         {
@@ -249,6 +250,7 @@ namespace RLEditor
             croppedBmp.Dispose();
             screenBmp.Dispose();
 
+            currentLevelDrawOffset = levelPos;
             if (cropTool.Active)
             {
                 using (Graphics g = Graphics.FromImage(fullBmp))
@@ -277,7 +279,8 @@ namespace RLEditor
             cropTool = new CropTool(
                 GetPicRectFromLevelRect,
                 GetLevelPointFromPicPoint,
-                () => new Rectangle(0, 0, level.Width, level.Height));
+                () => new Rectangle(0, 0, level.Width, level.Height),
+                () => currentLevelDrawOffset);
         }
 
         public void StartCropTool()
