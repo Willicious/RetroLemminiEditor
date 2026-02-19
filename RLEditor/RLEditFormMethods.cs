@@ -716,16 +716,11 @@ Digger=20
         public void HandleCropLevel()
         {
             if (curRenderer.CropTool.Active)
-            {
-                ApplyLevelCrop();
                 curRenderer.CropTool.Stop();
-                but_CropLevel.Text = "Crop";
-            }
             else
-            {
                 curRenderer.CropTool.Start();
-                but_CropLevel.Text = "Apply Crop";
-            }
+
+            UpdateCropButtons();
             pic_Level.SetImage(curRenderer.GetScreenImage());
         }
 
@@ -742,6 +737,7 @@ Digger=20
             num_Lvl_SizeY.Value = cropRect.Height;
 
             CommitLevelChanges();
+            HandleCropLevel();
         }
 
         public void OpenStyleManager()

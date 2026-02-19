@@ -1442,6 +1442,7 @@ namespace RLEditor
         private void NLEditForm_Shown(object sender, EventArgs e)
         {
             SetHotkeys();
+            UpdateCropButtons();
 
             if (curSettings.AllTabsExpanded)
                 ExpandAllTabs();
@@ -1627,6 +1628,15 @@ namespace RLEditor
         private void but_CropLevel_Click(object sender, EventArgs e)
         {
             HandleCropLevel();
+        }
+        private void but_CancelCrop_Click(object sender, EventArgs e)
+        {
+            HandleCropLevel();
+        }
+
+        private void but_ApplyCrop_Click(object sender, EventArgs e)
+        {
+            ApplyLevelCrop();
         }
     }
 }

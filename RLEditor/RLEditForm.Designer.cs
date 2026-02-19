@@ -156,6 +156,8 @@
             this.check_Pieces_NoOv = new System.Windows.Forms.CheckBox();
             this.check_Pieces_Erase = new System.Windows.Forms.CheckBox();
             this.tabGlobalInfo = new System.Windows.Forms.TabPage();
+            this.but_CancelCrop = new System.Windows.Forms.Button();
+            this.but_ApplyCrop = new System.Windows.Forms.Button();
             this.but_CropLevel = new System.Windows.Forms.Button();
             this.lblReleaseRateMax = new System.Windows.Forms.Label();
             this.lblReleaseRateMin = new System.Windows.Forms.Label();
@@ -1588,6 +1590,8 @@
             // 
             // tabGlobalInfo
             // 
+            this.tabGlobalInfo.Controls.Add(this.but_CancelCrop);
+            this.tabGlobalInfo.Controls.Add(this.but_ApplyCrop);
             this.tabGlobalInfo.Controls.Add(this.but_CropLevel);
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_RRMax);
             this.tabGlobalInfo.Controls.Add(this.lblReleaseRateMax);
@@ -1631,11 +1635,35 @@
             this.tabGlobalInfo.Text = "Globals";
             this.tabGlobalInfo.UseVisualStyleBackColor = true;
             // 
+            // but_CancelCrop
+            // 
+            this.but_CancelCrop.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.but_CancelCrop.Location = new System.Drawing.Point(249, 252);
+            this.but_CancelCrop.Name = "but_CancelCrop";
+            this.but_CancelCrop.Size = new System.Drawing.Size(100, 32);
+            this.but_CancelCrop.TabIndex = 105;
+            this.but_CancelCrop.Text = "Cancel";
+            this.but_CancelCrop.UseVisualStyleBackColor = true;
+            this.but_CancelCrop.Visible = false;
+            this.but_CancelCrop.Click += new System.EventHandler(this.but_CancelCrop_Click);
+            // 
+            // but_ApplyCrop
+            // 
+            this.but_ApplyCrop.ForeColor = System.Drawing.Color.Blue;
+            this.but_ApplyCrop.Location = new System.Drawing.Point(140, 252);
+            this.but_ApplyCrop.Name = "but_ApplyCrop";
+            this.but_ApplyCrop.Size = new System.Drawing.Size(100, 32);
+            this.but_ApplyCrop.TabIndex = 104;
+            this.but_ApplyCrop.Text = "Apply";
+            this.but_ApplyCrop.UseVisualStyleBackColor = true;
+            this.but_ApplyCrop.Visible = false;
+            this.but_ApplyCrop.Click += new System.EventHandler(this.but_ApplyCrop_Click);
+            // 
             // but_CropLevel
             // 
             this.but_CropLevel.Location = new System.Drawing.Point(28, 252);
             this.but_CropLevel.Name = "but_CropLevel";
-            this.but_CropLevel.Size = new System.Drawing.Size(321, 32);
+            this.but_CropLevel.Size = new System.Drawing.Size(100, 32);
             this.but_CropLevel.TabIndex = 103;
             this.but_CropLevel.Text = "Crop";
             this.but_CropLevel.UseVisualStyleBackColor = true;
@@ -2979,6 +3007,8 @@
         private System.Windows.Forms.Button but_FlipSpawnDirection;
         private System.Windows.Forms.Button but_StyleRandom;
         private System.Windows.Forms.Button but_CropLevel;
+        private System.Windows.Forms.Button but_CancelCrop;
+        private System.Windows.Forms.Button but_ApplyCrop;
     }
 }
 
