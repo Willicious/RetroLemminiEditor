@@ -209,9 +209,11 @@ namespace RLEditor
             // Zoom this image
             Bitmap screenBmp = croppedBmp.Zoom(ZoomFactor);
 
-            // Add rectangles around selected pieces
+            // Add screen start rectangle
             if (IsScreenStart)
                 AddScreenStartRectangle(ref screenBmp);
+
+            // Add rectangles around selected pieces
             AddSelectedRectangles(ref screenBmp);
             
             if (ZoomFactor >= 0 && IsObjectLayer)
