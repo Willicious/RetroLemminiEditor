@@ -717,6 +717,7 @@ Digger=20
         {
             if (curRenderer.CropTool.Active)
             {
+                ApplyLevelCrop();
                 curRenderer.CropTool.Stop();
                 but_CropLevel.Text = "Crop";
             }
@@ -726,6 +727,21 @@ Digger=20
                 but_CropLevel.Text = "Apply Crop";
             }
             pic_Level.SetImage(curRenderer.GetScreenImage());
+        }
+
+        private void ApplyLevelCrop()
+        {
+            Rectangle cropRect = curRenderer.CropTool.LevelCropRect;
+
+            SelectAllPieces();
+            CurLevel.MovePieces(C.DIR.N, cropRect.Y, 1);
+            CurLevel.MovePieces(C.DIR.W, cropRect.X, 1);
+            CurLevel.UnselectAll();
+
+            num_Lvl_SizeX.Value = cropRect.Width;
+            num_Lvl_SizeY.Value = cropRect.Height;
+
+            CommitLevelChanges();
         }
 
         public void OpenStyleManager()
