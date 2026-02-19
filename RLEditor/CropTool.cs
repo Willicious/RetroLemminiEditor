@@ -33,6 +33,8 @@ namespace RLEditor
         private Rectangle originalRect;
 
         private const int HANDLE_SIZE = 6;
+        private const int MIN_WIDTH = 80;
+        private const int MIN_HEIGHT = 80;
 
         public CropTool(
             Func<Rectangle, Rectangle> levelRect,
@@ -98,16 +100,25 @@ namespace RLEditor
 
         private Rectangle[] GetHandleRects(Rectangle rect)
         {
-            int hs = HANDLE_SIZE;
+            int ch = HANDLE_SIZE;     // corner handles
+            int eh = HANDLE_SIZE * 8; // edge handles
 
             return new Rectangle[]
             {
-            new Rectangle(rect.Left - hs, rect.Top - hs, hs*2, hs*2),
-            new Rectangle(rect.Right - hs, rect.Top - hs, hs*2, hs*2),
-            new Rectangle(rect.Left - hs, rect.Bottom - hs, hs*2, hs*2),
-            new Rectangle(rect.Right - hs, rect.Bottom - hs, hs*2, hs*2)
+                // Corner handles (squares)
+                new Rectangle(rect.Left - ch, rect.Top - ch, ch * 2, ch * 2),      // top-left
+                new Rectangle(rect.Right - ch, rect.Top - ch, ch * 2, ch * 2),     // top-right
+                new Rectangle(rect.Left - ch, rect.Bottom - ch, ch * 2, ch * 2),   // bottom-left
+                new Rectangle(rect.Right - ch, rect.Bottom - ch, ch * 2, ch * 2),  // bottom-right
+
+                // Edge handles (rectangles)
+                new Rectangle(rect.Left + rect.Width/2 - eh/2, rect.Top - ch, eh, ch * 2),     // top
+                new Rectangle(rect.Left + rect.Width/2 - eh/2, rect.Bottom - ch, eh, ch * 2),  // bottom
+                new Rectangle(rect.Left - ch, rect.Top + rect.Height/2 - eh/2, ch * 2, eh),    // left
+                new Rectangle(rect.Right - ch, rect.Top + rect.Height/2 - eh/2, ch * 2, eh),   // right
             };
         }
+
 
         public void MouseDown(Point picPoint)
         {
@@ -196,8 +207,19 @@ namespace RLEditor
                     break;
             }
 
-            if (r.Width < 1) r.Width = 1;
-            if (r.Height < 1) r.Height = 1;
+            if (r.Width < MIN_WIDTH)
+            {
+                if (dragMode == DragMode.ResizeLeft || dragMode == DragMode.ResizeTopLeft || dragMode == DragMode.ResizeBottomLeft)
+                    r.X -= MIN_WIDTH - r.Width;
+                r.Width = MIN_WIDTH;
+            }
+
+            if (r.Height < MIN_HEIGHT)
+            {
+                if (dragMode == DragMode.ResizeTop || dragMode == DragMode.ResizeTopLeft || dragMode == DragMode.ResizeTopRight)
+                    r.Y -= MIN_HEIGHT - r.Height;
+                r.Height = MIN_HEIGHT;
+            }
 
             Rectangle bounds = getLevelBounds();
             r = Rectangle.Intersect(r, bounds);
@@ -214,13 +236,20 @@ namespace RLEditor
         {
             Rectangle[] handles = GetHandleRects(picRect);
 
+            // Corner handles
             if (handles[0].Contains(picPoint)) return DragMode.ResizeTopLeft;
             if (handles[1].Contains(picPoint)) return DragMode.ResizeTopRight;
             if (handles[2].Contains(picPoint)) return DragMode.ResizeBottomLeft;
             if (handles[3].Contains(picPoint)) return DragMode.ResizeBottomRight;
 
-            if (picRect.Contains(picPoint))
-                return DragMode.Move;
+            // Edge handles
+            if (handles[4].Contains(picPoint)) return DragMode.ResizeTop;
+            if (handles[5].Contains(picPoint)) return DragMode.ResizeBottom;
+            if (handles[6].Contains(picPoint)) return DragMode.ResizeLeft;
+            if (handles[7].Contains(picPoint)) return DragMode.ResizeRight;
+
+            // Inside rectangle
+            if (picRect.Contains(picPoint)) return DragMode.Move;
 
             return DragMode.None;
         }
