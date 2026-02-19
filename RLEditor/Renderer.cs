@@ -43,7 +43,7 @@ namespace RLEditor
             ClearLayers();
             ChangeZoom(0);
 
-            InitializeCropTool(level);
+            InitializeCropTool();
         }
 
         public const int AllowedGrayBorder = 10;
@@ -274,7 +274,7 @@ namespace RLEditor
             EnsureScreenPosInLevel();
         }
 
-        private void InitializeCropTool(Level level)
+        private void InitializeCropTool()
         {
             CropTool = new CropTool(
                 GetPicRectFromLevelRect,
