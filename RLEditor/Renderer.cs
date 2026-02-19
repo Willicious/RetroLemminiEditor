@@ -42,6 +42,8 @@ namespace RLEditor
             SetLevel(level);
             ClearLayers();
             ChangeZoom(0);
+
+            InitializeCropTool(level);
         }
 
         public const int AllowedGrayBorder = 10;
@@ -76,6 +78,10 @@ namespace RLEditor
 
         Point zoomMouseScreenPos;
         Point zoomMouseLevelPos;
+
+        private CropTool cropTool;
+
+        public bool CropToolActive;
 
         public void Dispose()
         {
@@ -243,6 +249,14 @@ namespace RLEditor
             croppedBmp.Dispose();
             screenBmp.Dispose();
 
+            if (cropTool.Active)
+            {
+                using (Graphics g = Graphics.FromImage(fullBmp))
+                {
+                    cropTool.Draw(g);
+                }
+            }
+
             return fullBmp;
         }
 
@@ -256,6 +270,26 @@ namespace RLEditor
         {
             level = newLevel;
             EnsureScreenPosInLevel();
+        }
+
+        private void InitializeCropTool(Level level)
+        {
+            cropTool = new CropTool(
+                GetPicRectFromLevelRect,
+                GetLevelPointFromPicPoint,
+                () => new Rectangle(0, 0, level.Width, level.Height));
+        }
+
+        public void StartCropTool()
+        {
+            cropTool.Start();
+            CropToolActive = true;
+        }
+
+        public void StopCropTool()
+        {
+            cropTool.Stop();
+            CropToolActive = false;
         }
 
         public void ConfirmDrag()
@@ -337,7 +371,6 @@ namespace RLEditor
         /// <summary>
         /// Translates level distances to screen distances.
         /// </summary>
-        /// <param name="lvlCoord"></param>
         public int ApplyZoom(int lvlCoord)
         {
             return (ZoomFactor < 0) ? (lvlCoord / (1 - ZoomFactor)) : (lvlCoord * (ZoomFactor + 1));
@@ -346,7 +379,6 @@ namespace RLEditor
         /// <summary>
         /// Translates screen distances to level distances.
         /// </summary>
-        /// <param name="screenCoord"></param>
         public int ApplyUnZoom(int screenCoord)
         {
             return (ZoomFactor < 0) ? (screenCoord * (1 - ZoomFactor)) : (screenCoord / (ZoomFactor + 1));
@@ -913,7 +945,6 @@ namespace RLEditor
         /// <summary>
         /// Translates a rectangle in level coordinates into screen coordinates (relative to pic_Level)
         /// </summary>
-        /// <param name="origRect"></param>
         private Rectangle GetPicRectFromLevelRect(Rectangle origRect)
         {
             int posX = ApplyZoom(origRect.X - Math.Max(ScreenPosX, 0));
@@ -934,7 +965,6 @@ namespace RLEditor
         /// <summary>
         /// Translates a point in level coordinates into screen coordinates (relative to pic_Level)
         /// </summary>
-        /// <param name="origPoint"></param>
         private Point GetPicPointFromLevelPoint(Point origPoint)
         {
             int posX = ApplyZoom(origPoint.X - Math.Max(ScreenPosX, 0));
@@ -942,11 +972,20 @@ namespace RLEditor
             return new Point(posX, posY);
         }
 
+        /// <summary>
+        /// Translates screen coordinates (relative to pic_Level) into a point in level coordinates 
+        /// </summary>
+        private Point GetLevelPointFromPicPoint(Point picPoint)
+        {
+            int levelX = ApplyUnZoom(picPoint.X) + Math.Max(ScreenPosX, 0);
+            int levelY = ApplyUnZoom(picPoint.Y) + Math.Max(ScreenPosY, 0);
+
+            return new Point(levelX, levelY);
+        }
 
         /// <summary>
         /// Draws the rectangle around the area currently selected with the mouse.
         /// </summary>
-        /// <param name="levelBmp"></param>
         private void AddMouseSelectionArea(ref Bitmap levelBmp)
         {
             if (MouseDragAction != C.DragActions.SelectArea)
@@ -1012,8 +1051,6 @@ namespace RLEditor
         /// <summary>
         /// Modifies the zoom level and zooms onto the mouse position.
         /// </summary>
-        /// <param name="change"></param>
-        /// <param name="mouseScreenPos"></param>
         void ChangeZoomAtMousePos(int change)
         {
             int oldZoom = ZoomFactor;
@@ -1030,7 +1067,6 @@ namespace RLEditor
         /// <summary>
         /// Modifies the zoom level, zooming in at the center and adapts the screen position.
         /// </summary>
-        /// <param name="change"></param>
         void ChangeZoomAtCenter(int change)
         {
             int oldBorderWidth = ApplyUnZoom(BorderWidth());
@@ -1057,7 +1093,6 @@ namespace RLEditor
         /// <summary>
         /// Modifies the zoom level
         /// </summary>
-        /// <param name="change"></param>
         public void ChangeZoom(int change, bool mayCenterAtMouse = false)
         {
             if (mayCenterAtMouse && picBoxRect.Contains(zoomMouseScreenPos))

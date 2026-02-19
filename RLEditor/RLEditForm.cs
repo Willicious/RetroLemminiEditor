@@ -1601,5 +1601,10 @@ namespace RLEditor
         {
             LoadStyleFromMetaData();
         }
+
+        private void but_CropLevel_Click(object sender, EventArgs e)
+        {
+            HandleCropLevel();
+        }
     }
 }

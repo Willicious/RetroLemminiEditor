@@ -713,6 +713,21 @@ Digger=20
             pic_Level.Image = curRenderer.CreateLevelImage();
         }
 
+        public void HandleCropLevel()
+        {
+            if (curRenderer.CropToolActive)
+            {
+                curRenderer.StopCropTool();
+                but_CropLevel.Text = "Crop";
+            }
+            else
+            {
+                curRenderer.StartCropTool();
+                but_CropLevel.Text = "Apply Crop";
+            }
+            pic_Level.SetImage(curRenderer.GetScreenImage());
+        }
+
         public void OpenStyleManager()
         {
             using (var styleManagerForm = new FormStyleManager(this, curSettings))

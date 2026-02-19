@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BmpModify.cs" />
+    <Compile Include="CropTool.cs" />
     <Compile Include="FormHints.cs">
       <SubType>Form</SubType>
     </Compile>
