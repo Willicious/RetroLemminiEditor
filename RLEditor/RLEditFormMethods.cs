@@ -723,6 +723,7 @@ Digger=20
 
             UpdateCropButtons();
             pic_Level.SetImage(curRenderer.GetScreenImage());
+            PullFocusFromTextInputs();
         }
 
         private void ApplyLevelCrop()
