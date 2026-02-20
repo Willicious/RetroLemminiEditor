@@ -2885,6 +2885,7 @@ Digger=20
             AddHotkey(HotkeyConfig.HotkeyName.HotkeyRefreshStyles, () => RefreshStyles());
             AddHotkey(HotkeyConfig.HotkeyName.HotkeyOpenStyleManager, () => OpenStyleManager());
             AddHotkey(HotkeyConfig.HotkeyName.HotkeyToggleSnapToGrid, () => ToggleSnapToGrid(true));
+            AddHotkey(HotkeyConfig.HotkeyName.HotkeyToggleCrop, () => HandleCropLevel());
             AddHotkey(HotkeyConfig.HotkeyName.HotkeyOpenLevelArrangerWindow, () => OpenLevelArrangerWindow());
             AddHotkey(HotkeyConfig.HotkeyName.HotkeyOpenPieceBrowserWindow, () => OpenPieceBrowserWindow());
             AddHotkey(HotkeyConfig.HotkeyName.HotkeyToggleAllTabs, () => ToggleExpandedTabs());

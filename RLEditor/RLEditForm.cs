@@ -824,6 +824,20 @@ namespace RLEditor
                     break;
             }
 
+            // Handle Enter/Esc for crop
+            if (curRenderer.CropTool.Active)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Enter:
+                        ApplyLevelCrop();
+                        break;
+                    case Keys.Escape:
+                        HandleCropLevel();
+                        break;
+                }
+            }
+
             /// <summary>
             /// Determines if a key is used for text input.
             /// </summary>
