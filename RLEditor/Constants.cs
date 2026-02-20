@@ -121,10 +121,10 @@ namespace RLEditor
         public static readonly byte ALPHA_OWW = 255;
         public static readonly byte ALPHA_NOOWW = 254;
 
-        public enum Layer { Background, ObjBack, Terrain, ObjTop, Triggers, SteelAreas, Rulers }
+        public enum Layer { Background, Grid, ObjBack, Terrain, ObjTop, Triggers, SteelAreas, Rulers }
         public static readonly List<Layer> LayerList = new List<Layer>()
     {
-      Layer.Background, Layer.ObjBack, Layer.Terrain, Layer.ObjTop, Layer.Triggers, Layer.SteelAreas, Layer.Rulers
+      Layer.Background, Layer.Grid, Layer.ObjBack, Layer.Terrain, Layer.ObjTop, Layer.Triggers, Layer.SteelAreas, Layer.Rulers
     };
 
         public static List<string> OriginalStyles = new List<string>

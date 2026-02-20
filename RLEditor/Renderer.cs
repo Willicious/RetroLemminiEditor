@@ -96,7 +96,7 @@ namespace RLEditor
         {
             UpdateLayerBmpSize();
 
-            CreateBackgroundLayer();
+            CreateGridLayer();
             CreateObjectBackLayer();
             CreateTerrainLayer();
             CreateObjectTopLayer();
@@ -157,11 +157,13 @@ namespace RLEditor
                 baseLevelImage.Clear(level.MainStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
             }
 
-            // Draw all the layers
+            // Draw the pieces grid if needed
             if (IsGridEnabled)
             {
-                baseLevelImage.DrawOn(layerImages[C.Layer.Background]);
+                baseLevelImage.DrawOn(layerImages[C.Layer.Grid]);
             }
+
+            // Draw all the layers
             if (IsObjectLayer)
             {
                 baseLevelImage.DrawOn(layerImages[C.Layer.ObjBack]);
@@ -489,11 +491,15 @@ namespace RLEditor
         {
             // Set background color
             layerImages[C.Layer.Background].Clear(level.MainStyle?.GetColor(C.StyleColor.BACKGROUND) ?? C.RLColors[C.RLColor.BackDefault]);
+        }
 
-            // Draw the pieces grid if needed
+        public void CreateGridLayer()
+        {
+            layerImages[C.Layer.Grid].Clear();
+
             if (IsGridEnabled)
             {
-                DrawGrid(layerImages[C.Layer.Background], level.Width, level.Height, curSettings.GridSize, curSettings.GridColor);
+                DrawGrid(layerImages[C.Layer.Grid], level.Width, level.Height, curSettings.GridSize, curSettings.GridColor);
             }
         }
 
