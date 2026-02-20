@@ -119,7 +119,6 @@ namespace RLEditor
             };
         }
 
-
         public void MouseDown(Point picPoint)
         {
             if (!Active)

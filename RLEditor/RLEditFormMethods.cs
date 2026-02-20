@@ -727,6 +727,8 @@ Digger=20
         private void ApplyLevelCrop()
         {
             Rectangle cropRect = curRenderer.CropTool.LevelCropRect;
+            int startX = (int)num_Lvl_StartX.Value;
+            int startY = (int)num_Lvl_StartY.Value;
 
             SelectAllPieces();
             CurLevel.MovePieces(C.DIR.N, cropRect.Y, 1);
@@ -735,6 +737,8 @@ Digger=20
 
             num_Lvl_SizeX.Value = cropRect.Width;
             num_Lvl_SizeY.Value = cropRect.Height;
+            num_Lvl_StartX.Value = startX - cropRect.X;
+            num_Lvl_StartY.Value = startY - cropRect.Y;
 
             CommitLevelChanges();
             HandleCropLevel();
