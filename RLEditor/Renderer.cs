@@ -46,7 +46,7 @@ namespace RLEditor
             InitializeCropTool();
         }
 
-        public const int AllowedGrayBorder = 10;
+        public const int AllowedGrayBorder = 40;
 
         Dictionary<C.Layer, Bitmap> layerImages;
         Bitmap baseLevelImage;
