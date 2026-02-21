@@ -149,8 +149,15 @@ namespace RLEditor
             newLevel.TerrainList = new List<TerrainPiece>(this.TerrainList.Select(ter => (TerrainPiece)ter.Clone()));
             newLevel.GadgetList = new List<GadgetPiece>(this.GadgetList.Select(gad => (GadgetPiece)gad.Clone()));
 
-            newLevel.TerrainList.ForEach(ter => ter.IsSelected = false);
-            newLevel.GadgetList.ForEach(gad => gad.IsSelected = false);
+            for (int i = 0; i < newLevel.TerrainList.Count; i++)
+            {
+                newLevel.TerrainList[i].IsSelected = this.TerrainList[i].IsSelected;
+            }
+
+            for (int i = 0; i < newLevel.GadgetList.Count; i++)
+            {
+                newLevel.GadgetList[i].IsSelected = this.GadgetList[i].IsSelected;
+            }
 
             newLevel.NumLems = this.NumLems;
             newLevel.SaveReq = this.SaveReq;
@@ -235,11 +242,17 @@ namespace RLEditor
             {
                 if (!this.TerrainList[i].Equals(otherLevel.TerrainList[i]))
                     return false;
+
+                if (this.TerrainList[i].IsSelected != otherLevel.TerrainList[i].IsSelected)
+                    return false;
             }
 
             for (int i = 0; i < this.GadgetList.Count; i++)
             {
                 if (!this.GadgetList[i].Equals(otherLevel.GadgetList[i]))
+                    return false;
+
+                if (this.GadgetList[i].IsSelected != otherLevel.GadgetList[i].IsSelected)
                     return false;
             }
 

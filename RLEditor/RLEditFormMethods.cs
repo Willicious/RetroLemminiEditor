@@ -2165,6 +2165,7 @@ Digger=20
 
             MaybeOpenPiecesTab();
             UpdatePieceMetaData();
+            SaveChangesToOldLevelList();
         }
 
         /// <summary>
@@ -2193,6 +2194,8 @@ Digger=20
                 // Remove all pieces intersection SelectArea
                 CurLevel.SelectAreaPiece((Rectangle)selectArea, false);
             }
+
+            SaveChangesToOldLevelList();
         }
 
         /// <summary>
