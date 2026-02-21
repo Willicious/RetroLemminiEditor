@@ -740,15 +740,14 @@ Digger=20
             num_Lvl_SizeX.Value = cropRect.Width;
             num_Lvl_SizeY.Value = cropRect.Height;
 
-            if (startX - cropRect.X >= cropRect.Width)
-                num_Lvl_StartX.Value = cropRect.Width - 1;
-            else
-                num_Lvl_StartX.Value = startX - cropRect.X;
+            int newStartX = startX - cropRect.X;
+            int newStartY = startY - cropRect.Y;
 
-            if (startY - cropRect.Y >= cropRect.Height)
-                num_Lvl_StartY.Value = cropRect.Height - 1;
-            else
-                num_Lvl_StartY.Value = startY - cropRect.Y;
+            newStartX = Math.Max(0, Math.Min(newStartX, cropRect.Width - 1));
+            newStartY = Math.Max(0, Math.Min(newStartY, cropRect.Height - 1));
+
+            num_Lvl_StartX.Value = newStartX;
+            num_Lvl_StartY.Value = newStartY;
 
             CommitLevelChanges();
             HandleCropLevel();
