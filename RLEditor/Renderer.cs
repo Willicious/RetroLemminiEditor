@@ -80,6 +80,9 @@ namespace RLEditor
         Point zoomMouseScreenPos;
         Point zoomMouseLevelPos;
 
+        public bool ScrollHorizActive;
+        public bool ScrollVertActive;
+
         public CropTool CropTool;
         private Point currentLevelDrawOffset;
 
@@ -872,14 +875,11 @@ namespace RLEditor
 
             Point textPos = new Point(picBoxWidth + 2, picBoxHeight);
 
-            // Get the size of the displayed part of the level
-            Rectangle displayedLevelRect = GetLevelBmpRect();
-
             // Adjust text position if the scrollbars are visible and we're not in Level Arranger window
             if (!curSettings.LevelArranger.IsOpen)
             {
-                if (displayedLevelRect.Width + 1 < level.Width) textPos.X = textPos.X - 10;
-                if (displayedLevelRect.Height + 1 < level.Height) textPos.Y = textPos.Y - 8;
+                if (ScrollVertActive) textPos.X -= 10;
+                if (ScrollHorizActive) textPos.Y -= 8;
             }
 
             // Set color
