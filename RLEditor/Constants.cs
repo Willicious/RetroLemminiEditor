@@ -169,7 +169,7 @@ namespace RLEditor
             Skill.Floater,
         };
 
-        public static readonly int ZOOM_MIN = -2;
+        public static readonly int ZOOM_MIN = -3;
         public static readonly int ZOOM_MAX = 10;
 
         // Other colors are specified directly in BmpModify to speed up rendering.
