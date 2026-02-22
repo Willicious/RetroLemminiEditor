@@ -99,12 +99,15 @@ namespace RLEditor
         {
             rtLevelData.Clear();
             rtSkillSetData.Clear();
+            picPreview.Image?.Dispose();
+            picPreview.Image = null;
 
             if (listTemplates.Items.Count == 0)
             {
                 listTemplates.Items.Add("No templates found...");
                 labelTitle.Text = "To add a template, create a level and choose Save As Template.";
                 btnLoadTemplate.Visible = false;
+                btnSetAsDefault.Visible = false;
                 btnDelete.Visible = false;
                 noTemplatesFound = true;
                 listTemplates.Focus();
@@ -269,6 +272,13 @@ namespace RLEditor
             var templateInfo = (TemplateInfo)listTemplates.SelectedItem;
             int index = listTemplates.SelectedIndex;
 
+            bool levelIsDefault = curSettings.DefaultTemplate == templateInfo.FileName;
+            if (levelIsDefault)
+            {
+                curSettings.DefaultTemplate = string.Empty;
+                curSettings.WriteSettingsToFile();
+            }
+
             try
             {
                 // Delete the level file
@@ -287,8 +297,9 @@ namespace RLEditor
                 return;
             }
 
-            // Refresh the list
+            // Refresh the UI
             PopulateTemplatesList(index);
+            PopulateTemplateDataPanel();
         }
 
         private void SetCurrentTemplateAsDefault()
