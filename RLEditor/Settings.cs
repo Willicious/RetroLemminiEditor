@@ -73,6 +73,7 @@ namespace RLEditor
         public PieceBrowserState PieceBrowser { get; set; } = new PieceBrowserState();
 
         public string DefaultAuthorName { get; private set; }
+        public string DefaultTemplate { get; set; }
         public bool AutoPinOGStyles { get; set; }
         public bool ShowRandomButton { get; set; }
         public bool PreferObjectName { get; private set; }
@@ -110,6 +111,7 @@ namespace RLEditor
         public void SetDefault()
         {
             DefaultAuthorName = string.Empty;
+            DefaultTemplate = string.Empty;
             CurrentPieceBrowserMode = PieceBrowserMode.ShowData;
             CurrentTriggerAreaColor = TriggerAreaColor.Pink;
             AutoPinOGStyles = true;
@@ -847,6 +849,11 @@ namespace RLEditor
                                 DefaultAuthorName = line.Text.Trim();
                                 break;
                             }
+                        case "DEFAULTTEMPLATE":
+                            {
+                                DefaultTemplate = line.Text.Trim();
+                                break;
+                            }
                         case "PIECEBROWSERMODE":
                             {
                                 var modeText = line.Text.Trim().ToUpper();
@@ -1077,6 +1084,7 @@ namespace RLEditor
 
                 settingsFile.WriteLine("# RLEditor settings ");
                 settingsFile.WriteLine(" DefaultAuthorName      " + DefaultAuthorName);
+                settingsFile.WriteLine(" DefaultTemplate        " + DefaultTemplate);
                 settingsFile.WriteLine(" ValidateWhenSaving     " + (ValidateWhenSaving ? "True" : "False"));
                 settingsFile.WriteLine(" Autosave               " + AutosaveFrequency.ToString());
                 settingsFile.WriteLine(" AutosaveLimit          " + KeepAutosaveCount.ToString());
