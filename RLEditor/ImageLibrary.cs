@@ -343,7 +343,7 @@ namespace RLEditor
         /// </summary>
         public static bool IsImageLoadable(string imageKey)
         {
-            string filePath = C.AppPathPieces + imageKey + ".png";
+            string filePath = C.AppPathStyles + imageKey + ".png";
             if (imageDict.ContainsKey(imageKey))
                 return true;
             else if (!System.IO.File.Exists(filePath))
@@ -760,7 +760,7 @@ namespace RLEditor
         public static string CreatePieceKey(string filePath)
         {
             string fullPath = System.IO.Path.GetFullPath(filePath);
-            string relativePath = fullPath.Remove(0, C.AppPathPieces.Length);
+            string relativePath = fullPath.Remove(0, C.AppPathStyles.Length);
             return System.IO.Path.ChangeExtension(relativePath, null);
         }
 

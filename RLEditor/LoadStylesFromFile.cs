@@ -116,7 +116,7 @@ namespace RLEditor
         /// <param name="styleList"></param>
         public static List<Style> OrderAndRenameStyles(List<Style> styleList, Settings settings)
         {
-            string filePath = C.AppPathPieces + "styles.ini";
+            string filePath = C.AppPathStyles + "styles.ini";
 
             // Capture original indices for fallback ordering
             Dictionary<Style, int> originalIndices = styleList
@@ -267,7 +267,7 @@ namespace RLEditor
             if (Path.IsPathRooted(imageKey))
                 imagePath = imageKey;
             else
-                imagePath = C.AppPathPieces + imageKey;
+                imagePath = C.AppPathStyles + imageKey;
 
             try
             {
@@ -282,7 +282,7 @@ namespace RLEditor
 
         public static BaseImageInfo ImageInfo(string imageName)
         {
-            string imagePath = C.AppPathPieces + imageName;
+            string imagePath = C.AppPathStyles + imageName;
             int underscoreIndex = imageName.LastIndexOf('_');
             char letterBeforeNumber = imageName[underscoreIndex - 1];
 

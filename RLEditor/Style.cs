@@ -104,7 +104,7 @@ namespace RLEditor
         /// </summary>
         private void SearchDirectoryForTerrain()
         {
-            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
+            string directoryPath = C.AppPathStyles + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
@@ -133,7 +133,7 @@ namespace RLEditor
         /// </summary>
         private void SearchDirectoryForSteel()
         {
-            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
+            string directoryPath = C.AppPathStyles + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {
@@ -161,7 +161,7 @@ namespace RLEditor
         /// </summary>
         private void SearchDirectoryForObjects()
         {
-            string directoryPath = C.AppPathPieces + NameInDirectory + C.DirSep;
+            string directoryPath = C.AppPathStyles + NameInDirectory + C.DirSep;
 
             if (Directory.Exists(directoryPath))
             {

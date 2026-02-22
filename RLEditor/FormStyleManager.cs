@@ -23,7 +23,7 @@ namespace RLEditor
 
         private List<StyleEntry> styles = new List<StyleEntry>();
         
-        private string styleFilePath = C.AppPathPieces + "styles.ini";
+        private string styleFilePath = C.AppPathStyles + "styles.ini";
         
         private RLEditForm mainForm;
         private Settings curSettings;
@@ -747,7 +747,7 @@ namespace RLEditor
         /// </summary>
         private void AddNewStyle()
         {
-            string selectedFolder = ShowFolderSelectionDialog(C.AppPathPieces);
+            string selectedFolder = ShowFolderSelectionDialog(C.AppPathStyles);
             if (string.IsNullOrEmpty(selectedFolder)) return;
 
             string folderName = Path.GetFileName(selectedFolder);

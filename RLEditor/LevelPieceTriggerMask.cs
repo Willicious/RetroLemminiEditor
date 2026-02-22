@@ -39,7 +39,7 @@ namespace RLEditor
 
         private static string GetMaskPath(string objectImageKey)
         {
-            string imagePath = C.AppPathPieces + objectImageKey + ".png";
+            string imagePath = C.AppPathStyles + objectImageKey + ".png";
             return imagePath.Replace("o_", "om_");
         }
 
@@ -94,7 +94,7 @@ namespace RLEditor
             if (tileIndex < 0)
                 return Point.Empty;
 
-            string folderPath = Path.Combine(C.AppPathPieces, objectImageKey);
+            string folderPath = Path.Combine(C.AppPathStyles, objectImageKey);
             folderPath = Path.GetDirectoryName(folderPath);
 
             if (!IniOffsetCache.TryGetValue(folderPath, out var offsetsPerTile))
