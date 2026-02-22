@@ -142,7 +142,7 @@ namespace RLEditor
         int curOldLevelIndex;
         Level lastSavedLevel;
 
-        string levelDirectory; // for starting directory for saving/loading
+        public string LevelDirectory; // for starting directory for saving/loading
 
         int gridSize => curSettings.GridSize;
         int gridMoveAmount => curSettings.GridMoveAmount;
@@ -1651,6 +1651,16 @@ namespace RLEditor
         private void but_ApplyCrop_Click(object sender, EventArgs e)
         {
             ApplyLevelCrop();
+        }
+
+        private void openTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenTemplatesLoader();
+        }
+
+        private void saveAsTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveLevelAsTemplate();
         }
     }
 }

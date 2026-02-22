@@ -120,6 +120,12 @@
     <Compile Include="FormStyleManager.Designer.cs">
       <DependentUpon>FormStyleManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTemplates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTemplates.Designer.cs">
+      <DependentUpon>FormTemplates.cs</DependentUpon>
+    </Compile>
     <Compile Include="HotkeyConfig.cs" />
     <Compile Include="FormHotkeys.cs">
       <SubType>Form</SubType>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAboutRLEditor.resx">
       <DependentUpon>FormAboutRLEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTemplates.resx">
+      <DependentUpon>FormTemplates.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RLEditForm.resx">
       <DependentUpon>RLEditForm.cs</DependentUpon>

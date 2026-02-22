@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Taskbar;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace RLEditor
 {
@@ -76,6 +78,36 @@ namespace RLEditor
         }
 
         static private Level DoLoadLevelFromFile(string filePath, List<Style> styleList)
+        {
+            INIFileParser ini = INIFileParser.Load(filePath);
+
+            // --- MetaData ---
+            Level newLevel = LoadMetaData(filePath, styleList);
+
+            // --- Hints ---
+            LoadHints(newLevel, ini);
+
+            // --- Objects / gadgets ---
+            foreach (string data in ini.GetIndexed("object"))
+                LoadGadget(newLevel, data);
+
+            // --- Terrain ---
+            foreach (string data in ini.GetIndexed("terrain"))
+                LoadTerrain(newLevel, data);
+
+            // --- Steel ---
+            foreach (string data in ini.GetIndexed("steel"))
+                LoadSteelAreas(newLevel, data);
+
+            // --- Rulers ---
+            foreach (string data in ini.GetIndexed("ruler"))
+                LoadRulers(newLevel, data);
+
+            SanitizeInput(newLevel);
+            return newLevel;
+        }
+
+        static public Level LoadMetaData(string filePath, List<Style> styleList)
         {
             Level newLevel = new Level();
             INIFileParser ini = INIFileParser.Load(filePath);
@@ -183,26 +215,6 @@ namespace RLEditor
             // --- Skillset ---
             LoadSkillset(newLevel, ini);
 
-            // --- Hints ---
-            LoadHints(newLevel, ini);
-
-            // --- Objects / gadgets ---
-            foreach (string data in ini.GetIndexed("object"))
-                LoadGadget(newLevel, data);
-
-            // --- Terrain ---
-            foreach (string data in ini.GetIndexed("terrain"))
-                LoadTerrain(newLevel, data);
-
-            // --- Steel ---
-            foreach (string data in ini.GetIndexed("steel"))
-                LoadSteelAreas(newLevel, data);
-
-            // --- Rulers ---
-            foreach (string data in ini.GetIndexed("ruler"))
-                LoadRulers(newLevel, data);
-
-            SanitizeInput(newLevel);
             return newLevel;
         }
 

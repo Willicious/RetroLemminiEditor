@@ -26,6 +26,7 @@ namespace RLEditor
 
         public static string AppPath => System.Windows.Forms.Application.StartupPath + DirSep;
         public static string AppPathResources => AppPath + "resources" + DirSep;
+        public static string AppPathTemplates => AppPathResources + "templates" + DirSep;
         public static string AppPathAutosave => AppPathResources + "autosave" + DirSep;
         public static string AppPathStyles => AppPathResources + "styles" + DirSep;
         public static string AppPathMusic => AppPathResources + "music" + DirSep;
