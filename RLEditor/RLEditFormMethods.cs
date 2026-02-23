@@ -2950,6 +2950,8 @@ Digger=20
             AddHotkey(HotkeyName.HotkeySaveLevel, () => SaveLevel());
             AddHotkey(HotkeyName.HotkeySaveLevelAs, () => SaveLevelAsNewFile());
             AddHotkey(HotkeyName.HotkeySaveLevelAsImage, () => SaveLevelAsImage());
+            AddHotkey(HotkeyName.HotkeyOpenTemplate, () => OpenTemplatesLoader());
+            AddHotkey(HotkeyName.HotkeySaveLevelAsTemplate, () => SaveLevelAsTemplate());
             AddHotkey(HotkeyName.HotkeyPlaytestLevel, () => PlaytestLevel());
             AddHotkey(HotkeyName.HotkeyValidateLevel, () => ValidateLevel(false, false));
             AddHotkey(HotkeyName.HotkeyCleanseLevels, () => ShowCleanseLevelsDialog());
@@ -3064,6 +3066,12 @@ Digger=20
 
             saveAsImageToolStripMenuItem.ShortcutKeyDisplayString =
                 FormatHotkeyString(HotkeyName.HotkeySaveLevelAsImage);
+
+            openTemplateToolStripMenuItem.ShortcutKeyDisplayString =
+                FormatHotkeyString(HotkeyName.HotkeyOpenTemplate);
+
+            saveAsTemplateToolStripMenuItem.ShortcutKeyDisplayString =
+                FormatHotkeyString(HotkeyName.HotkeySaveLevelAsTemplate);
 
             exitToolStripMenuItem.ShortcutKeyDisplayString =
                 FormatHotkeyString(HotkeyName.HotkeyCloseEditor);
