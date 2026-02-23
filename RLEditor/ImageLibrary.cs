@@ -568,7 +568,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the width of the piece corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static int GetWidth(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -584,7 +583,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the height of the piece corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static int GetHeight(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -600,7 +598,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the default width of the piece corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static int GetDefaultWidth(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -616,7 +613,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the default height of the piece corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static int GetDefaultHeight(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -632,7 +628,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the Exit Marker X-pos corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static int GetMarkerX(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -648,7 +643,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the Exit Marker Y-pos corresponding to the key, or -1 if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static int GetMarkerY(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -679,7 +673,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the trigger area of the piece corresponding to the key, or an empty rectangle if image cannot be found. 
         /// </summary>
-        /// <param name="imageKey"></param>
         public static Rectangle GetTrigger(string imageKey)
         {
             if (!imageDict.ContainsKey(imageKey))
@@ -717,7 +710,6 @@ namespace RLEditor
         /// <summary>
         /// Loads a new image into the ImageLibrary. Returns false, if image cannot be found.
         /// </summary>
-        /// <param name="imageKey"></param>
         static bool AddNewImage(string imageKey)
         {
             try
@@ -756,7 +748,6 @@ namespace RLEditor
         /// <summary>
         /// Creates the image key from a file path (relative or absolute). 
         /// </summary>
-        /// <param name="filePath"></param>
         public static string CreatePieceKey(string filePath)
         {
             string fullPath = System.IO.Path.GetFullPath(filePath);
@@ -776,7 +767,6 @@ namespace RLEditor
         /// Transforms the piece location from level file location (using only the primary image)
         /// to editor location (using the merge of primary and secondary animations)
         /// </summary>
-        /// <param name="levelFileLocation"></param>
         public static Point LevelFileToEditorCoordinates(string imageKey, Point levelFileLocation,
           bool rotate, bool flip, bool invert)
         {
@@ -822,8 +812,6 @@ namespace RLEditor
         /// Transforms the piece location from editor location (using the merge of primary and secondary animations)
         /// to level file location (using only the primary image)
         /// </summary>
-        /// <param name="imageKey"></param>
-        /// <param name="editorLocation"></param>
         public static Point EditorToLevelFileCoordinates(string imageKey, Point editorLocation,
           bool rotate, bool flip, bool invert)
         {

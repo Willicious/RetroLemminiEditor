@@ -113,7 +113,6 @@ namespace RLEditor
         /// <summary>
         /// Reads the styles.ini file and orders and renames styles accordingly.
         /// </summary>
-        /// <param name="styleList"></param>
         public static List<Style> OrderAndRenameStyles(List<Style> styleList, Settings settings)
         {
             string filePath = C.AppPathStyles + "styles.ini";
@@ -259,7 +258,6 @@ namespace RLEditor
         /// <summary>
         /// Loads a .png image or null if the image could not be loaded.
         /// </summary>
-        /// <param name="imageKey"></param>
         public static Bitmap Image(string imageKey)
         {
             string imagePath;

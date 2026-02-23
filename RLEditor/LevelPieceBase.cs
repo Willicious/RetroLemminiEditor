@@ -99,7 +99,6 @@ namespace RLEditor
         /// <summary>
         /// Moves the piece in the level to the target position and rounds it to the grid.
         /// </summary>
-        /// <param name="targetPos"></param>
         public void Move(Point targetPos, int gridSize)
         {
             PosX = targetPos.X.RoundToMultiple(gridSize);
@@ -114,7 +113,6 @@ namespace RLEditor
         /// <summary>
         /// Compares two LevelPieces for equality.
         /// </summary>
-        /// <param name="piece"></param>
         public virtual bool Equals(LevelPiece piece)
         {
             return this.PosX == piece.PosX

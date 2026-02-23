@@ -59,7 +59,6 @@ namespace RLEditor
         /// <summary>
         /// Compares two GadgetPieces for equality.
         /// </summary>
-        /// <param name="piece"></param>
         public bool Equals(GadgetPiece piece)
         {
             return base.Equals(piece)
@@ -158,7 +157,6 @@ namespace RLEditor
         /// <summary>
         /// Rotates the piece around the center of a specified rectangle, if allowed for this piece.
         /// </summary>
-        /// <param name="borderRect"></param>
         public override void RotateInRect(Rectangle borderRect)
         {
             base.RotateInRect(borderRect);

@@ -46,7 +46,6 @@ namespace RLEditor
         /// <summary>
         /// Compares two TerrainPieces for equality.
         /// </summary>
-        /// <param name="piece"></param>
         public bool Equals(TerrainPiece piece)
         {
             return base.Equals(piece)

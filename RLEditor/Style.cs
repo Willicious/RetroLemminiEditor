@@ -15,7 +15,6 @@ namespace RLEditor
         /// <summary>
         /// Initializes a new instance of a Style by searching for pieces in the directory AppPath/StyleName/.
         /// </summary>
-        /// <param name="styleName"></param>
         public Style(string styleName, bool randomize)
         {
             NameInDirectory = styleName;
@@ -67,7 +66,6 @@ namespace RLEditor
         /// <summary>
         /// Checks for equality of the style's FileName.
         /// </summary>
-        /// <param name="otherStyle"></param>
         public bool Equals(Style otherStyle)
         {
             return this.NameInDirectory.Equals(otherStyle?.NameInDirectory);
@@ -90,7 +88,6 @@ namespace RLEditor
         /// <summary>
         /// Reads the style's color or a default value if no color is specified.
         /// </summary>
-        /// <param name="colorType"></param>
         public Color GetColor(C.StyleColor colorType)
         {
             if (colorDict.ContainsKey(colorType))

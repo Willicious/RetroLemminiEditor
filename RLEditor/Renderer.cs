@@ -296,7 +296,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the start position of the mouse and the screen position respectively the selection position.
         /// </summary>
-        /// <param name="mousePos"></param>
         public void SetDraggingVars(Point mousePos, C.DragActions dragAction)
         {
             if (dragAction == C.DragActions.Null)
@@ -398,7 +397,6 @@ namespace RLEditor
         /// <summary>
         /// Returns whether a point in screen corrdinates relative to pic_Level lies in the level area.
         /// </summary>
-        /// <param name="point"></param>
         public bool IsPointInLevelArea(Point? point)
         {
             if (point == null)
@@ -418,7 +416,6 @@ namespace RLEditor
         /// <summary>
         /// Translates a point in screen coordinates (relative to pic_Level) into level coordinates.
         /// </summary>
-        /// <param name="mouseScreenPos"></param>
         public Point GetMousePosInLevel(Point mouseScreenPos, bool doCropToLevelArea = true)
         {
             // Adapt to images that do not fill the whole pic_Level and to Mouse positions outside the level
@@ -447,7 +444,6 @@ namespace RLEditor
         /// Returns the start or current mouse position in level coordinates.
         /// <para> Returns null if this position lies outside pic_Level. </para>
         /// </summary>
-        /// <param name="isCurrent"></param>
         public Point? GetMousePosInLevel(bool isCurrent = true)
         {
             Point? MousePos = isCurrent ? MouseCurPos : MouseStartPos;
@@ -574,8 +570,6 @@ namespace RLEditor
         /// <summary>
         /// Draws the piece with the given Key on the levelBmp at the current mouse position.
         /// </summary>
-        /// <param name="levelBmp"></param>
-        /// <param name="newPieceKey"></param>
         private void AddDragNewPiece(Bitmap levelBmp, string newPieceKey, Point offset)
         {
             if (MouseCurPos == null)
@@ -592,7 +586,6 @@ namespace RLEditor
         /// <summary>
         /// Returns the correct CustDrawMode for the terrain piece.
         /// </summary>
-        /// <param name="terrPiece"></param>
         private C.CustDrawMode GetDrawModeForTerrain(TerrainPiece terrPiece)
         {
             if (terrPiece.IsErase)
@@ -793,8 +786,6 @@ namespace RLEditor
         /// <summary>
         /// Adds the screen start rectangle to the zoomed and cropped image.
         /// </summary>
-        /// <param name="levelBmp"></param>
-        /// <param name="NegScreenPos"></param>
         private void AddScreenStartRectangle(ref Bitmap levelBmp)
         {
             if (level.AutoStartPos)
@@ -1005,8 +996,6 @@ namespace RLEditor
         /// <summary>
         /// Moves the screen position in a given direction in approx delta screen pixels.
         /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="delta"></param>
         public void MoveScreenPos(C.DIR direction, int delta)
         {
             // Adapt delta to zoom level
@@ -1033,7 +1022,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the point to zoom into
         /// </summary>
-        /// <param name="mouseScreenPos"></param>
         public void SetZoomMousePos(Point mouseScreenPos)
         {
             if (level.Size.Contains(GetMousePosInLevel(mouseScreenPos)))
@@ -1117,7 +1105,6 @@ namespace RLEditor
         /// <summary>
         /// Ensures that the screen top resp left position is chosen such that no unnecessary boundaries appear 
         /// </summary>
-        /// <param name="isVert"></param>
         private int EnsureScreenPosInLevel(bool isVert, int curPos)
         {
             int levelLength = isVert ? level.Height : level.Width;

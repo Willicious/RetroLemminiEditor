@@ -476,7 +476,6 @@ namespace RLEditor
         /// <summary>
         /// Ensures that all level parameters are within sensible limits.
         /// </summary>
-        /// <param name="newLevel"></param>
         static private void SanitizeInput(Level newLevel)
         {
             // Level size

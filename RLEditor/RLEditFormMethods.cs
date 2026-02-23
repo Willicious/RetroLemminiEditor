@@ -1768,7 +1768,6 @@ Digger=20
         /// <summary>
         /// Returns a style with the requested name, or null if none such is found. 
         /// </summary>
-        /// <param name="styleName"></param>
         private Style ValidateStyleName(string styleName)
         {
             return StyleList?.Find(sty => sty.NameInEditor == styleName);
@@ -1813,7 +1812,6 @@ Digger=20
         /// <summary>
         /// Moves the screen start position to the given level coordinates.
         /// </summary>
-        /// <param name="newCenter"></param>
         private void MoveScreenStartPosition(Point newCenter)
         {
             // Ensure that the new center position is within the correct bounds.
@@ -1840,7 +1838,6 @@ Digger=20
         /// <summary>
         /// Moves the current screen start position by 8 pixels in the given direction.
         /// </summary>
-        /// <param name="direction"></param>
         private void MoveScreenStartPosition(C.DIR direction)
         {
             Point newCenter;
@@ -1870,7 +1867,6 @@ Digger=20
         /// <summary>
         /// Displays new pieces on the piece selection bar.
         /// </summary>
-        /// <param name="movement"></param>
         public void MoveTerrPieceSelection(int movement)
         {       
             List<string> pieceNameList;
@@ -1949,7 +1945,6 @@ Digger=20
         /// <summary>
         /// Changes the style for newly added pieces and displays the new pieces.
         /// </summary>
-        /// <param name="movement"></param>
         private void ChangeNewPieceStyleSelection(int movement)
         {
             if (StyleList == null || StyleList.Count == 0)
@@ -2066,7 +2061,6 @@ Digger=20
         /// <summary>
         /// Gets the key from the index of the clicked PieceBox.
         /// </summary>
-        /// <param name="picPieceIndex"></param>
         private string GetPieceKeyFromIndex(int picPieceIndex)
         {
             List<string> pieceList;
@@ -2108,7 +2102,6 @@ Digger=20
         /// <summary>
         /// Adds a new piece to the level and displays the result to the user.
         /// </summary>
-        /// <param name="picPieceIndex"></param>
         private void AddNewPieceToLevel(int picPieceIndex)
         {
             ReadLevelInfoFromForm(true);
@@ -2137,8 +2130,6 @@ Digger=20
         /// <summary>
         /// Adds a new piece to the level and displays the result to the user.
         /// </summary>
-        /// <param name="pieceKey"></param>
-        /// <param name="centerPosition"></param>
         public void AddNewPieceToLevel(string pieceKey, string style, Point centerPosition)
         {
             CurLevel.UnselectAll();
@@ -2221,8 +2212,6 @@ Digger=20
         /// <summary>
         /// Moves all selected pieces of the level and displays the result.
         /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="step"></param>
         private void HandleMovement(C.DIR direction, int step = 1)
         {
             movementActionPerformed = true;
@@ -2336,7 +2325,6 @@ Digger=20
         /// <summary>
         /// Sets the NoOverwrite flag for all selected pieces and displays the result.
         /// </summary>
-        /// <param name="doAdd"></param>
         private void SetNoOverwrite(bool doAdd)
         {
             CurLevel.SetNoOverwrite(doAdd);
@@ -2348,7 +2336,6 @@ Digger=20
         /// <summary>
         /// Sets the Erase flag for all selected pieces and displays the result.
         /// </summary>
-        /// <param name="doAdd"></param>
         private void SetErase(bool doAdd)
         {
             CurLevel.SetErase(doAdd);
@@ -2360,7 +2347,6 @@ Digger=20
         /// <summary>
         /// Sets the OnlyOnTerrain flag for all selected pieces and displays the result.
         /// </summary>
-        /// <param name="doAdd"></param>
         private void SetOnlyOnTerrain(bool doAdd)
         {
             CurLevel.SetOnlyOnTerrain(doAdd);
@@ -2372,7 +2358,6 @@ Digger=20
         /// <summary>
         /// Sets the OneWayAdmissible flag for all selected pieces and displays the result.
         /// </summary>
-        /// <param name="doAdd"></param>
         private void SetOneWay(bool doAdd)
         {
             CurLevel.SetOneWay(doAdd);
@@ -2384,7 +2369,6 @@ Digger=20
         /// <summary>
         /// Sets the Invisible flag for all selected pieces and displays the result.
         /// </summary>
-        /// <param name="doAdd"></param>
         private void SetInvisible(bool doAdd)
         {
             CurLevel.SetInvisible(doAdd);
@@ -2396,7 +2380,6 @@ Digger=20
         /// <summary>
         /// Sets the Fake flag for all selected pieces and displays the result.
         /// </summary>
-        /// <param name="doAdd"></param>
         private void SetFake(bool doAdd)
         {
             CurLevel.SetFake(doAdd);
@@ -2421,8 +2404,6 @@ Digger=20
         /// <summary>
         /// Changes the index of all selected pieces and displays the result.
         /// </summary>
-        /// <param name="toFront"></param>
-        /// <param name="onlyOneStep"></param>
         private void MovePieceIndex(bool toFront, bool onlyOneStep)
         {
             CurLevel.MoveSelectedPieces(toFront, onlyOneStep);
@@ -2622,7 +2603,6 @@ Digger=20
         /// <summary>
         /// Centers the collection of pieces around the cursor.
         /// </summary>
-        /// <param name="clipPieces"></param>
         private IEnumerable<LevelPiece> CenterPiecesAtCursor(IEnumerable<LevelPiece> clipPieces)
         {
             Point mousePos = curRenderer.GetMousePosInLevel(pic_Level.PointToClient(Cursor.Position));

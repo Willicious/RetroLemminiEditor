@@ -19,7 +19,6 @@ namespace RLEditor
         /// <summary>
         /// Initializes a new instance of a LevelValidator specific to the current level.
         /// </summary>
-        /// <param name="level"></param>
         public LevelValidator(Level level)
         {
             System.Diagnostics.Debug.Assert(level != null, "Level passed to LevelValidator is null.");
@@ -219,8 +218,6 @@ namespace RLEditor
         /// <summary>
         /// Disposes form controls on closing the form.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ValidatorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             txtIssuesList.Dispose();

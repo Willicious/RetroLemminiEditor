@@ -189,7 +189,6 @@ namespace RLEditor
         /// <summary>
         /// Compares two Levels for equality.
         /// </summary>
-        /// <param name="otherLevel"></param>
         public bool Equals(Level otherLevel)
         {
             if (otherLevel == null
@@ -278,7 +277,6 @@ namespace RLEditor
         /// <summary>
         /// Adds a list of pieces to the level.
         /// </summary>
-        /// <param name="pieces"></param>
         public void AddMultiplePieces(IEnumerable<LevelPiece> pieces)
         {
             if (pieces == null)
@@ -303,8 +301,6 @@ namespace RLEditor
         /// <summary>
         /// Creates a new piece and adds it to the level. 
         /// </summary>
-        /// <param name="pieceKey"></param>
-        /// <param name="centerPos"></param>
         public void AddPiece(string pieceKey, string style, Point centerPos, int gridSize)
         {
             int piecePosX = (centerPos.X - ImageLibrary.GetWidth(pieceKey) / 2).RoundToMultiple(gridSize);
@@ -334,9 +330,6 @@ namespace RLEditor
         /// <summary>
         /// Determines the piece to select.
         /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="isUnselected"></param>
-        /// <param name="doPriorityInvert"></param>
         private LevelPiece GetOnePiece(Point pos, bool isUnselected, bool doPriorityInvert)
         {
             LevelPiece selectedPiece = null;
@@ -374,8 +367,6 @@ namespace RLEditor
         /// <summary>
         /// Select all pieces that intersect with a given area.
         /// </summary>
-        /// <param name="rectangle"></param>
-        /// <param name="isAdded"></param>
         public void SelectAreaPiece(Rectangle rectangle, bool isAdded)
         {
             if (DisplaySettings.IsDisplayed(C.DisplayType.Terrain))
@@ -432,7 +423,6 @@ namespace RLEditor
         /// <summary>
         /// Returns whether there is a selected terrain piece at a point.
         /// </summary>
-        /// <param name="pos"></param>
         public bool HasSelectionAtPos(Point pos)
         {
             return SelectionList().Exists(item => item.ImageRectangle.Contains(pos));
@@ -441,7 +431,6 @@ namespace RLEditor
         /// <summary>
         /// Returns whether there is any terrain or object piece at this point.
         /// </summary>
-        /// <param name="pos"></param>
         public bool HasPieceAtPos(Point pos)
         {
             return TerrainList.Exists(item => item.ImageRectangle.Contains(pos))
@@ -452,8 +441,6 @@ namespace RLEditor
         /// <summary>
         /// Moves all selected pieces a given number of pixels into a given direction. 
         /// </summary>
-        /// <param name="direction"></param>
-        /// <param name="step"></param>
         public void MovePieces(C.DIR direction, int step, int gridSize)
         {
             SelectionList().ForEach(item => item.Move(direction, step, gridSize));
@@ -462,7 +449,6 @@ namespace RLEditor
         /// <summary>
         /// Moves all selected pieces to the target position. 
         /// </summary>
-        /// <param name="targetPos">Location of the rectangle spanning all selected pieces.</param>
         public void MovePieces(Point targetPos, int gridSize)
         {
             Point referencePos = SelectionRectangle().Location;
@@ -505,7 +491,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the NoOverwrite flag for all objects and terrain pieces.
         /// </summary>
-        /// <param name="doAdd"></param>
         public void SetNoOverwrite(bool doAdd)
         {
             TerrainList.FindAll(ter => ter.IsSelected)
@@ -517,7 +502,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the Erase flag for all terrain pieces.
         /// </summary>
-        /// <param name="doAdd"></param>
         public void SetErase(bool doAdd)
         {
             TerrainList.FindAll(ter => ter.IsSelected)
@@ -536,7 +520,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the Invisible flag for all objects and terrain pieces.
         /// </summary>
-        /// <param name="doAdd"></param>
         public void SetInvisible(bool doAdd)
         {
             TerrainList.FindAll(ter => ter.IsSelected)
@@ -548,7 +531,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the Fake flag for all objects and terrain pieces.
         /// </summary>
-        /// <param name="doAdd"></param>
         public void SetFake(bool doAdd)
         {
             TerrainList.FindAll(ter => ter.IsSelected)
@@ -570,7 +552,6 @@ namespace RLEditor
         /// <summary>
         /// Sets the OneWay flag for all terrain pieces.
         /// </summary>
-        /// <param name="doAdd"></param>
         public void SetOneWay(bool doAdd)
         {
             TerrainList.FindAll(ter => ter.IsSelected && !ter.IsSteel)
@@ -580,8 +561,6 @@ namespace RLEditor
         /// <summary>
         /// Changes the index of all selected pieces.
         /// </summary>
-        /// <param name="toTop"></param>
-        /// <param name="onlyOneStep"></param>
         public void MoveSelectedPieces(bool toTop, bool onlyOneStep)
         {
             if (onlyOneStep && toTop)
@@ -601,7 +580,6 @@ namespace RLEditor
         /// <summary>
         /// Moves all selected pieces to the beginning or the end of their respective lists.
         /// </summary>
-        /// <param name="toTop"></param>
         private void MoveSelectedMaximally(bool toTop)
         {
             if (toTop)
@@ -643,7 +621,6 @@ namespace RLEditor
         /// <summary>
         /// Finds the last index of a non-selected piece that when moved to top past all selected pieces changes output.
         /// </summary>
-        /// <param name="pieceList"></param>
         private int GetMoveBottomStartIndex<T>(List<T> pieceList) where T : LevelPiece
         {
             for (int i = pieceList.Count - 1; i >= 0; i--)
@@ -666,7 +643,6 @@ namespace RLEditor
         /// Finds the last index of a non-selected piece that when moved to bottom past all selected pieces changes output.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="pieceList"></param>
         private int GetMoveTopEndIndex<T>(List<T> pieceList) where T : LevelPiece
         {
             for (int i = 0; i < pieceList.Count; i++)
@@ -689,8 +665,6 @@ namespace RLEditor
         /// Moves all selected pieces to bottom in the range starting from startIndex.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="pieceList"></param>
-        /// <param name="startIndex"></param>
         private List<T> MoveSelectedAllToBottom<T>(List<T> pieceList, int startIndex) where T : LevelPiece
         {
             return pieceList.GetRange(0, startIndex)
@@ -703,8 +677,6 @@ namespace RLEditor
         /// Moves all selected pieces to top in the range ending with endIndex.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="pieceList"></param>
-        /// <param name="endIndex"></param>
         private List<T> MoveSelectedAllToTop<T>(List<T> pieceList, int endIndex) where T : LevelPiece
         {
             return pieceList.GetRange(0, endIndex + 1).FindAll(item => !item.IsSelected)
