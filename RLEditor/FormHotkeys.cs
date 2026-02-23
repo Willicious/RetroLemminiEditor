@@ -308,13 +308,13 @@ namespace RLEditor
             {
                 lblEditedSaved.ForeColor = Color.MediumSeaGreen;
                 lblEditedSaved.Text = "Hotkey Configuration saved successfully!";
-                this.Text = "SLX Editor - Hotkey Configuration";
+                this.Text = "RL Editor - Hotkey Configuration";
             }
             else
             {
                 lblEditedSaved.ForeColor = Color.DarkViolet;
                 lblEditedSaved.Text = "Hotkey Configuration edited...";
-                this.Text = "SLX Editor - Hotkey Configuration - [Edited]";
+                this.Text = "RL Editor - Hotkey Configuration - [Edited]";
             }
         }
 

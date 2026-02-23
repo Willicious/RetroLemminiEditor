@@ -635,7 +635,7 @@ namespace RLEditor
 
             if (!foundSelectPieces)
             {
-                invalidKey = "HotkeySelectPieces is missing from SLXEditorHotkeys.ini";
+                invalidKey = "HotkeySelectPieces is missing from RLEditorHotkeys.ini";
                 return true;
             }
 
@@ -657,7 +657,7 @@ namespace RLEditor
             if (ValidateHotkeyIniFile(lines, out string invalidKey))
             {
                 MessageBox.Show(
-                    $"Invalid or duplicate key detected in SLXEditorHotkeys.ini\n\n" +
+                    $"Invalid or duplicate key detected in RLEditorHotkeys.ini\n\n" +
                     $"{invalidKey}\n\n" +
                     $"The default hotkeys will be loaded instead",
                     "Hotkey Error",
