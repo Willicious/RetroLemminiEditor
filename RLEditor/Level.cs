@@ -301,10 +301,18 @@ namespace RLEditor
         /// <summary>
         /// Creates a new piece and adds it to the level. 
         /// </summary>
-        public void AddPiece(string pieceKey, string style, Point centerPos, int gridSize)
+        public void AddPiece(string pieceKey, string style, Point pos, int gridSize, bool useSelectedPos = false)
         {
-            int piecePosX = (centerPos.X - ImageLibrary.GetWidth(pieceKey) / 2).RoundToMultiple(gridSize);
-            int piecePosY = (centerPos.Y - ImageLibrary.GetHeight(pieceKey) / 2).RoundToMultiple(gridSize);
+            int piecePosX = pos.X;
+            int piecePosY = pos.Y;
+
+            if (!useSelectedPos)
+            {
+                // Center the piece at the given position
+                piecePosX -= (ImageLibrary.GetWidth(pieceKey) / 2).RoundToMultiple(gridSize);
+                piecePosY -= (ImageLibrary.GetHeight(pieceKey) / 2).RoundToMultiple(gridSize);
+            }
+
             Point piecePos = new Point(piecePosX, piecePosY);
 
             if (pieceKey.Contains(style + "o_") || pieceKey == "Default\\SteelArea" || pieceKey.Contains("Rulers\\"))
