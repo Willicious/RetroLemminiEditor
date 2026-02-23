@@ -30,3 +30,4 @@ RLEditor.vshost.exe.manifest
 RLEditor/RLEditor_TemporaryKey.pfx
 .vs/
 RLEditor/RLEditor.csproj.user
+UpdateReleaseEXE.bat
