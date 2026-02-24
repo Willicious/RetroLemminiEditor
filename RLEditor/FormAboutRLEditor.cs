@@ -106,15 +106,69 @@ namespace RLEditor
 
             WriteBoldText(richTextBox, $"================ Version {C.Version} Updates ================\n");
 
-            WriteBoldText(richTextBox, "\n• New OWW Directions\n");
-            richTextBox.AppendText(" • Added support for OWW Up/Down (available in RetroLemmini 2.8 onwards)\n");
-            richTextBox.AppendText(" • Note that it's no longer possible to flip/rotate/invert OWW in the Editor (transformed OWWs are not supported in RetroLemmini yet)\n");
+            WriteBoldText(richTextBox, "\n• Templates\n");
+            richTextBox.AppendText(" • It's now possible to create, save and load level templates.\n");
+            richTextBox.AppendText(" • From the Template Loader, choose a template to use as default. This template will then be loaded when opening the Editor or creating a new level.\n");
+            richTextBox.AppendText(" • The Template Loader is shown on startup by default. This can be toggled on/off at any time.\n");
+
+            WriteBoldText(richTextBox, "\n• Crop Level Width/Height\n");
+            richTextBox.AppendText(" • Added a new Crop rectangle which makes it much quicker and easier to adjust level width and height to fit the layout.\n");
+            richTextBox.AppendText(" • This has full hotkey support (X to toggle the Crop rectangle, Enter to apply, Esc to cancel.\n");
+            richTextBox.AppendText(" • Note that some Editor features (such as dragging pieces) become unavailable when the Crop rectangle is active.\n");
+
+            WriteBoldText(richTextBox, "\n• UI - Level Arranger\n");
+            richTextBox.AppendText(" • Increased minimum zoom to -3.\n");
+            richTextBox.AppendText(" • Improved/fixed layout of corner text (in both docked and windowed Level Arranger).\n");
+
+            WriteBoldText(richTextBox, "\n• UI - Piece Browser - Auto-replace selected pieces\n");
+            richTextBox.AppendText(" • Pressing [Ctrl] or [Shift] whilst clicking-to-add a piece from the Piece Browser will directly replace any currently-selected piece in the Level Arranger. Note that this only works if a single piece is selected.\n");
+            richTextBox.AppendText(" • Pressing [Alt] whilst clicking-to-add a piece from the Piece Browser will add that piece to the same X/Y co-ordinates as any currently-selected piece in the Level Arranger. Again, this only works if a single piece is selected.\n");
+
+            WriteBoldText(richTextBox, "\n• Hotkeys\n");
+            richTextBox.AppendText(" • Removed support for Classic hotkeys (not relevant in this version of the Editor).\n");
+
+            WriteBoldText(richTextBox, "\n• Bugfixes/UI");
+            richTextBox.AppendText(" • The selection rectangle is now drawn around the full object for OWWs.\n");
+            richTextBox.AppendText(" • Piece selection is now preserved on Undo/Redo.\n");
+            richTextBox.AppendText(" • Dropdown lists now show more items when expanded.\n");
+            richTextBox.AppendText(" • Grid is now drawn to its own layer.\n");
+
+            // Version 1.1 features
+            WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");
+
+            WriteBoldText(richTextBox, "\n• Full-featured level editor for RetroLemmini\n");
+            richTextBox.AppendText(" • Create, edit and play levels in a user-friendly and intuitive custom-built app.\n");
+
+            WriteBoldText(richTextBox, "\n• Front-panel control for all level features\n");
+            richTextBox.AppendText(" • Name your level, resize it, add a skillset, add pieces, and much more, all from the various tabs and controls on the main dashboard.\n");
+
+            WriteBoldText(richTextBox, "\n• Default Author Name\n");
+            richTextBox.AppendText(" • Added a setting which automatically applies a default author name when a new level is created\n");
+
+            WriteBoldText(richTextBox, "\n• Rulers\n");
+            richTextBox.AppendText(" • Use rulers to measure builder bridges, basher tunnels, fall distance, and more.\n");
 
             WriteBoldText(richTextBox, "\n• Piece Browser\n");
             richTextBox.AppendText(" • Added a 'Random' button to the Piece Browser which, when clicked, randomized the piece style selection. It's possible to specify which styles are Randomized in the Style Manager; if no styles are specified, the entire list is randomized\n");
 
-            WriteBoldText(richTextBox, "\n• Default Author Name\n");
-            richTextBox.AppendText(" • Added a setting which automatically applies a default author name when a new level is created\n");
+            WriteBoldText(richTextBox, "\n• Level Pack Compiler\n");
+            richTextBox.AppendText(" • Compile your levels into a level pack for RetroLemmini.\n");
+
+            WriteBoldText(richTextBox, "\n• Style Manager\n");
+            richTextBox.AppendText(" • Easily keep your styles list up to date and in whatever order you wish.\n");
+
+            WriteBoldText(richTextBox, "\n• Cleanse Levels\n");
+            richTextBox.AppendText(" • Refresh existing levels (or batch-convert between .ini and the new .rlv format) to keep your levels up to date and ensure compatibility with RetroLemmini.\n");
+
+            WriteBoldText(richTextBox, "\n• Validate Levels\n");
+            richTextBox.AppendText(" • Ensure that your levels are problem-free with just a few clicks.\n");
+            richTextBox.AppendText(" • Auto-replace deprecated objects for OG styles. Choose 'Delete deprecated pieces' when validating and they will be auto-replaced with the new corresponding piece\n");
+
+            WriteBoldText(richTextBox, "\n• New OWW Directions\n");
+            richTextBox.AppendText(" • Added support for OWW Up/Down (available in RetroLemmini 2.8 onwards)\n");
+            richTextBox.AppendText(" • Note that it's no longer possible to flip/rotate/invert OWW in the Editor (transformed OWWs are not supported in RetroLemmini yet)\n");
+
+            WriteBoldText(richTextBox, $"\n\n================ Previous Bugfixes ================\n");
 
             WriteBoldText(richTextBox, "\n• Cleanse Levels\n");
             richTextBox.AppendText(" • Bugfix - Cleansing to existing ext (.ini/.rlv) no longer throws an exception\n");
@@ -123,39 +177,12 @@ namespace RLEditor
             richTextBox.AppendText(" • mainLevel property is now internally supported to prevent errors during cleansing (ideally, it should no longer be used for new levels)\n");
             richTextBox.AppendText(" • Bugfix - .ini/.rlv is written in correctly when auto-updating levelpack.ini\n");
 
-            WriteBoldText(richTextBox, "\n• Validate Levels");
-            richTextBox.AppendText(" - Validate levels can now auto-replace deprecated objects for OG styles. Choose 'Delete deprecated pieces' and they will be auto-replaced with the new corresponding piece\n");
-
-            WriteBoldText(richTextBox, "\n• Bugfixes");
-            richTextBox.AppendText(" - Whitespace and trailing backslashes are auto-trimmed from level titles.\n");
-            richTextBox.AppendText(" - Any opaque pixel in a trigger mask is seen as a trigger area (it no longer has to be a specific shade of pink).\n");
+            WriteBoldText(richTextBox, "\n• Bugfixes\n");
+            richTextBox.AppendText(" • Whitespace and trailing backslashes are auto-trimmed from level titles.\n");
+            richTextBox.AppendText(" • Any opaque pixel in a trigger mask is seen as a trigger area (it no longer has to be a specific shade of pink).\n");
             richTextBox.AppendText(" • 'Save As Image' sanitizes invalid characters when saving\n");
             richTextBox.AppendText(" • Directory name is prioritized when identifying styles\n");
             richTextBox.AppendText(" • Added backwards-compatibility for screen start positions in earlier levels (it always saves to the more recent format)\n");
-
-            // Version 1.1 features
-            WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");
-
-            WriteBoldText(richTextBox, "\n• Full-featured level editor for RetroLemmini");
-            richTextBox.AppendText(" - Create, edit and play levels in a user-friendly and intuitive custom-built app.\n");
-
-            WriteBoldText(richTextBox, "• Front-panel control for all level features");
-            richTextBox.AppendText(" - Name your level, resize it, add a skillset, add pieces, and much more, all from the various tabs and controls on the main dashboard.\n");
-
-            WriteBoldText(richTextBox, "• Rulers");
-            richTextBox.AppendText(" - Use rulers to measure builder bridges, basher tunnels, fall distance, and more.\n");
-
-            WriteBoldText(richTextBox, "• Level Pack Compiler");
-            richTextBox.AppendText(" - Compile your levels into a level pack for RetroLemmini.\n");
-
-            WriteBoldText(richTextBox, "• Style Manager");
-            richTextBox.AppendText(" - Easily keep your styles list up to date and in whatever order you wish.\n");
-
-            WriteBoldText(richTextBox, "• Cleanse Levels");
-            richTextBox.AppendText(" - Refresh existing levels (or batch-convert between .ini and the new .rlv format) to keep your levels up to date and ensure compatibility with RetroLemmini.\n");
-
-            WriteBoldText(richTextBox, "• Validate Levels");
-            richTextBox.AppendText(" - Ensure that your levels are problem-free with just a few clicks.\n");
         }
 
         /// <summary>
