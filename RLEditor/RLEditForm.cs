@@ -1493,6 +1493,9 @@ namespace RLEditor
             if (curSettings.ShowAboutAtStartup)
                 ShowAboutRLEditor();
 
+            if (curSettings.OpenTemplatesAtStartup)
+                OpenTemplatesLoader();
+
             MoveControlsOnFormResize();
         }
 
