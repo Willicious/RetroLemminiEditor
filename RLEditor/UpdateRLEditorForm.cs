@@ -340,7 +340,7 @@ namespace RLEditor
             but_StyleRandom.Visible = showRandom ? true : false;
             combo_PieceStyle.Top = 0;
             combo_PieceStyle.Left = showRandom ? but_StyleRandom.Right + 5 : 5;
-            combo_PieceStyle.Width = showRandom ? 200 : 265;
+            combo_PieceStyle.Width = showRandom ? 190 : 265;
 
             but_PieceTerr.Top = 0;
             but_PieceSteel.Top = 0;

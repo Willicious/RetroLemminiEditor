@@ -115,6 +115,7 @@ namespace RLEditor
             CurrentPieceBrowserMode = PieceBrowserMode.ShowData;
             CurrentTriggerAreaColor = TriggerAreaColor.Pink;
             AutoPinOGStyles = true;
+            ShowRandomButton = true;
             PreferObjectName = false;
             InfiniteScrolling = false;
             UseGridForPieces = false;
