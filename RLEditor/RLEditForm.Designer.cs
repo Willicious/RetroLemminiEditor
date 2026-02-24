@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RLEditForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,13 +85,13 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.pic_Level = new System.Windows.Forms.PictureBox();
-            this.toolTipPieces = new System.Windows.Forms.ToolTip();
+            this.toolTipPieces = new System.Windows.Forms.ToolTip(this.components);
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
-            this.toolTipButton = new System.Windows.Forms.ToolTip();
+            this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
             this.but_PieceRight = new RLEditor.RepeatButton();
             this.but_PieceLeft = new RLEditor.RepeatButton();
-            this.timerAutosave = new System.Windows.Forms.Timer();
+            this.timerAutosave = new System.Windows.Forms.Timer(this.components);
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarSteelAreasLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBarMissingPiecesLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -1189,6 +1190,7 @@
             this.combo_PieceStyle.FormattingEnabled = true;
             this.combo_PieceStyle.Location = new System.Drawing.Point(127, 2);
             this.combo_PieceStyle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.combo_PieceStyle.MaxDropDownItems = 40;
             this.combo_PieceStyle.Name = "combo_PieceStyle";
             this.combo_PieceStyle.Size = new System.Drawing.Size(274, 28);
             this.combo_PieceStyle.TabIndex = 75;
@@ -2142,7 +2144,9 @@
             // 
             this.combo_MainStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_MainStyle.FormattingEnabled = true;
+            this.combo_MainStyle.ItemHeight = 20;
             this.combo_MainStyle.Location = new System.Drawing.Point(68, 156);
+            this.combo_MainStyle.MaxDropDownItems = 30;
             this.combo_MainStyle.Name = "combo_MainStyle";
             this.combo_MainStyle.Size = new System.Drawing.Size(301, 28);
             this.combo_MainStyle.TabIndex = 94;
