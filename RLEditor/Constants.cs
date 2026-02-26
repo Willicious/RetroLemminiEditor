@@ -34,13 +34,13 @@ namespace RLEditor
         public static string AppPathLevels => AppPathResources + "levels" + DirSep;
         public static string AppPathTempLevel => AppPathResources + "TempTestLevel.rlv";
         public static string AppPathThemeInfo(string styleName) => AppPathStyles + styleName + C.DirSep + styleName + ".ini";
-        public static string AppPathSettingsFolder => AppPath + "settings" + DirSep;
-        public static string AppPathSettings => AppPathSettingsFolder + "RLEditorSettings.ini";
-        public static string AppPathHotkeys => AppPathSettingsFolder + "RLEditorHotkeys.ini";
-        public static string AppPathCustomSkillsets => AppPathSettingsFolder + "RLEditorCustomSkillsets.ini";
-        public static string AppPathTranslationTables => AppPathSettingsFolder + "RLEditorINITranslationTables.ini";
-        public static string AppPathPlayerSettings => AppPathSettingsFolder + "retrolemmini_settings.ini";
-        public static string AppPathPlayerPlayers => AppPathSettingsFolder + "players.ini";
+        public static string AppPathSettings => AppPath + "settings" + DirSep;
+        public static string AppPathEditorSettings => AppPathSettings + "RLEditorSettings.ini";
+        public static string AppPathHotkeys => AppPathSettings + "RLEditorHotkeys.ini";
+        public static string AppPathCustomSkillsets => AppPathSettings + "RLEditorCustomSkillsets.ini";
+        public static string AppPathTranslationTables => AppPathSettings + "RLEditorINITranslationTables.ini";
+        public static string AppPathPlayerSettings => AppPathSettings + "retrolemmini_settings.ini";
+        public static string AppPathPlayerPlayers => AppPathSettings + "players.ini";
         public static string AppPathRetroLemmini => AppPath + "RetroLemmini.jar";
 
         public static char DirSep => System.IO.Path.DirectorySeparatorChar;
