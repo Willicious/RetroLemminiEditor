@@ -40,10 +40,10 @@ namespace RLEditor
 
             numericsSkillSet = new Dictionary<C.Skill, NumericUpDown>()
                 {
-                    { C.Skill.Climber, num_Ski_Climber }, { C.Skill.Floater, num_Ski_Floater },
-                    { C.Skill.Bomber, num_Ski_Bomber }, { C.Skill.Blocker, num_Ski_Blocker },
-                    { C.Skill.Builder, num_Ski_Builder }, { C.Skill.Basher, num_Ski_Basher },
-                    { C.Skill.Miner, num_Ski_Miner }, { C.Skill.Digger, num_Ski_Digger }
+                    { C.Skill.Climber, numClimber }, { C.Skill.Floater, numFloater },
+                    { C.Skill.Bomber, numBomber }, { C.Skill.Blocker, numBlocker },
+                    { C.Skill.Builder, numBuilder }, { C.Skill.Basher, numBasher },
+                    { C.Skill.Miner, numMiner }, { C.Skill.Digger, numDigger }
                 };
 
             var displayTabItems = new Dictionary<C.DisplayType, ToolStripMenuItem>()
@@ -64,11 +64,11 @@ namespace RLEditor
             CreateStyleList();
             if (StyleList.Count > 0)
             {
-                this.combo_MainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
-                this.combo_MainStyle.SelectedIndex = 0;
+                this.comboMainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
+                this.comboMainStyle.SelectedIndex = 0;
 
-                this.combo_PieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
-                this.combo_PieceStyle.SelectedIndex = 0;
+                this.comboPieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
+                this.comboPieceStyle.SelectedIndex = 0;
             }
 
             CreateNewLevelAndRenderer();
@@ -84,7 +84,7 @@ namespace RLEditor
             pieceDoDisplayKind = C.SelectPieceType.Terrain;
             try
             {
-                pieceCurStyle = ValidateStyleName(combo_PieceStyle.SelectedItem.ToString());
+                pieceCurStyle = ValidateStyleName(comboPieceStyle.SelectedItem.ToString());
             }
             catch (NullReferenceException)
             {
@@ -236,9 +236,9 @@ namespace RLEditor
 
         private void ResetLevelImage()
         {
-            pic_Level.Image = curRenderer.CombineLayers();
+            picLevel.Image = curRenderer.CombineLayers();
             curRenderer.EnsureScreenPosInLevel();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
         }
 
         private void NLEditForm_Activated(object sender, EventArgs e)
@@ -433,13 +433,13 @@ namespace RLEditor
         private void scrollPicLevelHoriz_Scroll(object sender, ScrollEventArgs e)
         {
             curRenderer.ScreenPosX = e.NewValue;
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
         }
 
         private void scrollPicLevelVert_Scroll(object sender, ScrollEventArgs e)
         {
             curRenderer.ScreenPosY = e.NewValue;
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
         }
 
         /* -----------------------------------------------------------
@@ -448,71 +448,71 @@ namespace RLEditor
 
         private void num_Lvl_SizeX_ValueChanged(object sender, EventArgs e)
         {
-            CurLevel.Width = (int)num_Lvl_SizeX.Value;
+            CurLevel.Width = (int)numWidth.Value;
 
             // Adapt max start position
-            num_Lvl_StartX.Maximum = CurLevel.Width - 1;
-            CurLevel.StartPosX = (int)num_Lvl_StartX.Value;
+            numStartX.Maximum = CurLevel.Width - 1;
+            CurLevel.StartPosX = (int)numStartX.Value;
 
             // Update screen position and render level
             curRenderer.ChangeZoom(0);
             RepositionPicLevel();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
         }
 
         private void num_Lvl_SizeY_ValueChanged(object sender, EventArgs e)
         {
-            CurLevel.Height = (int)num_Lvl_SizeY.Value;
+            CurLevel.Height = (int)numHeight.Value;
 
             // Adapt max start position
-            num_Lvl_StartY.Maximum = CurLevel.Height - 1;
-            CurLevel.StartPosY = (int)num_Lvl_StartY.Value;
+            numStartY.Maximum = CurLevel.Height - 1;
+            CurLevel.StartPosY = (int)numStartY.Value;
 
             // Update screen position and render level
             curRenderer.ChangeZoom(0);
             RepositionPicLevel();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
         }
 
         private void num_Lvl_StartX_ValueChanged(object sender, EventArgs e)
         {
-            CurLevel.StartPosX = (int)num_Lvl_StartX.Value;
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            CurLevel.StartPosX = (int)numStartX.Value;
+            picLevel.SetImage(curRenderer.GetScreenImage());
         }
 
         private void num_Lvl_StartY_ValueChanged(object sender, EventArgs e)
         {
-            CurLevel.StartPosY = (int)num_Lvl_StartY.Value;
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            CurLevel.StartPosY = (int)numStartY.Value;
+            picLevel.SetImage(curRenderer.GetScreenImage());
         }
 
         private void num_Lvl_RRMin_ValueChanged(object sender, EventArgs e)
         {
-            if (check_Lvl_LockSR.Checked || num_Lvl_RRMax.Value < num_Lvl_RRMin.Value)
-                num_Lvl_RRMax.Value = num_Lvl_RRMin.Value;
+            if (checkLockReleaseRate.Checked || numReleaseRateMax.Value < numReleaseRateMin.Value)
+                numReleaseRateMax.Value = numReleaseRateMin.Value;
         }
         private void num_Lvl_RRMax_ValueChanged(object sender, EventArgs e)
         {
-            if (num_Lvl_RRMax.Value < num_Lvl_RRMin.Value)
-                num_Lvl_RRMin.Value = num_Lvl_RRMax.Value;
+            if (numReleaseRateMax.Value < numReleaseRateMin.Value)
+                numReleaseRateMin.Value = numReleaseRateMax.Value;
         }
 
         private void check_Lvl_LockSR_CheckedChanged(object sender, EventArgs e)
         {
-            num_Lvl_RRMax.Value = num_Lvl_RRMin.Value;
-            num_Lvl_RRMax.Enabled = !check_Lvl_LockSR.Checked;
+            numReleaseRateMax.Value = numReleaseRateMin.Value;
+            numReleaseRateMax.Enabled = !checkLockReleaseRate.Checked;
             CommitLevelChanges();
         }
 
         private void check_Lvl_Superlemming_CheckedChanged(object sender, EventArgs e)
         {
-            if (!check_Lvl_Superlemming.Checked)
+            if (!checkSuperlemming.Checked)
             {
-                check_Lvl_ForceNormalTimerSpeed.Checked = true;
-                check_Lvl_ForceNormalTimerSpeed.Enabled = false;
+                checkForceNormalTimerSpeed.Checked = true;
+                checkForceNormalTimerSpeed.Enabled = false;
             }
             else
-                check_Lvl_ForceNormalTimerSpeed.Enabled = true;
+                checkForceNormalTimerSpeed.Enabled = true;
 
             CommitLevelChanges();
         }
@@ -521,139 +521,139 @@ namespace RLEditor
          *              Piece Info Tab
          * ----------------------------------------------------------- */
 
-        private void but_RotatePieces_Click(object sender, EventArgs e)
+        private void btnRotatePieces_Click(object sender, EventArgs e)
         {
-            if (!but_RotatePieces.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > but_RotatePieces.Interval() / 2)
+            if (!btnRotate.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > btnRotate.Interval() / 2)
             {
                 stopWatchMouse.Restart();
                 RotateLevelPieces();
             }
         }
 
-        private void but_RotatePieces_MouseUp(object sender, MouseEventArgs e)
+        private void btnRotatePieces_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
-        private void but_InvertPieces_Click(object sender, EventArgs e)
+        private void btnInvertPieces_Click(object sender, EventArgs e)
         {
-            if (!but_InvertPieces.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > but_InvertPieces.Interval() / 2)
+            if (!btnInvert.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > btnInvert.Interval() / 2)
             {
                 stopWatchMouse.Restart();
                 InvertLevelPieces();
             }
         }
 
-        private void but_InvertPieces_MouseUp(object sender, MouseEventArgs e)
+        private void btnInvertPieces_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
-        private void but_FlipPieces_Click(object sender, EventArgs e)
+        private void btnFlipPieces_Click(object sender, EventArgs e)
         {
-            if (!but_FlipPieces.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > but_FlipPieces.Interval() / 2)
+            if (!btnFlip.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > btnFlip.Interval() / 2)
             {
                 stopWatchMouse.Restart();
                 FlipLevelPieces();
             }
         }
 
-        private void but_FlipSpawnDirection_Click(object sender, EventArgs e)
+        private void btnFlipSpawnDirection_Click(object sender, EventArgs e)
         {
             FlipSpawnDirection();
         }
 
-        private void but_FlipPieces_MouseUp(object sender, MouseEventArgs e)
+        private void btnFlipPieces_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
 
-        private void but_MoveFront_Click(object sender, EventArgs e)
+        private void btnMoveFront_Click(object sender, EventArgs e)
         {
             MovePieceIndex(true, false);
             PullFocusFromTextInputs();
         }
 
-        private void but_MoveBack_Click(object sender, EventArgs e)
+        private void btnMoveBack_Click(object sender, EventArgs e)
         {
             MovePieceIndex(false, false);
             PullFocusFromTextInputs();
         }
 
-        private void but_MoveFrontOne_Click(object sender, EventArgs e)
+        private void btnMoveFrontOne_Click(object sender, EventArgs e)
         {
-            if (!but_MoveFrontOne.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > but_MoveFrontOne.Interval() / 2)
+            if (!btnDrawLater.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > btnDrawLater.Interval() / 2)
             {
                 stopWatchMouse.Restart();
                 MovePieceIndex(true, true);
             }
         }
 
-        private void but_MoveFrontOne_MouseUp(object sender, MouseEventArgs e)
+        private void btnMoveFrontOne_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
-        private void but_MoveBackOne_Click(object sender, EventArgs e)
+        private void btnMoveBackOne_Click(object sender, EventArgs e)
         {
-            if (!but_MoveBackOne.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > but_MoveBackOne.Interval() / 2)
+            if (!btnDrawSooner.IsRepeatedAction || stopWatchMouse.ElapsedMilliseconds > btnDrawSooner.Interval() / 2)
             {
                 stopWatchMouse.Restart();
                 MovePieceIndex(false, true);
             }
         }
 
-        private void but_MoveBackOne_MouseUp(object sender, MouseEventArgs e)
+        private void btnMoveBackOne_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
         private void check_Pieces_Erase_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = (check_Pieces_Erase.CheckState == CheckState.Checked);
+            bool isChecked = (checkErase.CheckState == CheckState.Checked);
             SetErase(isChecked);
             PullFocusFromTextInputs();
         }
 
         private void check_Pieces_NoOv_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = (check_Pieces_NoOv.CheckState == CheckState.Checked);
+            bool isChecked = (checkNoOverwrite.CheckState == CheckState.Checked);
             SetNoOverwrite(isChecked);
             PullFocusFromTextInputs();
         }
 
         private void check_Pieces_OnlyOnTerrain_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = (check_Pieces_OnlyOnTerrain.CheckState == CheckState.Checked);
+            bool isChecked = (checkOnlyOnTerrain.CheckState == CheckState.Checked);
             SetOnlyOnTerrain(isChecked);
             PullFocusFromTextInputs();
         }
 
         private void check_Pieces_OneWay_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = (check_Pieces_OneWay.CheckState == CheckState.Checked);
+            bool isChecked = (checkAllowOneWay.CheckState == CheckState.Checked);
             SetOneWay(isChecked);
             PullFocusFromTextInputs();
         }
 
         private void check_Pieces_Invisible_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = (check_Pieces_Invisible.CheckState == CheckState.Checked);
+            bool isChecked = (checkInvisible.CheckState == CheckState.Checked);
             SetInvisible(isChecked);
             PullFocusFromTextInputs();
         }
 
         private void check_Pieces_Fake_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = (check_Pieces_Fake.CheckState == CheckState.Checked);
+            bool isChecked = (checkFake.CheckState == CheckState.Checked);
             SetFake(isChecked);
             PullFocusFromTextInputs();
         }
 
         private void check_Pieces_NegativeSteel_CheckedChanged(object sender, EventArgs e)
         {
-            bool isChecked = (check_Pieces_NegativeSteel.CheckState == CheckState.Checked);
+            bool isChecked = (checkNegativeSteel.CheckState == CheckState.Checked);
             SetNegativeSteel(isChecked);
             PullFocusFromTextInputs();
         }
@@ -687,25 +687,25 @@ namespace RLEditor
 
         private void combo_MainStyle_TextChanged(object sender, EventArgs e)
         {
-            Style newStyle = ValidateStyleName(combo_MainStyle.Text);
+            Style newStyle = ValidateStyleName(comboMainStyle.Text);
 
             if (newStyle == null || CurLevel == null)
                 return;
 
             CurLevel.MainStyle = newStyle;
             LoadPiecesIntoPictureBox();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
 
             // If the level is empty, switch piece style, too
             if (CurLevel.GadgetList.Count == 0 && CurLevel.TerrainList.Count == 0)
             {
-                combo_PieceStyle.Text = newStyle.NameInEditor;
+                comboPieceStyle.Text = newStyle.NameInEditor;
             }
         }
 
         private void combo_PieceStyle_TextChanged(object sender, EventArgs e)
         {
-            Style newStyle = ValidateStyleName(combo_PieceStyle.Text);
+            Style newStyle = ValidateStyleName(comboPieceStyle.Text);
 
             if (newStyle == null || newStyle == pieceCurStyle)
                 return;
@@ -721,7 +721,7 @@ namespace RLEditor
         private void combo_PieceStyle_Leave(object sender, EventArgs e)
         {
             // Check whether to delete all pieces due to wrong style name
-            Style newStyle = ValidateStyleName(combo_PieceStyle.Text);
+            Style newStyle = ValidateStyleName(comboPieceStyle.Text);
 
             if (newStyle == null)
             {
@@ -731,47 +731,47 @@ namespace RLEditor
             }
         }
 
-        private void but_PieceTerr_Click(object sender, EventArgs e)
+        private void btnPieceTerr_Click(object sender, EventArgs e)
         {
             CyclePieceBrowserDisplay(C.SelectPieceType.Terrain);
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceSteel_Click(object sender, EventArgs e)
+        private void btnPieceSteel_Click(object sender, EventArgs e)
         {
             CyclePieceBrowserDisplay(C.SelectPieceType.Steel);
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceObj_Click(object sender, EventArgs e)
+        private void btnPieceObj_Click(object sender, EventArgs e)
         {
             CyclePieceBrowserDisplay(C.SelectPieceType.Objects);
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceRulers_Click(object sender, EventArgs e)
+        private void btnPieceRulers_Click(object sender, EventArgs e)
         {
             CyclePieceBrowserDisplay(C.SelectPieceType.Rulers);
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceLeft_MouseUp(object sender, MouseEventArgs e)
+        private void btnPieceLeft_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceLeft_Click(object sender, EventArgs e)
+        private void btnPieceLeft_Click(object sender, EventArgs e)
         {
             stopWatchMouse.Restart();
             MoveTerrPieceSelection(-1);
         }
 
-        private void but_PieceRight_MouseUp(object sender, MouseEventArgs e)
+        private void btnPieceRight_MouseUp(object sender, MouseEventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
-        private void but_PieceRight_Click(object sender, EventArgs e)
+        private void btnPieceRight_Click(object sender, EventArgs e)
         {
             stopWatchMouse.Restart();
             MoveTerrPieceSelection(1);
@@ -818,9 +818,9 @@ namespace RLEditor
 
             if (dragNewPieceKey != "")
             {
-                pic_DragNewPiece.Width = ImageLibrary.GetWidth(dragNewPieceKey);
-                pic_DragNewPiece.Height = ImageLibrary.GetHeight(dragNewPieceKey);
-                pic_DragNewPiece.Image = ImageLibrary.GetImage(dragNewPieceKey);
+                picDragNewPiece.Width = ImageLibrary.GetWidth(dragNewPieceKey);
+                picDragNewPiece.Height = ImageLibrary.GetHeight(dragNewPieceKey);
+                picDragNewPiece.Image = ImageLibrary.GetImage(dragNewPieceKey);
 
                 dragNewPieceTimer.Interval = 200;
                 dragNewPieceTimer.Enabled = true;
@@ -875,7 +875,7 @@ namespace RLEditor
                 return true;
             }
 
-            if (ActiveControl != txt_Focus)
+            if (ActiveControl != txtFocus)
             {
                 if (IsTextInputKey(e.KeyCode) && e.Modifiers == Keys.None)
                 {
@@ -968,7 +968,7 @@ namespace RLEditor
                 }
                 else // Zoom the level
                 {
-                    Point mousePosRelPicLevel = pic_Level.PointToClient(this.PointToScreen(e.Location));
+                    Point mousePosRelPicLevel = picLevel.PointToClient(this.PointToScreen(e.Location));
                     curRenderer.SetZoomMousePos(mousePosRelPicLevel);
                     curRenderer.ChangeZoom(movement > 0 ? 1 : -1, true);
                 }
@@ -976,7 +976,7 @@ namespace RLEditor
 
             // Update level image
             RepositionPicLevel();
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
 
             mutexMouseWheel.ReleaseMutex();
         }
@@ -1008,7 +1008,7 @@ namespace RLEditor
             if (curRenderer.CropTool.Active)
             {
                 curRenderer.CropTool.MouseDown(e.Location);
-                pic_Level.SetImage(curRenderer.GetScreenImage());
+                picLevel.SetImage(curRenderer.GetScreenImage());
                 return;
             }
 
@@ -1052,7 +1052,7 @@ namespace RLEditor
                 if (addOrRemoveSinglePiecePressed)
                 {
                     LevelSelectSinglePiece();
-                    pic_Level.SetImage(curRenderer.GetScreenImage());
+                    picLevel.SetImage(curRenderer.GetScreenImage());
                 }
 
                 dragAction = C.DragActions.DragPieces;
@@ -1071,7 +1071,7 @@ namespace RLEditor
             {
                 curRenderer.MouseCurPos = e.Location;
                 LevelSelectSinglePiece();
-                pic_Level.SetImage(curRenderer.GetScreenImage());
+                picLevel.SetImage(curRenderer.GetScreenImage());
                 dragAction = C.DragActions.MaybeDragPieces;
             }
             else
@@ -1090,7 +1090,7 @@ namespace RLEditor
             if (curRenderer.CropTool.Active)
             {
                 curRenderer.CropTool.MouseUp();
-                pic_Level.SetImage(curRenderer.CreateLevelImage());
+                picLevel.SetImage(curRenderer.CreateLevelImage());
                 return;
             }
 
@@ -1148,20 +1148,20 @@ namespace RLEditor
                     }
                 case C.DragActions.DragNewPiece:
                     {
-                        Point mousePicBoxPos = pic_Level.PointToClient(MousePosition);
+                        Point mousePicBoxPos = picLevel.PointToClient(MousePosition);
                         if (curRenderer.IsPointInLevelArea(mousePicBoxPos))
                         {
                             Point mouseLevelPos = curRenderer.GetMousePosInLevel(mousePicBoxPos);
                             AddNewPieceToLevel(dragNewPieceKey, pieceCurStyle.NameInDirectory, mouseLevelPos);
                         }
                         dragNewPieceTimer.Enabled = false;
-                        pic_DragNewPiece.Visible = false;
+                        picDragNewPiece.Visible = false;
                         break;
                     }
             }
 
             curRenderer.DeleteDraggingVars();
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
             UpdateFlagsForPieceActions();
 
             mouseButtonPressed = null;
@@ -1186,7 +1186,7 @@ namespace RLEditor
             if (curRenderer.CropTool.Active)
             {
                 curRenderer.CropTool.MouseMove(e.Location);
-                pic_Level.SetImage(curRenderer.CreateLevelImage());
+                picLevel.SetImage(curRenderer.CreateLevelImage());
                 return;
             }
 
@@ -1207,44 +1207,44 @@ namespace RLEditor
             switch (curRenderer.MouseDragAction)
             {
                 case C.DragActions.SelectArea:
-                    pic_Level.SetImage(curRenderer.GetScreenImage());
+                    picLevel.SetImage(curRenderer.GetScreenImage());
                     break;
 
                 case C.DragActions.MoveEditorPos:
                     curRenderer.UpdateScreenPos();
                     UpdateScrollBarValues();
-                    pic_Level.SetImage(curRenderer.GetScreenImage());
+                    picLevel.SetImage(curRenderer.GetScreenImage());
                     break;
 
                 case C.DragActions.MaybeDragPieces:
                     curRenderer.ConfirmDrag();
                     DragSelectedPieces();
-                    pic_Level.SetImage(curRenderer.CreateLevelImage());
+                    picLevel.SetImage(curRenderer.CreateLevelImage());
                     break;
 
                 case C.DragActions.DragPieces:
                     DragSelectedPieces();
-                    pic_Level.SetImage(curRenderer.CreateLevelImage());
+                    picLevel.SetImage(curRenderer.CreateLevelImage());
                     break;
 
                 case C.DragActions.HorizontalDrag:
                     XDragSelectedPieces();
-                    pic_Level.SetImage(curRenderer.CreateLevelImage());
+                    picLevel.SetImage(curRenderer.CreateLevelImage());
                     break;
 
                 case C.DragActions.VerticalDrag:
                     YDragSelectedPieces();
-                    pic_Level.SetImage(curRenderer.CreateLevelImage());
+                    picLevel.SetImage(curRenderer.CreateLevelImage());
                     break;
 
                 case C.DragActions.MoveStartPos:
                     Point newCenter = curRenderer.GetNewPosFromDragging();
                     MoveScreenStartPosition(newCenter);
-                    pic_Level.SetImage(curRenderer.GetScreenImage());
+                    picLevel.SetImage(curRenderer.GetScreenImage());
                     break;
             }
 
-            pic_Level.Refresh();
+            picLevel.Refresh();
             mutexMouseMove.ReleaseMutex();
         }
 
@@ -1323,11 +1323,11 @@ namespace RLEditor
             if (selection.Count == 1 && selection[0] is GadgetPiece gadget && gadget.ObjType == C.OBJ.STEEL)
             {
                 if (resizeWidth)
-                    gadget.SpecWidth = (int)num_SteelAreaWidth.Value;
+                    gadget.SpecWidth = (int)numSteelAreaWidth.Value;
                 else
-                    gadget.SpecHeight = (int)num_SteelAreaHeight.Value;
+                    gadget.SpecHeight = (int)numSteelAreaHeight.Value;
 
-                pic_Level.Image = curRenderer.CreateLevelImage();
+                picLevel.Image = curRenderer.CreateLevelImage();
             }
         }
 
@@ -1345,11 +1345,11 @@ namespace RLEditor
                     return;
 
                 if (resizeWidth)
-                    gadget.SpecWidth = (int)num_RulerWidth.Value;
+                    gadget.SpecWidth = (int)numRulerWidth.Value;
                 else
-                    gadget.SpecHeight = (int)num_RulerHeight.Value;
+                    gadget.SpecHeight = (int)numRulerHeight.Value;
 
-                pic_Level.Image = curRenderer.CreateLevelImage();
+                picLevel.Image = curRenderer.CreateLevelImage();
             }
         }
 
@@ -1406,7 +1406,7 @@ namespace RLEditor
             if (curRenderer == null) return;
             if (_IsWritingToForm) return;
             textbox_Leave(sender, e);
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
         }
 
         private void gotItThanksStatusBarMenuItem_Click(object sender, EventArgs e)
@@ -1470,9 +1470,9 @@ namespace RLEditor
 
         private void num_RandomLimit_ValueChanged(object sender, EventArgs e)
         {
-            if (num_RandomMinLimit.Value > num_RandomMaxLimit.Value)
+            if (numRandomMinLimit.Value > numRandomMaxLimit.Value)
             {
-                num_RandomMaxLimit.Value = num_RandomMinLimit.Value + 1;
+                numRandomMaxLimit.Value = numRandomMinLimit.Value + 1;
             }
         }
 
@@ -1497,8 +1497,9 @@ namespace RLEditor
                 OpenTemplatesLoader();
 
             MoveControlsOnFormResize();
-            LinkControlsToMouseEvents(this);
             UpdateMissingPiecesMenuItems();
+            LinkControlsToMouseEvents(this);
+            UpdateControlTags();
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1583,12 +1584,12 @@ namespace RLEditor
             OpenStyleManager();
         }
 
-        private void but_StyleRandom_Click(object sender, EventArgs e)
+        private void btnStyleRandom_Click(object sender, EventArgs e)
         {
             RandomizePieceStyle();
         }
 
-        private void but_AddSteelArea_Click(object sender, EventArgs e)
+        private void btnAddSteelArea_Click(object sender, EventArgs e)
         {
             AddSteelArea();
         }
@@ -1633,7 +1634,7 @@ namespace RLEditor
             ResizeRuler(false);
         }
 
-        private void but_Hints_Click(object sender, EventArgs e)
+        private void btnHints_Click(object sender, EventArgs e)
         {
             using (var hintsForm = new FormHints(CurLevel))
             {
@@ -1667,16 +1668,16 @@ namespace RLEditor
             LoadStyleFromMetaData();
         }
 
-        private void but_CropLevel_Click(object sender, EventArgs e)
+        private void btnCropLevel_Click(object sender, EventArgs e)
         {
             HandleCropLevel();
         }
-        private void but_CancelCrop_Click(object sender, EventArgs e)
+        private void btnCancelCrop_Click(object sender, EventArgs e)
         {
             HandleCropLevel();
         }
 
-        private void but_ApplyCrop_Click(object sender, EventArgs e)
+        private void btnApplyCrop_Click(object sender, EventArgs e)
         {
             ApplyLevelCrop();
         }

@@ -19,15 +19,15 @@ namespace RLEditor
         /// </summary>
         private void SetRepeatButtonIntervals()
         {
-            but_RotatePieces.SetInterval(1000);
-            but_InvertPieces.SetInterval(1000);
-            but_FlipPieces.SetInterval(1000);
-            but_MoveBackOne.SetInterval(150);
-            but_MoveFrontOne.SetInterval(150);
-            but_PieceLeft.SetInterval(100, MouseButtons.Left);
-            but_PieceLeft.SetInterval(30, MouseButtons.Right);
-            but_PieceRight.SetInterval(100, MouseButtons.Left);
-            but_PieceRight.SetInterval(30, MouseButtons.Right);
+            btnRotate.SetInterval(1000);
+            btnInvert.SetInterval(1000);
+            btnFlip.SetInterval(1000);
+            btnDrawSooner.SetInterval(150);
+            btnDrawLater.SetInterval(150);
+            btnPieceLeft.SetInterval(100, MouseButtons.Left);
+            btnPieceLeft.SetInterval(30, MouseButtons.Right);
+            btnPieceRight.SetInterval(100, MouseButtons.Left);
+            btnPieceRight.SetInterval(30, MouseButtons.Right);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace RLEditor
                 if (!ImageLibrary.IsImageLoadable(pieceKey))
                 {
                     // Make sure to stop the repeat-buttons from firing again.
-                    but_PieceRight.StopRepeatAction();
-                    but_PieceLeft.StopRepeatAction();
+                    btnPieceRight.StopRepeatAction();
+                    btnPieceLeft.StopRepeatAction();
                 }
 
                 int frameIndex = ImageLibrary.GetObjType(pieceKey) == C.OBJ.HATCH ? ImageLibrary.GetFrameCount(pieceKey) : 0;
@@ -161,31 +161,31 @@ namespace RLEditor
 
             bool piecesSelected = selectionList.Count > 0;
 
-            but_MoveBack.Enabled = piecesSelected;
-            but_MoveFront.Enabled = piecesSelected;
-            but_MoveBackOne.Enabled = piecesSelected;
-            but_MoveFrontOne.Enabled = piecesSelected;
+            btnDrawFirst.Enabled = piecesSelected;
+            btnDrawLast.Enabled = piecesSelected;
+            btnDrawSooner.Enabled = piecesSelected;
+            btnDrawLater.Enabled = piecesSelected;
 
             bool onlyHatchesSelected = selectionList.All(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.HATCH);
 
-            but_FlipSpawnDirection.Visible = piecesSelected && onlyHatchesSelected;
+            btnFlipSpawnDirection.Visible = piecesSelected && onlyHatchesSelected;
 
             bool oneWaySelected = selectionList.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL);
 
-            but_RotatePieces.Enabled = !oneWaySelected;
-            but_InvertPieces.Enabled = !oneWaySelected;
-            but_FlipPieces.Enabled = !oneWaySelected;
+            btnRotate.Enabled = !oneWaySelected;
+            btnInvert.Enabled = !oneWaySelected;
+            btnFlip.Enabled = !oneWaySelected;
 
             bool hasSpecialGadget = selectionList.OfType<GadgetPiece>()
                  .Any(g => g.ObjType.In(C.OBJ.STEEL, C.OBJ.RULER));
             if (hasSpecialGadget)
             {
-                check_Pieces_NoOv.Enabled = false; check_Pieces_NoOv.Checked = false;
-                check_Pieces_Erase.Enabled = false; check_Pieces_Erase.Checked = false;
-                check_Pieces_OneWay.Enabled = false; check_Pieces_OneWay.Checked = false;
-                check_Pieces_OnlyOnTerrain.Enabled = false; check_Pieces_OnlyOnTerrain.Checked = false;
-                check_Pieces_Invisible.Enabled = false; check_Pieces_Invisible.Checked = false;
-                check_Pieces_Fake.Enabled = false; check_Pieces_Fake.Checked = false;
+                checkNoOverwrite.Enabled = false; checkNoOverwrite.Checked = false;
+                checkErase.Enabled = false; checkErase.Checked = false;
+                checkAllowOneWay.Enabled = false; checkAllowOneWay.Checked = false;
+                checkOnlyOnTerrain.Enabled = false; checkOnlyOnTerrain.Checked = false;
+                checkInvisible.Enabled = false; checkInvisible.Checked = false;
+                checkFake.Enabled = false; checkFake.Checked = false;
             }
 
             bool singleSteelSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece ste && ste.ObjType == C.OBJ.STEEL;
@@ -194,16 +194,16 @@ namespace RLEditor
                 var gadget = (GadgetPiece)selectionList[0];
 
                 lblSteelAreaWidth.Visible = true; lblSteelAreaHeight.Visible = true;
-                num_SteelAreaWidth.Visible = true; num_SteelAreaHeight.Visible = true;
-                num_SteelAreaWidth.Value = Math.Max(1, gadget.SpecWidth);
-                num_SteelAreaHeight.Value = Math.Max(1, gadget.SpecHeight);
-                check_Pieces_NegativeSteel.Visible = true;
+                numSteelAreaWidth.Visible = true; numSteelAreaHeight.Visible = true;
+                numSteelAreaWidth.Value = Math.Max(1, gadget.SpecWidth);
+                numSteelAreaHeight.Value = Math.Max(1, gadget.SpecHeight);
+                checkNegativeSteel.Visible = true;
             }
             else
             {
                 lblSteelAreaHeight.Visible = false; lblSteelAreaWidth.Visible = false;
-                num_SteelAreaHeight.Visible = false; num_SteelAreaWidth.Visible = false;
-                check_Pieces_NegativeSteel.Visible = false;
+                numSteelAreaHeight.Visible = false; numSteelAreaWidth.Visible = false;
+                checkNegativeSteel.Visible = false;
             }
 
             bool singleRulerSelected = selectionList.Count == 1 && selectionList[0] is GadgetPiece && ((GadgetPiece)selectionList[0]).ObjType == C.OBJ.RULER;
@@ -214,58 +214,58 @@ namespace RLEditor
                 if (r.Key.Contains("Custom"))
                 {
                     lblRulerWidth.Visible = true; lblRulerHeight.Visible = true;
-                    num_RulerWidth.Visible = true; num_RulerHeight.Visible = true;
-                    num_RulerWidth.Value = Math.Max(1, r.SpecWidth);
-                    num_RulerHeight.Value = Math.Max(1, r.SpecHeight);
+                    numRulerWidth.Visible = true; numRulerHeight.Visible = true;
+                    numRulerWidth.Value = Math.Max(1, r.SpecWidth);
+                    numRulerHeight.Value = Math.Max(1, r.SpecHeight);
                 }
                 else
                 {
                     lblRulerWidth.Visible = false; lblRulerHeight.Visible = false;
-                    num_RulerWidth.Visible = false; num_RulerHeight.Visible = false;
+                    numRulerWidth.Visible = false; numRulerHeight.Visible = false;
                 }
             }
 
             if (hasSpecialGadget || singleSteelSelected || singleRulerSelected)
                 return;
 
-            check_Pieces_NoOv.Enabled = selectionList.Count() > 0;
+            checkNoOverwrite.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event
-            check_Pieces_NoOv.CheckedChanged -= check_Pieces_NoOv_CheckedChanged;
-            check_Pieces_NoOv.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsNoOverwrite)
+            checkNoOverwrite.CheckedChanged -= check_Pieces_NoOv_CheckedChanged;
+            checkNoOverwrite.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsNoOverwrite)
                                                                || (p is TerrainPiece && (p as TerrainPiece).IsNoOverwrite));
-            check_Pieces_NoOv.CheckedChanged += check_Pieces_NoOv_CheckedChanged;
+            checkNoOverwrite.CheckedChanged += check_Pieces_NoOv_CheckedChanged;
 
-            check_Pieces_Erase.Enabled = selectionList.Exists(p => (p is TerrainPiece tp));
+            checkErase.Enabled = selectionList.Exists(p => (p is TerrainPiece tp));
             // Set check-mark correctly, without firing the CheckedChanged event
-            check_Pieces_Erase.CheckedChanged -= check_Pieces_Erase_CheckedChanged;
-            check_Pieces_Erase.Checked = selectionList.Exists(p => p is TerrainPiece && (p as TerrainPiece).IsErase);
-            check_Pieces_Erase.CheckedChanged += check_Pieces_Erase_CheckedChanged;
+            checkErase.CheckedChanged -= check_Pieces_Erase_CheckedChanged;
+            checkErase.Checked = selectionList.Exists(p => p is TerrainPiece && (p as TerrainPiece).IsErase);
+            checkErase.CheckedChanged += check_Pieces_Erase_CheckedChanged;
 
-            check_Pieces_OneWay.Enabled = selectionList.Exists(p => (p is TerrainPiece tp) && !tp.IsSteel);
+            checkAllowOneWay.Enabled = selectionList.Exists(p => (p is TerrainPiece tp) && !tp.IsSteel);
             // Set check-mark correctly, without firing the CheckedChanged event
-            check_Pieces_OneWay.CheckedChanged -= check_Pieces_OneWay_CheckedChanged;
-            check_Pieces_OneWay.Checked = selectionList.Exists(p => p is TerrainPiece && (p as TerrainPiece).IsOneWay);
-            check_Pieces_OneWay.CheckedChanged += check_Pieces_OneWay_CheckedChanged;
+            checkAllowOneWay.CheckedChanged -= check_Pieces_OneWay_CheckedChanged;
+            checkAllowOneWay.Checked = selectionList.Exists(p => p is TerrainPiece && (p as TerrainPiece).IsOneWay);
+            checkAllowOneWay.CheckedChanged += check_Pieces_OneWay_CheckedChanged;
 
-            check_Pieces_OnlyOnTerrain.Enabled = selectionList.Exists(p => p is GadgetPiece);
+            checkOnlyOnTerrain.Enabled = selectionList.Exists(p => p is GadgetPiece);
             // Set check-mark correctly, without firing the CheckedChanged event
-            check_Pieces_OnlyOnTerrain.CheckedChanged -= check_Pieces_OnlyOnTerrain_CheckedChanged;
-            check_Pieces_OnlyOnTerrain.Checked = selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).IsOnlyOnTerrain);
-            check_Pieces_OnlyOnTerrain.CheckedChanged += check_Pieces_OnlyOnTerrain_CheckedChanged;
+            checkOnlyOnTerrain.CheckedChanged -= check_Pieces_OnlyOnTerrain_CheckedChanged;
+            checkOnlyOnTerrain.Checked = selectionList.Exists(p => p is GadgetPiece && (p as GadgetPiece).IsOnlyOnTerrain);
+            checkOnlyOnTerrain.CheckedChanged += check_Pieces_OnlyOnTerrain_CheckedChanged;
 
-            check_Pieces_Invisible.Enabled = selectionList.Count() > 0;
+            checkInvisible.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event
-            check_Pieces_Invisible.CheckedChanged -= check_Pieces_Invisible_CheckedChanged;
-            check_Pieces_Invisible.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsInvisible)
+            checkInvisible.CheckedChanged -= check_Pieces_Invisible_CheckedChanged;
+            checkInvisible.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsInvisible)
                                                                || (p is TerrainPiece && (p as TerrainPiece).IsInvisible));
-            check_Pieces_Invisible.CheckedChanged += check_Pieces_Invisible_CheckedChanged;
+            checkInvisible.CheckedChanged += check_Pieces_Invisible_CheckedChanged;
 
-            check_Pieces_Fake.Enabled = selectionList.Count() > 0;
+            checkFake.Enabled = selectionList.Count() > 0;
             // Set check-mark correctly, without firing the CheckedChanged event
-            check_Pieces_Fake.CheckedChanged -= check_Pieces_Fake_CheckedChanged;
-            check_Pieces_Fake.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsFake)
+            checkFake.CheckedChanged -= check_Pieces_Fake_CheckedChanged;
+            checkFake.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsFake)
                                                                || (p is TerrainPiece && (p as TerrainPiece).IsFake));
-            check_Pieces_Fake.CheckedChanged += check_Pieces_Fake_CheckedChanged;
+            checkFake.CheckedChanged += check_Pieces_Fake_CheckedChanged;
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace RLEditor
             }
             else
             {
-                posLeft = tabLvlProperties.Left - 6;
+                posLeft = tabProperties.Left - 6;
                 posTop = this.Height - height;
                 width = this.Width - 12;
                 rightButtonOffset = 36;
@@ -335,34 +335,34 @@ namespace RLEditor
             panelPieceBrowser.Height = height;
 
             bool showRandom = curSettings.ShowRandomButton;
-            but_StyleRandom.Top = 0;
-            but_StyleRandom.Left = 5;
-            but_StyleRandom.Visible = showRandom ? true : false;
-            combo_PieceStyle.Top = 0;
-            combo_PieceStyle.Left = showRandom ? but_StyleRandom.Right + 5 : 5;
-            combo_PieceStyle.Width = showRandom ? 190 : 265;
+            btnStyleRandom.Top = 0;
+            btnStyleRandom.Left = 5;
+            btnStyleRandom.Visible = showRandom ? true : false;
+            comboPieceStyle.Top = 0;
+            comboPieceStyle.Left = showRandom ? btnStyleRandom.Right + 5 : 5;
+            comboPieceStyle.Width = showRandom ? 190 : 265;
 
-            but_PieceTerr.Top = 0;
-            but_PieceSteel.Top = 0;
-            but_PieceObj.Top = 0;
-            but_PieceRulers.Top = 0;
+            btnTerrain.Top = 0;
+            btnSteel.Top = 0;
+            btnObjects.Top = 0;
+            btnRulers.Top = 0;
 
-            but_PieceLeft.Top = pieceBrowserTop;
-            but_PieceRight.Top = pieceBrowserTop;
-            but_PieceRight.Left = panelPieceBrowser.Width - rightButtonOffset;
+            btnPieceLeft.Top = pieceBrowserTop;
+            btnPieceRight.Top = pieceBrowserTop;
+            btnPieceRight.Left = panelPieceBrowser.Width - rightButtonOffset;
 
-            but_AddSteelArea.Top = 0;
-            but_AddSteelArea.Left = but_PieceRight.Right - 4 - but_AddSteelArea.Width;
+            btnAddSteelArea.Top = 0;
+            btnAddSteelArea.Left = btnPieceRight.Right - 4 - btnAddSteelArea.Width;
         }
 
         private void UpdateCropButtons()
         {
             bool cropActive = curRenderer.CropTool.Active;
 
-            but_ApplyCrop.Visible = cropActive;
-            but_CancelCrop.Visible = cropActive;
-            but_CropLevel.Enabled = !cropActive;
-            but_CropLevel.Width = cropActive ? but_ApplyCrop.Width : but_CancelCrop.Right - but_CropLevel.Left;
+            btnApplyCrop.Visible = cropActive;
+            btnCancelCrop.Visible = cropActive;
+            btnCropLevel.Enabled = !cropActive;
+            btnCropLevel.Width = cropActive ? btnApplyCrop.Width : btnCancelCrop.Right - btnCropLevel.Left;
         }
 
         /// <summary>
@@ -373,14 +373,14 @@ namespace RLEditor
             if (!repositionAfterZooming)
                 return;
             
-            pic_Level.Left = 264;
+            picLevel.Left = 264;
 
             Size newPicLevelSize = new Size(this.Width - 276, this.Height - 178);
 
             // Check for scroll bars. This method resizes pic_Level accordingly (if necessary).
             newPicLevelSize = CheckEnableLevelScrollbars(newPicLevelSize);
 
-            pic_Level.Size = newPicLevelSize;
+            picLevel.Size = newPicLevelSize;
             curRenderer.EnsureScreenPosInLevel();
         }
 
@@ -541,14 +541,14 @@ namespace RLEditor
         private void UpdateNewPiecePicBox()
         {
             Point mousePos = PointToClient(MousePosition);
-            Point mousePosPicLevel = pic_Level.PointToClient(MousePosition);
+            Point mousePosPicLevel = picLevel.PointToClient(MousePosition);
 
             if (curRenderer.MouseDragAction != C.DragActions.DragNewPiece
                 || MouseButtons != MouseButtons.Left)
             {
                 // Stop timer and make PicBox invisible
                 dragNewPieceTimer.Enabled = false;
-                pic_DragNewPiece.Visible = false;
+                picDragNewPiece.Visible = false;
                 if (curRenderer.MouseDragAction == C.DragActions.DragNewPiece)
                 {
                     curRenderer.DeleteDraggingVars();
@@ -557,25 +557,25 @@ namespace RLEditor
             else if (curRenderer.IsPointInLevelArea(mousePosPicLevel))
             {
                 // Display the piece via the renderer in the level
-                pic_DragNewPiece.Visible = false;
+                picDragNewPiece.Visible = false;
 
                 curRenderer.MouseCurPos = mousePosPicLevel;
-                pic_Level.Image = curRenderer.CombineLayers(dragNewPieceKey);
+                picLevel.Image = curRenderer.CombineLayers(dragNewPieceKey);
             }
             else
             {
                 // Display the piece via the picture box.
-                if (!pic_DragNewPiece.Visible)
+                if (!picDragNewPiece.Visible)
                 {
                     dragNewPieceTimer.Interval = 50;
-                    pic_DragNewPiece.BringToFront();
-                    pic_DragNewPiece.Visible = true;
-                    pic_Level.Image = curRenderer.CombineLayers();
+                    picDragNewPiece.BringToFront();
+                    picDragNewPiece.Visible = true;
+                    picLevel.Image = curRenderer.CombineLayers();
                 }
                 // Reposition the PicBox
-                int newPosX = mousePos.X - pic_DragNewPiece.Width / 2;
-                int newPosY = mousePos.Y - pic_DragNewPiece.Height / 2;
-                pic_DragNewPiece.Location = new Point(newPosX, newPosY);
+                int newPosX = mousePos.X - picDragNewPiece.Width / 2;
+                int newPosY = mousePos.Y - picDragNewPiece.Height / 2;
+                picDragNewPiece.Location = new Point(newPosX, newPosY);
             }
         }
     }

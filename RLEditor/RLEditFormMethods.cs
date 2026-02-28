@@ -186,7 +186,7 @@ namespace RLEditor
 
                 // Refresh dropdown and auto-select the new entry
                 SetCustomSkillsetList();
-                combo_CustomSkillset.SelectedItem = newName;
+                comboCustomSkillset.SelectedItem = newName;
 
                 MessageBox.Show("Custom skillset saved successfully!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -205,12 +205,12 @@ namespace RLEditor
         /// </summary>
         public void ApplyCustomSkillset()
         {
-            if (combo_CustomSkillset.SelectedIndex == 0)
+            if (comboCustomSkillset.SelectedIndex == 0)
                 return;
 
             try
             {
-                string selectedSkillset = combo_CustomSkillset.Text;
+                string selectedSkillset = comboCustomSkillset.Text;
 
                 if (string.IsNullOrWhiteSpace(selectedSkillset))
                 {
@@ -222,7 +222,7 @@ namespace RLEditor
                 byte[] buffer = new byte[bufferSize];
 
                 int length = GetPrivateProfileSection(selectedSkillset, buffer, bufferSize, C.AppPathCustomSkillsets);
-                if (length == 0 && combo_CustomSkillset.SelectedIndex > 0)
+                if (length == 0 && comboCustomSkillset.SelectedIndex > 0)
                 {
                     MessageBox.Show($"No skills found for skillset '{selectedSkillset}'.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -305,22 +305,22 @@ Digger=20
                 }
 
                 // At this point the file exists, so enable and populate combo
-                combo_CustomSkillset.Enabled = true;
+                comboCustomSkillset.Enabled = true;
 
-                combo_CustomSkillset.Items.Clear();
-                combo_CustomSkillset.Items.Add("Select Custom Skillset");
+                comboCustomSkillset.Items.Clear();
+                comboCustomSkillset.Items.Add("Select Custom Skillset");
 
                 // Read all section names (skillset names)
                 string[] skillsetNames = GetSkillsetNames(C.AppPathCustomSkillsets);
 
                 foreach (string name in skillsetNames)
                 {
-                    combo_CustomSkillset.Items.Add(name);
+                    comboCustomSkillset.Items.Add(name);
                 }
 
                 // Optionally select the first item
-                if (combo_CustomSkillset.Items.Count > 0)
-                    combo_CustomSkillset.SelectedIndex = 0;
+                if (comboCustomSkillset.Items.Count > 0)
+                    comboCustomSkillset.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -331,7 +331,7 @@ Digger=20
                     MessageBoxIcon.Error
                 );
 
-                combo_CustomSkillset.Enabled = false;
+                comboCustomSkillset.Enabled = false;
             }
         }
 
@@ -383,9 +383,9 @@ Digger=20
                 musicNames = C.MusicNames;
             }
 
-            combo_Music.Items.Clear();
-            combo_Music.Items.Add("");
-            musicNames.ForEach(music => combo_Music.Items.Add(music));
+            comboMusic.Items.Clear();
+            comboMusic.Items.Add("");
+            musicNames.ForEach(music => comboMusic.Items.Add(music));
         }
 
         /// <summary>
@@ -410,9 +410,9 @@ Digger=20
                 availableMods = new List<string>();
             }
 
-            combo_Mods.Items.Clear();
-            combo_Mods.Items.Add("");
-            availableMods.ForEach(mod => combo_Mods.Items.Add(mod));
+            comboMods.Items.Clear();
+            comboMods.Items.Add("");
+            availableMods.ForEach(mod => comboMods.Items.Add(mod));
         }
 
         /// <summary>
@@ -420,17 +420,17 @@ Digger=20
         /// </summary>
         private void UpdateExpandedTabs()
         {
-            tabLvlPieces.Size = tabLvlProperties.Size;
-            tabLvlPieces.Left = tabLvlProperties.Right;
-            tabLvlPieces.Top = tabLvlProperties.Top;
+            tabPiecesExp.Size = tabProperties.Size;
+            tabPiecesExp.Left = tabProperties.Right;
+            tabPiecesExp.Top = tabProperties.Top;
 
-            tabLvlSkills.Size = tabLvlProperties.Size;
-            tabLvlSkills.Left = tabLvlPieces.Right;
-            tabLvlSkills.Top = tabLvlProperties.Top;
+            tabSkillsExp.Size = tabProperties.Size;
+            tabSkillsExp.Left = tabPiecesExp.Right;
+            tabSkillsExp.Top = tabProperties.Top;
 
-            tabLvlExtras.Size = tabLvlProperties.Size;
-            tabLvlExtras.Left = tabLvlSkills.Right;
-            tabLvlExtras.Top = tabLvlProperties.Top;
+            tabExtrasExp.Size = tabProperties.Size;
+            tabExtrasExp.Left = tabSkillsExp.Right;
+            tabExtrasExp.Top = tabProperties.Top;
         }
 
         /// <summary>
@@ -439,9 +439,9 @@ Digger=20
         private void PullFocusFromTextInputs()
         {
             if (pieceBrowserWindow != null)
-                pieceBrowserWindow.ActiveControl = txt_FocusPieceBrowser;
+                pieceBrowserWindow.ActiveControl = txtFocusPieceBrowser;
 
-            this.ActiveControl = txt_Focus;
+            this.ActiveControl = txtFocus;
             UpdateIsSystemKeyPressed();
         }
 
@@ -462,27 +462,27 @@ Digger=20
         {
             if (CurLevel == null) return;
 
-            CurLevel.Author = txt_LevelAuthor.Text;
-            CurLevel.Title = txt_LevelTitle.Text;
-            CurLevel.MusicFile = Path.ChangeExtension(combo_Music.Text, null);
-            CurLevel.Mods = combo_Mods.Text;
-            CurLevel.Width = decimal.ToInt32(num_Lvl_SizeX.Value);
-            CurLevel.Height = decimal.ToInt32(num_Lvl_SizeY.Value);
-            CurLevel.AutoStartPos = chk_Lvl_AutoStart.Checked;
-            CurLevel.StartPosX = decimal.ToInt32(num_Lvl_StartX.Value);
-            CurLevel.StartPosY = decimal.ToInt32(num_Lvl_StartY.Value);
-            CurLevel.NumLems = decimal.ToInt32(num_Lvl_Lems.Value);
-            CurLevel.SaveReq = decimal.ToInt32(num_Lvl_Rescue.Value);
-            CurLevel.MinReleaseRate = decimal.ToInt32(num_Lvl_RRMin.Value);
-            CurLevel.MaxReleaseRate = decimal.ToInt32(num_Lvl_RRMax.Value);
-            CurLevel.IsReleaseRateLocked = check_Lvl_LockSR.Checked;
-            CurLevel.IsDirectDrop = check_Lvl_DirectDrop.Checked;
-            CurLevel.IsSuperlemming = check_Lvl_Superlemming.Checked;
-            CurLevel.ForceNormalTimerSpeed = check_Lvl_ForceNormalTimerSpeed.Checked;
-            CurLevel.TimeLimit = decimal.ToInt32(num_Lvl_TimeMin.Value) * 60
-                                    + decimal.ToInt32(num_Lvl_TimeSec.Value);
-            CurLevel.HasTimeLimit = check_Lvl_TimeLimit.Checked;
-            CurLevel.MaxFallDistance = decimal.ToInt32(num_Lvl_MaxFallDistance.Value);
+            CurLevel.Author = txtLevelAuthor.Text;
+            CurLevel.Title = txtLevelTitle.Text;
+            CurLevel.MusicFile = Path.ChangeExtension(comboMusic.Text, null);
+            CurLevel.Mods = comboMods.Text;
+            CurLevel.Width = decimal.ToInt32(numWidth.Value);
+            CurLevel.Height = decimal.ToInt32(numHeight.Value);
+            CurLevel.AutoStartPos = checkAutoStart.Checked;
+            CurLevel.StartPosX = decimal.ToInt32(numStartX.Value);
+            CurLevel.StartPosY = decimal.ToInt32(numStartY.Value);
+            CurLevel.NumLems = decimal.ToInt32(numLemmings.Value);
+            CurLevel.SaveReq = decimal.ToInt32(numRescue.Value);
+            CurLevel.MinReleaseRate = decimal.ToInt32(numReleaseRateMin.Value);
+            CurLevel.MaxReleaseRate = decimal.ToInt32(numReleaseRateMax.Value);
+            CurLevel.IsReleaseRateLocked = checkLockReleaseRate.Checked;
+            CurLevel.IsDirectDrop = checkDirectDrop.Checked;
+            CurLevel.IsSuperlemming = checkSuperlemming.Checked;
+            CurLevel.ForceNormalTimerSpeed = checkForceNormalTimerSpeed.Checked;
+            CurLevel.TimeLimit = decimal.ToInt32(numTimeMins.Value) * 60
+                                    + decimal.ToInt32(numTimeSecs.Value);
+            CurLevel.HasTimeLimit = checkTimeLimit.Checked;
+            CurLevel.MaxFallDistance = decimal.ToInt32(numMaxFallDistance.Value);
 
             /*
              N.B.All Lemmini versions currently don't actually support NeoLemmix-style steel,
@@ -506,7 +506,7 @@ Digger=20
             //    CurLevel.AutosteelMode = 2;
             //else
             //    CurLevel.AutosteelMode = 1;
-            CurLevel.AutosteelMode = check_Lvl_Autosteel.Checked ? 1 : 0;
+            CurLevel.AutosteelMode = checkAutoSteel.Checked ? 1 : 0;
 
             foreach (C.Skill skill in numericsSkillSet.Keys)
             {
@@ -553,57 +553,57 @@ Digger=20
             _IsWritingToForm = true;
             try
             {
-                txt_LevelAuthor.Text = CurLevel.Author;
-                txt_LevelTitle.Text = CurLevel.Title;
+                txtLevelAuthor.Text = CurLevel.Author;
+                txtLevelTitle.Text = CurLevel.Title;
 
-                if (!string.IsNullOrEmpty(CurLevel.MusicFile) && combo_Music.Items.Contains(CurLevel.MusicFile))
-                    combo_Music.SelectedItem = CurLevel.MusicFile;
+                if (!string.IsNullOrEmpty(CurLevel.MusicFile) && comboMusic.Items.Contains(CurLevel.MusicFile))
+                    comboMusic.SelectedItem = CurLevel.MusicFile;
                 else
-                    combo_Music.SelectedIndex = 0;
+                    comboMusic.SelectedIndex = 0;
 
-                if ((CurLevel.MainStyle != null) && combo_MainStyle.Items.Contains(CurLevel.MainStyle.NameInEditor))
-                    combo_MainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
+                if ((CurLevel.MainStyle != null) && comboMainStyle.Items.Contains(CurLevel.MainStyle.NameInEditor))
+                    comboMainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
                 else
-                    combo_MainStyle.SelectedIndex = 0;
+                    comboMainStyle.SelectedIndex = 0;
 
-                if (!string.IsNullOrEmpty(CurLevel.Mods) && combo_Mods.Items.Contains(CurLevel.Mods))
-                    combo_Mods.SelectedItem = CurLevel.Mods;
+                if (!string.IsNullOrEmpty(CurLevel.Mods) && comboMods.Items.Contains(CurLevel.Mods))
+                    comboMods.SelectedItem = CurLevel.Mods;
                 else
-                    combo_Mods.SelectedIndex = 0;
+                    comboMods.SelectedIndex = 0;
 
                 // Set size and start position, but without calling the Value_Changed methods,
                 // because they automatically call validation of the start position resp. render the level again.
-                num_Lvl_SizeX.ValueChanged -= num_Lvl_SizeX_ValueChanged;
-                num_Lvl_SizeY.ValueChanged -= num_Lvl_SizeY_ValueChanged;
-                num_Lvl_StartX.ValueChanged -= num_Lvl_StartX_ValueChanged;
-                num_Lvl_StartY.ValueChanged -= num_Lvl_StartY_ValueChanged;
+                numWidth.ValueChanged -= num_Lvl_SizeX_ValueChanged;
+                numHeight.ValueChanged -= num_Lvl_SizeY_ValueChanged;
+                numStartX.ValueChanged -= num_Lvl_StartX_ValueChanged;
+                numStartY.ValueChanged -= num_Lvl_StartY_ValueChanged;
 
-                num_Lvl_SizeX.Value = CurLevel.Width;
-                num_Lvl_SizeY.Value = CurLevel.Height;
-                num_Lvl_StartX.Maximum = CurLevel.Width - 1;
-                num_Lvl_StartY.Maximum = CurLevel.Height - 1;
-                num_Lvl_StartX.Value = CurLevel.StartPosX;
-                num_Lvl_StartY.Value = CurLevel.StartPosY;
-                chk_Lvl_AutoStart.Checked = CurLevel.AutoStartPos;
+                numWidth.Value = CurLevel.Width;
+                numHeight.Value = CurLevel.Height;
+                numStartX.Maximum = CurLevel.Width - 1;
+                numStartY.Maximum = CurLevel.Height - 1;
+                numStartX.Value = CurLevel.StartPosX;
+                numStartY.Value = CurLevel.StartPosY;
+                checkAutoStart.Checked = CurLevel.AutoStartPos;
 
-                num_Lvl_SizeX.ValueChanged += num_Lvl_SizeX_ValueChanged;
-                num_Lvl_SizeY.ValueChanged += num_Lvl_SizeY_ValueChanged;
-                num_Lvl_StartX.ValueChanged += num_Lvl_StartX_ValueChanged;
-                num_Lvl_StartY.ValueChanged += num_Lvl_StartY_ValueChanged;
+                numWidth.ValueChanged += num_Lvl_SizeX_ValueChanged;
+                numHeight.ValueChanged += num_Lvl_SizeY_ValueChanged;
+                numStartX.ValueChanged += num_Lvl_StartX_ValueChanged;
+                numStartY.ValueChanged += num_Lvl_StartY_ValueChanged;
 
                 // Add the rest of the values
-                num_Lvl_Lems.Value = CurLevel.NumLems;
-                num_Lvl_Rescue.Value = CurLevel.SaveReq;
-                num_Lvl_RRMin.Value = CurLevel.MinReleaseRate;
-                num_Lvl_RRMax.Value = CurLevel.MaxReleaseRate;
-                check_Lvl_LockSR.Checked = CurLevel.IsReleaseRateLocked;
-                num_Lvl_TimeMin.Value = CurLevel.TimeLimit / 60;
-                num_Lvl_TimeSec.Value = CurLevel.TimeLimit % 60;
-                check_Lvl_TimeLimit.Checked = CurLevel.HasTimeLimit;
-                check_Lvl_DirectDrop.Checked = CurLevel.IsDirectDrop;
-                check_Lvl_Superlemming.Checked = CurLevel.IsSuperlemming;
-                check_Lvl_ForceNormalTimerSpeed.Checked = CurLevel.ForceNormalTimerSpeed;
-                num_Lvl_MaxFallDistance.Value = CurLevel.MaxFallDistance;
+                numLemmings.Value = CurLevel.NumLems;
+                numRescue.Value = CurLevel.SaveReq;
+                numReleaseRateMin.Value = CurLevel.MinReleaseRate;
+                numReleaseRateMax.Value = CurLevel.MaxReleaseRate;
+                checkLockReleaseRate.Checked = CurLevel.IsReleaseRateLocked;
+                numTimeMins.Value = CurLevel.TimeLimit / 60;
+                numTimeSecs.Value = CurLevel.TimeLimit % 60;
+                checkTimeLimit.Checked = CurLevel.HasTimeLimit;
+                checkDirectDrop.Checked = CurLevel.IsDirectDrop;
+                checkSuperlemming.Checked = CurLevel.IsSuperlemming;
+                checkForceNormalTimerSpeed.Checked = CurLevel.ForceNormalTimerSpeed;
+                numMaxFallDistance.Value = CurLevel.MaxFallDistance;
 
                 /*
                  N.B.All Lemmini versions currently don't actually support NeoLemmix-style steel,
@@ -627,14 +627,14 @@ Digger=20
                 //    combo_SteelMode.SelectedIndex = 1;
                 //else
                 //    combo_SteelMode.SelectedIndex = 0;
-                check_Lvl_Autosteel.Checked = CurLevel.AutosteelMode == 0 ? false : true;
+                checkAutoSteel.Checked = CurLevel.AutosteelMode == 0 ? false : true;
 
                 foreach (C.Skill skill in numericsSkillSet.Keys)
                 {
                     numericsSkillSet[skill].Value = CurLevel.SkillSet[skill];
                 }
 
-                lbl_Global_Version.Text = "Level Version " + CurLevel.LevelVersion.ToString();
+                lblLevelVersion.Text = "Level Version " + CurLevel.LevelVersion.ToString();
             }
             finally
             {
@@ -650,14 +650,14 @@ Digger=20
             if (AskUserWhetherSaveLevel())
                 return;
 
-            Style mainStyle = StyleList?.Find(sty => sty.NameInEditor == combo_MainStyle.Text);
+            Style mainStyle = StyleList?.Find(sty => sty.NameInEditor == comboMainStyle.Text);
             CurLevel = new Level(mainStyle);
             CurLevel.Author = GetDefaultAuthorName();
 
             // Get new renderer with the standard display options
             if (curRenderer != null)
                 curRenderer.Dispose();
-            curRenderer = new Renderer(CurLevel, pic_Level, curSettings);
+            curRenderer = new Renderer(CurLevel, picLevel, curSettings);
 
             oldLevelList = new List<Level>();
             oldLevelList.Add(CurLevel.Clone());
@@ -668,7 +668,7 @@ Digger=20
             UpdateBackgroundColor();
             UpdateFlagsForPieceActions();
             RepositionPicLevel();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
 
             if (curSettings.DefaultTemplate != string.Empty)
                 LoadLevelFromDefaultTemplate();
@@ -723,9 +723,9 @@ Digger=20
             WriteLevelInfoToForm();
             UpdateFlagsForPieceActions();
             RepositionPicLevel();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
 
-            combo_PieceStyle.Text = CurLevel.MainStyle?.NameInEditor;
+            comboPieceStyle.Text = CurLevel.MainStyle?.NameInEditor;
         }
 
         /// <summary>
@@ -733,7 +733,7 @@ Digger=20
         /// </summary>
         public void RefreshLevel()
         {
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         public void HandleCropLevel()
@@ -744,23 +744,23 @@ Digger=20
                 curRenderer.CropTool.Start();
 
             UpdateCropButtons();
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
             PullFocusFromTextInputs();
         }
 
         private void ApplyLevelCrop()
         {
             Rectangle cropRect = curRenderer.CropTool.LevelCropRect;
-            int startX = (int)num_Lvl_StartX.Value;
-            int startY = (int)num_Lvl_StartY.Value;
+            int startX = (int)numStartX.Value;
+            int startY = (int)numStartY.Value;
 
             SelectAllPieces();
             CurLevel.MovePieces(C.DIR.N, cropRect.Y, 1);
             CurLevel.MovePieces(C.DIR.W, cropRect.X, 1);
             CurLevel.UnselectAll();
 
-            num_Lvl_SizeX.Value = cropRect.Width;
-            num_Lvl_SizeY.Value = cropRect.Height;
+            numWidth.Value = cropRect.Width;
+            numHeight.Value = cropRect.Height;
 
             int newStartX = startX - cropRect.X;
             int newStartY = startY - cropRect.Y;
@@ -768,8 +768,8 @@ Digger=20
             newStartX = Math.Max(0, Math.Min(newStartX, cropRect.Width - 1));
             newStartY = Math.Max(0, Math.Min(newStartY, cropRect.Height - 1));
 
-            num_Lvl_StartX.Value = newStartX;
-            num_Lvl_StartY.Value = newStartY;
+            numStartX.Value = newStartX;
+            numStartY.Value = newStartY;
 
             CommitLevelChanges();
             HandleCropLevel();
@@ -789,24 +789,24 @@ Digger=20
         private static readonly Random _rng = new Random();
         private void RandomizePieceStyle()
         {
-            if (combo_PieceStyle.Items.Count == 0)
+            if (comboPieceStyle.Items.Count == 0)
                 return;
 
             var randomizedNames = StyleList.Where(s => s.Randomize).Select(s => s.NameInEditor).ToList();
 
-            string current = combo_PieceStyle.SelectedItem as string;
+            string current = comboPieceStyle.SelectedItem as string;
 
             if (randomizedNames.Count == 0)
             {
                 int index;
                 do
                 {
-                    index = _rng.Next(combo_PieceStyle.Items.Count);
+                    index = _rng.Next(comboPieceStyle.Items.Count);
                 }
-                while (combo_PieceStyle.Items[index].Equals(current) &&
-                       combo_PieceStyle.Items.Count > 1);
+                while (comboPieceStyle.Items[index].Equals(current) &&
+                       comboPieceStyle.Items.Count > 1);
 
-                combo_PieceStyle.SelectedIndex = index;
+                comboPieceStyle.SelectedIndex = index;
                 return;
             }
 
@@ -817,7 +817,7 @@ Digger=20
             }
             while (chosen == current && randomizedNames.Count > 1);
 
-            combo_PieceStyle.SelectedItem = chosen;
+            comboPieceStyle.SelectedItem = chosen;
         }
 
         private void LoadStyleFromMetaData()
@@ -828,9 +828,9 @@ Digger=20
                 return;
             }
 
-            if (combo_PieceStyle.Items.Cast<string>().Contains(lblPieceStyle.Text))
+            if (comboPieceStyle.Items.Cast<string>().Contains(lblPieceStyle.Text))
             {
-                combo_PieceStyle.Text = lblPieceStyle.Text;
+                comboPieceStyle.Text = lblPieceStyle.Text;
             }
             else
             {
@@ -1039,8 +1039,8 @@ Digger=20
             Style pieceStyle = pieceCurStyle;
 
             StyleList.Clear();
-            combo_MainStyle.Items.Clear();
-            combo_PieceStyle.Items.Clear();
+            comboMainStyle.Items.Clear();
+            comboPieceStyle.Items.Clear();
 
             ImageLibrary.Clear();
             LoadStylesFromFile.AddSteelAreaImageToLibrary();
@@ -1050,20 +1050,20 @@ Digger=20
 
             if (StyleList.Count > 0)
             {
-                this.combo_MainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
-                this.combo_MainStyle.Text = ValidateStyleList(themeStyle);
+                this.comboMainStyle.Items.AddRange(StyleList.Where(sty => File.Exists(C.AppPathThemeInfo(sty.NameInDirectory))).Select(sty => sty.NameInEditor).ToArray());
+                this.comboMainStyle.Text = ValidateStyleList(themeStyle);
 
-                this.combo_PieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
-                this.combo_PieceStyle.Text = ValidateStyleList(pieceStyle);
+                this.comboPieceStyle.Items.AddRange(StyleList.ConvertAll(sty => sty.NameInEditor).ToArray());
+                this.comboPieceStyle.Text = ValidateStyleList(pieceStyle);
 
                 if (refreshedFromStyleManager)
                 {
-                    if ((CurLevel.MainStyle != null) && combo_MainStyle.Items.Contains(CurLevel.MainStyle.NameInEditor))
-                        combo_MainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
+                    if ((CurLevel.MainStyle != null) && comboMainStyle.Items.Contains(CurLevel.MainStyle.NameInEditor))
+                        comboMainStyle.SelectedItem = CurLevel.MainStyle.NameInEditor;
                     else
-                        combo_MainStyle.SelectedIndex = 0;
+                        comboMainStyle.SelectedIndex = 0;
 
-                    combo_PieceStyle.SelectedIndex = 0;
+                    comboPieceStyle.SelectedIndex = 0;
                 }
             }
             else
@@ -1295,8 +1295,8 @@ Digger=20
             AddNewPieceToLevel(pieceKey, null, pos);
 
             // Set the width and height of the steel area whilst it's auto-selected!
-            num_SteelAreaWidth.Value = width;
-            num_SteelAreaHeight.Value = height;
+            numSteelAreaWidth.Value = width;
+            numSteelAreaHeight.Value = height;
 
             MaybeOpenPiecesTab();
             UpdateStatusBar(1);
@@ -1319,7 +1319,7 @@ Digger=20
             }
 
             // Create the pop-out window and pass pic_Level to it
-            levelArrangerWindow = new FormLevelArranger(pic_Level, this, curRenderer, curSettings);
+            levelArrangerWindow = new FormLevelArranger(picLevel, this, curRenderer, curSettings);
 
             // Don't reposition pic_Level when zooming from within the Arrange Window
             repositionAfterZooming = false;
@@ -1332,15 +1332,15 @@ Digger=20
                     repositionAfterZooming = true;
                     
                     // Re-parent pic_Level back to the main form
-                    pic_Level.Dock = DockStyle.None;
-                    this.Controls.Add(pic_Level);
+                    picLevel.Dock = DockStyle.None;
+                    this.Controls.Add(picLevel);
 
                     // Reset the position of pic_Level
                     RepositionPicLevel();
-                    pic_Level.Image = curRenderer.CreateLevelImage();
+                    picLevel.Image = curRenderer.CreateLevelImage();
 
-                    pic_Level.Show();
-                    pic_Level.Focus();
+                    picLevel.Show();
+                    picLevel.Focus();
                 }));
             };
 
@@ -1386,7 +1386,7 @@ Digger=20
 
             // Show the pop-out window
             pieceBrowserWindow.Show();
-            txt_FocusPieceBrowser.Focus();
+            txtFocusPieceBrowser.Focus();
         }
 
 
@@ -1404,20 +1404,20 @@ Digger=20
 
         private void ExpandAllTabs()
         {
-            tabLvlProperties.TabPages.Remove(tabPieces);
-            tabLvlPieces.TabPages.Add(tabPieces);
-            tabLvlPieces.Enabled = true;
-            tabLvlPieces.Visible = true;
+            tabProperties.TabPages.Remove(tabPieces);
+            tabPiecesExp.TabPages.Add(tabPieces);
+            tabPiecesExp.Enabled = true;
+            tabPiecesExp.Visible = true;
 
-            tabLvlProperties.TabPages.Remove(tabSkills);
-            tabLvlSkills.TabPages.Add(tabSkills);
-            tabLvlSkills.Enabled = true;
-            tabLvlSkills.Visible = true;
+            tabProperties.TabPages.Remove(tabSkills);
+            tabSkillsExp.TabPages.Add(tabSkills);
+            tabSkillsExp.Enabled = true;
+            tabSkillsExp.Visible = true;
 
-            tabLvlProperties.TabPages.Remove(tabExtras);
-            tabLvlExtras.TabPages.Add(tabExtras);
-            tabLvlExtras.Enabled = true;
-            tabLvlExtras.Visible = true;
+            tabProperties.TabPages.Remove(tabExtras);
+            tabExtrasExp.TabPages.Add(tabExtras);
+            tabExtrasExp.Enabled = true;
+            tabExtrasExp.Visible = true;
 
             expandAllTabsToolStripMenuItem.Text = "Collapse All Tabs";
             allTabsExpanded = true;
@@ -1425,20 +1425,20 @@ Digger=20
 
         private void CollapseAllTabs()
         {
-            tabLvlPieces.TabPages.Remove(tabPieces);
-            tabLvlProperties.TabPages.Add(tabPieces);
-            tabLvlPieces.Enabled = false;
-            tabLvlPieces.Visible = false;
+            tabPiecesExp.TabPages.Remove(tabPieces);
+            tabProperties.TabPages.Add(tabPieces);
+            tabPiecesExp.Enabled = false;
+            tabPiecesExp.Visible = false;
 
-            tabLvlSkills.TabPages.Remove(tabSkills);
-            tabLvlProperties.TabPages.Add(tabSkills);
-            tabLvlSkills.Enabled = false;
-            tabLvlSkills.Visible = false;
+            tabSkillsExp.TabPages.Remove(tabSkills);
+            tabProperties.TabPages.Add(tabSkills);
+            tabSkillsExp.Enabled = false;
+            tabSkillsExp.Visible = false;
 
-            tabLvlExtras.TabPages.Remove(tabExtras);
-            tabLvlProperties.TabPages.Add(tabExtras);
-            tabLvlExtras.Enabled = false;
-            tabLvlExtras.Visible = false;
+            tabExtrasExp.TabPages.Remove(tabExtras);
+            tabProperties.TabPages.Add(tabExtras);
+            tabExtrasExp.Enabled = false;
+            tabExtrasExp.Visible = false;
 
             expandAllTabsToolStripMenuItem.Text = "Expand All Tabs";
             allTabsExpanded = false;
@@ -1772,7 +1772,7 @@ Digger=20
             ReadLevelInfoFromForm(true);
             var validator = new LevelValidator(CurLevel);
             validator.Validate(false, openedViaSave, cleansingLevels);
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
         }
 
 
@@ -1794,24 +1794,24 @@ Digger=20
             {
                 pieceDoDisplayKind = newKind;
 
-                but_PieceTerr.Font = new Font(but_PieceTerr.Font, FontStyle.Regular);
-                but_PieceSteel.Font = new Font(but_PieceSteel.Font, FontStyle.Regular);
-                but_PieceObj.Font = new Font(but_PieceObj.Font, FontStyle.Regular);
-                but_PieceRulers.Font = new Font(but_PieceRulers.Font, FontStyle.Regular);
+                btnTerrain.Font = new Font(btnTerrain.Font, FontStyle.Regular);
+                btnSteel.Font = new Font(btnSteel.Font, FontStyle.Regular);
+                btnObjects.Font = new Font(btnObjects.Font, FontStyle.Regular);
+                btnRulers.Font = new Font(btnRulers.Font, FontStyle.Regular);
 
                 switch (newKind)
                 {
                     case C.SelectPieceType.Terrain:
-                        but_PieceTerr.Font = new Font(but_PieceTerr.Font, FontStyle.Bold);
+                        btnTerrain.Font = new Font(btnTerrain.Font, FontStyle.Bold);
                         break;
                     case C.SelectPieceType.Steel:
-                        but_PieceSteel.Font = new Font(but_PieceSteel.Font, FontStyle.Bold);
+                        btnSteel.Font = new Font(btnSteel.Font, FontStyle.Bold);
                         break;
                     case C.SelectPieceType.Objects:
-                        but_PieceObj.Font = new Font(but_PieceObj.Font, FontStyle.Bold);
+                        btnObjects.Font = new Font(btnObjects.Font, FontStyle.Bold);
                         break;
                     case C.SelectPieceType.Rulers:
-                        but_PieceRulers.Font = new Font(but_PieceRulers.Font, FontStyle.Bold);
+                        btnRulers.Font = new Font(btnRulers.Font, FontStyle.Bold);
                         break;
                 }
 
@@ -1826,23 +1826,23 @@ Digger=20
         private void MoveScreenStartPosition(Point newCenter)
         {
             // Ensure that the new center position is within the correct bounds.
-            int newCenterX = newCenter.X.Restrict(0, (int)num_Lvl_StartX.Maximum);
-            int newCenterY = newCenter.Y.Restrict(0, (int)num_Lvl_StartY.Maximum);
+            int newCenterX = newCenter.X.Restrict(0, (int)numStartX.Maximum);
+            int newCenterY = newCenter.Y.Restrict(0, (int)numStartY.Maximum);
 
             // Remove these events to combine layers only once.
-            num_Lvl_StartX.ValueChanged -= num_Lvl_StartX_ValueChanged;
-            num_Lvl_StartY.ValueChanged -= num_Lvl_StartY_ValueChanged;
+            numStartX.ValueChanged -= num_Lvl_StartX_ValueChanged;
+            numStartY.ValueChanged -= num_Lvl_StartY_ValueChanged;
 
-            num_Lvl_StartX.Value = newCenterX;
-            num_Lvl_StartY.Value = newCenterY;
+            numStartX.Value = newCenterX;
+            numStartY.Value = newCenterY;
             CurLevel.StartPosX = newCenterX;
             CurLevel.StartPosY = newCenterY;
 
-            num_Lvl_StartX.ValueChanged += num_Lvl_StartX_ValueChanged;
-            num_Lvl_StartY.ValueChanged += num_Lvl_StartY_ValueChanged;
+            numStartX.ValueChanged += num_Lvl_StartX_ValueChanged;
+            numStartY.ValueChanged += num_Lvl_StartY_ValueChanged;
 
             // Save the changes and combine the layers now.
-            pic_Level.Image = curRenderer.CombineLayers();
+            picLevel.Image = curRenderer.CombineLayers();
             SaveChangesToOldLevelList();
         }
 
@@ -1977,7 +1977,7 @@ Digger=20
             pieceStartIndex = 0;
             LoadPiecesIntoPictureBox();
 
-            this.combo_PieceStyle.SelectedIndex = newStyleIndex;
+            this.comboPieceStyle.SelectedIndex = newStyleIndex;
         }
 
         private void CyclePieceBrowser()
@@ -2008,7 +2008,7 @@ Digger=20
         {
             if ((CurLevel.SelectionList().Count > 0) && (!allTabsExpanded))
             {
-                tabLvlProperties.SelectedIndex = tabLvlProperties.TabPages.IndexOf(tabPieces);
+                tabProperties.SelectedIndex = tabProperties.TabPages.IndexOf(tabPieces);
                 PullFocusFromTextInputs();
             }
         }
@@ -2151,7 +2151,7 @@ Digger=20
             AutosizeFallDistanceRuler(false);
 
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
             UpdateFlagsForPieceActions();
             PullFocusFromTextInputs();
         }
@@ -2237,12 +2237,12 @@ Digger=20
             else if (CurLevel.SelectionList().Count > 0)
             {
                 CurLevel.MovePieces(direction, step, gridSize);
-                pic_Level.Image = curRenderer.CreateLevelImage();
+                picLevel.Image = curRenderer.CreateLevelImage();
             }
             else
             {
                 curRenderer.MoveScreenPos(direction, step * 8);
-                pic_Level.SetImage(curRenderer.GetScreenImage());
+                picLevel.SetImage(curRenderer.GetScreenImage());
             }
         }
 
@@ -2281,7 +2281,7 @@ Digger=20
             CurLevel.RotatePieces();
             SaveChangesToOldLevelList();
             UpdateFlagsForPieceActions(); // needed for resizable pieces in selection
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2291,7 +2291,7 @@ Digger=20
         {
             CurLevel.InvertPieces();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2301,7 +2301,7 @@ Digger=20
         {
             CurLevel.FlipPieces();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2313,7 +2313,7 @@ Digger=20
                 if (gad.IsSelected)
                     gad.IsSpawnLeft = !gad.IsSpawnLeft;
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2344,7 +2344,7 @@ Digger=20
             CurLevel.SetNoOverwrite(doAdd);
             UpdateFlagsForPieceActions();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2355,7 +2355,7 @@ Digger=20
             CurLevel.SetErase(doAdd);
             UpdateFlagsForPieceActions();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2366,7 +2366,7 @@ Digger=20
             CurLevel.SetOnlyOnTerrain(doAdd);
             UpdateFlagsForPieceActions();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2377,7 +2377,7 @@ Digger=20
             CurLevel.SetOneWay(doAdd);
             UpdateFlagsForPieceActions();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2388,7 +2388,7 @@ Digger=20
             CurLevel.SetInvisible(doAdd);
             UpdateFlagsForPieceActions();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2399,7 +2399,7 @@ Digger=20
             CurLevel.SetFake(doAdd);
             UpdateFlagsForPieceActions();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         private void SetNegativeSteel(bool doAdd)
@@ -2407,7 +2407,7 @@ Digger=20
             CurLevel.SetNegativeSteel(doAdd);
             UpdateFlagsForPieceActions();
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         private Level GetCurLevel()
@@ -2421,7 +2421,7 @@ Digger=20
         private void MovePieceIndex(bool toFront, bool onlyOneStep)
         {
             CurLevel.MoveSelectedPieces(toFront, onlyOneStep);
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
 
             SaveChangesToOldLevelList();
         }
@@ -2452,7 +2452,7 @@ Digger=20
 
             WriteLevelInfoToForm();
             UpdateFlagsForPieceActions();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2520,7 +2520,7 @@ Digger=20
             }
 
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2559,7 +2559,7 @@ Digger=20
             CurLevel.TerrainList.RemoveAll(ter => ter.IsSelected);
             CurLevel.GadgetList.RemoveAll(obj => obj.IsSelected);
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
             UpdateFlagsForPieceActions();
         }
 
@@ -2571,7 +2571,7 @@ Digger=20
             CurLevel.TerrainList.ForEach(ter => ter.IsSelected = true);
             CurLevel.GadgetList.ForEach(gad => gad.IsSelected = true);
 
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
             UpdateFlagsForPieceActions();
             PullFocusFromTextInputs();
             UpdatePieceMetaData();
@@ -2611,7 +2611,7 @@ Digger=20
                 CurLevel.AddMultiplePieces(clipboardPieces);
             }
             SaveChangesToOldLevelList();
-            pic_Level.Image = curRenderer.CreateLevelImage();
+            picLevel.Image = curRenderer.CreateLevelImage();
         }
 
         /// <summary>
@@ -2619,7 +2619,7 @@ Digger=20
         /// </summary>
         private IEnumerable<LevelPiece> CenterPiecesAtCursor(IEnumerable<LevelPiece> clipPieces)
         {
-            Point mousePos = curRenderer.GetMousePosInLevel(pic_Level.PointToClient(Cursor.Position));
+            Point mousePos = curRenderer.GetMousePosInLevel(picLevel.PointToClient(Cursor.Position));
             int clipPosX = clipPieces.Min(piece => piece.PosX);
             int clipPosY = clipPieces.Min(piece => piece.PosY);
             int clipWidth = clipPieces.Max(piece => piece.PosX + piece.Width) - clipPosX;
@@ -2648,44 +2648,7 @@ Digger=20
             snapToGridToolStripMenuItem.Checked = curSettings.UseGridForPieces;
 
             curRenderer.CreateGridLayer();
-            pic_Level.SetImage(curRenderer.CombineLayers());
-        }
-
-        /// <summary>
-        /// This automatically links all controls to the mouse events that show hints in the hint label
-        /// </summary>
-        private void LinkControlsToMouseEvents(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (ctrl is Button || ctrl is CheckBox || ctrl is ComboBox || ctrl is TextBox)
-                {
-                    ctrl.MouseEnter += Control_MouseEnter;
-                    ctrl.MouseLeave += Control_MouseLeave;
-                }
-
-                if (ctrl is NumUpDownOverwrite)
-                {
-                    ctrl.Enter += Control_MouseEnter;
-                    ctrl.MouseMove += Control_MouseEnter;
-                    ctrl.MouseLeave += Control_MouseLeave;
-                }
-
-                if (ctrl.HasChildren)
-                    LinkControlsToMouseEvents(ctrl);
-            }
-        }
-
-        private void UpdateControlHintLabel(bool showHint, object sender)
-        {
-            lblHint.Visible = false;
-            lblHint.Text = "";
-
-            if (showHint && sender is Control ctrl && ctrl.Tag is string hint)
-            {
-                lblHint.Text = hint;
-                lblHint.Visible = true;
-            }
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         /// <summary>
@@ -2764,9 +2727,9 @@ Digger=20
         {
             foreach (Control ctrl in tabSkills.Controls)
             {
-                if (ctrl is NumericUpDown numBox && numBox != num_RandomMinLimit
-                                                 && numBox != num_RandomMaxLimit
-                                                 && numBox != num_AllSkillsToN)
+                if (ctrl is NumericUpDown numBox && numBox != numRandomMinLimit
+                                                 && numBox != numRandomMaxLimit
+                                                 && numBox != numAllSkillsToN)
                 {
                     numBox.Value = 0;
                 }
@@ -2777,11 +2740,11 @@ Digger=20
         {
             foreach (Control ctrl in tabSkills.Controls)
             {
-                if (ctrl is NumericUpDown numBox && numBox != num_RandomMinLimit
-                                                 && numBox != num_RandomMaxLimit
-                                                 && numBox != num_AllSkillsToN)
+                if (ctrl is NumericUpDown numBox && numBox != numRandomMinLimit
+                                                 && numBox != numRandomMaxLimit
+                                                 && numBox != numAllSkillsToN)
                 {
-                    numBox.Value = num_AllSkillsToN.Value;
+                    numBox.Value = numAllSkillsToN.Value;
                 }
             }
         }
@@ -2791,14 +2754,14 @@ Digger=20
             SetAllSkillsToZero(); // Zero the skillset first
             Random random = new Random();
 
-            int minValue = (int)num_RandomMinLimit.Value;
-            int maxValue = (int)num_RandomMaxLimit.Value;
+            int minValue = (int)numRandomMinLimit.Value;
+            int maxValue = (int)numRandomMaxLimit.Value;
 
             // List and shuffle the numeric controls on tabSkills (excluding the randomizer limits and disabled controls)
             List<NumericUpDown> numericUpDowns = tabSkills.Controls.OfType<NumericUpDown>()
-                .Where(n => n != num_RandomMinLimit &&
-                            n != num_RandomMaxLimit &&
-                            n != num_AllSkillsToN &&
+                .Where(n => n != numRandomMinLimit &&
+                            n != numRandomMaxLimit &&
+                            n != numAllSkillsToN &&
                             n.Enabled)
                 .ToList();
             numericUpDowns = numericUpDowns.OrderBy(x => random.Next()).ToList();
@@ -2883,55 +2846,55 @@ Digger=20
         {
             BmpModify.HighlightErasers = !BmpModify.HighlightErasers;
             highlightEraserPiecesToolStripMenuItem.Checked = BmpModify.HighlightErasers;
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
             curSettings.WriteSettingsToFile();
         }
 
         private void ToggleClearPhysics()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.ClearPhysics);
-            pic_Level.SetImage(curRenderer.CreateLevelImage());
+            picLevel.SetImage(curRenderer.CreateLevelImage());
         }
 
         private void ToggleTerrain()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.Terrain);
-            pic_Level.SetImage(curRenderer.CombineLayers());
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         private void ToggleObjects()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.Objects);
-            pic_Level.SetImage(curRenderer.CombineLayers());
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         private void ToggleTriggerAreas()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.Triggers);
-            pic_Level.SetImage(curRenderer.CombineLayers());
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         private void ToggleSteelAreas()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.SteelAreas);
-            pic_Level.SetImage(curRenderer.CombineLayers());
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         private void ToggleRulers()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.Rulers);
-            pic_Level.SetImage(curRenderer.CombineLayers());
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         private void ToggleScreenStart()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.ScreenStart);
-            pic_Level.SetImage(curRenderer.CombineLayers());
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         private void SetScreenStartToCursor()
         {
-            Point mousePos = curRenderer.GetMousePosInLevel(pic_Level.PointToClient(Cursor.Position));
+            Point mousePos = curRenderer.GetMousePosInLevel(picLevel.PointToClient(Cursor.Position));
             MoveScreenStartPosition(new Point(mousePos.X, mousePos.Y));
         }
 
@@ -2939,14 +2902,138 @@ Digger=20
         {
             curRenderer.ChangeZoom(1, false);
             RepositionPicLevel();
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
         }
 
         private void ZoomOut()
         {
             curRenderer.ChangeZoom(-1, false);
             RepositionPicLevel();
-            pic_Level.SetImage(curRenderer.GetScreenImage());
+            picLevel.SetImage(curRenderer.GetScreenImage());
+        }
+
+        /// <summary>
+        /// This automatically links all controls to the mouse events that show hints in the hint label
+        /// </summary>
+        private void LinkControlsToMouseEvents(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is Button || ctrl is CheckBox || ctrl is ComboBox || ctrl is TextBox)
+                {
+                    ctrl.MouseEnter += Control_MouseEnter;
+                    ctrl.MouseLeave += Control_MouseLeave;
+                }
+
+                if (ctrl is NumUpDownOverwrite)
+                {
+                    ctrl.Enter += Control_MouseEnter;
+                    ctrl.MouseMove += Control_MouseEnter;
+                    ctrl.MouseLeave += Control_MouseLeave;
+                }
+
+                if (ctrl.HasChildren)
+                    LinkControlsToMouseEvents(ctrl);
+            }
+        }
+
+        private void UpdateControlHintLabel(bool showHint, object sender)
+        {
+            lblHint.Visible = false;
+            lblHint.Text = "";
+
+            if (showHint && sender is Control ctrl && ctrl.Tag is string hint)
+            {
+                lblHint.Text = hint;
+                lblHint.Visible = true;
+            }
+        }
+
+        private void UpdateControlTags()
+        {
+            // --- Globals Tab --- //
+            txtLevelTitle.Tag = "Enter a title for your level";
+            txtLevelAuthor.Tag = "Enter an author name";
+            comboMusic.Tag = "Choose a music track for your level (note that you can also set music for a full pack of levels using the Level Pack Compiler)";
+            comboMainStyle.Tag = "Choose a main style for your level";
+            numWidth.Tag = "Set the level width";
+            numHeight.Tag = "Set the level height";
+            btnCropLevel.Tag = "Activate crop rectangle to easily change the width and height of the level";
+            btnApplyCrop.Tag = "Apply crop rectangle as new width and height";
+            btnCancelCrop.Tag = "Cancel crop and close the rectangle";
+            numStartX.Tag = "Set the horizontal start position";
+            numStartY.Tag = "Set the vertical start position";
+            checkAutoStart.Tag = "Automatically set the start position";
+            numLemmings.Tag = "Set the total number of lemmings";
+            numRescue.Tag = "Set the amount of lemmings to be saved";
+            numReleaseRateMin.Tag = "Set the minimum release rate";
+            numReleaseRateMax.Tag = "Set the maximum release rate";
+            checkLockReleaseRate.Tag = "Lock the release rate (prevents it from being changed in-game)";
+            checkTimeLimit.Tag = "Apply a time limit, or leave this unchecked for infinite time";
+            numTimeMins.Tag = "Set the number of minutes for the time limit";
+            numTimeSecs.Tag = "Set the number of seconds for the time limit";
+            checkAutoSteel.Tag = "With automatic steel checked, steel pieces do not require a manually-applied steel area";
+
+            // --- Pieces Tab --- //
+            btnRotate.Tag = "Rotate all selected pieces clockwise";
+            btnInvert.Tag = "Invert all selected pieces";
+            btnFlip.Tag = "Flip all selected pieces";
+            btnDrawLast.Tag = "Move all selected pieces to the backmost layer";
+            btnDrawLater.Tag = "Move all selected pieces one layer backward";
+            btnDrawSooner.Tag = "Move all selected pieces one layer forward";
+            btnDrawFirst.Tag = "Move all selected pieces to the frontmost layer";
+            btnFlipSpawnDirection.Tag = "Flip spawn direction of all selected hatches (if only hatches are selected)";
+            checkErase.Tag = "Set selected pieces as eraser pieces";
+            checkNoOverwrite.Tag = "Set selected pieces as no-overwrite (terrain is drawn to the backmost layer and is not erased by eraser pieces, objects are drawn to the frontmost layer)";
+            checkOnlyOnTerrain.Tag = "When checked, selected object pieces are drawn only where there is terrain";
+            checkAllowOneWay.Tag = "When checked, selected terrain pieces can have One-Way objects applied to them";
+            checkInvisible.Tag = "When checked, selected pieces will not be visible in-game (note that they will still be solid and/or interactable)";
+            checkFake.Tag = "When checked, selected pieces will not be solid or interactable in-game (note that they will still be visible)";
+            numSteelAreaWidth.Tag = "Set the width of the selected steel area";
+            numSteelAreaHeight.Tag = "Set the height of the selected steel area";
+            checkNegativeSteel.Tag = "When checked, the selected steel area will invert any steel and terrain pixels with the area";
+            numRulerWidth.Tag = "Set the width of the selected custom ruler";
+            numRulerHeight.Tag = "Set the height of the selected custom ruler";
+            btnLoadStyle.Tag = "Load the style of the selected piece into the Piece Browser";
+
+            // --- Skills Tab --- //
+
+            numClimber.Tag = "Set the number of available Climbers";
+            numFloater.Tag = "Set the number of available Floaters";
+            numBomber.Tag = "Set the number of available Bombers";
+            numBlocker.Tag = "Set the number of available Blockers";
+            numBuilder.Tag = "Set the number of available Builders";
+            numBasher.Tag = "Set the number of available Bashers";
+            numMiner.Tag = "Set the number of available Miners";
+            numDigger.Tag = "Set the number of available Diggers";
+            btnSaveAsCustomSkillset.Tag = "Save the current skillset as a custom skillset that can be loaded in any level";
+            comboCustomSkillset.Tag = "Load and apply a custom skillset";
+            btnRandomSkillset.Tag = "Generate a random skillset (you can set the lower and upper limits for the randomizer using the two number inputs below)";
+            numRandomMinLimit.Tag = "Set the minimum limit for the random skillset generator";
+            numRandomMaxLimit.Tag = "Set the maximum limit for the random skillset generator";
+            btnAllSkillsToN.Tag = "Set all skills to the same number (set that number using the input to the right)";
+            numAllSkillsToN.Tag = "Set the number used by the 'Set All Skills To N' button";
+            btnClearAllSkills.Tag = "Set all skills to zero";
+
+            // --- Extras Tab --- //
+
+            btnLevelPackCompiler.Tag = "Open the Level Pack Compiler, which allows you to compile multiple levels into a single level pack that can be shared and played in RetroLemmini";
+            comboMods.Tag = "Select a mod to be applied to the level. Click the '?' button for more info";
+            btnModsHelp.Tag = "Get more information about how mods are applied";
+            checkDirectDrop.Tag = "Set exit physics to maximum for the current level (lemmings can exit in midair and from any fall distance)";
+            checkSuperlemming.Tag = "Set the game to superlemming speed (3x normal speed) for the current level";
+            checkForceNormalTimerSpeed.Tag = "When superlemming mode is active, check this to have the timer run at normal speed, or leave it unchecked to run at superlemming speed (3x normal)";
+            numMaxFallDistance.Tag = "Set the maximum fall distance for the current level (default is 126px)";
+            btnHints.Tag = "Set level solution hints for the current level. These are displayed after the player has made 3 consecutive unsuccessful attempts";
+
+            // --- Piece Browser --- //
+            btnStyleRandom.Tag = "Open a random style in the Piece Browser (you can add styles to the randomizer in Style Manager)";
+            comboPieceStyle.Tag = "Open a style in the Piece Browser";
+            btnTerrain.Tag = "Show Terrain pieces";
+            btnSteel.Tag = "Show Steel pieces";
+            btnObjects.Tag = "Show Objects";
+            btnRulers.Tag = "Show Rulers (these can be used to fine-tune your level, and will not appear when the level is played in RetroLemmini)";
+            btnAddSteelArea.Tag = "Add a manual steel area (clicking this when a piece isselected will automatically apply a steel area to that piece)";
         }
 
         private void SetHotkeys()
@@ -3069,10 +3156,10 @@ Digger=20
             AddHotkey(HotkeyName.HotkeyRotate, () => RotateLevelPieces());
             AddHotkey(HotkeyName.HotkeyFlip, () => HandleFlipHotkey());
             AddHotkey(HotkeyName.HotkeyInvert, () => InvertLevelPieces());
-            AddHotkey(HotkeyName.HotkeyErase, () => check_Pieces_Erase.Checked = !check_Pieces_Erase.Checked);
-            AddHotkey(HotkeyName.HotkeyNoOverwrite, () => check_Pieces_NoOv.Checked = !check_Pieces_NoOv.Checked);
-            AddHotkey(HotkeyName.HotkeyOnlyOnTerrain, () => check_Pieces_OnlyOnTerrain.Checked = !check_Pieces_OnlyOnTerrain.Checked);
-            AddHotkey(HotkeyName.HotkeyAllowOneWay, () => check_Pieces_OneWay.Checked = !check_Pieces_OneWay.Checked);
+            AddHotkey(HotkeyName.HotkeyErase, () => checkErase.Checked = !checkErase.Checked);
+            AddHotkey(HotkeyName.HotkeyNoOverwrite, () => checkNoOverwrite.Checked = !checkNoOverwrite.Checked);
+            AddHotkey(HotkeyName.HotkeyOnlyOnTerrain, () => checkOnlyOnTerrain.Checked = !checkOnlyOnTerrain.Checked);
+            AddHotkey(HotkeyName.HotkeyAllowOneWay, () => checkAllowOneWay.Checked = !checkAllowOneWay.Checked);
             AddHotkey(HotkeyName.HotkeyDrawLast, () => MovePieceIndex(true, false));
             AddHotkey(HotkeyName.HotkeyDrawSooner, () => MovePieceIndex(true, true));
             AddHotkey(HotkeyName.HotkeyDrawLater, () => MovePieceIndex(false, true));
@@ -3085,7 +3172,7 @@ Digger=20
         /// The hotkey-action linkups are done in InitializeHotkeyActions
         /// </summary>
         private void UpdateMenuShortcutKeyDisplayStrings()
-        {           
+        {
             newToolStripMenuItem.ShortcutKeyDisplayString =
                 FormatHotkeyString(HotkeyName.HotkeyCreateNewLevel);
 
