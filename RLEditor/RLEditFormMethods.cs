@@ -2642,6 +2642,46 @@ Digger=20
             pic_Level.SetImage(curRenderer.CombineLayers());
         }
 
+        /// <summary>
+        /// This automatically links all controls to the mouse events that show hints in the hint label
+        /// </summary>
+        private void LinkControlsToMouseEvents(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is Button || ctrl is CheckBox || ctrl is ComboBox || ctrl is TextBox)
+                {
+                    ctrl.MouseEnter += Control_MouseEnter;
+                    ctrl.MouseLeave += Control_MouseLeave;
+                }
+
+                if (ctrl is NumUpDownOverwrite)
+                {
+                    ctrl.Enter += Control_MouseEnter;
+                    ctrl.MouseMove += Control_MouseEnter;
+                    ctrl.MouseLeave += Control_MouseLeave;
+                }
+
+                if (ctrl.HasChildren)
+                    LinkControlsToMouseEvents(ctrl);
+            }
+        }
+
+        private void UpdateControlHintLabel(bool showHint, object sender)
+        {
+            lblHint.Visible = false;
+            lblHint.Text = "";
+
+            if (showHint && sender is Control ctrl && ctrl.Tag is string hint)
+            {
+                lblHint.Text = hint;
+                lblHint.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// Autosave
+        /// </summary>
         private const string INVALID_AUTOSAVE_NAME_CHARS = "<>:\"/\\|?*.";
 
         private void MakeAutoSave()

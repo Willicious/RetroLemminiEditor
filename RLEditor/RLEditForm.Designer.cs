@@ -89,6 +89,7 @@
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
             this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
+            this.but_PieceRulers = new System.Windows.Forms.Button();
             this.but_PieceRight = new RLEditor.RepeatButton();
             this.but_PieceLeft = new RLEditor.RepeatButton();
             this.timerAutosave = new System.Windows.Forms.Timer(this.components);
@@ -108,7 +109,6 @@
             this.tabLvlExtras = new System.Windows.Forms.TabControl();
             this.panelPieceBrowser = new System.Windows.Forms.Panel();
             this.but_StyleRandom = new System.Windows.Forms.Button();
-            this.but_PieceRulers = new System.Windows.Forms.Button();
             this.but_AddSteelArea = new System.Windows.Forms.Button();
             this.picPiece7 = new System.Windows.Forms.PictureBox();
             this.but_PieceSteel = new System.Windows.Forms.Button();
@@ -205,7 +205,6 @@
             this.lbStartY = new System.Windows.Forms.Label();
             this.lbStartX = new System.Windows.Forms.Label();
             this.lbSizeH = new System.Windows.Forms.Label();
-            this.lbSizeW = new System.Windows.Forms.Label();
             this.combo_Music = new System.Windows.Forms.ComboBox();
             this.num_Lvl_TimeSec = new RLEditor.NumUpDownOverwrite();
             this.num_Lvl_TimeMin = new RLEditor.NumUpDownOverwrite();
@@ -221,8 +220,10 @@
             this.lbl_Global_Music = new System.Windows.Forms.Label();
             this.lbl_Global_Author = new System.Windows.Forms.Label();
             this.lbl_Global_Title = new System.Windows.Forms.Label();
+            this.lbSizeW = new System.Windows.Forms.Label();
             this.tabLvlProperties = new System.Windows.Forms.TabControl();
             this.tabExtras = new System.Windows.Forms.TabPage();
+            this.check_Lvl_DirectDrop = new System.Windows.Forms.CheckBox();
             this.btnLevelPackCompiler = new System.Windows.Forms.Button();
             this.btnModsHelp = new System.Windows.Forms.Button();
             this.combo_Mods = new System.Windows.Forms.ComboBox();
@@ -232,8 +233,8 @@
             this.check_Lvl_ForceNormalTimerSpeed = new System.Windows.Forms.CheckBox();
             this.check_Lvl_Superlemming = new System.Windows.Forms.CheckBox();
             this.num_Lvl_MaxFallDistance = new RLEditor.NumUpDownOverwrite();
+            this.lblHint = new System.Windows.Forms.Label();
             this.txt_Focus = new RLEditor.FocusTextBox();
-            this.check_Lvl_DirectDrop = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -796,6 +797,19 @@
             // 
             this.toolTipButton.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTipButton_Popup);
             // 
+            // but_PieceRulers
+            // 
+            this.but_PieceRulers.Location = new System.Drawing.Point(783, 2);
+            this.but_PieceRulers.Name = "but_PieceRulers";
+            this.but_PieceRulers.Size = new System.Drawing.Size(116, 32);
+            this.but_PieceRulers.TabIndex = 89;
+            this.but_PieceRulers.Tag = "Show Rulers (these can be used to fine-tune your level, and will not appear when " +
+    "the level is played in RetroLemmini)";
+            this.but_PieceRulers.Text = "Rulers";
+            this.toolTipButton.SetToolTip(this.but_PieceRulers, "Select from various helper rulers");
+            this.but_PieceRulers.UseVisualStyleBackColor = true;
+            this.but_PieceRulers.Click += new System.EventHandler(this.but_PieceRulers_Click);
+            // 
             // but_PieceRight
             // 
             this.but_PieceRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1007,19 +1021,11 @@
             this.but_StyleRandom.Name = "but_StyleRandom";
             this.but_StyleRandom.Size = new System.Drawing.Size(100, 32);
             this.but_StyleRandom.TabIndex = 90;
+            this.but_StyleRandom.Tag = "Open a random style in the Piece Browser (you can add styles to the randomizer in" +
+    " Style Manager)";
             this.but_StyleRandom.Text = "Random";
             this.but_StyleRandom.UseVisualStyleBackColor = true;
             this.but_StyleRandom.Click += new System.EventHandler(this.but_StyleRandom_Click);
-            // 
-            // but_PieceRulers
-            // 
-            this.but_PieceRulers.Location = new System.Drawing.Point(783, 2);
-            this.but_PieceRulers.Name = "but_PieceRulers";
-            this.but_PieceRulers.Size = new System.Drawing.Size(116, 32);
-            this.but_PieceRulers.TabIndex = 89;
-            this.but_PieceRulers.Text = "Rulers";
-            this.but_PieceRulers.UseVisualStyleBackColor = true;
-            this.but_PieceRulers.Click += new System.EventHandler(this.but_PieceRulers_Click);
             // 
             // but_AddSteelArea
             // 
@@ -1027,6 +1033,8 @@
             this.but_AddSteelArea.Name = "but_AddSteelArea";
             this.but_AddSteelArea.Size = new System.Drawing.Size(188, 32);
             this.but_AddSteelArea.TabIndex = 88;
+            this.but_AddSteelArea.Tag = "Add a manual steel area (clicking this when a piece isselected will automatically" +
+    " apply a steel area to that piece)";
             this.but_AddSteelArea.Text = "Add Steel Area";
             this.but_AddSteelArea.UseVisualStyleBackColor = true;
             this.but_AddSteelArea.Click += new System.EventHandler(this.but_AddSteelArea_Click);
@@ -1053,6 +1061,7 @@
             this.but_PieceSteel.Name = "but_PieceSteel";
             this.but_PieceSteel.Size = new System.Drawing.Size(116, 32);
             this.but_PieceSteel.TabIndex = 84;
+            this.but_PieceSteel.Tag = "Show Steel pieces";
             this.but_PieceSteel.Text = "Steel";
             this.but_PieceSteel.UseVisualStyleBackColor = true;
             this.but_PieceSteel.Click += new System.EventHandler(this.but_PieceSteel_Click);
@@ -1065,6 +1074,7 @@
             this.but_PieceTerr.Name = "but_PieceTerr";
             this.but_PieceTerr.Size = new System.Drawing.Size(116, 32);
             this.but_PieceTerr.TabIndex = 82;
+            this.but_PieceTerr.Tag = "Show Terrain pieces";
             this.but_PieceTerr.Text = "Terrain";
             this.but_PieceTerr.UseVisualStyleBackColor = true;
             this.but_PieceTerr.Click += new System.EventHandler(this.but_PieceTerr_Click);
@@ -1076,6 +1086,7 @@
             this.but_PieceObj.Name = "but_PieceObj";
             this.but_PieceObj.Size = new System.Drawing.Size(116, 32);
             this.but_PieceObj.TabIndex = 81;
+            this.but_PieceObj.Tag = "Show Objects";
             this.but_PieceObj.Text = "Objects";
             this.but_PieceObj.UseVisualStyleBackColor = true;
             this.but_PieceObj.Click += new System.EventHandler(this.but_PieceObj_Click);
@@ -1195,6 +1206,7 @@
             this.combo_PieceStyle.Name = "combo_PieceStyle";
             this.combo_PieceStyle.Size = new System.Drawing.Size(274, 28);
             this.combo_PieceStyle.TabIndex = 75;
+            this.combo_PieceStyle.Tag = "Open a style in the Piece Browser";
             this.combo_PieceStyle.SelectedIndexChanged += new System.EventHandler(this.combo_PieceStyle_TextChanged);
             this.combo_PieceStyle.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
             this.combo_PieceStyle.TextChanged += new System.EventHandler(this.combo_PieceStyle_TextChanged);
@@ -2038,7 +2050,6 @@
             this.tabGlobalInfo.Controls.Add(this.lbStartY);
             this.tabGlobalInfo.Controls.Add(this.lbStartX);
             this.tabGlobalInfo.Controls.Add(this.lbSizeH);
-            this.tabGlobalInfo.Controls.Add(this.lbSizeW);
             this.tabGlobalInfo.Controls.Add(this.combo_Music);
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_TimeSec);
             this.tabGlobalInfo.Controls.Add(this.num_Lvl_TimeMin);
@@ -2054,6 +2065,7 @@
             this.tabGlobalInfo.Controls.Add(this.lbl_Global_Music);
             this.tabGlobalInfo.Controls.Add(this.lbl_Global_Author);
             this.tabGlobalInfo.Controls.Add(this.lbl_Global_Title);
+            this.tabGlobalInfo.Controls.Add(this.lbSizeW);
             this.tabGlobalInfo.Location = new System.Drawing.Point(4, 29);
             this.tabGlobalInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabGlobalInfo.Name = "tabGlobalInfo";
@@ -2070,6 +2082,7 @@
             this.but_CancelCrop.Name = "but_CancelCrop";
             this.but_CancelCrop.Size = new System.Drawing.Size(100, 32);
             this.but_CancelCrop.TabIndex = 105;
+            this.but_CancelCrop.Tag = "Cancel crop and close the rectangle";
             this.but_CancelCrop.Text = "Cancel";
             this.but_CancelCrop.UseVisualStyleBackColor = true;
             this.but_CancelCrop.Visible = false;
@@ -2082,6 +2095,7 @@
             this.but_ApplyCrop.Name = "but_ApplyCrop";
             this.but_ApplyCrop.Size = new System.Drawing.Size(100, 32);
             this.but_ApplyCrop.TabIndex = 104;
+            this.but_ApplyCrop.Tag = "Apply crop rectangle as new width and height";
             this.but_ApplyCrop.Text = "Apply";
             this.but_ApplyCrop.UseVisualStyleBackColor = true;
             this.but_ApplyCrop.Visible = false;
@@ -2093,9 +2107,12 @@
             this.but_CropLevel.Name = "but_CropLevel";
             this.but_CropLevel.Size = new System.Drawing.Size(100, 32);
             this.but_CropLevel.TabIndex = 103;
+            this.but_CropLevel.Tag = "Activate crop rectangle to easily change the width and height of the level";
             this.but_CropLevel.Text = "Crop";
             this.but_CropLevel.UseVisualStyleBackColor = true;
             this.but_CropLevel.Click += new System.EventHandler(this.but_CropLevel_Click);
+            this.but_CropLevel.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            this.but_CropLevel.MouseLeave += new System.EventHandler(this.Control_MouseLeave);
             // 
             // num_Lvl_RRMax
             // 
@@ -2114,6 +2131,7 @@
             this.num_Lvl_RRMax.Name = "num_Lvl_RRMax";
             this.num_Lvl_RRMax.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_RRMax.TabIndex = 102;
+            this.num_Lvl_RRMax.Tag = "Set the maximum release rate";
             this.num_Lvl_RRMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_RRMax.Value = new decimal(new int[] {
             99,
@@ -2151,6 +2169,7 @@
             this.combo_MainStyle.Name = "combo_MainStyle";
             this.combo_MainStyle.Size = new System.Drawing.Size(301, 28);
             this.combo_MainStyle.TabIndex = 94;
+            this.combo_MainStyle.Tag = "Choose a main style for your level";
             this.combo_MainStyle.SelectedIndexChanged += new System.EventHandler(this.combo_MainStyle_TextChanged);
             this.combo_MainStyle.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
             this.combo_MainStyle.TextChanged += new System.EventHandler(this.combo_MainStyle_TextChanged);
@@ -2175,6 +2194,8 @@
             this.check_Lvl_Autosteel.Name = "check_Lvl_Autosteel";
             this.check_Lvl_Autosteel.Size = new System.Drawing.Size(148, 24);
             this.check_Lvl_Autosteel.TabIndex = 91;
+            this.check_Lvl_Autosteel.Tag = "With automatic steel checked, steel pieces do not require a manually-applied stee" +
+    "l area";
             this.check_Lvl_Autosteel.Text = "Automatic Steel";
             this.check_Lvl_Autosteel.UseVisualStyleBackColor = true;
             this.check_Lvl_Autosteel.CheckedChanged += new System.EventHandler(this.textbox_Leave);
@@ -2216,6 +2237,7 @@
             this.check_Lvl_TimeLimit.Name = "check_Lvl_TimeLimit";
             this.check_Lvl_TimeLimit.Size = new System.Drawing.Size(106, 24);
             this.check_Lvl_TimeLimit.TabIndex = 32;
+            this.check_Lvl_TimeLimit.Tag = "Apply a time limit, or leave this unchecked for infinite time";
             this.check_Lvl_TimeLimit.Text = "Time Limit";
             this.check_Lvl_TimeLimit.UseVisualStyleBackColor = true;
             this.check_Lvl_TimeLimit.CheckedChanged += new System.EventHandler(this.textbox_Leave);
@@ -2228,6 +2250,7 @@
             this.check_Lvl_LockSR.Name = "check_Lvl_LockSR";
             this.check_Lvl_LockSR.Size = new System.Drawing.Size(171, 24);
             this.check_Lvl_LockSR.TabIndex = 22;
+            this.check_Lvl_LockSR.Tag = "Lock the release rate (prevents it from being changed in-game)";
             this.check_Lvl_LockSR.Text = "Lock Release Rate";
             this.check_Lvl_LockSR.UseVisualStyleBackColor = true;
             this.check_Lvl_LockSR.CheckedChanged += new System.EventHandler(this.check_Lvl_LockSR_CheckedChanged);
@@ -2240,6 +2263,7 @@
             this.chk_Lvl_AutoStart.Name = "chk_Lvl_AutoStart";
             this.chk_Lvl_AutoStart.Size = new System.Drawing.Size(163, 24);
             this.chk_Lvl_AutoStart.TabIndex = 12;
+            this.chk_Lvl_AutoStart.Tag = "Automatically set the start position";
             this.chk_Lvl_AutoStart.Text = "Auto Screen Start";
             this.chk_Lvl_AutoStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chk_Lvl_AutoStart.UseVisualStyleBackColor = true;
@@ -2264,6 +2288,7 @@
             this.txt_LevelAuthor.Name = "txt_LevelAuthor";
             this.txt_LevelAuthor.Size = new System.Drawing.Size(302, 26);
             this.txt_LevelAuthor.TabIndex = 3;
+            this.txt_LevelAuthor.Tag = "Enter an author name";
             this.txt_LevelAuthor.Leave += new System.EventHandler(this.textbox_Leave);
             // 
             // txt_LevelTitle
@@ -2274,6 +2299,7 @@
             this.txt_LevelTitle.Name = "txt_LevelTitle";
             this.txt_LevelTitle.Size = new System.Drawing.Size(302, 26);
             this.txt_LevelTitle.TabIndex = 1;
+            this.txt_LevelTitle.Tag = "Enter a title for your level";
             this.txt_LevelTitle.Leave += new System.EventHandler(this.textbox_Leave);
             // 
             // lbStartY
@@ -2309,17 +2335,6 @@
             this.lbSizeH.Text = "Height";
             this.lbSizeH.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lbSizeW
-            // 
-            this.lbSizeW.AutoSize = true;
-            this.lbSizeW.Location = new System.Drawing.Point(24, 218);
-            this.lbSizeW.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbSizeW.Name = "lbSizeW";
-            this.lbSizeW.Size = new System.Drawing.Size(50, 20);
-            this.lbSizeW.TabIndex = 8;
-            this.lbSizeW.Text = "Width";
-            this.lbSizeW.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // combo_Music
             // 
             this.combo_Music.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2329,6 +2344,8 @@
             this.combo_Music.Name = "combo_Music";
             this.combo_Music.Size = new System.Drawing.Size(302, 28);
             this.combo_Music.TabIndex = 5;
+            this.combo_Music.Tag = "Choose a music track for your level (note that you can also set music for a full " +
+    "pack of levels using the Level Pack Compiler)";
             this.combo_Music.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
             this.combo_Music.Leave += new System.EventHandler(this.textbox_Leave);
             this.combo_Music.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
@@ -2346,6 +2363,7 @@
             this.num_Lvl_TimeSec.Name = "num_Lvl_TimeSec";
             this.num_Lvl_TimeSec.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_TimeSec.TabIndex = 27;
+            this.num_Lvl_TimeSec.Tag = "Set the numbr of seconds for the time limit";
             this.num_Lvl_TimeSec.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_TimeSec.Leave += new System.EventHandler(this.textbox_Leave);
             // 
@@ -2361,6 +2379,7 @@
             this.num_Lvl_TimeMin.Name = "num_Lvl_TimeMin";
             this.num_Lvl_TimeMin.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_TimeMin.TabIndex = 26;
+            this.num_Lvl_TimeMin.Tag = "Set the number of minutes for the time limit";
             this.num_Lvl_TimeMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_TimeMin.Leave += new System.EventHandler(this.textbox_Leave);
             // 
@@ -2381,6 +2400,7 @@
             this.num_Lvl_RRMin.Name = "num_Lvl_RRMin";
             this.num_Lvl_RRMin.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_RRMin.TabIndex = 24;
+            this.num_Lvl_RRMin.Tag = "Set the minimum release rate";
             this.num_Lvl_RRMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_RRMin.Value = new decimal(new int[] {
             50,
@@ -2407,6 +2427,7 @@
             this.num_Lvl_Rescue.Name = "num_Lvl_Rescue";
             this.num_Lvl_Rescue.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_Rescue.TabIndex = 21;
+            this.num_Lvl_Rescue.Tag = "Set the amount of lemmings to be saved";
             this.num_Lvl_Rescue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_Rescue.Value = new decimal(new int[] {
             20,
@@ -2443,6 +2464,7 @@
             this.num_Lvl_Lems.Name = "num_Lvl_Lems";
             this.num_Lvl_Lems.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_Lems.TabIndex = 18;
+            this.num_Lvl_Lems.Tag = "Set the total number of lemmings";
             this.num_Lvl_Lems.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_Lems.Value = new decimal(new int[] {
             40,
@@ -2479,6 +2501,7 @@
             this.num_Lvl_StartY.Name = "num_Lvl_StartY";
             this.num_Lvl_StartY.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_StartY.TabIndex = 15;
+            this.num_Lvl_StartY.Tag = "Set the vertical start position";
             this.num_Lvl_StartY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_StartY.Value = new decimal(new int[] {
             160,
@@ -2505,6 +2528,7 @@
             this.num_Lvl_StartX.Name = "num_Lvl_StartX";
             this.num_Lvl_StartX.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_StartX.TabIndex = 14;
+            this.num_Lvl_StartX.Tag = "Set the horizontal start position";
             this.num_Lvl_StartX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_StartX.Value = new decimal(new int[] {
             400,
@@ -2536,6 +2560,7 @@
             this.num_Lvl_SizeY.Name = "num_Lvl_SizeY";
             this.num_Lvl_SizeY.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_SizeY.TabIndex = 10;
+            this.num_Lvl_SizeY.Tag = "Set the level height";
             this.num_Lvl_SizeY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_SizeY.Value = new decimal(new int[] {
             320,
@@ -2567,6 +2592,7 @@
             this.num_Lvl_SizeX.Name = "num_Lvl_SizeX";
             this.num_Lvl_SizeX.Size = new System.Drawing.Size(70, 26);
             this.num_Lvl_SizeX.TabIndex = 9;
+            this.num_Lvl_SizeX.Tag = "Set the level width";
             this.num_Lvl_SizeX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_Lvl_SizeX.Value = new decimal(new int[] {
             800,
@@ -2606,6 +2632,18 @@
             this.lbl_Global_Title.Text = "Title";
             this.lbl_Global_Title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lbSizeW
+            // 
+            this.lbSizeW.AutoSize = true;
+            this.lbSizeW.Location = new System.Drawing.Point(24, 218);
+            this.lbSizeW.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSizeW.Name = "lbSizeW";
+            this.lbSizeW.Size = new System.Drawing.Size(50, 20);
+            this.lbSizeW.TabIndex = 8;
+            this.lbSizeW.Tag = "";
+            this.lbSizeW.Text = "Width";
+            this.lbSizeW.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // tabLvlProperties
             // 
             this.tabLvlProperties.Controls.Add(this.tabGlobalInfo);
@@ -2639,6 +2677,17 @@
             this.tabExtras.TabIndex = 3;
             this.tabExtras.Text = "Extras";
             this.tabExtras.UseVisualStyleBackColor = true;
+            // 
+            // check_Lvl_DirectDrop
+            // 
+            this.check_Lvl_DirectDrop.AutoSize = true;
+            this.check_Lvl_DirectDrop.Location = new System.Drawing.Point(33, 215);
+            this.check_Lvl_DirectDrop.Name = "check_Lvl_DirectDrop";
+            this.check_Lvl_DirectDrop.Size = new System.Drawing.Size(177, 24);
+            this.check_Lvl_DirectDrop.TabIndex = 109;
+            this.check_Lvl_DirectDrop.Text = "Activate Direct Drop";
+            this.check_Lvl_DirectDrop.UseVisualStyleBackColor = true;
+            this.check_Lvl_DirectDrop.CheckedChanged += new System.EventHandler(this.textbox_Leave);
             // 
             // btnLevelPackCompiler
             // 
@@ -2749,6 +2798,17 @@
             0,
             0});
             // 
+            // lblHint
+            // 
+            this.lblHint.AutoSize = true;
+            this.lblHint.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblHint.Location = new System.Drawing.Point(405, 13);
+            this.lblHint.Name = "lblHint";
+            this.lblHint.Size = new System.Drawing.Size(300, 20);
+            this.lblHint.TabIndex = 88;
+            this.lblHint.Text = "Shows hints when hovering over a control";
+            this.lblHint.Visible = false;
+            // 
             // txt_Focus
             // 
             this.txt_Focus.Location = new System.Drawing.Point(-150, 2);
@@ -2759,17 +2819,6 @@
             this.txt_Focus.TabStop = false;
             this.txt_Focus.Text = "asdf";
             // 
-            // check_Lvl_DirectDrop
-            // 
-            this.check_Lvl_DirectDrop.AutoSize = true;
-            this.check_Lvl_DirectDrop.Location = new System.Drawing.Point(33, 215);
-            this.check_Lvl_DirectDrop.Name = "check_Lvl_DirectDrop";
-            this.check_Lvl_DirectDrop.Size = new System.Drawing.Size(177, 24);
-            this.check_Lvl_DirectDrop.TabIndex = 109;
-            this.check_Lvl_DirectDrop.Text = "Activate Direct Drop";
-            this.check_Lvl_DirectDrop.UseVisualStyleBackColor = true;
-            this.check_Lvl_DirectDrop.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
             // RLEditForm
             // 
             this.AllowDrop = true;
@@ -2777,6 +2826,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1478, 1049);
+            this.Controls.Add(this.lblHint);
             this.Controls.Add(this.statusBar);
             this.Controls.Add(this.pic_DragNewPiece);
             this.Controls.Add(this.tabLvlExtras);
@@ -3071,6 +3121,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.CheckBox check_Lvl_DirectDrop;
+        private System.Windows.Forms.Label lblHint;
     }
 }
 

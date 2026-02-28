@@ -1497,6 +1497,7 @@ namespace RLEditor
                 OpenTemplatesLoader();
 
             MoveControlsOnFormResize();
+            LinkControlsToMouseEvents(this);
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1687,6 +1688,16 @@ namespace RLEditor
         private void saveAsTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveLevelAsTemplate();
+        }
+
+        private void Control_MouseEnter(object sender, EventArgs e)
+        {
+            UpdateControlHintLabel(true, sender);
+        }
+
+        private void Control_MouseLeave(object sender, EventArgs e)
+        {
+            UpdateControlHintLabel(false, sender);
         }
     }
 }
