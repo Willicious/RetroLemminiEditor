@@ -233,6 +233,7 @@
             this.check_Lvl_Superlemming = new System.Windows.Forms.CheckBox();
             this.num_Lvl_MaxFallDistance = new RLEditor.NumUpDownOverwrite();
             this.txt_Focus = new RLEditor.FocusTextBox();
+            this.check_Lvl_DirectDrop = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Level)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -2622,6 +2623,7 @@
             // 
             // tabExtras
             // 
+            this.tabExtras.Controls.Add(this.check_Lvl_DirectDrop);
             this.tabExtras.Controls.Add(this.btnLevelPackCompiler);
             this.tabExtras.Controls.Add(this.btnModsHelp);
             this.tabExtras.Controls.Add(this.combo_Mods);
@@ -2682,7 +2684,7 @@
             // 
             // but_Hints
             // 
-            this.but_Hints.Location = new System.Drawing.Point(33, 384);
+            this.but_Hints.Location = new System.Drawing.Point(33, 480);
             this.but_Hints.Name = "but_Hints";
             this.but_Hints.Size = new System.Drawing.Size(321, 50);
             this.but_Hints.TabIndex = 104;
@@ -2693,7 +2695,7 @@
             // lblMaxFallDistance
             // 
             this.lblMaxFallDistance.AutoSize = true;
-            this.lblMaxFallDistance.Location = new System.Drawing.Point(29, 309);
+            this.lblMaxFallDistance.Location = new System.Drawing.Point(29, 396);
             this.lblMaxFallDistance.Name = "lblMaxFallDistance";
             this.lblMaxFallDistance.Size = new System.Drawing.Size(134, 20);
             this.lblMaxFallDistance.TabIndex = 100;
@@ -2705,7 +2707,7 @@
             this.check_Lvl_ForceNormalTimerSpeed.Checked = true;
             this.check_Lvl_ForceNormalTimerSpeed.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check_Lvl_ForceNormalTimerSpeed.Enabled = false;
-            this.check_Lvl_ForceNormalTimerSpeed.Location = new System.Drawing.Point(33, 234);
+            this.check_Lvl_ForceNormalTimerSpeed.Location = new System.Drawing.Point(33, 322);
             this.check_Lvl_ForceNormalTimerSpeed.Name = "check_Lvl_ForceNormalTimerSpeed";
             this.check_Lvl_ForceNormalTimerSpeed.Size = new System.Drawing.Size(212, 24);
             this.check_Lvl_ForceNormalTimerSpeed.TabIndex = 97;
@@ -2716,7 +2718,7 @@
             // check_Lvl_Superlemming
             // 
             this.check_Lvl_Superlemming.AutoSize = true;
-            this.check_Lvl_Superlemming.Location = new System.Drawing.Point(33, 204);
+            this.check_Lvl_Superlemming.Location = new System.Drawing.Point(33, 292);
             this.check_Lvl_Superlemming.Name = "check_Lvl_Superlemming";
             this.check_Lvl_Superlemming.Size = new System.Drawing.Size(242, 24);
             this.check_Lvl_Superlemming.TabIndex = 93;
@@ -2726,7 +2728,7 @@
             // 
             // num_Lvl_MaxFallDistance
             // 
-            this.num_Lvl_MaxFallDistance.Location = new System.Drawing.Point(196, 307);
+            this.num_Lvl_MaxFallDistance.Location = new System.Drawing.Point(196, 394);
             this.num_Lvl_MaxFallDistance.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -2756,6 +2758,17 @@
             this.txt_Focus.TabIndex = 37;
             this.txt_Focus.TabStop = false;
             this.txt_Focus.Text = "asdf";
+            // 
+            // check_Lvl_DirectDrop
+            // 
+            this.check_Lvl_DirectDrop.AutoSize = true;
+            this.check_Lvl_DirectDrop.Location = new System.Drawing.Point(33, 215);
+            this.check_Lvl_DirectDrop.Name = "check_Lvl_DirectDrop";
+            this.check_Lvl_DirectDrop.Size = new System.Drawing.Size(177, 24);
+            this.check_Lvl_DirectDrop.TabIndex = 109;
+            this.check_Lvl_DirectDrop.Text = "Activate Direct Drop";
+            this.check_Lvl_DirectDrop.UseVisualStyleBackColor = true;
+            this.check_Lvl_DirectDrop.CheckedChanged += new System.EventHandler(this.textbox_Leave);
             // 
             // RLEditForm
             // 
@@ -3057,6 +3070,7 @@
         private System.Windows.Forms.ToolStripMenuItem openTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.CheckBox check_Lvl_DirectDrop;
     }
 }
 

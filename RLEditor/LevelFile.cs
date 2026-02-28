@@ -198,6 +198,9 @@ namespace RLEditor
             string classicSteel = ini.GetString("classicSteel", "false"); // default to "false"
             newLevel.ClassicSteel = classicSteel.Trim().ToLower() == "true";
 
+            string directDrop = ini.GetString("directDrop", "false"); // default to "false"
+            newLevel.IsDirectDrop = directDrop.Trim().ToLower() == "true";
+
             string superlemming = ini.GetString("superlemming", "false"); // default to "false"
             newLevel.IsSuperlemming = superlemming.Trim().ToLower() == "true";
 
@@ -581,6 +584,7 @@ namespace RLEditor
             sb.AppendLine($"numDiggers = {curLevel.NumDiggers}");
             sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
             sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
+            sb.AppendLine($"directDrop = {curLevel.IsDirectDrop}");
             sb.AppendLine($"superlemming = {curLevel.IsSuperlemming}");
             sb.AppendLine($"forceNormalTimerSpeed = {curLevel.ForceNormalTimerSpeed}");
             sb.AppendLine($"maxFallDistance = {curLevel.MaxFallDistance}");

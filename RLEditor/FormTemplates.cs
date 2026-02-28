@@ -171,6 +171,7 @@ namespace RLEditor
             rtLevelData.AppendText(Environment.NewLine);
 
             // --- Flags ---
+            AddLine("Direct Drop: ", $"{YesNo(level.IsDirectDrop)}");
             AddLine("SuperLemming: ", $"{YesNo(level.IsSuperlemming)}");
 
             // Reset selection

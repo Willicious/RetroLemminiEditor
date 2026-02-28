@@ -40,6 +40,7 @@ namespace RLEditor
             this.IsReleaseRateLocked = false;
             this.TimeLimit = 0;
             this.HasTimeLimit = false;
+            this.IsDirectDrop = false;
             this.IsSuperlemming = false;
             this.ForceNormalTimerSpeed = true;
             this.MaxFallDistance = 126;
@@ -102,6 +103,7 @@ namespace RLEditor
         public bool IsReleaseRateLocked { get; set; }
         public int TimeLimit { get; set; }
         public bool HasTimeLimit { get; set; }
+        public bool IsDirectDrop { get; set; }
         public bool IsSuperlemming { get; set; }
         public bool ForceNormalTimerSpeed { get; set; }
         public bool ClassicSteel { get; set; }
@@ -166,6 +168,7 @@ namespace RLEditor
             newLevel.IsReleaseRateLocked = this.IsReleaseRateLocked;
             newLevel.TimeLimit = this.TimeLimit;
             newLevel.HasTimeLimit = this.HasTimeLimit;
+            newLevel.IsDirectDrop = this.IsDirectDrop;
             newLevel.IsSuperlemming = this.IsSuperlemming;
             newLevel.ForceNormalTimerSpeed = this.ForceNormalTimerSpeed;
             newLevel.MaxFallDistance = this.MaxFallDistance;
@@ -213,6 +216,7 @@ namespace RLEditor
                 || this.MinReleaseRate != otherLevel.MinReleaseRate
                 || this.MaxReleaseRate != otherLevel.MaxReleaseRate
                 || this.IsReleaseRateLocked != otherLevel.IsReleaseRateLocked
+                || this.IsDirectDrop != otherLevel.IsDirectDrop
                 || this.IsSuperlemming != otherLevel.IsSuperlemming
                 || this.ForceNormalTimerSpeed != otherLevel.ForceNormalTimerSpeed
                 || this.MaxFallDistance != otherLevel.MaxFallDistance
