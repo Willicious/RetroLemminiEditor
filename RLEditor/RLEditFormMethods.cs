@@ -2937,12 +2937,15 @@ Digger=20
             }
         }
 
-        private void UpdateControlHintLabel(bool showHint, object sender)
+        public void UpdateControlHintLabel(bool showHint, object sender)
         {
             lblHint.Visible = false;
             lblHint.Text = "";
 
-            if (showHint && sender is Control ctrl && ctrl.Tag is string hint)
+            if (!curSettings.ShowControlHints || !showHint)
+                return;
+
+            if (sender is Control ctrl && ctrl.Tag is string hint)
             {
                 lblHint.Text = hint;
                 lblHint.Visible = true;

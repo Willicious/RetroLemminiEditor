@@ -104,6 +104,7 @@ namespace RLEditor
         public bool ShowSteelAreasMessage { get; set; }
         public bool ShowModsHelpDialog { get; set; }
         public bool ShowAboutAtStartup { get; set; }
+        public bool ShowControlHints { get; set; }
         public bool AllTabsExpanded { get; set; }
 
         /// <summary>
@@ -135,6 +136,7 @@ namespace RLEditor
             ShowSteelAreasMessage = true;
             ShowModsHelpDialog = true;
             ShowAboutAtStartup = true;
+            ShowControlHints = true;
             AllTabsExpanded = false;
 
             LevelArranger = new LevelArrangerState
@@ -482,6 +484,27 @@ namespace RLEditor
             groupTriggerAreaColor.Controls.Add(lblTriggerAreaColor);
             groupTriggerAreaColor.Controls.Add(comboTriggerAreaColor);
 
+            // ========================== Control Hints GroupBox ========================== //
+
+            GroupBox groupControlHints = new GroupBox();
+            groupControlHints.Text = "Control Hints";
+            groupControlHints.Top = 260;
+            groupControlHints.Left = columnRight;
+            groupControlHints.Width = 280;
+            groupControlHints.Height = 50;
+
+            CheckBox checkShowControlHints = new CheckBox();
+            checkShowControlHints.Name = "checkShowControlHints";
+            checkShowControlHints.AutoSize = true;
+            checkShowControlHints.CheckAlign = ContentAlignment.MiddleLeft;
+            checkShowControlHints.Checked = ShowControlHints;
+            checkShowControlHints.Text = "Show Control Hints in Status Bar";
+            checkShowControlHints.Top = groupBoxTop;
+            checkShowControlHints.Left = groupBoxColumnLeft;
+            checkShowControlHints.CheckedChanged += new EventHandler(checkShowControlHints_CheckedChanged);
+
+            groupControlHints.Controls.Add(checkShowControlHints);
+
             // ========================== Save And Close Button ========================== //
 
             btnSaveAndClose = new Button();
@@ -514,6 +537,7 @@ namespace RLEditor
             settingsForm.Controls.Add(groupCustomMove);
             settingsForm.Controls.Add(groupSnapToGrid);
             settingsForm.Controls.Add(groupTriggerAreaColor);
+            settingsForm.Controls.Add(groupControlHints);
             settingsForm.Controls.Add(groupSavingOptions);
 
             settingsForm.Controls.Add(btnSaveAndClose);
@@ -575,6 +599,13 @@ namespace RLEditor
                     checkPreferObjectName.Enabled = true;
             }
 
+            settingChanged = true;
+        }
+
+        private void checkShowControlHints_CheckedChanged(object sender, EventArgs e)
+        {
+            ShowControlHints = ((sender as CheckBox).CheckState == CheckState.Checked);
+            editorForm.UpdateControlHintLabel(false, sender);
             settingChanged = true;
         }
 
@@ -983,6 +1014,11 @@ namespace RLEditor
                                 ShowAboutAtStartup = line.Text.Trim().ToUpper() == "TRUE";
                                 break;
                             }
+                        case "SHOWCONTROLHINTS":
+                            {
+                                ShowControlHints = (line.Text.Trim().ToUpper() == "TRUE");
+                                break;
+                            }
                         case "ALLTABSEXPANDED":
                             {
                                 AllTabsExpanded = line.Text.Trim().ToUpper() == "TRUE";
@@ -1116,6 +1152,7 @@ namespace RLEditor
                 settingsFile.WriteLine(" ShowSteelAreasMessage  " + (ShowSteelAreasMessage ? "True" : "False"));
                 settingsFile.WriteLine(" ShowModsHelpDialog     " + (ShowModsHelpDialog ? "True" : "False"));
                 settingsFile.WriteLine(" ShowAboutAtStartup     " + (ShowAboutAtStartup ? "True" : "False"));
+                settingsFile.WriteLine(" ShowControlHints       " + (ShowControlHints ? "True" : "False"));
                 settingsFile.WriteLine(" AllTabsExpanded        " + (AllTabsExpanded ? "True" : "False"));
                 settingsFile.WriteLine(" HighlightErasers       " + (BmpModify.HighlightErasers ? "True" : "False"));
                 settingsFile.WriteLine("");
