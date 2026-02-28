@@ -27,7 +27,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RLEditForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +55,6 @@
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteInPlaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLevelWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPieceBrowserWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,26 +71,27 @@
             this.steelAreasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rulersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showMissingPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sepMissingPieces = new System.Windows.Forms.ToolStripSeparator();
+            this.refreshStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.styleManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.showMissingPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.styleManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.levelPackCompilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.pic_Level = new System.Windows.Forms.PictureBox();
-            this.toolTipPieces = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPieces = new System.Windows.Forms.ToolTip();
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
-            this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipButton = new System.Windows.Forms.ToolTip();
             this.but_PieceRulers = new System.Windows.Forms.Button();
             this.but_PieceRight = new RLEditor.RepeatButton();
             this.but_PieceLeft = new RLEditor.RepeatButton();
-            this.timerAutosave = new System.Windows.Forms.Timer(this.components);
+            this.timerAutosave = new System.Windows.Forms.Timer();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarSteelAreasLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBarMissingPiecesLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -442,8 +441,7 @@
             this.copyToolStripMenuItem,
             this.pasteToolStripMenuItem,
             this.pasteInPlaceToolStripMenuItem,
-            this.duplicateToolStripMenuItem,
-            this.toolStripSeparator3});
+            this.duplicateToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
             this.editToolStripMenuItem.Text = "Edit";
@@ -511,11 +509,6 @@
             this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(334, 34);
             this.duplicateToolStripMenuItem.Text = "Duplicate-In-Place";
             this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(331, 6);
             // 
             // viewToolStripMenuItem
             // 
@@ -663,20 +656,55 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showMissingPiecesToolStripMenuItem,
+            this.sepMissingPieces,
+            this.refreshStylesToolStripMenuItem,
+            this.styleManagerToolStripMenuItem,
+            this.toolStripSeparator13,
             this.snapToGridToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.hotkeysToolStripMenuItem,
             this.toolStripSeparator5,
-            this.showMissingPiecesToolStripMenuItem,
-            this.refreshStylesToolStripMenuItem,
-            this.styleManagerToolStripMenuItem,
             this.levelPackCompilerToolStripMenuItem,
             this.toolStripSeparator2,
-            this.aboutToolStripMenuItem,
-            this.toolStripSeparator4});
+            this.aboutToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
             this.optionsToolStripMenuItem.Text = "Tools";
+            // 
+            // showMissingPiecesToolStripMenuItem
+            // 
+            this.showMissingPiecesToolStripMenuItem.Name = "showMissingPiecesToolStripMenuItem";
+            this.showMissingPiecesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F8";
+            this.showMissingPiecesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.showMissingPiecesToolStripMenuItem.Text = "Show Missing Pieces";
+            this.showMissingPiecesToolStripMenuItem.Click += new System.EventHandler(this.showMissingPiecesToolStripMenuItem_Click);
+            // 
+            // sepMissingPieces
+            // 
+            this.sepMissingPieces.Name = "sepMissingPieces";
+            this.sepMissingPieces.Size = new System.Drawing.Size(407, 6);
+            // 
+            // refreshStylesToolStripMenuItem
+            // 
+            this.refreshStylesToolStripMenuItem.Name = "refreshStylesToolStripMenuItem";
+            this.refreshStylesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F8";
+            this.refreshStylesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.refreshStylesToolStripMenuItem.Text = "Refresh Styles";
+            this.refreshStylesToolStripMenuItem.Click += new System.EventHandler(this.refreshStylesToolStripMenuItem_Click);
+            // 
+            // styleManagerToolStripMenuItem
+            // 
+            this.styleManagerToolStripMenuItem.Name = "styleManagerToolStripMenuItem";
+            this.styleManagerToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Alt+F8";
+            this.styleManagerToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.styleManagerToolStripMenuItem.Text = "Style Manager";
+            this.styleManagerToolStripMenuItem.Click += new System.EventHandler(this.styleManagerToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(407, 6);
             // 
             // snapToGridToolStripMenuItem
             // 
@@ -707,30 +735,6 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(407, 6);
             // 
-            // showMissingPiecesToolStripMenuItem
-            // 
-            this.showMissingPiecesToolStripMenuItem.Name = "showMissingPiecesToolStripMenuItem";
-            this.showMissingPiecesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F8";
-            this.showMissingPiecesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
-            this.showMissingPiecesToolStripMenuItem.Text = "Show Missing Pieces";
-            this.showMissingPiecesToolStripMenuItem.Click += new System.EventHandler(this.showMissingPiecesToolStripMenuItem_Click);
-            // 
-            // refreshStylesToolStripMenuItem
-            // 
-            this.refreshStylesToolStripMenuItem.Name = "refreshStylesToolStripMenuItem";
-            this.refreshStylesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F8";
-            this.refreshStylesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
-            this.refreshStylesToolStripMenuItem.Text = "Refresh Styles";
-            this.refreshStylesToolStripMenuItem.Click += new System.EventHandler(this.refreshStylesToolStripMenuItem_Click);
-            // 
-            // styleManagerToolStripMenuItem
-            // 
-            this.styleManagerToolStripMenuItem.Name = "styleManagerToolStripMenuItem";
-            this.styleManagerToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Alt+F8";
-            this.styleManagerToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
-            this.styleManagerToolStripMenuItem.Text = "Style Manager";
-            this.styleManagerToolStripMenuItem.Click += new System.EventHandler(this.styleManagerToolStripMenuItem_Click);
-            // 
             // levelPackCompilerToolStripMenuItem
             // 
             this.levelPackCompilerToolStripMenuItem.Name = "levelPackCompilerToolStripMenuItem";
@@ -750,11 +754,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
             this.aboutToolStripMenuItem.Text = "About RetroLemmini Editor";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(407, 6);
             // 
             // pic_Level
             // 
@@ -2953,7 +2952,6 @@
         private System.Windows.Forms.ToolStripMenuItem playLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem validateLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel statusBarMissingPiecesLabel;
         private System.Windows.Forms.ToolStripStatusLabel statusBarGenericLabel;
@@ -2962,7 +2960,6 @@
         private System.Windows.Forms.ToolStripMenuItem showMissingPiecesStatusBarMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showMissingPiecesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cleanseLevelsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openLevelWindowToolStripMenuItem;
         private System.Windows.Forms.TabControl tabLvlPieces;
@@ -3122,6 +3119,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.CheckBox check_Lvl_DirectDrop;
         private System.Windows.Forms.Label lblHint;
+        private System.Windows.Forms.ToolStripSeparator sepMissingPieces;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
     }
 }
 

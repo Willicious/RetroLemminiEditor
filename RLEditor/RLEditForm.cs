@@ -1498,6 +1498,7 @@ namespace RLEditor
 
             MoveControlsOnFormResize();
             LinkControlsToMouseEvents(this);
+            UpdateMissingPiecesMenuItems();
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
