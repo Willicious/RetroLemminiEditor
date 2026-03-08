@@ -835,6 +835,7 @@ namespace RLEditor
             listStyles.Items.Insert(insertIndex, item);
 
             // Select the new item
+            listStyles.SelectedItems.Clear();
             item.Selected = true;
             listStyles.EnsureVisible(insertIndex);
             txtDisplayName.Text = newStyle.DisplayName;
