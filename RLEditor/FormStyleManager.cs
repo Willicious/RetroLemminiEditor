@@ -907,6 +907,7 @@ namespace RLEditor
         {
             UpdateDisplayNameTextInput();
             UpdateRandomizerButton();
+            btnSortAlphabetically.Enabled = listStyles.SelectedItems.Count > 1;
         }
 
         private void FormStyleManager_Load(object sender, EventArgs e)
