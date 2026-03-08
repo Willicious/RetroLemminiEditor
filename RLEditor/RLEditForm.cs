@@ -674,6 +674,15 @@ namespace RLEditor
             {
                 numBox.BackColor = SystemColors.Window;
             }
+
+            lblInfinityClimber.Visible = numClimber.Value == 100;
+            lblInfinityFloater.Visible = numFloater.Value == 100;
+            lblInfinityBomber.Visible = numBomber.Value == 100;
+            lblInfinityBlocker.Visible = numBlocker.Value == 100;
+            lblInfinityBuilder.Visible = numBuilder.Value == 100;
+            lblInfinityBasher.Visible = numBasher.Value == 100;
+            lblInfinityMiner.Visible = numMiner.Value == 100;
+            lblInfinityDigger.Visible = numDigger.Value == 100;
         }
 
         private void num_Skill_KeyDown(object sender, KeyEventArgs e)

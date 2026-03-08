@@ -582,14 +582,14 @@ namespace RLEditor
             sb.AppendLine($"numLemmings = {curLevel.NumLems}");
             sb.AppendLine($"numToRescue = {curLevel.SaveReq}");
             sb.AppendLine($"timeLimitSeconds = {curLevel.TimeLimit}");
-            sb.AppendLine($"numClimbers = {curLevel.NumClimbers}");
-            sb.AppendLine($"numFloaters = {curLevel.NumFloaters}");
-            sb.AppendLine($"numBombers = {curLevel.NumBombers}");
-            sb.AppendLine($"numBlockers = {curLevel.NumBlockers}");
-            sb.AppendLine($"numBuilders = {curLevel.NumBuilders}");
-            sb.AppendLine($"numBashers = {curLevel.NumBashers}");
-            sb.AppendLine($"numMiners = {curLevel.NumMiners}");
-            sb.AppendLine($"numDiggers = {curLevel.NumDiggers}");
+            sb.AppendLine($"numClimbers = {GetSkillAmount(curLevel.NumClimbers)}");
+            sb.AppendLine($"numFloaters = {GetSkillAmount(curLevel.NumFloaters)}");
+            sb.AppendLine($"numBombers = {GetSkillAmount(curLevel.NumBombers)}");
+            sb.AppendLine($"numBlockers = {GetSkillAmount(curLevel.NumBlockers)}");
+            sb.AppendLine($"numBuilders = {GetSkillAmount(curLevel.NumBuilders)}");
+            sb.AppendLine($"numBashers = {GetSkillAmount(curLevel.NumBashers)}");
+            sb.AppendLine($"numMiners = {GetSkillAmount(curLevel.NumMiners)}");
+            sb.AppendLine($"numDiggers = {GetSkillAmount(curLevel.NumDiggers)}");
             sb.AppendLine($"xPosCenter = {curLevel.StartPosX}");
             sb.AppendLine($"yPosCenter = {curLevel.StartPosY}");
             sb.AppendLine($"directDrop = {curLevel.IsDirectDrop}");
@@ -691,6 +691,11 @@ namespace RLEditor
                 return "\"" + text.Replace("\"", "\\\"") + "\"";
 
             return text;
+        }
+
+        private static string GetSkillAmount(int amount)
+        {
+            return (amount >= 100) ? "Infinity" : amount.ToString();
         }
 
         private static List<string> BuildObjectLines(Level level)

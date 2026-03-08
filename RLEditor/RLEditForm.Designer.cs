@@ -122,6 +122,7 @@
             this.comboPieceStyle = new System.Windows.Forms.ComboBox();
             this.picDragNewPiece = new System.Windows.Forms.PictureBox();
             this.tabSkills = new System.Windows.Forms.TabPage();
+            this.lblInfinityClimber = new System.Windows.Forms.Label();
             this.btnClearAllSkills = new System.Windows.Forms.Button();
             this.btnRandomSkillset = new System.Windows.Forms.Button();
             this.lblRandomMinLimit = new System.Windows.Forms.Label();
@@ -236,6 +237,13 @@
             this.btnPieceRight = new RLEditor.RepeatButton();
             this.btnPieceLeft = new RLEditor.RepeatButton();
             this.txtFocusPieceBrowser = new RLEditor.FocusTextBox();
+            this.lblInfinityFloater = new System.Windows.Forms.Label();
+            this.lblInfinityBomber = new System.Windows.Forms.Label();
+            this.lblInfinityBlocker = new System.Windows.Forms.Label();
+            this.lblInfinityBuilder = new System.Windows.Forms.Label();
+            this.lblInfinityBasher = new System.Windows.Forms.Label();
+            this.lblInfinityMiner = new System.Windows.Forms.Label();
+            this.lblInfinityDigger = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLevel)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -1198,6 +1206,14 @@
             // 
             // tabSkills
             // 
+            this.tabSkills.Controls.Add(this.lblInfinityDigger);
+            this.tabSkills.Controls.Add(this.lblInfinityMiner);
+            this.tabSkills.Controls.Add(this.lblInfinityBasher);
+            this.tabSkills.Controls.Add(this.lblInfinityBuilder);
+            this.tabSkills.Controls.Add(this.lblInfinityBlocker);
+            this.tabSkills.Controls.Add(this.lblInfinityBomber);
+            this.tabSkills.Controls.Add(this.lblInfinityFloater);
+            this.tabSkills.Controls.Add(this.lblInfinityClimber);
             this.tabSkills.Controls.Add(this.btnClearAllSkills);
             this.tabSkills.Controls.Add(this.btnRandomSkillset);
             this.tabSkills.Controls.Add(this.lblRandomMinLimit);
@@ -1232,6 +1248,17 @@
             this.tabSkills.TabIndex = 2;
             this.tabSkills.Text = "Skills";
             this.tabSkills.UseVisualStyleBackColor = true;
+            // 
+            // lblInfinityClimber
+            // 
+            this.lblInfinityClimber.AutoSize = true;
+            this.lblInfinityClimber.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityClimber.Location = new System.Drawing.Point(221, 45);
+            this.lblInfinityClimber.Name = "lblInfinityClimber";
+            this.lblInfinityClimber.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityClimber.TabIndex = 65;
+            this.lblInfinityClimber.Text = "- (Infinity)";
+            this.lblInfinityClimber.Visible = false;
             // 
             // btnClearAllSkills
             // 
@@ -2834,6 +2861,83 @@
             this.txtFocusPieceBrowser.TabIndex = 86;
             this.txtFocusPieceBrowser.Text = "asdf";
             // 
+            // lblInfinityFloater
+            // 
+            this.lblInfinityFloater.AutoSize = true;
+            this.lblInfinityFloater.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityFloater.Location = new System.Drawing.Point(221, 85);
+            this.lblInfinityFloater.Name = "lblInfinityFloater";
+            this.lblInfinityFloater.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityFloater.TabIndex = 66;
+            this.lblInfinityFloater.Text = "- (Infinity)";
+            this.lblInfinityFloater.Visible = false;
+            // 
+            // lblInfinityBomber
+            // 
+            this.lblInfinityBomber.AutoSize = true;
+            this.lblInfinityBomber.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBomber.Location = new System.Drawing.Point(221, 125);
+            this.lblInfinityBomber.Name = "lblInfinityBomber";
+            this.lblInfinityBomber.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBomber.TabIndex = 67;
+            this.lblInfinityBomber.Text = "- (Infinity)";
+            this.lblInfinityBomber.Visible = false;
+            // 
+            // lblInfinityBlocker
+            // 
+            this.lblInfinityBlocker.AutoSize = true;
+            this.lblInfinityBlocker.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBlocker.Location = new System.Drawing.Point(221, 165);
+            this.lblInfinityBlocker.Name = "lblInfinityBlocker";
+            this.lblInfinityBlocker.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBlocker.TabIndex = 68;
+            this.lblInfinityBlocker.Text = "- (Infinity)";
+            this.lblInfinityBlocker.Visible = false;
+            // 
+            // lblInfinityBuilder
+            // 
+            this.lblInfinityBuilder.AutoSize = true;
+            this.lblInfinityBuilder.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBuilder.Location = new System.Drawing.Point(221, 205);
+            this.lblInfinityBuilder.Name = "lblInfinityBuilder";
+            this.lblInfinityBuilder.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBuilder.TabIndex = 69;
+            this.lblInfinityBuilder.Text = "- (Infinity)";
+            this.lblInfinityBuilder.Visible = false;
+            // 
+            // lblInfinityBasher
+            // 
+            this.lblInfinityBasher.AutoSize = true;
+            this.lblInfinityBasher.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBasher.Location = new System.Drawing.Point(221, 245);
+            this.lblInfinityBasher.Name = "lblInfinityBasher";
+            this.lblInfinityBasher.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBasher.TabIndex = 70;
+            this.lblInfinityBasher.Text = "- (Infinity)";
+            this.lblInfinityBasher.Visible = false;
+            // 
+            // lblInfinityMiner
+            // 
+            this.lblInfinityMiner.AutoSize = true;
+            this.lblInfinityMiner.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityMiner.Location = new System.Drawing.Point(221, 285);
+            this.lblInfinityMiner.Name = "lblInfinityMiner";
+            this.lblInfinityMiner.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityMiner.TabIndex = 71;
+            this.lblInfinityMiner.Text = "- (Infinity)";
+            this.lblInfinityMiner.Visible = false;
+            // 
+            // lblInfinityDigger
+            // 
+            this.lblInfinityDigger.AutoSize = true;
+            this.lblInfinityDigger.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityDigger.Location = new System.Drawing.Point(221, 325);
+            this.lblInfinityDigger.Name = "lblInfinityDigger";
+            this.lblInfinityDigger.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityDigger.TabIndex = 72;
+            this.lblInfinityDigger.Text = "- (Infinity)";
+            this.lblInfinityDigger.Visible = false;
+            // 
             // RLEditForm
             // 
             this.AllowDrop = true;
@@ -3139,6 +3243,14 @@
         private System.Windows.Forms.ToolStripSeparator sepMissingPieces;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.Label lblUpdatingLPC;
+        private System.Windows.Forms.Label lblInfinityClimber;
+        private System.Windows.Forms.Label lblInfinityBomber;
+        private System.Windows.Forms.Label lblInfinityFloater;
+        private System.Windows.Forms.Label lblInfinityDigger;
+        private System.Windows.Forms.Label lblInfinityMiner;
+        private System.Windows.Forms.Label lblInfinityBasher;
+        private System.Windows.Forms.Label lblInfinityBuilder;
+        private System.Windows.Forms.Label lblInfinityBlocker;
     }
 }
 

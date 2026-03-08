@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace RLEditor
@@ -63,7 +64,17 @@ namespace RLEditor
             => _values.TryGetValue(key, out var v) ? v : defaultValue;
 
         public int GetInt(string key, int defaultValue = 0)
-            => int.TryParse(GetString(key), out var v) ? v : defaultValue;
+        {
+            string val = GetString(key)?.Trim();
+
+            if (string.IsNullOrEmpty(val))
+                return defaultValue;
+
+            if (val.Equals("Infinity", StringComparison.OrdinalIgnoreCase))
+                return 100;
+
+            return int.TryParse(val, out var v) ? v : defaultValue;
+        }
 
         public bool HasKey(string key) => _values.ContainsKey(key);
 
