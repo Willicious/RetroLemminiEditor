@@ -2203,6 +2203,9 @@ Digger=20
         /// </summary>
         private void RotateLevelPieces()
         {
+            if (CurLevel.SelectionList().Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL))
+                return;
+
             CurLevel.RotatePieces();
             SaveChangesToOldLevelList();
             UpdateFlagsForPieceActions(); // needed for resizable pieces in selection
@@ -2214,6 +2217,9 @@ Digger=20
         /// </summary>
         private void InvertLevelPieces()
         {
+            if (CurLevel.SelectionList().Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL))
+                return;
+
             CurLevel.InvertPieces();
             SaveChangesToOldLevelList();
             picLevel.Image = curRenderer.CreateLevelImage();
@@ -2249,6 +2255,9 @@ Digger=20
         {
             var selection = CurLevel.SelectionList();
             if (selection.Count == 0)
+                return;
+
+            if (selection.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL))
                 return;
 
             bool hasOnlyHatches = selection.All(item => item.ObjType == C.OBJ.HATCH);

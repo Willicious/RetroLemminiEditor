@@ -314,6 +314,14 @@ namespace RLEditor
             if (newGadget.IsNoOverwrite && newGadget.IsOnlyOnTerrain)
                 newGadget.IsNoOverwrite = false;
 
+            // Disallow transformations for OWW
+            if (newGadget.ObjType == C.OBJ.ONE_WAY_WALL)
+            {
+                doFlip = false;
+                doRotate = false;
+                doInvert = false;
+            }
+
             if (doRotate)
                 newGadget.RotateInRect(newGadget.ImageRectangle);
             if (doFlip)
