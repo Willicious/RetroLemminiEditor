@@ -158,6 +158,7 @@
     <Compile Include="LevelFile.cs" />
     <Compile Include="LevelPieceTriggerMask.cs" />
     <Compile Include="LoadStylesFromFile.cs" />
+    <Compile Include="LevelPackCompilerManager.cs" />
     <Compile Include="RLEditForm.cs">
       <SubType>Form</SubType>
     </Compile>

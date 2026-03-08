@@ -288,6 +288,8 @@ namespace RLEditor
 
             btnLoadStyle.Top = tabPieces.Height - btnLoadStyle.Height;
 
+            lblUpdatingLPC.Left = this.Width - lblUpdatingLPC.Width - 40;
+
             RepositionPieceBrowser(pieceBrowserIsWindowed, width);
             RepositionPicPieces(pieceBrowserIsWindowed, width);
         }

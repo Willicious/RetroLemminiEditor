@@ -106,6 +106,7 @@ namespace RLEditor
         public bool ShowAboutAtStartup { get; set; }
         public bool ShowControlHints { get; set; }
         public bool AllTabsExpanded { get; set; }
+        public DateTime LastLPCUpdateCheck { get; set; }
 
         /// <summary>
         /// Resets the editor options to the default values.
@@ -154,6 +155,8 @@ namespace RLEditor
                 Location = new Point(40, 560),
                 Size = new Size(1000, 148)
             };
+
+            LastLPCUpdateCheck = DateTime.MinValue;
 
             DisplaySettings.SetDisplayed(C.DisplayType.Terrain, true);
             DisplaySettings.SetDisplayed(C.DisplayType.Objects, true);
@@ -1093,6 +1096,15 @@ namespace RLEditor
                                 }
                                 break;
                             }
+                        case "LASTLPCUPDATECHECK":
+                            {
+                                if (DateTime.TryParseExact(line.Text.Trim(), "O", null,
+                                        System.Globalization.DateTimeStyles.RoundtripKind, out var parsedDate))
+                                    LastLPCUpdateCheck = parsedDate;
+                                else
+                                    LastLPCUpdateCheck = DateTime.MinValue;
+                                break;
+                            }
                     }
                 }
                 parser.DisposeStreamReader();
@@ -1165,6 +1177,8 @@ namespace RLEditor
                 settingsFile.WriteLine(" PieceBrowserMaximized  " + (PieceBrowser.IsMaximized ? "True" : "False"));
                 settingsFile.WriteLine(" PieceBrowserLocation   " + PieceBrowser.Location.X.ToString() + "," + PieceBrowser.Location.Y.ToString());
                 settingsFile.WriteLine(" PieceBrowserSize       " + PieceBrowser.Size.Width.ToString() + "," + PieceBrowser.Size.Height.ToString());
+                settingsFile.WriteLine("");
+                settingsFile.WriteLine(" LastLPCUpdateCheck     " + LastLPCUpdateCheck.ToString("O"));
                 settingsFile.WriteLine("");
 
                 var displayTypes = new List<C.DisplayType>()

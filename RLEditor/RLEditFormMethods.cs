@@ -918,81 +918,6 @@ Digger=20
             }
         }
 
-        public void OpenLevelPackCompiler()
-        {
-            string exeName = "LemminiLevelPackCompiler.exe";
-            string[] searchPaths = { C.AppPath, C.AppPathResources };
-            string exePath = null;
-
-            foreach (string path in searchPaths)
-            {
-                if (string.IsNullOrEmpty(path))
-                    continue;
-
-                string fullPath = Path.Combine(path, exeName);
-                if (File.Exists(fullPath))
-                {
-                    exePath = fullPath;
-                    break;
-                }
-            }
-
-            if (exePath != null)
-            {
-                try
-                {
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = exePath,
-                        UseShellExecute = true
-                    });
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Failed to launch {exeName}:\n{ex.Message}",
-                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                DialogResult result = MessageBox.Show(
-                    $"{exeName} could not be found in the application folders.\n\n" +
-                    "Would you like to download it now?",
-                    "Not Found",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    string downloadUrl = "https://williciousmedia.short.gy/RLLevelPackCompiler";
-                    string savePath = Path.Combine(C.AppPath, exeName);
-
-                    try
-                    {
-                        using (WebClient wc = new WebClient())
-                        {
-                            wc.DownloadFile(downloadUrl, savePath);
-                        }
-
-                        MessageBox.Show($"{exeName} was downloaded to:\n{savePath}",
-                                        "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // Launch the downloaded exe
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = savePath,
-                            UseShellExecute = true
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Failed to download {exeName}:\n{ex.Message}",
-                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Returns the requested style or the first available valid style
         /// </summary>
@@ -2910,6 +2835,21 @@ Digger=20
             curRenderer.ChangeZoom(-1, false);
             RepositionPicLevel();
             picLevel.SetImage(curRenderer.GetScreenImage());
+        }
+
+        private void OpenLevelPackCompiler()
+        {
+            var manager = new LevelPackCompilerManager(curSettings, lblUpdatingLPC);
+            manager.LaunchLevelPackCompiler();
+        }
+
+        private async void MaybeUpdateLevelPackCompiler()
+        {
+            await Task.Run(() =>
+            {
+                var manager = new LevelPackCompilerManager(curSettings, lblUpdatingLPC);
+                manager.UpdateLevelPackCompiler();
+            });
         }
 
         /// <summary>

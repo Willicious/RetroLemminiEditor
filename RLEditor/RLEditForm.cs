@@ -1500,6 +1500,8 @@ namespace RLEditor
             UpdateMissingPiecesMenuItems();
             LinkControlsToMouseEvents(this);
             UpdateControlTags();
+
+            MaybeUpdateLevelPackCompiler();
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1700,6 +1702,21 @@ namespace RLEditor
         private void Control_MouseLeave(object sender, EventArgs e)
         {
             UpdateControlHintLabel(false, sender);
+        }
+
+        private void lblUpdatingLPC_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void lblUpdatingLPC_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
+        private void lblUpdatingLPC_Click(object sender, EventArgs e)
+        {
+            lblUpdatingLPC.Visible = false;
         }
     }
 }
