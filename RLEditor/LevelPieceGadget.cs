@@ -85,11 +85,11 @@ namespace RLEditor
 
                 if (ObjType == C.OBJ.HATCH)
                 {
-                    int lemmingHeight = 20;
+                    int lemmHeight = 20;
                     Point offset = TriggerMask.GetTriggerOffset(Key);
 
-                    int lemminiSpawnPointX = PosX + (Width / 2) + 2 + offset.X;
-                    int lemminiSpawnPointY = PosY + lemmingHeight + offset.Y;
+                    int lemminiSpawnPointX = PosX + (Width / 2) + offset.X + 2;
+                    int lemminiSpawnPointY = PosY + lemmHeight  + offset.Y - 1;
 
                     return new Rectangle(lemminiSpawnPointX, lemminiSpawnPointY, 1, 1);
                 }
