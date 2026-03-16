@@ -2979,8 +2979,8 @@ Digger=20
             btnHints.Tag = "Set level solution hints for the current level. These are displayed after the player has made 3 consecutive unsuccessful attempts";
 
             // --- Piece Browser --- //
-            btnStyleRandom.Tag = "Open a random style in the Piece Browser (you can add styles to the randomizer in Style Manager)";
-            comboPieceStyle.Tag = "Open a style in the Piece Browser";
+            btnStyleRandom.Tag = "Load a random style into the Piece Browser (you can add styles to the randomizer in Style Manager)";
+            comboPieceStyle.Tag = "Load a style into the Piece Browser";
             btnTerrain.Tag = "Show Terrain pieces";
             btnSteel.Tag = "Show Steel pieces";
             btnObjects.Tag = "Show Objects";

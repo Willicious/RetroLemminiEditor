@@ -1185,7 +1185,6 @@
             this.comboPieceStyle.Name = "comboPieceStyle";
             this.comboPieceStyle.Size = new System.Drawing.Size(274, 28);
             this.comboPieceStyle.TabIndex = 75;
-            this.comboPieceStyle.Tag = "Open a style in the Piece Browser";
             this.comboPieceStyle.SelectedIndexChanged += new System.EventHandler(this.combo_PieceStyle_TextChanged);
             this.comboPieceStyle.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
             this.comboPieceStyle.TextChanged += new System.EventHandler(this.combo_PieceStyle_TextChanged);
