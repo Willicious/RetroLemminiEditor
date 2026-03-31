@@ -90,6 +90,8 @@
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
             this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
             this.btnRulers = new System.Windows.Forms.Button();
+            this.btnPieceRight = new RLEditor.RepeatButton();
+            this.btnPieceLeft = new RLEditor.RepeatButton();
             this.timerAutosave = new System.Windows.Forms.Timer(this.components);
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarSteelAreasLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -120,8 +122,16 @@
             this.picPiece1 = new System.Windows.Forms.PictureBox();
             this.picPiece0 = new System.Windows.Forms.PictureBox();
             this.comboPieceStyle = new System.Windows.Forms.ComboBox();
+            this.txtFocusPieceBrowser = new RLEditor.FocusTextBox();
             this.picDragNewPiece = new System.Windows.Forms.PictureBox();
             this.tabSkills = new System.Windows.Forms.TabPage();
+            this.lblInfinityDigger = new System.Windows.Forms.Label();
+            this.lblInfinityMiner = new System.Windows.Forms.Label();
+            this.lblInfinityBasher = new System.Windows.Forms.Label();
+            this.lblInfinityBuilder = new System.Windows.Forms.Label();
+            this.lblInfinityBlocker = new System.Windows.Forms.Label();
+            this.lblInfinityBomber = new System.Windows.Forms.Label();
+            this.lblInfinityFloater = new System.Windows.Forms.Label();
             this.lblInfinityClimber = new System.Windows.Forms.Label();
             this.btnClearAllSkills = new System.Windows.Forms.Button();
             this.btnRandomSkillset = new System.Windows.Forms.Button();
@@ -138,6 +148,17 @@
             this.lblBlocker = new System.Windows.Forms.Label();
             this.lblFloater = new System.Windows.Forms.Label();
             this.lblClimber = new System.Windows.Forms.Label();
+            this.numRandomMaxLimit = new RLEditor.NumUpDownOverwrite();
+            this.numRandomMinLimit = new RLEditor.NumUpDownOverwrite();
+            this.numAllSkillsToN = new RLEditor.NumUpDownOverwrite();
+            this.numDigger = new RLEditor.NumUpDownOverwrite();
+            this.numMiner = new RLEditor.NumUpDownOverwrite();
+            this.numBasher = new RLEditor.NumUpDownOverwrite();
+            this.numBuilder = new RLEditor.NumUpDownOverwrite();
+            this.numBomber = new RLEditor.NumUpDownOverwrite();
+            this.numBlocker = new RLEditor.NumUpDownOverwrite();
+            this.numFloater = new RLEditor.NumUpDownOverwrite();
+            this.numClimber = new RLEditor.NumUpDownOverwrite();
             this.tabPieces = new System.Windows.Forms.TabPage();
             this.btnFlipSpawnDirection = new System.Windows.Forms.Button();
             this.btnLoadStyle = new System.Windows.Forms.Button();
@@ -160,10 +181,22 @@
             this.checkOnlyOnTerrain = new System.Windows.Forms.CheckBox();
             this.checkNoOverwrite = new System.Windows.Forms.CheckBox();
             this.checkErase = new System.Windows.Forms.CheckBox();
+            this.numRulerHeight = new RLEditor.NumUpDownOverwrite();
+            this.numRulerWidth = new RLEditor.NumUpDownOverwrite();
+            this.numSteelAreaHeight = new RLEditor.NumUpDownOverwrite();
+            this.numSteelAreaWidth = new RLEditor.NumUpDownOverwrite();
+            this.btnDrawSooner = new RLEditor.RepeatButton();
+            this.btnDrawLater = new RLEditor.RepeatButton();
+            this.btnDrawFirst = new RLEditor.NoPaddingButton();
+            this.btnDrawLast = new RLEditor.NoPaddingButton();
+            this.btnFlip = new RLEditor.RepeatButton();
+            this.btnInvert = new RLEditor.RepeatButton();
+            this.btnRotate = new RLEditor.RepeatButton();
             this.tabGlobals = new System.Windows.Forms.TabPage();
             this.btnCancelCrop = new System.Windows.Forms.Button();
             this.btnApplyCrop = new System.Windows.Forms.Button();
             this.btnCropLevel = new System.Windows.Forms.Button();
+            this.numReleaseRateMax = new RLEditor.NumUpDownOverwrite();
             this.lblReleaseRateMax = new System.Windows.Forms.Label();
             this.lblReleaseRateMin = new System.Windows.Forms.Label();
             this.comboMainStyle = new System.Windows.Forms.ComboBox();
@@ -181,8 +214,17 @@
             this.lblStartX = new System.Windows.Forms.Label();
             this.lblHeight = new System.Windows.Forms.Label();
             this.comboMusic = new System.Windows.Forms.ComboBox();
+            this.numTimeSecs = new RLEditor.NumUpDownOverwrite();
+            this.numTimeMins = new RLEditor.NumUpDownOverwrite();
+            this.numReleaseRateMin = new RLEditor.NumUpDownOverwrite();
+            this.numRescue = new RLEditor.NumUpDownOverwrite();
             this.lblRescue = new System.Windows.Forms.Label();
+            this.numLemmings = new RLEditor.NumUpDownOverwrite();
             this.lblLemmings = new System.Windows.Forms.Label();
+            this.numStartY = new RLEditor.NumUpDownOverwrite();
+            this.numStartX = new RLEditor.NumUpDownOverwrite();
+            this.numHeight = new RLEditor.NumUpDownOverwrite();
+            this.numWidth = new RLEditor.NumUpDownOverwrite();
             this.lblMusic = new System.Windows.Forms.Label();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -198,52 +240,10 @@
             this.lblMaxFallDistance = new System.Windows.Forms.Label();
             this.checkForceNormalTimerSpeed = new System.Windows.Forms.CheckBox();
             this.checkSuperlemming = new System.Windows.Forms.CheckBox();
+            this.numMaxFallDistance = new RLEditor.NumUpDownOverwrite();
             this.lblHint = new System.Windows.Forms.Label();
             this.lblUpdatingLPC = new System.Windows.Forms.Label();
-            this.numReleaseRateMax = new RLEditor.NumUpDownOverwrite();
-            this.numTimeSecs = new RLEditor.NumUpDownOverwrite();
-            this.numTimeMins = new RLEditor.NumUpDownOverwrite();
-            this.numReleaseRateMin = new RLEditor.NumUpDownOverwrite();
-            this.numRescue = new RLEditor.NumUpDownOverwrite();
-            this.numLemmings = new RLEditor.NumUpDownOverwrite();
-            this.numStartY = new RLEditor.NumUpDownOverwrite();
-            this.numStartX = new RLEditor.NumUpDownOverwrite();
-            this.numHeight = new RLEditor.NumUpDownOverwrite();
-            this.numWidth = new RLEditor.NumUpDownOverwrite();
-            this.numRulerHeight = new RLEditor.NumUpDownOverwrite();
-            this.numRulerWidth = new RLEditor.NumUpDownOverwrite();
-            this.numSteelAreaHeight = new RLEditor.NumUpDownOverwrite();
-            this.numSteelAreaWidth = new RLEditor.NumUpDownOverwrite();
-            this.btnDrawSooner = new RLEditor.RepeatButton();
-            this.btnDrawLater = new RLEditor.RepeatButton();
-            this.btnDrawFirst = new RLEditor.NoPaddingButton();
-            this.btnDrawLast = new RLEditor.NoPaddingButton();
-            this.btnFlip = new RLEditor.RepeatButton();
-            this.btnInvert = new RLEditor.RepeatButton();
-            this.btnRotate = new RLEditor.RepeatButton();
-            this.numRandomMaxLimit = new RLEditor.NumUpDownOverwrite();
-            this.numRandomMinLimit = new RLEditor.NumUpDownOverwrite();
-            this.numAllSkillsToN = new RLEditor.NumUpDownOverwrite();
-            this.numDigger = new RLEditor.NumUpDownOverwrite();
-            this.numMiner = new RLEditor.NumUpDownOverwrite();
-            this.numBasher = new RLEditor.NumUpDownOverwrite();
-            this.numBuilder = new RLEditor.NumUpDownOverwrite();
-            this.numBomber = new RLEditor.NumUpDownOverwrite();
-            this.numBlocker = new RLEditor.NumUpDownOverwrite();
-            this.numFloater = new RLEditor.NumUpDownOverwrite();
-            this.numClimber = new RLEditor.NumUpDownOverwrite();
-            this.numMaxFallDistance = new RLEditor.NumUpDownOverwrite();
             this.txtFocus = new RLEditor.FocusTextBox();
-            this.btnPieceRight = new RLEditor.RepeatButton();
-            this.btnPieceLeft = new RLEditor.RepeatButton();
-            this.txtFocusPieceBrowser = new RLEditor.FocusTextBox();
-            this.lblInfinityFloater = new System.Windows.Forms.Label();
-            this.lblInfinityBomber = new System.Windows.Forms.Label();
-            this.lblInfinityBlocker = new System.Windows.Forms.Label();
-            this.lblInfinityBuilder = new System.Windows.Forms.Label();
-            this.lblInfinityBasher = new System.Windows.Forms.Label();
-            this.lblInfinityMiner = new System.Windows.Forms.Label();
-            this.lblInfinityDigger = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLevel)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -258,24 +258,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPiece0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picDragNewPiece)).BeginInit();
             this.tabSkills.SuspendLayout();
-            this.tabPieces.SuspendLayout();
-            this.tabGlobals.SuspendLayout();
-            this.tabProperties.SuspendLayout();
-            this.tabExtras.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMax)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimeSecs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimeMins)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRescue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLemmings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStartY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStartX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRulerHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRulerWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRandomMaxLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRandomMinLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAllSkillsToN)).BeginInit();
@@ -287,6 +269,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.numBlocker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFloater)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numClimber)).BeginInit();
+            this.tabPieces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numRulerHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRulerWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaWidth)).BeginInit();
+            this.tabGlobals.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeSecs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeMins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRescue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLemmings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
+            this.tabProperties.SuspendLayout();
+            this.tabExtras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFallDistance)).BeginInit();
             this.SuspendLayout();
             // 
@@ -819,6 +819,36 @@
             this.btnRulers.UseVisualStyleBackColor = true;
             this.btnRulers.Click += new System.EventHandler(this.btnPieceRulers_Click);
             // 
+            // btnPieceRight
+            // 
+            this.btnPieceRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPieceRight.Location = new System.Drawing.Point(1274, 40);
+            this.btnPieceRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnPieceRight.Name = "btnPieceRight";
+            this.btnPieceRight.NoPaddingText = null;
+            this.btnPieceRight.Size = new System.Drawing.Size(48, 129);
+            this.btnPieceRight.TabIndex = 80;
+            this.btnPieceRight.Text = "⇨";
+            this.toolTipButton.SetToolTip(this.btnPieceRight, "Right-click for faster scrolling");
+            this.btnPieceRight.UseVisualStyleBackColor = true;
+            this.btnPieceRight.Click += new System.EventHandler(this.btnPieceRight_Click);
+            this.btnPieceRight.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPieceRight_MouseUp);
+            // 
+            // btnPieceLeft
+            // 
+            this.btnPieceLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPieceLeft.Location = new System.Drawing.Point(3, 40);
+            this.btnPieceLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnPieceLeft.Name = "btnPieceLeft";
+            this.btnPieceLeft.NoPaddingText = null;
+            this.btnPieceLeft.Size = new System.Drawing.Size(48, 129);
+            this.btnPieceLeft.TabIndex = 79;
+            this.btnPieceLeft.Text = "⇦";
+            this.toolTipButton.SetToolTip(this.btnPieceLeft, "Right-click for faster scrolling");
+            this.btnPieceLeft.UseVisualStyleBackColor = true;
+            this.btnPieceLeft.Click += new System.EventHandler(this.btnPieceLeft_Click);
+            this.btnPieceLeft.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPieceLeft_MouseUp);
+            // 
             // timerAutosave
             // 
             this.timerAutosave.Interval = 60000;
@@ -1192,6 +1222,16 @@
             this.comboPieceStyle.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
             this.comboPieceStyle.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
             // 
+            // txtFocusPieceBrowser
+            // 
+            this.txtFocusPieceBrowser.BackColor = System.Drawing.SystemColors.Control;
+            this.txtFocusPieceBrowser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFocusPieceBrowser.Location = new System.Drawing.Point(-150, 2);
+            this.txtFocusPieceBrowser.Name = "txtFocusPieceBrowser";
+            this.txtFocusPieceBrowser.Size = new System.Drawing.Size(57, 19);
+            this.txtFocusPieceBrowser.TabIndex = 86;
+            this.txtFocusPieceBrowser.Text = "asdf";
+            // 
             // picDragNewPiece
             // 
             this.picDragNewPiece.BackColor = System.Drawing.Color.Black;
@@ -1247,6 +1287,83 @@
             this.tabSkills.TabIndex = 2;
             this.tabSkills.Text = "Skills";
             this.tabSkills.UseVisualStyleBackColor = true;
+            // 
+            // lblInfinityDigger
+            // 
+            this.lblInfinityDigger.AutoSize = true;
+            this.lblInfinityDigger.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityDigger.Location = new System.Drawing.Point(221, 325);
+            this.lblInfinityDigger.Name = "lblInfinityDigger";
+            this.lblInfinityDigger.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityDigger.TabIndex = 72;
+            this.lblInfinityDigger.Text = "- (Infinity)";
+            this.lblInfinityDigger.Visible = false;
+            // 
+            // lblInfinityMiner
+            // 
+            this.lblInfinityMiner.AutoSize = true;
+            this.lblInfinityMiner.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityMiner.Location = new System.Drawing.Point(221, 285);
+            this.lblInfinityMiner.Name = "lblInfinityMiner";
+            this.lblInfinityMiner.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityMiner.TabIndex = 71;
+            this.lblInfinityMiner.Text = "- (Infinity)";
+            this.lblInfinityMiner.Visible = false;
+            // 
+            // lblInfinityBasher
+            // 
+            this.lblInfinityBasher.AutoSize = true;
+            this.lblInfinityBasher.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBasher.Location = new System.Drawing.Point(221, 245);
+            this.lblInfinityBasher.Name = "lblInfinityBasher";
+            this.lblInfinityBasher.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBasher.TabIndex = 70;
+            this.lblInfinityBasher.Text = "- (Infinity)";
+            this.lblInfinityBasher.Visible = false;
+            // 
+            // lblInfinityBuilder
+            // 
+            this.lblInfinityBuilder.AutoSize = true;
+            this.lblInfinityBuilder.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBuilder.Location = new System.Drawing.Point(221, 205);
+            this.lblInfinityBuilder.Name = "lblInfinityBuilder";
+            this.lblInfinityBuilder.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBuilder.TabIndex = 69;
+            this.lblInfinityBuilder.Text = "- (Infinity)";
+            this.lblInfinityBuilder.Visible = false;
+            // 
+            // lblInfinityBlocker
+            // 
+            this.lblInfinityBlocker.AutoSize = true;
+            this.lblInfinityBlocker.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBlocker.Location = new System.Drawing.Point(221, 165);
+            this.lblInfinityBlocker.Name = "lblInfinityBlocker";
+            this.lblInfinityBlocker.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBlocker.TabIndex = 68;
+            this.lblInfinityBlocker.Text = "- (Infinity)";
+            this.lblInfinityBlocker.Visible = false;
+            // 
+            // lblInfinityBomber
+            // 
+            this.lblInfinityBomber.AutoSize = true;
+            this.lblInfinityBomber.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityBomber.Location = new System.Drawing.Point(221, 125);
+            this.lblInfinityBomber.Name = "lblInfinityBomber";
+            this.lblInfinityBomber.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityBomber.TabIndex = 67;
+            this.lblInfinityBomber.Text = "- (Infinity)";
+            this.lblInfinityBomber.Visible = false;
+            // 
+            // lblInfinityFloater
+            // 
+            this.lblInfinityFloater.AutoSize = true;
+            this.lblInfinityFloater.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblInfinityFloater.Location = new System.Drawing.Point(221, 85);
+            this.lblInfinityFloater.Name = "lblInfinityFloater";
+            this.lblInfinityFloater.Size = new System.Drawing.Size(74, 20);
+            this.lblInfinityFloater.TabIndex = 66;
+            this.lblInfinityFloater.Text = "- (Infinity)";
+            this.lblInfinityFloater.Visible = false;
             // 
             // lblInfinityClimber
             // 
@@ -1407,6 +1524,158 @@
             this.lblClimber.Size = new System.Drawing.Size(62, 20);
             this.lblClimber.TabIndex = 0;
             this.lblClimber.Text = "Climber";
+            // 
+            // numRandomMaxLimit
+            // 
+            this.numRandomMaxLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numRandomMaxLimit.Location = new System.Drawing.Point(259, 569);
+            this.numRandomMaxLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numRandomMaxLimit.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numRandomMaxLimit.Name = "numRandomMaxLimit";
+            this.numRandomMaxLimit.Size = new System.Drawing.Size(64, 26);
+            this.numRandomMaxLimit.TabIndex = 62;
+            this.numRandomMaxLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numRandomMaxLimit.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numRandomMaxLimit.ValueChanged += new System.EventHandler(this.num_RandomLimit_ValueChanged);
+            // 
+            // numRandomMinLimit
+            // 
+            this.numRandomMinLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numRandomMinLimit.Location = new System.Drawing.Point(131, 569);
+            this.numRandomMinLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numRandomMinLimit.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numRandomMinLimit.Name = "numRandomMinLimit";
+            this.numRandomMinLimit.Size = new System.Drawing.Size(64, 26);
+            this.numRandomMinLimit.TabIndex = 61;
+            this.numRandomMinLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numRandomMinLimit.ValueChanged += new System.EventHandler(this.num_RandomLimit_ValueChanged);
+            // 
+            // numAllSkillsToN
+            // 
+            this.numAllSkillsToN.Location = new System.Drawing.Point(259, 660);
+            this.numAllSkillsToN.Name = "numAllSkillsToN";
+            this.numAllSkillsToN.Size = new System.Drawing.Size(64, 26);
+            this.numAllSkillsToN.TabIndex = 53;
+            this.numAllSkillsToN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // numDigger
+            // 
+            this.numDigger.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numDigger.Location = new System.Drawing.Point(152, 323);
+            this.numDigger.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numDigger.Name = "numDigger";
+            this.numDigger.Size = new System.Drawing.Size(64, 26);
+            this.numDigger.TabIndex = 25;
+            this.numDigger.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numDigger.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numDigger.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numDigger.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numMiner
+            // 
+            this.numMiner.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numMiner.Location = new System.Drawing.Point(152, 283);
+            this.numMiner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numMiner.Name = "numMiner";
+            this.numMiner.Size = new System.Drawing.Size(64, 26);
+            this.numMiner.TabIndex = 24;
+            this.numMiner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numMiner.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numMiner.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numMiner.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numBasher
+            // 
+            this.numBasher.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numBasher.Location = new System.Drawing.Point(152, 243);
+            this.numBasher.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numBasher.Name = "numBasher";
+            this.numBasher.Size = new System.Drawing.Size(64, 26);
+            this.numBasher.TabIndex = 22;
+            this.numBasher.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numBasher.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numBasher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numBasher.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numBuilder
+            // 
+            this.numBuilder.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numBuilder.Location = new System.Drawing.Point(152, 203);
+            this.numBuilder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numBuilder.Name = "numBuilder";
+            this.numBuilder.Size = new System.Drawing.Size(64, 26);
+            this.numBuilder.TabIndex = 17;
+            this.numBuilder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numBuilder.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numBuilder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numBuilder.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numBomber
+            // 
+            this.numBomber.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numBomber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numBomber.Location = new System.Drawing.Point(152, 123);
+            this.numBomber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numBomber.Name = "numBomber";
+            this.numBomber.Size = new System.Drawing.Size(64, 26);
+            this.numBomber.TabIndex = 12;
+            this.numBomber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numBomber.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numBomber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numBomber.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numBlocker
+            // 
+            this.numBlocker.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numBlocker.Location = new System.Drawing.Point(152, 163);
+            this.numBlocker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numBlocker.Name = "numBlocker";
+            this.numBlocker.Size = new System.Drawing.Size(64, 26);
+            this.numBlocker.TabIndex = 14;
+            this.numBlocker.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numBlocker.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numBlocker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numBlocker.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numFloater
+            // 
+            this.numFloater.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numFloater.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numFloater.Location = new System.Drawing.Point(152, 83);
+            this.numFloater.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numFloater.Name = "numFloater";
+            this.numFloater.Size = new System.Drawing.Size(64, 26);
+            this.numFloater.TabIndex = 8;
+            this.numFloater.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numFloater.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numFloater.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numFloater.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numClimber
+            // 
+            this.numClimber.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.numClimber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numClimber.Location = new System.Drawing.Point(152, 43);
+            this.numClimber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numClimber.Name = "numClimber";
+            this.numClimber.Size = new System.Drawing.Size(64, 26);
+            this.numClimber.TabIndex = 6;
+            this.numClimber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numClimber.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
+            this.numClimber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
+            this.numClimber.Leave += new System.EventHandler(this.textbox_Leave);
             // 
             // tabPieces
             // 
@@ -1669,778 +1938,6 @@
             this.checkErase.UseVisualStyleBackColor = true;
             this.checkErase.CheckedChanged += new System.EventHandler(this.check_Pieces_Erase_CheckedChanged);
             // 
-            // tabGlobals
-            // 
-            this.tabGlobals.Controls.Add(this.btnCancelCrop);
-            this.tabGlobals.Controls.Add(this.btnApplyCrop);
-            this.tabGlobals.Controls.Add(this.btnCropLevel);
-            this.tabGlobals.Controls.Add(this.numReleaseRateMax);
-            this.tabGlobals.Controls.Add(this.lblReleaseRateMax);
-            this.tabGlobals.Controls.Add(this.lblReleaseRateMin);
-            this.tabGlobals.Controls.Add(this.comboMainStyle);
-            this.tabGlobals.Controls.Add(this.lblMainStyle);
-            this.tabGlobals.Controls.Add(this.checkAutoSteel);
-            this.tabGlobals.Controls.Add(this.comboSteelMode);
-            this.tabGlobals.Controls.Add(this.lblSteelMode);
-            this.tabGlobals.Controls.Add(this.checkTimeLimit);
-            this.tabGlobals.Controls.Add(this.checkLockReleaseRate);
-            this.tabGlobals.Controls.Add(this.checkAutoStart);
-            this.tabGlobals.Controls.Add(this.lblLevelVersion);
-            this.tabGlobals.Controls.Add(this.txtLevelAuthor);
-            this.tabGlobals.Controls.Add(this.txtLevelTitle);
-            this.tabGlobals.Controls.Add(this.lblStartY);
-            this.tabGlobals.Controls.Add(this.lblStartX);
-            this.tabGlobals.Controls.Add(this.lblHeight);
-            this.tabGlobals.Controls.Add(this.comboMusic);
-            this.tabGlobals.Controls.Add(this.numTimeSecs);
-            this.tabGlobals.Controls.Add(this.numTimeMins);
-            this.tabGlobals.Controls.Add(this.numReleaseRateMin);
-            this.tabGlobals.Controls.Add(this.numRescue);
-            this.tabGlobals.Controls.Add(this.lblRescue);
-            this.tabGlobals.Controls.Add(this.numLemmings);
-            this.tabGlobals.Controls.Add(this.lblLemmings);
-            this.tabGlobals.Controls.Add(this.numStartY);
-            this.tabGlobals.Controls.Add(this.numStartX);
-            this.tabGlobals.Controls.Add(this.numHeight);
-            this.tabGlobals.Controls.Add(this.numWidth);
-            this.tabGlobals.Controls.Add(this.lblMusic);
-            this.tabGlobals.Controls.Add(this.lblAuthor);
-            this.tabGlobals.Controls.Add(this.lblTitle);
-            this.tabGlobals.Controls.Add(this.lblWidth);
-            this.tabGlobals.Location = new System.Drawing.Point(4, 29);
-            this.tabGlobals.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabGlobals.Name = "tabGlobals";
-            this.tabGlobals.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabGlobals.Size = new System.Drawing.Size(388, 787);
-            this.tabGlobals.TabIndex = 0;
-            this.tabGlobals.Text = "Globals";
-            this.tabGlobals.UseVisualStyleBackColor = true;
-            // 
-            // btnCancelCrop
-            // 
-            this.btnCancelCrop.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCancelCrop.Location = new System.Drawing.Point(249, 250);
-            this.btnCancelCrop.Name = "btnCancelCrop";
-            this.btnCancelCrop.Size = new System.Drawing.Size(100, 32);
-            this.btnCancelCrop.TabIndex = 105;
-            this.btnCancelCrop.Tag = "Cancel crop and close the rectangle";
-            this.btnCancelCrop.Text = "Cancel";
-            this.btnCancelCrop.UseVisualStyleBackColor = true;
-            this.btnCancelCrop.Visible = false;
-            this.btnCancelCrop.Click += new System.EventHandler(this.btnCancelCrop_Click);
-            // 
-            // btnApplyCrop
-            // 
-            this.btnApplyCrop.ForeColor = System.Drawing.Color.Blue;
-            this.btnApplyCrop.Location = new System.Drawing.Point(140, 250);
-            this.btnApplyCrop.Name = "btnApplyCrop";
-            this.btnApplyCrop.Size = new System.Drawing.Size(100, 32);
-            this.btnApplyCrop.TabIndex = 104;
-            this.btnApplyCrop.Tag = "Apply crop rectangle as new width and height";
-            this.btnApplyCrop.Text = "Apply";
-            this.btnApplyCrop.UseVisualStyleBackColor = true;
-            this.btnApplyCrop.Visible = false;
-            this.btnApplyCrop.Click += new System.EventHandler(this.btnApplyCrop_Click);
-            // 
-            // btnCropLevel
-            // 
-            this.btnCropLevel.Location = new System.Drawing.Point(28, 250);
-            this.btnCropLevel.Name = "btnCropLevel";
-            this.btnCropLevel.Size = new System.Drawing.Size(100, 32);
-            this.btnCropLevel.TabIndex = 103;
-            this.btnCropLevel.Tag = "Activate crop rectangle to easily change the width and height of the level";
-            this.btnCropLevel.Text = "Crop";
-            this.btnCropLevel.UseVisualStyleBackColor = true;
-            this.btnCropLevel.Click += new System.EventHandler(this.btnCropLevel_Click);
-            this.btnCropLevel.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
-            this.btnCropLevel.MouseLeave += new System.EventHandler(this.Control_MouseLeave);
-            // 
-            // lblReleaseRateMax
-            // 
-            this.lblReleaseRateMax.AutoSize = true;
-            this.lblReleaseRateMax.Location = new System.Drawing.Point(209, 485);
-            this.lblReleaseRateMax.Name = "lblReleaseRateMax";
-            this.lblReleaseRateMax.Size = new System.Drawing.Size(66, 20);
-            this.lblReleaseRateMax.TabIndex = 101;
-            this.lblReleaseRateMax.Text = "Max RR";
-            // 
-            // lblReleaseRateMin
-            // 
-            this.lblReleaseRateMin.AutoSize = true;
-            this.lblReleaseRateMin.Location = new System.Drawing.Point(24, 485);
-            this.lblReleaseRateMin.Name = "lblReleaseRateMin";
-            this.lblReleaseRateMin.Size = new System.Drawing.Size(62, 20);
-            this.lblReleaseRateMin.TabIndex = 100;
-            this.lblReleaseRateMin.Text = "Min RR";
-            // 
-            // comboMainStyle
-            // 
-            this.comboMainStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboMainStyle.FormattingEnabled = true;
-            this.comboMainStyle.ItemHeight = 20;
-            this.comboMainStyle.Location = new System.Drawing.Point(68, 156);
-            this.comboMainStyle.MaxDropDownItems = 30;
-            this.comboMainStyle.Name = "comboMainStyle";
-            this.comboMainStyle.Size = new System.Drawing.Size(301, 28);
-            this.comboMainStyle.TabIndex = 94;
-            this.comboMainStyle.Tag = "Choose a main style for your level";
-            this.comboMainStyle.SelectedIndexChanged += new System.EventHandler(this.combo_MainStyle_TextChanged);
-            this.comboMainStyle.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
-            this.comboMainStyle.TextChanged += new System.EventHandler(this.combo_MainStyle_TextChanged);
-            this.comboMainStyle.Leave += new System.EventHandler(this.textbox_Leave);
-            this.comboMainStyle.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
-            this.comboMainStyle.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
-            // 
-            // lblMainStyle
-            // 
-            this.lblMainStyle.Location = new System.Drawing.Point(9, 161);
-            this.lblMainStyle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMainStyle.Name = "lblMainStyle";
-            this.lblMainStyle.Size = new System.Drawing.Size(69, 23);
-            this.lblMainStyle.TabIndex = 93;
-            this.lblMainStyle.Text = "Style";
-            this.lblMainStyle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // checkAutoSteel
-            // 
-            this.checkAutoSteel.AutoSize = true;
-            this.checkAutoSteel.Location = new System.Drawing.Point(28, 653);
-            this.checkAutoSteel.Name = "checkAutoSteel";
-            this.checkAutoSteel.Size = new System.Drawing.Size(148, 24);
-            this.checkAutoSteel.TabIndex = 91;
-            this.checkAutoSteel.Tag = "With automatic steel checked, steel pieces do not require a manually-applied stee" +
-    "l area";
-            this.checkAutoSteel.Text = "Automatic Steel";
-            this.checkAutoSteel.UseVisualStyleBackColor = true;
-            this.checkAutoSteel.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
-            // comboSteelMode
-            // 
-            this.comboSteelMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSteelMode.Enabled = false;
-            this.comboSteelMode.FormattingEnabled = true;
-            this.comboSteelMode.Items.AddRange(new object[] {
-            "Auto (Fit to Shape)",
-            "Auto (Visible Pixels Only)",
-            "Manual"});
-            this.comboSteelMode.Location = new System.Drawing.Point(297, 651);
-            this.comboSteelMode.Name = "comboSteelMode";
-            this.comboSteelMode.Size = new System.Drawing.Size(52, 28);
-            this.comboSteelMode.TabIndex = 90;
-            this.comboSteelMode.Visible = false;
-            this.comboSteelMode.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
-            this.comboSteelMode.Leave += new System.EventHandler(this.textbox_Leave);
-            this.comboSteelMode.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
-            this.comboSteelMode.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
-            // 
-            // lblSteelMode
-            // 
-            this.lblSteelMode.AutoSize = true;
-            this.lblSteelMode.Enabled = false;
-            this.lblSteelMode.Location = new System.Drawing.Point(201, 654);
-            this.lblSteelMode.Name = "lblSteelMode";
-            this.lblSteelMode.Size = new System.Drawing.Size(90, 20);
-            this.lblSteelMode.TabIndex = 89;
-            this.lblSteelMode.Text = "Steel Mode";
-            this.lblSteelMode.Visible = false;
-            // 
-            // checkTimeLimit
-            // 
-            this.checkTimeLimit.AutoSize = true;
-            this.checkTimeLimit.Location = new System.Drawing.Point(28, 586);
-            this.checkTimeLimit.Name = "checkTimeLimit";
-            this.checkTimeLimit.Size = new System.Drawing.Size(106, 24);
-            this.checkTimeLimit.TabIndex = 32;
-            this.checkTimeLimit.Tag = "Apply a time limit, or leave this unchecked for infinite time";
-            this.checkTimeLimit.Text = "Time Limit";
-            this.checkTimeLimit.UseVisualStyleBackColor = true;
-            this.checkTimeLimit.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
-            // checkLockReleaseRate
-            // 
-            this.checkLockReleaseRate.AutoSize = true;
-            this.checkLockReleaseRate.Location = new System.Drawing.Point(28, 521);
-            this.checkLockReleaseRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkLockReleaseRate.Name = "checkLockReleaseRate";
-            this.checkLockReleaseRate.Size = new System.Drawing.Size(171, 24);
-            this.checkLockReleaseRate.TabIndex = 22;
-            this.checkLockReleaseRate.Tag = "Lock the release rate (prevents it from being changed in-game)";
-            this.checkLockReleaseRate.Text = "Lock Release Rate";
-            this.checkLockReleaseRate.UseVisualStyleBackColor = true;
-            this.checkLockReleaseRate.CheckedChanged += new System.EventHandler(this.check_Lvl_LockSR_CheckedChanged);
-            // 
-            // checkAutoStart
-            // 
-            this.checkAutoStart.AutoSize = true;
-            this.checkAutoStart.Location = new System.Drawing.Point(28, 349);
-            this.checkAutoStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkAutoStart.Name = "checkAutoStart";
-            this.checkAutoStart.Size = new System.Drawing.Size(163, 24);
-            this.checkAutoStart.TabIndex = 12;
-            this.checkAutoStart.Tag = "Automatically set the start position";
-            this.checkAutoStart.Text = "Auto Screen Start";
-            this.checkAutoStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkAutoStart.UseVisualStyleBackColor = true;
-            this.checkAutoStart.CheckedChanged += new System.EventHandler(this.chk_Lvl_AutoStart_Leave);
-            // 
-            // lblLevelVersion
-            // 
-            this.lblLevelVersion.AutoSize = true;
-            this.lblLevelVersion.Location = new System.Drawing.Point(24, 717);
-            this.lblLevelVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLevelVersion.Name = "lblLevelVersion";
-            this.lblLevelVersion.Size = new System.Drawing.Size(117, 20);
-            this.lblLevelVersion.TabIndex = 31;
-            this.lblLevelVersion.Text = "Level Version 0";
-            this.lblLevelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtLevelAuthor
-            // 
-            this.txtLevelAuthor.Location = new System.Drawing.Point(67, 63);
-            this.txtLevelAuthor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtLevelAuthor.MaxLength = 54;
-            this.txtLevelAuthor.Name = "txtLevelAuthor";
-            this.txtLevelAuthor.Size = new System.Drawing.Size(302, 26);
-            this.txtLevelAuthor.TabIndex = 3;
-            this.txtLevelAuthor.Tag = "Enter an author name";
-            this.txtLevelAuthor.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // txtLevelTitle
-            // 
-            this.txtLevelTitle.Location = new System.Drawing.Point(67, 15);
-            this.txtLevelTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtLevelTitle.MaxLength = 54;
-            this.txtLevelTitle.Name = "txtLevelTitle";
-            this.txtLevelTitle.Size = new System.Drawing.Size(302, 26);
-            this.txtLevelTitle.TabIndex = 1;
-            this.txtLevelTitle.Tag = "Enter a title for your level";
-            this.txtLevelTitle.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // lblStartY
-            // 
-            this.lblStartY.AutoSize = true;
-            this.lblStartY.Location = new System.Drawing.Point(209, 313);
-            this.lblStartY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStartY.Name = "lblStartY";
-            this.lblStartY.Size = new System.Drawing.Size(59, 20);
-            this.lblStartY.TabIndex = 16;
-            this.lblStartY.Text = "Start Y";
-            this.lblStartY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblStartX
-            // 
-            this.lblStartX.AutoSize = true;
-            this.lblStartX.Location = new System.Drawing.Point(24, 313);
-            this.lblStartX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStartX.Name = "lblStartX";
-            this.lblStartX.Size = new System.Drawing.Size(59, 20);
-            this.lblStartX.TabIndex = 13;
-            this.lblStartX.Text = "Start X";
-            this.lblStartX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblHeight
-            // 
-            this.lblHeight.AutoSize = true;
-            this.lblHeight.Location = new System.Drawing.Point(209, 218);
-            this.lblHeight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblHeight.Name = "lblHeight";
-            this.lblHeight.Size = new System.Drawing.Size(56, 20);
-            this.lblHeight.TabIndex = 11;
-            this.lblHeight.Text = "Height";
-            this.lblHeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // comboMusic
-            // 
-            this.comboMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboMusic.FormattingEnabled = true;
-            this.comboMusic.Location = new System.Drawing.Point(68, 108);
-            this.comboMusic.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboMusic.Name = "comboMusic";
-            this.comboMusic.Size = new System.Drawing.Size(302, 28);
-            this.comboMusic.TabIndex = 5;
-            this.comboMusic.Tag = "Choose a music track for your level (note that you can also set music for a full " +
-    "pack of levels using the Level Pack Compiler)";
-            this.comboMusic.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
-            this.comboMusic.Leave += new System.EventHandler(this.textbox_Leave);
-            this.comboMusic.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
-            this.comboMusic.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
-            // 
-            // lblRescue
-            // 
-            this.lblRescue.AutoSize = true;
-            this.lblRescue.Location = new System.Drawing.Point(209, 412);
-            this.lblRescue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblRescue.Name = "lblRescue";
-            this.lblRescue.Size = new System.Drawing.Size(45, 20);
-            this.lblRescue.TabIndex = 20;
-            this.lblRescue.Text = "Save";
-            this.lblRescue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblLemmings
-            // 
-            this.lblLemmings.AutoSize = true;
-            this.lblLemmings.Location = new System.Drawing.Point(24, 412);
-            this.lblLemmings.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblLemmings.Name = "lblLemmings";
-            this.lblLemmings.Size = new System.Drawing.Size(82, 20);
-            this.lblLemmings.TabIndex = 17;
-            this.lblLemmings.Text = "Lemmings";
-            this.lblLemmings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblMusic
-            // 
-            this.lblMusic.Location = new System.Drawing.Point(9, 113);
-            this.lblMusic.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblMusic.Name = "lblMusic";
-            this.lblMusic.Size = new System.Drawing.Size(69, 23);
-            this.lblMusic.TabIndex = 4;
-            this.lblMusic.Text = "Music";
-            this.lblMusic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblAuthor
-            // 
-            this.lblAuthor.Location = new System.Drawing.Point(9, 65);
-            this.lblAuthor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(66, 23);
-            this.lblAuthor.TabIndex = 2;
-            this.lblAuthor.Text = "Author";
-            this.lblAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Location = new System.Drawing.Point(9, 17);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(69, 23);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Title";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblWidth
-            // 
-            this.lblWidth.AutoSize = true;
-            this.lblWidth.Location = new System.Drawing.Point(24, 218);
-            this.lblWidth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblWidth.Name = "lblWidth";
-            this.lblWidth.Size = new System.Drawing.Size(50, 20);
-            this.lblWidth.TabIndex = 8;
-            this.lblWidth.Tag = "";
-            this.lblWidth.Text = "Width";
-            this.lblWidth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tabProperties
-            // 
-            this.tabProperties.Controls.Add(this.tabGlobals);
-            this.tabProperties.Controls.Add(this.tabPieces);
-            this.tabProperties.Controls.Add(this.tabSkills);
-            this.tabProperties.Controls.Add(this.tabExtras);
-            this.tabProperties.Location = new System.Drawing.Point(9, 42);
-            this.tabProperties.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabProperties.Name = "tabProperties";
-            this.tabProperties.SelectedIndex = 0;
-            this.tabProperties.Size = new System.Drawing.Size(396, 820);
-            this.tabProperties.TabIndex = 1;
-            this.tabProperties.TabStop = false;
-            this.tabProperties.Click += new System.EventHandler(this.tabLvlProperties_Click);
-            // 
-            // tabExtras
-            // 
-            this.tabExtras.Controls.Add(this.checkDirectDrop);
-            this.tabExtras.Controls.Add(this.btnLevelPackCompiler);
-            this.tabExtras.Controls.Add(this.btnModsHelp);
-            this.tabExtras.Controls.Add(this.comboMods);
-            this.tabExtras.Controls.Add(this.lblMods);
-            this.tabExtras.Controls.Add(this.btnHints);
-            this.tabExtras.Controls.Add(this.lblMaxFallDistance);
-            this.tabExtras.Controls.Add(this.checkForceNormalTimerSpeed);
-            this.tabExtras.Controls.Add(this.checkSuperlemming);
-            this.tabExtras.Controls.Add(this.numMaxFallDistance);
-            this.tabExtras.Location = new System.Drawing.Point(4, 29);
-            this.tabExtras.Name = "tabExtras";
-            this.tabExtras.Size = new System.Drawing.Size(388, 787);
-            this.tabExtras.TabIndex = 3;
-            this.tabExtras.Text = "Extras";
-            this.tabExtras.UseVisualStyleBackColor = true;
-            // 
-            // checkDirectDrop
-            // 
-            this.checkDirectDrop.AutoSize = true;
-            this.checkDirectDrop.Location = new System.Drawing.Point(33, 215);
-            this.checkDirectDrop.Name = "checkDirectDrop";
-            this.checkDirectDrop.Size = new System.Drawing.Size(177, 24);
-            this.checkDirectDrop.TabIndex = 109;
-            this.checkDirectDrop.Text = "Activate Direct Drop";
-            this.checkDirectDrop.UseVisualStyleBackColor = true;
-            this.checkDirectDrop.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
-            // btnLevelPackCompiler
-            // 
-            this.btnLevelPackCompiler.Location = new System.Drawing.Point(33, 25);
-            this.btnLevelPackCompiler.Name = "btnLevelPackCompiler";
-            this.btnLevelPackCompiler.Size = new System.Drawing.Size(321, 50);
-            this.btnLevelPackCompiler.TabIndex = 108;
-            this.btnLevelPackCompiler.Text = "Level Pack Compiler";
-            this.btnLevelPackCompiler.UseVisualStyleBackColor = true;
-            this.btnLevelPackCompiler.Click += new System.EventHandler(this.btnLevelPackCompiler_Click);
-            // 
-            // btnModsHelp
-            // 
-            this.btnModsHelp.Location = new System.Drawing.Point(298, 119);
-            this.btnModsHelp.Name = "btnModsHelp";
-            this.btnModsHelp.Size = new System.Drawing.Size(56, 50);
-            this.btnModsHelp.TabIndex = 107;
-            this.btnModsHelp.Text = "?";
-            this.btnModsHelp.UseVisualStyleBackColor = true;
-            this.btnModsHelp.Click += new System.EventHandler(this.btnModsHelp_Click);
-            // 
-            // comboMods
-            // 
-            this.comboMods.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboMods.FormattingEnabled = true;
-            this.comboMods.Location = new System.Drawing.Point(83, 127);
-            this.comboMods.Name = "comboMods";
-            this.comboMods.Size = new System.Drawing.Size(209, 28);
-            this.comboMods.TabIndex = 106;
-            this.comboMods.DropDownClosed += new System.EventHandler(this.combo_Mods_DropDownClosed);
-            this.comboMods.Leave += new System.EventHandler(this.textbox_Leave);
-            this.comboMods.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
-            this.comboMods.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
-            // 
-            // lblMods
-            // 
-            this.lblMods.AutoSize = true;
-            this.lblMods.Location = new System.Drawing.Point(29, 135);
-            this.lblMods.Name = "lblMods";
-            this.lblMods.Size = new System.Drawing.Size(48, 20);
-            this.lblMods.TabIndex = 105;
-            this.lblMods.Text = "Mods";
-            // 
-            // btnHints
-            // 
-            this.btnHints.Location = new System.Drawing.Point(33, 480);
-            this.btnHints.Name = "btnHints";
-            this.btnHints.Size = new System.Drawing.Size(321, 50);
-            this.btnHints.TabIndex = 104;
-            this.btnHints.Text = "Level Solution Hints";
-            this.btnHints.UseVisualStyleBackColor = true;
-            this.btnHints.Click += new System.EventHandler(this.btnHints_Click);
-            // 
-            // lblMaxFallDistance
-            // 
-            this.lblMaxFallDistance.AutoSize = true;
-            this.lblMaxFallDistance.Location = new System.Drawing.Point(29, 396);
-            this.lblMaxFallDistance.Name = "lblMaxFallDistance";
-            this.lblMaxFallDistance.Size = new System.Drawing.Size(134, 20);
-            this.lblMaxFallDistance.TabIndex = 100;
-            this.lblMaxFallDistance.Text = "Max Fall Distance";
-            // 
-            // checkForceNormalTimerSpeed
-            // 
-            this.checkForceNormalTimerSpeed.AutoSize = true;
-            this.checkForceNormalTimerSpeed.Checked = true;
-            this.checkForceNormalTimerSpeed.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkForceNormalTimerSpeed.Enabled = false;
-            this.checkForceNormalTimerSpeed.Location = new System.Drawing.Point(33, 322);
-            this.checkForceNormalTimerSpeed.Name = "checkForceNormalTimerSpeed";
-            this.checkForceNormalTimerSpeed.Size = new System.Drawing.Size(212, 24);
-            this.checkForceNormalTimerSpeed.TabIndex = 97;
-            this.checkForceNormalTimerSpeed.Text = "Use Normal Timer Speed";
-            this.checkForceNormalTimerSpeed.UseVisualStyleBackColor = true;
-            this.checkForceNormalTimerSpeed.CheckedChanged += new System.EventHandler(this.textbox_Leave);
-            // 
-            // checkSuperlemming
-            // 
-            this.checkSuperlemming.AutoSize = true;
-            this.checkSuperlemming.Location = new System.Drawing.Point(33, 292);
-            this.checkSuperlemming.Name = "checkSuperlemming";
-            this.checkSuperlemming.Size = new System.Drawing.Size(242, 24);
-            this.checkSuperlemming.TabIndex = 93;
-            this.checkSuperlemming.Text = "Activate Superlemming Mode";
-            this.checkSuperlemming.UseVisualStyleBackColor = true;
-            this.checkSuperlemming.CheckedChanged += new System.EventHandler(this.check_Lvl_Superlemming_CheckedChanged);
-            // 
-            // lblHint
-            // 
-            this.lblHint.AutoSize = true;
-            this.lblHint.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblHint.Location = new System.Drawing.Point(405, 13);
-            this.lblHint.Name = "lblHint";
-            this.lblHint.Size = new System.Drawing.Size(300, 20);
-            this.lblHint.TabIndex = 88;
-            this.lblHint.Text = "Shows hints when hovering over a control";
-            this.lblHint.Visible = false;
-            // 
-            // lblUpdatingLPC
-            // 
-            this.lblUpdatingLPC.AutoSize = true;
-            this.lblUpdatingLPC.ForeColor = System.Drawing.Color.DarkBlue;
-            this.lblUpdatingLPC.Location = new System.Drawing.Point(728, 13);
-            this.lblUpdatingLPC.Name = "lblUpdatingLPC";
-            this.lblUpdatingLPC.Size = new System.Drawing.Size(232, 20);
-            this.lblUpdatingLPC.TabIndex = 89;
-            this.lblUpdatingLPC.Text = "Updating Level Pack Compiler...";
-            this.lblUpdatingLPC.Visible = false;
-            this.lblUpdatingLPC.Click += new System.EventHandler(this.lblUpdatingLPC_Click);
-            this.lblUpdatingLPC.MouseEnter += new System.EventHandler(this.lblUpdatingLPC_MouseEnter);
-            this.lblUpdatingLPC.MouseLeave += new System.EventHandler(this.lblUpdatingLPC_MouseLeave);
-            // 
-            // numReleaseRateMax
-            // 
-            this.numReleaseRateMax.Location = new System.Drawing.Point(279, 483);
-            this.numReleaseRateMax.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numReleaseRateMax.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numReleaseRateMax.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numReleaseRateMax.Name = "numReleaseRateMax";
-            this.numReleaseRateMax.Size = new System.Drawing.Size(70, 26);
-            this.numReleaseRateMax.TabIndex = 102;
-            this.numReleaseRateMax.Tag = "Set the maximum release rate";
-            this.numReleaseRateMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numReleaseRateMax.Value = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numReleaseRateMax.ValueChanged += new System.EventHandler(this.num_Lvl_RRMax_ValueChanged);
-            this.numReleaseRateMax.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numTimeSecs
-            // 
-            this.numTimeSecs.Location = new System.Drawing.Point(279, 585);
-            this.numTimeSecs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numTimeSecs.Maximum = new decimal(new int[] {
-            59,
-            0,
-            0,
-            0});
-            this.numTimeSecs.Name = "numTimeSecs";
-            this.numTimeSecs.Size = new System.Drawing.Size(70, 26);
-            this.numTimeSecs.TabIndex = 27;
-            this.numTimeSecs.Tag = "Set the numbr of seconds for the time limit";
-            this.numTimeSecs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numTimeSecs.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numTimeMins
-            // 
-            this.numTimeMins.Location = new System.Drawing.Point(192, 585);
-            this.numTimeMins.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numTimeMins.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numTimeMins.Name = "numTimeMins";
-            this.numTimeMins.Size = new System.Drawing.Size(70, 26);
-            this.numTimeMins.TabIndex = 26;
-            this.numTimeMins.Tag = "Set the number of minutes for the time limit";
-            this.numTimeMins.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numTimeMins.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numReleaseRateMin
-            // 
-            this.numReleaseRateMin.Location = new System.Drawing.Point(114, 483);
-            this.numReleaseRateMin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numReleaseRateMin.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.numReleaseRateMin.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numReleaseRateMin.Name = "numReleaseRateMin";
-            this.numReleaseRateMin.Size = new System.Drawing.Size(70, 26);
-            this.numReleaseRateMin.TabIndex = 24;
-            this.numReleaseRateMin.Tag = "Set the minimum release rate";
-            this.numReleaseRateMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numReleaseRateMin.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numReleaseRateMin.ValueChanged += new System.EventHandler(this.num_Lvl_RRMin_ValueChanged);
-            this.numReleaseRateMin.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numRescue
-            // 
-            this.numRescue.Location = new System.Drawing.Point(279, 410);
-            this.numRescue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numRescue.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numRescue.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numRescue.Name = "numRescue";
-            this.numRescue.Size = new System.Drawing.Size(70, 26);
-            this.numRescue.TabIndex = 21;
-            this.numRescue.Tag = "Set the amount of lemmings to be saved";
-            this.numRescue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numRescue.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numRescue.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numLemmings
-            // 
-            this.numLemmings.Location = new System.Drawing.Point(114, 410);
-            this.numLemmings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numLemmings.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numLemmings.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numLemmings.Name = "numLemmings";
-            this.numLemmings.Size = new System.Drawing.Size(70, 26);
-            this.numLemmings.TabIndex = 18;
-            this.numLemmings.Tag = "Set the total number of lemmings";
-            this.numLemmings.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numLemmings.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            this.numLemmings.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numStartY
-            // 
-            this.numStartY.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numStartY.Location = new System.Drawing.Point(279, 311);
-            this.numStartY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numStartY.Maximum = new decimal(new int[] {
-            319,
-            0,
-            0,
-            0});
-            this.numStartY.Name = "numStartY";
-            this.numStartY.Size = new System.Drawing.Size(70, 26);
-            this.numStartY.TabIndex = 15;
-            this.numStartY.Tag = "Set the vertical start position";
-            this.numStartY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numStartY.Value = new decimal(new int[] {
-            160,
-            0,
-            0,
-            0});
-            this.numStartY.ValueChanged += new System.EventHandler(this.num_Lvl_StartY_ValueChanged);
-            this.numStartY.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numStartX
-            // 
-            this.numStartX.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numStartX.Location = new System.Drawing.Point(114, 311);
-            this.numStartX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numStartX.Maximum = new decimal(new int[] {
-            639,
-            0,
-            0,
-            0});
-            this.numStartX.Name = "numStartX";
-            this.numStartX.Size = new System.Drawing.Size(70, 26);
-            this.numStartX.TabIndex = 14;
-            this.numStartX.Tag = "Set the horizontal start position";
-            this.numStartX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numStartX.Value = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
-            this.numStartX.ValueChanged += new System.EventHandler(this.num_Lvl_StartX_ValueChanged);
-            this.numStartX.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numHeight
-            // 
-            this.numHeight.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numHeight.Location = new System.Drawing.Point(279, 216);
-            this.numHeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numHeight.Maximum = new decimal(new int[] {
-            6400,
-            0,
-            0,
-            0});
-            this.numHeight.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numHeight.Name = "numHeight";
-            this.numHeight.Size = new System.Drawing.Size(70, 26);
-            this.numHeight.TabIndex = 10;
-            this.numHeight.Tag = "Set the level height";
-            this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numHeight.Value = new decimal(new int[] {
-            320,
-            0,
-            0,
-            0});
-            this.numHeight.ValueChanged += new System.EventHandler(this.num_Lvl_SizeY_ValueChanged);
-            this.numHeight.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
-            // numWidth
-            // 
-            this.numWidth.Increment = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.numWidth.Location = new System.Drawing.Point(114, 216);
-            this.numWidth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numWidth.Maximum = new decimal(new int[] {
-            6400,
-            0,
-            0,
-            0});
-            this.numWidth.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numWidth.Name = "numWidth";
-            this.numWidth.Size = new System.Drawing.Size(70, 26);
-            this.numWidth.TabIndex = 9;
-            this.numWidth.Tag = "Set the level width";
-            this.numWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numWidth.Value = new decimal(new int[] {
-            800,
-            0,
-            0,
-            0});
-            this.numWidth.ValueChanged += new System.EventHandler(this.num_Lvl_SizeX_ValueChanged);
-            this.numWidth.Leave += new System.EventHandler(this.textbox_Leave);
-            // 
             // numRulerHeight
             // 
             this.numRulerHeight.Location = new System.Drawing.Point(85, 686);
@@ -2635,157 +2132,753 @@
             this.btnRotate.Click += new System.EventHandler(this.btnRotatePieces_Click);
             this.btnRotate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnRotatePieces_MouseUp);
             // 
-            // numRandomMaxLimit
+            // tabGlobals
             // 
-            this.numRandomMaxLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numRandomMaxLimit.Location = new System.Drawing.Point(259, 569);
-            this.numRandomMaxLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numRandomMaxLimit.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numRandomMaxLimit.Name = "numRandomMaxLimit";
-            this.numRandomMaxLimit.Size = new System.Drawing.Size(64, 26);
-            this.numRandomMaxLimit.TabIndex = 62;
-            this.numRandomMaxLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numRandomMaxLimit.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numRandomMaxLimit.ValueChanged += new System.EventHandler(this.num_RandomLimit_ValueChanged);
+            this.tabGlobals.Controls.Add(this.btnCancelCrop);
+            this.tabGlobals.Controls.Add(this.btnApplyCrop);
+            this.tabGlobals.Controls.Add(this.btnCropLevel);
+            this.tabGlobals.Controls.Add(this.numReleaseRateMax);
+            this.tabGlobals.Controls.Add(this.lblReleaseRateMax);
+            this.tabGlobals.Controls.Add(this.lblReleaseRateMin);
+            this.tabGlobals.Controls.Add(this.comboMainStyle);
+            this.tabGlobals.Controls.Add(this.lblMainStyle);
+            this.tabGlobals.Controls.Add(this.checkAutoSteel);
+            this.tabGlobals.Controls.Add(this.comboSteelMode);
+            this.tabGlobals.Controls.Add(this.lblSteelMode);
+            this.tabGlobals.Controls.Add(this.checkTimeLimit);
+            this.tabGlobals.Controls.Add(this.checkLockReleaseRate);
+            this.tabGlobals.Controls.Add(this.checkAutoStart);
+            this.tabGlobals.Controls.Add(this.lblLevelVersion);
+            this.tabGlobals.Controls.Add(this.txtLevelAuthor);
+            this.tabGlobals.Controls.Add(this.txtLevelTitle);
+            this.tabGlobals.Controls.Add(this.lblStartY);
+            this.tabGlobals.Controls.Add(this.lblStartX);
+            this.tabGlobals.Controls.Add(this.lblHeight);
+            this.tabGlobals.Controls.Add(this.comboMusic);
+            this.tabGlobals.Controls.Add(this.numTimeSecs);
+            this.tabGlobals.Controls.Add(this.numTimeMins);
+            this.tabGlobals.Controls.Add(this.numReleaseRateMin);
+            this.tabGlobals.Controls.Add(this.numRescue);
+            this.tabGlobals.Controls.Add(this.lblRescue);
+            this.tabGlobals.Controls.Add(this.numLemmings);
+            this.tabGlobals.Controls.Add(this.lblLemmings);
+            this.tabGlobals.Controls.Add(this.numStartY);
+            this.tabGlobals.Controls.Add(this.numStartX);
+            this.tabGlobals.Controls.Add(this.numHeight);
+            this.tabGlobals.Controls.Add(this.numWidth);
+            this.tabGlobals.Controls.Add(this.lblMusic);
+            this.tabGlobals.Controls.Add(this.lblAuthor);
+            this.tabGlobals.Controls.Add(this.lblTitle);
+            this.tabGlobals.Controls.Add(this.lblWidth);
+            this.tabGlobals.Location = new System.Drawing.Point(4, 29);
+            this.tabGlobals.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabGlobals.Name = "tabGlobals";
+            this.tabGlobals.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabGlobals.Size = new System.Drawing.Size(388, 787);
+            this.tabGlobals.TabIndex = 0;
+            this.tabGlobals.Text = "Globals";
+            this.tabGlobals.UseVisualStyleBackColor = true;
             // 
-            // numRandomMinLimit
+            // btnCancelCrop
             // 
-            this.numRandomMinLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numRandomMinLimit.Location = new System.Drawing.Point(131, 569);
-            this.numRandomMinLimit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numRandomMinLimit.Maximum = new decimal(new int[] {
+            this.btnCancelCrop.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCancelCrop.Location = new System.Drawing.Point(249, 250);
+            this.btnCancelCrop.Name = "btnCancelCrop";
+            this.btnCancelCrop.Size = new System.Drawing.Size(100, 32);
+            this.btnCancelCrop.TabIndex = 105;
+            this.btnCancelCrop.Tag = "Cancel crop and close the rectangle";
+            this.btnCancelCrop.Text = "Cancel";
+            this.btnCancelCrop.UseVisualStyleBackColor = true;
+            this.btnCancelCrop.Visible = false;
+            this.btnCancelCrop.Click += new System.EventHandler(this.btnCancelCrop_Click);
+            // 
+            // btnApplyCrop
+            // 
+            this.btnApplyCrop.ForeColor = System.Drawing.Color.Blue;
+            this.btnApplyCrop.Location = new System.Drawing.Point(140, 250);
+            this.btnApplyCrop.Name = "btnApplyCrop";
+            this.btnApplyCrop.Size = new System.Drawing.Size(100, 32);
+            this.btnApplyCrop.TabIndex = 104;
+            this.btnApplyCrop.Tag = "Apply crop rectangle as new width and height";
+            this.btnApplyCrop.Text = "Apply";
+            this.btnApplyCrop.UseVisualStyleBackColor = true;
+            this.btnApplyCrop.Visible = false;
+            this.btnApplyCrop.Click += new System.EventHandler(this.btnApplyCrop_Click);
+            // 
+            // btnCropLevel
+            // 
+            this.btnCropLevel.Location = new System.Drawing.Point(28, 250);
+            this.btnCropLevel.Name = "btnCropLevel";
+            this.btnCropLevel.Size = new System.Drawing.Size(100, 32);
+            this.btnCropLevel.TabIndex = 103;
+            this.btnCropLevel.Tag = "Activate crop rectangle to easily change the width and height of the level";
+            this.btnCropLevel.Text = "Crop";
+            this.btnCropLevel.UseVisualStyleBackColor = true;
+            this.btnCropLevel.Click += new System.EventHandler(this.btnCropLevel_Click);
+            this.btnCropLevel.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            this.btnCropLevel.MouseLeave += new System.EventHandler(this.Control_MouseLeave);
+            // 
+            // numReleaseRateMax
+            // 
+            this.numReleaseRateMax.Location = new System.Drawing.Point(279, 483);
+            this.numReleaseRateMax.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numReleaseRateMax.Maximum = new decimal(new int[] {
             99,
             0,
             0,
             0});
-            this.numRandomMinLimit.Name = "numRandomMinLimit";
-            this.numRandomMinLimit.Size = new System.Drawing.Size(64, 26);
-            this.numRandomMinLimit.TabIndex = 61;
-            this.numRandomMinLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numRandomMinLimit.ValueChanged += new System.EventHandler(this.num_RandomLimit_ValueChanged);
+            this.numReleaseRateMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numReleaseRateMax.Name = "numReleaseRateMax";
+            this.numReleaseRateMax.Size = new System.Drawing.Size(70, 26);
+            this.numReleaseRateMax.TabIndex = 102;
+            this.numReleaseRateMax.Tag = "Set the maximum release rate";
+            this.numReleaseRateMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numReleaseRateMax.Value = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numReleaseRateMax.ValueChanged += new System.EventHandler(this.num_Lvl_RRMax_ValueChanged);
+            this.numReleaseRateMax.Leave += new System.EventHandler(this.textbox_Leave);
             // 
-            // numAllSkillsToN
+            // lblReleaseRateMax
             // 
-            this.numAllSkillsToN.Location = new System.Drawing.Point(259, 660);
-            this.numAllSkillsToN.Name = "numAllSkillsToN";
-            this.numAllSkillsToN.Size = new System.Drawing.Size(64, 26);
-            this.numAllSkillsToN.TabIndex = 53;
-            this.numAllSkillsToN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lblReleaseRateMax.AutoSize = true;
+            this.lblReleaseRateMax.Location = new System.Drawing.Point(209, 485);
+            this.lblReleaseRateMax.Name = "lblReleaseRateMax";
+            this.lblReleaseRateMax.Size = new System.Drawing.Size(66, 20);
+            this.lblReleaseRateMax.TabIndex = 101;
+            this.lblReleaseRateMax.Text = "Max RR";
             // 
-            // numDigger
+            // lblReleaseRateMin
             // 
-            this.numDigger.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numDigger.Location = new System.Drawing.Point(152, 323);
-            this.numDigger.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numDigger.Name = "numDigger";
-            this.numDigger.Size = new System.Drawing.Size(64, 26);
-            this.numDigger.TabIndex = 25;
-            this.numDigger.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numDigger.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numDigger.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numDigger.Leave += new System.EventHandler(this.textbox_Leave);
+            this.lblReleaseRateMin.AutoSize = true;
+            this.lblReleaseRateMin.Location = new System.Drawing.Point(24, 485);
+            this.lblReleaseRateMin.Name = "lblReleaseRateMin";
+            this.lblReleaseRateMin.Size = new System.Drawing.Size(62, 20);
+            this.lblReleaseRateMin.TabIndex = 100;
+            this.lblReleaseRateMin.Text = "Min RR";
             // 
-            // numMiner
+            // comboMainStyle
             // 
-            this.numMiner.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numMiner.Location = new System.Drawing.Point(152, 283);
-            this.numMiner.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numMiner.Name = "numMiner";
-            this.numMiner.Size = new System.Drawing.Size(64, 26);
-            this.numMiner.TabIndex = 24;
-            this.numMiner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numMiner.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numMiner.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numMiner.Leave += new System.EventHandler(this.textbox_Leave);
+            this.comboMainStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboMainStyle.FormattingEnabled = true;
+            this.comboMainStyle.ItemHeight = 20;
+            this.comboMainStyle.Location = new System.Drawing.Point(68, 156);
+            this.comboMainStyle.MaxDropDownItems = 30;
+            this.comboMainStyle.Name = "comboMainStyle";
+            this.comboMainStyle.Size = new System.Drawing.Size(301, 28);
+            this.comboMainStyle.TabIndex = 94;
+            this.comboMainStyle.Tag = "Choose a main style for your level";
+            this.comboMainStyle.SelectedIndexChanged += new System.EventHandler(this.combo_MainStyle_TextChanged);
+            this.comboMainStyle.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
+            this.comboMainStyle.TextChanged += new System.EventHandler(this.combo_MainStyle_TextChanged);
+            this.comboMainStyle.Leave += new System.EventHandler(this.textbox_Leave);
+            this.comboMainStyle.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
+            this.comboMainStyle.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
             // 
-            // numBasher
+            // lblMainStyle
             // 
-            this.numBasher.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numBasher.Location = new System.Drawing.Point(152, 243);
-            this.numBasher.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numBasher.Name = "numBasher";
-            this.numBasher.Size = new System.Drawing.Size(64, 26);
-            this.numBasher.TabIndex = 22;
-            this.numBasher.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numBasher.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numBasher.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numBasher.Leave += new System.EventHandler(this.textbox_Leave);
+            this.lblMainStyle.Location = new System.Drawing.Point(9, 161);
+            this.lblMainStyle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMainStyle.Name = "lblMainStyle";
+            this.lblMainStyle.Size = new System.Drawing.Size(69, 23);
+            this.lblMainStyle.TabIndex = 93;
+            this.lblMainStyle.Text = "Style";
+            this.lblMainStyle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // numBuilder
+            // checkAutoSteel
             // 
-            this.numBuilder.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numBuilder.Location = new System.Drawing.Point(152, 203);
-            this.numBuilder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numBuilder.Name = "numBuilder";
-            this.numBuilder.Size = new System.Drawing.Size(64, 26);
-            this.numBuilder.TabIndex = 17;
-            this.numBuilder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numBuilder.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numBuilder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numBuilder.Leave += new System.EventHandler(this.textbox_Leave);
+            this.checkAutoSteel.AutoSize = true;
+            this.checkAutoSteel.Location = new System.Drawing.Point(28, 653);
+            this.checkAutoSteel.Name = "checkAutoSteel";
+            this.checkAutoSteel.Size = new System.Drawing.Size(148, 24);
+            this.checkAutoSteel.TabIndex = 91;
+            this.checkAutoSteel.Tag = "With automatic steel checked, steel pieces do not require a manually-applied stee" +
+    "l area";
+            this.checkAutoSteel.Text = "Automatic Steel";
+            this.checkAutoSteel.UseVisualStyleBackColor = true;
+            this.checkAutoSteel.CheckedChanged += new System.EventHandler(this.textbox_Leave);
             // 
-            // numBomber
+            // comboSteelMode
             // 
-            this.numBomber.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numBomber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numBomber.Location = new System.Drawing.Point(152, 123);
-            this.numBomber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numBomber.Name = "numBomber";
-            this.numBomber.Size = new System.Drawing.Size(64, 26);
-            this.numBomber.TabIndex = 12;
-            this.numBomber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numBomber.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numBomber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numBomber.Leave += new System.EventHandler(this.textbox_Leave);
+            this.comboSteelMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSteelMode.Enabled = false;
+            this.comboSteelMode.FormattingEnabled = true;
+            this.comboSteelMode.Items.AddRange(new object[] {
+            "Auto (Fit to Shape)",
+            "Auto (Visible Pixels Only)",
+            "Manual"});
+            this.comboSteelMode.Location = new System.Drawing.Point(297, 651);
+            this.comboSteelMode.Name = "comboSteelMode";
+            this.comboSteelMode.Size = new System.Drawing.Size(52, 28);
+            this.comboSteelMode.TabIndex = 90;
+            this.comboSteelMode.Visible = false;
+            this.comboSteelMode.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
+            this.comboSteelMode.Leave += new System.EventHandler(this.textbox_Leave);
+            this.comboSteelMode.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
+            this.comboSteelMode.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
             // 
-            // numBlocker
+            // lblSteelMode
             // 
-            this.numBlocker.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numBlocker.Location = new System.Drawing.Point(152, 163);
-            this.numBlocker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numBlocker.Name = "numBlocker";
-            this.numBlocker.Size = new System.Drawing.Size(64, 26);
-            this.numBlocker.TabIndex = 14;
-            this.numBlocker.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numBlocker.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numBlocker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numBlocker.Leave += new System.EventHandler(this.textbox_Leave);
+            this.lblSteelMode.AutoSize = true;
+            this.lblSteelMode.Enabled = false;
+            this.lblSteelMode.Location = new System.Drawing.Point(201, 654);
+            this.lblSteelMode.Name = "lblSteelMode";
+            this.lblSteelMode.Size = new System.Drawing.Size(90, 20);
+            this.lblSteelMode.TabIndex = 89;
+            this.lblSteelMode.Text = "Steel Mode";
+            this.lblSteelMode.Visible = false;
             // 
-            // numFloater
+            // checkTimeLimit
             // 
-            this.numFloater.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numFloater.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numFloater.Location = new System.Drawing.Point(152, 83);
-            this.numFloater.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numFloater.Name = "numFloater";
-            this.numFloater.Size = new System.Drawing.Size(64, 26);
-            this.numFloater.TabIndex = 8;
-            this.numFloater.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numFloater.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numFloater.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numFloater.Leave += new System.EventHandler(this.textbox_Leave);
+            this.checkTimeLimit.AutoSize = true;
+            this.checkTimeLimit.Location = new System.Drawing.Point(28, 586);
+            this.checkTimeLimit.Name = "checkTimeLimit";
+            this.checkTimeLimit.Size = new System.Drawing.Size(106, 24);
+            this.checkTimeLimit.TabIndex = 32;
+            this.checkTimeLimit.Tag = "Apply a time limit, or leave this unchecked for infinite time";
+            this.checkTimeLimit.Text = "Time Limit";
+            this.checkTimeLimit.UseVisualStyleBackColor = true;
+            this.checkTimeLimit.CheckedChanged += new System.EventHandler(this.textbox_Leave);
             // 
-            // numClimber
+            // checkLockReleaseRate
             // 
-            this.numClimber.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.numClimber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numClimber.Location = new System.Drawing.Point(152, 43);
-            this.numClimber.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.numClimber.Name = "numClimber";
-            this.numClimber.Size = new System.Drawing.Size(64, 26);
-            this.numClimber.TabIndex = 6;
-            this.numClimber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numClimber.ValueChanged += new System.EventHandler(this.num_Skill_ValueChanged);
-            this.numClimber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_Skill_KeyDown);
-            this.numClimber.Leave += new System.EventHandler(this.textbox_Leave);
+            this.checkLockReleaseRate.AutoSize = true;
+            this.checkLockReleaseRate.Location = new System.Drawing.Point(28, 521);
+            this.checkLockReleaseRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.checkLockReleaseRate.Name = "checkLockReleaseRate";
+            this.checkLockReleaseRate.Size = new System.Drawing.Size(171, 24);
+            this.checkLockReleaseRate.TabIndex = 22;
+            this.checkLockReleaseRate.Tag = "Lock the release rate (prevents it from being changed in-game)";
+            this.checkLockReleaseRate.Text = "Lock Release Rate";
+            this.checkLockReleaseRate.UseVisualStyleBackColor = true;
+            this.checkLockReleaseRate.CheckedChanged += new System.EventHandler(this.check_Lvl_LockSR_CheckedChanged);
+            // 
+            // checkAutoStart
+            // 
+            this.checkAutoStart.AutoSize = true;
+            this.checkAutoStart.Location = new System.Drawing.Point(28, 349);
+            this.checkAutoStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.checkAutoStart.Name = "checkAutoStart";
+            this.checkAutoStart.Size = new System.Drawing.Size(163, 24);
+            this.checkAutoStart.TabIndex = 12;
+            this.checkAutoStart.Tag = "Automatically set the start position";
+            this.checkAutoStart.Text = "Auto Screen Start";
+            this.checkAutoStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkAutoStart.UseVisualStyleBackColor = true;
+            this.checkAutoStart.CheckedChanged += new System.EventHandler(this.chk_Lvl_AutoStart_Leave);
+            // 
+            // lblLevelVersion
+            // 
+            this.lblLevelVersion.AutoSize = true;
+            this.lblLevelVersion.Location = new System.Drawing.Point(24, 717);
+            this.lblLevelVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLevelVersion.Name = "lblLevelVersion";
+            this.lblLevelVersion.Size = new System.Drawing.Size(117, 20);
+            this.lblLevelVersion.TabIndex = 31;
+            this.lblLevelVersion.Text = "Level Version 0";
+            this.lblLevelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtLevelAuthor
+            // 
+            this.txtLevelAuthor.Location = new System.Drawing.Point(67, 63);
+            this.txtLevelAuthor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtLevelAuthor.MaxLength = 54;
+            this.txtLevelAuthor.Name = "txtLevelAuthor";
+            this.txtLevelAuthor.Size = new System.Drawing.Size(302, 26);
+            this.txtLevelAuthor.TabIndex = 3;
+            this.txtLevelAuthor.Tag = "Enter an author name";
+            this.txtLevelAuthor.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // txtLevelTitle
+            // 
+            this.txtLevelTitle.Location = new System.Drawing.Point(67, 15);
+            this.txtLevelTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtLevelTitle.MaxLength = 54;
+            this.txtLevelTitle.Name = "txtLevelTitle";
+            this.txtLevelTitle.Size = new System.Drawing.Size(302, 26);
+            this.txtLevelTitle.TabIndex = 1;
+            this.txtLevelTitle.Tag = "Enter a title for your level";
+            this.txtLevelTitle.TextChanged += new System.EventHandler(this.txtLevelTitle_TextChanged);
+            this.txtLevelTitle.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // lblStartY
+            // 
+            this.lblStartY.AutoSize = true;
+            this.lblStartY.Location = new System.Drawing.Point(209, 313);
+            this.lblStartY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStartY.Name = "lblStartY";
+            this.lblStartY.Size = new System.Drawing.Size(59, 20);
+            this.lblStartY.TabIndex = 16;
+            this.lblStartY.Text = "Start Y";
+            this.lblStartY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblStartX
+            // 
+            this.lblStartX.AutoSize = true;
+            this.lblStartX.Location = new System.Drawing.Point(24, 313);
+            this.lblStartX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStartX.Name = "lblStartX";
+            this.lblStartX.Size = new System.Drawing.Size(59, 20);
+            this.lblStartX.TabIndex = 13;
+            this.lblStartX.Text = "Start X";
+            this.lblStartX.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblHeight
+            // 
+            this.lblHeight.AutoSize = true;
+            this.lblHeight.Location = new System.Drawing.Point(209, 218);
+            this.lblHeight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHeight.Name = "lblHeight";
+            this.lblHeight.Size = new System.Drawing.Size(56, 20);
+            this.lblHeight.TabIndex = 11;
+            this.lblHeight.Text = "Height";
+            this.lblHeight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // comboMusic
+            // 
+            this.comboMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboMusic.FormattingEnabled = true;
+            this.comboMusic.Location = new System.Drawing.Point(68, 108);
+            this.comboMusic.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboMusic.Name = "comboMusic";
+            this.comboMusic.Size = new System.Drawing.Size(302, 28);
+            this.comboMusic.TabIndex = 5;
+            this.comboMusic.Tag = "Choose a music track for your level (note that you can also set music for a full " +
+    "pack of levels using the Level Pack Compiler)";
+            this.comboMusic.DropDownClosed += new System.EventHandler(this.ComboDropDownClosed);
+            this.comboMusic.Leave += new System.EventHandler(this.textbox_Leave);
+            this.comboMusic.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
+            this.comboMusic.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
+            // 
+            // numTimeSecs
+            // 
+            this.numTimeSecs.Location = new System.Drawing.Point(279, 585);
+            this.numTimeSecs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numTimeSecs.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numTimeSecs.Name = "numTimeSecs";
+            this.numTimeSecs.Size = new System.Drawing.Size(70, 26);
+            this.numTimeSecs.TabIndex = 27;
+            this.numTimeSecs.Tag = "Set the numbr of seconds for the time limit";
+            this.numTimeSecs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numTimeSecs.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numTimeMins
+            // 
+            this.numTimeMins.Location = new System.Drawing.Point(192, 585);
+            this.numTimeMins.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numTimeMins.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numTimeMins.Name = "numTimeMins";
+            this.numTimeMins.Size = new System.Drawing.Size(70, 26);
+            this.numTimeMins.TabIndex = 26;
+            this.numTimeMins.Tag = "Set the number of minutes for the time limit";
+            this.numTimeMins.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numTimeMins.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numReleaseRateMin
+            // 
+            this.numReleaseRateMin.Location = new System.Drawing.Point(114, 483);
+            this.numReleaseRateMin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numReleaseRateMin.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.numReleaseRateMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numReleaseRateMin.Name = "numReleaseRateMin";
+            this.numReleaseRateMin.Size = new System.Drawing.Size(70, 26);
+            this.numReleaseRateMin.TabIndex = 24;
+            this.numReleaseRateMin.Tag = "Set the minimum release rate";
+            this.numReleaseRateMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numReleaseRateMin.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numReleaseRateMin.ValueChanged += new System.EventHandler(this.num_Lvl_RRMin_ValueChanged);
+            this.numReleaseRateMin.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numRescue
+            // 
+            this.numRescue.Location = new System.Drawing.Point(279, 410);
+            this.numRescue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numRescue.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numRescue.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numRescue.Name = "numRescue";
+            this.numRescue.Size = new System.Drawing.Size(70, 26);
+            this.numRescue.TabIndex = 21;
+            this.numRescue.Tag = "Set the amount of lemmings to be saved";
+            this.numRescue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numRescue.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numRescue.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // lblRescue
+            // 
+            this.lblRescue.AutoSize = true;
+            this.lblRescue.Location = new System.Drawing.Point(209, 412);
+            this.lblRescue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRescue.Name = "lblRescue";
+            this.lblRescue.Size = new System.Drawing.Size(45, 20);
+            this.lblRescue.TabIndex = 20;
+            this.lblRescue.Text = "Save";
+            this.lblRescue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numLemmings
+            // 
+            this.numLemmings.Location = new System.Drawing.Point(114, 410);
+            this.numLemmings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numLemmings.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numLemmings.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numLemmings.Name = "numLemmings";
+            this.numLemmings.Size = new System.Drawing.Size(70, 26);
+            this.numLemmings.TabIndex = 18;
+            this.numLemmings.Tag = "Set the total number of lemmings";
+            this.numLemmings.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numLemmings.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.numLemmings.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // lblLemmings
+            // 
+            this.lblLemmings.AutoSize = true;
+            this.lblLemmings.Location = new System.Drawing.Point(24, 412);
+            this.lblLemmings.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLemmings.Name = "lblLemmings";
+            this.lblLemmings.Size = new System.Drawing.Size(82, 20);
+            this.lblLemmings.TabIndex = 17;
+            this.lblLemmings.Text = "Lemmings";
+            this.lblLemmings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // numStartY
+            // 
+            this.numStartY.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numStartY.Location = new System.Drawing.Point(279, 311);
+            this.numStartY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numStartY.Maximum = new decimal(new int[] {
+            319,
+            0,
+            0,
+            0});
+            this.numStartY.Name = "numStartY";
+            this.numStartY.Size = new System.Drawing.Size(70, 26);
+            this.numStartY.TabIndex = 15;
+            this.numStartY.Tag = "Set the vertical start position";
+            this.numStartY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numStartY.Value = new decimal(new int[] {
+            160,
+            0,
+            0,
+            0});
+            this.numStartY.ValueChanged += new System.EventHandler(this.num_Lvl_StartY_ValueChanged);
+            this.numStartY.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numStartX
+            // 
+            this.numStartX.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numStartX.Location = new System.Drawing.Point(114, 311);
+            this.numStartX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numStartX.Maximum = new decimal(new int[] {
+            639,
+            0,
+            0,
+            0});
+            this.numStartX.Name = "numStartX";
+            this.numStartX.Size = new System.Drawing.Size(70, 26);
+            this.numStartX.TabIndex = 14;
+            this.numStartX.Tag = "Set the horizontal start position";
+            this.numStartX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numStartX.Value = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
+            this.numStartX.ValueChanged += new System.EventHandler(this.num_Lvl_StartX_ValueChanged);
+            this.numStartX.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numHeight
+            // 
+            this.numHeight.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numHeight.Location = new System.Drawing.Point(279, 216);
+            this.numHeight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numHeight.Maximum = new decimal(new int[] {
+            6400,
+            0,
+            0,
+            0});
+            this.numHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numHeight.Name = "numHeight";
+            this.numHeight.Size = new System.Drawing.Size(70, 26);
+            this.numHeight.TabIndex = 10;
+            this.numHeight.Tag = "Set the level height";
+            this.numHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numHeight.Value = new decimal(new int[] {
+            320,
+            0,
+            0,
+            0});
+            this.numHeight.ValueChanged += new System.EventHandler(this.num_Lvl_SizeY_ValueChanged);
+            this.numHeight.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // numWidth
+            // 
+            this.numWidth.Increment = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numWidth.Location = new System.Drawing.Point(114, 216);
+            this.numWidth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numWidth.Maximum = new decimal(new int[] {
+            6400,
+            0,
+            0,
+            0});
+            this.numWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numWidth.Name = "numWidth";
+            this.numWidth.Size = new System.Drawing.Size(70, 26);
+            this.numWidth.TabIndex = 9;
+            this.numWidth.Tag = "Set the level width";
+            this.numWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numWidth.Value = new decimal(new int[] {
+            800,
+            0,
+            0,
+            0});
+            this.numWidth.ValueChanged += new System.EventHandler(this.num_Lvl_SizeX_ValueChanged);
+            this.numWidth.Leave += new System.EventHandler(this.textbox_Leave);
+            // 
+            // lblMusic
+            // 
+            this.lblMusic.Location = new System.Drawing.Point(9, 113);
+            this.lblMusic.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMusic.Name = "lblMusic";
+            this.lblMusic.Size = new System.Drawing.Size(69, 23);
+            this.lblMusic.TabIndex = 4;
+            this.lblMusic.Text = "Music";
+            this.lblMusic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAuthor
+            // 
+            this.lblAuthor.Location = new System.Drawing.Point(9, 65);
+            this.lblAuthor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(66, 23);
+            this.lblAuthor.TabIndex = 2;
+            this.lblAuthor.Text = "Author";
+            this.lblAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Location = new System.Drawing.Point(9, 17);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(69, 23);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Title";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblWidth
+            // 
+            this.lblWidth.AutoSize = true;
+            this.lblWidth.Location = new System.Drawing.Point(24, 218);
+            this.lblWidth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblWidth.Name = "lblWidth";
+            this.lblWidth.Size = new System.Drawing.Size(50, 20);
+            this.lblWidth.TabIndex = 8;
+            this.lblWidth.Tag = "";
+            this.lblWidth.Text = "Width";
+            this.lblWidth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tabProperties
+            // 
+            this.tabProperties.Controls.Add(this.tabGlobals);
+            this.tabProperties.Controls.Add(this.tabPieces);
+            this.tabProperties.Controls.Add(this.tabSkills);
+            this.tabProperties.Controls.Add(this.tabExtras);
+            this.tabProperties.Location = new System.Drawing.Point(9, 42);
+            this.tabProperties.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabProperties.Name = "tabProperties";
+            this.tabProperties.SelectedIndex = 0;
+            this.tabProperties.Size = new System.Drawing.Size(396, 820);
+            this.tabProperties.TabIndex = 1;
+            this.tabProperties.TabStop = false;
+            this.tabProperties.Click += new System.EventHandler(this.tabLvlProperties_Click);
+            // 
+            // tabExtras
+            // 
+            this.tabExtras.Controls.Add(this.checkDirectDrop);
+            this.tabExtras.Controls.Add(this.btnLevelPackCompiler);
+            this.tabExtras.Controls.Add(this.btnModsHelp);
+            this.tabExtras.Controls.Add(this.comboMods);
+            this.tabExtras.Controls.Add(this.lblMods);
+            this.tabExtras.Controls.Add(this.btnHints);
+            this.tabExtras.Controls.Add(this.lblMaxFallDistance);
+            this.tabExtras.Controls.Add(this.checkForceNormalTimerSpeed);
+            this.tabExtras.Controls.Add(this.checkSuperlemming);
+            this.tabExtras.Controls.Add(this.numMaxFallDistance);
+            this.tabExtras.Location = new System.Drawing.Point(4, 29);
+            this.tabExtras.Name = "tabExtras";
+            this.tabExtras.Size = new System.Drawing.Size(388, 787);
+            this.tabExtras.TabIndex = 3;
+            this.tabExtras.Text = "Extras";
+            this.tabExtras.UseVisualStyleBackColor = true;
+            // 
+            // checkDirectDrop
+            // 
+            this.checkDirectDrop.AutoSize = true;
+            this.checkDirectDrop.Location = new System.Drawing.Point(33, 215);
+            this.checkDirectDrop.Name = "checkDirectDrop";
+            this.checkDirectDrop.Size = new System.Drawing.Size(177, 24);
+            this.checkDirectDrop.TabIndex = 109;
+            this.checkDirectDrop.Text = "Activate Direct Drop";
+            this.checkDirectDrop.UseVisualStyleBackColor = true;
+            this.checkDirectDrop.CheckedChanged += new System.EventHandler(this.textbox_Leave);
+            // 
+            // btnLevelPackCompiler
+            // 
+            this.btnLevelPackCompiler.Location = new System.Drawing.Point(33, 25);
+            this.btnLevelPackCompiler.Name = "btnLevelPackCompiler";
+            this.btnLevelPackCompiler.Size = new System.Drawing.Size(321, 50);
+            this.btnLevelPackCompiler.TabIndex = 108;
+            this.btnLevelPackCompiler.Text = "Level Pack Compiler";
+            this.btnLevelPackCompiler.UseVisualStyleBackColor = true;
+            this.btnLevelPackCompiler.Click += new System.EventHandler(this.btnLevelPackCompiler_Click);
+            // 
+            // btnModsHelp
+            // 
+            this.btnModsHelp.Location = new System.Drawing.Point(298, 119);
+            this.btnModsHelp.Name = "btnModsHelp";
+            this.btnModsHelp.Size = new System.Drawing.Size(56, 50);
+            this.btnModsHelp.TabIndex = 107;
+            this.btnModsHelp.Text = "?";
+            this.btnModsHelp.UseVisualStyleBackColor = true;
+            this.btnModsHelp.Click += new System.EventHandler(this.btnModsHelp_Click);
+            // 
+            // comboMods
+            // 
+            this.comboMods.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboMods.FormattingEnabled = true;
+            this.comboMods.Location = new System.Drawing.Point(83, 127);
+            this.comboMods.Name = "comboMods";
+            this.comboMods.Size = new System.Drawing.Size(209, 28);
+            this.comboMods.TabIndex = 106;
+            this.comboMods.DropDownClosed += new System.EventHandler(this.combo_Mods_DropDownClosed);
+            this.comboMods.Leave += new System.EventHandler(this.textbox_Leave);
+            this.comboMods.MouseEnter += new System.EventHandler(this.ComboMouseEnter);
+            this.comboMods.MouseLeave += new System.EventHandler(this.ComboMouseLeave);
+            // 
+            // lblMods
+            // 
+            this.lblMods.AutoSize = true;
+            this.lblMods.Location = new System.Drawing.Point(29, 135);
+            this.lblMods.Name = "lblMods";
+            this.lblMods.Size = new System.Drawing.Size(48, 20);
+            this.lblMods.TabIndex = 105;
+            this.lblMods.Text = "Mods";
+            // 
+            // btnHints
+            // 
+            this.btnHints.Location = new System.Drawing.Point(33, 480);
+            this.btnHints.Name = "btnHints";
+            this.btnHints.Size = new System.Drawing.Size(321, 50);
+            this.btnHints.TabIndex = 104;
+            this.btnHints.Text = "Level Solution Hints";
+            this.btnHints.UseVisualStyleBackColor = true;
+            this.btnHints.Click += new System.EventHandler(this.btnHints_Click);
+            // 
+            // lblMaxFallDistance
+            // 
+            this.lblMaxFallDistance.AutoSize = true;
+            this.lblMaxFallDistance.Location = new System.Drawing.Point(29, 396);
+            this.lblMaxFallDistance.Name = "lblMaxFallDistance";
+            this.lblMaxFallDistance.Size = new System.Drawing.Size(134, 20);
+            this.lblMaxFallDistance.TabIndex = 100;
+            this.lblMaxFallDistance.Text = "Max Fall Distance";
+            // 
+            // checkForceNormalTimerSpeed
+            // 
+            this.checkForceNormalTimerSpeed.AutoSize = true;
+            this.checkForceNormalTimerSpeed.Checked = true;
+            this.checkForceNormalTimerSpeed.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkForceNormalTimerSpeed.Enabled = false;
+            this.checkForceNormalTimerSpeed.Location = new System.Drawing.Point(33, 322);
+            this.checkForceNormalTimerSpeed.Name = "checkForceNormalTimerSpeed";
+            this.checkForceNormalTimerSpeed.Size = new System.Drawing.Size(212, 24);
+            this.checkForceNormalTimerSpeed.TabIndex = 97;
+            this.checkForceNormalTimerSpeed.Text = "Use Normal Timer Speed";
+            this.checkForceNormalTimerSpeed.UseVisualStyleBackColor = true;
+            this.checkForceNormalTimerSpeed.CheckedChanged += new System.EventHandler(this.textbox_Leave);
+            // 
+            // checkSuperlemming
+            // 
+            this.checkSuperlemming.AutoSize = true;
+            this.checkSuperlemming.Location = new System.Drawing.Point(33, 292);
+            this.checkSuperlemming.Name = "checkSuperlemming";
+            this.checkSuperlemming.Size = new System.Drawing.Size(242, 24);
+            this.checkSuperlemming.TabIndex = 93;
+            this.checkSuperlemming.Text = "Activate Superlemming Mode";
+            this.checkSuperlemming.UseVisualStyleBackColor = true;
+            this.checkSuperlemming.CheckedChanged += new System.EventHandler(this.check_Lvl_Superlemming_CheckedChanged);
             // 
             // numMaxFallDistance
             // 
@@ -2810,6 +2903,31 @@
             0,
             0});
             // 
+            // lblHint
+            // 
+            this.lblHint.AutoSize = true;
+            this.lblHint.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblHint.Location = new System.Drawing.Point(405, 13);
+            this.lblHint.Name = "lblHint";
+            this.lblHint.Size = new System.Drawing.Size(300, 20);
+            this.lblHint.TabIndex = 88;
+            this.lblHint.Text = "Shows hints when hovering over a control";
+            this.lblHint.Visible = false;
+            // 
+            // lblUpdatingLPC
+            // 
+            this.lblUpdatingLPC.AutoSize = true;
+            this.lblUpdatingLPC.ForeColor = System.Drawing.Color.DarkBlue;
+            this.lblUpdatingLPC.Location = new System.Drawing.Point(728, 13);
+            this.lblUpdatingLPC.Name = "lblUpdatingLPC";
+            this.lblUpdatingLPC.Size = new System.Drawing.Size(232, 20);
+            this.lblUpdatingLPC.TabIndex = 89;
+            this.lblUpdatingLPC.Text = "Updating Level Pack Compiler...";
+            this.lblUpdatingLPC.Visible = false;
+            this.lblUpdatingLPC.Click += new System.EventHandler(this.lblUpdatingLPC_Click);
+            this.lblUpdatingLPC.MouseEnter += new System.EventHandler(this.lblUpdatingLPC_MouseEnter);
+            this.lblUpdatingLPC.MouseLeave += new System.EventHandler(this.lblUpdatingLPC_MouseLeave);
+            // 
             // txtFocus
             // 
             this.txtFocus.Location = new System.Drawing.Point(-150, 2);
@@ -2819,123 +2937,6 @@
             this.txtFocus.TabIndex = 37;
             this.txtFocus.TabStop = false;
             this.txtFocus.Text = "asdf";
-            // 
-            // btnPieceRight
-            // 
-            this.btnPieceRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPieceRight.Location = new System.Drawing.Point(1274, 40);
-            this.btnPieceRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnPieceRight.Name = "btnPieceRight";
-            this.btnPieceRight.NoPaddingText = null;
-            this.btnPieceRight.Size = new System.Drawing.Size(48, 129);
-            this.btnPieceRight.TabIndex = 80;
-            this.btnPieceRight.Text = "⇨";
-            this.toolTipButton.SetToolTip(this.btnPieceRight, "Right-click for faster scrolling");
-            this.btnPieceRight.UseVisualStyleBackColor = true;
-            this.btnPieceRight.Click += new System.EventHandler(this.btnPieceRight_Click);
-            this.btnPieceRight.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPieceRight_MouseUp);
-            // 
-            // btnPieceLeft
-            // 
-            this.btnPieceLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPieceLeft.Location = new System.Drawing.Point(3, 40);
-            this.btnPieceLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnPieceLeft.Name = "btnPieceLeft";
-            this.btnPieceLeft.NoPaddingText = null;
-            this.btnPieceLeft.Size = new System.Drawing.Size(48, 129);
-            this.btnPieceLeft.TabIndex = 79;
-            this.btnPieceLeft.Text = "⇦";
-            this.toolTipButton.SetToolTip(this.btnPieceLeft, "Right-click for faster scrolling");
-            this.btnPieceLeft.UseVisualStyleBackColor = true;
-            this.btnPieceLeft.Click += new System.EventHandler(this.btnPieceLeft_Click);
-            this.btnPieceLeft.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPieceLeft_MouseUp);
-            // 
-            // txtFocusPieceBrowser
-            // 
-            this.txtFocusPieceBrowser.BackColor = System.Drawing.SystemColors.Control;
-            this.txtFocusPieceBrowser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtFocusPieceBrowser.Location = new System.Drawing.Point(-150, 2);
-            this.txtFocusPieceBrowser.Name = "txtFocusPieceBrowser";
-            this.txtFocusPieceBrowser.Size = new System.Drawing.Size(57, 19);
-            this.txtFocusPieceBrowser.TabIndex = 86;
-            this.txtFocusPieceBrowser.Text = "asdf";
-            // 
-            // lblInfinityFloater
-            // 
-            this.lblInfinityFloater.AutoSize = true;
-            this.lblInfinityFloater.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblInfinityFloater.Location = new System.Drawing.Point(221, 85);
-            this.lblInfinityFloater.Name = "lblInfinityFloater";
-            this.lblInfinityFloater.Size = new System.Drawing.Size(74, 20);
-            this.lblInfinityFloater.TabIndex = 66;
-            this.lblInfinityFloater.Text = "- (Infinity)";
-            this.lblInfinityFloater.Visible = false;
-            // 
-            // lblInfinityBomber
-            // 
-            this.lblInfinityBomber.AutoSize = true;
-            this.lblInfinityBomber.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblInfinityBomber.Location = new System.Drawing.Point(221, 125);
-            this.lblInfinityBomber.Name = "lblInfinityBomber";
-            this.lblInfinityBomber.Size = new System.Drawing.Size(74, 20);
-            this.lblInfinityBomber.TabIndex = 67;
-            this.lblInfinityBomber.Text = "- (Infinity)";
-            this.lblInfinityBomber.Visible = false;
-            // 
-            // lblInfinityBlocker
-            // 
-            this.lblInfinityBlocker.AutoSize = true;
-            this.lblInfinityBlocker.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblInfinityBlocker.Location = new System.Drawing.Point(221, 165);
-            this.lblInfinityBlocker.Name = "lblInfinityBlocker";
-            this.lblInfinityBlocker.Size = new System.Drawing.Size(74, 20);
-            this.lblInfinityBlocker.TabIndex = 68;
-            this.lblInfinityBlocker.Text = "- (Infinity)";
-            this.lblInfinityBlocker.Visible = false;
-            // 
-            // lblInfinityBuilder
-            // 
-            this.lblInfinityBuilder.AutoSize = true;
-            this.lblInfinityBuilder.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblInfinityBuilder.Location = new System.Drawing.Point(221, 205);
-            this.lblInfinityBuilder.Name = "lblInfinityBuilder";
-            this.lblInfinityBuilder.Size = new System.Drawing.Size(74, 20);
-            this.lblInfinityBuilder.TabIndex = 69;
-            this.lblInfinityBuilder.Text = "- (Infinity)";
-            this.lblInfinityBuilder.Visible = false;
-            // 
-            // lblInfinityBasher
-            // 
-            this.lblInfinityBasher.AutoSize = true;
-            this.lblInfinityBasher.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblInfinityBasher.Location = new System.Drawing.Point(221, 245);
-            this.lblInfinityBasher.Name = "lblInfinityBasher";
-            this.lblInfinityBasher.Size = new System.Drawing.Size(74, 20);
-            this.lblInfinityBasher.TabIndex = 70;
-            this.lblInfinityBasher.Text = "- (Infinity)";
-            this.lblInfinityBasher.Visible = false;
-            // 
-            // lblInfinityMiner
-            // 
-            this.lblInfinityMiner.AutoSize = true;
-            this.lblInfinityMiner.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblInfinityMiner.Location = new System.Drawing.Point(221, 285);
-            this.lblInfinityMiner.Name = "lblInfinityMiner";
-            this.lblInfinityMiner.Size = new System.Drawing.Size(74, 20);
-            this.lblInfinityMiner.TabIndex = 71;
-            this.lblInfinityMiner.Text = "- (Infinity)";
-            this.lblInfinityMiner.Visible = false;
-            // 
-            // lblInfinityDigger
-            // 
-            this.lblInfinityDigger.AutoSize = true;
-            this.lblInfinityDigger.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lblInfinityDigger.Location = new System.Drawing.Point(221, 325);
-            this.lblInfinityDigger.Name = "lblInfinityDigger";
-            this.lblInfinityDigger.Size = new System.Drawing.Size(74, 20);
-            this.lblInfinityDigger.TabIndex = 72;
-            this.lblInfinityDigger.Text = "- (Infinity)";
-            this.lblInfinityDigger.Visible = false;
             // 
             // RLEditForm
             // 
@@ -2995,27 +2996,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picDragNewPiece)).EndInit();
             this.tabSkills.ResumeLayout(false);
             this.tabSkills.PerformLayout();
-            this.tabPieces.ResumeLayout(false);
-            this.tabPieces.PerformLayout();
-            this.tabGlobals.ResumeLayout(false);
-            this.tabGlobals.PerformLayout();
-            this.tabProperties.ResumeLayout(false);
-            this.tabExtras.ResumeLayout(false);
-            this.tabExtras.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMax)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimeSecs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimeMins)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRescue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLemmings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStartY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numStartX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRulerHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numRulerWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRandomMaxLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRandomMinLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAllSkillsToN)).EndInit();
@@ -3027,6 +3007,27 @@
             ((System.ComponentModel.ISupportInitialize)(this.numBlocker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numFloater)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numClimber)).EndInit();
+            this.tabPieces.ResumeLayout(false);
+            this.tabPieces.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numRulerHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRulerWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSteelAreaWidth)).EndInit();
+            this.tabGlobals.ResumeLayout(false);
+            this.tabGlobals.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeSecs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeMins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numReleaseRateMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRescue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLemmings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numStartX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
+            this.tabProperties.ResumeLayout(false);
+            this.tabExtras.ResumeLayout(false);
+            this.tabExtras.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxFallDistance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

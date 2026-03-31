@@ -1727,5 +1727,19 @@ namespace RLEditor
         {
             lblUpdatingLPC.Visible = false;
         }
+
+        private void txtLevelTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (txtLevelTitle.Text.Length >= 33)
+            {
+                lblTitle.ForeColor = Color.Red;
+                txtLevelTitle.ForeColor = Color.Red;
+            }
+            else
+            {
+                lblTitle.ForeColor = SystemColors.ControlText;
+                txtLevelTitle.ForeColor = SystemColors.WindowText;
+            }     
+        }
     }
 }
