@@ -106,26 +106,8 @@ namespace RLEditor
 
             WriteBoldText(richTextBox, $"================ Version {C.Version} Updates ================\n");
 
-            WriteBoldText(richTextBox, "\n• Direct Drop (Maximum Exit Physics) support added\n");
-            richTextBox.AppendText(" • It's now possible to set Direct Drop (Maximum Exit Physics) on a per-level basis. With this property activated, lemmings will always interact with the Exit's trigger (regardless of state/action), meaning that lems can exit in midair and from otherwise unsurvivable drop heights (aka Direct Drop), and will prioritise an Exit's trigger over any other object wherever they overlap.\n");
-
-            WriteBoldText(richTextBox, "\n• Control Hints\n");
-            richTextBox.AppendText(" • When the mouse is hovered over a control, information about that control is now displayed in the status bar. This can be toggled on/off in Settings.\n");
-
-            WriteBoldText(richTextBox, "\n• Level Pack Compiler - Automatic Updates/UI\n");
-            richTextBox.AppendText(" • The Level Pack Compiler now silently checks for updates every 30 days and automatically downloads the latest version.\n");
-
-            WriteBoldText(richTextBox, "\n• Style Manager/UI\n");
-            richTextBox.AppendText(" • Added 'Remove' button so that styles can be removed from the list.\n");
-            richTextBox.AppendText(" • Bugfix - 'Sort Alphabetically' becomes available only when multiple items are selected.\n");
-
-            WriteBoldText(richTextBox, "\n• Skillset\n");
-            richTextBox.AppendText(" • Added support for 'Infinity' skill amount (applies when the numeric control is set to 100).\n");
-
             WriteBoldText(richTextBox, "\n• Bugfixes/UI\n");
-            richTextBox.AppendText(" • Corrected Y-Position of hatch spawn point.\n");
-            richTextBox.AppendText(" • 'Show Missing Pieces' menu item is now only present when relevant (i.e. when the level contains missing pieces).\n");
-            richTextBox.AppendText(" • Transformations (rotate/invert/flip) no longer apply for One-Way-Walls (matches RetroLemmini 2.9 behaviour).\n");
+            richTextBox.AppendText(" • When typing a level title, if the limit of 32 is exceeded, the title is shown in red as a warning (but still allowed).\n");
 
             // Version 1.1 features
             WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");
@@ -149,6 +131,9 @@ namespace RLEditor
             WriteBoldText(richTextBox, "\n• Default Author Name\n");
             richTextBox.AppendText(" • Added a setting which automatically applies a default author name when a new level is created\n");
 
+            WriteBoldText(richTextBox, "\n• Skillset\n");
+            richTextBox.AppendText(" • Added support for 'Infinity' skill amount (applies when the numeric control is set to 100).\n");
+
             WriteBoldText(richTextBox, "\n• Rulers\n");
             richTextBox.AppendText(" • Use rulers to measure builder bridges, basher tunnels, fall distance, and more.\n");
 
@@ -163,9 +148,12 @@ namespace RLEditor
 
             WriteBoldText(richTextBox, "\n• Level Pack Compiler\n");
             richTextBox.AppendText(" • Compile your levels into a level pack for RetroLemmini.\n");
+            richTextBox.AppendText(" • The Level Pack Compiler silently checks for updates every 30 days and automatically downloads the latest version.\n");
 
             WriteBoldText(richTextBox, "\n• Style Manager\n");
             richTextBox.AppendText(" • Easily keep your styles list up to date and in whatever order you wish.\n");
+            richTextBox.AppendText(" • Added 'Remove' button so that styles can be removed from the list.\n");
+            richTextBox.AppendText(" • Bugfix - 'Sort Alphabetically' becomes available only when multiple items are selected.\n");
 
             WriteBoldText(richTextBox, "\n• Cleanse Levels\n");
             richTextBox.AppendText(" • Refresh existing levels (or batch-convert between .ini and the new .rlv format) to keep your levels up to date and ensure compatibility with RetroLemmini.\n");
@@ -181,6 +169,12 @@ namespace RLEditor
             WriteBoldText(richTextBox, "\n• Hotkeys\n");
             richTextBox.AppendText(" • Removed support for Classic hotkeys (not relevant in this version of the Editor).\n");
 
+            WriteBoldText(richTextBox, "\n• Control Hints\n");
+            richTextBox.AppendText(" • When the mouse is hovered over a control, information about that control is now displayed in the status bar. This can be toggled on/off in Settings.\n");
+
+            WriteBoldText(richTextBox, "\n• Direct Drop (Maximum Exit Physics) support added\n");
+            richTextBox.AppendText(" • It's now possible to set Direct Drop (Maximum Exit Physics) on a per-level basis. With this property activated, lemmings will always interact with the Exit's trigger (regardless of state/action), meaning that lems can exit in midair and from otherwise unsurvivable drop heights (aka Direct Drop), and will prioritise an Exit's trigger over any other object wherever they overlap.\n");
+
             WriteBoldText(richTextBox, $"\n\n================ Previous Bugfixes ================\n");
 
             WriteBoldText(richTextBox, "\n• Cleanse Levels\n");
@@ -191,6 +185,9 @@ namespace RLEditor
             richTextBox.AppendText(" • Bugfix - .ini/.rlv is written in correctly when auto-updating levelpack.ini\n");
 
             WriteBoldText(richTextBox, "\n• Bugfixes\n");
+            richTextBox.AppendText(" • Corrected Y-Position of hatch spawn point.\n");
+            richTextBox.AppendText(" • 'Show Missing Pieces' menu item is now only present when relevant (i.e. when the level contains missing pieces).\n");
+            richTextBox.AppendText(" • Transformations (rotate/invert/flip) no longer apply for One-Way-Walls (matches RetroLemmini 2.9 behaviour).\n");
             richTextBox.AppendText(" • The selection rectangle is now drawn around the full object for OWWs.\n");
             richTextBox.AppendText(" • Piece selection is now preserved on Undo/Redo.\n");
             richTextBox.AppendText(" • Dropdown lists now show more items when expanded.\n");
