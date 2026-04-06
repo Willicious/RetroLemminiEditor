@@ -2104,13 +2104,13 @@ Digger=20
             {
                 // Add or remove a single piece, depending on whether there is a selected piece at the mouse position 
                 bool doAdd = !CurLevel.HasSelectionAtPos(levelPos);
-                CurLevel.SelectOnePiece(levelPos, doAdd, selectPiecesBelowPressed);
+                CurLevel.SelectOnePiece(levelPos, doAdd, false, false);
             }
             else
             {
                 // Select only the one that is below the mouse cursor
                 CurLevel.UnselectAll();
-                CurLevel.SelectOnePiece(levelPos, true, selectPiecesBelowPressed);
+                CurLevel.SelectOnePiece(levelPos, true, selectPiecesBelowPressed, cycleSelectPiecesPressed);
             }
 
             MaybeOpenPiecesTab();
@@ -3069,6 +3069,7 @@ Digger=20
             AddHotkey(HotkeyName.HotkeyRemovePiecesAtCursor, () => removeAllPiecesAtCursorPressed = true);
             AddHotkey(HotkeyName.HotkeyAddRemoveSinglePiece, () => addOrRemoveSinglePiecePressed = true);
             AddHotkey(HotkeyName.HotkeySelectPiecesBelow, () => selectPiecesBelowPressed = true);
+            AddHotkey(HotkeyName.HotkeyCycleSelectPieces, () => cycleSelectPiecesPressed = true);
             AddHotkey(HotkeyName.HotkeyZoomIn, () => ZoomIn());
             AddHotkey(HotkeyName.HotkeyZoomOut, () => ZoomOut());
             AddHotkey(HotkeyName.HotkeyScrollHorizontally, () => scrollHorizontallyPressed = true);
