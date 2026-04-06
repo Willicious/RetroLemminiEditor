@@ -188,7 +188,7 @@ namespace RLEditor
             int minRR = ini.GetInt("releaseRate");
             int maxRR = ini.GetInt("maxReleaseRate", 99);
             string lockReleaseRate = ini.GetString("lockReleaseRate", "false"); // default to "false"
-            bool isRRLocked = lockReleaseRate.Trim().ToLower() == "true";
+            bool isRRLocked = lockReleaseRate.Trim().ToLowerInvariant() == "true";
 
             newLevel.MinReleaseRate = minRR;
             newLevel.MaxReleaseRate = maxRR;
@@ -196,16 +196,16 @@ namespace RLEditor
 
             // --- Other stuff ---
             string classicSteel = ini.GetString("classicSteel", "false"); // default to "false"
-            newLevel.ClassicSteel = classicSteel.Trim().ToLower() == "true";
+            newLevel.ClassicSteel = classicSteel.Trim().ToLowerInvariant() == "true";
 
             string directDrop = ini.GetString("directDrop", "false"); // default to "false"
-            newLevel.IsDirectDrop = directDrop.Trim().ToLower() == "true";
+            newLevel.IsDirectDrop = directDrop.Trim().ToLowerInvariant() == "true";
 
             string superlemming = ini.GetString("superlemming", "false"); // default to "false"
-            newLevel.IsSuperlemming = superlemming.Trim().ToLower() == "true";
+            newLevel.IsSuperlemming = superlemming.Trim().ToLowerInvariant() == "true";
 
             string forceNormalSpeed = ini.GetString("forceNormalTimerSpeed", "true"); // default to "true"
-            newLevel.ForceNormalTimerSpeed = forceNormalSpeed.Trim().ToLower() == "true";
+            newLevel.ForceNormalTimerSpeed = forceNormalSpeed.Trim().ToLowerInvariant() == "true";
 
             newLevel.MaxFallDistance = ini.GetInt("maxFallDistance", 126);
             newLevel.AutosteelMode = ini.GetInt("autosteelMode");
@@ -869,7 +869,7 @@ namespace RLEditor
         /// </summary>
         static string SkillString(C.Skill skill)
         {
-            return Enum.GetName(typeof(C.Skill), skill).ToUpper();
+            return Enum.GetName(typeof(C.Skill), skill).ToUpperInvariant();
         }
 
         /// <summary>

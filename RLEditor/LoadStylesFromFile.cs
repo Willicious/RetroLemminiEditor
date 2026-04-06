@@ -221,7 +221,7 @@ namespace RLEditor
                     {
                         styleFileName = line.Substring(1, line.Length - 2);
                     }
-                    else if (line.ToUpper().StartsWith("NAME") && line.Length > 5)
+                    else if (line.ToUpperInvariant().StartsWith("NAME") && line.Length > 5)
                     {
                         string styleNewName = line.Substring(5).Trim();
                         if (styleFileName != null)
@@ -229,7 +229,7 @@ namespace RLEditor
                             newStyleNameDict[styleFileName] = styleNewName;
                         }
                     }
-                    else if (line.ToUpper().StartsWith("ORDER") && line.Length > 6)
+                    else if (line.ToUpperInvariant().StartsWith("ORDER") && line.Length > 6)
                     {
                         float styleNewPos;
                         if (styleFileName != null &&
@@ -238,7 +238,7 @@ namespace RLEditor
                             styleOrderDict[styleFileName] = styleNewPos;
                         }
                     }
-                    else if (line.ToUpper().StartsWith("RANDOMIZE") && line.Length > 10)
+                    else if (line.ToUpperInvariant().StartsWith("RANDOMIZE") && line.Length > 10)
                     {
                         bool styleNewRandomize;
                         if (styleFileName != null &&
