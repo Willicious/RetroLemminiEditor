@@ -279,6 +279,15 @@ namespace RLEditor
         }
 
         /// <summary>
+        /// Determines whether terrain or steel pieces are currently shown.
+        /// </summary>
+        public bool TerrainIsDisplayed()
+        {
+            return DisplaySettings.IsDisplayed(C.DisplayType.Terrain) ||
+                   DisplaySettings.IsDisplayed(C.DisplayType.Steel);
+        }
+
+        /// <summary>
         /// Adds a list of pieces to the level.
         /// </summary>
         public void AddMultiplePieces(IEnumerable<LevelPiece> pieces)
@@ -348,7 +357,7 @@ namespace RLEditor
 
             if (doPriorityInvert)
             {
-                if (DisplaySettings.IsDisplayed(C.DisplayType.Terrain))
+                if (TerrainIsDisplayed())
                 {
                     selectedPiece = TerrainList.Find(ter => ter.ImageRectangle.Contains(pos)
                                                         && (isUnselected ^ ter.IsSelected));
@@ -366,7 +375,7 @@ namespace RLEditor
                     selectedPiece = GadgetList.FindLast(gad => gad.ImageRectangle.Contains(pos)
                                                            && (isUnselected ^ gad.IsSelected));
                 }
-                if (selectedPiece == null && DisplaySettings.IsDisplayed(C.DisplayType.Terrain))
+                if (selectedPiece == null && TerrainIsDisplayed())
                 {
                     selectedPiece = TerrainList.FindLast(ter => ter.ImageRectangle.Contains(pos)
                                                             && (isUnselected ^ ter.IsSelected));
@@ -381,7 +390,7 @@ namespace RLEditor
         /// </summary>
         public void SelectAreaPiece(Rectangle rectangle, bool isAdded)
         {
-            if (DisplaySettings.IsDisplayed(C.DisplayType.Terrain))
+            if (TerrainIsDisplayed())
             {
                 TerrainList.FindAll(ter => ter.ImageRectangle.IntersectsWith(rectangle))
                            .ForEach(ter => ter.IsSelected = isAdded);

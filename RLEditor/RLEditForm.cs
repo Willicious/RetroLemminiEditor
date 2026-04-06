@@ -52,6 +52,7 @@ namespace RLEditor
                     { C.DisplayType.Objects, objectToolStripMenuItem },
                     { C.DisplayType.ScreenStart, screenStartToolStripMenuItem },
                     { C.DisplayType.Terrain, terrainToolStripMenuItem },
+                    { C.DisplayType.Steel, steelToolStripMenuItem },
                     { C.DisplayType.Triggers, triggerAreasToolStripMenuItem },
                     { C.DisplayType.SteelAreas, steelAreasToolStripMenuItem },
                     { C.DisplayType.Rulers, rulersToolStripMenuItem }
@@ -323,6 +324,11 @@ namespace RLEditor
         private void terrainToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToggleTerrain();
+        }
+
+        private void steelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToggleSteel();
         }
 
         private void objectToolStripMenuItem_Click(object sender, EventArgs e)

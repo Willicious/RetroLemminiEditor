@@ -2793,7 +2793,13 @@ Digger=20
         private void ToggleTerrain()
         {
             DisplaySettings.ChangeDisplayed(C.DisplayType.Terrain);
-            picLevel.SetImage(curRenderer.CombineLayers());
+            RedrawTerrain();
+        }
+
+        private void ToggleSteel()
+        {
+            DisplaySettings.ChangeDisplayed(C.DisplayType.Steel);
+            RedrawTerrain();
         }
 
         private void ToggleObjects()
@@ -2859,6 +2865,12 @@ Digger=20
                 var manager = new LevelPackCompilerManager(curSettings, lblUpdatingLPC);
                 manager.UpdateLevelPackCompiler();
             });
+        }
+
+        private void RedrawTerrain()
+        {
+            curRenderer.CreateTerrainLayer();
+            picLevel.SetImage(curRenderer.CombineLayers());
         }
 
         /// <summary>
@@ -3031,6 +3043,7 @@ Digger=20
             AddHotkey(HotkeyName.HotkeyHighlightEraserPieces, () => HighlightEraserPieces());
             AddHotkey(HotkeyName.HotkeyToggleClearPhysics, () => ToggleClearPhysics());
             AddHotkey(HotkeyName.HotkeyToggleTerrain, () => ToggleTerrain());
+            AddHotkey(HotkeyName.HotkeyToggleSteel, () => ToggleSteel());
             AddHotkey(HotkeyName.HotkeyToggleObjects, () => ToggleObjects());
             AddHotkey(HotkeyName.HotkeyToggleTriggerAreas, () => ToggleTriggerAreas());
             AddHotkey(HotkeyName.HotkeyToggleScreenStart, () => ToggleScreenStart());
@@ -3190,6 +3203,9 @@ Digger=20
 
             terrainToolStripMenuItem.ShortcutKeyDisplayString =
                 FormatHotkeyString(HotkeyName.HotkeyToggleTerrain);
+
+            steelToolStripMenuItem.ShortcutKeyDisplayString =
+                FormatHotkeyString(HotkeyName.HotkeyToggleSteel);
 
             objectToolStripMenuItem.ShortcutKeyDisplayString =
                 FormatHotkeyString(HotkeyName.HotkeyToggleObjects);

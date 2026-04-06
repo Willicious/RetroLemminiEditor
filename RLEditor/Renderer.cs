@@ -55,9 +55,10 @@ namespace RLEditor
         Settings curSettings;
         bool IsClearPhysics => DisplaySettings.IsDisplayed(C.DisplayType.ClearPhysics);
         bool IsTerrainLayer => DisplaySettings.IsDisplayed(C.DisplayType.Terrain);
+        bool IsSteelTerrainLayer => DisplaySettings.IsDisplayed(C.DisplayType.Steel);
         bool IsObjectLayer => DisplaySettings.IsDisplayed(C.DisplayType.Objects);
         bool IsTriggerLayer => DisplaySettings.IsDisplayed(C.DisplayType.Triggers);
-        bool IsSteelLayer => DisplaySettings.IsDisplayed(C.DisplayType.SteelAreas);
+        bool IsSteelAreaLayer => DisplaySettings.IsDisplayed(C.DisplayType.SteelAreas);
         bool IsRulerLayer => DisplaySettings.IsDisplayed(C.DisplayType.Rulers);
         bool IsScreenStart => DisplaySettings.IsDisplayed(C.DisplayType.ScreenStart);
         bool IsGridEnabled => curSettings.UseGridForPieces;
@@ -173,7 +174,7 @@ namespace RLEditor
                 baseLevelImage.DrawOn(layerImages[C.Layer.ObjBack]);
             }
 
-            if (IsTerrainLayer)
+            if (IsTerrainLayer || IsSteelTerrainLayer)
             {
                 baseLevelImage.DrawOn(layerImages[C.Layer.Terrain]);
             }
@@ -194,7 +195,7 @@ namespace RLEditor
                 baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.Triggers], true);
             }
 
-            if (IsSteelLayer)
+            if (IsSteelAreaLayer)
             {
                 baseLevelImage.DrawOnWithAlpha(layerImages[C.Layer.SteelAreas], true);
             }
@@ -553,12 +554,18 @@ namespace RLEditor
         /// <summary>
         /// Renders all terrain pieces.
         /// </summary>
-        private void CreateTerrainLayer()
+        public void CreateTerrainLayer()
         {
             layerImages[C.Layer.Terrain].Clear();
 
             foreach (TerrainPiece terrPiece in level.TerrainList)
             {
+                if (terrPiece.IsSteel && !IsSteelTerrainLayer)
+                    continue;
+
+                if (!terrPiece.IsSteel && !IsTerrainLayer)
+                    continue;
+
                 C.CustDrawMode drawMode = GetDrawModeForTerrain(terrPiece);
                 if (terrPiece.IsInvisible || terrPiece.IsFake)
                     layerImages[C.Layer.Terrain].DrawOnWithAlpha(terrPiece.Image, terrPiece.Pos, false);

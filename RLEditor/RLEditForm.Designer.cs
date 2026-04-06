@@ -66,6 +66,7 @@
             this.clearPhysicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.terrainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triggerAreasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screenStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -532,6 +533,7 @@
             this.clearPhysicsToolStripMenuItem,
             this.toolStripSeparator8,
             this.terrainToolStripMenuItem,
+            this.steelToolStripMenuItem,
             this.objectToolStripMenuItem,
             this.triggerAreasToolStripMenuItem,
             this.screenStartToolStripMenuItem,
@@ -608,6 +610,16 @@
             this.terrainToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
             this.terrainToolStripMenuItem.Text = "Show/Hide Terrain";
             this.terrainToolStripMenuItem.Click += new System.EventHandler(this.terrainToolStripMenuItem_Click);
+            // 
+            // steelToolStripMenuItem
+            // 
+            this.steelToolStripMenuItem.Checked = true;
+            this.steelToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.steelToolStripMenuItem.Name = "steelToolStripMenuItem";
+            this.steelToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F2";
+            this.steelToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.steelToolStripMenuItem.Text = "Show/Hide Steel";
+            this.steelToolStripMenuItem.Click += new System.EventHandler(this.steelToolStripMenuItem_Click);
             // 
             // objectToolStripMenuItem
             // 
@@ -3251,6 +3263,7 @@
         private System.Windows.Forms.Label lblInfinityBasher;
         private System.Windows.Forms.Label lblInfinityBuilder;
         private System.Windows.Forms.Label lblInfinityBlocker;
+        private System.Windows.Forms.ToolStripMenuItem steelToolStripMenuItem;
     }
 }
 

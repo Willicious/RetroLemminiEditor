@@ -159,6 +159,7 @@ namespace RLEditor
             LastLPCUpdateCheck = DateTime.MinValue;
 
             DisplaySettings.SetDisplayed(C.DisplayType.Terrain, true);
+            DisplaySettings.SetDisplayed(C.DisplayType.Steel, true);
             DisplaySettings.SetDisplayed(C.DisplayType.Objects, true);
             DisplaySettings.SetDisplayed(C.DisplayType.ScreenStart, false);
             DisplaySettings.SetDisplayed(C.DisplayType.Triggers, true);
