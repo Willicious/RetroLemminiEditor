@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RLEditForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,14 +87,14 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picLevel = new System.Windows.Forms.PictureBox();
-            this.toolTipPieces = new System.Windows.Forms.ToolTip();
+            this.toolTipPieces = new System.Windows.Forms.ToolTip(this.components);
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
-            this.toolTipButton = new System.Windows.Forms.ToolTip();
+            this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
             this.btnRulers = new System.Windows.Forms.Button();
             this.btnPieceRight = new RLEditor.RepeatButton();
             this.btnPieceLeft = new RLEditor.RepeatButton();
-            this.timerAutosave = new System.Windows.Forms.Timer();
+            this.timerAutosave = new System.Windows.Forms.Timer(this.components);
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarSteelAreasLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBarMissingPiecesLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -2227,7 +2228,7 @@
             // 
             // btnApplyCrop
             // 
-            this.btnApplyCrop.ForeColor = System.Drawing.Color.Blue;
+            this.btnApplyCrop.ForeColor = System.Drawing.Color.RoyalBlue;
             this.btnApplyCrop.Location = new System.Drawing.Point(140, 250);
             this.btnApplyCrop.Name = "btnApplyCrop";
             this.btnApplyCrop.Size = new System.Drawing.Size(100, 32);
@@ -2939,7 +2940,7 @@
             // lblHint
             // 
             this.lblHint.AutoSize = true;
-            this.lblHint.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblHint.ForeColor = System.Drawing.Color.RoyalBlue;
             this.lblHint.Location = new System.Drawing.Point(405, 13);
             this.lblHint.Name = "lblHint";
             this.lblHint.Size = new System.Drawing.Size(300, 20);
