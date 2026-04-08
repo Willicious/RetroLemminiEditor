@@ -157,8 +157,12 @@ namespace RLEditor
         /// </summary>
         private void UpdateFlagsForPieceActions()
         {
-            List<LevelPiece> selectionList = CurLevel.SelectionList();
+            bool levelHasPieces = CurLevel.TerrainList.Count > 0 || CurLevel.GadgetList.Count > 0;
 
+            btnShowPiecesList.Enabled = levelHasPieces;
+            openPiecesListToolStripMenuItem.Enabled = levelHasPieces;
+
+            List<LevelPiece> selectionList = CurLevel.SelectionList();
             bool piecesSelected = selectionList.Count > 0;
 
             btnDrawFirst.Enabled = piecesSelected;

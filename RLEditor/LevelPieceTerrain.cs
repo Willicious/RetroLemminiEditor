@@ -37,6 +37,18 @@ namespace RLEditor
         public bool IsInvisible { get; set; }
         public bool IsFake { get; set; }
 
+        public override string DrawMode
+        {
+            get
+            {
+                string s = "";
+                if (IsErase) s += "Eraser";
+                if (IsNoOverwrite) s += (s.Length > 0 ? ", " : "") + "NoOverwrite";
+                if (IsOneWay) s += (s.Length > 0 ? ", " : "") + "OneWay";
+                return s;
+            }
+        }
+
         public override LevelPiece Clone()
         {
             return new TerrainPiece(Key, Pos, Rotation, IsInvert, IsErase, IsNoOverwrite, IsOneWay,

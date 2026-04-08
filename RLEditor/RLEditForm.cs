@@ -186,6 +186,9 @@ namespace RLEditor
 
         private FormLevelArranger levelArrangerWindow;
         private FormPieceBrowser pieceBrowserWindow;
+        private FormPiecesList piecesListForm;
+
+        public event Action LevelChanged;
 
         private void NLEditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -1758,6 +1761,16 @@ namespace RLEditor
                 lblTitle.ForeColor = SystemColors.ControlText;
                 txtLevelTitle.ForeColor = SystemColors.WindowText;
             }     
+        }
+
+        private void openPiecesListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenPiecesList();
+        }
+
+        private void btnShowPiecesList_Click(object sender, EventArgs e)
+        {
+            OpenPiecesList();
         }
     }
 }

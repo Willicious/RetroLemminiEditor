@@ -27,7 +27,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RLEditForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +58,7 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLevelWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPieceBrowserWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openPiecesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.expandAllTabsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.highlightEraserPiecesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,14 +86,14 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picLevel = new System.Windows.Forms.PictureBox();
-            this.toolTipPieces = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPieces = new System.Windows.Forms.ToolTip();
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
             this.scrollPicLevelVert = new System.Windows.Forms.VScrollBar();
-            this.toolTipButton = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipButton = new System.Windows.Forms.ToolTip();
             this.btnRulers = new System.Windows.Forms.Button();
             this.btnPieceRight = new RLEditor.RepeatButton();
             this.btnPieceLeft = new RLEditor.RepeatButton();
-            this.timerAutosave = new System.Windows.Forms.Timer(this.components);
+            this.timerAutosave = new System.Windows.Forms.Timer();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarSteelAreasLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusBarMissingPiecesLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -161,6 +161,7 @@
             this.numFloater = new RLEditor.NumUpDownOverwrite();
             this.numClimber = new RLEditor.NumUpDownOverwrite();
             this.tabPieces = new System.Windows.Forms.TabPage();
+            this.btnShowPiecesList = new System.Windows.Forms.Button();
             this.btnFlipSpawnDirection = new System.Windows.Forms.Button();
             this.btnLoadStyle = new System.Windows.Forms.Button();
             this.checkNegativeSteel = new System.Windows.Forms.CheckBox();
@@ -526,6 +527,7 @@
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openLevelWindowToolStripMenuItem,
             this.openPieceBrowserWindowToolStripMenuItem,
+            this.openPiecesListToolStripMenuItem,
             this.expandAllTabsToolStripMenuItem,
             this.toolStripSeparator6,
             this.highlightEraserPiecesToolStripMenuItem,
@@ -546,59 +548,67 @@
             // openLevelWindowToolStripMenuItem
             // 
             this.openLevelWindowToolStripMenuItem.Name = "openLevelWindowToolStripMenuItem";
-            this.openLevelWindowToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F9";
-            this.openLevelWindowToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.openLevelWindowToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+L";
+            this.openLevelWindowToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.openLevelWindowToolStripMenuItem.Text = "Open Level Arranger Window";
             this.openLevelWindowToolStripMenuItem.Click += new System.EventHandler(this.openLevelWindowToolStripMenuItem_Click);
             // 
             // openPieceBrowserWindowToolStripMenuItem
             // 
             this.openPieceBrowserWindowToolStripMenuItem.Name = "openPieceBrowserWindowToolStripMenuItem";
-            this.openPieceBrowserWindowToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F9";
-            this.openPieceBrowserWindowToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.openPieceBrowserWindowToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+B";
+            this.openPieceBrowserWindowToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.openPieceBrowserWindowToolStripMenuItem.Text = "Open Piece Browser Window";
             this.openPieceBrowserWindowToolStripMenuItem.Click += new System.EventHandler(this.openPieceBrowserWindowToolStripMenuItem_Click);
+            // 
+            // openPiecesListToolStripMenuItem
+            // 
+            this.openPiecesListToolStripMenuItem.Name = "openPiecesListToolStripMenuItem";
+            this.openPiecesListToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+P";
+            this.openPiecesListToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
+            this.openPiecesListToolStripMenuItem.Text = "Open Pieces List";
+            this.openPiecesListToolStripMenuItem.Click += new System.EventHandler(this.openPiecesListToolStripMenuItem_Click);
             // 
             // expandAllTabsToolStripMenuItem
             // 
             this.expandAllTabsToolStripMenuItem.Name = "expandAllTabsToolStripMenuItem";
-            this.expandAllTabsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F10";
-            this.expandAllTabsToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.expandAllTabsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Space";
+            this.expandAllTabsToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.expandAllTabsToolStripMenuItem.Text = "Expand All Tabs";
             this.expandAllTabsToolStripMenuItem.Click += new System.EventHandler(this.expandAllTabsToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(457, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(403, 6);
             // 
             // highlightEraserPiecesToolStripMenuItem
             // 
             this.highlightEraserPiecesToolStripMenuItem.CheckOnClick = true;
             this.highlightEraserPiecesToolStripMenuItem.Name = "highlightEraserPiecesToolStripMenuItem";
             this.highlightEraserPiecesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+E";
-            this.highlightEraserPiecesToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.highlightEraserPiecesToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.highlightEraserPiecesToolStripMenuItem.Text = "Highlight Eraser Pieces";
             this.highlightEraserPiecesToolStripMenuItem.Click += new System.EventHandler(this.highlightEraserPiecesToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(457, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(403, 6);
             // 
             // clearPhysicsToolStripMenuItem
             // 
             this.clearPhysicsToolStripMenuItem.CheckOnClick = true;
             this.clearPhysicsToolStripMenuItem.Name = "clearPhysicsToolStripMenuItem";
             this.clearPhysicsToolStripMenuItem.ShortcutKeyDisplayString = "F1";
-            this.clearPhysicsToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.clearPhysicsToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.clearPhysicsToolStripMenuItem.Text = "Clear Physics Mode";
             this.clearPhysicsToolStripMenuItem.Click += new System.EventHandler(this.clearPhysicsToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(457, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(403, 6);
             // 
             // terrainToolStripMenuItem
             // 
@@ -607,7 +617,7 @@
             this.terrainToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.terrainToolStripMenuItem.Name = "terrainToolStripMenuItem";
             this.terrainToolStripMenuItem.ShortcutKeyDisplayString = "F2";
-            this.terrainToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.terrainToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.terrainToolStripMenuItem.Text = "Show/Hide Terrain";
             this.terrainToolStripMenuItem.Click += new System.EventHandler(this.terrainToolStripMenuItem_Click);
             // 
@@ -617,7 +627,7 @@
             this.steelToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.steelToolStripMenuItem.Name = "steelToolStripMenuItem";
             this.steelToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F2";
-            this.steelToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.steelToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.steelToolStripMenuItem.Text = "Show/Hide Steel";
             this.steelToolStripMenuItem.Click += new System.EventHandler(this.steelToolStripMenuItem_Click);
             // 
@@ -628,7 +638,7 @@
             this.objectToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.objectToolStripMenuItem.Name = "objectToolStripMenuItem";
             this.objectToolStripMenuItem.ShortcutKeyDisplayString = "F3";
-            this.objectToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.objectToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.objectToolStripMenuItem.Text = "Show/Hide Objects";
             this.objectToolStripMenuItem.Click += new System.EventHandler(this.objectToolStripMenuItem_Click);
             // 
@@ -639,7 +649,7 @@
             this.triggerAreasToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.triggerAreasToolStripMenuItem.Name = "triggerAreasToolStripMenuItem";
             this.triggerAreasToolStripMenuItem.ShortcutKeyDisplayString = "F4";
-            this.triggerAreasToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.triggerAreasToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.triggerAreasToolStripMenuItem.Text = "Show/Hide Triggers";
             this.triggerAreasToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.triggerAreasToolStripMenuItem.Click += new System.EventHandler(this.triggerAreasToolStripMenuItem_Click);
@@ -649,7 +659,7 @@
             this.screenStartToolStripMenuItem.CheckOnClick = true;
             this.screenStartToolStripMenuItem.Name = "screenStartToolStripMenuItem";
             this.screenStartToolStripMenuItem.ShortcutKeyDisplayString = "F5";
-            this.screenStartToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.screenStartToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.screenStartToolStripMenuItem.Text = "Show/Hide Screen Start";
             this.screenStartToolStripMenuItem.Click += new System.EventHandler(this.screenStartToolStripMenuItem_Click);
             // 
@@ -660,7 +670,7 @@
             this.steelAreasToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.steelAreasToolStripMenuItem.Name = "steelAreasToolStripMenuItem";
             this.steelAreasToolStripMenuItem.ShortcutKeyDisplayString = "F6";
-            this.steelAreasToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.steelAreasToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.steelAreasToolStripMenuItem.Text = "Show/Hide Steel Areas";
             this.steelAreasToolStripMenuItem.Click += new System.EventHandler(this.steelAreasToolStripMenuItem_Click);
             // 
@@ -671,7 +681,7 @@
             this.rulersToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.rulersToolStripMenuItem.Name = "rulersToolStripMenuItem";
             this.rulersToolStripMenuItem.ShortcutKeyDisplayString = "F7";
-            this.rulersToolStripMenuItem.Size = new System.Drawing.Size(460, 34);
+            this.rulersToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
             this.rulersToolStripMenuItem.Text = "Show/Hide Rulers";
             this.rulersToolStripMenuItem.Click += new System.EventHandler(this.rulersToolStripMenuItem_Click);
             // 
@@ -1691,6 +1701,7 @@
             // 
             // tabPieces
             // 
+            this.tabPieces.Controls.Add(this.btnShowPiecesList);
             this.tabPieces.Controls.Add(this.btnFlipSpawnDirection);
             this.tabPieces.Controls.Add(this.btnLoadStyle);
             this.tabPieces.Controls.Add(this.checkNegativeSteel);
@@ -1731,6 +1742,16 @@
             this.tabPieces.TabIndex = 1;
             this.tabPieces.Text = "Pieces";
             this.tabPieces.UseVisualStyleBackColor = true;
+            // 
+            // btnShowPiecesList
+            // 
+            this.btnShowPiecesList.Location = new System.Drawing.Point(11, 13);
+            this.btnShowPiecesList.Name = "btnShowPiecesList";
+            this.btnShowPiecesList.Size = new System.Drawing.Size(61, 50);
+            this.btnShowPiecesList.TabIndex = 82;
+            this.btnShowPiecesList.Text = "☰";
+            this.btnShowPiecesList.UseVisualStyleBackColor = true;
+            this.btnShowPiecesList.Click += new System.EventHandler(this.btnShowPiecesList_Click);
             // 
             // btnFlipSpawnDirection
             // 
@@ -2107,11 +2128,11 @@
             // 
             // btnFlip
             // 
-            this.btnFlip.Location = new System.Drawing.Point(255, 13);
+            this.btnFlip.Location = new System.Drawing.Point(282, 13);
             this.btnFlip.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFlip.Name = "btnFlip";
             this.btnFlip.NoPaddingText = null;
-            this.btnFlip.Size = new System.Drawing.Size(117, 50);
+            this.btnFlip.Size = new System.Drawing.Size(90, 50);
             this.btnFlip.TabIndex = 2;
             this.btnFlip.Text = "Flip";
             this.btnFlip.UseVisualStyleBackColor = true;
@@ -2120,11 +2141,11 @@
             // 
             // btnInvert
             // 
-            this.btnInvert.Location = new System.Drawing.Point(128, 13);
+            this.btnInvert.Location = new System.Drawing.Point(184, 13);
             this.btnInvert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnInvert.Name = "btnInvert";
             this.btnInvert.NoPaddingText = null;
-            this.btnInvert.Size = new System.Drawing.Size(120, 50);
+            this.btnInvert.Size = new System.Drawing.Size(90, 50);
             this.btnInvert.TabIndex = 1;
             this.btnInvert.Text = "Invert";
             this.btnInvert.UseVisualStyleBackColor = true;
@@ -2133,11 +2154,11 @@
             // 
             // btnRotate
             // 
-            this.btnRotate.Location = new System.Drawing.Point(11, 13);
+            this.btnRotate.Location = new System.Drawing.Point(84, 13);
             this.btnRotate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRotate.Name = "btnRotate";
             this.btnRotate.NoPaddingText = null;
-            this.btnRotate.Size = new System.Drawing.Size(110, 50);
+            this.btnRotate.Size = new System.Drawing.Size(90, 50);
             this.btnRotate.TabIndex = 0;
             this.btnRotate.Text = "Rotate";
             this.btnRotate.UseVisualStyleBackColor = true;
@@ -3264,6 +3285,8 @@
         private System.Windows.Forms.Label lblInfinityBuilder;
         private System.Windows.Forms.Label lblInfinityBlocker;
         private System.Windows.Forms.ToolStripMenuItem steelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openPiecesListToolStripMenuItem;
+        private System.Windows.Forms.Button btnShowPiecesList;
     }
 }
 

@@ -5,7 +5,7 @@ namespace RLEditor
 {
     internal static class ImagePreview
     {
-        public static void PreviewPiece(string key, PictureBox pic, Style style)
+        public static void PreviewPiece(string key, PictureBox pic)
         {
             pic.Image?.Dispose();
 

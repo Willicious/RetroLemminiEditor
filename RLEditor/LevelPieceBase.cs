@@ -62,6 +62,7 @@ namespace RLEditor
         public virtual Bitmap Image => ImageLibrary.GetImage(Key, GetRotateFlipType(), GetFrameIndex());
         public Rectangle ImageRectangle => new Rectangle(PosX, PosY, Width, Height);
         public C.OBJ ObjType => ImageLibrary.GetObjType(Key);
+        public virtual string DrawMode => "";
         public bool IsSelected { get; set; }
         public bool IsMissing { get; set; }
         public bool IsDeprecated { get; set; }

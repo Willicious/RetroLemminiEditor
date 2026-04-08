@@ -49,6 +49,17 @@ namespace RLEditor
         public bool IsFake { get; set; }
         public bool IsNegativeSteel { get; set; }
 
+        public override string DrawMode
+        {
+            get
+            {
+                string s = "";
+                if (IsNoOverwrite) s += "NoOverwrite";
+                if (IsOnlyOnTerrain) s += (s.Length > 0 ? ", " : "") + "OnlyOnTerrain";
+                return s;
+            }
+        }
+
         public override LevelPiece Clone()
         {
             return new GadgetPiece(Key, Pos, Rotation, IsInvert, IsNoOverwrite, IsOnlyOnTerrain,
