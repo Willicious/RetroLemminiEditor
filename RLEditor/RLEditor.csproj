@@ -140,6 +140,7 @@
       <DependentUpon>FormAboutRLEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="HotkeyData.cs" />
+    <Compile Include="ImagePreview.cs" />
     <Compile Include="INIFileParser.cs" />
     <Compile Include="LevelPieceBase.cs" />
     <Compile Include="LevelPieceGadget.cs" />
