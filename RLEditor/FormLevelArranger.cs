@@ -188,7 +188,7 @@ namespace RLEditor
             }
             else if (mainForm != null)
             {
-                mainForm.NLEditForm_KeyDown(this, e);
+                mainForm.RLEditForm_KeyDown(this, e);
             }
         }
 
@@ -196,7 +196,7 @@ namespace RLEditor
         {
             if (mainForm != null)
             {
-                mainForm.NLEditForm_KeyUp(this, e);
+                mainForm.RLEditForm_KeyUp(this, e);
             }
         }
 
@@ -204,7 +204,7 @@ namespace RLEditor
         {
             if (mainForm != null)
             {
-                mainForm.NLEditForm_MouseWheel(this, e);
+                mainForm.RLEditForm_MouseWheel(this, e);
             }
 
             UpdateScrollbars();

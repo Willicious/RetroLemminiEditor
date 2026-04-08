@@ -107,7 +107,7 @@ namespace RLEditor
             // But now we want to apply the size informations given by the settings.
             if (curSettings.IsFormMaximized)
                 ClientSize = curSettings.FormSize;
-            this.Resize += new EventHandler(NLEditForm_Resize);
+            this.Resize += new EventHandler(RLEditForm_Resize);
             if (curSettings.IsFormMaximized)
                 WindowState = FormWindowState.Maximized;
             else
@@ -190,7 +190,7 @@ namespace RLEditor
 
         public event Action LevelChanged;
 
-        private void NLEditForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void RLEditForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
@@ -218,12 +218,12 @@ namespace RLEditor
             }
         }
 
-        private void NLEditForm_Click(object sender, EventArgs e)
+        private void RLEditForm_Click(object sender, EventArgs e)
         {
             PullFocusFromTextInputs();
         }
 
-        private void NLEditForm_Resize(object sender, EventArgs e)
+        private void RLEditForm_Resize(object sender, EventArgs e)
         {
             if (this == null || curRenderer == null)
                 return;
@@ -246,7 +246,7 @@ namespace RLEditor
             picLevel.SetImage(curRenderer.CreateLevelImage());
         }
 
-        private void NLEditForm_Activated(object sender, EventArgs e)
+        private void RLEditForm_Activated(object sender, EventArgs e)
         {
             UpdateIsSystemKeyPressed();
         }
@@ -851,7 +851,7 @@ namespace RLEditor
         /* -----------------------------------------------------------
          *              Direct Key and Mouse imput
          * ----------------------------------------------------------- */
-        public void NLEditForm_KeyDown(object sender, KeyEventArgs e)
+        public void RLEditForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -911,7 +911,7 @@ namespace RLEditor
             }
         }
 
-        public void NLEditForm_KeyUp(object sender, KeyEventArgs e)
+        public void RLEditForm_KeyUp(object sender, KeyEventArgs e)
         {
             // Reset hotkey flags when keys are released
             switch (e.KeyCode)
@@ -972,7 +972,7 @@ namespace RLEditor
             }
         }
 
-        public void NLEditForm_MouseWheel(object sender, MouseEventArgs e)
+        public void RLEditForm_MouseWheel(object sender, MouseEventArgs e)
         {
             mutexMouseWheel.WaitOne();
 
@@ -1416,14 +1416,14 @@ namespace RLEditor
             }
         }
 
-        private void NLEditForm_DragDrop(object sender, DragEventArgs e)
+        private void RLEditForm_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
             if (files.Length == 1)
                 LoadNewLevel(files[0]);
         }
 
-        private void NLEditForm_DragOver(object sender, DragEventArgs e)
+        private void RLEditForm_DragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Link;
@@ -1506,7 +1506,7 @@ namespace RLEditor
             }
         }
 
-        private void NLEditForm_Shown(object sender, EventArgs e)
+        private void RLEditForm_Shown(object sender, EventArgs e)
         {
             SetHotkeys();
             UpdateCropButtons();
