@@ -223,20 +223,39 @@ namespace RLEditor
             PullFocusFromTextInputs();
         }
 
+        private Timer _resizeDebounce;
         private void RLEditForm_Resize(object sender, EventArgs e)
         {
             if (this == null || curRenderer == null)
                 return;
+            if (_resizeDebounce == null)
+            {
+                _resizeDebounce = new Timer { Interval = 50 };
+                _resizeDebounce.Tick += (s, _) =>
+                {
+                    _resizeDebounce.Stop();
 
-            this.MinimumSize = new System.Drawing.Size(editorMinWidth, editorMinHeight);
+                    this.MinimumSize = new System.Drawing.Size(editorMinWidth, editorMinHeight);
 
-            // Don't do anything on minimizing the form!
-            if (WindowState == FormWindowState.Minimized)
-                return;
+                    // Don't do anything on minimizing the form!
+                    if (WindowState == FormWindowState.Minimized)
+                        return;
 
-            MoveControlsOnFormResize();
-            ResetLevelImage();
-            curSettings.SetFormSize();
+                    MoveControlsOnFormResize();
+                    ResetLevelImage();
+                    curSettings.SetFormSize();
+
+                    // Don't do anything on minimizing the form!
+                    if (WindowState == FormWindowState.Minimized)
+                        return;
+
+                    MoveControlsOnFormResize();
+                    ResetLevelImage();
+                    curSettings.SetFormSize();
+                };
+            }
+            _resizeDebounce.Stop();
+            _resizeDebounce.Start();
         }
 
         private bool _isRendering = false;
