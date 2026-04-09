@@ -194,6 +194,7 @@ namespace RLEditor
         {
             try
             {
+                curSettings.UseAutoStart = checkAutoStart.Checked;
                 curSettings.WriteSettingsToFile();
 
                 Utility.DeleteFile(C.AppPathTempLevel);
@@ -235,15 +236,7 @@ namespace RLEditor
                 {
                     _resizeDebounce.Stop();
 
-                    this.MinimumSize = new System.Drawing.Size(editorMinWidth, editorMinHeight);
-
-                    // Don't do anything on minimizing the form!
-                    if (WindowState == FormWindowState.Minimized)
-                        return;
-
-                    MoveControlsOnFormResize();
-                    ResetLevelImage();
-                    curSettings.SetFormSize();
+                    this.MinimumSize = new Size(editorMinWidth, editorMinHeight);
 
                     // Don't do anything on minimizing the form!
                     if (WindowState == FormWindowState.Minimized)
@@ -1555,6 +1548,8 @@ namespace RLEditor
 
             if (curSettings.OpenTemplatesAtStartup)
                 OpenTemplatesLoader();
+
+            checkAutoStart.Checked = curSettings.UseAutoStart;
 
             MoveControlsOnFormResize();
             UpdateMissingPiecesMenuItems();

@@ -101,6 +101,7 @@ namespace RLEditor
         public int KeepAutosaveCount { get { return RemoveOldAutosaves ? keepAutosaveCount : 0; } }
         public bool IsFormMaximized { get; private set; }
         public Size FormSize { get; private set; }
+        public bool UseAutoStart { get; set; }
         public bool ShowSteelAreasMessage { get; set; }
         public bool ShowModsHelpDialog { get; set; }
         public bool ShowAboutAtStartup { get; set; }
@@ -134,6 +135,7 @@ namespace RLEditor
             NumTooltipBottonDisplay = 3;
             IsFormMaximized = false;
             FormSize = editorForm.MinimumSize;
+            UseAutoStart = false;
             ShowSteelAreasMessage = true;
             ShowModsHelpDialog = true;
             ShowAboutAtStartup = true;
@@ -1000,7 +1002,7 @@ namespace RLEditor
                             }
                         case "USEAUTOSTART":
                             {
-                                editorForm.checkAutoStart.Checked = line.Text.Trim().ToUpperInvariant() == "TRUE";
+                                UseAutoStart = line.Text.Trim().ToUpperInvariant() == "TRUE";
                                 break;
                             }
                         case "SHOWSTEELAREASMESSAGE":
@@ -1151,7 +1153,7 @@ namespace RLEditor
                 settingsFile.WriteLine(" PreferObjectName       " + (PreferObjectName ? "True" : "False"));
                 settingsFile.WriteLine(" InfiniteScrolling      " + (InfiniteScrolling ? "True" : "False"));
                 settingsFile.WriteLine(" ShowRandomButton       " + (ShowRandomButton ? "True" : "False"));
-                settingsFile.WriteLine(" UseAutostart           " + editorForm.checkAutoStart.Checked.ToString());
+                settingsFile.WriteLine(" UseAutostart           " + (UseAutoStart ? "True" : "False"));
                 settingsFile.WriteLine(" GridSize               " + GridSize.ToString());
                 settingsFile.WriteLine(" GridColor              " + (GridColor == Color.Empty ? "(Invisible)" : ColorTranslator.ToHtml(GridColor)));
                 settingsFile.WriteLine(" TriggerAreaColor       " + CurrentTriggerAreaColor.ToString());
