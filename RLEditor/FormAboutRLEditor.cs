@@ -106,8 +106,24 @@ namespace RLEditor
 
             WriteBoldText(richTextBox, $"================ Version {C.Version} Updates ================\n");
 
-            WriteBoldText(richTextBox, "\n• Bugfixes/UI\n");
-            richTextBox.AppendText(" • When typing a level title, if the limit of 32 is exceeded, the title is shown in red as a warning (but still allowed).\n");
+            WriteBoldText(richTextBox, "\n• Cycle Select Pieces\n");
+            richTextBox.AppendText(" • Shift + LMB (by default) cycles through pieces within 32px of the cursor, so that each subsequent click grabs the piece at the next-highest index.\n");
+
+            WriteBoldText(richTextBox, "\n• Show/Hide Steel\n");
+            richTextBox.AppendText(" • Added menu item and hotkey support for Show/Hide Steel (Ctrl + F2 by default).\n");
+
+            WriteBoldText(richTextBox, "\n• Pieces List\n");
+            richTextBox.AppendText(" • Added a 'Pieces List' window which displays all pieces currently active in the level.\n");
+            richTextBox.AppendText(" • From here, pieces can be selected, moved behind/in front of other pieces, and deleted.\n");
+
+            WriteBoldText(richTextBox, "\n• Misc UI\n");
+            richTextBox.AppendText(" • Updated some default hotkeys (Level Arranger is now Ctrl + L, Piece Browser is Ctrl + B, Expand All Tabs is Ctrl + Space).\n");
+
+            WriteBoldText(richTextBox, "\n• Bugfixes\n");
+            richTextBox.AppendText(" • 'Select Pieces Below' (Alt + LMB by default) re-triggers selection correctly, even if used whilst a piece is already selected.\n");
+            richTextBox.AppendText(" • Enhanced support for non-English locales.\n");
+            richTextBox.AppendText(" • Fixed repeat renderings when auto-resizing the form.\n");
+            richTextBox.AppendText(" • 'Use Auto Screen Start' is now written to/from a setting object rather that directly to/from the checkbox.\n");
 
             // Version 1.1 features
             WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");
@@ -197,6 +213,7 @@ namespace RLEditor
             richTextBox.AppendText(" • 'Save As Image' sanitizes invalid characters when saving\n");
             richTextBox.AppendText(" • Directory name is prioritized when identifying styles\n");
             richTextBox.AppendText(" • Added backwards-compatibility for screen start positions in earlier levels (it always saves to the more recent format)\n");
+            richTextBox.AppendText(" • When typing a level title, if the limit of 32 is exceeded, the title is shown in red as a warning (but still allowed).\n");
         }
 
         /// <summary>
