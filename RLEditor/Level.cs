@@ -47,7 +47,7 @@ namespace RLEditor
             this.ClassicSteel = false;
             this.AutosteelMode = 2;
 
-            this.TopBoundary = 8;
+            this.TopBoundary = 2;
             this.BottomBoundary = 20;
             this.LeftBoundary = 0;
             this.RightBoundary = -16;
