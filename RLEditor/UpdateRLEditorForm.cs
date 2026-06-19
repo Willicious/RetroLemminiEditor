@@ -280,6 +280,14 @@ namespace RLEditor
             scrollPicLevelHoriz.Top = this.Height - 178;
             scrollPicLevelVert.Left = this.Width - 30;
 
+            btnNextLevel.Left = this.Width - btnNextLevel.Width - 20;
+            lblLevel.Left = btnNextLevel.Left - lblLevel.Width - 2;
+            btnPreviousLevel.Left = lblLevel.Left - btnPreviousLevel.Width - 4;
+
+            int levelButtonsWidth = btnNextLevel.Width + lblLevel.Width + btnPreviousLevel.Width + 26;
+            statusBar.Width = this.Width - statusBar.Left - levelButtonsWidth - 6;
+            lblUpdatingLPC.Left = this.Width - lblUpdatingLPC.Width - levelButtonsWidth - 46;
+
             RepositionPicLevel();
 
             foreach (TabControl tabControl in this.Controls.OfType<TabControl>())
@@ -291,8 +299,6 @@ namespace RLEditor
             int width = pieceBrowserWindow != null ? pieceBrowserWindow.Width : this.Width;
 
             btnLoadStyle.Top = tabPieces.Height - btnLoadStyle.Height;
-
-            lblUpdatingLPC.Left = this.Width - lblUpdatingLPC.Width - 40;
 
             RepositionPieceBrowser(pieceBrowserIsWindowed, width);
             RepositionPicPieces(pieceBrowserIsWindowed, width);

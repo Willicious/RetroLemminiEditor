@@ -670,6 +670,8 @@ Digger=20
             RepositionPicLevel();
             picLevel.Image = curRenderer.CreateLevelImage();
 
+            this.Text = "  RetroLemmini Editor";
+
             if (curSettings.DefaultTemplate != string.Empty)
                 LoadLevelFromDefaultTemplate();
         }
@@ -726,6 +728,61 @@ Digger=20
             picLevel.Image = curRenderer.CreateLevelImage();
 
             comboPieceStyle.Text = CurLevel.MainStyle?.NameInEditor;
+
+            string name = Path.GetFileName(CurLevel.FilePathToSave);
+            this.Text = "  RetroLemmini Editor" + (string.IsNullOrEmpty(name) ? "" : " - " + name);
+        }
+
+        /// <summary>
+        /// Load Previous/Next Level using buttons
+        /// </summary>
+        private string GetLevelFromDirectory(int position)
+        {
+            if (CurLevel == null || string.IsNullOrEmpty(CurLevel.FilePathToSave))
+                return string.Empty;
+
+            string currentFile = Path.GetFullPath(CurLevel.FilePathToSave);
+            string directory = Path.GetDirectoryName(currentFile);
+
+            string[] levelFiles = Directory.GetFiles(directory, "*.rlv")
+                .Concat(Directory.GetFiles(directory, "*.ini"))
+                .Where(f => !Path.GetFileName(f).Equals(
+                    "levelpack.ini",
+                    StringComparison.OrdinalIgnoreCase))
+                .Select(Path.GetFullPath)
+                .OrderBy(f => f)
+                .ToArray();
+
+            int currentIndex = Array.FindIndex(levelFiles,
+                f => string.Equals(f, currentFile, StringComparison.OrdinalIgnoreCase));
+
+            if (currentIndex == -1)
+                currentIndex = 0;
+
+            int newIndex = currentIndex + position;
+
+            if (newIndex < 0)
+                newIndex = levelFiles.Length - 1;
+            else if (newIndex >= levelFiles.Length)
+                newIndex = 0;
+
+            return levelFiles[newIndex];
+        }
+
+        private void LoadPreviousLevel()
+        {
+            String file = GetLevelFromDirectory(-1);
+            if (string.IsNullOrEmpty(file))
+                return;
+            LoadNewLevel(file);
+        }
+
+        private void LoadNextLevel()
+        {
+            String file = GetLevelFromDirectory(1);
+            if (string.IsNullOrEmpty(file))
+                return;
+            LoadNewLevel(file);
         }
 
         /// <summary>
@@ -2932,6 +2989,10 @@ Digger=20
 
         private void UpdateControlTags()
         {
+            // --- Menu Bar --- //
+            btnPreviousLevel.Tag = "Load the previous level in the current directory";
+            btnNextLevel.Tag = "Load the next level in the current directory";
+
             // --- Globals Tab --- //
             txtLevelTitle.Tag = "Enter a title for your level";
             txtLevelAuthor.Tag = "Enter an author name";
@@ -2978,7 +3039,6 @@ Digger=20
             btnLoadStyle.Tag = "Load the style of the selected piece into the Piece Browser";
 
             // --- Skills Tab --- //
-
             numClimber.Tag = "Set the number of available Climbers";
             numFloater.Tag = "Set the number of available Floaters";
             numBomber.Tag = "Set the number of available Bombers";
@@ -2997,7 +3057,6 @@ Digger=20
             btnClearAllSkills.Tag = "Set all skills to zero";
 
             // --- Extras Tab --- //
-
             btnLevelPackCompiler.Tag = "Open the Level Pack Compiler, which allows you to compile multiple levels into a single level pack that can be shared and played in RetroLemmini";
             comboMods.Tag = "Select a mod to be applied to the level. Click the '?' button for more info";
             btnModsHelp.Tag = "Get more information about how mods are applied";
