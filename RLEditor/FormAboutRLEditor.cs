@@ -106,24 +106,11 @@ namespace RLEditor
 
             WriteBoldText(richTextBox, $"================ Version {C.Version} Updates ================\n");
 
-            WriteBoldText(richTextBox, "\n• Cycle Select Pieces\n");
-            richTextBox.AppendText(" • Shift + LMB (by default) cycles through pieces within 32px of the cursor, so that each subsequent click grabs the piece at the next-highest index.\n");
-
-            WriteBoldText(richTextBox, "\n• Show/Hide Steel\n");
-            richTextBox.AppendText(" • Added menu item and hotkey support for Show/Hide Steel (Ctrl + F2 by default).\n");
-
-            WriteBoldText(richTextBox, "\n• Pieces List\n");
-            richTextBox.AppendText(" • Added a 'Pieces List' window which displays all pieces currently active in the level.\n");
-            richTextBox.AppendText(" • From here, pieces can be selected, moved behind/in front of other pieces, and deleted.\n");
-
-            WriteBoldText(richTextBox, "\n• Misc UI\n");
-            richTextBox.AppendText(" • Updated some default hotkeys (Level Arranger is now Ctrl + L, Piece Browser is Ctrl + B, Expand All Tabs is Ctrl + Space).\n");
+            WriteBoldText(richTextBox, "\n• Previous/Next Level Buttons\n");
+            richTextBox.AppendText(" • Added '<<' and '>>' buttons for navigating between levels in the current directory.\n");
 
             WriteBoldText(richTextBox, "\n• Bugfixes\n");
-            richTextBox.AppendText(" • 'Select Pieces Below' (Alt + LMB by default) re-triggers selection correctly, even if used whilst a piece is already selected.\n");
-            richTextBox.AppendText(" • Enhanced support for non-English locales.\n");
-            richTextBox.AppendText(" • Fixed repeat renderings when auto-resizing the form.\n");
-            richTextBox.AppendText(" • 'Use Auto Screen Start' is now written to/from a setting object rather that directly to/from the checkbox.\n");
+            richTextBox.AppendText(" • Changed default top boundary to 2.\n");
 
             // Version 1.1 features
             WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");
@@ -143,6 +130,16 @@ namespace RLEditor
             richTextBox.AppendText(" • Added a new Crop rectangle which makes it much quicker and easier to adjust level width and height to fit the layout.\n");
             richTextBox.AppendText(" • This has full hotkey support (X to toggle the Crop rectangle, Enter to apply, Esc to cancel.\n");
             richTextBox.AppendText(" • Note that some Editor features (such as dragging pieces) become unavailable when the Crop rectangle is active.\n");
+
+            WriteBoldText(richTextBox, "\n• Cycle Select Pieces\n");
+            richTextBox.AppendText(" • Shift + LMB (by default) cycles through pieces within 32px of the cursor, so that each subsequent click grabs the piece at the next-highest index.\n");
+
+            WriteBoldText(richTextBox, "\n• Show/Hide Steel\n");
+            richTextBox.AppendText(" • Added menu item and hotkey support for Show/Hide Steel (Ctrl + F2 by default).\n");
+
+            WriteBoldText(richTextBox, "\n• Pieces List\n");
+            richTextBox.AppendText(" • Added a 'Pieces List' window which displays all pieces currently active in the level.\n");
+            richTextBox.AppendText(" • From here, pieces can be selected, moved behind/in front of other pieces, and deleted.\n");
 
             WriteBoldText(richTextBox, "\n• Default Author Name\n");
             richTextBox.AppendText(" • Added a setting which automatically applies a default author name when a new level is created\n");
@@ -184,6 +181,7 @@ namespace RLEditor
 
             WriteBoldText(richTextBox, "\n• Hotkeys\n");
             richTextBox.AppendText(" • Removed support for Classic hotkeys (not relevant in this version of the Editor).\n");
+            richTextBox.AppendText(" • Updated some default hotkeys (Level Arranger is now Ctrl + L, Piece Browser is Ctrl + B, Expand All Tabs is Ctrl + Space).\n");
 
             WriteBoldText(richTextBox, "\n• Control Hints\n");
             richTextBox.AppendText(" • When the mouse is hovered over a control, information about that control is now displayed in the status bar. This can be toggled on/off in Settings.\n");
@@ -214,6 +212,10 @@ namespace RLEditor
             richTextBox.AppendText(" • Directory name is prioritized when identifying styles\n");
             richTextBox.AppendText(" • Added backwards-compatibility for screen start positions in earlier levels (it always saves to the more recent format)\n");
             richTextBox.AppendText(" • When typing a level title, if the limit of 32 is exceeded, the title is shown in red as a warning (but still allowed).\n");
+            richTextBox.AppendText(" • 'Select Pieces Below' (Alt + LMB by default) re-triggers selection correctly, even if used whilst a piece is already selected.\n");
+            richTextBox.AppendText(" • Enhanced support for non-English locales.\n");
+            richTextBox.AppendText(" • Fixed repeat renderings when auto-resizing the form.\n");
+            richTextBox.AppendText(" • 'Use Auto Screen Start' is now written to/from a setting object rather that directly to/from the checkbox.\n");
         }
 
         /// <summary>
