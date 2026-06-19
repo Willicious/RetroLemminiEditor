@@ -7,6 +7,8 @@ namespace RLEditor
 {
     public static class C // for Constants
     {
+        public static string AppCaption = "  RetroLemmini Editor";
+
         public static string Version
         {
             get

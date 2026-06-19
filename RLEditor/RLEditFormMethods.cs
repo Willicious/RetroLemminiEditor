@@ -670,7 +670,7 @@ Digger=20
             RepositionPicLevel();
             picLevel.Image = curRenderer.CreateLevelImage();
 
-            this.Text = "  RetroLemmini Editor";
+            this.Text = C.AppCaption;
 
             if (curSettings.DefaultTemplate != string.Empty)
                 LoadLevelFromDefaultTemplate();
@@ -730,7 +730,7 @@ Digger=20
             comboPieceStyle.Text = CurLevel.MainStyle?.NameInEditor;
 
             string name = Path.GetFileName(CurLevel.FilePathToSave);
-            this.Text = "  RetroLemmini Editor" + (string.IsNullOrEmpty(name) ? "" : " - " + name);
+            this.Text = C.AppCaption + (string.IsNullOrEmpty(name) ? "" : " - " + name);
         }
 
         /// <summary>

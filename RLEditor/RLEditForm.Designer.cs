@@ -3035,7 +3035,7 @@
             this.MinimumSize = new System.Drawing.Size(1300, 700);
             this.Name = "RLEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "  RetroLemmini Editor";
+            this.Text = C.AppCaption;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Activated += new System.EventHandler(this.RLEditForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLEditForm_FormClosing);
