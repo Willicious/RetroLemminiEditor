@@ -26,7 +26,7 @@ namespace RLEditor
         /// </summary>
         private void InitializeSettings()
         {
-            curSettings.ReadSettingsFromFile();
+            curSettings.LoadSettings();
 
             snapToGridToolStripMenuItem.Checked = curSettings.UseGridForPieces;
             highlightEraserPiecesToolStripMenuItem.Checked = BmpModify.HighlightErasers;

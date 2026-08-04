@@ -859,7 +859,7 @@ namespace RLEditor
 
         public void ReloadSettings()
         {
-            ReadSettingsFromFile();
+            LoadSettings();
 
             editorForm.ToggleSnapToGrid();
             editorForm.MoveControlsOnFormResize();
@@ -871,7 +871,7 @@ namespace RLEditor
         /// <summary>
         /// Reads the users editor settings from RLEditorSettings.ini.
         /// </summary>
-        public void ReadSettingsFromFile()
+        public void LoadSettings()
         {
             SetDefault();
 
