@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using static RLEditor.Settings;
@@ -270,6 +271,41 @@ namespace RLEditor
             checkFake.Checked = selectionList.Exists(p => (p is GadgetPiece && (p as GadgetPiece).IsFake)
                                                                || (p is TerrainPiece && (p as TerrainPiece).IsFake));
             checkFake.CheckedChanged += check_Pieces_Fake_CheckedChanged;
+        }
+
+        /// <summary>
+        /// Updates Recent Levels menu and (de)activates the menu item accordingly.
+        /// </summary>
+        private void UpdateRecentLevelsMenu()
+        {
+            ToolStripItemCollection items = openRecentToolStripMenuItem.DropDownItems;
+            while (items.Count > 0 && items[0] != openRecentSeparator)
+            {
+                items.RemoveAt(0);
+            }
+
+            int index = 1;
+
+            foreach (string level in curSettings.RecentLevels.Levels)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem();
+
+                if (index <= 9)
+                    item.Text = "&" + index + "   " + Path.GetFileName(level);
+                else
+                    item.Text = "     " + Path.GetFileName(level);
+
+                item.Tag = level;
+                item.ToolTipText = level;
+
+                item.Click += RecentLevel_Click;
+
+                openRecentToolStripMenuItem.DropDownItems.Insert(index - 1, item);
+
+                index++;
+            }
+
+            openRecentToolStripMenuItem.Enabled = curSettings.RecentLevels.Levels.Count > 0;
         }
 
         /// <summary>

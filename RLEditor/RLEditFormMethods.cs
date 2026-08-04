@@ -710,6 +710,13 @@ Digger=20
             if (level == null)
                 return;
 
+            if (!string.IsNullOrEmpty(level.FilePathToSave))
+            {
+                curSettings.RecentLevels.Add(level.FilePathToSave);
+                curSettings.WriteSettingsToFile();
+                UpdateRecentLevelsMenu();
+            }
+
             LevelDirectory = Path.GetDirectoryName(level.FilePathToSave);
             
             CurLevel = level;
@@ -791,6 +798,16 @@ Digger=20
         public void RefreshLevel()
         {
             picLevel.Image = curRenderer.CreateLevelImage();
+        }
+
+        /// <summary>
+        /// Clears the recent levels list and updates the menu
+        /// </summary>
+        private void ClearRecentLevels()
+        {
+            curSettings.RecentLevels.Clear();
+            curSettings.WriteSettingsToFile();
+            UpdateRecentLevelsMenu();
         }
 
         public void HandleCropLevel()

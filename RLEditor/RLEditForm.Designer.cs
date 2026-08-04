@@ -33,6 +33,8 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openRecentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openRecentSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -250,6 +252,7 @@
             this.btnPreviousLevel = new System.Windows.Forms.Button();
             this.btnNextLevel = new System.Windows.Forms.Button();
             this.lblLevel = new System.Windows.Forms.Label();
+            this.clearRecentLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLevel)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -316,6 +319,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.loadToolStripMenuItem,
+            this.openRecentToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.saveAsImageToolStripMenuItem,
@@ -347,6 +351,20 @@
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
             this.loadToolStripMenuItem.Text = "Open";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // openRecentToolStripMenuItem
+            // 
+            this.openRecentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openRecentSeparator,
+            this.clearRecentLevelsToolStripMenuItem});
+            this.openRecentToolStripMenuItem.Name = "openRecentToolStripMenuItem";
+            this.openRecentToolStripMenuItem.Size = new System.Drawing.Size(354, 34);
+            this.openRecentToolStripMenuItem.Text = "Open Recent";
+            // 
+            // openRecentSeparator
+            // 
+            this.openRecentSeparator.Name = "openRecentSeparator";
+            this.openRecentSeparator.Size = new System.Drawing.Size(267, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -3004,6 +3022,13 @@
             this.lblLevel.TabIndex = 92;
             this.lblLevel.Text = "Level";
             // 
+            // clearRecentLevelsToolStripMenuItem
+            // 
+            this.clearRecentLevelsToolStripMenuItem.Name = "clearRecentLevelsToolStripMenuItem";
+            this.clearRecentLevelsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.clearRecentLevelsToolStripMenuItem.Text = "Clear Recent Levels";
+            this.clearRecentLevelsToolStripMenuItem.Click += new System.EventHandler(this.clearRecentLevelsToolStripMenuItem_Click);
+            // 
             // RLEditForm
             // 
             this.AllowDrop = true;
@@ -3035,7 +3060,7 @@
             this.MinimumSize = new System.Drawing.Size(1300, 700);
             this.Name = "RLEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = C.AppCaption;
+            this.Text = "  RetroLemmini Editor";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Activated += new System.EventHandler(this.RLEditForm_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RLEditForm_FormClosing);
@@ -3326,6 +3351,9 @@
         private System.Windows.Forms.Button btnPreviousLevel;
         private System.Windows.Forms.Button btnNextLevel;
         private System.Windows.Forms.Label lblLevel;
+        private System.Windows.Forms.ToolStripMenuItem openRecentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator openRecentSeparator;
+        private System.Windows.Forms.ToolStripMenuItem clearRecentLevelsToolStripMenuItem;
     }
 }
 

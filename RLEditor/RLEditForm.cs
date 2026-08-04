@@ -1554,6 +1554,7 @@ namespace RLEditor
             MoveControlsOnFormResize();
             UpdateMissingPiecesMenuItems();
             LinkControlsToMouseEvents(this);
+            UpdateRecentLevelsMenu();
             UpdateControlTags();
 
             MaybeUpdateLevelPackCompiler();
@@ -1582,6 +1583,29 @@ namespace RLEditor
         private void expandAllTabsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToggleExpandedTabs();
+        }
+
+        private void RecentLevel_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+
+            if (item == null)
+                return;
+
+            string filename = (string)item.Tag;
+
+            if (!File.Exists(filename))
+            {
+                MessageBox.Show("The file could not be found.");
+
+                curSettings.RecentLevels.Remove(filename);
+                UpdateRecentLevelsMenu();
+                curSettings.WriteSettingsToFile();
+
+                return;
+            }
+
+            LoadNewLevel(filename);
         }
 
         private void ComboMouseEnter(object sender, EventArgs e)
@@ -1806,6 +1830,11 @@ namespace RLEditor
         private void btnNextLevel_Click(object sender, EventArgs e)
         {
             LoadNextLevel();
+        }
+
+        private void clearRecentLevelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClearRecentLevels();
         }
     }
 }
