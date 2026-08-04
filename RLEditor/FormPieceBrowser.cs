@@ -80,7 +80,7 @@ namespace RLEditor
             curSettings.PieceBrowser.IsMaximized = this.WindowState == FormWindowState.Maximized;
             curSettings.PieceBrowser.Location = this.Location;
             curSettings.PieceBrowser.Size = this.Size;
-            curSettings.WriteSettingsToFile();
+            curSettings.SaveSettings();
 
             ReturnPieceBrowserToMainForm();
             mainForm = null;

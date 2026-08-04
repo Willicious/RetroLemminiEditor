@@ -62,7 +62,7 @@ namespace RLEditor
         private void Check_ShowThisWindow_CheckedChanged(object sender, EventArgs e)
         {
             curSettings.ShowAboutAtStartup = check_ShowThisWindow.Checked;
-            curSettings.WriteSettingsToFile();
+            curSettings.SaveSettings();
         }
 
         private void FormAboutRLEditor_KeyDown(object sender, KeyEventArgs e)

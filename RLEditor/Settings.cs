@@ -835,7 +835,7 @@ namespace RLEditor
 
                     if (result == DialogResult.Yes)
                     {
-                        WriteSettingsToFile();
+                        SaveSettings();
                     }
                     else if (result == DialogResult.No)
                     {
@@ -853,7 +853,7 @@ namespace RLEditor
             }
             else
             {
-                WriteSettingsToFile();
+                SaveSettings();
             }
         }
 
@@ -865,7 +865,7 @@ namespace RLEditor
             editorForm.MoveControlsOnFormResize();
             editorForm.LoadPiecesIntoPictureBox();
 
-            WriteSettingsToFile();
+            SaveSettings();
         }
 
         /// <summary>
@@ -1138,7 +1138,7 @@ namespace RLEditor
         /// <summary>
         /// Saves the user's current editor settings to RLEditorSettings.ini. 
         /// </summary>
-        public void WriteSettingsToFile()
+        public void SaveSettings()
         {
             try
             {

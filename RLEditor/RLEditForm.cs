@@ -195,7 +195,7 @@ namespace RLEditor
             try
             {
                 curSettings.UseAutoStart = checkAutoStart.Checked;
-                curSettings.WriteSettingsToFile();
+                curSettings.SaveSettings();
 
                 Utility.DeleteFile(C.AppPathTempLevel);
                 Utility.DeleteFile(System.IO.Path.ChangeExtension(C.AppPathTempLevel, ".nxsv"));
@@ -1470,7 +1470,7 @@ namespace RLEditor
         private void dontShowAgainStatusBarMenuItem_Click(object sender, EventArgs e)
         {
             curSettings.ShowSteelAreasMessage = false;
-            curSettings.WriteSettingsToFile();
+            curSettings.SaveSettings();
             HideStatusBar();
         }
 
@@ -1600,7 +1600,7 @@ namespace RLEditor
 
                 curSettings.RecentLevels.Remove(filename);
                 UpdateRecentLevelsMenu();
-                curSettings.WriteSettingsToFile();
+                curSettings.SaveSettings();
 
                 return;
             }

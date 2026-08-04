@@ -277,7 +277,7 @@ namespace RLEditor
             if (levelIsDefault)
             {
                 curSettings.DefaultTemplate = string.Empty;
-                curSettings.WriteSettingsToFile();
+                curSettings.SaveSettings();
             }
 
             try
@@ -312,7 +312,7 @@ namespace RLEditor
             int index = listTemplates.SelectedIndex;
 
             curSettings.DefaultTemplate = templateInfo.FileName;
-            curSettings.WriteSettingsToFile();
+            curSettings.SaveSettings();
             btnSetAsDefault.Enabled = false;
             PopulateTemplatesList(index);
         }
@@ -348,7 +348,7 @@ namespace RLEditor
         private void checkOpenTemplatesAtStartup_CheckedChanged(object sender, EventArgs e)
         {
             curSettings.OpenTemplatesAtStartup = checkOpenTemplatesAtStartup.Checked;
-            curSettings.WriteSettingsToFile();
+            curSettings.SaveSettings();
         }
     }
 }

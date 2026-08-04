@@ -637,7 +637,7 @@ namespace RLEditor
 
             // Update setting
             curSettings.AutoPinOGStyles = cb.Checked;
-            curSettings.WriteSettingsToFile();
+            curSettings.SaveSettings();
 
             // Refresh list view
             HandleOGStylePinning();
@@ -656,7 +656,7 @@ namespace RLEditor
 
             // Update setting
             curSettings.ShowRandomButton = cb.Checked;
-            curSettings.WriteSettingsToFile();
+            curSettings.SaveSettings();
 
             // Refresh Editor
             mainForm.MoveControlsOnFormResize();

@@ -94,7 +94,7 @@ namespace RLEditor
             if (exePath == null)
             {
                 curSettings.LastLPCUpdateCheck = DateTime.Now;
-                curSettings.WriteSettingsToFile();
+                curSettings.SaveSettings();
                 return;
             }
 
@@ -141,7 +141,7 @@ namespace RLEditor
                     infoLabel.Visible = false;
 
                 curSettings.LastLPCUpdateCheck = DateTime.Now;
-                curSettings.WriteSettingsToFile();
+                curSettings.SaveSettings();
             }
             catch
             {
