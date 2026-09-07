@@ -1300,6 +1300,7 @@ Digger=20
             numSteelAreaHeight.Value = height;
 
             MaybeOpenPiecesTab();
+            UpdatePieceMetaData();
             UpdateStatusBar(1);
         }
 
@@ -1308,6 +1309,7 @@ Digger=20
             Point pos = curRenderer.GetCenterPoint();
             AddNewPieceToLevel(pieceKey, null, pos);
             MaybeOpenPiecesTab();
+            UpdatePieceMetaData();
         }
 
         private void OpenLevelArrangerWindow()
