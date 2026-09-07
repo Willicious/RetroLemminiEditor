@@ -35,6 +35,7 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openRecentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openRecentSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.clearRecentLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -252,7 +253,6 @@
             this.btnPreviousLevel = new System.Windows.Forms.Button();
             this.btnNextLevel = new System.Windows.Forms.Button();
             this.lblLevel = new System.Windows.Forms.Label();
-            this.clearRecentLevelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLevel)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -364,7 +364,14 @@
             // openRecentSeparator
             // 
             this.openRecentSeparator.Name = "openRecentSeparator";
-            this.openRecentSeparator.Size = new System.Drawing.Size(267, 6);
+            this.openRecentSeparator.Size = new System.Drawing.Size(259, 6);
+            // 
+            // clearRecentLevelsToolStripMenuItem
+            // 
+            this.clearRecentLevelsToolStripMenuItem.Name = "clearRecentLevelsToolStripMenuItem";
+            this.clearRecentLevelsToolStripMenuItem.Size = new System.Drawing.Size(262, 34);
+            this.clearRecentLevelsToolStripMenuItem.Text = "Clear Recent Levels";
+            this.clearRecentLevelsToolStripMenuItem.Click += new System.EventHandler(this.clearRecentLevelsToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -1876,6 +1883,7 @@
             // lblPieceSize
             // 
             this.lblPieceSize.AutoSize = true;
+            this.lblPieceSize.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblPieceSize.Location = new System.Drawing.Point(80, 494);
             this.lblPieceSize.Name = "lblPieceSize";
             this.lblPieceSize.Size = new System.Drawing.Size(84, 20);
@@ -1886,6 +1894,7 @@
             // 
             this.lblSize.AutoSize = true;
             this.lblSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSize.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblSize.Location = new System.Drawing.Point(17, 494);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(44, 20);
@@ -1896,6 +1905,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblName.Location = new System.Drawing.Point(17, 422);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(55, 20);
@@ -1905,6 +1915,7 @@
             // lblPieceType
             // 
             this.lblPieceType.AutoSize = true;
+            this.lblPieceType.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblPieceType.Location = new System.Drawing.Point(80, 470);
             this.lblPieceType.Name = "lblPieceType";
             this.lblPieceType.Size = new System.Drawing.Size(86, 20);
@@ -1915,6 +1926,7 @@
             // 
             this.lblStyle.AutoSize = true;
             this.lblStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStyle.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblStyle.Location = new System.Drawing.Point(17, 446);
             this.lblStyle.Name = "lblStyle";
             this.lblStyle.Size = new System.Drawing.Size(48, 20);
@@ -1924,6 +1936,7 @@
             // lblPieceStyle
             // 
             this.lblPieceStyle.AutoSize = true;
+            this.lblPieceStyle.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblPieceStyle.Location = new System.Drawing.Point(80, 446);
             this.lblPieceStyle.Name = "lblPieceStyle";
             this.lblPieceStyle.Size = new System.Drawing.Size(88, 20);
@@ -1934,6 +1947,7 @@
             // 
             this.lblType.AutoSize = true;
             this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblType.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblType.Location = new System.Drawing.Point(17, 470);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(47, 20);
@@ -1943,6 +1957,7 @@
             // lblPieceName
             // 
             this.lblPieceName.AutoSize = true;
+            this.lblPieceName.ForeColor = System.Drawing.Color.SteelBlue;
             this.lblPieceName.Location = new System.Drawing.Point(80, 422);
             this.lblPieceName.Name = "lblPieceName";
             this.lblPieceName.Size = new System.Drawing.Size(96, 20);
@@ -3021,13 +3036,6 @@
             this.lblLevel.Size = new System.Drawing.Size(46, 20);
             this.lblLevel.TabIndex = 92;
             this.lblLevel.Text = "Level";
-            // 
-            // clearRecentLevelsToolStripMenuItem
-            // 
-            this.clearRecentLevelsToolStripMenuItem.Name = "clearRecentLevelsToolStripMenuItem";
-            this.clearRecentLevelsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.clearRecentLevelsToolStripMenuItem.Text = "Clear Recent Levels";
-            this.clearRecentLevelsToolStripMenuItem.Click += new System.EventHandler(this.clearRecentLevelsToolStripMenuItem_Click);
             // 
             // RLEditForm
             // 
