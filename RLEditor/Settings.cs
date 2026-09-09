@@ -182,13 +182,13 @@ namespace RLEditor
         public void OpenSettingsWindow()
         {
             int formWidth = 650;
-            int formHeight = 410;
+            int formHeight = 400;
             int columnLeft = 30;
             int columnRight = 340;
             int groupBoxTop = 20;
             int groupBoxColumnLeft = 16;
             int groupBoxColumnRight = 208;
-            int buttonsTop = 360;
+            int buttonsTop = 350;
 
             settingsForm = new EscExitForm();
             settingsForm.StartPosition = FormStartPosition.CenterScreen;
@@ -298,7 +298,7 @@ namespace RLEditor
 
             GroupBox groupSavingOptions = new GroupBox();
             groupSavingOptions.Text = "Level Saving Options";
-            groupSavingOptions.Top = 210;
+            groupSavingOptions.Top = 220;
             groupSavingOptions.Left = columnLeft;
             groupSavingOptions.Width = 280;
             groupSavingOptions.Height = 110;
@@ -375,11 +375,11 @@ namespace RLEditor
             groupSavingOptions.Controls.Add(checkDeleteAutosaves);
             groupSavingOptions.Controls.Add(numAutosavesToKeep);
 
-            // ========================== Snap-to-Grid GroupBox ========================== //
+            // ========================== Grid Settings GroupBox ========================== //
 
             GroupBox groupSnapToGrid = new GroupBox();
-            groupSnapToGrid.Text = "Snap Pieces to Grid";
-            groupSnapToGrid.Top = 20;
+            groupSnapToGrid.Text = "Grid Settings";
+            groupSnapToGrid.Top = 60;
             groupSnapToGrid.Left = columnRight;
             groupSnapToGrid.Width = 280;
             groupSnapToGrid.Height = 80;
@@ -432,14 +432,14 @@ namespace RLEditor
             groupSnapToGrid.Controls.Add(lblGridColor);
             groupSnapToGrid.Controls.Add(comboGridColor);
 
-            // ========================== Custom Move GroupBox =========================== //
+            // ========================== Other Settings GroupBox =========================== //
 
-            GroupBox groupCustomMove = new GroupBox();
-            groupCustomMove.Text = "Custom move selected pieces";
-            groupCustomMove.Top = 120;
-            groupCustomMove.Left = columnRight;
-            groupCustomMove.Width = 280;
-            groupCustomMove.Height = 50;
+            GroupBox groupOtherSettings = new GroupBox();
+            groupOtherSettings.Text = "Other Settings";
+            groupOtherSettings.Top = 160;
+            groupOtherSettings.Left = columnRight;
+            groupOtherSettings.Width = 280;
+            groupOtherSettings.Height = 170;
 
             Label lblCustomMove = new Label();
             lblCustomMove.Text = "Custom move amount in pixels:";
@@ -460,22 +460,10 @@ namespace RLEditor
             numCustomMove.ValueChanged += new EventHandler(numCustomMove_ValueChanged);
             numCustomMove.KeyDown += new KeyEventHandler(numUpDown_KeyDown);
 
-            groupCustomMove.Controls.Add(lblCustomMove);
-            groupCustomMove.Controls.Add(numCustomMove);
-
-            // ========================== Trigger Area Color GroupBox ========================== //
-
-            GroupBox groupTriggerAreaColor = new GroupBox();
-            groupTriggerAreaColor.Text = "Trigger Area Color";
-            groupTriggerAreaColor.Top = 190;
-            groupTriggerAreaColor.Left = columnRight;
-            groupTriggerAreaColor.Width = 280;
-            groupTriggerAreaColor.Height = 50;
-
             Label lblTriggerAreaColor = new Label();
             lblTriggerAreaColor.Name = "lblTriggerAreaColor";
             lblTriggerAreaColor.Text = "Choose trigger area color:";
-            lblTriggerAreaColor.Top = groupBoxTop;
+            lblTriggerAreaColor.Top = groupBoxTop + 30;
             lblTriggerAreaColor.Left = groupBoxColumnLeft;
             lblTriggerAreaColor.AutoSize = true;
             lblTriggerAreaColor.Enabled = true;
@@ -491,17 +479,15 @@ namespace RLEditor
             comboTriggerAreaColor.SelectedItem = CurrentTriggerAreaColor.ToString();
             comboTriggerAreaColor.SelectedIndexChanged += new EventHandler(comboTriggerAreaColor_IndexChanged);
 
-            groupTriggerAreaColor.Controls.Add(lblTriggerAreaColor);
-            groupTriggerAreaColor.Controls.Add(comboTriggerAreaColor);
-
-            // ========================== Control Hints GroupBox ========================== //
-
-            GroupBox groupControlHints = new GroupBox();
-            groupControlHints.Text = "Control Hints";
-            groupControlHints.Top = 260;
-            groupControlHints.Left = columnRight;
-            groupControlHints.Width = 280;
-            groupControlHints.Height = 50;
+            CheckBox checkUseAutoStart = new CheckBox();
+            checkUseAutoStart.Name = "checkUseAutoStart";
+            checkUseAutoStart.AutoSize = true;
+            checkUseAutoStart.CheckAlign = ContentAlignment.MiddleLeft;
+            checkUseAutoStart.Checked = UseAutoStart;
+            checkUseAutoStart.Text = "Always Use Auto Screen Start";
+            checkUseAutoStart.Top = groupBoxTop + 60;
+            checkUseAutoStart.Left = groupBoxColumnLeft;
+            checkUseAutoStart.CheckedChanged += new EventHandler(checkUseAutoStart_CheckedChanged);
 
             CheckBox checkShowControlHints = new CheckBox();
             checkShowControlHints.Name = "checkShowControlHints";
@@ -509,11 +495,16 @@ namespace RLEditor
             checkShowControlHints.CheckAlign = ContentAlignment.MiddleLeft;
             checkShowControlHints.Checked = ShowControlHints;
             checkShowControlHints.Text = "Show Control Hints in Status Bar";
-            checkShowControlHints.Top = groupBoxTop;
+            checkShowControlHints.Top = groupBoxTop + 90;
             checkShowControlHints.Left = groupBoxColumnLeft;
             checkShowControlHints.CheckedChanged += new EventHandler(checkShowControlHints_CheckedChanged);
 
-            groupControlHints.Controls.Add(checkShowControlHints);
+            groupOtherSettings.Controls.Add(lblCustomMove);
+            groupOtherSettings.Controls.Add(numCustomMove);
+            groupOtherSettings.Controls.Add(lblTriggerAreaColor);
+            groupOtherSettings.Controls.Add(comboTriggerAreaColor);
+            groupOtherSettings.Controls.Add(checkUseAutoStart);
+            groupOtherSettings.Controls.Add(checkShowControlHints);
 
             // ========================== Save And Close Button ========================== //
 
@@ -544,11 +535,9 @@ namespace RLEditor
             settingsForm.Controls.Add(textAuthorName);
 
             settingsForm.Controls.Add(groupPieceBrowserMode);
-            settingsForm.Controls.Add(groupCustomMove);
             settingsForm.Controls.Add(groupSnapToGrid);
-            settingsForm.Controls.Add(groupTriggerAreaColor);
-            settingsForm.Controls.Add(groupControlHints);
             settingsForm.Controls.Add(groupSavingOptions);
+            settingsForm.Controls.Add(groupOtherSettings);
 
             settingsForm.Controls.Add(btnSaveAndClose);
             settingsForm.Controls.Add(btnCancel);
@@ -610,6 +599,17 @@ namespace RLEditor
             }
 
             settingChanged = true;
+        }
+
+        private void checkUseAutoStart_CheckedChanged(object sender, EventArgs e)
+        {
+            UseAutoStart = ((sender as CheckBox).CheckState == CheckState.Checked);
+            settingChanged = true;
+
+            bool autoStartActive = editorForm.checkAutoStart.Checked;
+
+            if (!autoStartActive)
+                editorForm.checkAutoStart.Checked = UseAutoStart;
         }
 
         private void checkShowControlHints_CheckedChanged(object sender, EventArgs e)

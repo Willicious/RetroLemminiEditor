@@ -194,7 +194,6 @@ namespace RLEditor
         {
             try
             {
-                curSettings.UseAutoStart = checkAutoStart.Checked;
                 curSettings.SaveSettings();
 
                 Utility.DeleteFile(C.AppPathTempLevel);
