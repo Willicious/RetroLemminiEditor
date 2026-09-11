@@ -167,7 +167,7 @@ namespace RLEditor
             DisplaySettings.SetDisplayed(C.DisplayType.Objects, true);
             DisplaySettings.SetDisplayed(C.DisplayType.ScreenStart, false);
             DisplaySettings.SetDisplayed(C.DisplayType.Triggers, true);
-            DisplaySettings.SetDisplayed(C.DisplayType.ClearPhysics, false);
+            DisplaySettings.SetDisplayed(C.DisplayType.PhysicsView, false);
             DisplaySettings.SetDisplayed(C.DisplayType.SteelAreas, true);
             DisplaySettings.SetDisplayed(C.DisplayType.Rulers, true);
 

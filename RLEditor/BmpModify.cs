@@ -25,12 +25,12 @@ namespace RLEditor
             colorFuncDict.Add(C.CustDrawMode.NoOverwriteOWW, null);
             colorFuncDict.Add(C.CustDrawMode.OnlyAtMask, null);
             colorFuncDict.Add(C.CustDrawMode.OnlyAtOWW, null);
-            colorFuncDict.Add(C.CustDrawMode.ClearPhysics, ColorFunc_ClearPhysics);
-            colorFuncDict.Add(C.CustDrawMode.ClearPhysicsOWW, ColorFunc_ClearPhysicsOWW);
-            colorFuncDict.Add(C.CustDrawMode.ClearPhysicsSteel, ColorFunc_ClearPhysicsSteel);
-            colorFuncDict.Add(C.CustDrawMode.ClearPhysicsNoOverwrite, ColorFunc_ClearPhysics);
-            colorFuncDict.Add(C.CustDrawMode.ClearPhysicsNoOverwriteOWW, ColorFunc_ClearPhysicsOWW);
-            colorFuncDict.Add(C.CustDrawMode.ClearPhysicsSteelNoOverwrite, ColorFunc_ClearPhysicsSteel);
+            colorFuncDict.Add(C.CustDrawMode.PhysicsView, ColorFunc_PhysicsView);
+            colorFuncDict.Add(C.CustDrawMode.PhysicsViewOWW, ColorFunc_PhysicsViewOWW);
+            colorFuncDict.Add(C.CustDrawMode.PhysicsViewSteel, ColorFunc_PhysicsViewSteel);
+            colorFuncDict.Add(C.CustDrawMode.PhysicsViewNoOverwrite, ColorFunc_PhysicsView);
+            colorFuncDict.Add(C.CustDrawMode.PhysicsViewNoOverwriteOWW, ColorFunc_PhysicsViewOWW);
+            colorFuncDict.Add(C.CustDrawMode.PhysicsViewSteelNoOverwrite, ColorFunc_PhysicsViewSteel);
 
             doDrawThisPixelDict = new Dictionary<C.CustDrawMode, Func<byte, byte, bool>>();
             doDrawThisPixelDict.Add(C.CustDrawMode.Default, DoDrawThisPixel_DrawNew);
@@ -40,12 +40,12 @@ namespace RLEditor
             doDrawThisPixelDict.Add(C.CustDrawMode.NoOverwriteOWW, DoDrawThisPixel_NotAtMask);
             doDrawThisPixelDict.Add(C.CustDrawMode.OnlyAtMask, DoDrawThisPixel_OnlyAtMask);
             doDrawThisPixelDict.Add(C.CustDrawMode.OnlyAtOWW, DoDrawThisPixel_OnlyAtOWW);
-            doDrawThisPixelDict.Add(C.CustDrawMode.ClearPhysics, DoDrawThisPixel_DrawNew);
-            doDrawThisPixelDict.Add(C.CustDrawMode.ClearPhysicsOWW, DoDrawThisPixel_DrawNew);
-            doDrawThisPixelDict.Add(C.CustDrawMode.ClearPhysicsSteel, DoDrawThisPixel_DrawNew);
-            doDrawThisPixelDict.Add(C.CustDrawMode.ClearPhysicsNoOverwrite, DoDrawThisPixel_NotAtMask);
-            doDrawThisPixelDict.Add(C.CustDrawMode.ClearPhysicsNoOverwriteOWW, DoDrawThisPixel_NotAtMask);
-            doDrawThisPixelDict.Add(C.CustDrawMode.ClearPhysicsSteelNoOverwrite, DoDrawThisPixel_NotAtMask);
+            doDrawThisPixelDict.Add(C.CustDrawMode.PhysicsView, DoDrawThisPixel_DrawNew);
+            doDrawThisPixelDict.Add(C.CustDrawMode.PhysicsViewOWW, DoDrawThisPixel_DrawNew);
+            doDrawThisPixelDict.Add(C.CustDrawMode.PhysicsViewSteel, DoDrawThisPixel_DrawNew);
+            doDrawThisPixelDict.Add(C.CustDrawMode.PhysicsViewNoOverwrite, DoDrawThisPixel_NotAtMask);
+            doDrawThisPixelDict.Add(C.CustDrawMode.PhysicsViewNoOverwriteOWW, DoDrawThisPixel_NotAtMask);
+            doDrawThisPixelDict.Add(C.CustDrawMode.PhysicsViewSteelNoOverwrite, DoDrawThisPixel_NotAtMask);
         }
 
         private static Dictionary<C.CustDrawMode, Func<int, int, byte[]>> colorFuncDict;
@@ -56,12 +56,12 @@ namespace RLEditor
 
         private static readonly byte[] COLOR_ERASE = { 0, 0, 0, 0 };
         private static readonly byte[] COLOR_ERASE_SOLID = { 100, 0, 100, 255 };
-        private static readonly byte[] COLOR_CLEAR_PHYSICS_LIGHT = { 200, 200, 200, 254 };
-        private static readonly byte[] COLOR_CLEAR_PHYSICS_DARK = { 170, 170, 170, 254 };
-        private static readonly byte[] COLOR_CLEAR_PHYSICS_LIGHT_OWW = { 200, 200, 200, 255 };
-        private static readonly byte[] COLOR_CLEAR_PHYSICS_DARK_OWW = { 170, 170, 170, 255 };
-        private static readonly byte[] COLOR_CLEAR_PHYSICS_STEEL_LIGHT = { 80, 80, 80, 254 };
-        private static readonly byte[] COLOR_CLEAR_PHYSICS_STEEL_DARK = { 50, 50, 50, 254 };
+        private static readonly byte[] COLOR_PHYSICS_VIEW_LIGHT = { 200, 200, 200, 254 };
+        private static readonly byte[] COLOR_PHYSICS_VIEW_DARK = { 170, 170, 170, 254 };
+        private static readonly byte[] COLOR_PHYSICS_VIEW_LIGHT_OWW = { 200, 200, 200, 255 };
+        private static readonly byte[] COLOR_PHYSICS_VIEW_DARK_OWW = { 170, 170, 170, 255 };
+        private static readonly byte[] COLOR_PHYSICS_VIEW_STEEL_LIGHT = { 80, 80, 80, 254 };
+        private static readonly byte[] COLOR_PHYSICS_VIEW_STEEL_DARK = { 50, 50, 50, 254 };
         private static readonly byte[] COLOR_RECTANGLE_LIGHT = { 240, 240, 240, 255 };
         private static readonly byte[] COLOR_RECTANGLE_DARK = { 30, 30, 30, 255 };
 
@@ -76,39 +76,39 @@ namespace RLEditor
             return HighlightErasers ? COLOR_ERASE_SOLID : COLOR_ERASE;
         }
 
-        private static byte[] ColorFunc_ClearPhysics(int posX, int posY)
+        private static byte[] ColorFunc_PhysicsView(int posX, int posY)
         {
             if ((posX + posY) % 2 == 0)
             {
-                return COLOR_CLEAR_PHYSICS_LIGHT;
+                return COLOR_PHYSICS_VIEW_LIGHT;
             }
             else
             {
-                return COLOR_CLEAR_PHYSICS_DARK;
+                return COLOR_PHYSICS_VIEW_DARK;
             }
         }
 
-        private static byte[] ColorFunc_ClearPhysicsOWW(int posX, int posY)
+        private static byte[] ColorFunc_PhysicsViewOWW(int posX, int posY)
         {
             if ((posX + posY) % 2 == 0)
             {
-                return COLOR_CLEAR_PHYSICS_LIGHT_OWW;
+                return COLOR_PHYSICS_VIEW_LIGHT_OWW;
             }
             else
             {
-                return COLOR_CLEAR_PHYSICS_DARK_OWW;
+                return COLOR_PHYSICS_VIEW_DARK_OWW;
             }
         }
 
-        private static byte[] ColorFunc_ClearPhysicsSteel(int posX, int posY)
+        private static byte[] ColorFunc_PhysicsViewSteel(int posX, int posY)
         {
             if ((posX + posY) % 2 == 0)
             {
-                return COLOR_CLEAR_PHYSICS_STEEL_LIGHT;
+                return COLOR_PHYSICS_VIEW_STEEL_LIGHT;
             }
             else
             {
-                return COLOR_CLEAR_PHYSICS_STEEL_DARK;
+                return COLOR_PHYSICS_VIEW_STEEL_DARK;
             }
         }
 

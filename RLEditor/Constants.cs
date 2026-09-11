@@ -58,15 +58,15 @@ namespace RLEditor
 
         public enum DisplayType
         {
-            Terrain, Steel, Objects, Triggers, SteelAreas, Rulers, ScreenStart, ClearPhysics
+            Terrain, Steel, Objects, Triggers, SteelAreas, Rulers, ScreenStart, PhysicsView
         }
 
         public enum CustDrawMode
         {
             Default, DefaultOWW, Erase, OnlyAtMask, OnlyAtOWW,
             NoOverwrite, NoOverwriteOWW,
-            ClearPhysics, ClearPhysicsOWW, ClearPhysicsSteel,
-            ClearPhysicsNoOverwrite, ClearPhysicsNoOverwriteOWW, ClearPhysicsSteelNoOverwrite,
+            PhysicsView, PhysicsViewOWW, PhysicsViewSteel,
+            PhysicsViewNoOverwrite, PhysicsViewNoOverwriteOWW, PhysicsViewSteelNoOverwrite,
             Custom
         }
 
