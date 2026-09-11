@@ -3041,6 +3041,7 @@ Digger=20
             checkAutoSteel.Tag = "With automatic steel checked, steel pieces do not require a manually-applied steel area";
 
             // --- Pieces Tab --- //
+            btnShowPiecesList.Tag = "Show a list of all pieces in the level";
             btnRotate.Tag = "Rotate all selected pieces clockwise";
             btnInvert.Tag = "Invert all selected pieces";
             btnFlip.Tag = "Flip all selected pieces";
