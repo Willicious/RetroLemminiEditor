@@ -92,6 +92,7 @@ namespace RLEditor
                 pieceCurStyle = null;
             }
             LoadPiecesIntoPictureBox();
+            SetPieceHighlight();
 
             dragNewPieceTimer = new Timer();
             dragNewPieceTimer.Tick += new EventHandler((object sender, EventArgs e) => UpdateNewPiecePicBox());
@@ -127,7 +128,8 @@ namespace RLEditor
         Style pieceCurStyle;
         int pieceStartIndex;
         C.SelectPieceType pieceDoDisplayKind;
-
+        private int highlightedPieceBrowserIndex = -1;
+        private string highlightedPieceKey = string.Empty;
         string dragNewPieceKey;
         Timer dragNewPieceTimer;
 
@@ -1834,6 +1836,21 @@ namespace RLEditor
         private void clearRecentLevelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClearRecentLevels();
+        }
+
+        private void lblPieceHighlight_Click(object sender, EventArgs e)
+        {
+            lblPieceHighlight.Visible = false;
+        }
+
+        private void lblPieceHighlight_MouseEnter(object sender, EventArgs e)
+        {
+            lblPieceHighlight.BackColor = Color.RoyalBlue;
+        }
+
+        private void lblPieceHighlight_MouseLeave(object sender, EventArgs e)
+        {
+            lblPieceHighlight.BackColor = Color.Lime;
         }
     }
 }

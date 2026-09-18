@@ -69,6 +69,8 @@ namespace RLEditor
                 return;
             }
 
+            highlightedPieceBrowserIndex = -1;
+
             // load correct pictures
             for (int i = 0; i < picPieceList.Count; i++)
             {
@@ -79,6 +81,9 @@ namespace RLEditor
                     btnPieceRight.StopRepeatAction();
                     btnPieceLeft.StopRepeatAction();
                 }
+
+                if (pieceKey == highlightedPieceKey)
+                    highlightedPieceBrowserIndex = i;
 
                 int frameIndex = ImageLibrary.GetObjType(pieceKey) == C.OBJ.HATCH ? ImageLibrary.GetFrameCount(pieceKey) : 0;
                 Bitmap pieceImage;
@@ -411,6 +416,32 @@ namespace RLEditor
             btnCancelCrop.Visible = cropActive;
             btnCropLevel.Enabled = !cropActive;
             btnCropLevel.Width = cropActive ? btnApplyCrop.Width : btnCancelCrop.Right - btnCropLevel.Left;
+        }
+
+        /// <summary>
+        /// Set & update the size & visibility of the piece highlight panel
+        /// </summary>
+        private void SetPieceHighlight()
+        {
+            lblPieceHighlight.Visible = false;
+            lblPieceHighlight.BringToFront();
+        }
+
+        private void UpdatePieceHighlight()
+        {
+            if (!lblPieceHighlight.Visible)
+                return;
+
+            if (highlightedPieceBrowserIndex < 0 || highlightedPieceBrowserIndex >= picPieceList.Count)
+            {
+                lblPieceHighlight.Top = -100;
+                lblPieceHighlight.Left = -100;
+            }
+            else
+            {
+                lblPieceHighlight.Top = picPieceList[highlightedPieceBrowserIndex].Top - 4;
+                lblPieceHighlight.Left = picPieceList[highlightedPieceBrowserIndex].Left - 4;
+            }
         }
 
         /// <summary>

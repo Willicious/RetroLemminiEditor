@@ -910,6 +910,8 @@ Digger=20
             if (comboPieceStyle.Items.Cast<string>().Contains(lblPieceStyle.Text))
             {
                 comboPieceStyle.Text = lblPieceStyle.Text;
+                highlightedPieceKey = CurLevel.SelectionList().First().Key;
+                HighlightPieceInBrowser(highlightedPieceKey);
             }
             else
             {
@@ -1928,6 +1930,7 @@ Digger=20
                 ScrollPieces(pieceNameList, movement);
 
             LoadPiecesIntoPictureBox();
+            UpdatePieceHighlight();
         }
 
         /// <summary>
@@ -1952,7 +1955,6 @@ Digger=20
             if (pieceNameList.Count <= picPieceList.Count)
             {
                 pieceStartIndex = 0; // No scrolling needed
-                LoadPiecesIntoPictureBox();
                 return;
             }
 
@@ -1968,7 +1970,6 @@ Digger=20
             if (newIndex != pieceStartIndex)
             {
                 pieceStartIndex = newIndex;
-                LoadPiecesIntoPictureBox();
             }
         }
 
@@ -2036,7 +2037,10 @@ Digger=20
         {
             if (CurLevel == null)
                 return;
-            
+
+            // Always clear highlight when updating metadata
+            lblPieceHighlight.Visible = false;
+
             LevelPiece currentPiece;
             string pieceName;
             string pieceStyle;
@@ -2044,7 +2048,9 @@ Digger=20
             string pieceSize;
 
             if (CurLevel.SelectionList().Count == 1)
+            {
                 currentPiece = CurLevel.SelectionList().First();
+            }
             else
             {
                 lblPieceName.Text = string.Empty;
@@ -2118,6 +2124,67 @@ Digger=20
 
             int actualIndex = (pieceStartIndex + picPieceIndex) % pieceList.Count;
             return pieceList[actualIndex];
+        }
+
+        /// <summary>
+        /// Highlight a specific piece in the Piece Browser from its key
+        /// </summary>
+        private bool HighlightPieceInBrowser(string pieceKey)
+        {
+            if (pieceCurStyle == null || string.IsNullOrEmpty(pieceKey))
+                return false;
+
+            List<string> pieceKeys = null;
+            C.SelectPieceType displayKind;
+
+            if (pieceKey.StartsWith("rulers\\", StringComparison.OrdinalIgnoreCase))
+            {
+                displayKind = C.SelectPieceType.Rulers;
+                pieceKeys = new List<string>(ImageLibrary.RulerKeys);
+            }
+            else if (pieceCurStyle.TerrainKeys.Contains(pieceKey))
+            {
+                displayKind = C.SelectPieceType.Terrain;
+                pieceKeys = pieceCurStyle.TerrainKeys;
+            }
+            else if (pieceCurStyle.SteelKeys.Contains(pieceKey))
+            {
+                displayKind = C.SelectPieceType.Steel;
+                pieceKeys = pieceCurStyle.SteelKeys;
+            }
+            else if (pieceCurStyle.ObjectKeys.Contains(pieceKey))
+            {
+                displayKind = C.SelectPieceType.Objects;
+                pieceKeys = pieceCurStyle.ObjectKeys;
+            }
+            else return false;
+
+            int index = pieceKeys.IndexOf(pieceKey);
+
+            if (index < 0)
+                return false;
+
+            pieceDoDisplayKind = displayKind;
+
+            if (curSettings.InfiniteScrolling)
+            {
+                int middleIndex = picPieceList.Count / 2;
+                pieceStartIndex = (index - middleIndex + pieceKeys.Count) % pieceKeys.Count;
+            }
+            else
+            {
+                int maxIndex = Math.Max(0, pieceKeys.Count - picPieceList.Count);
+                int middleIndex = picPieceList.Count / 2;
+                pieceStartIndex = Math.Max(0, Math.Min(index - middleIndex, maxIndex));
+            }
+
+            highlightedPieceKey = pieceKey;
+            LoadPiecesIntoPictureBox();
+
+            lblPieceHighlight.Visible = true;
+            UpdatePieceHighlight();
+
+            return true;
         }
 
         private void AddPieceViaHotkey(int hotkeyIndex)
