@@ -30,7 +30,7 @@ namespace RLEditor
         /// <summary>
         /// Initializes a new instance of a Renderer. This resets all existing display options. 
         /// </summary>
-        public Renderer(Level level, PictureBox pic_Level, Settings settings)
+        public Renderer(Level level, PictureBox picLevel, Settings settings)
         {
             curSettings = settings;
 
@@ -38,7 +38,7 @@ namespace RLEditor
             this.ScreenPosY = 0;
             this.ZoomFactor = 0;
 
-            this.levelPicBox = pic_Level;
+            this.levelPicBox = picLevel;
 
             SetLevel(level);
             ClearLayers();
@@ -355,7 +355,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Returns the middle point of pic_Level in level coordinates.
+        /// Returns the middle point of picLevel in level coordinates.
         /// </summary>
         public Point GetCenterPoint()
         {
@@ -396,7 +396,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Returns whether a point in screen corrdinates relative to pic_Level lies in the level area.
+        /// Returns whether a point in screen corrdinates relative to picLevel lies in the level area.
         /// </summary>
         public bool IsPointInLevelArea(Point? point)
         {
@@ -415,11 +415,11 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Translates a point in screen coordinates (relative to pic_Level) into level coordinates.
+        /// Translates a point in screen coordinates (relative to picLevel) into level coordinates.
         /// </summary>
         public Point GetMousePosInLevel(Point mouseScreenPos, bool doCropToLevelArea = true)
         {
-            // Adapt to images that do not fill the whole pic_Level and to Mouse positions outside the level
+            // Adapt to images that do not fill the whole picLevel and to Mouse positions outside the level
             int mouseScreenPosX;
             int mouseScreenPosY;
             if (doCropToLevelArea)
@@ -443,7 +443,7 @@ namespace RLEditor
 
         /// <summary>
         /// Returns the start or current mouse position in level coordinates.
-        /// <para> Returns null if this position lies outside pic_Level. </para>
+        /// <para> Returns null if this position lies outside picLevel. </para>
         /// </summary>
         public Point? GetMousePosInLevel(bool isCurrent = true)
         {
@@ -459,7 +459,7 @@ namespace RLEditor
 
         /// <summary>
         /// Returns the rectangle in level coordinates spanned by the start and current position of the mouse.
-        /// <para> Returns null if either mouse position lies outside pic_Level. </para>
+        /// <para> Returns null if either mouse position lies outside picLevel. </para>
         /// </summary>
         public Rectangle? GetCurSelectionInLevel()
         {
@@ -941,7 +941,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Translates a rectangle in level coordinates into screen coordinates (relative to pic_Level)
+        /// Translates a rectangle in level coordinates into screen coordinates (relative to picLevel)
         /// </summary>
         private Rectangle GetPicRectFromLevelRect(Rectangle origRect)
         {
@@ -961,7 +961,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Translates a point in level coordinates into screen coordinates (relative to pic_Level)
+        /// Translates a point in level coordinates into screen coordinates (relative to picLevel)
         /// </summary>
         private Point GetPicPointFromLevelPoint(Point origPoint)
         {
@@ -971,7 +971,7 @@ namespace RLEditor
         }
 
         /// <summary>
-        /// Translates screen coordinates (relative to pic_Level) into a point in level coordinates 
+        /// Translates screen coordinates (relative to picLevel) into a point in level coordinates 
         /// </summary>
         private Point GetLevelPointFromPicPoint(Point picPoint)
         {

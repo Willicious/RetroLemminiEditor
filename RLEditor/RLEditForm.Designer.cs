@@ -828,9 +828,9 @@
             this.picLevel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picLevel.TabIndex = 36;
             this.picLevel.TabStop = false;
-            this.picLevel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseDown);
-            this.picLevel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseMove);
-            this.picLevel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picLevel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseDown);
+            this.picLevel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseMove);
+            this.picLevel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // scrollPicLevelHoriz
             // 
@@ -1130,7 +1130,7 @@
             this.picPiece7.TabStop = false;
             this.picPiece7.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // btnSteel
             // 
@@ -1182,7 +1182,7 @@
             this.picPiece6.TabStop = false;
             this.picPiece6.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // picPiece5
             // 
@@ -1197,7 +1197,7 @@
             this.picPiece5.TabStop = false;
             this.picPiece5.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // picPiece4
             // 
@@ -1212,7 +1212,7 @@
             this.picPiece4.TabStop = false;
             this.picPiece4.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // picPiece3
             // 
@@ -1227,7 +1227,7 @@
             this.picPiece3.TabStop = false;
             this.picPiece3.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // picPiece2
             // 
@@ -1242,7 +1242,7 @@
             this.picPiece2.TabStop = false;
             this.picPiece2.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // picPiece1
             // 
@@ -1257,7 +1257,7 @@
             this.picPiece1.TabStop = false;
             this.picPiece1.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // picPiece0
             // 
@@ -1272,7 +1272,7 @@
             this.picPiece0.TabStop = false;
             this.picPiece0.Click += new System.EventHandler(this.picPieces_Click);
             this.picPiece0.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPieces_MouseDown);
-            this.picPiece0.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pic_Level_MouseUp);
+            this.picPiece0.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picLevel_MouseUp);
             // 
             // comboPieceStyle
             // 
