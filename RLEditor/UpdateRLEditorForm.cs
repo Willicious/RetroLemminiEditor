@@ -604,7 +604,7 @@ namespace RLEditor
             picPiece.Top = pieceBrowserTop;
             picPiece.BorderStyle = BorderStyle.Fixed3D;
             picPiece.SizeMode = PictureBoxSizeMode.CenterImage;
-
+            picPiece.Tag = "Click or drag to add this piece to the level";
             picPiece.Click += new EventHandler(picPieces_Click);
             picPiece.MouseDown += new MouseEventHandler(picPieces_MouseDown);
             picPiece.MouseUp += new MouseEventHandler(picLevel_MouseUp);

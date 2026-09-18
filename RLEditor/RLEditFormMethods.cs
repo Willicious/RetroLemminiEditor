@@ -3045,7 +3045,9 @@ Digger=20
         {
             foreach (Control ctrl in parent.Controls)
             {
-                if (ctrl is Button || ctrl is CheckBox || ctrl is ComboBox || ctrl is TextBox)
+                if (ctrl is Button || ctrl is CheckBox || ctrl is ComboBox ||
+                    ctrl is TextBox || ctrl is RadioButton || ctrl is PictureBox ||
+                    ctrl is Label)
                 {
                     ctrl.MouseEnter += Control_MouseEnter;
                     ctrl.MouseLeave += Control_MouseLeave;
@@ -3159,6 +3161,11 @@ Digger=20
             btnHints.Tag = "Set level solution hints for the current level. These are displayed after the player has made 3 consecutive unsuccessful attempts";
 
             // --- Piece Browser --- //
+            foreach (Control picPiece in panelPieceBrowser.Controls.OfType<PictureBox>())
+            {
+                picPiece.Tag = "Click or drag to add this piece to the level";
+            }
+
             btnStyleRandom.Tag = "Load a random style into the Piece Browser (you can add styles to the randomizer in Style Manager)";
             comboPieceStyle.Tag = "Load a style into the Piece Browser";
             btnTerrain.Tag = "Show Terrain pieces";
@@ -3166,6 +3173,7 @@ Digger=20
             btnObjects.Tag = "Show Objects";
             btnRulers.Tag = "Show Rulers (these can be used to fine-tune your level, and will not appear when the level is played in RetroLemmini)";
             btnAddSteelArea.Tag = "Add a manual steel area (clicking this when a piece isselected will automatically apply a steel area to that piece)";
+            lblPieceHighlight.Tag = "Click to clear the highlight";
         }
 
         private void SetHotkeys()
