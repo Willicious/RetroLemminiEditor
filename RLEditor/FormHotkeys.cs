@@ -34,13 +34,10 @@ namespace RLEditor
         public FormHotkeys()
         {
             InitializeComponent();
+            KeyPreview = true;
+
             DoCheckForDuplicates = true;
             hasUnsavedChanges = false;
-        }
-
-        private void FormHotkeys_Load(object sender, EventArgs e)
-        {
-            KeyPreview = true;
         }
 
         private void FormHotkeys_Shown(object sender, EventArgs e)
