@@ -449,7 +449,7 @@ namespace RLEditor
 
         public static string FormatHotkeyString(HotkeyData hotkeyData)
         {
-            if (hotkeyData == null) return "None";
+            if (hotkeyData == null) return "<Unassigned>";
             return FormatHotkeyString(hotkeyData.CurrentKeys);
         }
 
@@ -473,6 +473,9 @@ namespace RLEditor
             string baseKeyString;
             switch (baseKey)
             {
+                case Keys.None:
+                    baseKeyString = "<Unassigned>";
+                    break;
                 case Keys.Back:
                     baseKeyString = "Backspace";
                     break;
@@ -591,8 +594,9 @@ namespace RLEditor
                 string name = parts[0].Trim();
                 string key = parts[1].Trim();
 
-                // Skip "None"
-                if (string.Equals(key, "None", StringComparison.OrdinalIgnoreCase))
+                // Skip "None" / "<Unassigned>"
+                if (string.Equals(key, "<Unassigned>", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(key, "None", StringComparison.OrdinalIgnoreCase))
                     continue;
 
                 // Parse the key

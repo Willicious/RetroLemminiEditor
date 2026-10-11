@@ -352,7 +352,7 @@ namespace RLEditor
 
         private void SetModifierAvailability()
         {
-            if (comboBoxChooseKey.SelectedItem?.ToString() == "None")
+            if (comboBoxChooseKey.SelectedItem?.ToString() == "<Unassigned>")
             {
                 lblAddModifier.Enabled = false;
                 checkModCtrl.Enabled = false;
@@ -382,7 +382,7 @@ namespace RLEditor
         {
             foreach (ListViewItem item in listViewHotkeys.Items)
             {
-                item.SubItems[1].Text = "None";
+                item.SubItems[1].Text = "<Unassigned>";
             }
 
             ResetComponents();
