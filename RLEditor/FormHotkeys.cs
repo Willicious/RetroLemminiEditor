@@ -33,8 +33,6 @@ namespace RLEditor
         public FormHotkeys()
         {
             InitializeComponent();
-            GetMouseMandatoryHotkeys();
-            SetItemNames();
             DoCheckForDuplicates = true;
         }
 
@@ -683,8 +681,8 @@ namespace RLEditor
                 listViewHotkeys.Focus();
             }
 
-            // Rebuild mandatory mouse items after populating
             GetMouseMandatoryHotkeys();
+            SetItemNames();
         }
 
         private void GetMouseMandatoryHotkeys()
