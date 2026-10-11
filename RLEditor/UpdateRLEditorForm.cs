@@ -181,10 +181,11 @@ namespace RLEditor
             btnFlipSpawnDirection.Visible = piecesSelected && onlyHatchesSelected;
 
             bool oneWaySelected = selectionList.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL);
+            bool forceFieldSelected = selectionList.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.FORCE_FIELD);
 
-            btnRotate.Enabled = !oneWaySelected;
-            btnInvert.Enabled = !oneWaySelected;
-            btnFlip.Enabled = !oneWaySelected;
+            btnRotate.Enabled = !oneWaySelected && !forceFieldSelected;
+            btnInvert.Enabled = !oneWaySelected && !forceFieldSelected;
+            btnFlip.Enabled = !oneWaySelected && !forceFieldSelected;
 
             bool hasSpecialGadget = selectionList.OfType<GadgetPiece>()
                  .Any(g => g.ObjType.In(C.OBJ.STEEL, C.OBJ.RULER));

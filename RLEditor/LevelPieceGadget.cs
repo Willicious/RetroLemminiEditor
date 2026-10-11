@@ -108,7 +108,7 @@ namespace RLEditor
                 Rectangle trigRect = ImageLibrary.GetTrigger(Key);
 
                 // Apply rotation / flipping / inverting
-                if (ObjType != C.OBJ.ONE_WAY_WALL)
+                if (ObjType != C.OBJ.ONE_WAY_WALL && ObjType != C.OBJ.FORCE_FIELD)
                 {
                     if (IsRotatedInPlayer)
                     {

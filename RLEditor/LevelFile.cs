@@ -314,8 +314,8 @@ namespace RLEditor
             if (newGadget.IsNoOverwrite && newGadget.IsOnlyOnTerrain)
                 newGadget.IsNoOverwrite = false;
 
-            // Disallow transformations for OWW
-            if (newGadget.ObjType == C.OBJ.ONE_WAY_WALL)
+            // Disallow transformations for OWW / Forcefields
+            if (newGadget.ObjType == C.OBJ.ONE_WAY_WALL || newGadget.ObjType == C.OBJ.FORCE_FIELD)
             {
                 doFlip = false;
                 doRotate = false;

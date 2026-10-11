@@ -2364,7 +2364,8 @@ Digger=20
         /// </summary>
         private void RotateLevelPieces()
         {
-            if (CurLevel.SelectionList().Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL))
+            if (CurLevel.SelectionList().OfType<GadgetPiece>()
+                .Any(gp => gp.ObjType == C.OBJ.ONE_WAY_WALL || gp.ObjType == C.OBJ.FORCE_FIELD))
                 return;
 
             CurLevel.RotatePieces();
@@ -2378,7 +2379,8 @@ Digger=20
         /// </summary>
         private void InvertLevelPieces()
         {
-            if (CurLevel.SelectionList().Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL))
+            if (CurLevel.SelectionList().OfType<GadgetPiece>()
+                .Any(gp => gp.ObjType == C.OBJ.ONE_WAY_WALL || gp.ObjType == C.OBJ.FORCE_FIELD))
                 return;
 
             CurLevel.InvertPieces();
@@ -2418,7 +2420,8 @@ Digger=20
             if (selection.Count == 0)
                 return;
 
-            if (selection.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL))
+            if (selection.OfType<GadgetPiece>().Any(gp =>
+                gp.ObjType == C.OBJ.ONE_WAY_WALL || gp.ObjType == C.OBJ.FORCE_FIELD))
                 return;
 
             bool hasOnlyHatches = selection.All(item => item.ObjType == C.OBJ.HATCH);
