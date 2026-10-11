@@ -288,7 +288,7 @@ namespace RLEditor
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            if (lblEditedSaved.Visible && lblEditedSaved.ForeColor == Color.DarkViolet)
+            if (hasUnsavedChanges)
             {
                 // Ask the user if they want to save
                 DialogResult result = MessageBox.Show("Do you want to save the current configuration?",
