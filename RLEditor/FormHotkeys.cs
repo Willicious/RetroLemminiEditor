@@ -11,7 +11,7 @@ namespace RLEditor
     {
         private Keys selectedKey;
         private ListViewItem selectedItem;
-        private bool DoCheckForDuplicates = true;
+        private bool DoCheckForDuplicates;
 
         private readonly List<Keys> defaultKeyList = new List<Keys>()
         {
@@ -35,6 +35,7 @@ namespace RLEditor
             InitializeComponent();
             GetMouseMandatoryHotkeys();
             SetItemNames();
+            DoCheckForDuplicates = true;
         }
 
         private void FormHotkeys_Load(object sender, EventArgs e)
