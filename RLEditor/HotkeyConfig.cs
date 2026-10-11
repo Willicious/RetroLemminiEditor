@@ -279,7 +279,7 @@ namespace RLEditor
                 "Show Next Style in Piece Browser",
                 Keys.Shift | Keys.Down),
             new HotkeyData(HotkeyName.HotkeyCycleBrowser,
-                "Cycle Through Piece Browser Items (Terrain, Objects, etc)",
+                "Cycle Piece Browser (Terrain, Steel, Objects...)",
                 Keys.Space),
             new HotkeyData(HotkeyName.HotkeyAddPiece1,
                 "Add Piece At Position 1 in Piece Browser",
