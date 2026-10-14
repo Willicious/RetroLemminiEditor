@@ -110,6 +110,7 @@ namespace RLEditor
         public bool ShowControlHints { get; set; }
         public bool AllTabsExpanded { get; set; }
         public DateTime LastLPCUpdateCheck { get; set; }
+        public DateTime LastUpdateCheck { get; set; }
 
         /// <summary>
         /// Resets the editor options to the default values.
@@ -161,6 +162,7 @@ namespace RLEditor
             };
 
             LastLPCUpdateCheck = DateTime.MinValue;
+            LastUpdateCheck = DateTime.MinValue;
 
             DisplaySettings.SetDisplayed(C.DisplayType.Terrain, true);
             DisplaySettings.SetDisplayed(C.DisplayType.Steel, true);
@@ -1112,6 +1114,15 @@ namespace RLEditor
                                     LastLPCUpdateCheck = DateTime.MinValue;
                                 break;
                             }
+                        case "LASTUPDATECHECK":
+                            {
+                                if (DateTime.TryParseExact(line.Text.Trim(), "O", null,
+                                        System.Globalization.DateTimeStyles.RoundtripKind, out var parsedDate))
+                                    LastUpdateCheck = parsedDate;
+                                else
+                                    LastUpdateCheck = DateTime.MinValue;
+                                break;
+                            }
                         case "RECENT":
                             {
                                 string path = line.Text.Trim();
@@ -1195,6 +1206,7 @@ namespace RLEditor
                 settingsFile.WriteLine(" PieceBrowserSize       " + PieceBrowser.Size.Width.ToString() + "," + PieceBrowser.Size.Height.ToString());
                 settingsFile.WriteLine("");
                 settingsFile.WriteLine(" LastLPCUpdateCheck     " + LastLPCUpdateCheck.ToString("O"));
+                settingsFile.WriteLine(" LastUpdateCheck        " + LastUpdateCheck.ToString("O"));
                 settingsFile.WriteLine("");
 
                 var displayTypes = new List<C.DisplayType>()

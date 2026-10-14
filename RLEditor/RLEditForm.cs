@@ -1559,6 +1559,7 @@ namespace RLEditor
             UpdateControlTags();
 
             MaybeUpdateLevelPackCompiler();
+            MaybeUpdateEditor();
         }
 
         private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1851,6 +1852,11 @@ namespace RLEditor
         private void lblPieceHighlight_MouseLeave(object sender, EventArgs e)
         {
             lblPieceHighlight.BackColor = Color.Lime;
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckForUpdates();
         }
     }
 }
