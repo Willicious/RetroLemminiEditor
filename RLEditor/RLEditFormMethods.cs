@@ -3021,19 +3021,19 @@ Digger=20
             picLevel.SetImage(curRenderer.GetScreenImage());
         }
 
-        private void OpenLevelPackCompiler()
+        private async void OpenLevelPackCompiler()
         {
             var manager = new LevelPackCompilerManager(curSettings, lblUpdatingLPC);
-            manager.LaunchLevelPackCompiler();
+            await manager.LaunchLevelPackCompiler();
         }
 
         private async void MaybeUpdateLevelPackCompiler()
         {
-            await Task.Run(() =>
-            {
-                var manager = new LevelPackCompilerManager(curSettings, lblUpdatingLPC);
-                manager.UpdateLevelPackCompiler();
-            });
+            var manager = new LevelPackCompilerManager(curSettings, lblUpdatingLPC);
+            await manager.UpdateLevelPackCompiler();
+
+            curSettings.LastLPCUpdateCheck = DateTime.Now;
+            curSettings.SaveSettings();
         }
 
         private void RedrawTerrain()

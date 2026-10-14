@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RLEditor
@@ -57,14 +58,15 @@ namespace RLEditor
             }
         }
 
-        private Version GetRemoteVersion()
+        private async Task<Version> GetRemoteVersion()
         {
             try
             {
                 using (var wc = new WebClient())
                 {
                     wc.Headers.Add("User-Agent", "RetroLemmini");
-                    string versionText = wc.DownloadString(RemoteVersionUrl).Trim();
+                    string versionText = (await wc.DownloadStringTaskAsync(RemoteVersionUrl)).Trim();
+
                     return Version.Parse(versionText);
                 }
             }
@@ -80,26 +82,23 @@ namespace RLEditor
                    (DateTime.Now - curSettings.LastLPCUpdateCheck).TotalDays >= minCheckDays;
         }
 
-        public void UpdateLevelPackCompiler(bool userLaunched = false)
+        public async Task UpdateLevelPackCompiler(bool userLaunched = false)
         {
             if (!ShouldCheckForUpdate() && !userLaunched)
                 return;
 
             string exePath = GetExePath();
-            if (!File.Exists(exePath))
-            {
-                curSettings.LastLPCUpdateCheck = DateTime.Now;
-                curSettings.SaveSettings();
+
+            if (string.IsNullOrEmpty(exePath))
                 return;
-            }
 
             try
             {
                 Version localVersion = GetLocalVersion(exePath);
-                Version remoteVersion = GetRemoteVersion();
+                Version remoteVersion = await GetRemoteVersion();
 
                 if (remoteVersion == null || localVersion == null ||
-                   (remoteVersion > localVersion))
+                    remoteVersion > localVersion)
                 {
                     if (infoLabel != null && userLaunched)
                     {
@@ -109,19 +108,34 @@ namespace RLEditor
                         infoLabel.Refresh();
                     }
 
-                    string tempPath = Path.Combine(Path.GetTempPath(), LevelPackCompilerExeName);
+                    // Keep the temporary file beside the existing executable
+                    string tempPath = exePath + ".download";
+
                     try
                     {
+                        if (File.Exists(tempPath))
+                            File.Delete(tempPath);
+
                         using (var wc = new WebClient())
                         {
                             wc.Headers.Add("User-Agent", "RetroLemminiEditor");
-                            wc.DownloadFile(RemoteExeUrl, tempPath);
+                            await wc.DownloadFileTaskAsync(new Uri(RemoteExeUrl), tempPath);
                         }
 
                         File.Replace(tempPath, exePath, null);
                     }
-                    catch (Exception ex)
+                    catch
                     {
+                        try
+                        {
+                            if (File.Exists(tempPath))
+                                File.Delete(tempPath);
+                        }
+                        catch
+                        {
+                            // Fail silently
+                        }
+
                         if (infoLabel != null && userLaunched)
                         {
                             infoLabel.Text = "Level Pack Compiler update failed";
@@ -129,15 +143,13 @@ namespace RLEditor
                             infoLabel.Visible = true;
                             infoLabel.Refresh();
                         }
-                        return; // Keep label visible, don't update last time checked
+
+                        return;
                     }
                 }
 
                 if (infoLabel != null && userLaunched)
                     infoLabel.Visible = false;
-
-                curSettings.LastLPCUpdateCheck = DateTime.Now;
-                curSettings.SaveSettings();
             }
             catch
             {
@@ -145,12 +157,13 @@ namespace RLEditor
             }
         }
 
-        public void LaunchLevelPackCompiler()
+        public async Task LaunchLevelPackCompiler()
         {
-            UpdateLevelPackCompiler(true);
+            await UpdateLevelPackCompiler(true);
 
             string exePath = GetExePath();
-            if (File.Exists(exePath))
+
+            if (!string.IsNullOrEmpty(exePath) && File.Exists(exePath))
             {
                 try
                 {
@@ -162,46 +175,74 @@ namespace RLEditor
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to launch {LevelPackCompilerExeName}:\n{ex.Message}",
-                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        $"Failed to launch {LevelPackCompilerExeName}:\n{ex.Message}",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
+
+                return;
             }
-            else
+
+            DialogResult result = MessageBox.Show(
+                $"{LevelPackCompilerExeName} could not be found in the application folders.\n\n" +
+                "Would you like to download it now?",
+                "Not Found",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            string savePath = Path.Combine(C.AppPath, LevelPackCompilerExeName);
+            string tempPath = savePath + ".download";
+
+            try
             {
-                DialogResult result = MessageBox.Show(
-                    $"{LevelPackCompilerExeName} could not be found in the application folders.\n\n" +
-                    "Would you like to download it now?",
-                    "Not Found",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                using (var wc = new WebClient())
                 {
-                    string savePath = Path.Combine(C.AppPath, LevelPackCompilerExeName);
-                    try
-                    {
-                        using (var wc = new WebClient())
-                        {
-                            wc.Headers.Add("User-Agent", "RetroLemminiEditor");
-                            wc.DownloadFile(RemoteExeUrl, savePath);
-                        }
-
-                        MessageBox.Show($"{LevelPackCompilerExeName} was downloaded to:\n{savePath}",
-                                        "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // Launch the downloaded exe
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = savePath,
-                            UseShellExecute = true
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Failed to download {LevelPackCompilerExeName}:\n{ex.Message}",
-                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    wc.Headers.Add("User-Agent", "RetroLemminiEditor");
+                    await wc.DownloadFileTaskAsync(new Uri(RemoteExeUrl), tempPath);
                 }
+
+                if (!File.Exists(tempPath) || new FileInfo(tempPath).Length == 0)
+                    throw new IOException("The downloaded file is empty or missing.");
+
+                if (File.Exists(savePath))
+                    File.Delete(savePath);
+
+                File.Move(tempPath, savePath);
+
+                MessageBox.Show(
+                    $"{LevelPackCompilerExeName} was downloaded to:\n{savePath}",
+                    "Download Complete",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = savePath,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    if (File.Exists(tempPath))
+                        File.Delete(tempPath);
+                }
+                catch
+                {
+                    // Fail silently
+                }
+
+                MessageBox.Show(
+                    $"Failed to download or launch {LevelPackCompilerExeName}:\n{ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }
