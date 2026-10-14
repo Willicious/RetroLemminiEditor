@@ -82,12 +82,13 @@
             this.refreshStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.styleManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hotkeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.levelPackCompilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picLevel = new System.Windows.Forms.PictureBox();
             this.toolTipPieces = new System.Windows.Forms.ToolTip(this.components);
             this.scrollPicLevelHoriz = new System.Windows.Forms.HScrollBar();
@@ -253,9 +254,8 @@
             this.btnPreviousLevel = new System.Windows.Forms.Button();
             this.btnNextLevel = new System.Windows.Forms.Button();
             this.lblLevel = new System.Windows.Forms.Label();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.snapToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLevel)).BeginInit();
             this.statusBar.SuspendLayout();
@@ -574,7 +574,9 @@
             this.triggerAreasToolStripMenuItem,
             this.screenStartToolStripMenuItem,
             this.steelAreasToolStripMenuItem,
-            this.rulersToolStripMenuItem});
+            this.rulersToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.snapToGridToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
             this.viewToolStripMenuItem.Text = "View";
@@ -727,13 +729,10 @@
             this.refreshStylesToolStripMenuItem,
             this.styleManagerToolStripMenuItem,
             this.toolStripSeparator13,
-            this.snapToGridToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.hotkeysToolStripMenuItem,
             this.toolStripSeparator5,
-            this.levelPackCompilerToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.aboutToolStripMenuItem});
+            this.levelPackCompilerToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(69, 29);
             this.optionsToolStripMenuItem.Text = "Tools";
@@ -742,20 +741,20 @@
             // 
             this.showMissingPiecesToolStripMenuItem.Name = "showMissingPiecesToolStripMenuItem";
             this.showMissingPiecesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F8";
-            this.showMissingPiecesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.showMissingPiecesToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.showMissingPiecesToolStripMenuItem.Text = "Show Missing Pieces";
             this.showMissingPiecesToolStripMenuItem.Click += new System.EventHandler(this.showMissingPiecesToolStripMenuItem_Click);
             // 
             // sepMissingPieces
             // 
             this.sepMissingPieces.Name = "sepMissingPieces";
-            this.sepMissingPieces.Size = new System.Drawing.Size(407, 6);
+            this.sepMissingPieces.Size = new System.Drawing.Size(344, 6);
             // 
             // refreshStylesToolStripMenuItem
             // 
             this.refreshStylesToolStripMenuItem.Name = "refreshStylesToolStripMenuItem";
             this.refreshStylesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+F8";
-            this.refreshStylesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.refreshStylesToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.refreshStylesToolStripMenuItem.Text = "Refresh Styles";
             this.refreshStylesToolStripMenuItem.Click += new System.EventHandler(this.refreshStylesToolStripMenuItem_Click);
             // 
@@ -763,28 +762,20 @@
             // 
             this.styleManagerToolStripMenuItem.Name = "styleManagerToolStripMenuItem";
             this.styleManagerToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Alt+F8";
-            this.styleManagerToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.styleManagerToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.styleManagerToolStripMenuItem.Text = "Style Manager";
             this.styleManagerToolStripMenuItem.Click += new System.EventHandler(this.styleManagerToolStripMenuItem_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(407, 6);
-            // 
-            // snapToGridToolStripMenuItem
-            // 
-            this.snapToGridToolStripMenuItem.Name = "snapToGridToolStripMenuItem";
-            this.snapToGridToolStripMenuItem.ShortcutKeyDisplayString = "F9";
-            this.snapToGridToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
-            this.snapToGridToolStripMenuItem.Text = "Snap to Grid";
-            this.snapToGridToolStripMenuItem.Click += new System.EventHandler(this.snapToGridToolStripMenuItem_Click);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(344, 6);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.ShortcutKeyDisplayString = "F10";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -792,33 +783,52 @@
             // 
             this.hotkeysToolStripMenuItem.Name = "hotkeysToolStripMenuItem";
             this.hotkeysToolStripMenuItem.ShortcutKeyDisplayString = "F11";
-            this.hotkeysToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.hotkeysToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.hotkeysToolStripMenuItem.Text = "Configure Hotkeys";
             this.hotkeysToolStripMenuItem.Click += new System.EventHandler(this.hotkeysToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(407, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(344, 6);
             // 
             // levelPackCompilerToolStripMenuItem
             // 
             this.levelPackCompilerToolStripMenuItem.Name = "levelPackCompilerToolStripMenuItem";
-            this.levelPackCompilerToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.levelPackCompilerToolStripMenuItem.Size = new System.Drawing.Size(347, 34);
             this.levelPackCompilerToolStripMenuItem.Text = "Level Pack Compiler";
             this.levelPackCompilerToolStripMenuItem.Click += new System.EventHandler(this.levelPackCompilerToolStripMenuItem_Click);
             // 
-            // toolStripSeparator2
+            // helpToolStripMenuItem
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(407, 6);
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkForUpdatesToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates...";
+            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F11";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
+            this.aboutToolStripMenuItem.Text = "About RetroLemmini Editor";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // picLevel
             // 
             this.picLevel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.picLevel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picLevel.Location = new System.Drawing.Point(343, 34);
-            this.picLevel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picLevel.Margin = new System.Windows.Forms.Padding(4);
             this.picLevel.Name = "picLevel";
             this.picLevel.Size = new System.Drawing.Size(891, 657);
             this.picLevel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -872,7 +882,7 @@
             // 
             this.btnPieceRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPieceRight.Location = new System.Drawing.Point(1132, 32);
-            this.btnPieceRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPieceRight.Margin = new System.Windows.Forms.Padding(4);
             this.btnPieceRight.Name = "btnPieceRight";
             this.btnPieceRight.NoPaddingText = null;
             this.btnPieceRight.Size = new System.Drawing.Size(43, 103);
@@ -887,7 +897,7 @@
             // 
             this.btnPieceLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPieceLeft.Location = new System.Drawing.Point(3, 32);
-            this.btnPieceLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPieceLeft.Margin = new System.Windows.Forms.Padding(4);
             this.btnPieceLeft.Name = "btnPieceLeft";
             this.btnPieceLeft.NoPaddingText = null;
             this.btnPieceLeft.Size = new System.Drawing.Size(43, 103);
@@ -1125,7 +1135,7 @@
             this.picPiece7.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece7.Location = new System.Drawing.Point(890, 32);
-            this.picPiece7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece7.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece7.Name = "picPiece7";
             this.picPiece7.Size = new System.Drawing.Size(111, 102);
             this.picPiece7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1138,7 +1148,7 @@
             // btnSteel
             // 
             this.btnSteel.Location = new System.Drawing.Point(476, 2);
-            this.btnSteel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSteel.Margin = new System.Windows.Forms.Padding(4);
             this.btnSteel.Name = "btnSteel";
             this.btnSteel.Size = new System.Drawing.Size(103, 26);
             this.btnSteel.TabIndex = 84;
@@ -1151,7 +1161,7 @@
             // 
             this.btnTerrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTerrain.Location = new System.Drawing.Point(366, 2);
-            this.btnTerrain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTerrain.Margin = new System.Windows.Forms.Padding(4);
             this.btnTerrain.Name = "btnTerrain";
             this.btnTerrain.Size = new System.Drawing.Size(103, 26);
             this.btnTerrain.TabIndex = 82;
@@ -1163,7 +1173,7 @@
             // btnObjects
             // 
             this.btnObjects.Location = new System.Drawing.Point(587, 2);
-            this.btnObjects.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnObjects.Margin = new System.Windows.Forms.Padding(4);
             this.btnObjects.Name = "btnObjects";
             this.btnObjects.Size = new System.Drawing.Size(103, 26);
             this.btnObjects.TabIndex = 81;
@@ -1177,7 +1187,7 @@
             this.picPiece6.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece6.Location = new System.Drawing.Point(771, 32);
-            this.picPiece6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece6.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece6.Name = "picPiece6";
             this.picPiece6.Size = new System.Drawing.Size(111, 102);
             this.picPiece6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1192,7 +1202,7 @@
             this.picPiece5.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece5.Location = new System.Drawing.Point(651, 32);
-            this.picPiece5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece5.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece5.Name = "picPiece5";
             this.picPiece5.Size = new System.Drawing.Size(111, 102);
             this.picPiece5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1207,7 +1217,7 @@
             this.picPiece4.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece4.Location = new System.Drawing.Point(531, 32);
-            this.picPiece4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece4.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece4.Name = "picPiece4";
             this.picPiece4.Size = new System.Drawing.Size(111, 102);
             this.picPiece4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1222,7 +1232,7 @@
             this.picPiece3.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece3.Location = new System.Drawing.Point(411, 32);
-            this.picPiece3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece3.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece3.Name = "picPiece3";
             this.picPiece3.Size = new System.Drawing.Size(111, 102);
             this.picPiece3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1237,7 +1247,7 @@
             this.picPiece2.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece2.Location = new System.Drawing.Point(291, 32);
-            this.picPiece2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece2.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece2.Name = "picPiece2";
             this.picPiece2.Size = new System.Drawing.Size(111, 102);
             this.picPiece2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1252,7 +1262,7 @@
             this.picPiece1.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece1.Location = new System.Drawing.Point(171, 32);
-            this.picPiece1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece1.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece1.Name = "picPiece1";
             this.picPiece1.Size = new System.Drawing.Size(111, 102);
             this.picPiece1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1267,7 +1277,7 @@
             this.picPiece0.BackColor = System.Drawing.SystemColors.Control;
             this.picPiece0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picPiece0.Location = new System.Drawing.Point(51, 32);
-            this.picPiece0.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPiece0.Margin = new System.Windows.Forms.Padding(4);
             this.picPiece0.Name = "picPiece0";
             this.picPiece0.Size = new System.Drawing.Size(111, 102);
             this.picPiece0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1282,7 +1292,7 @@
             this.comboPieceStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboPieceStyle.FormattingEnabled = true;
             this.comboPieceStyle.Location = new System.Drawing.Point(113, 2);
-            this.comboPieceStyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboPieceStyle.Margin = new System.Windows.Forms.Padding(4);
             this.comboPieceStyle.MaxDropDownItems = 40;
             this.comboPieceStyle.Name = "comboPieceStyle";
             this.comboPieceStyle.Size = new System.Drawing.Size(244, 24);
@@ -1309,7 +1319,7 @@
             // 
             this.picDragNewPiece.BackColor = System.Drawing.Color.Black;
             this.picDragNewPiece.Location = new System.Drawing.Point(1264, 661);
-            this.picDragNewPiece.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picDragNewPiece.Margin = new System.Windows.Forms.Padding(4);
             this.picDragNewPiece.Name = "picDragNewPiece";
             this.picDragNewPiece.Size = new System.Drawing.Size(27, 25);
             this.picDragNewPiece.TabIndex = 87;
@@ -1354,7 +1364,7 @@
             this.tabSkills.Controls.Add(this.numClimber);
             this.tabSkills.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabSkills.Location = new System.Drawing.Point(4, 25);
-            this.tabSkills.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabSkills.Margin = new System.Windows.Forms.Padding(4);
             this.tabSkills.Name = "tabSkills";
             this.tabSkills.Size = new System.Drawing.Size(344, 627);
             this.tabSkills.TabIndex = 2;
@@ -1607,7 +1617,7 @@
             // 
             this.numRandomMaxLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numRandomMaxLimit.Location = new System.Drawing.Point(230, 455);
-            this.numRandomMaxLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numRandomMaxLimit.Margin = new System.Windows.Forms.Padding(4);
             this.numRandomMaxLimit.Minimum = new decimal(new int[] {
             2,
             0,
@@ -1628,7 +1638,7 @@
             // 
             this.numRandomMinLimit.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numRandomMinLimit.Location = new System.Drawing.Point(116, 455);
-            this.numRandomMinLimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numRandomMinLimit.Margin = new System.Windows.Forms.Padding(4);
             this.numRandomMinLimit.Maximum = new decimal(new int[] {
             99,
             0,
@@ -1653,7 +1663,7 @@
             // 
             this.numDigger.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numDigger.Location = new System.Drawing.Point(135, 258);
-            this.numDigger.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numDigger.Margin = new System.Windows.Forms.Padding(4);
             this.numDigger.Name = "numDigger";
             this.numDigger.Size = new System.Drawing.Size(57, 22);
             this.numDigger.TabIndex = 25;
@@ -1666,7 +1676,7 @@
             // 
             this.numMiner.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numMiner.Location = new System.Drawing.Point(135, 226);
-            this.numMiner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numMiner.Margin = new System.Windows.Forms.Padding(4);
             this.numMiner.Name = "numMiner";
             this.numMiner.Size = new System.Drawing.Size(57, 22);
             this.numMiner.TabIndex = 24;
@@ -1679,7 +1689,7 @@
             // 
             this.numBasher.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numBasher.Location = new System.Drawing.Point(135, 194);
-            this.numBasher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numBasher.Margin = new System.Windows.Forms.Padding(4);
             this.numBasher.Name = "numBasher";
             this.numBasher.Size = new System.Drawing.Size(57, 22);
             this.numBasher.TabIndex = 22;
@@ -1692,7 +1702,7 @@
             // 
             this.numBuilder.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numBuilder.Location = new System.Drawing.Point(135, 162);
-            this.numBuilder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numBuilder.Margin = new System.Windows.Forms.Padding(4);
             this.numBuilder.Name = "numBuilder";
             this.numBuilder.Size = new System.Drawing.Size(57, 22);
             this.numBuilder.TabIndex = 17;
@@ -1706,7 +1716,7 @@
             this.numBomber.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numBomber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numBomber.Location = new System.Drawing.Point(135, 98);
-            this.numBomber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numBomber.Margin = new System.Windows.Forms.Padding(4);
             this.numBomber.Name = "numBomber";
             this.numBomber.Size = new System.Drawing.Size(57, 26);
             this.numBomber.TabIndex = 12;
@@ -1719,7 +1729,7 @@
             // 
             this.numBlocker.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numBlocker.Location = new System.Drawing.Point(135, 130);
-            this.numBlocker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numBlocker.Margin = new System.Windows.Forms.Padding(4);
             this.numBlocker.Name = "numBlocker";
             this.numBlocker.Size = new System.Drawing.Size(57, 22);
             this.numBlocker.TabIndex = 14;
@@ -1733,7 +1743,7 @@
             this.numFloater.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numFloater.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numFloater.Location = new System.Drawing.Point(135, 66);
-            this.numFloater.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numFloater.Margin = new System.Windows.Forms.Padding(4);
             this.numFloater.Name = "numFloater";
             this.numFloater.Size = new System.Drawing.Size(57, 26);
             this.numFloater.TabIndex = 8;
@@ -1747,7 +1757,7 @@
             this.numClimber.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.numClimber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numClimber.Location = new System.Drawing.Point(135, 34);
-            this.numClimber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numClimber.Margin = new System.Windows.Forms.Padding(4);
             this.numClimber.Name = "numClimber";
             this.numClimber.Size = new System.Drawing.Size(57, 26);
             this.numClimber.TabIndex = 6;
@@ -1792,9 +1802,9 @@
             this.tabPieces.Controls.Add(this.btnInvert);
             this.tabPieces.Controls.Add(this.btnRotate);
             this.tabPieces.Location = new System.Drawing.Point(4, 25);
-            this.tabPieces.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPieces.Margin = new System.Windows.Forms.Padding(4);
             this.tabPieces.Name = "tabPieces";
-            this.tabPieces.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPieces.Padding = new System.Windows.Forms.Padding(4);
             this.tabPieces.Size = new System.Drawing.Size(344, 627);
             this.tabPieces.TabIndex = 1;
             this.tabPieces.Text = "Pieces";
@@ -2001,7 +2011,7 @@
             // checkAllowOneWay
             // 
             this.checkAllowOneWay.Location = new System.Drawing.Point(19, 228);
-            this.checkAllowOneWay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkAllowOneWay.Margin = new System.Windows.Forms.Padding(4);
             this.checkAllowOneWay.Name = "checkAllowOneWay";
             this.checkAllowOneWay.Size = new System.Drawing.Size(137, 21);
             this.checkAllowOneWay.TabIndex = 12;
@@ -2012,7 +2022,7 @@
             // checkOnlyOnTerrain
             // 
             this.checkOnlyOnTerrain.Location = new System.Drawing.Point(19, 207);
-            this.checkOnlyOnTerrain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkOnlyOnTerrain.Margin = new System.Windows.Forms.Padding(4);
             this.checkOnlyOnTerrain.Name = "checkOnlyOnTerrain";
             this.checkOnlyOnTerrain.Size = new System.Drawing.Size(137, 21);
             this.checkOnlyOnTerrain.TabIndex = 11;
@@ -2023,7 +2033,7 @@
             // checkNoOverwrite
             // 
             this.checkNoOverwrite.Location = new System.Drawing.Point(19, 186);
-            this.checkNoOverwrite.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkNoOverwrite.Margin = new System.Windows.Forms.Padding(4);
             this.checkNoOverwrite.Name = "checkNoOverwrite";
             this.checkNoOverwrite.Size = new System.Drawing.Size(137, 21);
             this.checkNoOverwrite.TabIndex = 10;
@@ -2034,7 +2044,7 @@
             // checkErase
             // 
             this.checkErase.Location = new System.Drawing.Point(19, 165);
-            this.checkErase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkErase.Margin = new System.Windows.Forms.Padding(4);
             this.checkErase.Name = "checkErase";
             this.checkErase.Size = new System.Drawing.Size(137, 21);
             this.checkErase.TabIndex = 9;
@@ -2157,7 +2167,7 @@
             // btnDrawSooner
             // 
             this.btnDrawSooner.Location = new System.Drawing.Point(163, 58);
-            this.btnDrawSooner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDrawSooner.Margin = new System.Windows.Forms.Padding(4);
             this.btnDrawSooner.Name = "btnDrawSooner";
             this.btnDrawSooner.NoPaddingText = "Draw Sooner";
             this.btnDrawSooner.Size = new System.Drawing.Size(89, 42);
@@ -2169,7 +2179,7 @@
             // btnDrawLater
             // 
             this.btnDrawLater.Location = new System.Drawing.Point(84, 58);
-            this.btnDrawLater.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDrawLater.Margin = new System.Windows.Forms.Padding(4);
             this.btnDrawLater.Name = "btnDrawLater";
             this.btnDrawLater.NoPaddingText = "Draw Later";
             this.btnDrawLater.Size = new System.Drawing.Size(75, 42);
@@ -2181,7 +2191,7 @@
             // btnDrawFirst
             // 
             this.btnDrawFirst.Location = new System.Drawing.Point(260, 58);
-            this.btnDrawFirst.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDrawFirst.Margin = new System.Windows.Forms.Padding(4);
             this.btnDrawFirst.Name = "btnDrawFirst";
             this.btnDrawFirst.NoPaddingText = "Draw First";
             this.btnDrawFirst.Size = new System.Drawing.Size(71, 42);
@@ -2193,7 +2203,7 @@
             // 
             this.btnDrawLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrawLast.Location = new System.Drawing.Point(10, 58);
-            this.btnDrawLast.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDrawLast.Margin = new System.Windows.Forms.Padding(4);
             this.btnDrawLast.Name = "btnDrawLast";
             this.btnDrawLast.NoPaddingText = "Draw Last";
             this.btnDrawLast.Size = new System.Drawing.Size(66, 42);
@@ -2204,7 +2214,7 @@
             // btnFlip
             // 
             this.btnFlip.Location = new System.Drawing.Point(251, 10);
-            this.btnFlip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFlip.Margin = new System.Windows.Forms.Padding(4);
             this.btnFlip.Name = "btnFlip";
             this.btnFlip.NoPaddingText = null;
             this.btnFlip.Size = new System.Drawing.Size(80, 40);
@@ -2217,7 +2227,7 @@
             // btnInvert
             // 
             this.btnInvert.Location = new System.Drawing.Point(164, 10);
-            this.btnInvert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnInvert.Margin = new System.Windows.Forms.Padding(4);
             this.btnInvert.Name = "btnInvert";
             this.btnInvert.NoPaddingText = null;
             this.btnInvert.Size = new System.Drawing.Size(80, 40);
@@ -2230,7 +2240,7 @@
             // btnRotate
             // 
             this.btnRotate.Location = new System.Drawing.Point(75, 10);
-            this.btnRotate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRotate.Margin = new System.Windows.Forms.Padding(4);
             this.btnRotate.Name = "btnRotate";
             this.btnRotate.NoPaddingText = null;
             this.btnRotate.Size = new System.Drawing.Size(80, 40);
@@ -2279,9 +2289,9 @@
             this.tabGlobals.Controls.Add(this.lblTitle);
             this.tabGlobals.Controls.Add(this.lblWidth);
             this.tabGlobals.Location = new System.Drawing.Point(4, 25);
-            this.tabGlobals.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabGlobals.Margin = new System.Windows.Forms.Padding(4);
             this.tabGlobals.Name = "tabGlobals";
-            this.tabGlobals.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabGlobals.Padding = new System.Windows.Forms.Padding(4);
             this.tabGlobals.Size = new System.Drawing.Size(344, 627);
             this.tabGlobals.TabIndex = 0;
             this.tabGlobals.Text = "Globals";
@@ -2332,7 +2342,7 @@
             // numReleaseRateMax
             // 
             this.numReleaseRateMax.Location = new System.Drawing.Point(248, 386);
-            this.numReleaseRateMax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numReleaseRateMax.Margin = new System.Windows.Forms.Padding(4);
             this.numReleaseRateMax.Maximum = new decimal(new int[] {
             99,
             0,
@@ -2465,7 +2475,7 @@
             // 
             this.checkLockReleaseRate.AutoSize = true;
             this.checkLockReleaseRate.Location = new System.Drawing.Point(25, 417);
-            this.checkLockReleaseRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkLockReleaseRate.Margin = new System.Windows.Forms.Padding(4);
             this.checkLockReleaseRate.Name = "checkLockReleaseRate";
             this.checkLockReleaseRate.Size = new System.Drawing.Size(149, 21);
             this.checkLockReleaseRate.TabIndex = 22;
@@ -2478,7 +2488,7 @@
             // 
             this.checkAutoStart.AutoSize = true;
             this.checkAutoStart.Location = new System.Drawing.Point(25, 279);
-            this.checkAutoStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkAutoStart.Margin = new System.Windows.Forms.Padding(4);
             this.checkAutoStart.Name = "checkAutoStart";
             this.checkAutoStart.Size = new System.Drawing.Size(136, 21);
             this.checkAutoStart.TabIndex = 12;
@@ -2502,7 +2512,7 @@
             // txtLevelAuthor
             // 
             this.txtLevelAuthor.Location = new System.Drawing.Point(60, 50);
-            this.txtLevelAuthor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLevelAuthor.Margin = new System.Windows.Forms.Padding(4);
             this.txtLevelAuthor.MaxLength = 54;
             this.txtLevelAuthor.Name = "txtLevelAuthor";
             this.txtLevelAuthor.Size = new System.Drawing.Size(269, 22);
@@ -2513,7 +2523,7 @@
             // txtLevelTitle
             // 
             this.txtLevelTitle.Location = new System.Drawing.Point(60, 12);
-            this.txtLevelTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLevelTitle.Margin = new System.Windows.Forms.Padding(4);
             this.txtLevelTitle.MaxLength = 54;
             this.txtLevelTitle.Name = "txtLevelTitle";
             this.txtLevelTitle.Size = new System.Drawing.Size(269, 22);
@@ -2560,7 +2570,7 @@
             this.comboMusic.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMusic.FormattingEnabled = true;
             this.comboMusic.Location = new System.Drawing.Point(60, 86);
-            this.comboMusic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboMusic.Margin = new System.Windows.Forms.Padding(4);
             this.comboMusic.Name = "comboMusic";
             this.comboMusic.Size = new System.Drawing.Size(269, 24);
             this.comboMusic.TabIndex = 5;
@@ -2574,7 +2584,7 @@
             // numTimeSecs
             // 
             this.numTimeSecs.Location = new System.Drawing.Point(248, 468);
-            this.numTimeSecs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numTimeSecs.Margin = new System.Windows.Forms.Padding(4);
             this.numTimeSecs.Maximum = new decimal(new int[] {
             59,
             0,
@@ -2590,7 +2600,7 @@
             // numTimeMins
             // 
             this.numTimeMins.Location = new System.Drawing.Point(171, 468);
-            this.numTimeMins.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numTimeMins.Margin = new System.Windows.Forms.Padding(4);
             this.numTimeMins.Maximum = new decimal(new int[] {
             99,
             0,
@@ -2606,7 +2616,7 @@
             // numReleaseRateMin
             // 
             this.numReleaseRateMin.Location = new System.Drawing.Point(101, 386);
-            this.numReleaseRateMin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numReleaseRateMin.Margin = new System.Windows.Forms.Padding(4);
             this.numReleaseRateMin.Maximum = new decimal(new int[] {
             99,
             0,
@@ -2633,7 +2643,7 @@
             // numRescue
             // 
             this.numRescue.Location = new System.Drawing.Point(248, 328);
-            this.numRescue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numRescue.Margin = new System.Windows.Forms.Padding(4);
             this.numRescue.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -2670,7 +2680,7 @@
             // numLemmings
             // 
             this.numLemmings.Location = new System.Drawing.Point(101, 328);
-            this.numLemmings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numLemmings.Margin = new System.Windows.Forms.Padding(4);
             this.numLemmings.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -2712,7 +2722,7 @@
             0,
             0});
             this.numStartY.Location = new System.Drawing.Point(248, 249);
-            this.numStartY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numStartY.Margin = new System.Windows.Forms.Padding(4);
             this.numStartY.Maximum = new decimal(new int[] {
             319,
             0,
@@ -2739,7 +2749,7 @@
             0,
             0});
             this.numStartX.Location = new System.Drawing.Point(101, 249);
-            this.numStartX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numStartX.Margin = new System.Windows.Forms.Padding(4);
             this.numStartX.Maximum = new decimal(new int[] {
             639,
             0,
@@ -2766,7 +2776,7 @@
             0,
             0});
             this.numHeight.Location = new System.Drawing.Point(248, 173);
-            this.numHeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numHeight.Margin = new System.Windows.Forms.Padding(4);
             this.numHeight.Maximum = new decimal(new int[] {
             6400,
             0,
@@ -2798,7 +2808,7 @@
             0,
             0});
             this.numWidth.Location = new System.Drawing.Point(101, 173);
-            this.numWidth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numWidth.Margin = new System.Windows.Forms.Padding(4);
             this.numWidth.Maximum = new decimal(new int[] {
             6400,
             0,
@@ -2871,7 +2881,7 @@
             this.tabProperties.Controls.Add(this.tabSkills);
             this.tabProperties.Controls.Add(this.tabExtras);
             this.tabProperties.Location = new System.Drawing.Point(8, 34);
-            this.tabProperties.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabProperties.Margin = new System.Windows.Forms.Padding(4);
             this.tabProperties.Name = "tabProperties";
             this.tabProperties.SelectedIndex = 0;
             this.tabProperties.Size = new System.Drawing.Size(352, 656);
@@ -3055,7 +3065,7 @@
             // txtFocus
             // 
             this.txtFocus.Location = new System.Drawing.Point(-133, 2);
-            this.txtFocus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFocus.Margin = new System.Windows.Forms.Padding(4);
             this.txtFocus.Name = "txtFocus";
             this.txtFocus.Size = new System.Drawing.Size(52, 22);
             this.txtFocus.TabIndex = 37;
@@ -3093,28 +3103,18 @@
             this.lblLevel.TabIndex = 92;
             this.lblLevel.Text = "Level";
             // 
-            // helpToolStripMenuItem
+            // toolStripSeparator2
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.checkForUpdatesToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(65, 29);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(403, 6);
             // 
-            // aboutToolStripMenuItem
+            // snapToGridToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F11";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(410, 34);
-            this.aboutToolStripMenuItem.Text = "About RetroLemmini Editor";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // checkForUpdatesToolStripMenuItem
-            // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
-            this.checkForUpdatesToolStripMenuItem.Text = "Check for Updates...";
-            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            this.snapToGridToolStripMenuItem.Name = "snapToGridToolStripMenuItem";
+            this.snapToGridToolStripMenuItem.ShortcutKeyDisplayString = "F9";
+            this.snapToGridToolStripMenuItem.Size = new System.Drawing.Size(406, 34);
+            this.snapToGridToolStripMenuItem.Text = "Snap to Grid";
+            this.snapToGridToolStripMenuItem.Click += new System.EventHandler(this.snapToGridToolStripMenuItem_Click);
             // 
             // RLEditForm
             // 
@@ -3143,7 +3143,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1158, 571);
             this.Name = "RLEditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -3248,11 +3248,9 @@
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteInPlaceToolStripMenuItem;
         private System.Windows.Forms.Timer timerAutosave;
-        private System.Windows.Forms.ToolStripMenuItem snapToGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem playLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem validateLevelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel statusBarMissingPiecesLabel;
         private System.Windows.Forms.ToolStripStatusLabel statusBarGenericLabel;
@@ -3441,9 +3439,11 @@
         private System.Windows.Forms.ToolStripSeparator openRecentSeparator;
         private System.Windows.Forms.ToolStripMenuItem clearRecentLevelsToolStripMenuItem;
         private System.Windows.Forms.Label lblPieceHighlight;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem snapToGridToolStripMenuItem;
     }
 }
 

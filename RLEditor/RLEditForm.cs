@@ -1562,11 +1562,6 @@ namespace RLEditor
             MaybeUpdateEditor();
         }
 
-        private void whatsNewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowAboutRLEditor();
-        }
-
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SelectAllPieces();
