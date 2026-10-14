@@ -654,6 +654,7 @@ Digger=20
 
             Style mainStyle = StyleList?.Find(sty => sty.NameInEditor == comboMainStyle.Text);
             CurLevel = new Level(mainStyle);
+            CurLevel.Title = "Untitled";
             CurLevel.Author = GetDefaultAuthorName();
 
             // Get new renderer with the standard display options
