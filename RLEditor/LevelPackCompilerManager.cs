@@ -91,7 +91,7 @@ namespace RLEditor
                 return;
 
             string exePath = GetExePath();
-            if (exePath == null)
+            if (!File.Exists(exePath))
             {
                 curSettings.LastLPCUpdateCheck = DateTime.Now;
                 curSettings.SaveSettings();
@@ -155,7 +155,7 @@ namespace RLEditor
             UpdateLevelPackCompiler(true);
 
             string exePath = GetExePath();
-            if (exePath != null)
+            if (File.Exists(exePath))
             {
                 try
                 {
