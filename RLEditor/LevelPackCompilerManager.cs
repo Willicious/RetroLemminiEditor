@@ -40,7 +40,7 @@ namespace RLEditor
         private Version GetLocalVersion(string exePath)
         {
             if (!File.Exists(exePath))
-                return new Version(0, 0);
+                return null;
 
             try
             {
@@ -52,7 +52,7 @@ namespace RLEditor
             }
             catch
             {
-                return new Version(0, 0);
+                return null;
             }
         }
 
@@ -69,7 +69,7 @@ namespace RLEditor
             }
             catch
             {
-                return new Version(0, 0);
+                return null;
             }
         }
 
@@ -103,7 +103,8 @@ namespace RLEditor
                 Version localVersion = GetLocalVersion(exePath);
                 Version remoteVersion = GetRemoteVersion();
 
-                if (remoteVersion > localVersion)
+                if (remoteVersion == null || localVersion == null ||
+                   (remoteVersion > localVersion))
                 {
                     if (infoLabel != null && userLaunched)
                     {
