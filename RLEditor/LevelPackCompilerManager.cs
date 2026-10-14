@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Odbc;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -16,6 +15,8 @@ namespace RLEditor
 
         private Settings curSettings;
         private Label infoLabel;
+
+        private const int minCheckDays = 7;
 
         public LevelPackCompilerManager(Settings settings, Label label)
         {
@@ -75,14 +76,8 @@ namespace RLEditor
 
         private bool ShouldCheckForUpdate()
         {
-            try
-            {
-                return (DateTime.Now - curSettings.LastLPCUpdateCheck).TotalDays > 7;
-            }
-            catch
-            {
-                return true;
-            }
+            return curSettings.LastLPCUpdateCheck == DateTime.MinValue ||
+                   (DateTime.Now - curSettings.LastLPCUpdateCheck).TotalDays >= minCheckDays;
         }
 
         public void UpdateLevelPackCompiler(bool userLaunched = false)
