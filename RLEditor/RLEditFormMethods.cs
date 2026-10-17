@@ -2366,7 +2366,7 @@ Digger=20
         private void RotateLevelPieces()
         {
             if (CurLevel.SelectionList().OfType<GadgetPiece>()
-                .Any(gp => gp.ObjType == C.OBJ.ONE_WAY_WALL || gp.ObjType == C.OBJ.FORCE_FIELD))
+                .Any(gp => gp.ObjType == C.OBJ.ONE_WAY_WALL || gp.ObjType == C.OBJ.FORCE_FIELD || gp.ObjType == C.OBJ.HATCH))
                 return;
 
             CurLevel.RotatePieces();

@@ -314,6 +314,10 @@ namespace RLEditor
             if (newGadget.IsNoOverwrite && newGadget.IsOnlyOnTerrain)
                 newGadget.IsNoOverwrite = false;
 
+            // Disallow rotation for hatches
+            if (newGadget.ObjType == C.OBJ.HATCH)
+                doRotate = false;
+
             // Disallow transformations for OWW / Forcefields
             if (newGadget.ObjType == C.OBJ.ONE_WAY_WALL || newGadget.ObjType == C.OBJ.FORCE_FIELD)
             {

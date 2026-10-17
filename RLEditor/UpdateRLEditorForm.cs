@@ -182,8 +182,9 @@ namespace RLEditor
 
             bool oneWaySelected = selectionList.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.ONE_WAY_WALL);
             bool forceFieldSelected = selectionList.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.FORCE_FIELD);
+            bool hatchSelected = selectionList.Any(p => p is GadgetPiece gp && gp.ObjType == C.OBJ.HATCH);
 
-            btnRotate.Enabled = !oneWaySelected && !forceFieldSelected;
+            btnRotate.Enabled = !oneWaySelected && !forceFieldSelected && !hatchSelected;
             btnInvert.Enabled = !oneWaySelected && !forceFieldSelected;
             btnFlip.Enabled = !oneWaySelected && !forceFieldSelected;
 
