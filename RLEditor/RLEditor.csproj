@@ -163,7 +163,6 @@
     <Compile Include="ImageLibrary.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelFile.cs" />
-    <Compile Include="LevelPieceTriggerMask.cs" />
     <Compile Include="LoadStylesFromFile.cs" />
     <Compile Include="LevelPackCompilerManager.cs" />
     <Compile Include="OnlineUpdater.cs" />

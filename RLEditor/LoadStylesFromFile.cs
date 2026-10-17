@@ -294,6 +294,7 @@ namespace RLEditor
         {
             C.OBJ objType = C.OBJ.NONE;
             int frameCount = 0;
+            Rectangle triggerRect = Rectangle.Empty;
             bool isDeprecated = false;
 
             // Determine tile index from filename
@@ -328,21 +329,20 @@ namespace RLEditor
                             continue;
                         }
 
+                        string valueStr = line.Text.TrimStart('=', ' ').Trim();
+
                         // Number of frames
                         if (key.Equals($"frames_{tileIndex}", StringComparison.OrdinalIgnoreCase))
                         {
-                            string valueStr = line.Text.TrimStart('=', ' ').Trim();
                             if (int.TryParse(valueStr, out int parsedFrames))
-                            {
                                 frameCount = parsedFrames;
-                            }
+
                             continue;
                         }
 
                         // Object type
                         if (key.Equals($"type_{tileIndex}", StringComparison.OrdinalIgnoreCase))
                         {
-                            string valueStr = line.Text.TrimStart('=', ' ').Trim();
                             if (int.TryParse(valueStr, out int parsedType))
                             {
                                 switch (parsedType)
@@ -383,8 +383,38 @@ namespace RLEditor
                             continue;
                         }
 
+                        // Get the trigger rectangle from the mask image
+                        if (key.StartsWith("mask", StringComparison.OrdinalIgnoreCase))
+                        {
+                            if (int.TryParse(valueStr, out int value))
+                            {
+                                if (objType == C.OBJ.HATCH)
+                                {
+                                    if (key.Equals($"maskX_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                                        triggerRect.X = value;
+                                    else if (key.Equals($"maskY_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                                        triggerRect.Y = value;
+
+                                    triggerRect.Width = 1;
+                                    triggerRect.Height = 1;
+                                }
+                                else
+                                {
+                                    if (key.Equals($"maskX_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                                        triggerRect.X = value;
+                                    else if (key.Equals($"maskY_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                                        triggerRect.Y = value;
+                                    else if (key.Equals($"maskWidth_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                                        triggerRect.Width = value;
+                                    else if (key.Equals($"maskHeight_{tileIndex}", StringComparison.OrdinalIgnoreCase))
+                                        triggerRect.Height = value;
+                                }
+                            }
+                            continue;
+                        }
+
                         // Break early if we have all values
-                        if (frameCount >= 1 && objType != C.OBJ.NONE)
+                        if (frameCount >= 1 && objType != C.OBJ.NONE && !triggerRect.IsEmpty)
                             break;
                     }
                 }
@@ -397,16 +427,6 @@ namespace RLEditor
                 {
                     parser?.DisposeStreamReader();
                 }
-            }
-
-            // Get the trigger rectangle from the mask image
-            Rectangle triggerRect = new Rectangle(0, 0, 1, 1);
-
-            if (tileIndex >= 0)
-            {
-                TriggerMask mask = TriggerMask.FromObjectImageKey(Path.Combine(styleName, fileName));
-                if (mask != null && !mask.IsEmpty)
-                    triggerRect = mask.LocalRect;
             }
 
             // Output the new object

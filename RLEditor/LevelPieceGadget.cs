@@ -94,28 +94,18 @@ namespace RLEditor
                     return new Rectangle(PosX, PosY, Math.Max(1, SpecWidth), Math.Max(1, SpecHeight));
                 }
 
-                if (ObjType == C.OBJ.HATCH)
-                {
-                    int lemmHeight = 20;
-                    Point offset = TriggerMask.GetTriggerOffset(Key);
-
-                    int lemminiSpawnPointX = PosX + (Width / 2) + offset.X + 2;
-                    int lemminiSpawnPointY = PosY + lemmHeight  + offset.Y - 1;
-
-                    return new Rectangle(lemminiSpawnPointX, lemminiSpawnPointY, 1, 1);
-                }
-
                 Rectangle trigRect = ImageLibrary.GetTrigger(Key);
 
                 // Apply rotation / flipping / inverting
-                if (ObjType != C.OBJ.ONE_WAY_WALL && ObjType != C.OBJ.FORCE_FIELD)
+                if (!ObjType.In(C.OBJ.ONE_WAY_WALL, C.OBJ.FORCE_FIELD, C.OBJ.HATCH))
                 {
                     if (IsRotatedInPlayer)
                     {
                         int origImageHeight = ImageRectangle.Width;
                         trigRect = new Rectangle(origImageHeight - trigRect.Bottom, trigRect.X, trigRect.Height, trigRect.Width);
                     }
-                    if (IsFlippedInPlayer && ObjType != C.OBJ.HATCH)
+
+                    if (IsFlippedInPlayer)
                         trigRect.X = ImageRectangle.Width - trigRect.Right;
                     if (IsInvertedInPlayer)
                         trigRect.Y = ImageRectangle.Height - trigRect.Bottom;
