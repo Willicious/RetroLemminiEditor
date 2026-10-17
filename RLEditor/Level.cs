@@ -331,7 +331,7 @@ namespace RLEditor
 
             Point piecePos = new Point(piecePosX, piecePosY);
 
-            if (pieceKey.Contains(style + "o_") || pieceKey == "Default\\SteelArea" || pieceKey.Contains("Rulers\\"))
+            if (pieceKey.Contains(style + "_o_") || pieceKey == "Default\\SteelArea" || pieceKey.Contains("Rulers\\"))
             {
                 GadgetList.Add(new GadgetPiece(pieceKey, piecePos));
             }

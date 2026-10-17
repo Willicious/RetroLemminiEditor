@@ -266,7 +266,7 @@ namespace RLEditor
             int modifier = parts.Length > 5 ? int.Parse(parts[5].Trim()) : 0;
             string style = parts.Length > 6 ? parts[6].Trim() : level.MainStyle.NameInDirectory;
 
-            string pieceName = style + "o_" + objectID;
+            string pieceName = style + "_o_" + objectID;
 
             bool isInvisible = (paintMode & 2) != 0;
             bool isNoOverwrite = (paintMode & 4) != 0;
