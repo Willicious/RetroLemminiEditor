@@ -1232,8 +1232,8 @@ namespace RLEditor
             }
             catch (Exception Ex)
             {
+                // Fail silently and log the error
                 Utility.LogException(Ex);
-                MessageBox.Show("Error: Could not save settings to " + Path.GetFileName(C.AppPathEditorSettings) + ".", "Could not save");
                 return;
             }
         }
