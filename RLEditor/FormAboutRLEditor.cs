@@ -124,6 +124,7 @@ namespace RLEditor
             richTextBox.AppendText(" • Added default title 'Untitled' when creating a new level.\n");
             richTextBox.AppendText(" • Rotate/Flip/Invert is now disallowed for Force Fields to keep behaviour consistent with RetroLemmini.\n");
             richTextBox.AppendText(" • Rotate is now disallowed for Entrance Hatches (they can still be Flipped/Inverted).\n");
+            richTextBox.AppendText(" • '_pg' object gfx no longer show up in 'Terrain'.\n");
 
             // Version 1.1 features
             WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");

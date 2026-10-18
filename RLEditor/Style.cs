@@ -109,10 +109,8 @@ namespace RLEditor
                     .Where(ter =>
                     {
                         string name = Path.GetFileNameWithoutExtension(ter);
-                        int underscoreIndex = name.LastIndexOf('_');
-                        if (underscoreIndex <= 0) return false;
-                        char letterBeforeNumber = name[underscoreIndex - 1];
-                        return letterBeforeNumber != 'm' && letterBeforeNumber != 'o';
+                        return !name.EndsWith("_pg", StringComparison.OrdinalIgnoreCase)
+                            && !name.Contains("_o_");
                     })
                     .Select(ter => ImageLibrary.CreatePieceKey(ter))
                     .Where(key => ImageLibrary.GetObjType(key) == C.OBJ.TERRAIN)
@@ -138,10 +136,8 @@ namespace RLEditor
                     .Where(steel =>
                     {
                         string name = Path.GetFileNameWithoutExtension(steel);
-                        int underscoreIndex = name.LastIndexOf('_');
-                        if (underscoreIndex <= 0) return false;
-                        char letterBeforeNumber = name[underscoreIndex - 1];
-                        return letterBeforeNumber != 'm' && letterBeforeNumber != 'o';
+                        return !name.EndsWith("_pg", StringComparison.OrdinalIgnoreCase)
+                            && !name.Contains("_o_");
                     })
                     .Select(steel => ImageLibrary.CreatePieceKey(steel))
                     .Where(key => ImageLibrary.GetObjType(key) == C.OBJ.STEEL)
@@ -166,10 +162,8 @@ namespace RLEditor
                     .Where(obj =>
                     {
                         string name = Path.GetFileNameWithoutExtension(obj);
-                        int underscoreIndex = name.LastIndexOf('_');
-                        if (underscoreIndex <= 0) return false;
-                        char letterBeforeNumber = name[underscoreIndex - 1];
-                        return letterBeforeNumber != 'm' && letterBeforeNumber == 'o';
+                        return name.Contains("_o_")
+                            && !name.EndsWith("_pg", StringComparison.OrdinalIgnoreCase);
                     })
                     .Select(obj => ImageLibrary.CreatePieceKey(obj))
                     .Where(key => ImageLibrary.GetObjType(key) != C.OBJ.TERRAIN && ImageLibrary.GetObjType(key) != C.OBJ.STEEL)

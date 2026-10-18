@@ -281,10 +281,8 @@ namespace RLEditor
         public static BaseImageInfo ImageInfo(string imageName)
         {
             string imagePath = C.AppPathStyles + imageName;
-            int underscoreIndex = imageName.LastIndexOf('_');
-            char letterBeforeNumber = imageName[underscoreIndex - 1];
 
-            if (letterBeforeNumber == 'o')
+            if (imageName.Contains("_o_"))
                 return CreateNewObjectInfo(imagePath);
             else
                 return CreateNewTerrainInfo(imagePath);
