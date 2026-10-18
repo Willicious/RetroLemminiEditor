@@ -109,20 +109,21 @@ namespace RLEditor
             //WriteBoldText(richTextBox, "\n• Template Bold Text\n");
             //richTextBox.AppendText(" • Template Text.\n");
 
-            WriteBoldText(richTextBox, "\n• Open Recent\n");
-            richTextBox.AppendText(" • Recent levels can now be opened via File > Open Recent.\n");
+            WriteBoldText(richTextBox, "\n• Online Updates\n");
+            richTextBox.AppendText(" • The Editor can now check online for updates! This happens automatically once per week when starting the Editor, or can be done manually using 'Help > Check For Updates...'\n");
 
-            WriteBoldText(richTextBox, "\n• Piece Highlight\n");
-            richTextBox.AppendText(" • When loading a style from a selected piece (from the button on the Pieces tab), the piece is now highlighted in the Piece Browser.\n");
+            WriteBoldText(richTextBox, "\n• Style Handling\n");
+            richTextBox.AppendText(" • In accordance with RetroLemmini 4.0, the Editor now looks to the style's .ini folder to find object trigger areas. This system replaces the 'om_' object mask images so that styles can be smaller and easier to maintain.\n");
+            richTextBox.AppendText(" • Furthermore, objects are now expected to be named with the updated suffix '_o_' rather than 'o_' as before.\n");
+
+            WriteBoldText(richTextBox, "\n• Hotkey Config\n");
+            richTextBox.AppendText(" • Added 'Clear Current Key' button.\n");
+            richTextBox.AppendText(" • Bugfix - 'Edited' label persists until changes have been saved successfully.\n");
 
             WriteBoldText(richTextBox, "\n• UI / Bugfixes\n");
-            richTextBox.AppendText(" • Added setting for 'Always Use Auto Screen Start'.\n");
-            richTextBox.AppendText(" • Applying a Custom Skillset immediately commits the skillset to the active level.\n");
-            richTextBox.AppendText(" • Entrance hatches are now only ever moved by 1 index when choosing Draw Sooner / Draw Later.\n");
-            richTextBox.AppendText(" • Unknown or invalid hotkey strings are now tolerated (and ignored).\n");
-            richTextBox.AppendText(" • Added control hints for the Piece Browser.\n");
-            richTextBox.AppendText(" • Piece data is correctly updated after adding a ruler or steel area.\n");
-            richTextBox.AppendText(" • Repositioned 'Load Style' button and changed piece data text to blue.\n");
+            richTextBox.AppendText(" • Added default title 'Untitled' when creating a new level.\n");
+            richTextBox.AppendText(" • Rotate/Flip/Invert is now disallowed for Force Fields to keep behaviour consistent with RetroLemmini.\n");
+            richTextBox.AppendText(" • Rotate is now disallowed for Entrance Hatches (they can still be Flipped/Inverted).\n");
 
             // Version 1.1 features
             WriteBoldText(richTextBox, $"\n\n================ Previous Updates ================\n");
@@ -168,6 +169,12 @@ namespace RLEditor
             WriteBoldText(richTextBox, "\n• UI - Level Arranger\n");
             richTextBox.AppendText(" • Increased minimum zoom to -3.\n");
             richTextBox.AppendText(" • Improved/fixed layout of corner text (in both docked and windowed Level Arranger).\n");
+
+            WriteBoldText(richTextBox, "\n• Open Recent\n");
+            richTextBox.AppendText(" • Recent levels can now be opened via File > Open Recent.\n");
+
+            WriteBoldText(richTextBox, "\n• Piece Highlight\n");
+            richTextBox.AppendText(" • When loading a style from a selected piece (from the button on the Pieces tab), the piece is now highlighted in the Piece Browser.\n");
 
             WriteBoldText(richTextBox, "\n• Piece Browser\n");
             richTextBox.AppendText(" • Added a 'Random' button to the Piece Browser which, when clicked, randomized the piece style selection. It's possible to specify which styles are Randomized in the Style Manager; if no styles are specified, the entire list is randomized\n");
@@ -232,6 +239,13 @@ namespace RLEditor
             richTextBox.AppendText(" • Fixed repeat renderings when auto-resizing the form.\n");
             richTextBox.AppendText(" • 'Use Auto Screen Start' is now written to/from a setting object rather that directly to/from the checkbox.\n");
             richTextBox.AppendText(" • Changed default top boundary to 2.\n");
+            richTextBox.AppendText(" • Added setting for 'Always Use Auto Screen Start'.\n");
+            richTextBox.AppendText(" • Applying a Custom Skillset immediately commits the skillset to the active level.\n");
+            richTextBox.AppendText(" • Entrance hatches are now only ever moved by 1 index when choosing Draw Sooner / Draw Later.\n");
+            richTextBox.AppendText(" • Unknown or invalid hotkey strings are now tolerated (and ignored).\n");
+            richTextBox.AppendText(" • Added control hints for the Piece Browser.\n");
+            richTextBox.AppendText(" • Piece data is correctly updated after adding a ruler or steel area.\n");
+            richTextBox.AppendText(" • Repositioned 'Load Style' button and changed piece data text to blue.\n");
         }
 
         /// <summary>
