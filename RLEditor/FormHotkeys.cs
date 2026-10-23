@@ -315,13 +315,13 @@ namespace RLEditor
             {
                 lblEditedSaved.ForeColor = Color.DarkViolet;
                 lblEditedSaved.Text = "Hotkey Configuration edited...";
-                Text = "SLX Editor - Hotkey Configuration - [Edited]";
+                Text = "RL Editor - Hotkey Configuration - [Edited]";
             }
             else
             {
                 lblEditedSaved.ForeColor = Color.MediumSeaGreen;
                 lblEditedSaved.Text = "Hotkey Configuration saved successfully!";
-                Text = "SLX Editor - Hotkey Configuration";
+                Text = "RL Editor - Hotkey Configuration";
             }
         }
 
