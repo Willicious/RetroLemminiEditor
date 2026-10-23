@@ -148,8 +148,8 @@ namespace RLEditor
             WriteBoldText(richTextBox, "\n• Cycle Select Pieces\n");
             richTextBox.AppendText(" • Shift + LMB (by default) cycles through pieces within 32px of the cursor, so that each subsequent click grabs the piece at the next-highest index.\n");
 
-            WriteBoldText(richTextBox, "\n• Show/Hide Steel\n");
-            richTextBox.AppendText(" • Added menu item and hotkey support for Show/Hide Steel (Ctrl + F2 by default).\n");
+            WriteBoldText(richTextBox, "\n• Show Steel\n");
+            richTextBox.AppendText(" • Added menu item and hotkey support for Show Steel (Ctrl + F2 by default).\n");
 
             WriteBoldText(richTextBox, "\n• Pieces List\n");
             richTextBox.AppendText(" • Added a 'Pieces List' window which displays all pieces currently active in the level.\n");
